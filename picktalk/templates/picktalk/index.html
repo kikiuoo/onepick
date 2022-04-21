@@ -1,0 +1,116 @@
+{% extends 'picktalk/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/index.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/index.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/index.js' %}"></script>
+
+
+<!-- 본문 내용 -->
+<div class="mainBanner"></div>
+
+<!-- 본문 내용 : 오디션 정보 -->
+<div class="mainTitle">
+    오디션 정보
+    <span class="mobileNone" data-url="/audi/main/actor/">전체보기</span>
+</div>
+
+<div class="inBox">
+    {% for audition in auditions %}
+    <div class="audition" data-num="{{ audition.id }}">
+        <div class="audiType">{{ audition.name }}</div>
+        <div class="audiLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ audition.logoImage }}");'></div>
+        <div class="audiTitle">{{ audition.title }}</div>
+        <div class="audiTerm">~ {{ audition.auditionDate|date:'Y-m-d' }}</div>
+        <div class="pickBtn"></div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+<!-- 본문 내용 : 프로필 정보 -->
+<div class="mainTitle titleMargin">
+    프로필 정보
+    <span class="mobileNone" data-url="/profile/list/actor/newest/">전체보기</span>
+</div>
+
+<div class="inBox">
+    {% for profile in profiles %}
+    <div class="profile" data-num="{{ profile.id }}" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profile.mainImage }}");'>
+        <div class="pickBtn"></div>
+    </div>
+    {% endfor %}
+
+    <div class="profileBlank"></div>
+</div>
+
+<!--
+    본문 내용 : 소베너
+    모바일/PC 표시 순서가 다름.
+
+    방법 1 : HTML 구문 2개 생성. Class로 제어.
+    방법 2 : css order 속성 사용하여 순서 변경
+
+    결론, 방법 2로 사용시 화면이 정상적으로 표시 X. 따라서 방법 1 사용.
+-->
+<div class="inBox mobileNone">
+    {% for pickChoise in pickChoises %}
+    <div class="subBanner" data-url="{{ pickChoise.url }}"  style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ pickChoise.image }}");'></div>
+    {% endfor %}
+</div>
+
+<!-- 본문 내용 : 알바픽 정보 -- DB 정보 없음. -- -->
+<div class="mainTitle titleMargin">
+    알바픽 정보
+    <span class="mobileNone" data-url="#">전체보기</span>
+</div>
+
+<div class="inBox">
+    <!-- DB 연결 후 For 문으로 변경 예정 -->
+    <div class="partTime">
+        <div class="partDay">D-5</div>
+        <div class="partLogo"></div>
+        <div class="partTitle">현대백화점 목동점 와인판매 아르바이트</div>
+        <span class="partInfo">시급 9,500원</span>
+        <span class="partInfo">시간협의</span>
+        <span class="partInfo">5일단기</span>
+    </div>
+    <div class="partTime">
+        <div class="partDay">D-5</div>
+        <div class="partLogo"></div>
+        <div class="partTitle">현대백화점 목동점 와인판매 아르바이트</div>
+        <span class="partInfo">시급 9,500원</span>
+        <span class="partInfo">시간협의</span>
+        <span class="partInfo">5일단기</span>
+    </div>
+    <div class="partTime">
+        <div class="partDay">D-5</div>
+        <div class="partLogo"></div>
+        <div class="partTitle">현대백화점 목동점 와인판매 아르바이트</div>
+        <span class="partInfo">시급 9,500원</span>
+        <span class="partInfo">시간협의</span>
+        <span class="partInfo">5일단기</span>
+    </div>
+    <div class="partTime noneMargin">
+        <div class="partDay">D-5</div>
+        <div class="partLogo"></div>
+        <div class="partTitle">현대백화점 목동점 와인판매 아르바이트 현대백화점 목동점 와인판매 아르바이트</div>
+        <span class="partInfo">시급 9,500원</span>
+        <span class="partInfo">시간협의</span>
+        <span class="partInfo">5일단기</span>
+    </div>
+</div>
+
+<!-- 모바일용 소베너: PC와 표출위치가 달라 HTML 코드로 제어 -->
+<div class="inBox pcNone">
+    {% for pickChoise in pickChoises %}
+    <div class="subBanner" data-url="{{ pickChoise.url }}" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ pickChoise.image }}");'></div>
+    {% endfor %}
+</div>
+
+{% endblock %}

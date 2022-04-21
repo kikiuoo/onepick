@@ -1,0 +1,33 @@
+.menu{
+    display: none !important; /* ui상 모바일의 경우 메인 munu를 표시하지 않음 */
+}
+
+.subCate{
+    text-align: center;
+    font-size: 0px;
+    margin-bottom: 16px;
+}
+
+.subCate .cate{
+    height: 34px;
+    line-height: 34px;
+    display: inline-block;
+    margin-left: 15px;
+    padding: 0px 15px;
+
+    font-size: 15px;
+    font-weight: bold;
+    color: #b9b9b9;
+    cursor: pointer;
+    text-align: center;
+}
+
+.subCate .cate:first-child{
+    margin-left: 0px;
+}
+
+.subCate .cate.active{
+    border-radius: 33px;
+    background-color: #ff8aae;
+    color: #fff;
+}

@@ -1,0 +1,425 @@
+/* PC Base CSS */
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+
+/* PC Base CSS */
+body{
+    position:  relative;
+    padding : 0px;
+    margin : 0px;
+    font-family: 'Spoqa Han Sans' !important;
+}
+
+.container{
+    width : 1440px;
+    padding : 100px 111px 45px 108px;
+    margin : 0 auto;
+    box-sizing: border-box;
+}
+
+.pcNone{
+    display: none !important;
+}
+
+/* PC Base Header CSS */
+.header{
+    position : relative;
+    font-size: 0px;
+    padding-bottom : 55px;
+}
+
+.header .logo{
+    display :inline-block;
+    width: 219px;
+    height: 35px;
+    background-image : url('../../image/web/logo.png');
+    background-size : cover;
+    vertical-align : top;
+    cursor:pointer;
+}
+
+.header .searchBtn{
+    display :inline-block;
+    width: 20px;
+    height: 35px;
+    margin-left: 274px;
+    margin-right: 41px;
+    background-image : url('../../image/web/searchBtn.png');
+    background-size : 100%;
+    background-repeat : no-repeat;
+    background-position : center;
+    vertical-align : top;
+    cursor:pointer;
+}
+
+/* serach 버튼 클릭시 변경된 디자인 */
+.header .searchBox{
+    position: absolute;
+    left: 252px;
+    top: -10px;
+    width: 282px;
+    height: 53px;
+    border-radius: 33px;
+    box-shadow: 0 1px 13px 0 rgba(255, 138, 174, 0.3);
+    background-color: #fff;
+    display: none; /* 기본이 표시하지 않음. 이벤트 발생시 block으로 변경. */
+}
+.header .searchBox #search{
+    display:  inline-block;
+    border : 0px solid blue;
+    background-color: transparent;
+    width: 80%;
+    height: 100%;
+    box-sizing:border-box;
+    vertical-align: top;
+    padding-left: 25px;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+.header .searchBox #search::placeholder{
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+.header .searchBox #search:focus{
+    outline: none;
+}
+.header .searchBox .search{
+    display:  inline-block;
+    width: 20%;
+    height: 100%;
+    box-sizing:border-box;
+    vertical-align: top;
+    cursor: pointer;
+
+    background-image : url('../../image/web/searchBtn.png');
+    background-size : 40%;
+    background-repeat : no-repeat;
+    background-position : center;
+}
+/* serach 버튼 클릭시 변경된 디자인 */
+
+.header .menu{
+    display :inline-block;
+    height: 35px;
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 35px;
+    letter-spacing: normal;
+    color: #454545;
+    vertical-align : top;
+    margin-right : 33px;
+    cursor:pointer;
+}
+
+.header .registerBtn{
+    position : absolute;
+    left: 960px;
+    top : -9px;
+    box-shadow: 0 1px 11px 0 rgba(223, 223, 223, 0.66);
+    background-color: #fff;
+    border-radius : 10px;
+
+    width: 73px;
+    height: 53px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #454545;
+    text-align : center;
+    line-height : 53px;
+    cursor:pointer;
+}
+
+
+/* 등록 버튼 클릭시 변경된 디자인 */
+.header .registerBox{
+    position: absolute;
+    left : 876px;
+    top :60px;
+    width: 251px;
+    padding : 40px 30px;
+    border-radius: 14px;
+    box-shadow: 0 1px 30px 0 rgba(223, 223, 223, 0.7);
+    background-color: #fff;
+    box-sizing: border-box;
+    display: none; /* 기본이 표시하지 않음. 이벤트 발생시 block으로 변경. */
+}
+
+.header .registerBox span{
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #454545;
+    margin-bottom: 8px;
+    cursor: default;
+}
+
+.header .registerBox .regiBtn{
+    position: relative;
+    height: 30px ;
+    padding-left: 51px;
+    line-height: 30px;
+    cursor: pointer;
+    margin: 8px 0px;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: #1f1f1f;
+}
+
+.header .registerBox .regiBtn .regIcon{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    left: 0px;
+    top: 0px;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.header .registerBox .regiBtn .regIcon#audition{background-image: url("../../image/web/auditionIcon.png");}
+.header .registerBox .regiBtn .regIcon#parttime{background-image: url("../../image/web/parttimeIcon.png");}
+.header .registerBox .regiBtn .regIcon#profile{background-image: url("../../image/web/profileIcon.png");}
+/* 등록 버튼 클릭시 변경된 디자인 */
+
+
+.header .login{
+    display :inline-block;
+    height: 35px;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 35px;
+    letter-spacing: normal;
+    text-align: left;
+    color: #454545;
+    margin-left : 109px;
+    cursor:pointer;
+}
+
+/* PC Base Footer CSS */
+.footer{
+    background-color : #f8f8f8;
+}
+.footer .footerContext {
+    padding : 56px 0px 48px 108px;
+    font-size : 0px;
+    margin : 0 auto;
+    box-sizing: border-box;
+    width : 1440px;
+}
+.footer .footerContext .company{
+    display : block;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom : 32px;
+}
+
+.footer .footerContext .companyLink{
+    margin-bottom : 28px;
+}
+
+.footer .footerContext .companyLink span{
+    display : inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    color: #1f1f1f;
+    cursor: pointer;
+    margin-right : 33px;
+}
+
+.footer .footerContext .info{
+    display : block;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+}
+
+.footer .footerContext .info.addr{
+    margin-bottom : 26px;
+}
+
+
+/* PC Base Login Popup CSS */
+.loginPopup{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color:  rgb(0,0,0,0.4);
+    z-index: 10;
+    display: none;
+}
+
+.loginPopup .loginBox{
+    position:  absolute;
+    left: 50%;
+    top: 50%;
+    width: 585px;
+    height: 820px;
+    padding: 88px 77px;
+    border-radius: 33px;
+    background-color: #fff;
+    margin-left: -292.5px;
+    margin-top: -410px;
+    box-sizing:  border-box;
+}
+
+.loginBox .loginClose{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    right: 52px;
+    top: 52px;
+
+    background-image: url("../../image/web/closeIcon.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.loginBox .loginLogo{
+    padding-top: 78px;
+    text-align: center;
+}
+.loginBox .loginLogo span{
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-align: center;
+    color: #ff8aae;
+}
+.loginBox .loginLogo .Logo{
+    height: 40px;
+    width: 252px;
+    margin: 27px auto 0px;
+
+    background-image : url('../../image/web/logo.png');
+    background-size : cover;
+    background-repeat:  no-repeat;
+    background-position: center;
+}
+
+.loginBox .socialLogin .title{
+    margin-top: 72px;
+
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 1.39;
+    text-align: center;
+    color: #454545;
+    cursor: default;
+}
+
+.loginBox .socialLogin .socialBox{
+    margin-top: 59px;
+    text-align: center;
+    font-size: 0px;
+}
+
+.loginBox .socialLogin .socialBox .socialBtn{
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    margin-left: 12px;
+    cursor: pointer;
+}
+
+.loginBox .socialLogin .socialBox .socialBtn:first-child{
+    margin: 0px;
+}
+
+.loginBox .socialLogin .socialBox .socialBtn#kakaoLogin{background-image: url("../../image/web/kakaoIcon.png");}
+.loginBox .socialLogin .socialBox .socialBtn#gogleLogin{background-image: url("../../image/web/gogleIcon.png");}
+.loginBox .socialLogin .socialBox .socialBtn#appleLogin{background-image: url("../../image/web/appleIcon.png");}
+.loginBox .socialLogin .socialBox .socialBtn#facebookLogin{background-image: url("../../image/web/facebookIcon.png");}
+
+.loginBox .socialLogin .sendOneLogin{
+    margin-top: 96px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #454545;
+    cursor: pointer;
+}
+
+.loginBox .onepickLogin{
+    margin-top: 38px;
+    display: none;
+}
+
+.loginBox .onepickLogin .loginInfo{
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.67;
+    text-align: center;
+    color: #878787;
+    margin-bottom: 28px;
+}
+
+.loginBox .onepickLogin input{
+    height: 74.6px;
+    width: 100%;
+    padding: 26px 33px 22px;
+    border-radius: 11px;
+    background-color: #f5f5f5;
+    box-sizing: border-box;
+    border: 0px;
+    margin-bottom: 17px;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: #aaa;
+}
+
+.loginBox .onepickLogin input::placeholder{
+    font-size: 18px;
+    font-weight: bold;
+    color: #aaa;
+}
+.loginBox .onepickLogin input:focus{
+    outline: none;
+}
+
+.loginBox .onepickLogin .loginBtn{
+    margin-top: 11px;
+    height: 66px;
+    line-height: 66px;
+    border-radius: 11px;
+    background-color: #ff8aae;
+
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+}
+
+.loginBox .onepickLogin .idSearchBox{
+    margin-top: 37px;
+    font-size: 0px;
+    text-align: center;
+}
+
+.loginBox .onepickLogin .idSearchBox span{
+    display: inline-block;
+
+    font-size: 18px;
+    font-weight:  bold;
+    color: #afafaf;
+    margin-left: 32px;
+    cursor: pointer;
+}
+
+.loginBox .onepickLogin .idSearchBox span:first-child{
+    margin: 0px;
+}

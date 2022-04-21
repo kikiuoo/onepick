@@ -1,0 +1,289 @@
+/* Mobile Base CSS */
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+
+/* Mobile Base CSS */
+body{
+    padding : 0px;
+    margin : 0px;
+    position: relative;
+    font-family: 'Spoqa Han Sans' !important;
+}
+
+.container{
+    padding : 33px 24px 43px;
+    margin : 0 auto;
+    box-sizing: border-box;
+}
+
+.mobileNone{
+    display: none !important;
+}
+
+/* Mobile Header Css */
+.header{
+    position: relative;
+    font-size: 0px;
+    margin-bottom: 13px;
+}
+
+.header .logo{
+    width: 94px;
+    height: 15px;
+    margin-bottom: 33px;
+
+    background-image: url("../../image/mobile/logo.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.header .menuBtn{
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: -3px;
+    right: 0px;
+
+    background-image: url("../../image/mobile/menu.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+/* menu 버튼 클릭시 변경된 디자인 */
+.menuPopup{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    cursor: pointer;
+    display: none;
+    z-index: 10;
+}
+
+.menuPopup .sideMenu{
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    width: 70%;
+    box-sizing: border-box;
+    background-color: #fff;
+    padding : 50px 34px 50px 43px;
+}
+
+.menuPopup .sideMenu .m_loginBox{
+    margin-top: 28px;
+}
+
+.menuPopup .sideMenu .m_loginBox .login{
+    height: 23px;
+    line-height: 23px;
+    padding : 0px 6px;
+
+    font-size: 11px;
+    font-weight: bold;
+    color: #bbb;
+    text-align: right;
+    cursor: pointer;
+    display: none;
+}
+
+.menuPopup .sideMenu .infoBox{
+    position: relative;
+    height: 23px;
+    line-height: 23px;
+    padding : 0px 6px;
+    font-size: 0px;
+    margin: 13px 0px;
+    cursor: pointer;
+}
+
+.menuPopup .sideMenu .infoBox span{
+    display: inline-block;
+    height: 23px;
+    line-height: 23px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #ff8aae;
+    padding-left: 33px;
+}
+
+.menuPopup .sideMenu .infoBox .logout{
+    position: absolute;
+    right: 15px;
+    height: 23px;
+    line-height: 23px;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    color: #bbb;
+    text-align: right;
+    cursor: pointer;
+}
+
+.menuPopup .sideMenu .infoBox .infoIcon{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin-top: 1.5px;
+    box-sizing: border-box;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.menuPopup .sideMenu .infoBox p{
+    height: 23px;
+    line-height: 23px;
+    padding: 0px 0px 0px 33px;
+    margin-top: 0px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #1f1f1f;
+}
+
+.menuPopup .sideMenu .m_inbox{
+    border-top: 1px solid #dfdfdf;
+    border-bottom: 1px solid #dfdfdf;
+    margin-top: 2px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    margin-bottom: 7px;
+}
+.menuPopup .sideMenu .infoBox#login .infoIcon{ background-image: url("../../image/mobile/mypageIcon.png"); }
+.menuPopup .sideMenu .infoBox#mypick .infoIcon{ background-image: url("../../image/mobile/myPick.png"); }
+.menuPopup .sideMenu .infoBox#auditonReg .infoIcon{ background-image: url("../../image/mobile/auditionIcon.png"); }
+.menuPopup .sideMenu .infoBox#profileReg .infoIcon{ background-image: url("../../image/mobile/profileIcon.png"); }
+.menuPopup .sideMenu .infoBox#parttimeReg .infoIcon{ background-image: url("../../image/mobile/parttimeIcon.png"); }
+.menuPopup .sideMenu .infoBox#advice .infoIcon{ background-image: url("../../image/mobile/adviceIcon.png"); }
+.menuPopup .sideMenu .infoBox#choice .infoIcon{ background-image: url("../../image/mobile/pickChoiceIcon.png"); }
+.menuPopup .sideMenu .infoBox#setting .infoIcon{ background-image: url("../../image/mobile/settingIcon.png"); }
+
+/* menu 버튼 클릭시 변경된 디자인 */
+
+/* search 버튼 클릭시 변경된 디자인 */
+
+.header .searchBox{
+    position: absolute;
+    right: 34px;
+    top: -6px;
+    height: 28px;
+    width: 65%;
+    border-radius: 33px;
+    box-shadow: 0 1px 13px 0 rgba(255, 138, 174, 0.3);
+    background-color: #fff;
+    z-index: 1;
+    display: none;
+}
+.header .searchBox #search{
+    display:  inline-block;
+    border : 0px solid blue;
+    background-color: transparent;
+    width: 85%;
+    height: 100%;
+    box-sizing:border-box;
+    vertical-align: top;
+    padding-left: 25px;
+
+    font-size: 12px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+.header .searchBox #search::placeholder{
+    font-size: 12px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+.header .searchBox #search:focus{
+    outline: none;
+}
+.header .searchBox .search{
+    display:  inline-block;
+    width: 15%;
+    height: 100%;
+    box-sizing:border-box;
+    vertical-align: top;
+    cursor: pointer;
+
+    background-image : url('../../image/mobile/searchBtn.png');
+    background-size : 35%;
+    background-repeat : no-repeat;
+    background-position : center;
+}
+/* search 버튼 클릭시 변경된 디자인 */
+
+
+
+.header .searchBtn{
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: -3px;
+    right: 43px;
+
+    background-image: url("../../image/mobile/searchBtn.png");
+    background-position: center;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.header .menu{
+    display: inline-block;
+    width: 33%;
+    font-size: 16px;
+    font-weight: bold;
+    color: #1f1f1f;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Mobile Base Footer CSS */
+.footer{
+    background-color: #f8f8f8;
+    padding: 22px 37px;
+}
+
+.footer .company{
+    display: inline-block;
+    font-size: 11px;
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 11px;
+}
+
+.footer .companyLink{
+    font-size: 0px;
+    margin-bottom: 11px;
+}
+
+.footer .companyLink span{
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    color: #1f1f1f;
+    margin-right: 17px;
+    cursor: pointer;
+}
+
+.footer .info{
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    color: #1f1f1f;
+}
+
+.footer .info.addr{
+    margin-bottom: 11px;
+}
+
+/* 로그인 Popup 디자인 추가되면 구현 예정 */
+.loginPopup {
+    display: none;
+}

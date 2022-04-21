@@ -1,0 +1,98 @@
+{% extends 'profiles/profile_base.html' %}
+
+{% block context_profile %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/profile/viewer.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/profile/viewer.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/profile/viewer.js' %}"></script>
+
+<!-- 본문 내용 -->
+<div class="backBtn mobileNone"><span></span> 목록으로 돌아가기</div>
+
+{% for profile in profileData %}
+{% for user in userData %}
+<div class="mainProfile">
+    <div class="mainImage" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profile.mainImage }}")'></div>
+
+    <div class="mainInfo">
+        <div class="name">{{ profile.name|default_if_none:"" }},{{ user.age|default_if_none:"" }}</div>
+        <div class="info">
+            <span>{{ profile.gender|default_if_none:"" }}/{{ user.age|default_if_none:"" }}세</span>
+            <span>
+                {% if user.foreigner == 0 %}
+                내국인
+                {% elif user.foreigner == 1 %}
+                외국인
+                {% endif %}
+            </span>
+        </div>
+
+        <div class="info">
+            <p>키</p>
+            <span>{{ profile.height }}cm</span>
+
+            <p>체중</p>
+            <span>{{ profile.weight }}kg</span>
+
+            <p>SNS</p>
+            <span id="instagram"></span>
+            <span id="youtube"></span>
+        </div>
+
+        <div class="info mobileNone">
+            <p>지원분야</p>
+            <span class="important">
+                {% for cates in cate %}
+                    #{{ cates.name }}&nbsp;&nbsp;
+                {% endfor %}
+            </span>
+
+            <p>경력</p>
+            <span class="important"></span>
+        </div>
+
+        <div class="btnBox pcNone">
+            <div class="scrapBtn">스크랩하기</div>
+            <div class="auditionBtn">오디션 제안</div>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="introduction">
+            {{ profile.introduction|default_if_none:""|linebreaksbr }}
+        </div>
+
+        <div class="btnBox mobileNone">
+            <div class="scrapBtn">스크랩하기</div>
+            <div class="auditionBtn">오디션 제안</div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<div class="subInfoBox">
+    <div class="subInfoCate active" data-type="youtube">영상 프로필</div>
+    <div class="subInfoCate" data-type="image">이미지</div>
+    <div class="subInfoCate" data-type="career">경력사항</div>
+</div>
+
+<div class="subInfo">
+    {% if profile.youtubeUrl != "" %}
+    <div class="iframeBox" >
+        <iframe src="{{ youtube }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    {%  endif %}
+</div>
+{% endfor %}
+
+    
+<script>
+    var cateType = '{{ cateType }}';
+    var num = '{{ num }}';
+</script>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+.subCate{
+    font-size: 0px;
+    margin-bottom: 54px;
+}
+.subCate .cate{
+    display: inline-block;
+    margin-right: 37px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #b9b9b9;
+    cursor: pointer;
+}
+
+.subCate .cate.active{
+    color: #1f1f1f;
+}
+

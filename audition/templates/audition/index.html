@@ -1,0 +1,71 @@
+{% extends 'audition/audi_base.html' %}
+
+{% block context_audi %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/audi/index.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/audi/index.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/audi/index.js' %}"></script>
+
+<!-- 메인 베너 -->
+<div class="mainBanner"></div>
+
+<!-- 신규 오디션 -->
+<div class="title">
+    신규 오디션
+    <span data-url="#">전체보기</span>
+</div>
+<div class="inBox">
+    {% for newAudis in newAudi %}
+    <div class="audition" data-num="{{ newAudis.id }}">
+        <div class="audiType">{{ newAudis.name }}</div>
+        <div class="audiLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ newAudis.logoImage }}");'></div>
+        <div class="audiTitle">{{ newAudis.title }}</div>
+        <div class="audiTerm">~ {{ newAudis.auditionDate|date:'Y-m-d' }}</div>
+        <div class="pickBtn"></div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- 마감임박 오디션 -->
+<div class="title">
+    마감임박 오디션
+    <span data-url="#">전체보기</span>
+</div>
+<div class="inBox">
+    {% for finishAudis in finishAudi %}
+    <div class="audition" data-num="{{ finishAudis.id }}">
+        <div class="audiType">{{ finishAudis.name }}</div>
+        <div class="audiLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ finishAudis.logoImage }}");'></div>
+        <div class="audiTitle">{{ finishAudis.title }}</div>
+        <div class="audiTerm">~ {{ finishAudis.auditionDate|date:'Y-m-d' }}</div>
+        <div class="pickBtn"></div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- 추천 오디션 -->
+<div class="title">
+    추천 오디션
+    <span data-url="#">전체보기</span>
+</div>
+<div class="inBox">
+    {% for recomAudis in recomAudi %}
+    <div class="audition" data-num="{{ recomAudis.id }}">
+        <div class="audiType">{{ recomAudis.name }}</div>
+        <div class="audiLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ recomAudis.logoImage }}");'></div>
+        <div class="audiTitle">{{ recomAudis.title }}</div>
+        <div class="audiTerm">~ {{ recomAudis.auditionDate|date:'Y-m-d' }}</div>
+        <div class="pickBtn"></div>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    var cateType = '{{ cateType }}';
+</script>
+
+{% endblock %}

@@ -1,0 +1,160 @@
+/* 페이지 타이틀 */
+.pageTitle{
+    font-size: 18px;
+    font-weight: bold;
+    color: #1f1f1f;
+    margin-bottom: 4px;
+}
+
+/* 회사로고 */
+.companyLogo{
+    width: 100%;
+    padding-bottom: 20%;
+    background-color: #ddd;
+    margin-bottom: 15px;
+}
+
+/* 본문 내용 */
+.content{
+    position: relative;
+    padding : 0px 5px;
+}
+
+.content .contentTitle{
+    font-size: 16px;
+    font-weight: bold;
+    color: #1f1f1f;
+    margin-bottom: 15px;
+}
+
+.content .urlLink{
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: #1f1f1f;
+    margin-bottom: 11px;
+}
+
+.content .finishDay{
+    position: absolute;
+    right: 5px;
+    top: 0px;
+    border-radius: 11px;
+    background-color: rgba(255, 138, 174, 0.1);
+    padding : 9px 18px;
+
+    font-size: 12px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+
+.content .info{
+    display: flex;
+    margin-bottom: 16px;
+}
+
+.content .info .title{
+    order :1;
+    display: inline-block;
+    width: 64px;
+
+    font-size: 12px;
+    font-weight: bold;
+    color: #1f1f1f;
+    line-height: 2.5em;
+}
+
+.content .info .infoContent{
+    order :2;
+    display: inline-block;
+    width: calc(100% - 64px);
+}
+
+
+
+
+.content .info .contentBox{
+    display: flex;
+    width: 100%;
+}
+
+.content .info .infoContent .subTitle{
+    order :1;
+    width: 35px;
+    line-height: 2em;
+
+    font-size: 14px;
+    font-weight: bold;
+    color: #afafaf;
+    vertical-align: top;
+}
+.content .info .infoContent .subInfo{
+    order :2;
+    width: auto;
+    vertical-align: top;
+}
+
+.content .info .infoContent .subInfo:nth-child(2){
+    width: calc(100% - 35px);
+}
+
+.content .info .infoContent .subInfo span{
+    display: inline-block;
+    padding: 9px;
+    border-radius: 11px;
+    background-color: rgba(221, 221, 221, 0.28);
+    margin-right: 13px ;
+    margin-bottom: 12px;
+
+    font-size: 13px;
+    font-weight: bold;
+    color: #292929;
+}
+
+.content .info .infoContent .subInfo.important span{
+    color: #ff8aae;
+}
+
+.content .info .infoContent .subInfo.important{
+    font-size: 13px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+
+/* 버튼 */
+.buttonBox{
+    margin-top: 39px;
+    text-align: center;
+    font-size: 0px;
+}
+
+.buttonBox .scrapBtn{
+    display: inline-block;
+    width: 118px;
+    height: 39px;
+    line-height: 39px;
+    border-radius: 11px;
+    box-shadow: 0 1px 13px 0 rgba(255, 138, 174, 0.25);
+    background-color: #fff;
+    margin-right: 12px;
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+
+.buttonBox .auditionBtn{
+    display: inline-block;
+    width: 118px;
+    height: 39px;
+    line-height: 39px;
+    border-radius: 11px;
+    box-shadow: 0 1px 13px 0 rgba(255, 138, 174, 0.25);
+    background-color: #ff8aae;
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+}

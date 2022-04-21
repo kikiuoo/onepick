@@ -1,0 +1,38 @@
+{% extends 'profiles/profile_base.html' %}
+
+{% block context_profile %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/profile/list.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/profile/list.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/profile/list.js' %}"></script>
+
+
+<!-- 출력 순서 -->
+ <div class="selectBox mobileNone">
+    <select name="order" class="order">
+        <option value="newest">최신순</option>
+        <option value="popular">인기순</option>
+        <option value="share">공유많은순</option>
+        <option value="recommend">추천많은순</option>
+    </select>
+</div>
+
+<!-- 본문 내용 -->
+<div class="inBox">
+    {% for profiles in profileList %}
+    <div class="profile" data-num="{{ profiles.id }}">
+        <div class="image" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profiles.mainImage }}");'></div>
+        <div class="info">{{ profiles.name }}</div>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    var cateType = '{{ cateType }}';
+</script>
+
+{% endblock %}

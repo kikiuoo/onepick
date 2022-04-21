@@ -1,0 +1,100 @@
+.mainBanner{
+    cursor: pointer;
+    width: 1234px;
+    height: 344px;
+    border-radius: 22px;
+    background-color: #c4c4c4;
+}
+
+.title{
+    position : relative;
+    margin-top: 77px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #1f1f1f;
+}
+
+.title span{
+    position: absolute;
+    right: 0px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #1f1f1f;
+    cursor: pointer;
+}
+
+.inBox{
+    padding: 35px 20px 0px 20px;
+    font-size: 0px;
+}
+
+.inBox .audition{
+    position: relative;
+    width: 282px;
+    height: 280px;
+    border-radius: 33px;
+    box-shadow: 0 4px 13px 0 rgba(235, 235, 235, 0.9);
+    background-color: #fff;
+    display: inline-block;
+    margin-right: 16px;
+    margin-bottom: 27px;
+    padding: 24px;
+    box-sizing: border-box;
+    cursor: pointer;
+    vertical-align: top;
+}
+
+.inBox .audition:nth-child(4n){
+    margin-right: 0px;
+}
+
+.inBox .audition:nth-child(5), .inBox .audition:nth-child(6),
+.inBox .audition:nth-child(7), .inBox .audition:nth-child(8){
+    margin-bottom: 0px;
+}
+
+.inBox .audition .audiType{
+    position: absolute;
+    right: 24px;
+    top : 24px;
+    border-radius: 33px;
+    padding: 5px 12px;
+    background-color: #f4f4f4;
+
+    font-size: 13px;
+    font-weight: bold;
+    color: #1f1f1f;
+}
+
+.inBox .audition .audiLogo{
+    width: 100%;
+    height: 111px;
+    background-color: #fff;
+    margin-bottom: 13px;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% auto;
+}
+
+.inBox .audition .audiTitle{
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.65;
+    color: #292929;
+    margin-bottom: 16px;
+    min-height: 66px;
+
+    /* 2줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    display : -webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+}
+
+.inBox .audition .audiTerm{
+    font-size: 22px;
+    font-weight: bold;
+    color: #1f1f1f;
+}

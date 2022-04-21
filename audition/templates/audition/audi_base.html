@@ -1,0 +1,22 @@
+{% extends 'picktalk/base.html' %}
+
+{% block context %}
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/audi/audi_base.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/audi/audi_base.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/audi/audi_base.js' %}"></script>
+
+<!-- 분야 카테고리 -->
+<div class="subCate">
+    <div class="cate {% if cateType == 'actor'  %} active {% endif %}" data-url="/audi/main/actor/">배우</div>
+    <div class="cate {% if cateType == 'model'  %} active {% endif %}" data-url="/audi/main/model/">모델</div>
+    <div class="cate {% if cateType == 'singer'  %} active {% endif %}" data-url="/audi/main/singer/">가수</div>
+</div>
+
+{% block context_audi %}
+{% endblock %}
+
+{% endblock %}
