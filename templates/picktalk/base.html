@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>원픽|나만의 ONEPICK</title>
+
+    <meta name="viewport" content="width=device-width">
+
+    {% load static %}
+    <link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/base.css' %}"> <!-- PC 버전 -->
+    <link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/base.css' %}" > <!-- 모바일 버전 -->
+
+    <!-- JS 파일 -->
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/base.js' %}"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- header -->
+        <div class="header">
+            <div class="logo"></div>
+            <div class="searchBtn"></div>
+            <div class="searchBox">
+                <input type="text" name="search" id="search" placeholder="오디션,인물 검색"/>
+                <div class="search"></div>
+            </div>
+            <div class="menuBtn pcNone"></div>
+
+            <div class="menu" data-url="/audi/main/actor/">오디션</div>
+            <div class="menu" data-url="/profile/list/actor/newest/">프로필</div>
+            <div class="menu" data-url="#">알바픽</div>
+            <div class="menu mobileNone" data-url="#">전문가 상담</div>
+
+            <div class="registerBtn mobileNone">등록</div>
+            <div class="registerBox mobileNone">
+                <span>기업회원</span>
+                <div class="regiBtn">
+                    <div class="regIcon" id="audition"></div> 오디션 등록
+                </div>
+                <div class="regiBtn">
+                    <div class="regIcon" id="parttime"></div> 알바 등록
+                </div>
+                <span>개인회원</span>
+                <div class="regiBtn">
+                    <div class="regIcon" id="profile"></div> 프로필 등록
+                </div>
+            </div>
+
+            <div class="login mobileNone">로그인/회원가입</div>
+        </div>
+        <!-- header -->
+
+        {% block context %}
+        {% endblock %}
+    </div>
+
+    <!-- footer - 배경 색상 전체 와이드로 표시하기 위해서 container 밖에 표현함. -->
+    <div class="footer">
+        <div class="footerContext">
+            <span class="company">(주)케이에스앤픽 | 대표:양규석</span>
+            <div class="companyLink">
+                <span data-url="#">이용약관</span>
+                <span data-url="#">개인정보보호정책</span>
+                <span data-url="#">광고문의</span>
+            </div>
+            <span class="info addr">서울특별시 강남구 선릉로 153길 8, 3층(신사동,제인빌딩)</span>
+            <span class="info email">이메일 onepick@myonepick.com</span>
+        </div>
+    </div>
+    <!-- footer -->
+
+    <!-- Login PopUp -->
+    <div class="loginPopup">
+        <div class="loginBox">
+            <div class="loginClose"></div>
+            <div class="loginLogo">
+                <span>글로벌 NO.1 오디션 플랫폼</span>
+                <div class="Logo"></div>
+            </div>
+
+            <div class="socialLogin">
+                <div class="title">원픽과 함께 당신의 꿈을<br>PICK 하러 가보실까요?</div>
+                <div class="socialBox">
+                    <div class="socialBtn" id="kakaoLogin"></div>
+                    <div class="socialBtn" id="gogleLogin"></div>
+                    <div class="socialBtn" id="appleLogin"></div>
+                    <div class="socialBtn" id="facebookLogin"></div>
+                </div>
+                <div class="sendOneLogin">기존 원픽 계정이 있어요</div>
+            </div>
+
+            <div class="onepickLogin">
+                <div class="loginInfo">
+                    원픽 사이트(myonepick.com)의<br>
+                    아이디 패스워드가 있으신 분은<br>
+                    기존 계정으로 로그인이 가능합니다.
+                </div>
+                <input type="text" value="" id="onepickId" placeholder="아이디 입력"/>
+                <input  type="password" value="" id="onpickPW" placeholder="비밀번호 입력"/>
+                <div class="loginBtn">로그인</div>
+
+                <div class="idSearchBox">
+                    <span>아이디 찾기</span>
+                    <span>비밀번호 찾기</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login PopUp -->
+
+    <!-- mobile Menu Popup -->
+    <div class="menuPopup pcNone">
+        <div class="sideMenu">
+            <div class="m_loginBox">
+                <div class="login">로그인/회원가입</div>
+                <div class="infoBox" id="login">
+                    <div class="infoIcon"></div>
+                    <span>김누리</span>
+                    <div class="logout">로그아웃하기</div>
+                </div>
+            </div>
+
+            <div class="m_inbox">
+                <div class="infoBox" id="mypick">
+                    <div class="infoIcon"></div>
+                    <p>마이픽</p>
+                </div>
+                <div class="infoBox" id="auditonReg">
+                    <div class="infoIcon"></div>
+                    <p>오디션 등록</p>
+                </div>
+                <div class="infoBox" id="profileReg">
+                    <div class="infoIcon"></div>
+                    <p>프로필 등록</p>
+                </div>
+                <div class="infoBox" id="parttimeReg">
+                    <div class="infoIcon"></div>
+                    <p>알바픽 등록</p>
+                </div>
+                <div class="infoBox" id="advice">
+                    <div class="infoIcon"></div>
+                    <p>전문가 상담</p>
+                </div>
+                <div class="infoBox" id="choice">
+                    <div class="infoIcon"></div>
+                    <p>픽초이스</p>
+                </div>
+            </div>
+
+            <div class="infoBox" id="setting">
+                <div class="infoIcon"></div>
+                <p>설정</p>
+            </div>
+        </div>
+    </div>
+    <!-- mobile Menu Popup -->
+</body>
+</html>
