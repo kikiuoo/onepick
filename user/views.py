@@ -4,7 +4,7 @@ from user.exception import *
 from user.models import *
 import os
 
-
+'''
 # Create your views here.
 def kakao_login(request):
     if request.user.is_authenticated:
@@ -49,3 +49,5 @@ def kakao_login_callback(request):
     gender = kakao_account.get("gender", None)
 
     return redirect(request, "picktalk/index.html")
+    
+'''
