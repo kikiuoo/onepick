@@ -56,12 +56,12 @@ INSTALLED_APPS = [
     'profiles',
 
     #allauth
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
+    #'allauth',
+    #'allauth.account',
+    #'allauth.socialaccount',
 
     #provider
-    'allauth.socialaccount.providers.kakao',
+    #'allauth.socialaccount.providers.kakao',
 ]
 
 MIDDLEWARE = [
@@ -159,7 +159,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+"""
 ## 카카오 키들은 나중에 accounts.view에서 쓰일 예정
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -168,3 +168,4 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
+"""
