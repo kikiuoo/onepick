@@ -64,7 +64,7 @@ $(document).ready(function () {
 
         // 각 API 구현 필요.
         if( loginType == "kakaoLogin" ){
-
+            window.location.href = "/users/login/kakao/";
         }else if( loginType == "gogleLogin" ){
 
         }else if( loginType == "appleLogin" ){
