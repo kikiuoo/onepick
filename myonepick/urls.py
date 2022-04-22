@@ -21,5 +21,5 @@ urlpatterns = [
     path('', include('picktalk.urls')),
     path('audi/', include('audition.urls')),
     path('profile/', include('profiles.urls')),
-    #path('users/', include('user.urls')),
+    path('users/', include('user.urls')),
 ]
