@@ -55,8 +55,6 @@ INSTALLED_APPS = [
     'models',
     'profiles',
 
-    'sslserver'
-
     #allauth
     #'allauth',
     #'allauth.account',
