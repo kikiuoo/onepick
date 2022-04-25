@@ -5,6 +5,10 @@
     margin-top: 26px;
     margin-bottom: 42px;
     border-radius: 33px;
+
+    background-position:  center;
+    background-size: cover;
+    background-repeat:  no-repeat;
 }
 .mainProfile .mainInfo{
     padding : 0px 9px;
