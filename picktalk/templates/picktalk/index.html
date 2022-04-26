@@ -5,13 +5,26 @@
 {% load static %}
 <link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/index.css' %}"> <!-- pc 버전 -->
 <link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/index.css' %}" > <!-- 모바일 버전 -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
 <!-- JS 파일 -->
 <script src="{% static 'js/index.js' %}"></script>
 
 
 <!-- 본문 내용 -->
-<div class="mainBanner"></div>
+<!-- 메인 베너 -->
+<div class="swiper mySwiper mainBanner">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide" style="background-color: darkkhaki"></div>
+        <div class="swiper-slide" style="background-color: darkred"></div>
+        <div class="swiper-slide" style="background-color: goldenrod"></div>
+    </div>
+    <div class="swiper-pagination"></div>
+
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+</div>
+
 
 <!-- 본문 내용 : 오디션 정보 -->
 <div class="mainTitle">
@@ -25,7 +38,7 @@
         <div class="audiType">{{ audition.name }}</div>
         <div class="audiLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ audition.logoImage }}");'></div>
         <div class="audiTitle">{{ audition.title }}</div>
-        <div class="audiTerm">~ {{ audition.auditionDate|date:'Y-m-d' }}</div>
+        <div class="audiTerm">~ {{ audition.endDate|date:'Y-m-d' }}</div>
         <div class="pickBtn"></div>
     </div>
     {% endfor %}
@@ -64,14 +77,13 @@
     {% endfor %}
 </div>
 
-<!-- 본문 내용 : 알바픽 정보 -- DB 정보 없음. -- -->
+<!-- 본문 내용 : 알바픽 정보 -- DB 정보 없음.
 <div class="mainTitle titleMargin">
     알바픽 정보
     <span class="mobileNone" data-url="#">전체보기</span>
 </div>
 
 <div class="inBox">
-    <!-- DB 연결 후 For 문으로 변경 예정 -->
     <div class="partTime">
         <div class="partDay">D-5</div>
         <div class="partLogo"></div>
@@ -105,12 +117,36 @@
         <span class="partInfo">5일단기</span>
     </div>
 </div>
-
+-- -->
 <!-- 모바일용 소베너: PC와 표출위치가 달라 HTML 코드로 제어 -->
 <div class="inBox pcNone">
     {% for pickChoise in pickChoises %}
     <div class="subBanner" data-url="{{ pickChoise.url }}" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ pickChoise.image }}");'></div>
     {% endfor %}
 </div>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    var cateType = '{{ cateType }}';
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        autoplay: {
+          delay: 2500,
+          disableOnInteraction: false,
+        },
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+         navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+    });
+</script>
 
 {% endblock %}
