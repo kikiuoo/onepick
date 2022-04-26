@@ -85,8 +85,37 @@ $(document).ready(function () {
 
     $(document).on("click", ".loginPopup .idSearchBox span", function (){
         // 비밀번호 찾기/ id 찾기 기능 추가
-    })
+        var type = $(this).attr("id");
 
+        if( type == "findID" ){
+
+        }else  if( type == "findPW" ) {
+
+        }
+    });
+
+    // 기존 회원 로그인
+    $(document).on("click", ".loginBtn", function (){
+
+        var userID = $("#onepickId").val();
+        var userPW = $("#onepickPW").val();
+
+        if( userID == "" ){
+            alert("아이디를 입력해 주세요.");
+            return;
+        }
+        else if( userPW == "" ){
+            alert("패스워드를 입력해 주세요.");
+            return;
+        }
+
+        login(userID, userPW);
+
+    });
+
+    $(document).on("click", ".logout", function(){
+        logout();
+    });
 
     /* Menu Popup 버튼 mobile 이벤트 */
     $(document).on("click", ".menuPopup", function (e){
@@ -121,3 +150,45 @@ $(document).ready(function () {
         }
     });
 });
+
+
+function login(username, password){
+   $.ajax({
+      url: "/users/login/local/",
+      type: "POST",
+      dataType: "json",
+      data:{"username" : username, "password" : password},
+
+      success: function(data){
+
+          if( data.code == "0" ){
+              window.location.href = "/";
+          }else{
+              alert( data.message );
+          }
+      },
+      error: function (request, status, error){
+
+      }
+   });
+}
+
+
+function logout(){
+   $.ajax({
+      url: "/users/logout/local/",
+      type: "POST",
+      dataType: "json",
+      success: function(data){
+
+          if( data.code == "0" ){
+              window.location.href = "/";
+          }else{
+              alert( data.message );
+          }
+      },
+      error: function (request, status, error){
+
+      }
+   });
+}

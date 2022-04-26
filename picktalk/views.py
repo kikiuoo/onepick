@@ -34,6 +34,7 @@ def index(request):
 
         # 알바픽 정보
 
+        print(request.session['nickName'] )
 
         connection.commit()
         connection.close()

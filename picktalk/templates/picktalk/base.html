@@ -13,6 +13,22 @@
     <!-- JS 파일 -->
     <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static 'js/base.js' %}"></script>
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0WGRWN44B0"></script>
+    <script>
+        // Post 형태 ajax 통신시 필요.
+        $.ajaxSetup({
+            headers: { "X-CSRFToken": '{{csrf_token}}' }
+        });
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+         gtag('config', 'G-0WGRWN44B0');
+    </script>
 </head>
 <body>
     <div class="container">
@@ -45,7 +61,11 @@
                 </div>
             </div>
 
+            {% if request.session.nickName == "" or request.session.nickName == null %}
             <div class="login mobileNone">로그인/회원가입</div>
+            {% else %}
+            <div class="logout mobileNone">로그아웃</div>
+            {% endif %}
         </div>
         <!-- header -->
 
@@ -94,13 +114,14 @@
                     아이디 패스워드가 있으신 분은<br>
                     기존 계정으로 로그인이 가능합니다.
                 </div>
+
                 <input type="text" value="" id="onepickId" placeholder="아이디 입력"/>
-                <input  type="password" value="" id="onpickPW" placeholder="비밀번호 입력"/>
+                <input type="password" value="" id="onepickPW" placeholder="비밀번호 입력"/>
                 <div class="loginBtn">로그인</div>
 
                 <div class="idSearchBox">
-                    <span>아이디 찾기</span>
-                    <span>비밀번호 찾기</span>
+                    <span id="findID">아이디 찾기</span>
+                    <span id="findPW">비밀번호 찾기</span>
                 </div>
             </div>
         </div>

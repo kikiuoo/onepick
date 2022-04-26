@@ -150,7 +150,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-""""""
+""" """
 AWS_ACCESS_KEY_ID = 'AKIARCIZISC6QEB3E2EW'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'picktalk'

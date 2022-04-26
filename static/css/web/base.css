@@ -189,7 +189,7 @@ body{
 /* 등록 버튼 클릭시 변경된 디자인 */
 
 
-.header .login{
+.header .login, .header .logout{
     display :inline-block;
     height: 35px;
     font-size: 16px;
