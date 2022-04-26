@@ -213,3 +213,12 @@
     font-weight: bold;
     color: #292929;
 }
+
+.swiper-button-prev , .swiper-button-next{
+    --swiper-navigation-size : 26px !important;
+}
+
+.swiper-pagination-bullet {
+    width: 6px !important;
+    height: 6px !important;
+}

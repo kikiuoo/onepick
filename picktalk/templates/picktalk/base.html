@@ -132,12 +132,15 @@
     <div class="menuPopup pcNone">
         <div class="sideMenu">
             <div class="m_loginBox">
+                {% if request.session.nickName == "" or request.session.nickName == null %}
                 <div class="login">로그인/회원가입</div>
+                {% else %}
                 <div class="infoBox" id="login">
                     <div class="infoIcon"></div>
-                    <span>김누리</span>
+                    <span>{{ request.session.nickName }}</span>
                     <div class="logout">로그아웃하기</div>
                 </div>
+                {% endif %}
             </div>
 
             <div class="m_inbox">

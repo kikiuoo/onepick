@@ -90,7 +90,6 @@ body{
     color: #bbb;
     text-align: right;
     cursor: pointer;
-    display: none;
 }
 
 .menuPopup .sideMenu .infoBox{
@@ -236,7 +235,7 @@ body{
 
 .header .menu{
     display: inline-block;
-    width: 33%;
+    width: 50%;
     font-size: 16px;
     font-weight: bold;
     color: #1f1f1f;
