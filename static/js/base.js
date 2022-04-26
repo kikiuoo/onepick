@@ -66,7 +66,7 @@ $(document).ready(function () {
         if( loginType == "kakaoLogin" ){
             window.location.href = "/users/login/kakao/";
         }else if( loginType == "gogleLogin" ){
-
+            window.location.href = "/users/login/google/";
         }else if( loginType == "appleLogin" ){
 
         }else if( loginType == "facebookLogin" ){

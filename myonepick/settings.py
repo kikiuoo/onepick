@@ -171,7 +171,6 @@ DEFAULT_FILE_STORAGE = 'picktalk.storage_backends.MediaStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
-
 """
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -185,6 +184,7 @@ STATIC_ROOT = '/usr/local/lib/python3.8/dist-packages/django/contrib/admin'
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 
 ## 카카오 키들은 나중에 accounts.view에서 쓰일 예정
