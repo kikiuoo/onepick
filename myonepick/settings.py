@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+
     'picktalk.apps.PicktalkConfig',
     'user',
     'albapick',
@@ -108,7 +109,7 @@ WSGI_APPLICATION = 'myonepick.wsgi.application'
 DATABASES = {
     'default' :{
         'ENGINE' : 'django.db.backends.mysql',
-        'NAME' : 'picktalk',
+        'NAME' : 'onepick',
         'USER' : 'admin',
         'PASSWORD' : 'Q8iy-_ntkRs',
         'HOST' : 'picktalk.c5vctp8izdfi.ap-northeast-2.rds.amazonaws.com',
@@ -172,6 +173,11 @@ DEFAULT_FILE_STORAGE = 'picktalk.storage_backends.MediaStorage'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 """
+
+AWS_ACCESS_KEY_ID = 'AKIARCIZISC6QEB3E2EW'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'picktalk'
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
@@ -184,7 +190,6 @@ STATIC_ROOT = '/usr/local/lib/python3.8/dist-packages/django/contrib/admin'
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 
 ## 카카오 키들은 나중에 accounts.view에서 쓰일 예정

@@ -11,7 +11,7 @@ body{
 
 .container{
     width : 1440px;
-    padding : 100px 111px 45px 108px;
+    padding : 98px 110px 65px 110px;
     margin : 0 auto;
     box-sizing: border-box;
 }
@@ -24,44 +24,49 @@ body{
 .header{
     position : relative;
     font-size: 0px;
-    padding-bottom : 55px;
+    margin-bottom: 55px;
+    height:35px;
+    padding-right: 10px;
+    box-sizing: border-box;
+    text-align: right;
 }
 
 .header .logo{
+    position: absolute;
+    left: 0px;
+    top: 0px;
     display :inline-block;
     width: 219px;
     height: 35px;
     background-image : url('../../image/web/logo.png');
-    background-size : cover;
-    vertical-align : top;
-    cursor:pointer;
-}
 
-.header .searchBtn{
-    display :inline-block;
-    width: 20px;
-    height: 35px;
-    margin-left: 274px;
-    margin-right: 41px;
-    background-image : url('../../image/web/searchBtn.png');
-    background-size : 100%;
-    background-repeat : no-repeat;
-    background-position : center;
     vertical-align : top;
     cursor:pointer;
+
+    background-size : auto;
+    background-repeat: no-repeat;
+    background-position: left center;
 }
 
 /* serach 버튼 클릭시 변경된 디자인 */
 .header .searchBox{
     position: absolute;
-    left: 252px;
-    top: -10px;
-    width: 282px;
-    height: 53px;
+    left : 240px;
+    top : -8.5px;
+
+    width: 300px;
+    height: 52px;
+    *padding: 14px 17px 14px 16px;
     border-radius: 33px;
-    box-shadow: 0 1px 13px 0 rgba(255, 138, 174, 0.3);
+    border: solid 2px #ff8aae;
     background-color: #fff;
-    display: none; /* 기본이 표시하지 않음. 이벤트 발생시 block으로 변경. */
+    box-sizing: border-box;
+
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    color: #ff8aae;
+    font-size: 0px;
 }
 .header .searchBox #search{
     display:  inline-block;
@@ -71,7 +76,8 @@ body{
     height: 100%;
     box-sizing:border-box;
     vertical-align: top;
-    padding-left: 25px;
+    padding-left: 16px;
+    padding-top: 5px;
 
     font-size: 18px;
     font-weight: bold;
@@ -100,108 +106,108 @@ body{
 }
 /* serach 버튼 클릭시 변경된 디자인 */
 
+.header .audiRegBtn,
+.header .profileRegBtn{
+    display: inline-block;
+    margin-right: 27px;
+    font-size: 0px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.header .audiRegBtn .icon,
+.header .profileRegBtn .icon{
+    display:  inline-block;
+    width: 30px;
+    height: 30px;
+    border: 1px saddlebrown;
+    margin-top: 2.5px;
+    margin-right: 8px;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.header .audiRegBtn .icon{
+    background-image: url("../../image/web/auditionIcon.png");
+}
+.header .profileRegBtn .icon{
+    background-image: url("../../image/web/profileIcon.png");
+}
+
+.header .audiRegBtn .name,
+.header .profileRegBtn .name{
+    display:  inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    color: #454545;
+    height: 35px;
+    line-height: 35px;
+    vertical-align: top;
+}
+
+.header .line{
+    display:  inline-block;
+    vertical-align: top;
+    width: 2px;
+    height: 18px;
+    margin-top: 10px;
+    background-color: #c4c4c4;
+}
+
+
 .header .menu{
     display :inline-block;
     height: 35px;
-    font-size: 20px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 35px;
-    letter-spacing: normal;
-    color: #454545;
     vertical-align : top;
-    margin-right : 33px;
+    margin-left : 27px;
     cursor:pointer;
-}
+    line-height: 35px;
 
-.header .registerBtn{
-    position : absolute;
-    left: 960px;
-    top : -9px;
-    box-shadow: 0 1px 11px 0 rgba(223, 223, 223, 0.66);
-    background-color: #fff;
-    border-radius : 10px;
-
-    width: 73px;
-    height: 53px;
     font-size: 20px;
     font-weight: bold;
     color: #454545;
-    text-align : center;
-    line-height : 53px;
-    cursor:pointer;
 }
 
-
-/* 등록 버튼 클릭시 변경된 디자인 */
-.header .registerBox{
-    position: absolute;
-    left : 876px;
-    top :60px;
-    width: 251px;
-    padding : 40px 30px;
-    border-radius: 14px;
-    box-shadow: 0 1px 30px 0 rgba(223, 223, 223, 0.7);
-    background-color: #fff;
-    box-sizing: border-box;
-    display: none; /* 기본이 표시하지 않음. 이벤트 발생시 block으로 변경. */
-}
-
-.header .registerBox span{
-    display: block;
-    font-size: 16px;
-    font-weight: bold;
-    color: #454545;
-    margin-bottom: 8px;
-    cursor: default;
-}
-
-.header .registerBox .regiBtn{
-    position: relative;
-    height: 30px ;
-    padding-left: 51px;
-    line-height: 30px;
-    cursor: pointer;
-    margin: 8px 0px;
-
-    font-size: 18px;
-    font-weight: bold;
-    color: #1f1f1f;
-}
-
-.header .registerBox .regiBtn .regIcon{
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    display: inline-block;
-    left: 0px;
-    top: 0px;
-
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
-
-.header .registerBox .regiBtn .regIcon#audition{background-image: url("../../image/web/auditionIcon.png");}
-.header .registerBox .regiBtn .regIcon#parttime{background-image: url("../../image/web/parttimeIcon.png");}
-.header .registerBox .regiBtn .regIcon#profile{background-image: url("../../image/web/profileIcon.png");}
-/* 등록 버튼 클릭시 변경된 디자인 */
-
-
-.header .login, .header .logout{
+.header .login, .header .mypage{
     display :inline-block;
-    height: 35px;
+    width: 88px;
+    height: 40px;
+    flex-grow: 0;
+    border-radius: 33px;
+    background-color: #ff8aae;
+    text-align:  center;
+    vertical-align: top;
+    margin-top: -2.5px;
+    cursor: pointer;
+
     font-size: 16px;
     font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 35px;
-    letter-spacing: normal;
-    text-align: left;
-    color: #454545;
-    margin-left : 202px;
+    line-height: 40px;
+    color: #fff;
+    margin-left: 41px;
+}
+
+.header .join, .header .logout{
+    display :inline-block;
+    width: 88px;
+    height: 40px;
+    margin-left:10px;
+    margin-top: -2.5px;
+    border-radius: 33px;
+    border: solid 1px #959595;
+    background-color: #fff;
     cursor:pointer;
+    box-sizing: border-box;
+
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 40px;
+    color: #454545;
+    text-align:  center;
+    vertical-align: top;
 }
 
 /* PC Base Footer CSS */
@@ -209,7 +215,7 @@ body{
     background-color : #f8f8f8;
 }
 .footer .footerContext {
-    padding : 56px 0px 48px 108px;
+    padding : 22px 0px 25px 100px;
     font-size : 0px;
     margin : 0 auto;
     box-sizing: border-box;
@@ -217,20 +223,20 @@ body{
 }
 .footer .footerContext .company{
     display : block;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 15px;
+    font-weight: 500;
     color: #000;
-    margin-bottom : 32px;
+    margin-bottom : 16px;
 }
 
 .footer .footerContext .companyLink{
-    margin-bottom : 28px;
+    margin-bottom : 17px;
 }
 
 .footer .footerContext .companyLink span{
     display : inline-block;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 15px;
+    font-weight: 500;
     color: #1f1f1f;
     cursor: pointer;
     margin-right : 33px;
@@ -238,13 +244,9 @@ body{
 
 .footer .footerContext .info{
     display : block;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 15px;
+    font-weight: 500;
     color: #000;
-}
-
-.footer .footerContext .info.addr{
-    margin-bottom : 26px;
 }
 
 
@@ -274,7 +276,8 @@ body{
     box-sizing:  border-box;
 }
 
-.loginBox .loginClose{
+.loginBox .loginClose,
+.regCompanyPopup .regCompanyBox .closeBtn{
     position: absolute;
     width: 50px;
     height: 50px;
@@ -422,4 +425,77 @@ body{
 
 .loginBox .onepickLogin .idSearchBox span:first-child{
     margin: 0px;
+}
+
+
+/*  기업회원 등록 페이지.  */
+
+.regCompanyPopup{
+    display: none;
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(84, 84, 84, 0.7);
+    top: 0px;
+    left: 0px;
+}
+
+.regCompanyPopup .regCompanyBox{
+    position: absolute;
+    width: 585px;
+    height: 820px;
+
+    top: 50%;
+    left: 50%;
+    margin-left: -292.5px;
+    margin-top: -410px;
+
+
+    padding: 190px 57px 166px 77px;
+    border-radius: 33px;
+    background-color: #fff;
+
+    box-sizing: border-box;
+}
+
+.regCompanyPopup .regCompanyBox .title{
+    font-size: 33px;
+    font-weight: bold;
+    line-height: 1.42;
+    color: #1f1f1f;
+    margin-bottom: 30px;
+}
+
+.regCompanyPopup .regCompanyBox .regInfo{
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.59;
+    color: #878787;
+    margin-bottom: 30px;
+}
+
+.regCompanyPopup .regCompanyBox .regCompanyBtn{
+    display: inline-block;
+    padding: 32px 36px;
+    border-radius: 22px;
+    background-color: #ff8aae;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.regCompanyPopup .regCompanyBox .close{
+    display: inline-block;
+    margin-top: 24px;
+    margin-left: 33px;
+    cursor: pointer;
+
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #b1b1b1;
 }

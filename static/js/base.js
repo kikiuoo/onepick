@@ -20,19 +20,17 @@ $(document).ready(function () {
        window.location.href = url;
     });
 
-    /* Header 버튼 Web 이벤트 */
-    // 등록 버튼 이벤트 (Web)
-    $(document).on("click", ".header .registerBtn", function(){
-        var display = $(".registerBox").css("display");
+    $(document).on("click", ".audiRegBtn", function(){
 
-        if( display == "none" ){ // 화면에 표시
-            $(".registerBox").css("display", "block");
+        if( userID ){
+            window.location.href = "/audi/write/";
+        }else{
+            alert("로그인 후 이용 가능합니다.");
         }
-        else if( display == "block"){ // 화면에서 미 표시.
-            $(".registerBox").css("display", "none");
-        }
+
     });
 
+    /* Header 버튼 Web 이벤트 */
     $(document).on("click",".header .login", function(){
         $(".loginPopup").css("display", "block");
     });
@@ -94,6 +92,12 @@ $(document).ready(function () {
         }
     });
 
+    $(document).on("keyup", "#onepickId, #onepickPW", function(e){
+       if( e.keyCode == 13 ){
+           $(".loginBtn").trigger("click");
+       }
+    });
+
     // 기존 회원 로그인
     $(document).on("click", ".loginBtn", function (){
 
@@ -148,6 +152,35 @@ $(document).ready(function () {
         }else if( urlType == "setting" ){
             window.location.href = "#";
         }
+    });
+
+
+    // 기업회원 등록 팝업 제어
+    $(document).on("click", ".registerBox .regiBtn", function (){
+        var btnType = $(this).attr("data-type");
+
+       if( userID == null || userID == ""){
+            alert("로그인 후 이용가능합니다.");
+            return;
+        }
+
+        if( btnType == "audition" ){
+            if( userType == "COMPANY"){
+                window.location.href = "/audi/write/"
+            }else if( userType == "NORMAL"){
+                $(".registerBox").css("display", "none");
+                $(".regCompanyPopup").css("display", "block");
+            }
+        }
+
+    });
+
+    $(document).on("click", ".regCompanyPopup .close, .regCompanyPopup .closeBtn", function(){
+       $(".regCompanyPopup").css("display", "none");
+    });
+
+    $(document).on("click", ".regCompanyPopup .regCompanyBtn", function(){
+       window.location.href = "/company/regCompany/"
     });
 });
 

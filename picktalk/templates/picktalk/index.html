@@ -13,17 +13,19 @@
 
 <!-- 본문 내용 -->
 <!-- 메인 베너 -->
+{%  if mainbanner.count > 0  %}
 <div class="swiper mySwiper mainBanner">
     <div class="swiper-wrapper">
-        <div class="swiper-slide" style="background-color: darkkhaki"></div>
-        <div class="swiper-slide" style="background-color: darkred"></div>
-        <div class="swiper-slide" style="background-color: goldenrod"></div>
+        {% for banner in mainbanner %}
+        <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
+        {% endfor %}
     </div>
     <div class="swiper-pagination"></div>
 
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
 </div>
+{% endif %}
 
 
 <!-- 본문 내용 : 오디션 정보 -->
@@ -34,14 +36,14 @@
 
 <div class="inBox">
     {% for audition in auditions %}
-    <div class="audition" data-num="{{ audition.id }}">
+    <div class="audition" data-num="{{ audition.num }}">
         <div class="audiType">{{ audition.name }}</div>
         <div class="audiLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ audition.logoImage }}");'></div>
         <div class="audiTitle">{{ audition.title }}</div>
         <div class="audiTerm">~ {{ audition.endDate|date:'Y-m-d' }}</div>
         <div class="pickBtn"></div>
     </div>
-    {% endfor %}
+     {% endfor %}
 </div>
 
 

@@ -8,12 +8,10 @@
 from django.db import models
 
 
-
-
 class AuditionApply(models.Model):
     num = models.BigAutoField(primary_key=True)
-    auditionnum = models.PositiveBigIntegerField(db_column='auditionNum')  # Field name made lowercase.
-    profilenum = models.PositiveBigIntegerField(db_column='profileNum')  # Field name made lowercase.
+    auditionnum = models.ForeignKey('AuditionInfo', models.DO_NOTHING, db_column='auditionNum')  # Field name made lowercase.
+    profilenum = models.ForeignKey('ProfileInfo', models.DO_NOTHING, db_column='profileNum')  # Field name made lowercase.
     comment = models.CharField(max_length=100, blank=True, null=True)
     pick = models.CharField(max_length=10, blank=True, null=True)
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
@@ -26,8 +24,8 @@ class AuditionApply(models.Model):
 
 class AuditionInfo(models.Model):
     num = models.BigAutoField(primary_key=True)
-    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
-    cate = models.CharField(max_length=50, blank=True, null=True)
+    userid = models.ForeignKey('UserInfo', models.DO_NOTHING, db_column='userID')  # Field name made lowercase.
+    cate = models.ForeignKey('CateMain', models.DO_NOTHING, db_column='cate', blank=True, null=True)
     subcate = models.CharField(db_column='subCate', max_length=100, blank=True, null=True)  # Field name made lowercase.
     startdate = models.DateTimeField(db_column='startDate', blank=True, null=True)  # Field name made lowercase.
     enddate = models.DateTimeField(db_column='endDate', blank=True, null=True)  # Field name made lowercase.
@@ -56,8 +54,8 @@ class AuditionInfo(models.Model):
 
 class AuditionPick(models.Model):
     num = models.BigIntegerField(primary_key=True)
-    auditionnum = models.PositiveBigIntegerField(db_column='auditionNum')  # Field name made lowercase.
-    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    auditionnum = models.ForeignKey(AuditionInfo, models.DO_NOTHING, db_column='auditionNum')  # Field name made lowercase.
+    userid = models.ForeignKey('UserInfo', models.DO_NOTHING, db_column='userID')  # Field name made lowercase.
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
@@ -67,14 +65,13 @@ class AuditionPick(models.Model):
 
 class AuditionView(models.Model):
     num = models.BigIntegerField(primary_key=True)
-    auditionnum = models.PositiveBigIntegerField(db_column='auditionNum')  # Field name made lowercase.
-    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    auditionnum = models.ForeignKey(AuditionInfo, models.DO_NOTHING, db_column='auditionNum')  # Field name made lowercase.
+    userid = models.ForeignKey('UserInfo', models.DO_NOTHING, db_column='userID')  # Field name made lowercase.
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'audition_view'
-
 
 
 class CateMain(models.Model):
@@ -90,7 +87,7 @@ class CateMain(models.Model):
 
 class CateSub(models.Model):
     num = models.AutoField(primary_key=True)
-    catecode = models.CharField(db_column='cateCode', max_length=50)  # Field name made lowercase.
+    catecode = models.ForeignKey(CateMain, models.DO_NOTHING, db_column='cateCode')  # Field name made lowercase.
     subcate = models.CharField(db_column='subCate', unique=True, max_length=50)  # Field name made lowercase.
     catename = models.CharField(db_column='cateName', max_length=100, blank=True, null=True)  # Field name made lowercase.
     cateorder = models.IntegerField(db_column='cateOrder', blank=True, null=True)  # Field name made lowercase.
@@ -98,6 +95,7 @@ class CateSub(models.Model):
     class Meta:
         managed = False
         db_table = 'cate_sub'
+
 
 class EventBanner(models.Model):
     num = models.BigAutoField(primary_key=True)
@@ -118,8 +116,8 @@ class EventBanner(models.Model):
 
 class ProfileCareer(models.Model):
     num = models.BigAutoField(primary_key=True)
-    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
-    profilenum = models.PositiveBigIntegerField(db_column='profileNum')  # Field name made lowercase.
+    userid = models.ForeignKey('UserInfo', models.DO_NOTHING, db_column='userID')  # Field name made lowercase.
+    profilenum = models.ForeignKey('ProfileInfo', models.DO_NOTHING, db_column='profileNum')  # Field name made lowercase.
     catetype = models.IntegerField(db_column='cateType', blank=True, null=True)  # Field name made lowercase.
     catesubtype = models.IntegerField(db_column='cateSubType', blank=True, null=True)  # Field name made lowercase.
     content = models.CharField(max_length=100, blank=True, null=True)
@@ -133,8 +131,8 @@ class ProfileCareer(models.Model):
 
 class ProfileComment(models.Model):
     num = models.BigIntegerField(primary_key=True)
-    profilenum = models.PositiveBigIntegerField(db_column='profileNum')  # Field name made lowercase.
-    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    profilenum = models.ForeignKey('ProfileInfo', models.DO_NOTHING, db_column='profileNum')  # Field name made lowercase.
+    userid = models.ForeignKey('UserInfo', models.DO_NOTHING, db_column='userID')  # Field name made lowercase.
     content = models.CharField(max_length=500, blank=True, null=True)
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
 
@@ -145,8 +143,8 @@ class ProfileComment(models.Model):
 
 class ProfileEtccareer(models.Model):
     num = models.BigAutoField(primary_key=True)
-    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
-    profilenum = models.PositiveBigIntegerField(db_column='profileNum')  # Field name made lowercase.
+    userid = models.ForeignKey('UserInfo', models.DO_NOTHING, db_column='userID')  # Field name made lowercase.
+    profilenum = models.ForeignKey('ProfileInfo', models.DO_NOTHING, db_column='profileNum')  # Field name made lowercase.
     catetype = models.IntegerField(db_column='cateType', blank=True, null=True)  # Field name made lowercase.
     subcatetype = models.IntegerField(db_column='subCateType', blank=True, null=True)  # Field name made lowercase.
     content = models.CharField(max_length=100, blank=True, null=True)
@@ -160,7 +158,7 @@ class ProfileEtccareer(models.Model):
 
 class ProfileInfo(models.Model):
     num = models.BigAutoField(primary_key=True)
-    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    userid = models.ForeignKey('UserInfo', models.DO_NOTHING, db_column='userID')  # Field name made lowercase.
     profileimage = models.CharField(db_column='profileImage', max_length=500, blank=True, null=True)  # Field name made lowercase.
     detailimage = models.TextField(db_column='detailImage', blank=True, null=True)  # Field name made lowercase.
     height = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True)
@@ -175,7 +173,6 @@ class ProfileInfo(models.Model):
     foreign = models.CharField(max_length=500, blank=True, null=True)
     youtube = models.CharField(max_length=500, blank=True, null=True)
     linecomment = models.CharField(db_column='lineComment', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    comment = models.CharField(max_length=500, blank=True, null=True)
     intercate = models.CharField(db_column='interCate', max_length=50, blank=True, null=True)  # Field name made lowercase.
     intersubcate = models.CharField(db_column='interSubCate', max_length=50, blank=True, null=True)  # Field name made lowercase.
     regdate = models.DateTimeField(db_column='RegDate', blank=True, null=True)  # Field name made lowercase.
@@ -190,8 +187,8 @@ class ProfileInfo(models.Model):
 
 class ProfilePick(models.Model):
     num = models.BigIntegerField(primary_key=True)
-    profilenum = models.PositiveBigIntegerField(db_column='profileNum')  # Field name made lowercase.
-    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    profilenum = models.ForeignKey(ProfileInfo, models.DO_NOTHING, db_column='profileNum')  # Field name made lowercase.
+    userid = models.ForeignKey('UserInfo', models.DO_NOTHING, db_column='userID')  # Field name made lowercase.
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
@@ -201,8 +198,8 @@ class ProfilePick(models.Model):
 
 class ProfileShare(models.Model):
     num = models.BigIntegerField(primary_key=True)
-    profilenum = models.PositiveBigIntegerField(db_column='profileNum')  # Field name made lowercase.
-    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    profilenum = models.ForeignKey(ProfileInfo, models.DO_NOTHING, db_column='profileNum')  # Field name made lowercase.
+    userid = models.ForeignKey('UserInfo', models.DO_NOTHING, db_column='userID')  # Field name made lowercase.
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
@@ -212,7 +209,7 @@ class ProfileShare(models.Model):
 
 class ProfileSuggest(models.Model):
     num = models.BigAutoField(primary_key=True)
-    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    userid = models.ForeignKey('UserInfo', models.DO_NOTHING, db_column='userID')  # Field name made lowercase.
     auditionnum = models.PositiveBigIntegerField(db_column='auditionNum')  # Field name made lowercase.
     comment = models.CharField(max_length=500, blank=True, null=True)
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
@@ -224,8 +221,8 @@ class ProfileSuggest(models.Model):
 
 class ProfileView(models.Model):
     num = models.BigIntegerField(primary_key=True)
-    profilenum = models.PositiveBigIntegerField(db_column='profileNum')  # Field name made lowercase.
-    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    profilenum = models.ForeignKey(ProfileInfo, models.DO_NOTHING, db_column='profileNum')  # Field name made lowercase.
+    userid = models.ForeignKey('UserInfo', models.DO_NOTHING, db_column='userID')  # Field name made lowercase.
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
@@ -233,26 +230,10 @@ class ProfileView(models.Model):
         db_table = 'profile_view'
 
 
-class UserAgree(models.Model):
-    num = models.AutoField(primary_key=True)
-    savecolumn = models.CharField(db_column='saveColumn', max_length=50, blank=True, null=True)  # Field name made lowercase.
-    title = models.CharField(max_length=50, blank=True, null=True)
-    content = models.TextField(blank=True, null=True)
-    order = models.IntegerField(blank=True, null=True)
-    use = models.CharField(max_length=10, blank=True, null=True)
-    regdate = models.DateTimeField(db_column='regDate', blank=True, null=True)  # Field name made lowercase.
-    upddate = models.DateTimeField(db_column='updDate', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'user_agree'
-
-
 class UserCompany(models.Model):
-    num = models.BigAutoField(primary_key=True)
-    userid = models.CharField(db_column='userID', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    num = models.PositiveBigIntegerField(primary_key=True)
+    userid = models.ForeignKey('UserInfo', models.DO_NOTHING, db_column='userID', blank=True, null=True)  # Field name made lowercase.
     logoimage = models.CharField(db_column='logoImage', max_length=200, blank=True, null=True)  # Field name made lowercase.
-    licenseimage = models.CharField(db_column='licenseImage', max_length=200, blank=True, null=True)  # Field name made lowercase.
     license = models.CharField(max_length=200, blank=True, null=True)
     companyname = models.CharField(db_column='companyName', max_length=50, blank=True, null=True)  # Field name made lowercase.
     addr1 = models.CharField(max_length=100, blank=True, null=True)
@@ -282,8 +263,6 @@ class UserInfo(models.Model):
     gender = models.CharField(max_length=10, blank=True, null=True)
     nationality = models.CharField(max_length=10, blank=True, null=True)
     school = models.CharField(max_length=50, blank=True, null=True)
-    entertain = models.CharField(max_length=10, blank=True, null=True)
-    military = models.CharField(max_length=10, blank=True, null=True)
     agreeusage = models.CharField(db_column='agreeUsage', max_length=10, blank=True, null=True)  # Field name made lowercase.
     agreeprivacy = models.CharField(db_column='agreePrivacy', max_length=10, blank=True, null=True)  # Field name made lowercase.
     agreemarketing = models.CharField(db_column='agreeMarketing', max_length=10, blank=True, null=True)  # Field name made lowercase.
@@ -301,7 +280,7 @@ class UserInfo(models.Model):
 
 class UserLogin(models.Model):
     num = models.BigAutoField(primary_key=True)
-    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    userid = models.ForeignKey(UserInfo, models.DO_NOTHING, db_column='userID')  # Field name made lowercase.
     accesstime = models.DateTimeField(db_column='accessTime', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:

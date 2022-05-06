@@ -13,4 +13,6 @@ urlpatterns = [
     path('login/local/', views.localLogin, name='local-login'), # 로컬 로그인.
     path('logout/local/', views.locallogout, name='local-logout'), # 로컬 로그아웃.
 
+    path('join/<num>/', views.join, name='joins'),
+    path('joins/updateUser/', views.joinUpdate, name="join-update"),
 ]

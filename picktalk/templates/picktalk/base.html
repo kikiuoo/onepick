@@ -35,35 +35,34 @@
         <!-- header -->
         <div class="header">
             <div class="logo"></div>
-            <div class="searchBtn"></div>
             <div class="searchBox">
                 <input type="text" name="search" id="search" placeholder="오디션,인물 검색"/>
                 <div class="search"></div>
             </div>
             <div class="menuBtn pcNone"></div>
 
+            {% if request.session.userType == "COMPANY" and request.session.id != null %}
+            <div class="audiRegBtn">
+                <div class="icon"></div>
+                <div class="name">오디션 등록</div>
+            </div>
+            <div class="line"></div>
+            {% elif request.session.userType == "NORMAL" and request.session.id != null %}
+            <div class="profileRegBtn">
+                <div class="icon"></div>
+                <div class="name">프로필 등록</div>
+            </div>
+            <div class="line"></div>
+            {% endif %}
+
             <div class="menu" data-url="/audi/main/actor/">오디션</div>
             <div class="menu" data-url="/profile/list/actor/newest/">프로필</div>
-            <div class="menu mobileNone" data-url="#">전문가 상담</div>
 
-            <div class="registerBtn mobileNone">등록</div>
-            <div class="registerBox mobileNone">
-                <span>기업회원</span>
-                <div class="regiBtn">
-                    <div class="regIcon" id="audition"></div> 오디션 등록
-                </div>
-                <div class="regiBtn">
-                    <div class="regIcon" id="parttime"></div> 알바 등록
-                </div>
-                <span>개인회원</span>
-                <div class="regiBtn">
-                    <div class="regIcon" id="profile"></div> 프로필 등록
-                </div>
-            </div>
-
-            {% if request.session.nickName == "" or request.session.nickName == null %}
-            <div class="login mobileNone">로그인/회원가입</div>
+            {% if request.session.id == "" or request.session.id == null %}
+            <div class="login mobileNone">로그인</div>
+            <div class="join mobileNone">회원가입</div>
             {% else %}
+            <div class="mypage mobileNone">마이페이지</div>
             <div class="logout mobileNone">로그아웃</div>
             {% endif %}
         </div>
@@ -132,12 +131,12 @@
     <div class="menuPopup pcNone">
         <div class="sideMenu">
             <div class="m_loginBox">
-                {% if request.session.nickName == "" or request.session.nickName == null %}
+                {% if request.session.id == "" or request.session.id == null %}
                 <div class="login">로그인/회원가입</div>
                 {% else %}
                 <div class="infoBox" id="login">
                     <div class="infoIcon"></div>
-                    <span>{{ request.session.nickName }}</span>
+                    <span>{{ request.session.id }}</span>
                     <div class="logout">로그아웃하기</div>
                 </div>
                 {% endif %}
@@ -177,5 +176,25 @@
         </div>
     </div>
     <!-- mobile Menu Popup -->
+
+
+    <div class="regCompanyPopup">
+        <div class="regCompanyBox">
+            <div class="closeBtn"></div>
+            <div class="title">
+                오디션 등록 / 알바픽 등록을<br>위해 먼저 기업회원 전환이<br>필요합니다.
+            </div>
+            <div class="regInfo">
+                기업회원은 자유롭게 오디션 및 알바공고를<br>등록하고 프로필 열람 및 오디션 제안 기능을<br>사용하실 수 있습니다.
+            </div>
+            <div class="regCompanyBtn">지금 기업회원 전환하기 →</div>
+            <div class="close">다음에 할래요</div>
+        </div>
+    </div>
+
+    <script>
+        var userType = "{{ request.session.userType }}";
+        var userID = "{{ request.session.id }}";
+    </script>
 </body>
 </html>

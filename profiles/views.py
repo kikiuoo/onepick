@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from profiles.models import *
 
 # Create your views here.
 # profile/list/actor/ -- 배우 리스트
@@ -36,15 +35,21 @@ def getCateType(cate_type):
 
 def listView(request, cate_type, orderby): # 오디션 Main
 
+    """
     order = orderbyType(orderby)
     cate = getCateType(cate_type)
-    profileList = Profile.objects.filter(careers__applySubType__applyType_id=cate).distinct().order_by(order)[:12]
+    profileList = ProfileInfo.objects.filter(careers__applySubType__applyType_id=cate).distinct().order_by(order)[:12]
 
     return render(request, 'profiles/list.html', {'cateType' : cate_type, "profileList" : profileList } )
 
+    """
+    return render(request, 'profiles/list.html')
+
+
 def viewer(request, cate_type, num) :
 
-    profileData = Profile.objects.filter(id=num)
+    """
+    profileData = ProfileInfo.objects.filter(id=num)
 
     for row in profileData.values_list():
         userID = row[1]
@@ -52,17 +57,21 @@ def viewer(request, cate_type, num) :
 
     youtube = youtube.replace("https://youtu.be/", "https://www.youtube.com/embed/")
 
-    userData = User.objects.filter(id=userID)
+    userData = UserInfo.objects.filter(id=userID)
 
-    cate = AuditionCategory.objects.filter(applysubtype__career__profile_id=num).distinct()
+    cate = CateMain.objects.filter(applysubtype__career__profile_id=num).distinct()
 
     return render(request, 'profiles/viewer.html', { 'cateType' : cate_type , "num":num, "profileData" : profileData,
                                                      "userData" : userData, "youtube" : youtube, "cate" : cate })
+    """
+
+    return render(request, 'profiles/viewer.html')
 
 def viewerDetail(request, type, num) :
 
+    """
     if type == "youtube" :
-        profileData = Profile.objects.filter(id=num)
+        profileData = ProfileInfo.objects.filter(id=num)
 
         for row in profileData.values_list():
             data = row[10].replace("https://youtu.be/", "https://www.youtube.com/embed/")
@@ -80,3 +89,5 @@ def viewerDetail(request, type, num) :
 
 
     return render(request, 'profiles/viewer_detail.html', { 'type' :  type , 'num' : num, 'data' : data })
+    """
+    return render(request, 'profiles/viewer_detail.html')

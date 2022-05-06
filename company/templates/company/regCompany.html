@@ -1,0 +1,81 @@
+{% extends 'picktalk/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/index.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/index.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/company/regCompany.js' %}"></script>
+
+
+<!-- 본문 내용 -->
+<div class="bTitle">기업회원 등록</div>
+
+<div class="body">
+    <form action="/company/regCompany/callback/" method="post" enctype="multipart/form-data" id="saveCompany">
+        {% csrf_token %}
+        <div class="imageBox">
+            <input type="file" name="logo" id="logo">
+            <input type="file" name="regImage" id="regImage">
+        </div>
+
+        <input type="hidden" value="{{ request.session.id }}" id="userID" name="userID"/>
+
+        <div class="joinInfo">
+            <div class="title">사업자명</div>
+            <div class="content"><input type="text" value="" id="companyName" name="companyName" maxlength="10"/> </div>
+        </div>
+
+
+        <div class="joinInfo">
+            <div class="title">사업자등록번호</div>
+            <div class="content"><input type="text" value="" id="registration" name="registration" /> </div>
+        </div>
+
+
+        <div class="joinInfo">
+            <div class="title">사업장 주소</div>
+            <div class="content">
+                <input type="text" id="sample4_roadAddress" name="addr1" placeholder="도로명주소" readonly>
+                <input type="text" id="sample4_detailAddress" name="addr2" placeholder="상세주소">
+                <input type="button" onclick="sample4_execDaumPostcode()" value="주소 찾기">
+            </div>
+        </div>
+
+
+        <div class="joinInfo">
+            <div class="title">담당자명</div>
+            <div class="content"><input type="text" value="" id="name" name="name" maxlength="5"/> </div>
+        </div>
+
+
+        <div class="joinInfo">
+            <div class="title">담당자 연락처</div>
+            <div class="content">
+                <select name="phone1" id="phone1">
+                    <option value="010" {% if phone.0 == "010" %} selected {% endif %}>010</option>
+                    <option value="011" {% if phone.0 == "011" %} selected {% endif %}>011</option>
+                    <option value="016" {% if phone.0 == "016" %} selected {% endif %}>016</option>
+                    <option value="017" {% if phone.0 == "017" %} selected {% endif %}>017</option>
+                    <option value="019" {% if phone.0 == "019" %} selected {% endif %}>019</option>
+                </select> -
+                <input type="text" value="" id="phone2" name="phone2" maxlength="4"/> -
+                <input type="text" value="" id="phone3" name="phone3" maxlength="4"/>
+            </div>
+        </div>
+
+
+        <div class="joinInfo">
+            <div class="title">웹사이트</div>
+            <div class="content"><input type="text" value="" id="webSite" name="webSite" /> </div>
+        </div>
+    </form>
+
+    <div class="sendBtn">저장</div>
+</div>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+{% endblock %}

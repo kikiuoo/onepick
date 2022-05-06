@@ -22,4 +22,5 @@ urlpatterns = [
     path('audi/', include('audition.urls')),
     path('profile/', include('profiles.urls')),
     path('users/', include('user.urls')),
+    path('company/', include('company.urls')),
 ]
