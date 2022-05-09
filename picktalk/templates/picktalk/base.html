@@ -55,8 +55,8 @@
             <div class="line"></div>
             {% endif %}
 
-            <div class="menu" data-url="/audi/main/actor/">오디션</div>
-            <div class="menu" data-url="/profile/list/actor/newest/">프로필</div>
+            <div class="menu mobileNone" data-url="/audi/main/actor/">오디션</div>
+            <div class="menu mobileNone" data-url="/profile/list/actor/newest/">프로필</div>
 
             {% if request.session.id == "" or request.session.id == null %}
             <div class="login mobileNone">로그인</div>
@@ -143,36 +143,29 @@
             </div>
 
             <div class="m_inbox">
-                <div class="infoBox" id="mypick">
-                    <div class="infoIcon"></div>
-                    <p>마이픽</p>
+                <div class="menuCate" id="audition">
+                    <p>오디션</p>
                 </div>
+                <div class="menuCate" id="profile">
+                    <p>프로필</p>
+                </div>
+            </div>
+
+            {% if request.session.id != null %}
+            <div class="m_inbox">
+                {% if request.session.userType == "COMPANY" and request.session.id != null %}
                 <div class="infoBox" id="auditonReg">
                     <div class="infoIcon"></div>
                     <p>오디션 등록</p>
                 </div>
+                {% elif request.session.userType == "NORMAL" and request.session.id != null %}
                 <div class="infoBox" id="profileReg">
                     <div class="infoIcon"></div>
                     <p>프로필 등록</p>
                 </div>
-                <div class="infoBox" id="parttimeReg">
-                    <div class="infoIcon"></div>
-                    <p>알바픽 등록</p>
-                </div>
-                <div class="infoBox" id="advice">
-                    <div class="infoIcon"></div>
-                    <p>전문가 상담</p>
-                </div>
-                <div class="infoBox" id="choice">
-                    <div class="infoIcon"></div>
-                    <p>픽초이스</p>
-                </div>
+                {% endif %}
             </div>
-
-            <div class="infoBox" id="setting">
-                <div class="infoIcon"></div>
-                <p>설정</p>
-            </div>
+            {% endif %}
         </div>
     </div>
     <!-- mobile Menu Popup -->

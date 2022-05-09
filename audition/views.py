@@ -1,6 +1,6 @@
 import datetime
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import  loader
 from django.db import connection
@@ -65,6 +65,14 @@ def audi_write(request) :
     catesub = CateSub.objects.filter(catecode="mainCate1").order_by("cateorder")
 
     return render(request, 'audition/write.html', {'cate':cate, 'catesub' : catesub})
+
+
+def audi_write_callback(request) :
+
+
+
+    return redirect('audition/')
+
 
 def audiAjaxGetCate(request) :
 

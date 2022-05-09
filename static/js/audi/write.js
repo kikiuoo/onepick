@@ -49,6 +49,81 @@ $(document).ready(function(){
         interval: 10
     });
 
+    //preview image
+    $('.content .upload-hidden').on('change', function(){
+        var parent = $(this).parent();
+        //parent.children('.upload-display').remove();
+
+        //image 파일만
+        if (!$(this)[0].files[0].type.match(/image\//)) return;
+
+        var reader = new FileReader();
+        reader.onload = function(e){
+            var src = e.target.result;
+            parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb"></div></div>');
+        }
+
+        parent.append('<input type="file" name="userImage[]" class="saveImage" value="'+ $(this).val() +'">')
+
+        reader.readAsDataURL($(this)[0].files[0]);
+    });
+
+    $(document).on("click", "#ordinary", function (){
+
+        var ordinary = $("#ordinary").is(":checked");
+
+        if( ordinary == true){
+            $("#startDate").attr("disabled", "true");
+            $("#endDate").attr("disabled", "true");
+        } else{
+            $("#startDate").removeAttr("disabled")
+            $("#endDate").removeAttr("disabled")
+        }
+
+    });
+
+
+    $(document).on("click", ".sendBtn", function(){
+        var title = $("#title").val();
+        var subCate = $(".subCate").is(":checked");
+
+        var ordinary = $("#ordinary").is(":checked");
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+        var auditionDate = $("#auditionDate").val();
+        var auditionTime = $("#auditionTime").val();
+
+        if( title == "" ){
+            alert("오디션 공고 제목을 입력해주세요.");
+            return;
+        }
+
+        if( subCate == false ){
+            alert("카테고리 세부분야를 선택해주세요.");
+            return;
+        }
+
+        if( ordinary == false ){
+            if( startDate == ""  || endDate == "" ){
+                alert("오디션 모집기간을 정확히 입력해주세요.");
+                return;
+            }
+        }
+
+        if( auditionDate == "" ){
+            alert("오디션 날짜를 입력해주세요.");
+            return;
+        }
+
+        if( auditionTime == "" ){
+            alert("오디션 시간을 입력해주세요.");
+            return;
+        }
+
+        $("#saveAudiForm").submit();
+
+    });
+
 });
 
 function getSubCate(cate){

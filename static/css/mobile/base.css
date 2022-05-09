@@ -10,7 +10,7 @@ body{
 }
 
 .container{
-    padding : 33px 24px 43px;
+    padding : 30px 17px;
     margin : 0 auto;
     box-sizing: border-box;
 }
@@ -24,12 +24,15 @@ body{
     position: relative;
     font-size: 0px;
     margin-bottom: 13px;
+    height: 24px;
+    box-sizing: border-box;
+    border: 1px solid #fff;
 }
 
 .header .logo{
     width: 94px;
     height: 15px;
-    margin-bottom: 33px;
+    margin-top: 4.5px;
 
     background-image: url("../../image/mobile/logo.png");
     background-position: center;
@@ -38,12 +41,63 @@ body{
     cursor: pointer;
 }
 
+.header .searchBox{
+    position: absolute;
+    right: 34px;
+    top: -4px;
+    height: 28px;
+    width: 170px;
+    border-radius: 33px;
+    border: solid 1px #ff8aae;
+    background-color: #fff;
+    z-index: 1;
+}
+.header .searchBox #search{
+    display:  inline-block;
+    border : 0px solid blue;
+    background-color: transparent;
+    width: 85%;
+    height: 100%;
+    box-sizing:border-box;
+    vertical-align: top;
+    padding-left: 9px;
+
+    font-size: 10px;
+    line-height: 28px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+.header .searchBox #search::placeholder{
+    font-size: 10px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+.header .searchBox #search:focus{
+    outline: none;
+}
+.header .searchBox .search{
+    display:  inline-block;
+    width: 16px;
+    height: 16px;
+    box-sizing:border-box;
+    vertical-align: top;
+    cursor: pointer;
+    margin-top: 6px;
+
+    background-image : url('../../image/mobile/searchBtn.png');
+    background-size : cover;
+    background-repeat : no-repeat;
+    background-position : center;
+}
+
+
 .header .menuBtn{
     width: 24px;
     height: 24px;
     position: absolute;
-    top: -3px;
     right: 0px;
+    top: 0px;
+    vertical-align: top;
 
     background-image: url("../../image/mobile/menu.png");
     background-position: center;
@@ -61,8 +115,8 @@ body{
     height: 100%;
     background-color: rgba(0,0,0,0.4);
     cursor: pointer;
-    display: none;
     z-index: 10;
+    display: none;
 }
 
 .menuPopup .sideMenu{
@@ -78,6 +132,7 @@ body{
 
 .menuPopup .sideMenu .m_loginBox{
     margin-top: 28px;
+    margin-bottom: 11.5px;
 }
 
 .menuPopup .sideMenu .m_loginBox .login{
@@ -147,13 +202,23 @@ body{
     color: #1f1f1f;
 }
 
+.menuPopup .sideMenu .menuCate p{
+    margin: 0px;
+    height: 16px;
+    line-height: 16px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #1f1f1f;
+    margin-top: 20px;
+}
+.menuPopup .sideMenu .menuCate:first-child p{
+    margin-top: 0px;
+}
+
 .menuPopup .sideMenu .m_inbox{
     border-top: 1px solid #dfdfdf;
-    border-bottom: 1px solid #dfdfdf;
-    margin-top: 2px;
-    padding-top: 14px;
-    padding-bottom: 14px;
-    margin-bottom: 7px;
+    padding-top: 19px;
+    padding-bottom: 19px;
 }
 .menuPopup .sideMenu .infoBox#login .infoIcon{ background-image: url("../../image/mobile/mypageIcon.png"); }
 .menuPopup .sideMenu .infoBox#mypick .infoIcon{ background-image: url("../../image/mobile/myPick.png"); }
@@ -165,58 +230,6 @@ body{
 .menuPopup .sideMenu .infoBox#setting .infoIcon{ background-image: url("../../image/mobile/settingIcon.png"); }
 
 /* menu 버튼 클릭시 변경된 디자인 */
-
-/* search 버튼 클릭시 변경된 디자인 */
-
-.header .searchBox{
-    position: absolute;
-    right: 34px;
-    top: -6px;
-    height: 28px;
-    width: 65%;
-    border-radius: 33px;
-    box-shadow: 0 1px 13px 0 rgba(255, 138, 174, 0.3);
-    background-color: #fff;
-    z-index: 1;
-    display: none;
-}
-.header .searchBox #search{
-    display:  inline-block;
-    border : 0px solid blue;
-    background-color: transparent;
-    width: 85%;
-    height: 100%;
-    box-sizing:border-box;
-    vertical-align: top;
-    padding-left: 25px;
-
-    font-size: 12px;
-    font-weight: bold;
-    color: #ff8aae;
-}
-.header .searchBox #search::placeholder{
-    font-size: 12px;
-    font-weight: bold;
-    color: #ff8aae;
-}
-.header .searchBox #search:focus{
-    outline: none;
-}
-.header .searchBox .search{
-    display:  inline-block;
-    width: 15%;
-    height: 100%;
-    box-sizing:border-box;
-    vertical-align: top;
-    cursor: pointer;
-
-    background-image : url('../../image/mobile/searchBtn.png');
-    background-size : 35%;
-    background-repeat : no-repeat;
-    background-position : center;
-}
-/* search 버튼 클릭시 변경된 디자인 */
-
 
 
 .header .searchBtn{
@@ -246,15 +259,15 @@ body{
 /* Mobile Base Footer CSS */
 .footer{
     background-color: #f8f8f8;
-    padding: 22px 37px;
+    padding: 13px 20px;
 }
 
 .footer .company{
     display: inline-block;
-    font-size: 11px;
+    font-size: 13px;
     color: #000000;
-    font-weight: bold;
-    margin-bottom: 11px;
+    font-weight: 500;
+    margin-bottom: 16px;
 }
 
 .footer .companyLink{
@@ -264,25 +277,26 @@ body{
 
 .footer .companyLink span{
     display: inline-block;
-    font-size: 11px;
-    font-weight: bold;
+    font-size: 13px;
+    font-weight: 500;
     color: #1f1f1f;
-    margin-right: 17px;
+    margin-right: 24px;
     cursor: pointer;
 }
 
 .footer .info{
     display: inline-block;
-    font-size: 11px;
-    font-weight: bold;
+    font-size: 10px;
+    font-weight: 500;
     color: #1f1f1f;
-}
-
-.footer .info.addr{
-    margin-bottom: 11px;
+    line-height: 1em;
 }
 
 /* 로그인 Popup 디자인 추가되면 구현 예정 */
 .loginPopup {
+    display: none;
+}
+
+.regCompanyPopup{
     display: none;
 }
