@@ -19,9 +19,17 @@ def index(request):
         # 메인 베너
         mainbanner = EventBanner.objects.filter(position="main")
 
-        query = "SELECT AI.num, AI.title, AI.endDate, AI.ordinary, UC.logoImage, (SELECT COUNT(*) FROM audition_pick WHERE userID = 'kakao_2207974285' AND auditionNum = AI.num ) AS audiPick" \
-                " FROM audition_info AS AI LEFT JOIN user_company AS UC ON AI.userID  = UC.userID " \
-                "order by AI.regTime desc LIMIT 8 "
+        user = request.session.get('id', '')
+
+        if user :
+            query = "SELECT AI.num, AI.title, AI.endDate, AI.ordinary, UC.logoImage, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user +"' AND auditionNum = AI.num ) AS audiPick" \
+                    " FROM audition_info AS AI LEFT JOIN user_company AS UC ON AI.userID  = UC.userID " \
+                    "order by AI.regTime desc LIMIT 8 "
+        else :
+            query = "SELECT AI.num, AI.title, AI.endDate, AI.ordinary, UC.logoImage, '0' AS audiPick" \
+                    " FROM audition_info AS AI LEFT JOIN user_company AS UC ON AI.userID  = UC.userID " \
+                    "order by AI.regTime desc LIMIT 8 "
+
         result = cursor.execute(query)
         auditions = cursor.fetchall()
 

@@ -48,7 +48,7 @@
                 ~ {{ audition.2|date:'Y-m-d' }}
             {% endif %}
         </div>
-        {% if audition.5 == 0 %}
+        {% if audition.5 == 0 or audition.5 == "0" %}
         <div class="pickBtn" data-nowType="off"></div>
         {% else %}
         <div class="pickBtn pickOn " data-nowType="on"></div>
