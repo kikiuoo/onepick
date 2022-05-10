@@ -23,7 +23,7 @@ body{
 .header{
     position: relative;
     font-size: 0px;
-    margin-bottom: 13px;
+    margin-bottom: 25px;
     height: 24px;
     box-sizing: border-box;
     border: 1px solid #fff;
@@ -36,7 +36,7 @@ body{
 
     background-image: url("../../image/mobile/logo.png");
     background-position: center;
-    background-size: cover;
+    background-size: 100%;
     background-repeat: no-repeat;
     cursor: pointer;
 }

@@ -6,6 +6,17 @@ from django.template import  loader
 from django.db import connection
 
 from picktalk.models import *
+import boto3
+from django.conf import settings
+from django.utils import timezone
+import hashlib
+
+
+def md5_generator(str):
+    m = hashlib.md5()
+    m.update(str.encode())
+    return m.hexdigest()
+
 
 # 오디션 /audi ...
 #  -- 오디션 메인
@@ -67,11 +78,79 @@ def audi_write(request) :
     return render(request, 'audition/write.html', {'cate':cate, 'catesub' : catesub})
 
 
+session = boto3.Session(
+    aws_access_key_id = settings.AWS_ACCESS_KEY_ID,
+    aws_secret_access_key = settings.AWS_SECRET_ACCESS_KEY,
+)
+
+
 def audi_write_callback(request) :
 
+    userID = request.POST['userID']
+    title = request.POST['title']
+    cateMain = request.POST['cateMain']
+    subCate = request.POST.getlist('subCate')
+    startDate = request.POST.get('startDate',"9999-12-01 00:00:00")
+    endDate = request.POST.get('endDate',"9999-12-01 00:00:00")
+    ordinary = request.POST.get('ordinary', "0")
+    auditionDate = request.POST['auditionDate']
+    auditionTime = request.POST['auditionTime']
+    each = request.POST.get('each', "0")
+    age = request.POST['age']
+    gender = request.POST['gender']
+    career = request.POST['career']
+    essential = request.POST['essential']
+    preparation = request.POST['preparation']
+
+    catesub = "|".join(subCate) # subCate 문자열로 변환
+
+    if ordinary == "1" :
+        startDate = "9999-12-01 00:00:00"
+        endDate = "9999-12-01 00:00:00"
+
+    userImage = request.FILES.getlist('userImage[]')
+
+    print(userImage)
+
+    s3_client = boto3.client(
+        's3',
+        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+    )
+
+    nowTime = timezone.now()
+    image = ""
+    count = 0
+    for image in userImage :
+        count = count + 1
+        sub = image.name.split('.')[-1]
+        imgName = userID + "_" + image.name + "_" + str(nowTime)
+        imageName = md5_generator(imgName) + "." + sub
+
+        s3_client.upload_fileobj(
+            image,
+            settings.AWS_STORAGE_BUCKET_NAME,
+            "media/photos/audition/image/" + imageName,
+            ExtraArgs={
+                "ContentType": image.content_type,
+            }
+        )
+
+        if( count == 1) :
+            imageURL = "media/photos/audition/image/" + imageName
+        else :
+            imageURL = imageURL + "|" + "media/photos/audition/image/" + imageName
 
 
-    return redirect('audition/')
+    saveAudition = AuditionInfo.objects.create(userid=userID, title=title, cate=cateMain, subcate=catesub,
+                                               startdate=startDate, enddate=endDate, ordinary=ordinary,
+                                               auditiondate=auditionDate, auditiontime=auditionTime, each=each,
+                                               age=age, gender=gender, career=career, image=imageURL, essential=essential,
+                                               field_preparation=preparation, regtime=nowTime, viewcount=0, recorder=0, isdelete=0)
+
+    key = str(AuditionInfo.objects.latest('num').num)
+
+    return redirect('/audi/audiDetail/actor/'+key+"/")
 
 
 def audiAjaxGetCate(request) :

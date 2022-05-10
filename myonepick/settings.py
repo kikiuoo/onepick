@@ -151,7 +151,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-"""  """
+""" """
 AWS_ACCESS_KEY_ID = 'AKIARCIZISC6QEB3E2EW'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'picktalk'
@@ -174,7 +174,6 @@ DEFAULT_FILE_STORAGE = 'picktalk.storage_backends.MediaStorage'
 
 
 """
-
 AWS_ACCESS_KEY_ID = 'AKIARCIZISC6QEB3E2EW'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'picktalk'
@@ -191,6 +190,7 @@ STATIC_ROOT = '/usr/local/lib/python3.8/dist-packages/django/contrib/admin'
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 ## 카카오 키들은 나중에 accounts.view에서 쓰일 예정
 AUTHENTICATION_BACKENDS = (

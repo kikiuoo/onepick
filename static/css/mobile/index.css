@@ -8,26 +8,35 @@
 .mainBanner{
     width: 100%;
     min-width: 300px; /* width가 100%인경우 최소 수치 300. */
-    height: 115px;
+    height: 125px;
     border-radius: 22px;
     background-color: #c4c4c4;
+    margin-bottom: 30px;
 }
 
 /* Index 제목 */
 .mainTitle{
-    margin-top: 27px;
+    position: relative;
     margin-bottom: 14px;
-    padding-left : 6px;
-    font-family: 'Spoqa Han Sans';
-    font-size: 14px;
+    padding : 3px;
+    font-size: 15px;
     font-weight: bold;
-    text-align: left;
-    color: #1f1f1f;
+    color: #282828;
+}
+
+.mainTitle span{
+    position: absolute;
+    right: 3px;
+    bottom: 0px;
+
+    font-size: 10px;
+    font-weight: bold;
+    color: #959595;
 }
 
 /* 내부 Box 간격 조정 */
 .inBox{
-    padding : 0px 10px;
+    padding : 0px 3px;
     font-size : 0px;
 }
 
@@ -35,52 +44,45 @@
 .audition{
     position: relative;
     display:  inline-block;
-    width: calc(50% - 8.5px);
-    padding: 15px;
-    margin-right: 17px;
-    margin-bottom: 21px;
-    border-radius: 22px;
-    box-shadow: 0 1px 13px 0 rgba(235, 235, 235, 0.9);
-    background-color: #fff;
+    width: calc(50% - 5.5px);
+    height: 160px;
+    margin-right: 11px;
+    margin-bottom: 10px;
     box-sizing: border-box;
+    overflow: hidden;
+    padding: 12px 6px;
+
+    border-radius: 22px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
 }
 
 .audition:nth-child(2n){
     margin-right: 0px;
 }
 
-.audition .audiType{
-    display: inline-block;
-    float: right;
-    border-radius: 33px;
-    background-color: #f4f4f4;
-    padding : 5px 10px;
-
-    font-family: 'Spoqa Han Sans';
-    font-size: 7px;
-    font-weight: bold;
-    color: #1f1f1f;
-}
-
 .audition .audiLogo{
-    width: 100%;
-    padding-bottom: 36.4%;
+    position: absolute;
+    top: 12px;
+    left: 6px;
+    width: calc(100% - 12px);
+    height: 74px;
     background-color: #fff;
-    margin-bottom: 2px;
 
     background-position: left center;
     background-repeat:  no-repeat;
-    background-size: 100% auto;
+    background-size: 100% 100%;
 }
 
 .audition .audiTitle{
-    margin-bottom: 7px;
-    font-family: 'Spoqa Han Sans';
-    font-size: 10px;
+    margin-top: 70px;
+    margin-bottom: 10px;
+    font-size: 11px;
     line-height: 1.6;
     font-weight: bold;
     color: #292929;
-    min-height: 32px;
+    min-height: 40px;
+    box-sizing: border-box;
 
     /* 2줄 이상일 경우 ... 처리 */
     white-space : normal;
@@ -90,26 +92,28 @@
     -webkit-box-orient:vertical;
 }
 .audition .audiTerm{
-    font-family: 'Spoqa Han Sans';
-    font-size: 9px;
+    padding-left : 4px;
+    font-size: 12px;
     font-weight: bold;
     color: #1f1f1f;
-    margin-bottom: 13px;
 }
 
 .audition .pickBtn{
     position: absolute;
-    right: 15px;
-    bottom: 19px;
-    width: 19px;
-    height: 15px;
+    right: 10px;
+    bottom: 10px;
+    width: 24px;
+    height: 24px;
 
-    background-image: url("../../image/mobile/myPick.png");
+    background-image: url("../../image/mobile/pick_off.png");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
 }
 
+.audition .pickBtn.pickOn{
+    background-image: url("../../image/mobile/pick_on.png");
+}
 
 /* 프로필 정보 CSS */
 .profile{

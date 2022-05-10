@@ -23,7 +23,24 @@ $(document).ready(function (){
         e.preventDefault();
         e.stopPropagation();
 
-        // 기능 구현 필요
+        if( userID == ""){
+            alert("로그인 후 이용가능합니다.")
+             return;
+        }
+
+        var nowType = $(this).attr("data-nowType");
+        var num = $(this).parent().attr("data-num");
+
+        updatePick("audition", nowType, num );
+
+        if( nowType == "off" ){
+            $(this).attr("data-nowType", "on");
+            $(this).addClass("pickOn");
+        }else{
+            $(this).attr("data-nowType", "off");
+            $(this).removeClass("pickOn");
+        }
+
     });
 
     // 프로필 클릭 이벤트
@@ -47,4 +64,22 @@ $(document).ready(function (){
 
        window.location.href = url;
     });
+
 });
+
+
+function updatePick(tableName, nowType, num){
+    $.ajax({
+      url: "/ajax/updatePick/",
+      type: "GET",
+      dataType: "json",
+      data:{"userID":userID, "tableName" : tableName, "nowType" : nowType, "num" : num},
+
+      success: function(data){
+
+      },
+      error: function (request, status, error){
+
+      }
+   });
+}

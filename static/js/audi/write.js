@@ -50,22 +50,26 @@ $(document).ready(function(){
     });
 
     //preview image
-    $('.content .upload-hidden').on('change', function(){
-        var parent = $(this).parent();
-        //parent.children('.upload-display').remove();
+    $(document).on("change", ".upload-hidden", function (){
+        var thisImage = $(this);
 
-        //image 파일만
-        if (!$(this)[0].files[0].type.match(/image\//)) return;
+           /* file 태그 변경 */
+        var rand1 = Math.random(); // 난수
+        $("#fileLabel").attr("for", "input_"+rand1);
+        $(".imageBox").append('<input type="file" name="userImage[]" id="input_'+rand1+'" class="upload-hidden">');
+
+        /* file 이미지 처리 */
+        if (!thisImage[0].files[0].type.match(/image\//)) return;//image 파일만
 
         var reader = new FileReader();
         reader.onload = function(e){
             var src = e.target.result;
-            parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb"></div></div>');
+
+            $(".imageBox").prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb"></div></div>')
+            $(".imageBox").append('<script>$(document).on("change", "#input_'+rand1+'", function(){ alert("check"); var image = $(this); imageAdd(image); } ); </script>')
         }
 
-        parent.append('<input type="file" name="userImage[]" class="saveImage" value="'+ $(this).val() +'">')
-
-        reader.readAsDataURL($(this)[0].files[0]);
+        reader.readAsDataURL(thisImage[0].files[0]);
     });
 
     $(document).on("click", "#ordinary", function (){

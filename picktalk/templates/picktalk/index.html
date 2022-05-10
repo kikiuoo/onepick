@@ -13,35 +13,46 @@
 
 <!-- 본문 내용 -->
 <!-- 메인 베너 -->
-{%  if mainbanner.count > 0  %}
 <div class="swiper mySwiper mainBanner">
     <div class="swiper-wrapper">
-        {% for banner in mainbanner %}
         <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
-        {% endfor %}
+        <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
+        <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
+        <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
+        <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
+        <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
+        <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
     </div>
     <div class="swiper-pagination"></div>
 
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
 </div>
-{% endif %}
 
 
 <!-- 본문 내용 : 오디션 정보 -->
 <div class="mainTitle">
     오디션 정보
-    <span class="mobileNone" data-url="/audi/main/actor/">전체보기</span>
+    <span data-url="/audi/main/actor/">전체보기</span>
 </div>
 
 <div class="inBox">
     {% for audition in auditions %}
-    <div class="audition" data-num="{{ audition.num }}">
-        <div class="audiType">{{ audition.name }}</div>
-        <div class="audiLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ audition.logoImage }}");'></div>
-        <div class="audiTitle">{{ audition.title }}</div>
-        <div class="audiTerm">~ {{ audition.endDate|date:'Y-m-d' }}</div>
-        <div class="pickBtn"></div>
+    <div class="audition" data-num="{{ audition.0 }}">
+        <div class="audiLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ audition.4 }}");'></div>
+        <div class="audiTitle">{{ audition.1 }}</div>
+        <div class="audiTerm">
+            {% if audition.3 == "1" %}
+                상시모집
+            {% else %}
+                ~ {{ audition.2|date:'Y-m-d' }}
+            {% endif %}
+        </div>
+        {% if audition.5 == 0 %}
+        <div class="pickBtn" data-nowType="off"></div>
+        {% else %}
+        <div class="pickBtn pickOn " data-nowType="on"></div>
+        {% endif %}
     </div>
      {% endfor %}
 </div>

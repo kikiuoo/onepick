@@ -27,6 +27,7 @@ class AuditionApply(models.Model):
 class AuditionInfo(models.Model):
     num = models.BigAutoField(primary_key=True)
     userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    title = models.CharField(max_length=100, blank=True, null=True)
     cate = models.CharField(max_length=50, blank=True, null=True)
     subcate = models.CharField(db_column='subCate', max_length=100, blank=True, null=True)  # Field name made lowercase.
     startdate = models.DateTimeField(db_column='startDate', blank=True, null=True)  # Field name made lowercase.
@@ -180,6 +181,7 @@ class ProfileInfo(models.Model):
     intersubcate = models.CharField(db_column='interSubCate', max_length=50, blank=True, null=True)  # Field name made lowercase.
     regdate = models.DateTimeField(db_column='RegDate', blank=True, null=True)  # Field name made lowercase.
     viewcount = models.IntegerField(db_column='viewCount', blank=True, null=True)  # Field name made lowercase.
+    cviewcount = models.IntegerField(db_column='cViewCount', blank=True, null=True)  # Field name made lowercase.
     public = models.CharField(max_length=10, blank=True, null=True)
     isdelete = models.CharField(db_column='isDelete', max_length=10, blank=True, null=True)  # Field name made lowercase.
 
@@ -209,6 +211,15 @@ class ProfileShare(models.Model):
         managed = False
         db_table = 'profile_share'
 
+class ProfileViewCompany(models.Model):
+    num = models.BigIntegerField(primary_key=True)
+    profilenum = models.PositiveBigIntegerField(db_column='profileNum')  # Field name made lowercase.
+    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'profile_view_company'
 
 class ProfileSuggest(models.Model):
     num = models.BigAutoField(primary_key=True)
