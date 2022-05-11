@@ -24,30 +24,55 @@ def md5_generator(str):
 #     /audi/main/model/ : 모델 탭 활성화
 #     /audi/main/singer/ : 가수 탭 활성화
 def audi_index(request, cate_type): # 오디션 Main
-    """
     try:
-        if cate_type == 'actor':
-            cate = '2'
-        elif cate_type == 'model' :
-            cate = '3'
-        elif cate_type == 'singer' :
-            cate = '4'
 
-        newAudi = Audition.objects.filter( subCategories__category__id=cate ).distinct().order_by('-regTime')[:4] # 신규오디션.
+        cursor = connection.cursor()
 
-        today = datetime.now()  # 오늘날짜
-        finishAudi = Audition.objects.filter( endDate__gte = today, subCategories__category__id=cate ).distinct().order_by('endDate')[:4] # 마감임박 오디션.
+        # 메인 베너
+        subBanner = EventBanner.objects.filter(position="audi", nowview="1")
 
-        recomAudi = Audition.objects.filter( subCategories__category__id=cate ).distinct().order_by('-id')[:4] # 추천 오디션.  --> 출력 순서 확인 필요.
+        user = request.session.get('id', '')
+
+        if user:
+            query = "SELECT AI.num, AI.title, AI.endDate, AI.ordinary, UC.logoImage, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user + "' AND auditionNum = AI.num ) AS audiPick" \
+                    " FROM audition_info AS AI LEFT JOIN user_company AS UC ON AI.userID  = UC.userID " \
+                    "WHERE recommend = '1' " \
+                    "order by AI.recOrder ASC LIMIT 4 "
+        else:
+            query = "SELECT AI.num, AI.title, AI.endDate, AI.ordinary, UC.logoImage, '0' AS audiPick" \
+                    " FROM audition_info AS AI LEFT JOIN user_company AS UC ON AI.userID  = UC.userID " \
+                    "WHERE recommend = '1' " \
+                    "order by AI.recOrder ASC LIMIT 4 "
+
+        result = cursor.execute(query)
+        recomAudi = cursor.fetchall()
+
+        user = request.session.get('id', '')
+
+        if user:
+            query = "SELECT AI.num, AI.title, AI.endDate, AI.ordinary, UC.logoImage, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user + "' AND auditionNum = AI.num ) AS audiPick" \
+                    " FROM audition_info AS AI LEFT JOIN user_company AS UC ON AI.userID  = UC.userID " \
+                    "WHERE ordinary = '0' AND endDate >= NOW()" \
+                    "order by AI.endDate ASC LIMIT 4 "
+        else:
+            query = "SELECT AI.num, AI.title, AI.endDate, AI.ordinary, UC.logoImage, '0' AS audiPick " \
+                    "FROM audition_info AS AI LEFT JOIN user_company AS UC ON AI.userID  = UC.userID " \
+                    "WHERE ordinary = '0' AND endDate >= NOW()" \
+                    "order by AI.endDate ASC LIMIT 4 "
+
+        result = cursor.execute(query)
+        finishAudi = cursor.fetchall()
+
+        audition = AuditionInfo.objects.all().order_by("-regtime")[:15]
+
+        connection.commit()
+        connection.close()
     except:
         connection.rollback()
         print('Faild DB Connection')
 
 
-    return render(request, 'audition/index.html', {'cateType' : cate_type , 'newAudi' : newAudi, "finishAudi" : finishAudi, "recomAudi": recomAudi} )
-    """
-
-    return render(request, 'audition/index.html' )
+    return render(request, 'audition/index.html', {'cateType' : cate_type , 'subBanner' : subBanner, "recomAudi" : recomAudi, "finishAudi" : finishAudi, "audition": audition} )
 
 #     /audi/audiDetail/(category)/(글번호)
 def audi_detail(request, cate_type, num) :
@@ -73,9 +98,8 @@ def audi_detail(request, cate_type, num) :
 def audi_write(request) :
 
     cate = CateMain.objects.all().order_by('cateorder')
-    catesub = CateSub.objects.filter(catecode="mainCate1").order_by("cateorder")
 
-    return render(request, 'audition/write.html', {'cate':cate, 'catesub' : catesub})
+    return render(request, 'audition/write.html', {'cate':cate})
 
 
 session = boto3.Session(
@@ -93,8 +117,8 @@ def audi_write_callback(request) :
     startDate = request.POST.get('startDate',"9999-12-01 00:00:00")
     endDate = request.POST.get('endDate',"9999-12-01 00:00:00")
     ordinary = request.POST.get('ordinary', "0")
-    auditionDate = request.POST['auditionDate']
-    auditionTime = request.POST['auditionTime']
+    auditionDate = request.POST.get('auditionDate',"9999-12-01")
+    auditionTime = request.POST.get('auditionTime',"00:00:00")
     each = request.POST.get('each', "0")
     age = request.POST['age']
     gender = request.POST['gender']
@@ -107,6 +131,8 @@ def audi_write_callback(request) :
     if ordinary == "1" :
         startDate = "9999-12-01 00:00:00"
         endDate = "9999-12-01 00:00:00"
+        auditionDate = "9999-12-01"
+        auditionTime = "00:00:00"
 
     userImage = request.FILES.getlist('userImage[]')
 

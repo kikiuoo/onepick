@@ -10,7 +10,7 @@
 <!-- JS 파일 -->
 <script src="{% static 'js/audi/index.js' %}"></script>
 
-<!-- 메인 베너 -->
+<!-- 메인 베너  subBanner -->
 <div class="swiper mySwiper mainBanner">
     <div class="swiper-wrapper">
         <div class="swiper-slide" style="background-color: darkkhaki"></div>
@@ -23,58 +23,79 @@
     <div class="swiper-button-prev"></div>
 </div>
 
-
-<!-- 신규 오디션 -->
-<div class="title">
-    신규 오디션
-    <span data-url="#">전체보기</span>
-</div>
-<div class="inBox">
-    {% for newAudis in newAudi %}
-    <div class="audition" data-num="{{ newAudis.id }}">
-        <div class="audiType">{{ newAudis.name }}</div>
-        <div class="audiLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ newAudis.logoImage }}");'></div>
-        <div class="audiTitle">{{ newAudis.title }}</div>
-        <div class="audiTerm">~ {{ newAudis.endDate|date:'Y-m-d' }}</div>
-        <div class="pickBtn"></div>
-    </div>
-    {% endfor %}
-</div>
-
-<!-- 마감임박 오디션 -->
-<div class="title">
-    마감임박 오디션
-    <span data-url="#">전체보기</span>
-</div>
-<div class="inBox">
-    {% for finishAudis in finishAudi %}
-    <div class="audition" data-num="{{ finishAudis.id }}">
-        <div class="audiType">{{ finishAudis.name }}</div>
-        <div class="audiLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ finishAudis.logoImage }}");'></div>
-        <div class="audiTitle">{{ finishAudis.title }}</div>
-        <div class="audiTerm">~ {{ finishAudis.endDate|date:'Y-m-d' }}</div>
-        <div class="pickBtn"></div>
-    </div>
-    {% endfor %}
-</div>
-
 <!-- 추천 오디션 -->
-<div class="title">
-    추천 오디션
-    <span data-url="#">전체보기</span>
-</div>
+<div class="title">추천 오디션</div>
 <div class="inBox">
     {% for recomAudis in recomAudi %}
-    <div class="audition" data-num="{{ recomAudis.id }}">
-        <div class="audiType">{{ recomAudis.name }}</div>
-        <div class="audiLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ recomAudis.logoImage }}");'></div>
-        <div class="audiTitle">{{ recomAudis.title }}</div>
-        <div class="audiTerm">~ {{ recomAudis.endDate|date:'Y-m-d' }}</div>
-        <div class="pickBtn"></div>
+     <div class="audition" data-num="{{ recomAudis.0 }}">
+        <div class="audiLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ recomAudis.4 }}");'></div>
+        <div class="audiTitle">{{ recomAudis.1 }}</div>
+        <div class="audiTerm">
+            {% if recomAudis.3 == "1" %}
+                상시모집
+            {% else %}
+                ~ {{ recomAudis.2|date:'Y-m-d' }}
+            {% endif %}
+        </div>
+        {% if recomAudis.5 == 0 or recomAudis.5 == "0" %}
+        <div class="pickBtn" data-nowType="off"></div>
+        {% else %}
+        <div class="pickBtn pickOn " data-nowType="on"></div>
+        {% endif %}
     </div>
     {% endfor %}
 </div>
 
+<!-- 마감 오디션 -->
+<div class="title">마감임박 오디션</div>
+<div class="inBox">
+    {% for finishAudis in finishAudi %}
+     <div class="audition" data-num="{{ finishAudis.0 }}">
+        <div class="audiLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ finishAudis.4 }}");'></div>
+        <div class="audiTitle">{{ finishAudis.1 }}</div>
+        <div class="audiTerm">
+            {% if finishAudis.3 == "1" %}
+                상시모집
+            {% else %}
+                ~ {{ finishAudis.2|date:'Y-m-d' }}
+            {% endif %}
+        </div>
+        {% if finishAudis.5 == 0 or finishAudis.5 == "0" %}
+        <div class="pickBtn" data-nowType="off"></div>
+        {% else %}
+        <div class="pickBtn pickOn " data-nowType="on"></div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+
+
+<!-- 전체 오디션 -->
+<div class="title">전체 오디션</div>
+<div class="inBox" style="padding-top: 0px">
+    <div class="audiList">
+        {% for auditions in audition %}
+        <div class="audiListBox" data-num="{{ finishAudis.0 }}">
+            <div class="companyName">팬스타즈컴퍼니 앤터테인먼트</div>
+            <div class="sContent">
+                <div class="lTitle">팬스타즈컴퍼니 엔터테인먼트 소속사 오디션</div>
+                <div class="lAppel">
+                    <span>모집분야</span>
+                    <p>배우</p>
+                    <span>경력</span>
+                    <p>무관</p>
+                    <span>나이</span>
+                    <p>무관</p>
+                </div>
+            </div>
+            <div class="date">
+                <div class="endDate">~ 2021/12/22</div>
+                <div class="regDate">20일 전 등록</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 

@@ -1,6 +1,7 @@
 .subCate{
     font-size: 0px;
-    margin-bottom: 54px;
+    margin-bottom: 30px;
+    margin-top: 12px;
 }
 .subCate .cate{
     display: inline-block;
@@ -12,6 +13,6 @@
 }
 
 .subCate .cate.active{
-    color: #1f1f1f;
+    color: #282828;
 }
 

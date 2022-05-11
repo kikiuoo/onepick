@@ -1,17 +1,18 @@
 .mainBanner{
     cursor: pointer;
-    width: 1234px;
-    height: 344px;
+    width: 1220px;
+    height: 340px;
     border-radius: 22px;
     background-color: #c4c4c4;
 }
 
 .title{
     position : relative;
-    margin-top: 77px;
+    margin-top: 40px;
     font-size: 30px;
     font-weight: bold;
     color: #1f1f1f;
+    padding : 0px 10px;
 }
 
 .title span{
@@ -24,66 +25,54 @@
 }
 
 .inBox{
-    padding: 35px 20px 0px 20px;
+    padding: 20px 10px 0px;
     font-size: 0px;
 }
 
 .inBox .audition{
-    position: relative;
-    width: 282px;
+    position : relative;
+    display : inline-block;
+    width: 285px;
     height: 280px;
     border-radius: 33px;
-    box-shadow: 0 4px 13px 0 rgba(235, 235, 235, 0.9);
+    border: solid 1px #c0c0c0;
     background-color: #fff;
-    display: inline-block;
-    margin-right: 16px;
-    margin-bottom: 27px;
-    padding: 24px;
+    margin-top: 20px;
+    margin-right: 20px;
     box-sizing: border-box;
-    cursor: pointer;
-    vertical-align: top;
+    overflow: hidden;
+    padding: 0px 10px;
+
+    cursor:pointer;
 }
 
 .inBox .audition:nth-child(4n){
     margin-right: 0px;
 }
 
-.inBox .audition:nth-child(5), .inBox .audition:nth-child(6),
-.inBox .audition:nth-child(7), .inBox .audition:nth-child(8){
-    margin-bottom: 0px;
-}
-
-.inBox .audition .audiType{
-    position: absolute;
-    right: 24px;
-    top : 24px;
-    border-radius: 33px;
-    padding: 5px 12px;
-    background-color: #f4f4f4;
-
-    font-size: 13px;
-    font-weight: bold;
-    color: #1f1f1f;
-}
-
 .inBox .audition .audiLogo{
-    width: 100%;
-    height: 111px;
-    background-color: #fff;
-    margin-bottom: 13px;
+    position: absolute;
+    background-color : #fff;
+    width : calc(100% - 10px);
+    height :128px;
+    top: 10px;
+    left: 10px;
 
-    background-repeat: no-repeat;
     background-position: center;
-    background-size: 100% auto;
+    background-repeat:  no-repeat;
+    background-size: 100% 100%;
 }
 
 .inBox .audition .audiTitle{
-    font-size: 20px;
+    display : block;
+    height : 76px;
+    margin-top: 148px;
+
+    font-size: 18px;
     font-weight: bold;
     line-height: 1.65;
+    letter-spacing: normal;
     color: #292929;
-    margin-bottom: 16px;
-    min-height: 66px;
 
     /* 2줄 이상일 경우 ... 처리 */
     white-space : normal;
@@ -94,7 +83,142 @@
 }
 
 .inBox .audition .audiTerm{
+    padding-left: 10px;
+    height : 26px;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: normal;
+    color: #1f1f1f;
+}
+
+.audition .pickBtn{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 41px;
+    height: 41px;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/pick_off.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.audition .pickBtn.pickOn{
+    background-image: url("../../../image/web/pick_on.png");
+}
+
+
+.audiList{
+    width: 1200px;
+    margin: 20px 0 0;
+    padding: 0px 50px 15px;
+    border-radius: 33px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+    box-sizing: border-box;
+    font-size: 0px;
+}
+
+.audiList .audiListBox{
+    padding : 36px 20px 21.5px;
+    border-top : 1px solid #c0c0c0;
+    cursor: pointer;
+}
+
+.audiList .audiListBox:first-child{
+    border-top : 0px;
+}
+
+.audiList .audiListBox .companyName{
+    display: inline-block;
+    width: 300px;
+    height: 62px;
+    line-height: 62px;
     font-size: 22px;
     font-weight: bold;
     color: #1f1f1f;
+    box-sizing: border-box;
+    vertical-align: top;
+    margin-left: 24px;
+
+
+    /* 2줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    -webkit-line-clamp:1;
+    -webkit-box-orient:vertical;
+}
+
+.audiList .audiListBox .sContent{
+    display: inline-block;
+    width: 580px;
+    height: 62px;
+    box-sizing: border-box;
+    vertical-align: top;
+    margin-left: 24px;
+}
+
+.audiList .audiListBox .sContent .lTitle{
+    display: inline-block;
+    width: 580px;
+    height: 26px;
+    line-height: 26px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #1f1f1f;
+    box-sizing: border-box;
+    vertical-align: top;
+    margin-bottom: 10px;
+
+    /* 2줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    -webkit-line-clamp:1;
+    -webkit-box-orient:vertical;
+}
+.audiList .audiListBox .sContent .lAppel{
+    vertical-align: top;
+}
+
+.audiList .audiListBox .sContent .lAppel span{
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #959595;
+}
+
+.audiList .audiListBox .sContent .lAppel p{
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+    margin-right: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #1f1f1f;
+}
+
+.audiList .audiListBox .date{
+    display: inline-block;
+    width: 130px;
+    height: 62px;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.audiList .audiListBox .date .endDate{
+    font-size: 20px;
+    font-weight: bold;
+    color: #1f1f1f;
+    margin-top: 3px;
+}
+
+.audiList .audiListBox .date .regDate{
+    font-size: 16px;
+    font-weight: bold;
+    color: #959595;
+    margin-top: 5px;
+    text-align: center;
 }
