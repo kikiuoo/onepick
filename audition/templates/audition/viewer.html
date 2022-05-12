@@ -1,6 +1,6 @@
 {% extends 'audition/audi_base.html' %}
 
-{% block context_audi %}
+{% block context %}
 
 <!-- Index CSS 파일 및 JS 파일 include -->
 {% load static %}
@@ -12,142 +12,90 @@
 
 
 
-{% for audition in audiViewData %}
-<div class="pageTitle pcNone">오디션 상세</div>
-
-<!-- 업체 로고 -->
-<div class="companyLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ audition.logoImage }}");'>
-    <div class="backBtn mobileNone"><span></span> 목록으로 돌아가기</div>
-</div>
-
 <!-- 본문 내용 -->
 <div class="content">
-    <div class="contentTitle">{{ audition.title }}</div>
-    <div class="urlLink" data-url="{{ audition.webUrl }}">{{ audition.webUrl }}</div>
-    <div class="finishDay">마감 {{ audition.d_day }}일 전</div>
+    {% for auditions in audition %}
+    <div class="btnBox">
+        {% if request.session.id == auditions.1 %}
+        <div class="editBtn" data-num="{{ auditions.0 }}"></div>
+        <div class="delBtn" data-num="{{ auditions.0 }}"></div>
+        {% endif %}
+        <!--<div class="printBtn"></div>-->
+        <div class="shareBtn"></div>
+    </div>
 
-    <div class="info">
-        <div class="title">모집분야</div>
-        <div class="infoContent">
-            {% if category_actor|length > 0 %}
-            <div class="contentBox">
-                <div class="subTitle">배우</div>
-                <div class="subInfo">
-                    {% for actor in category_actor  %}
-                    <span>{{ actor.name }}</span>
-                    {% endfor %}
-                </div>
-            </div>
+    <div class="companyLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ auditions.25 }}")'></div>
+    <div class="companySite" data-url="{{ auditions.26 }}">{{ auditions.26 }}</div>
+    <div class="title">{{ auditions.2 }}</div>
+
+    <div class="line">
+        {% if auditions.28 == 0 or auditions.28 == "0" %}
+        <div class="pickBtn" data-nowType="off"></div>
+        {% else %}
+        <div class="pickBtn pickOn " data-nowType="on"></div>
+        {% endif %}
+        <div class="supportBtn">오디션 지원</div>
+        {% if auditions.7 == '0' %}
+            {% if auditions.27 > 0 %}
+            <div class="deadline">마감 {{ auditions.27 }}일 전</div>
+            {% elif auditions.27 == 0 %}
+            <div class="deadline">오늘 마감</div>
+            {% else %}
+            <div class="deadline">마감된 오디션</div>
             {% endif %}
+        {% endif %}
+    </div>
 
-            {% if category_model|length > 0 %}
-            <div class="contentBox">
-                <div class="subTitle">모델</div>
-                <div class="subInfo">
-                     {% for model in category_model  %}
-                    <span>{{ model.name }}</span>
-                    {% endfor %}
-                </div>
-            </div>
+    <div class="conditionBox">
+        <div class="condLeft">
+            <span>모집 분야</span>
+            <p class="inline">{{ auditions.24 }}</p>
+            <p>{{ audiCate }}</p>
+
+            <span>모집 조건</span>
+            <p>나이 {{ auditions.11 }}&nbsp;&nbsp;&nbsp;&nbsp;경력 {{ auditions.13 }}</p>
+            <p>성별 {{ auditions.12 }}</p>
+        </div>
+        <div class="condRight">
+            <span>모집기간</span>
+            {% if auditions.7 == '0' %}
+            <p>{{ auditions.5|date:'Y/m/d' }} ~ {{ auditions.6|date:'Y/m/d' }}</p>
+            {% else %}
+            <p>상시모집</p>
             {% endif %}
-
-            {% if category_singer|length > 0 %}
-            <div class="contentBox">
-                <div class="subTitle">가수</div>
-                <div class="subInfo">
-                     {% for singer in category_singer  %}
-                    <span>{{ singer.name }}</span>
-                    {% endfor %}
-                </div>
-            </div>
+            <span>오디션</span>
+            {% if auditions.7 == '0' %}
+            <p>{{ auditions.8|date:'Y/m/d' }} {{ auditions.9|date:' H시 i분' }}<span class="important">합격자 개별연락</span> </p>
+            {% elif auditions.7 == '1' %}
+            <p><span class="important" style="margin:0px">합격자 개별연락</span></p>
             {% endif %}
         </div>
+
+        {% if auditions.16 %}
+        <div class="infoBox">
+            <div class="infoTitle">필수 사항</div>
+            <div class="infoContent">{{ auditions.16 }}</div>
+        </div>
+        {% endif %}
+
+        {% if auditions.17 %}
+        <div class="infoBox" style="margin-top: 30px">
+            <div class="infoTitle">상세 내용</div>
+           <div class="infoContent">{{ auditions.17 }}</div>
+        </div>
+        {% endif %}
     </div>
 
-    <div class="info">
-        <div class="title">모집기간</div>
-        <div class="infoContent">
-            <div class="subInfo">
-                <span>
-                    {% if isNoPeriod == '1' %}
-                        상시모집
-                    {% else %}
-                        {{ audition.startDate|date:'Y/m/d' }} ~ {{ audition.endDate|date:'Y/m/d' }}
-                    {% endif %}
-                </span>
-            </div>
-        </div>
-    </div>
-
-    <div class="info">
-        <div class="title">오디션</div>
-        <div class="infoContent">
-            <div class="subInfo important">
-                <span>{{ audition.auditionDate|date:'Y/m/d' }}</span>
-                <!--합격자 개별연락 -->
-            </div>
-        </div>
-    </div>
-
-    <div class="info">
-        <div class="title">모집조건</div>
-        <div class="infoContent">
-            <div class="contentBox">
-                <div class="subTitle">나이</div>
-                <div class="subInfo">
-                    <span>{{ audition.age }}</span>
-                </div>
-            </div>
-
-            <div class="contentBox">
-                <div class="subTitle">성별</div>
-                <div class="subInfo">
-                    <span>{{ audition.gender }}</span>
-                </div>
-            </div>
-
-            <div class="contentBox">
-                <div class="subTitle">경력</div>
-                <div class="subInfo">
-                    <span>{{ audition.career }}</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {% if audition.required != '' %}
-    <div class="info">
-        <div class="title">필수사항</div>
-        <div class="infoContent">
-            <div class="subInfo">
-                <span>{{ audition.required }}</span>
-            </div>
-        </div>
+    {% if auditions.15 %}
+    <div class="line"></div>
+    <div class="imageBox">
+        {% for images in image %}
+        <img src="https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ images }}" width="100%">
+        {% endfor %}
     </div>
     {% endif %}
-
-    {% if audition.prepared != '' %}
-    <div class="info" style="margin-bottom: 25px">
-        <div class="title">준비사항</div>
-        <div class="infoContent">
-            <div class="subInfo">
-                <span>{{ audition.prepared }}</span>
-            </div>
-        </div>
-    </div>
-    {% endif %}
-
-    {% for image in viewImages %}
-    <img src="https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ image.image }}" width="100%">
     {% endfor %}
 </div>
 
-{% endfor %}
-
-<!-- 스크랩, 오디션 버튼 -->
-<div class="buttonBox">
-    <div class="scrapBtn">스크랩하기</div>
-    <div class="auditionBtn">오디션 지원</div>
-</div>
 
 {% endblock %}

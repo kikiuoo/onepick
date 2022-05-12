@@ -15,17 +15,21 @@ $(document).ready(function (){
     $(document).on("click", ".audition", function(){
        var num = $(this).attr("data-num");
 
+       if( userID == ""){
+            alert("로그인 후 이용가능합니다.");
+            //return;
+       }
+
        window.location.href = "/audi/audiDetail/actor/" + num + "/" //  ../audi/audiDetail/actor(기본값)/글번호/
     });
 
-    // 오디션 픽 기능. ( 구현 필요 )
     $(document).on("click", ".audition .pickBtn", function(e){
         e.preventDefault();
         e.stopPropagation();
 
         if( userID == ""){
-            alert("로그인 후 이용가능합니다.")
-             return;
+            alert("로그인 후 이용가능합니다.");
+            return;
         }
 
         var nowType = $(this).attr("data-nowType");

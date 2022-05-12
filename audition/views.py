@@ -25,7 +25,6 @@ def md5_generator(str):
 #     /audi/main/singer/ : 가수 탭 활성화
 def audi_index(request, cate_type): # 오디션 Main
     try:
-
         cursor = connection.cursor()
 
         # 메인 베너
@@ -47,8 +46,6 @@ def audi_index(request, cate_type): # 오디션 Main
         result = cursor.execute(query)
         recomAudi = cursor.fetchall()
 
-        user = request.session.get('id', '')
-
         if user:
             query = "SELECT AI.num, AI.title, AI.endDate, AI.ordinary, UC.logoImage, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user + "' AND auditionNum = AI.num ) AS audiPick" \
                     " FROM audition_info AS AI LEFT JOIN user_company AS UC ON AI.userID  = UC.userID " \
@@ -63,7 +60,13 @@ def audi_index(request, cate_type): # 오디션 Main
         result = cursor.execute(query)
         finishAudi = cursor.fetchall()
 
-        audition = AuditionInfo.objects.all().order_by("-regtime")[:15]
+        query = "SELECT ai.num, ai.title, cm.cateName, ai.career, ai.age, ai.endDate, ai.regTime, ai.ordinary, uc.companyName, DATEDIFF(NOW(),  ai.regTime) AS diffDate " \
+                "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode " \
+                "    LEFT JOIN  user_company AS uc ON ai.userID = uc.userID " \
+                "ORDER BY ai.regTime DESC limit 15"
+
+        result = cursor.execute(query)
+        audition = cursor.fetchall()
 
         connection.commit()
         connection.close()
@@ -76,23 +79,49 @@ def audi_index(request, cate_type): # 오디션 Main
 
 #     /audi/audiDetail/(category)/(글번호)
 def audi_detail(request, cate_type, num) :
-    """
-    try:
-        audiViewData = Audition.objects.filter(id=num) # 오디션 기본 정보.
-        viewImages = AuditionImages.objects.filter(audition__id=num) # 본문 이미지
+    try :
+        cursor = connection.cursor()
 
-        category_actor = AuditionSubCategory.objects.filter(category=2, audition__id=num)
-        category_model = AuditionSubCategory.objects.filter(category=3, audition__id=num)
-        category_singer = AuditionSubCategory.objects.filter(category=4, audition__id=num)
+        user = request.session.get('id', '')
+
+        if user:
+            nowTime = timezone.now()
+            saveView =  AuditionView.objects.create( auditionnum=num, userid=user, regtime=nowTime )
+            updateView = AuditionInfo.objects.get(num=num)
+            updateView.viewcount = updateView.viewcount + 1
+            updateView.save()
+
+            query = "SELECT ai.*, cm.cateName, uc.logoImage, uc.webSite, DATEDIFF(ai.auditionDate,  NOW()) AS diffDate, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user + "' AND auditionNum = ai.num ) AS audiPick " \
+                    "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode  " \
+                    "     LEFT JOIN  user_company AS uc ON ai.userID = uc.userID  " \
+                    "WHERE ai.num = '" + str(num) + "' limit 1"
+        else:
+            query = "SELECT ai.*, cm.cateName, uc.logoImage, uc.webSite, DATEDIFF(ai.auditionDate,  NOW()) AS diffDate, 0 as audiPick " \
+                    "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode  " \
+                    "     LEFT JOIN  user_company AS uc ON ai.userID = uc.userID  " \
+                    "WHERE ai.num = '" + str(num) + "' limit 1"
+
+        result = cursor.execute(query)
+        audition = cursor.fetchall()
+
+        audiSubCate = []
+        for row in audition:
+            subCate = row[4].split('|')
+            image = row[15].split('|')
+            print(row[28])
+            for sub in subCate:
+                cateName = CateSub.objects.get(subcate=sub)
+                audiSubCate.append(cateName.catename)
+
+        audiCate = ', '.join(audiSubCate)
+
+        connection.commit()
+        connection.close()
     except:
         connection.rollback()
         print('Faild DB Connection')
 
-    return render(request, 'audition/viewer.html', { "cateType" : cate_type , "audiViewData" : audiViewData , "viewImages" : viewImages
-        , "category_actor" : category_actor, "category_model" : category_model, "category_singer" : category_singer } )
-    """
-
-    return render(request, 'audition/viewer.html')
+    return render(request, 'audition/viewer.html', {"audition": audition, "audiCate" : audiCate, "image" : image})
 
 
 def audi_write(request) :
@@ -163,9 +192,9 @@ def audi_write_callback(request) :
         )
 
         if( count == 1) :
-            imageURL = "media/photos/audition/image/" + imageName
+            imageURL = "photos/audition/image/" + imageName
         else :
-            imageURL = imageURL + "|" + "media/photos/audition/image/" + imageName
+            imageURL = imageURL + "|" + "photos/audition/image/" + imageName
 
 
     saveAudition = AuditionInfo.objects.create(userid=userID, title=title, cate=cateMain, subcate=catesub,

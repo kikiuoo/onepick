@@ -75,22 +75,30 @@
 <div class="inBox" style="padding-top: 0px">
     <div class="audiList">
         {% for auditions in audition %}
-        <div class="audiListBox" data-num="{{ finishAudis.0 }}">
-            <div class="companyName">팬스타즈컴퍼니 앤터테인먼트</div>
+        <div class="audiListBox" data-num="{{ auditions.0 }}">
+            <div class="companyName">{{ auditions.8 }}</div>
             <div class="sContent">
-                <div class="lTitle">팬스타즈컴퍼니 엔터테인먼트 소속사 오디션</div>
+                <div class="lTitle">{{ auditions.1 }}</div>
                 <div class="lAppel">
                     <span>모집분야</span>
-                    <p>배우</p>
+                    <p>{{ auditions.2 }}</p>
                     <span>경력</span>
-                    <p>무관</p>
+                    <p>{{ auditions.3 }}</p>
                     <span>나이</span>
-                    <p>무관</p>
+                    <p>{{ auditions.4 }}</p>
                 </div>
             </div>
             <div class="date">
-                <div class="endDate">~ 2021/12/22</div>
-                <div class="regDate">20일 전 등록</div>
+                {% if auditions.7 == '1' %}
+                <div class="endDate">상시모집</div>
+                {% elif auditions.7 == '0' %}
+                <div class="endDate">~ {{ auditions.5|date:'Y/m/d' }}</div>
+                {% endif %}
+                {% if auditions.9 == 0 %}
+                <div class="regDate">오늘 등록</div>
+                {% else %}
+                <div class="regDate">{{ auditions.9 }}일 전 등록</div>
+                {% endif %}
             </div>
         </div>
         {% endfor %}
