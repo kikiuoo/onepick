@@ -8,5 +8,10 @@ urlpatterns = [
     path('write/', views.audi_write, name='audi-write'),
     path('write/callback/', views.audi_write_callback, name='audi-write'),
 
+    path('edit/<int:num>/', views.audi_edit, name='audi-edit'),
+    path('editCallback/', views.audi_edit_callback, name='audi-editCallback'),
+
+    path('del/<int:num>/', views.audi_delete, name='audi-delete'),
+
     path('ajax/getSubCate/', views.audiAjaxGetCate, name="audi-getCate"),
 ]

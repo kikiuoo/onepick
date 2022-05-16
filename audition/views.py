@@ -1,6 +1,6 @@
 import datetime
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template import  loader
 from django.db import connection
@@ -35,12 +35,12 @@ def audi_index(request, cate_type): # 오디션 Main
         if user:
             query = "SELECT AI.num, AI.title, AI.endDate, AI.ordinary, UC.logoImage, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user + "' AND auditionNum = AI.num ) AS audiPick" \
                     " FROM audition_info AS AI LEFT JOIN user_company AS UC ON AI.userID  = UC.userID " \
-                    "WHERE recommend = '1' " \
+                    "WHERE recommend = '1' and (AI.isDelete = '0' or AI.isDelete is null) " \
                     "order by AI.recOrder ASC LIMIT 4 "
         else:
             query = "SELECT AI.num, AI.title, AI.endDate, AI.ordinary, UC.logoImage, '0' AS audiPick" \
                     " FROM audition_info AS AI LEFT JOIN user_company AS UC ON AI.userID  = UC.userID " \
-                    "WHERE recommend = '1' " \
+                    "WHERE recommend = '1' and (AI.isDelete = '0' or AI.isDelete is null) " \
                     "order by AI.recOrder ASC LIMIT 4 "
 
         result = cursor.execute(query)
@@ -49,12 +49,12 @@ def audi_index(request, cate_type): # 오디션 Main
         if user:
             query = "SELECT AI.num, AI.title, AI.endDate, AI.ordinary, UC.logoImage, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user + "' AND auditionNum = AI.num ) AS audiPick" \
                     " FROM audition_info AS AI LEFT JOIN user_company AS UC ON AI.userID  = UC.userID " \
-                    "WHERE ordinary = '0' AND endDate >= NOW()" \
+                    "WHERE ordinary = '0' AND endDate >= NOW()  and (AI.isDelete = '0' or AI.isDelete is null) " \
                     "order by AI.endDate ASC LIMIT 4 "
         else:
             query = "SELECT AI.num, AI.title, AI.endDate, AI.ordinary, UC.logoImage, '0' AS audiPick " \
                     "FROM audition_info AS AI LEFT JOIN user_company AS UC ON AI.userID  = UC.userID " \
-                    "WHERE ordinary = '0' AND endDate >= NOW()" \
+                    "WHERE ordinary = '0' AND endDate >= NOW() and (AI.isDelete = '0' or AI.isDelete is null) " \
                     "order by AI.endDate ASC LIMIT 4 "
 
         result = cursor.execute(query)
@@ -63,6 +63,7 @@ def audi_index(request, cate_type): # 오디션 Main
         query = "SELECT ai.num, ai.title, cm.cateName, ai.career, ai.age, ai.endDate, ai.regTime, ai.ordinary, uc.companyName, DATEDIFF(NOW(),  ai.regTime) AS diffDate " \
                 "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode " \
                 "    LEFT JOIN  user_company AS uc ON ai.userID = uc.userID " \
+                "where  ai.isDelete = '0' or ai.isDelete is null "\
                 "ORDER BY ai.regTime DESC limit 15"
 
         result = cursor.execute(query)
@@ -91,12 +92,12 @@ def audi_detail(request, cate_type, num) :
             updateView.viewcount = updateView.viewcount + 1
             updateView.save()
 
-            query = "SELECT ai.*, cm.cateName, uc.logoImage, uc.webSite, DATEDIFF(ai.auditionDate,  NOW()) AS diffDate, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user + "' AND auditionNum = ai.num ) AS audiPick " \
+            query = "SELECT ai.*, cm.cateName, uc.logoImage, uc.webSite, DATEDIFF(ai.auditionDate,  NOW()) AS diffDate, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user + "' AND auditionNum = ai.num ) AS audiPick, isDelete " \
                     "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode  " \
                     "     LEFT JOIN  user_company AS uc ON ai.userID = uc.userID  " \
                     "WHERE ai.num = '" + str(num) + "' limit 1"
         else:
-            query = "SELECT ai.*, cm.cateName, uc.logoImage, uc.webSite, DATEDIFF(ai.auditionDate,  NOW()) AS diffDate, 0 as audiPick " \
+            query = "SELECT ai.*, cm.cateName, uc.logoImage, uc.webSite, DATEDIFF(ai.auditionDate,  NOW()) AS diffDate, 0 as audiPick, isDelete " \
                     "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode  " \
                     "     LEFT JOIN  user_company AS uc ON ai.userID = uc.userID  " \
                     "WHERE ai.num = '" + str(num) + "' limit 1"
@@ -108,7 +109,6 @@ def audi_detail(request, cate_type, num) :
         for row in audition:
             subCate = row[4].split('|')
             image = row[15].split('|')
-            print(row[28])
             for sub in subCate:
                 cateName = CateSub.objects.get(subcate=sub)
                 audiSubCate.append(cateName.catename)
@@ -165,8 +165,6 @@ def audi_write_callback(request) :
 
     userImage = request.FILES.getlist('userImage[]')
 
-    print(userImage)
-
     s3_client = boto3.client(
         's3',
         aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
@@ -205,8 +203,129 @@ def audi_write_callback(request) :
 
     key = str(AuditionInfo.objects.latest('num').num)
 
-    return redirect('/audi/audiDetail/actor/'+key+"/")
+    return redirect('/audi/audiDetail/all/'+key+"/")
 
+
+def audi_edit(request, num) :
+
+    audition = AuditionInfo.objects.get(num=num)
+
+    audisubCate = audition.subcate.split('|')
+    cate = CateMain.objects.all()
+    audiCate = CateSub.objects.filter(catecode=audition.cate)
+    image = audition.image.split('|')
+
+    return render(request, 'audition/edit.html', {"audition": audition, "cate" : cate, "audiCate" : audiCate,
+                                                  "audisubCate" : audisubCate, "image":image})
+
+def audi_edit_callback( request ) :
+    userID = request.POST['userID']
+    num = request.POST['num']
+    title = request.POST['title']
+    cateMain = request.POST['cateMain']
+    subCate = request.POST.getlist('subCate')
+    startDate = request.POST.get('startDate', "9999-12-01 00:00:00")
+    endDate = request.POST.get('endDate', "9999-12-01 00:00:00")
+    ordinary = request.POST.get('ordinary', "0")
+    auditionDate = request.POST.get('auditionDate', "9999-12-01")
+    auditionTime = request.POST.get('auditionTime', "00:00:00")
+    each = request.POST.get('each', "0")
+    age = request.POST['age']
+    gender = request.POST['gender']
+    career = request.POST['career']
+    essential = request.POST['essential']
+    preparation = request.POST['preparation']
+    removeImage = request.POST.get('removeImage', "")
+
+    catesub = "|".join(subCate)  # subCate 문자열로 변환
+
+    if ordinary == "1":
+        startDate = "9999-12-01 00:00:00"
+        endDate = "9999-12-01 00:00:00"
+        auditionDate = "9999-12-01"
+        auditionTime = "00:00:00"
+
+    userImage = request.FILES.getlist('userImage[]')
+
+
+    s3_client = boto3.client(
+        's3',
+        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+    )
+
+    # 이미지 등록.
+    nowTime = timezone.now()
+    image = ""
+    count = 0
+    addImage = []
+    for image in userImage:
+        count = count + 1
+        sub = image.name.split('.')[-1]
+        imgName = userID + "_" + image.name + "_" + str(nowTime)
+        imageName = md5_generator(imgName) + "." + sub
+
+        s3_client.upload_fileobj(
+            image,
+            settings.AWS_STORAGE_BUCKET_NAME,
+            "media/photos/audition/image/" + imageName,
+            ExtraArgs={
+                "ContentType": image.content_type,
+            }
+        )
+
+        addImage.append("photos/audition/image/" + imageName)
+
+    updateAudition = AuditionInfo.objects.get(num = num)
+
+    # DB에서 이미지 저장된 내용 빼기.
+    dbImage = updateAudition.image.split('|')
+
+    # 이미지 삭제.
+    rmImage = removeImage.split('|')
+    if( removeImage != "") :
+        s3 = boto3.resource('s3',
+                            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+                            )
+
+        for rmImages in rmImage :
+            if( rmImages == ""): continue
+            img = rmImages.replace("photos/audition/image/", "")
+            s3.Object(settings.AWS_STORAGE_BUCKET_NAME, "media/photos/audition/image/" +  img).delete()
+            dbImage.remove(rmImages)
+
+
+    saveImage = dbImage + addImage
+    imageUrl = "|".join(saveImage)
+
+    updateAudition.title = title
+    updateAudition.cate = cateMain
+    updateAudition.subcate = catesub
+    updateAudition.startdate = startDate
+    updateAudition.enddate = endDate
+    updateAudition.ordinary = ordinary
+    updateAudition.auditiondate = auditionDate
+    updateAudition.auditiontime = auditionTime
+    updateAudition.each = each
+    updateAudition.age = age
+    updateAudition.gender = gender
+    updateAudition.career = career
+    updateAudition.image = imageUrl
+    updateAudition.essential = essential
+    updateAudition.field_preparation = preparation
+    updateAudition.updtime = nowTime
+
+    updateAudition.save()
+
+    return redirect('/audi/audiDetail/all/' + num + "/")
+
+def audi_delete(request, num):
+    updateAudition = AuditionInfo.objects.get(num=num)
+    updateAudition.isdelete = '1'
+    updateAudition.save()
+
+    return redirect('/audi/main/all/')
 
 def audiAjaxGetCate(request) :
 

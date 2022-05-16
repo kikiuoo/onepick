@@ -1,5 +1,10 @@
 $(document).ready(function(){
 
+    if( userType != 'admin' && isDelete == '1'){
+        alert("잘못된 접근입니다.");
+        window.history.back(-1);
+    }
+
    // 스크랩 기능
     $(document).on("click", ".pickBtn", function(e){
         e.preventDefault();
@@ -11,7 +16,7 @@ $(document).ready(function(){
         }
 
         var nowType = $(this).attr("data-nowType");
-        var num = $(this).parent().attr("data-num");
+        var num = $(this).attr("data-num");
 
         updatePick("audition", nowType, num );
 

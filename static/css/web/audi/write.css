@@ -257,7 +257,8 @@
     vertical-align: top;
 }
 
-.upload-display .upload-sub{
+.upload-display .upload-sub,
+.upload-display .upload-sub2{
     position: absolute;
     right: -10px;
     top : -10px;
@@ -317,4 +318,7 @@
     background-position: center;
     background-image: url("../../../image/web/textCheck_off.png");
     background-repeat: no-repeat;
+}
+.textCheck .check.on{
+    background-image: url("../../../image/web/textCheck_on.png");
 }

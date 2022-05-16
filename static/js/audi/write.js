@@ -42,7 +42,7 @@ $(document).ready(function(){
 
         if( checked == true ){
             $(this).css("color", "#ff8aae");
-            $(this).children("div").css("background-image", 'url("../../static/image/web/textCheck_on.png")');
+            $(this).children("div").css("background-image", 'url("/static/image/web/textCheck_on.png")');
 
             $("#startDate").val("선택불가");
             $("#endDate").val("선택불가");
@@ -60,7 +60,7 @@ $(document).ready(function(){
 
         }else{
             $(this).css("color", "#c0c0c0");
-            $(this).children("div").css("background-image", 'url("../../static/image/web/textCheck_off.png")');
+            $(this).children("div").css("background-image", 'url("/static/image/web/textCheck_off.png")');
 
             $("#startDate").val('');
             $("#endDate").val('');
@@ -78,10 +78,10 @@ $(document).ready(function(){
 
         if( checked == true ){
             $(this).css("color", "#ff8aae");
-            $(this).children("div").css("background-image", 'url("../../static/image/web/textCheck_on.png")');
+            $(this).children("div").css("background-image", 'url("/static/image/web/textCheck_on.png")');
         }else{
             $(this).css("color", "#c0c0c0");
-            $(this).children("div").css("background-image", 'url("../../static/image/web/textCheck_off.png")');
+            $(this).children("div").css("background-image", 'url("/static/image/web/textCheck_off.png")');
         }
     });
 
@@ -152,6 +152,19 @@ $(document).ready(function(){
 
        $("."+id).remove();
        $(this).parent().remove();
+
+    });
+
+    $(document).on("click", ".upload-sub2", function (){
+       var image = $(this).attr("data-image");
+       var removeImage = $("#removeImage").val();
+       var remove = removeImage.split('|');
+       remove.push(image);
+       var removeText = remove.join("|");
+
+
+       $(this).parent().remove();
+       $("#removeImage").val(removeText);
 
     });
 

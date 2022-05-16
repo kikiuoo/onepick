@@ -10,11 +10,11 @@
 <!-- JS 파일 -->
 <script src="{% static 'js/audi/viewer.js' %}"></script>
 
+{% for auditions in audition %}
 
 
 <!-- 본문 내용 -->
 <div class="content">
-    {% for auditions in audition %}
     <div class="btnBox">
         {% if request.session.id == auditions.1 %}
         <div class="editBtn" data-num="{{ auditions.0 }}"></div>
@@ -30,9 +30,9 @@
 
     <div class="line">
         {% if auditions.28 == 0 or auditions.28 == "0" %}
-        <div class="pickBtn" data-nowType="off"></div>
+        <div class="pickBtn" data-nowType="off"  data-num="{{ auditions.0 }}"></div>
         {% else %}
-        <div class="pickBtn pickOn " data-nowType="on"></div>
+        <div class="pickBtn pickOn " data-nowType="on" data-num="{{ auditions.0 }}"></div>
         {% endif %}
         <div class="supportBtn">오디션 지원</div>
         {% if auditions.7 == '0' %}
@@ -94,8 +94,11 @@
         {% endfor %}
     </div>
     {% endif %}
-    {% endfor %}
 </div>
 
+<script>
+    var isDelete = "{{ auditions.28 }}";
+</script>
 
+{% endfor %}
 {% endblock %}
