@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from picktalk.models import *
+
+
 
 # Create your views here.
 # profile/list/actor/ -- 배우 리스트
@@ -91,3 +94,30 @@ def viewerDetail(request, type, num) :
     return render(request, 'profiles/viewer_detail.html', { 'type' :  type , 'num' : num, 'data' : data })
     """
     return render(request, 'profiles/viewer_detail.html')
+
+
+
+def pofile_write(request) :
+
+    userID = request.session['id']
+    user = UserInfo.objects.get(userid=userID)
+    cate = CateMain.objects.all()
+
+    return render(request, 'profiles/write.html', { 'user':user, 'cate' : cate })
+
+
+
+def audiAjaxGetCate(request) :
+
+    cate = request.GET.get('cate')
+    catesub = CateSub.objects.filter(catecode=cate).order_by("cateorder")
+
+    return render(request, 'profiles/ajax_cate.html', {'catesub':catesub})
+
+
+def audiAjaxGetCateEtc(request) :
+
+    cate = request.GET.get('cate')
+
+    return render(request, 'profiles/ajax_cate_etc.html', {'cate':cate})
+

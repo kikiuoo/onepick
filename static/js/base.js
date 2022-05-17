@@ -30,6 +30,14 @@ $(document).ready(function () {
 
     });
 
+    $(document).on("click", ".profileRegBtn", function (){
+        if( userID ){
+            window.location.href = "/profile/write/";
+        }else{
+            alert("로그인 후 이용 가능합니다.");
+        }
+    });
+
     /* Header 버튼 Web 이벤트 */
     $(document).on("click",".header .login", function(){
         $(".loginPopup").css("display", "block");
