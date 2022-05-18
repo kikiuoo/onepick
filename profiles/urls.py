@@ -7,6 +7,7 @@ urlpatterns = [
     path('ajax/<type>/<int:num>/', views.viewerDetail, name='listView'),
 
     path('write/', views.pofile_write, name="profile-write"),
+    path('write/callback/', views.pofile_write_callback, name="profile-writeCallback"),
 
     path('ajax/getSubCate/', views.audiAjaxGetCate, name="profile-getCate"),
     path('ajax/getSubCate_etc/', views.audiAjaxGetCateEtc, name="profile-getCateEtc"),

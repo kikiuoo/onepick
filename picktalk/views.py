@@ -35,7 +35,23 @@ def index(request):
         result = cursor.execute(query)
         auditions = cursor.fetchall()
 
-        profiles = ProfileInfo.objects.all().order_by('-regdate').distinct()[:4] # 프로필
+        # 프로필
+        if user:
+            query = "SELECT p.num, profileImage, height, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user +"' AND profileNum = p.num ) AS proPick " \
+                    "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
+                    "WHERE public = '0' " \
+                    "ORDER BY regDate DESC " \
+                    "LIMIT 4"
+        else:
+            query = "SELECT p.num, profileImage, height, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, '0' AS proPick " \
+                    "FROM profile_info AS p LEFT JOIN user_info AS ui " \
+                    "     ON p.userID = ui.userID " \
+                    "WHERE public = '0' " \
+                    "ORDER BY regDate DESC  " \
+                    "LIMIT 4"
+
+        result = cursor.execute(query)
+        profiles = cursor.fetchall()
 
         # 소베너 - 코드 변경 필요.
         subBanner = EventBanner.objects.filter(position="mainSub")

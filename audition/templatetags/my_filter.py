@@ -1,10 +1,4 @@
 from django import template
 
 register = template.Library()
-
-@register.filter
-def findArrayData(values, list):
-    if values in list:
-        return "1"
-    else :
-        return "0"
+from picktalk.templatetags.my_filter import *

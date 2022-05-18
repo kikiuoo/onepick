@@ -66,7 +66,7 @@ def kakao_login_callback(request):
 
         for row in kakao.values_list():
             userID = row[1]
-            userType = row[22]
+            userType = row[29]
 
         setSession(request, userID, userType)
         updateLastVisit(userID)
@@ -133,7 +133,7 @@ def googleLoginCallback(request):
 
         for row in google.values_list():
             userID = row[1]
-            userType = row[22]
+            userType = row[29]
 
         setSession(request, userID, userType)
         updateLastVisit(userID)
@@ -159,7 +159,7 @@ def localLogin (request) :
         if userIN.count() > 0 :
             for row in userIN.values_list():
                 userID = row[1]
-                userType = row[22]
+                userType = row[29]
 
             setSession(request, id, nickname, userType)
             updateLastVisit(id)
@@ -180,8 +180,6 @@ def locallogout (request) :
 
 # 세션 생성.
 def setSession(request, id, usertype) :
-    print(usertype)
-
     request.session['id'] = id
     request.session['userType'] = usertype
     request.session.set_expiry(0)

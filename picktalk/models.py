@@ -171,7 +171,7 @@ class ProfileInfo(models.Model):
     height = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True)
     weight = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True)
     topsize = models.CharField(db_column='topSize', max_length=20, blank=True, null=True)  # Field name made lowercase.
-    bottomsize = models.IntegerField(db_column='bottomSize', blank=True, null=True)  # Field name made lowercase.
+    bottomsize = models.CharField(db_column='bottomSize', max_length=20, blank=True, null=True)  # Field name made lowercase.
     shoessize = models.IntegerField(db_column='shoesSize', blank=True, null=True)  # Field name made lowercase.
     skincolor = models.CharField(db_column='skinColor', max_length=50, blank=True, null=True)  # Field name made lowercase.
     haircolor = models.CharField(db_column='hairColor', max_length=50, blank=True, null=True)  # Field name made lowercase.

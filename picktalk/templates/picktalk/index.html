@@ -3,6 +3,7 @@
 
 <!-- Index CSS 파일 및 JS 파일 include -->
 {% load static %}
+{% load my_filter %}
 <link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/index.css' %}"> <!-- pc 버전 -->
 <link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/index.css' %}" > <!-- 모바일 버전 -->
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -66,7 +67,22 @@
 
 <div class="inBox">
     {% for profile in profiles %}
-    <div class="profile" data-num="{{ profile.id }}" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profile.mainImage }}");'>
+    <div class="profile" data-num="{{ profile.0 }}">
+        <div class="image"  style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profile.1 }}");'></div>
+        <div class="info">
+            <div class="name">{{ profile.6|updateUserName }} ({{ profile.7|userAge }})</div>
+            <div class="hight">키 {{ profile.2|userHight }}cm</div>
+            <div class="entertain">
+                {% if profile.9 == "" %}
+                    소속사 없음
+                {% else %}
+                    소속사 있음
+                {% endif %}
+            </div>
+        </div>
+        <div class="viewBox">
+
+        </div>
         <div class="pickBtn"></div>
     </div>
     {% endfor %}

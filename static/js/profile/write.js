@@ -77,8 +77,6 @@ $(document).ready(function (){
             var y_link = $("#y_link").val();
             var youSave = $("#youSave").val();
 
-            alert(mainYoutube);
-
             if( y_link == "" ){
                 alert("유튜브 영상 URL을 입력해주세요.");
                 return;
@@ -93,14 +91,14 @@ $(document).ready(function (){
 
             mainYoutube = mainYoutube + 1;
 
-            var saveData = y_link;
+            var saveData = mainYoutube + "$" + y_link;
 
             if( array.indexOf(saveData) != -1 ){
                 alert("이미 등록된 값입니다.");
                 return;
             }
 
-            if( mainYoutubeCheck == true){
+            if( mainYoutubeCheck == true || array.length == 0 ){
                 addHtml = '<div id="list_'+addListCount+'"><label class="textCheck mainYoutube" style="color: #ff8aae "><input type="radio" id="mainYoutube" value="'+mainYoutube+'" name="mainYoutube" checked> 메인 영상으로 설정 <div class="check" style="background-image:url(/static/image/web/textCheck_on.png)"></div></label>';
                 addHtml = addHtml + '<input type="text" value="'+y_link+'" style="width: 868px; margin-right: 10px" disabled>';
                 addHtml = addHtml + '<div class="subBtn" id="linkSub" data-id="'+addListCount+'" data-value="'+saveData+'"></div></div>';
@@ -292,24 +290,32 @@ $(document).ready(function (){
 
             if (id == "notCareer") {
                 if (checked == true) {
+                    $("#allCarrer_y").css("color", "#c0c0c0");
+                    $("#allCarrer_m").css("color", "#c0c0c0");
+
+                    $("#allCarrer_y").val("");
+                    $("#allCarrer_m").val("");
+                    $("#c_cateM").val("");
+                    $("#c_cateS").val("");
+                    $("#c_title").val("");
+                    $("#c_role").val("");
+
                     $("#c_cateM").attr("disabled", "true");
                     $("#c_cateS").attr("disabled", "true");
                     $("#c_title").attr("disabled", "true");
                     $("#c_role").attr("disabled", "true");
-                    $("#allCarrer_y").attr("disabled", "true");
-                    $("#allCarrer_m").attr("disabled", "true");
+                    $("#allCareer_y").attr("disabled", "true");
+                    $("#allCareer_m").attr("disabled", "true");
 
                     $(".careerList").empty().html('<textarea name="saveCareer" id="saveCareer"></textarea>');
 
-                    $("#allCarrer_y").css("color", "#c0c0c0");
-                    $("#allCarrer_m").css("color", "#c0c0c0");
                 } else {
                     $("#c_cateM").removeAttr("disabled")
                     $("#c_cateS").removeAttr("disabled")
                     $("#c_title").removeAttr("disabled")
                     $("#c_role").removeAttr("disabled")
-                    $("#allCarrer_y").removeAttr("disabled")
-                    $("#allCarrer_m").removeAttr("disabled")
+                    $("#allCareer_y").removeAttr("disabled")
+                    $("#allCareer_m").removeAttr("disabled")
                 }
             }
         }
@@ -360,6 +366,13 @@ $(document).ready(function (){
                 labelFor = $("#pieceLabel");
                 imageBox = $(".userImageBox .imageBox");
                 name = "userImage[]";
+            }
+
+            var count = imageBox.children().length;
+
+            if( count > 20 ){
+                alert("이미지는 10장까지만 업로드가 가능합니다.");
+                return;
             }
 
             addCount++;
@@ -432,6 +445,122 @@ $(document).ready(function (){
 
     });
 
+
+    $(document).on("click", ".sendBtn", function(){
+
+        // 기본정보
+        var nationality = $("#nationality").find("option:selected").val();
+        var military = $("#military").find("option:selected").val();
+        var finalSchool = $("#finalSchool").find("option:selected").val();
+        var school = $("#school").val();
+        var major = $("#major").val();
+
+        if( nationality == "" ){
+            alert("국적을 선택해주세요.");
+            return;
+        }
+        if( military == "" ){
+            alert("병역 구분을 선택해주세요.");
+            return;
+        }
+        if( finalSchool == "" ){
+            alert("최종 학력을 선택해주세요.");
+            return;
+        }
+        if( school == "" ){
+            alert("학교명을 입력해주세요.");
+            return;
+        }
+        if( major == "" ){
+            alert("학과명을 입력해주세요.");
+            return;
+        }
+
+        // 신체정보
+        var height = $("#height").val();
+        var weight = $("#weight").val();
+        var topSize = $("#topSize").find("option:selected").val();
+        var bottomSize = $("#bottomSize").find("option:selected").val();
+        var shoesSize = $("#shoesSize").find("option:selected").val();
+        var skinColor = $("#skinColor").find("option:selected").val();
+        var hairColor = $("#hairColor").find("option:selected").val();
+
+        if( height == "" ){
+            alert("키를 입력해주세요.");
+            return;
+        }
+        if( weight == "" ){
+            alert("몸무게를 입력해주세요.");
+            return;
+        }
+        if( topSize == "" ){
+            alert("상의 사이즈를 선택해주세요.");
+            return;
+        }
+        if( bottomSize == "" ){
+            alert("하의 사이즈를 선택해주세요.");
+            return;
+        }
+        if( shoesSize == "" ){
+            alert("신발 사이즈를 선택해주세요.");
+            return;
+        }
+        if( skinColor == "" ){
+            alert("피부색을 선택해주세요.");
+            return;
+        }
+        if( hairColor == "" ){
+            alert("머리색을 선택해주세요.");
+            return;
+        }
+
+        // 지원 분야
+        var cate_m = $("#cate_m").find("option:selected").val();
+        var cate_s = $("#cate_s").find("option:selected").val();
+
+        if( cate_m == "" ){
+            alert("지원분야 대분류를 선택해주세요.");
+            return;
+        }
+        if( cate_s == "" ){
+            alert("지원분야 소분류를 선택해주세요.");
+            return;
+        }
+        
+        // 경력
+        var notCareer = $("#notCareer").is(":checked");
+        var saveCareer = getListData( $("#saveCareer"), 'career');
+
+        if( notCareer == false && saveCareer == "" ){
+            alert("경력을 입력해주세요.");
+            return;
+        }
+
+        //이미지.
+        var mainImage = $("#input-mainImage").val();
+
+        if( mainImage == "" ){
+            alert("메인 프로필 사진을 등록해주세요.");
+            return;
+        }
+
+        var introduction = $("#introduction").val();
+
+        if( notCareer == true ){
+            if( introduction == "" || introduction.length < 100 ){
+                alert("경력사항이 없는 경우, 자기소개를 100자 이상 작성해주세요.");
+                return;
+            }
+        }
+
+        getListData( $("#youSave"), 'youtube');
+        getListData( $("#etcSaveCareer"), 'etcareer');
+        getListData( $("#saveForeign"), 'foreign');
+        getListData( $("#saveSpecialty"), 'specialty');
+
+        $("#saveProfileForm").submit();
+    });
+
 });
 
 function getSubCate(cate, objCate){
@@ -465,4 +594,50 @@ function getSubCate_etc(cate, objCate){
 
       }
    });
+}
+
+function getListData( saveText, saveType){
+
+    if( saveType == "career"){
+        var c_cateM = $("#c_cateM").find("option:selected").val();
+        var c_cateS = $("#c_cateS").find("option:selected").val();
+        var c_title = $("#c_title").val();
+        var c_role = $("#c_role").val();
+
+        if( c_cateM != "" || c_cateS != "" || c_title != "" || c_role != "" ){
+            $("#careerAdd").trigger("click");
+        }
+    }else  if( saveType == "youtube"){
+        var y_link = $("#y_link").val();
+
+        if( y_link != "" ){
+            $("#linkAdd").trigger("click");
+        }
+    }else  if( saveType == "etcareer"){
+        var ec_cateM = $("#ec_cateM").find("option:selected").val();
+        var ec_cateS = $("#ec_cateS").find("option:selected").val();
+        var ec_title = $("#ec_title").val();
+        var ec_role = $("#ec_role").val();
+
+        if( ec_cateM != "" || ec_cateS != "" || ec_title != "" || ec_role != "" ){
+            $("#eCareerAdd").trigger("click");
+        }
+    }else  if( saveType == "foreign"){
+        var foreign = $("#foreign").find("option:selected").val();
+        var good = $("#good").find("option:selected").val();
+
+        if( foreign != "" || good != "" ){
+            $("#foreignAdd").trigger("click");
+        }
+    }else  if( saveType == "specialty"){
+        var specialty = $("#specialty").val();
+
+        if( specialty != "" ){
+            $("#specialtyAdd").trigger("click");
+        }
+    }
+
+    var saveContent = saveText.val();
+
+    return saveContent;
 }

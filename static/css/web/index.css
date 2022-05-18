@@ -128,104 +128,65 @@
 
 /* Index 프로필 정보 */
 .profile{
-    width: 286px;
-    height: 280px;
-    background-color: #c4c4c4;
-    display : inline-block;
-    margin-right : 17px;
-    border-radius: 33px;
-    cursor:  pointer;
-
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-}
-
-.profile:nth-child(4){
-    margin-right: 0px;
-}
-
-/* 소베너 */
-.profileBlank{
-    height : 58px;
-}
-
-.subBanner{
-    display : inline-block;
-    width: 584px;
-    height: 256px;
-    background-color: #c4c4c4;
-    margin-right : 29px;
-    border-radius: 33px;
-
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    cursor: pointer;
-}
-
-.subBanner:nth-child(2){
-    margin-right: 0px;
-}
-
-/* Index 프로필 정보 */
-.partTime{
     position: relative;
-    display: inline-block;
-    width: 285px;
+    font-size: 0px;
+    width: 590px;
     height: 280px;
-    padding: 25px;
     border-radius: 33px;
-    box-shadow: 0 1px 13px 0 rgba(235, 235, 235, 0.9);
+    border: solid 1px #c0c0c0;
     background-color: #fff;
-    margin-right: 19px;
+    display : inline-block;
+    margin-right : 20px;
+    cursor:  pointer;
     box-sizing: border-box;
-    cursor: pointer;
+    margin-top: 20px;
+    overflow: hidden;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
-.partTime .partDay{
-    position: absolute;
-    right: 20px;
-    top: 25px;
-    padding : 8px 18px;
-    border-radius: 44px;
-    background-color: #ff8aae;
-    font-size: 22px;
+.profile:nth-child(2n){
+    margin-right: 0px;
+}
+
+.profile .image{
+    display : inline-block;
+    width: 380px;
+    height: 280px;
+    box-sizing: border-box;
+    vertical-align: top;
+
+    background-size: 100% auto;
+    background-position: top center;
+}
+
+.profile .info{
+    display : inline-block;
+    width: 208px;
+    height: 280px;
+    padding: 50px 20px;
+    vertical-align: top;
+
+    box-sizing: border-box;
+}
+
+.profile .info .name{
+    font-size: 28px;
     font-weight: bold;
-    color: #fff;
+    color: #282828;
 }
 
-.partTime .partLogo{
-    height: 72px;
-    background-color: #c4c4c4;
-    margin-bottom: 7px;
-}
-
-.partTime .partTitle{
-    height: 60px;
+.profile .info .hight{
+    margin-top: 27px;
     font-size: 20px;
     font-weight: bold;
-    line-height: 1.4;
-    color: #292929;
-    margin-bottom: 9px;
-
-    /* 2줄 이상일 경우 ... 처리 */
-    white-space : normal;
-    overflow: hidden;
-    display : -webkit-box;
-    -webkit-line-clamp:2;
-    -webkit-box-orient:vertical;
+    color: #4d4d4d;
 }
-
-.partTime .partInfo{
-    display:  inline-block;
-    margin-bottom: 5px;
-    margin-right: 7px;
-    background-color: #f4f4f4;
-    border-radius: 22px;
-    padding: 8px 10px;
-
-    font-size: 13px;
+.profile .info .entertain{
+    margin-top: 10px;
+    font-size: 20px;
     font-weight: bold;
-    color: #1f1f1f;
+    color: #4d4d4d;
 }
