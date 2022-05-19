@@ -51,7 +51,12 @@ $(document).ready(function (){
     $(document).on("click", ".profile", function(){
        var num = $(this).attr("data-num");
 
-       window.location.href = "/profile/profDetail/" + num + "/" //  ../profile/profDetail/글번호/
+
+       if( userID == ""){
+            alert("로그인 후 이용가능합니다.");
+            //return;
+       }
+       window.location.href = "/profile/profileDetail/actor/" + num + "/" //  ../profile/profDetail/글번호/
     });
 
     // 프로필 픽 기능. ( 구현 필요 )
@@ -60,6 +65,23 @@ $(document).ready(function (){
         e.stopPropagation();
 
         // 기능 구현 필요
+        if( userID == ""){
+            alert("로그인 후 이용가능합니다.");
+            return;
+        }
+
+        var nowType = $(this).attr("data-nowType");
+        var num = $(this).parent().attr("data-num");
+
+        updatePick("profile", nowType, num );
+
+        if( nowType == "off" ){
+            $(this).attr("data-nowType", "on");
+            $(this).addClass("pickOn");
+        }else{
+            $(this).attr("data-nowType", "off");
+            $(this).removeClass("pickOn");
+        }
     });
 
     // 소베너 클릭이벤트

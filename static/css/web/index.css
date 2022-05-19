@@ -107,7 +107,7 @@
     color: #1f1f1f;
 }
 
-.audition .pickBtn{
+.pickBtn{
     position: absolute;
     bottom: 20px;
     right: 20px;
@@ -121,7 +121,7 @@
     background-size: cover;
 }
 
-.audition .pickBtn.pickOn{
+.pickBtn.pickOn{
     background-image: url("../../image/web/pick_on.png");
 }
 
@@ -163,6 +163,7 @@
 }
 
 .profile .info{
+    position: relative;
     display : inline-block;
     width: 208px;
     height: 280px;
@@ -189,4 +190,47 @@
     font-size: 20px;
     font-weight: bold;
     color: #4d4d4d;
+}
+
+.viewBox{
+    position: absolute;
+    bottom: 15px;
+    left: 20px;
+    width: 90px;
+    font-size: 0px;
+}
+
+.viewBox .countBox{
+    display: inline-block;
+    height: 43px;
+    width: 28px;
+    margin-right: 3px;
+}
+
+.viewBox .countBox:nth-child(3){
+    margin-right: 0px;
+}
+
+.viewBox .countBox span{
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.viewBox .countBox span.viewCount{ background-image: url("../../image/web/viewCount.png")}
+.viewBox .countBox span.pickCount{ background-image: url("../../image/web/pickCount.png")}
+.viewBox .countBox span.comViewCount{ background-image: url("../../image/web/companyView.png")}
+
+.viewBox .countBox p{
+    margin: 0px;
+    padding: 0px;
+
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    color: #ff8aae;
 }

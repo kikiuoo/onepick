@@ -62,7 +62,7 @@
 <!-- 본문 내용 : 프로필 정보 -->
 <div class="mainTitle titleMargin">
     프로필 정보
-    <span class="mobileNone" data-url="/profile/list/actor/newest/">전체보기</span>
+    <span class="mobileNone" data-url="/profile/list/actor/">전체보기</span>
 </div>
 
 <div class="inBox">
@@ -79,11 +79,28 @@
                     소속사 있음
                 {% endif %}
             </div>
-        </div>
-        <div class="viewBox">
 
+            <div class="viewBox">
+                <div class="countBox">
+                    <span class="viewCount"></span>
+                    <p>{{ profile.3 }}</p>
+                </div>
+                <div class="countBox">
+                    <span class="pickCount"></span>
+                    <p>{{ profile.4 }}</p>
+                </div>
+                <div class="countBox">
+                    <span class="comViewCount"></span>
+                    <p>{{ profile.5 }}</p>
+                </div>
+            </div>
         </div>
-        <div class="pickBtn"></div>
+
+        {% if profile.9 == 0 or profile.9 == "0" %}
+        <div class="pickBtn" data-nowType="off"></div>
+        {% else %}
+        <div class="pickBtn pickOn " data-nowType="on"></div>
+        {% endif %}
     </div>
     {% endfor %}
 

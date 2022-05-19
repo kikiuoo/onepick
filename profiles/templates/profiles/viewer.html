@@ -1,6 +1,6 @@
 {% extends 'profiles/profile_base.html' %}
 
-{% block context_profile %}
+{% block context %}
 
 <!-- Index CSS 파일 및 JS 파일 include -->
 {% load static %}
@@ -10,86 +10,137 @@
 <!-- JS 파일 -->
 <script src="{% static 'js/profile/viewer.js' %}"></script>
 
-<!-- 본문 내용 -->
-<div class="backBtn mobileNone"><span></span> 목록으로 돌아가기</div>
-
-{% for profile in profileData %}
-{% for user in userData %}
-<div class="mainProfile">
-    <div class="mainImage" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profile.mainImage }}")'></div>
-
-    <div class="mainInfo">
-        <div class="name">{{ profile.name|default_if_none:"" }},{{ user.age|default_if_none:"" }}</div>
+<div class="inBox">
+    <div class="mainImage"></div>
+    <div class="userInfo">
+        <div class="userName">이**,25세(1888/12/12)</div>
         <div class="info">
-            <span>{{ profile.gender|default_if_none:"" }}/{{ user.age|default_if_none:"" }}세</span>
-            <span>
-                {% if user.foreigner == 0 %}
-                내국인
-                {% elif user.foreigner == 1 %}
-                외국인
-                {% endif %}
-            </span>
+            연락처 연람 불가<br>
+            이메일 abcde@naver.com<br>
+            주소 (12345) 서울특별시..
+        </div>
+        <div class="info">
+            내국인 | 군필 | 소속사 없음<br>
+            중앙대학교 연극영화과
+        </div>
+
+        <div class="snsBox">
+            <div class="instagram"></div>
+            <div class="youtube"></div>
         </div>
 
         <div class="info">
-            <p>키</p>
-            <span>{{ profile.height }}cm</span>
-
-            <p>체중</p>
-            <span>{{ profile.weight }}kg</span>
-
-            <p>SNS</p>
-            <span id="instagram"></span>
-            <span id="youtube"></span>
+            키 17* cm | 몸무게 7* kg<br>
+            상의 L | 하의 30 | 신발 270 | 피부 21호 | 머리색 갈색
         </div>
 
-        <div class="info mobileNone">
-            <p>지원분야</p>
-            <span class="important">
-                {% for cates in cate %}
-                    #{{ cates.name }}&nbsp;&nbsp;
-                {% endfor %}
-            </span>
+        <div class="allCareer">총 경력 1년 2개월</div>
 
-            <p>경력</p>
-            <span class="important"></span>
+        <div class="viewBox">
+            <div class="countBox">
+                <span class="viewCount"></span>
+                <p>{{ profile.4 }}</p>
+            </div>
+            <div class="countBox">
+                <span class="pickCount"></span>
+                <p>{{ profile.5 }}</p>
+            </div>
+            <div class="countBox">
+                <span class="comViewCount"></span>
+                <p>{{ profile.6 }}</p>
+            </div>
         </div>
 
-        <div class="btnBox pcNone">
-            <div class="scrapBtn">스크랩하기</div>
-            <div class="auditionBtn">오디션 제안</div>
+        {% if profile.18 == 0 or profile.18 == "0" %}
+        <div class="pickBtn" data-nowType="off"></div>
+        {% else %}
+        <div class="pickBtn pickOn " data-nowType="on"></div>
+        {% endif %}
+
+        <div class="oditionBtn">오디션 제안</div>
+    </div>
+
+    <div class="careerBox">
+        <div class="leftBox">
+            <div class="title">지원분야</div>
+            <div class="content">배우 장편영화</div>
+            <div class="title">영화</div>
+            <div class="content">배우 | 장편영화 | 영화 제목 | 지나가는 행인10 역 </div>
+            <div class="title">TV드라마,웹드라마</div>
+            <div class="content">배우 | 장편영화 | 영화 제목 | 지나가는 행인10 역 </div>
+            <div class="content">배우 | 장편영화 | 영화 제목 | 지나가는 행인10 역 </div>
+            <div class="title">광고/기타</div>
+            <div class="content">배우 | 장편영화 | 영화 제목 | 지나가는 행인10 역 </div>
         </div>
 
-        <div class="line"></div>
+        <div class="rightBox">
+            <div class="title">기타 경력</div>
+            <div class="content">배우 | 장편영화 | 영화 제목 | 지나가는 행인10 역 </div>
+            <div class="title">외국어 능력</div>
+            <div class="content">배우 | 장편영화 | 영화 제목 | 지나가는 행인10 역 </div>
+            <div class="title">특기</div>
+            <div class="content">배우 | 장편영화 | 영화 제목 | 지나가는 행인10 역 </div>
+        </div>
+    </div>
 
-        <div class="introduction">
-            {{ profile.introduction|default_if_none:""|linebreaksbr }}
+    <div class="introduction">
+        안녕하세요, 진심을 다해 연기하는 배우 김진서입니다. 9년간의 연기 경력을 가지고 있고 다양한 스펙트럼의 연기 경험이 있다고 자신할 수 있습니다.
+선한 마스크를 지녔다는 평을 많이 듣지만 악역에 있어서도 자신있습니다. 항상 기대되는 배우가 되도록 더욱 노력하겠습니다.
+    </div>
+
+    <div class="viewDetail">
+        <div class="title">프로필 사진</div>
+        <div class="imageBox" id="profile">
+            <div class="blank"></div>
+            <img src="https://cdn.newscj.com/news/photo/202103/newscj_%EC%B2%9C%EC%A7%80%EC%9D%BC%EB%B3%B4_2021_3_9_162845_883390.jpg" height="440px">
+            <img src="https://file.mk.co.kr/meet/neds/2021/07/image_readtop_2021_699895_16268246914723780.jpg" height="440px">
+            <img src="https://cdn.imweb.me/thumbnail/20210806/43ecdd4d58d8e.jpg" height="440px">
+            <img src="https://www.naewoeilbo.com/news/photo/202107/368068_143344_540.jpg" height="440px">
         </div>
 
-        <div class="btnBox mobileNone">
-            <div class="scrapBtn">스크랩하기</div>
-            <div class="auditionBtn">오디션 제안</div>
+        <div class="title">작품 사진</div>
+        <div class="imageBox" id="actImage">
+            <div class="blank"></div>
+            <img src="https://cdn.newscj.com/news/photo/202103/newscj_%EC%B2%9C%EC%A7%80%EC%9D%BC%EB%B3%B4_2021_3_9_162845_883390.jpg" height="440px">
+            <img src="https://file.mk.co.kr/meet/neds/2021/07/image_readtop_2021_699895_16268246914723780.jpg" height="440px">
+            <img src="https://cdn.imweb.me/thumbnail/20210806/43ecdd4d58d8e.jpg" height="440px">
+            <img src="https://www.naewoeilbo.com/news/photo/202107/368068_143344_540.jpg" height="440px">
+        </div>
+
+        <div class="title">프로필 영상</div>
+        <div class="imageBox" id="profileMovie">
+            <div class="blank"></div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/YcEL6btw_bg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/YcEL6btw_bg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/YcEL6btw_bg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/YcEL6btw_bg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+            <div class="cover-bar"></div>
         </div>
     </div>
 </div>
-{% endfor %}
 
-<div class="subInfoBox">
-    <div class="subInfoCate active" data-type="youtube">영상 프로필</div>
-    <div class="subInfoCate" data-type="image">이미지</div>
-    <div class="subInfoCate" data-type="career">경력사항</div>
-</div>
-
-<div class="subInfo">
-    {% if profile.youtubeUrl != "" %}
-    <div class="iframeBox" >
-        <iframe src="{{ youtube }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="inBox">
+    <div class="inputBox">
+        <input type="text" name="comment" id="comment" placeholder="댓글을 작성할 수 있습니다.">
+        <div class="saveComment">댓글 쓰기</div>
     </div>
-    {%  endif %}
-</div>
-{% endfor %}
 
-    
+    <div class="commentList">
+        <div class="comments">
+            <div class="name">김*이</div>
+            <div class="comContent">댓글 내용 댓글 내용 댓글 내용 댓글 내용 댓글 내용 댓글 내용</div>
+            <div class="date">2022-05-17</div>
+        </div>
+
+        <div class="comments">
+            <div class="name">김*이</div>
+            <div class="comContent">댓글 내용 댓글 내용 댓글 내용 댓글 내용 댓글 내용 댓글 내용</div>
+            <div class="date">2022-05-17</div>
+        </div>
+    </div>
+</div>
+
 <script>
     var cateType = '{{ cateType }}';
     var num = '{{ num }}';

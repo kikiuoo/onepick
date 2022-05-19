@@ -1,238 +1,332 @@
-/* 뒤로가기 버튼 */
-.backBtn{
-    cursor: pointer;
-    margin-bottom: 46px;
+html { scrollbar-color: #6969dd #e0e0e0; scrollbar-width: thin; }
 
-    font-size: 24px;
-    font-weight: bold;
-    color: #1f1f1f;
-    height: 50px;
-    line-height: 50px;
-    vertical-align: top;
-}
-.backBtn span{
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
-    vertical-align: top;
-
-    background-image: url("../../../image/web/backBtnIcon.png");
-    background-size: 80%;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-/* 기본 프로필 정보 */
-.mainProfile{
-    position: relative;
-    font-size: 0px;
-}
-
-.mainImage{
-    display: inline-block;
-    width: 396px;
-    height: 544px;
+.inBox{
+    width: 1200px;
+    padding: 20px 0px 32px 20px;
     border-radius: 33px;
-    margin-right: 60px;
-    vertical-align: middle;
-
-    background-position: center;
-    background-size: 100%;
-    background-repeat: no-repeat;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+    box-sizing: border-box;
+    font-size: 0px;
+    margin-left: 10px;
+    margin-bottom:30px;
 }
 
-.mainInfo{
+.inBox .mainImage{
     display: inline-block;
-    width: 600px;
-    min-height: 544px;
+    width: 360px;
+    height: 520px;
+    margin: 0 20px 20px 0;
+    border-radius: 33px;
+    background-color: #aaaaaa;
+}
+
+.inBox .userInfo{
+    position: relative;
+    display: inline-block;
+    width: 750px;
+    height: 520px;
+    border-bottom: 1px solid #c0c0c0;
     vertical-align: top;
-    padding: 0px;
+    padding: 30px 20px 25px;
     box-sizing: border-box;
 }
 
-.mainInfo .name{
-    font-size: 40px;
-    font-weight: bold;
-    color: #1f1f1f;
-    margin-bottom: 35px;
-}
+.inBox .userInfo .userName{
+    height: 33px;
 
-.mainInfo .info{
-    margin-bottom: 32px;
-}
-
-.mainInfo .info p{
-    display: inline-block;
     font-size: 24px;
     font-weight: bold;
-    color: #1f1f1f;
-    margin: 0px;
-    padding: 0px;
-    margin-right: 14px;
+    color: #282828;
 }
 
-.mainInfo .info span{
-    font-size: 24px;
-    font-weight: 500;
-    color: #1f1f1f;
-    margin-right: 50px;
-}
-
-.mainInfo .info span.important{
-    font-size: 24px;
-    font-weight: bold;
-    color: #ff8aae;
-}
-
-.mainInfo .line{
-    width: 100%;
-    height: 2px;
-    background-color: #000;
-    margin-top: 15px;
-}
-
-.mainInfo .introduction{
-    margin-top: 20px;
+.inBox .userInfo .info{
+    height: 99px;
+    margin-top: 17px;
     font-size: 18px;
     font-weight: 500;
     line-height: 1.83;
-    color: #000;
+    color: #282828;
 }
 
-.mainInfo .btnBox{
-    margin-top: 30px;
+.inBox .userInfo .info:nth-child(3){
+    height: 66px;
+    margin-top: 11px;
 }
 
-.mainInfo .btnBox .scrapBtn{
+.inBox .userInfo .info:nth-child(5){
+    height: 66px;
+}
+
+.inBox .userInfo .snsBox{
+    height: 50px;
+    margin-top: 24px;
+    margin-bottom: 8px;
+}
+
+.inBox .userInfo .snsBox div{
     display: inline-block;
-    width: 164px;
-    height: 54px;
-    border-radius: 11px;
-    box-shadow: 0 1px 13px 0 rgba(255, 138, 174, 0.25);
-    background-color: #fff;
-    margin-right: 12px;
-    cursor: pointer;
-    vertical-align: top;
+    width: 50px;
+    height: 50px;
+    margin-right: 17px;
+}
 
-    font-size: 20px;
+.inBox .userInfo .snsBox div.instagram{ background-image: url("../../../image/web/instagram.png")}
+.inBox .userInfo .snsBox div.youtube{ background-image: url("../../../image/web/youtube.png")}
+
+.inBox .userInfo .allCareer{
+    margin-top: 39px;
+    font-size: 22px;
     font-weight: bold;
+    color: #ff8aae;
+}
+
+
+.viewBox{
+    position: absolute;
+    bottom: 20px;
+    right: 255px;
+    width: 90px;
+    font-size: 0px;
+}
+
+.viewBox .countBox{
+    display: inline-block;
+    height: 43px;
+    width: 28px;
+    margin-right: 3px;
+}
+
+.viewBox .countBox:nth-child(3){
+    margin-right: 0px;
+}
+
+.viewBox .countBox span{
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.viewBox .countBox span.viewCount{ background-image: url("../../../image/web/viewCount.png")}
+.viewBox .countBox span.pickCount{ background-image: url("../../../image/web/pickCount.png")}
+.viewBox .countBox span.comViewCount{ background-image: url("../../../image/web/companyView.png")}
+
+.viewBox .countBox p{
+    margin: 0px;
+    padding: 0px;
+
+    font-size: 12px;
+    font-weight: 500;
     text-align: center;
     color: #ff8aae;
-    line-height: 54px;
 }
 
-.mainInfo .btnBox .auditionBtn{
-    display: inline-block;
+.pickBtn{
+    position: absolute;
+    bottom: 21.5px;
+    right: 194px;
+    width: 41px;
+    height: 41px;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/pick_off.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.pickBtn.pickOn{
+    background-image: url("../../../image/web/pick_on.png");
+}
+
+.inBox .userInfo .oditionBtn{
+    position: absolute;
+    right: 0px;
+    bottom: 15.5px;
     width: 164px;
     height: 54px;
-    border-radius: 11px;
-    box-shadow: 0 1px 13px 0 rgba(255, 138, 174, 0.25);
+    border-radius: 22px;
     background-color: #ff8aae;
+    line-height: 54px;
     cursor: pointer;
-    vertical-align: top;
 
     font-size: 20px;
     font-weight: bold;
     text-align: center;
     color: #fff;
-    line-height: 54px;
 }
 
-/* 상세정보 */
-.subInfoBox{
-    margin-top: 71px;
-    font-size: 0px;
-}
 
-.subInfoBox .subInfoCate{
-    display: inline-block;
-    padding: 0px 6px 14px;
-    margin-right: 76px;
+
+.careerBox{
+    width: 1100px;
     box-sizing: border-box;
-    cursor: pointer;
-
-    font-size: 30px;
-    font-weight: bold;
-    color: #b9b9b9;
+    margin: 0px 30px;
+    border-bottom : 1px solid #c0c0c0;
 }
 
-.subInfoBox .subInfoCate.active{
-    color: #000000;
-    border-bottom : 3px solid #000;
-}
-
-.subInfo{
-    padding : 50px 0px;
-}
-
-/* 유튜브 상세정보 */
-.subInfo .iframeBox{
+.careerBox .leftBox, .careerBox .rightBox{
     display: inline-block;
-}
-.subInfo iframe{
-    width: 501px;
-    height: 283px;
-    border-radius: 22px;
-    margin-right: 39px;
-    margin-bottom: 27px;
-}
-
-/* 프로필 이미지 */
-.subInfo .imageBox{
-    column-width:570px;
-    column-count: 2;
-}
-
-.subInfo img{
-    width: 570px;
-    margin-bottom: 37px;
+    width: 50%;
     vertical-align: top;
-    border-radius: 22px;
+    margin-bottom: 32px;
 }
 
-/* 경력사항 */
-.subInfo .infoTitle{
-    font-size: 30px;
+.title{
+    font-size: 20px;
     font-weight: bold;
-    color: #000;
-    margin-bottom: 34px;
+    color: #ff8aae;
+    line-height: 33px;
 }
 
-.subInfo .careerBox{
-    font-size: 0px;
-    margin-bottom: 23px;
+.careerBox .content{
+    font-size: 20px;
+    font-weight: bold;
+    color: #4d4d4d;
+    line-height: 33px;
 }
 
-.subInfo .careerBox .careerTitle{
-    display: inline-block;
-    width: 157px;
-    margin-right: 47px;
+.introduction {
+    width: 1100px;
     box-sizing: border-box;
-    text-align: center;
-    vertical-align: top;
+    margin: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.83;
+    color: #4d4d4d;
 }
 
-.subInfo .careerBox .careerTitle span{
+.viewDetail{
+    margin-left: -20px;
+}
+
+.viewDetail .title{
+    padding-left: 50px;
+}
+
+.imageBox{
+    overflow: hidden;
+
+     /* 가로 스크롤 */
+    overflow: auto;
+    white-space: nowrap;
+    padding-top: 13px;
+    padding-bottom: 5px;
+    margin-bottom: 25px;
+}
+
+.imageBox#profile img{
+    height: 440px;
+    margin-right: 20px;
+    border-radius: 22px;
+}
+
+.imageBox#actImage img{
+    height: 380px;
+    margin-right: 20px;
+    border-radius: 22px;
+}
+
+.imageBox#profileMovie iframe{
+    width: 550px;
+    height: 310px;
+    border-radius: 22px;
+    margin-right: 20px;
+}
+
+.imageBox::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+}
+.imageBox::-webkit-scrollbar-thumb {
+    background-color: #fff;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+.imageBox::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+
+.imageBox .blank{
+    width: 50px;
     display: inline-block;
-    padding: 10px 22px;
+}
+
+.imageBox:hover::-webkit-scrollbar-thumb {
+    background-color: #D6D6D6;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+.imageBox:hover::-webkit-scrollbar-track {
+    background-color: #F6F6F6;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+
+.inBox .inputBox{
+    padding : 0px 30px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.inBox .commentList{
+    padding : 10px 30px 0px 30px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.inBox .inputBox #comment{
+    width: 940px;
+    height: 56px;
+    padding: 16px 18px;
     border-radius: 11px;
-    background-color: rgba(221, 221, 221, 0.28);
-
-    font-size: 22px;
+    background-color: #f6f6f6;
+    box-sizing: border-box;
+    outline: none;
+    border: 0px;
+    font-size: 18px;
     font-weight: bold;
-    color: #292929;
+    line-height: 1.2em;
+    margin-right: 10px;
+}
+.inBox .inputBox #comment::placeholder{
+    font-size: 18px;
+    font-weight: bold;
+    color: #c0c0c0;
 }
 
-.subInfo .careerBox .careerContent {
+.inBox .inputBox .saveComment{
     display: inline-block;
-    width: calc( 100% - 204px );
-    box-sizing: border-box;
-    vertical-align: top;
-    min-height: 77px ;
+    width: 150px;
+    height: 56px;
+    line-height: 56px;
+    text-align: center;
+    border-radius: 11px;
+    background-color: #ff8aae;
 
-    font-size: 22px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+}
+
+.comments{
+    padding: 19px 10px;
+    border-top: 1px solid #c0c0c0;
+}
+
+.comments .name{
+    font-size: 18px;
     font-weight: 500;
-    line-height: 2;
-    color: #000;
+    color: #1f1f1f;
 }

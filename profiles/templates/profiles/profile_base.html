@@ -12,11 +12,9 @@
 
 <!-- 분야 카테고리 -->
 <div class="subCate">
-    <div class="cate {% if cateType == 'actor'  %} active {% endif %}" data-url="/profile/list/actor/newest/">배우</div>
-    <div class="cate {% if cateType == 'model'  %} active {% endif %}" data-url="/profile/list/model/newest/">모델</div>
-    <div class="cate {% if cateType == 'singer'  %} active {% endif %}" data-url="/profile/list/singer/newest/">가수</div>
-    <div class="cate {% if cateType == 'dancer'  %} active {% endif %}" data-url="/profile/list/dancer/newest/">댄서</div>
-    <div class="cate {% if cateType == 'influencer'  %} active {% endif %}" data-url="/profile/list/influencer/newest/">인플루언서</div>
+    <div class="cate {% if cateType == 'actor'  %} active {% endif %}" data-url="/profile/list/actor/">배우</div>
+    <div class="cate {% if cateType == 'model'  %} active {% endif %}" data-url="/profile/list/model/">모델</div>
+    <div class="cate {% if cateType == 'singer'  %} active {% endif %}" data-url="/profile/list/singer/">가수</div>
 </div>
 
 {% block context_profile %}
