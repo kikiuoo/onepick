@@ -16,7 +16,7 @@
 <!-- 본문 내용 -->
 <div class="content">
     <div class="btnBox">
-        {% if request.session.id == auditions.1 %}
+        {% if  request.session.userType == "admin" or  request.session.id == auditions.1 %}
         <div class="editBtn" data-num="{{ auditions.0 }}"></div>
         <div class="delBtn" data-num="{{ auditions.0 }}"></div>
         {% endif %}

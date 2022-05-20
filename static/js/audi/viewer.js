@@ -52,6 +52,7 @@ $(document).ready(function(){
         alert("URL이 복사되었습니다.")
     });
 
+
     $(document).on("click", ".editBtn", function(){
         var num = $(this).attr("data-num");
 
@@ -65,6 +66,7 @@ $(document).ready(function(){
            window.location.href = "/audi/del/"+num +"/";
        }
     });
+
 });
 
 function updatePick(tableName, nowType, num){

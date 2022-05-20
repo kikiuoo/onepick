@@ -153,7 +153,6 @@ def localLogin (request) :
         pw = md5_generator(password)
         userIN = UserInfo.objects.filter(nickname=username, password=pw)
 
-        print(userIN);
         """
 
         if userIN.count() > 0 :

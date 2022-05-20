@@ -89,3 +89,100 @@ def getCareer(num, type) :
     except:
         connection.rollback()
     return returnData
+
+@register.filter
+def replace(value, keys):
+    key = keys.split("|")
+    returnValue = value.replace(key[0], key[1])
+    return returnValue
+
+@register.filter
+def allReplace(value, key):
+
+    returnValue = ""
+    for values in value :
+        returnValue = returnValue + key
+
+    return returnValue
+
+@register.filter
+def phoneReplace(value, key):
+
+    returnValue = ""
+    count = 0
+    for values in value :
+
+        if count == 3 or count == 7 :
+            returnValue = returnValue + "-"
+
+        if count < 5 :
+            returnValue = returnValue + values
+        else :
+            returnValue = returnValue + key
+        count = count + 1;
+
+    return returnValue
+
+@register.filter
+def emailReplace(value, key):
+
+    email = value.split("@")
+    returnValue = ""
+
+    count = 0
+    for values in email[0] :
+        if count == 0:
+            returnValue = returnValue + values
+        else:
+            returnValue = returnValue + key
+        count = count + 1;
+
+    returnValue = returnValue + "@" + email[1]
+
+    return returnValue
+
+
+
+@register.filter
+def getMainCate(value):
+
+    cate = CateMain.objects.get(catecode=value)
+
+    return cate.catename
+
+
+@register.filter
+def getSubCate(value):
+
+    cate = CateSub.objects.get(subcate=value)
+
+    return cate.catename
+
+@register.filter
+def getArrayCount(value):
+
+    return len(value)
+
+@register.filter
+def getUserName(valuse):
+    user = UserInfo.objects.get(userid=valuse)
+    userName = user.name
+
+    returnValue = ""
+
+    count = 0
+    for values in userName:
+        if count == 0 or count == (len(userName)-1):
+            returnValue = returnValue + values
+        else:
+            returnValue = returnValue + "*"
+        count = count + 1;
+
+    return returnValue
+
+
+@register.filter
+def addNum(value, addValue) :
+    returnNum = int(value) + int(addValue)
+
+    return returnNum

@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.conf import settings
 import hashlib
 from audition.views import md5_generator
+from django.http import HttpResponse, JsonResponse
 from django.db import connection
 
 
@@ -80,51 +81,43 @@ def listView(request, cate_type): # 오디션 Main
 
 def viewer(request, cate_type, num) :
 
-    """
-    profileData = ProfileInfo.objects.filter(id=num)
+    #프로필 정보.
+    profiles = ProfileInfo.objects.get(num=num)
+    writeUser = profiles.userid
 
-    for row in profileData.values_list():
-        userID = row[1]
-        youtube = row[10]
+    #프로필 등록자 정보
+    userInfo = UserInfo.objects.get(userid=writeUser)
+    careerEtc = ProfileEtccareer.objects.filter(profilenum=num).order_by("num")
+    comment = ProfileComment.objects.filter(profilenum=num).order_by("-num")
 
-    youtube = youtube.replace("https://youtu.be/", "https://www.youtube.com/embed/")
+    user = request.session.get('id', '')
+    if user :
+        pick = ProfilePick.objects.filter(userid=user)
+        if pick.count() == 0 :
+            pickCheck = "0"
+        else :
+            pickCheck = "1"
 
-    userData = UserInfo.objects.filter(id=userID)
+    else :
+        pickCheck = "0"
 
-    cate = CateMain.objects.filter(applysubtype__career__profile_id=num).distinct()
+    profileImages = profiles.detailimage.split("|")
+    artImages = profiles.artimage.split("|")
+    youtubes = profiles.youtube.split("|")
+    foreign = profiles.foreign.split("|")
+    talent = profiles.talent.split("|")
 
-    return render(request, 'profiles/viewer.html', { 'cateType' : cate_type , "num":num, "profileData" : profileData,
-                                                     "userData" : userData, "youtube" : youtube, "cate" : cate })
-    """
+    # 세부 분야별 경력정보
+    movieCareer = getCareerList(num, "movie")
+    dramaCareer = getCareerList(num, "drama")
+    etcCareer = getCareerList(num, "etc")
+    
 
-    return render(request, 'profiles/viewer.html')
-
-def viewerDetail(request, type, num) :
-
-    """
-    if type == "youtube" :
-        profileData = ProfileInfo.objects.filter(id=num)
-
-        for row in profileData.values_list():
-            data = row[10].replace("https://youtu.be/", "https://www.youtube.com/embed/")
-
-    elif type == "image" :
-        data = ProfileImage.objects.filter(profile__id=num)
-        print(data)
-
-    elif type == "career" :
-        data = AuditionSubCategory.objects.filter(applysubtype__career__profile_id=num).values('name', 'applysubtype__career__contents')
-        #print(str(data.query))
-        #print(data)
-        #for row in data.values_list():
-        #    print(row)
-
-
-    return render(request, 'profiles/viewer_detail.html', { 'type' :  type , 'num' : num, 'data' : data })
-    """
-    return render(request, 'profiles/viewer_detail.html')
-
-
+    return render(request, 'profiles/viewer.html', { 'profiles':profiles, "userInfo":userInfo, "foreign" : foreign,
+                                                     "careerEtc":careerEtc, "comment":comment, "pickCheck" : pickCheck,
+                                                     "profileImages" : profileImages, "artImages" : artImages,
+                                                     "youtubes" : youtubes, "movieCareer" : movieCareer, "dramaCareer" : dramaCareer,
+                                                     "etcCareer": etcCareer, "talent" : talent})
 
 def pofile_write(request) :
 
@@ -398,8 +391,6 @@ def getProfile(request) :
                     "     ON p.userID = ui.userID " \
                     "WHERE public = '0' " + where + orderby + " LIMIT 15"
 
-        print(query)
-
         result = cursor.execute(query)
         profiles = cursor.fetchall()
 
@@ -410,3 +401,53 @@ def getProfile(request) :
         connection.rollback()
 
     return render(request, 'profiles/ajax_profileList.html', {'profiles':profiles})
+
+
+def getCareerList(profileNum, groupType) :
+
+    try:
+        cursor = connection.cursor()
+
+        query = "SELECT profileNum, title, ROLE, cm.cateName AS mainCate, cs.cateName AS subCate  " \
+                "FROM profile_career AS pc LEFT JOIN cate_main AS cm ON pc.cateType = cm.cateCode " \
+                "     LEFT JOIN cate_sub AS cs ON pc.cateSubType = cs.subCate " \
+                "WHERE pc.profileNum = '"+ str(profileNum) +"' AND cs.otherGroup = '"+groupType+"'"
+
+        result = cursor.execute(query)
+        cateList = cursor.fetchall()
+
+        connection.commit()
+        connection.close()
+
+    except:
+        connection.rollback()
+
+    return cateList
+
+def saveComment(request) :
+
+    comment = request.GET['comment']
+    num = request.GET['num']
+    userID = request.session['id']
+
+    nowTime = timezone.now()
+
+    save = ProfileComment.objects.create(profilenum=num,userid=userID,content=comment,regtime=nowTime)
+
+    return JsonResponse({"code": "0"})
+
+def reloadComment(request) :
+    num = request.GET['num']
+
+    comment = ProfileComment.objects.filter(profilenum=num).order_by("-num")
+
+    return render(request, 'profiles/ajax_comment.html', {'comment': comment})
+
+def deleteComment(request) :
+
+    num = request.GET['num']
+
+    comment = ProfileComment.objects.get(num=num)
+    comment.delete()
+
+    return JsonResponse({"code": "0"})

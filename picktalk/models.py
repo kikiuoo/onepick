@@ -188,6 +188,7 @@ class ProfileInfo(models.Model):
     regdate = models.DateTimeField(db_column='RegDate', blank=True, null=True)  # Field name made lowercase.
     viewcount = models.IntegerField(db_column='viewCount', blank=True, null=True)  # Field name made lowercase.
     cviewcount = models.IntegerField(db_column='cViewCount', blank=True, null=True)  # Field name made lowercase.
+    pickcount = models.IntegerField(db_column='pickCount', blank=True, null=True)  # Field name made lowercase.
     public = models.CharField(max_length=10, blank=True, null=True)
     isdelete = models.CharField(db_column='isDelete', max_length=10, blank=True, null=True)  # Field name made lowercase.
 
