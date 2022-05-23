@@ -39,14 +39,14 @@ def index(request):
         if user:
             query = "SELECT p.num, profileImage, height, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user +"' AND profileNum = p.num ) AS proPick " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
-                    "WHERE public = '0' " \
+                    "WHERE public = '0' and isDelete = '0' " \
                     "ORDER BY regDate DESC " \
                     "LIMIT 4"
         else:
             query = "SELECT p.num, profileImage, height, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, '0' AS proPick " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui " \
                     "     ON p.userID = ui.userID " \
-                    "WHERE public = '0' " \
+                    "WHERE public = '0' and isDelete = '0' " \
                     "ORDER BY regDate DESC  " \
                     "LIMIT 4"
 
@@ -81,6 +81,9 @@ def updatePick(request) :
         if tableName == "audition" :
             pick = AuditionPick.objects.create( auditionnum=num, userid=userID, regtime=nowTime )
         else :
+            profiles = ProfileInfo.objects.get(num=num)
+            profiles.pickcount = profiles.pickcount + 1
+            profiles.save()
             pick = ProfilePick.objects.create( profilenum=num, userid=userID, regtime=nowTime )
 
     else : # on : 삭제
@@ -88,8 +91,26 @@ def updatePick(request) :
         if tableName == "audition" :
             pick = AuditionPick.objects.filter( auditionnum=num, userid=userID )
         else :
+            profiles = ProfileInfo.objects.get(num=num)
+            profiles.pickcount = profiles.pickcount - 1
+            profiles.save()
             pick = ProfilePick.objects.filter( profilenum=num, userid=userID )
 
         pick.delete()
+
+    return JsonResponse({"code": "0"})
+
+
+def advertise(request) :
+
+    return render(request, 'picktalk/advertise.html',)
+
+
+
+def advertise_callBack(request) :
+
+
+
+
 
     return JsonResponse({"code": "0"})

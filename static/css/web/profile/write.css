@@ -174,7 +174,7 @@
     background-image: url("../../../image/web/addBtn.png");
 }
 
-.subBtn{
+.subBtn, .subBtn2{
     display: inline-block;
     vertical-align: middle;
     width: 30px;
@@ -378,13 +378,31 @@
     height: 10px;
 }
 .mainImageBox::-webkit-scrollbar-thumb {
-    background-color: #2f3542;
+    background-color: transparent;
     border-radius: 10px;
     background-clip: padding-box;
     border: 2px solid transparent;
 }
+
 .mainImageBox::-webkit-scrollbar-track {
-    background-color: grey;
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+.mainImageBox .blank{
+    width: 50px;
+    display: inline-block;
+}
+
+.mainImageBox:hover::-webkit-scrollbar-thumb {
+    background-color: #D6D6D6;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+.mainImageBox:hover::-webkit-scrollbar-track {
+    background-color: #F6F6F6;
     border-radius: 10px;
     box-shadow: inset 0px 0px 5px white;
 }
@@ -400,7 +418,7 @@
 
 #mainImage{
     background-position: top center;
-    background-size: 100% auto;
+    background-size: 100%;
     background-repeat: no-repeat;
 }
 
@@ -416,8 +434,8 @@
     margin-right: 20px;
 
     background-repeat: no-repeat;
-    background-position: top center;
-    background-size: 100% auto;
+    background-position: center;
+    background-size: 100% 100%;
     vertical-align: top;
 }
 

@@ -104,6 +104,7 @@ def audi_detail(request, cate_type, num) :
 
         result = cursor.execute(query)
         audition = cursor.fetchall()
+        print(audition)
 
         audiSubCate = []
         for row in audition:

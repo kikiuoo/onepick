@@ -56,7 +56,7 @@ def listView(request, cate_type): # 오디션 Main
             query = "SELECT p.num , profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, " \
                     "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
-                    "WHERE public = '0' " \
+                    "WHERE public = '0' and isDelete = '0' " \
                     "ORDER BY regDate DESC " \
                     "LIMIT 15"
         else:
@@ -64,7 +64,7 @@ def listView(request, cate_type): # 오디션 Main
                     "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, '0' AS proPick " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui " \
                     "     ON p.userID = ui.userID " \
-                    "WHERE public = '0' " \
+                    "WHERE public = '0' and isDelete = '0' " \
                     "ORDER BY regDate DESC  " \
                     "LIMIT 15"
 
@@ -111,6 +111,20 @@ def viewer(request, cate_type, num) :
     movieCareer = getCareerList(num, "movie")
     dramaCareer = getCareerList(num, "drama")
     etcCareer = getCareerList(num, "etc")
+
+    userType = request.session.get('userType', '')
+
+    nowTime = timezone.now()
+
+    if userType == "COMPANY" or userType == "S-COMPANY" :
+        profiles.cviewcount = profiles.cviewcount + 1
+        profiles.save()
+        viewAdd = ProfileViewCompany.objects.create(profilenum=num, userid=user, regtime=nowTime)
+
+    else :
+        profiles.viewcount = profiles.viewcount +1
+        profiles.save()
+        viewAdd = ProfileView.objects.create(profilenum=num, userid=user, regtime=nowTime)
     
 
     return render(request, 'profiles/viewer.html', { 'profiles':profiles, "userInfo":userInfo, "foreign" : foreign,
@@ -301,6 +315,332 @@ def pofile_write_callback(request) :
     return redirect('/profile/profileDetail/all/' + key + "/")
 
 
+def pofile_edit(request, num) :
+
+    userID = request.session['id']
+    user = UserInfo.objects.get(userid=userID)
+    cate = CateMain.objects.all()
+    profiles = ProfileInfo.objects.get(num=num)
+    catesub = CateSub.objects.filter(catecode=profiles.intercate).order_by("cateorder")
+
+    cursor = connection.cursor()
+
+    query = "SELECT profileNum, title, ROLE, cm.cateName AS mainCate, cs.cateName AS subCate, cateType, cateSubType  " \
+            "FROM profile_career AS pc LEFT JOIN cate_main AS cm ON pc.cateType = cm.cateCode " \
+            "     LEFT JOIN cate_sub AS cs ON pc.cateSubType = cs.subCate " \
+            "WHERE pc.profileNum = '" + str(num) + "' order by pc.num asc "
+
+    result = cursor.execute(query)
+    careerList = cursor.fetchall()
+
+    connection.commit()
+    connection.close()
+
+    profileImages = profiles.detailimage.split("|")
+    artImages = profiles.artimage.split("|")
+    youtubes = profiles.youtube.split("|")
+    foreign = profiles.foreign.split("|")
+    talent = profiles.talent.split("|")
+    careerEtc = ProfileEtccareer.objects.filter(profilenum=num).order_by("num")
+
+    return render(request, 'profiles/edit.html', { 'user':user, 'cate' : cate, 'num' : num, 'profiles' : profiles,
+                                                   'catesub':catesub, "careerList" : careerList, "profileImages" : profileImages,
+                                                   "artImages":artImages, "youtubes":youtubes, "foreign": foreign, "talent": talent,
+                                                   "careerEtc":careerEtc})
+
+
+def pofile_edit_callback(request) :
+    # 기본정보
+    num = request.POST['num']
+    userID = request.POST['userID']
+    nationality = request.POST['nationality']
+    military = request.POST['military']
+    entertain = request.POST['entertain']
+    finalSchool = request.POST['finalSchool']
+    school = request.POST['school']
+    major = request.POST['major']
+    instagram = request.POST['instagram']
+    youtube = request.POST['youtube']
+
+    # 신체정보
+    height = request.POST['height']
+    weight = request.POST['weight']
+    topSize = request.POST['topSize']
+    bottomSize = request.POST['bottomSize']
+    shoesSize = request.POST['shoesSize']
+    skinColor = request.POST['skinColor']
+    hairColor = request.POST['hairColor']
+
+    # 지원 분야
+    cate_m = request.POST['cate_m']
+    cate_s = request.POST['cate_s']
+
+    # 경력
+    notCareer = request.POST.get('notCareer', "0")
+    saveCareer = request.POST['saveCareer']  # 경력 리스트 '|' 구분
+    allCareer_y = request.POST.get('allCareer_y', "")
+    allCareer_m = request.POST.get('allCareer_m', "")
+
+    # 이미지
+    mainImage = request.FILES.getlist('mainImage[]')
+    profileImage = request.FILES.getlist('profileImage[]')
+    userImage = request.FILES.getlist('userImage[]')
+    mainImg = request.POST.get('mainImg', "")
+
+
+    removeImage_detail = request.POST.get('removeImage_detail', "")
+    removeImage_art = request.POST.get('removeImage_art', "")
+
+    # 프로필 영상.
+    mainYoutube = request.POST.get('mainYoutube', "0")
+    youSave = request.POST['youSave']
+
+    youtubes = youSave.split('|')
+    saveYoutube = []
+    youtube_main = ''
+    if youSave != "":
+        for you in youtubes:
+            tube = you.split('$')
+            if tube[0] == mainYoutube:
+                youtube_main = tube[1]
+            saveYoutube.append(tube[1])
+    sYoutube = "|".join(saveYoutube)
+
+
+    # 기타
+    etcSaveCareer = request.POST.get('etcSaveCareer')
+    saveForeign = request.POST['saveForeign']
+    saveSpecialty = request.POST['saveSpecialty']
+    introduction = request.POST['introduction']
+    notView = request.POST.get('notView', "0")
+    delCareer = request.POST.get("delCareer", "")
+    etcDelCareer = request.POST.get("etcDelCareer", "")
+
+
+    profiles = ProfileInfo.objects.get(num=num)
+
+
+    # 이미지 등록
+    s3_client = boto3.client(
+        's3',
+        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+    )
+
+    s3 = boto3.resource('s3',
+                        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+                        )
+
+    nowTime = timezone.now()
+
+    # 메인 이미지 등록
+    if len(mainImage) > 0 :
+        # 기존 이미지 삭제
+        for rmImages in mainImg:
+            if (rmImages == ""): continue
+            img = rmImages.replace("photos/profiles/main/", "")
+            s3.Object(settings.AWS_STORAGE_BUCKET_NAME, "media/photos/profiles/main/" + img).delete()
+        
+        #신규 이미지 업데이트
+        for image in mainImage:
+            sub = image.name.split('.')[-1]
+            imgName = userID + "_userMain_" + str(nowTime)
+            imageName = md5_generator(imgName) + "." + sub
+
+            s3_client.upload_fileobj(
+                image,
+                settings.AWS_STORAGE_BUCKET_NAME,
+                "media/photos/profiles/main/" + imageName,
+                ExtraArgs={
+                    "ContentType": image.content_type,
+                }
+            )
+            image_main = "photos/profiles/main/" + imageName
+
+    else :
+        image_main = mainImg
+
+
+    # 프로필 이미지 처리
+    profileImgArr = profiles.detailimage.split("|")
+    rmImage = removeImage_detail.split('|')
+    if (removeImage_detail != ""):
+        s3 = boto3.resource('s3',
+                            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+                            )
+
+        for rmImages in rmImage:
+            if (rmImages == ""): continue
+            img = rmImages.replace("photos/profile/additional/", "")
+            s3.Object(settings.AWS_STORAGE_BUCKET_NAME, "media/photos/profile/additional/" + img).delete()
+            profileImgArr.remove(rmImages)
+
+    addImage = []
+    if len(profileImage) != 0:
+        count = 0
+        for image in profileImage:
+            count = count + 1
+            sub = image.name.split('.')[-1]
+            imgName = userID + "_profile_" + str(count) + "_" + str(nowTime)
+            imageName = md5_generator(imgName) + "." + sub
+
+            s3_client.upload_fileobj(
+                image,
+                settings.AWS_STORAGE_BUCKET_NAME,
+                "media/photos/profile/additional/" + imageName,
+                ExtraArgs={
+                    "ContentType": image.content_type,
+                }
+            )
+
+            addImage.append("photos/profile/additional/" + imageName)
+
+    profileDetail_image =  profileImgArr + addImage
+    proDetail = "|".join(profileDetail_image)
+
+    # 작품 이미지 등록
+    actImageArr = profiles.artimage.split("|")
+    rmImage = removeImage_art.split('|')
+    if (removeImage_art != ""):
+        s3 = boto3.resource('s3',
+                            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+                            )
+
+        for rmImages in rmImage:
+            if (rmImages == ""): continue
+            img = rmImages.replace("photos/profile/additional/", "")
+            s3.Object(settings.AWS_STORAGE_BUCKET_NAME, "media/photos/profile/additional/" + img).delete()
+            actImageArr.remove(rmImages)
+
+    addImage = []
+    if len(userImage) != 0:
+        count = 0
+        for image in userImage:
+            count = count + 1
+            sub = image.name.split('.')[-1]
+            imgName = userID + "_userImage_" + str(count) + "_" + str(nowTime)
+            imageName = md5_generator(imgName) + "." + sub
+
+            s3_client.upload_fileobj(
+                image,
+                settings.AWS_STORAGE_BUCKET_NAME,
+                "media/photos/profile/additional/" + imageName,
+                ExtraArgs={
+                    "ContentType": image.content_type,
+                }
+            )
+
+            addImage.append("photos/profile/additional/" + imageName)
+
+    artImageDetail = actImageArr + addImage
+    artImage = "|".join(artImageDetail)
+
+    # 기본정보 수정.
+    userInfo = UserInfo.objects.get(userid=userID)
+    userInfo.nationality = nationality;
+    userInfo.military = military;
+    userInfo.entertain = entertain;
+    userInfo.finalschool = finalSchool;
+    userInfo.school = school;
+    userInfo.major = major;
+    userInfo.instargram = instagram;
+    userInfo.youtube = youtube;
+    userInfo.save();
+
+    profiles.profileimage = image_main
+    profiles.detailimage =proDetail
+    profiles.artimage =artImage
+    profiles.height=height
+    profiles.weight=weight
+    profiles.topsize=topSize
+    profiles.bottomsize=bottomSize
+    profiles.shoessize=shoesSize
+    profiles.skincolor=skinColor
+    profiles.haircolor=hairColor
+    profiles.foreign=saveForeign
+    profiles.mainyoutube=youtube_main
+    profiles.youtube=sYoutube
+    profiles.talent=saveSpecialty
+    profiles.comment=introduction
+    profiles.intercate=cate_m
+    profiles.intersubcate=cate_s
+    profiles.iscareer=notCareer
+    profiles.careeryear=allCareer_y
+    profiles.careermonth=allCareer_m
+    profiles.public=notView
+    profiles.save()
+
+
+    if notCareer == "0":
+        career = saveCareer.split('|')
+        for careers in career:
+            # c_cateM_val + "$" + c_cateM + "$" + c_cateS_val + "$" + c_cateS + "$" + c_title + "$" + c_role
+            careerContent = careers.split('$')
+
+            getCareer = ProfileCareer.objects.filter( profilenum=num, catetype=careerContent[0],
+                                                         catesubtype=careerContent[2],
+                                                         title=careerContent[4], role=careerContent[5] )
+
+            if getCareer.count() == 0 :
+                saveProCareer = ProfileCareer.objects.create(userid=userID, profilenum=num, catetype=careerContent[0],
+                                                             catesubtype=careerContent[2],
+                                                             title=careerContent[4], role=careerContent[5], regtime=nowTime)
+
+    else :
+        getCareer = ProfileCareer.objects.filter(profilenum=num)
+        getCareer.delete() # 경력없음일경우 모두 삭제.
+
+    if delCareer != "" :
+        delCareers = delCareer.split('|')
+        for careers in delCareers :
+            careerContent = careers.split('$')
+            getCareer = ProfileCareer.objects.filter(profilenum=num, catetype=careerContent[0],
+                                                     catesubtype=careerContent[2],
+                                                     title=careerContent[4], role=careerContent[5])
+            getCareer.delete()
+
+
+    if etcSaveCareer != "":
+        etcCareer = etcSaveCareer.split('|')
+        for careers in etcCareer:
+            # ec_cateM + "$" + ec_cateS + "$" + ec_title + "$" + ec_role;
+            careerContent = careers.split('$')
+
+            getEtcCareer = ProfileEtccareer.objects.filter( profilenum=num, catetype=careerContent[0],
+                                                               subcatetype=careerContent[1],
+                                                               title=careerContent[2], role=careerContent[3] )
+
+            if getEtcCareer.count() == 0 :
+                saveProCareerEtc = ProfileEtccareer.objects.create(userid=userID, profilenum=num, catetype=careerContent[0],
+                                                                   subcatetype=careerContent[1],
+                                                                   title=careerContent[2], role=careerContent[3],
+                                                                   regtime=nowTime)
+    # 기타 경력 삭제
+    if etcDelCareer != "" :
+        etcCareer = etcDelCareer.split('|')
+        for careers in etcCareer:
+            # ec_cateM + "$" + ec_cateS + "$" + ec_title + "$" + ec_role;
+            careerContent = careers.split('$')
+
+            getEtcCareer = ProfileEtccareer.objects.filter( profilenum=num, catetype=careerContent[0],
+                                                               subcatetype=careerContent[1],
+                                                               title=careerContent[2], role=careerContent[3] )
+            getEtcCareer.delete()
+
+
+    return redirect('/profile/profileDetail/all/' + num + "/")
+
+
+def pofile_delete(request, num) :
+
+    profiles = ProfileInfo.objects.get(num=num)
+    profiles.isdelete = '1'
+    profiles.save()
+
+    return redirect("/")
 
 def audiAjaxGetCate(request) :
 
@@ -383,13 +723,13 @@ def getProfile(request) :
             query = "SELECT p.num , profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, " \
                     "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
-                    "WHERE public = '0' " + where + orderby + " LIMIT 15"
+                    "WHERE public = '0' and isDelete = '0' " + where + orderby + " LIMIT 15"
         else:
             query = "SELECT p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain," \
                     "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, '0' AS proPick " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui " \
                     "     ON p.userID = ui.userID " \
-                    "WHERE public = '0' " + where + orderby + " LIMIT 15"
+                    "WHERE public = '0' and isDelete = '0' " + where + orderby + " LIMIT 15"
 
         result = cursor.execute(query)
         profiles = cursor.fetchall()

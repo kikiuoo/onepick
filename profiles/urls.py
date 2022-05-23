@@ -8,6 +8,11 @@ urlpatterns = [
     path('write/', views.pofile_write, name="profile-write"),
     path('write/callback/', views.pofile_write_callback, name="profile-writeCallback"),
 
+    path('edit/<int:num>/', views.pofile_edit, name="profile-edit"),
+    path('edit/callback/', views.pofile_edit_callback, name="profile-editCallback"),
+
+    path('delete/<int:num>/', views.pofile_delete, name="profile-delete"),
+
     path('ajax/getSubCate/', views.audiAjaxGetCate, name="profile-getCate"),
     path('ajax/getSubCate_etc/', views.audiAjaxGetCateEtc, name="profile-getCateEtc"),
     path('ajax/getProfile/', views.getProfile, name="profile-getProfile"),

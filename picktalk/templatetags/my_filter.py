@@ -43,7 +43,7 @@ def userHight(values) :
     return returnData + "*"
 
 @register.filter
-def parsingYoutube(values) :
+def parsingYoutube_view(values) :
     youtubeUrl = values.replace('https://youtu.be/', 'https://www.youtube.com/embed/' )
     return youtubeUrl
 
@@ -186,3 +186,61 @@ def addNum(value, addValue) :
     returnNum = int(value) + int(addValue)
 
     return returnNum
+
+@register.filter
+def parsingCareer(value) :
+
+    returnData = ""
+
+    #profileNum, title, ROLE, cm.cateName AS mainCate, cs.cateName AS subCate
+    count = 0;
+    for values in value :
+        saveData = values[5] + "$" + values[3] + "$" + values[6] + "$" +  values[4] + "$"  +  values[1] + "$" + values[2]
+        if count == 0 :
+            returnData = returnData + saveData
+        else :
+            returnData = returnData + "|" + saveData
+        count = count + 1
+
+    return returnData
+
+@register.filter
+def parsingYoutube(value) :
+
+    returnData = ""
+
+    #count, link
+    count = 0;
+    for values in value :
+        saveData = "s" + str(count) +  "$" + values
+        if count == 0 :
+            returnData = returnData + saveData
+        else :
+            returnData = returnData + "|" + saveData
+        count = count + 1
+
+    return returnData
+
+@register.filter
+def parsingETCCareer(value) :
+
+    returnData = ""
+
+    #ec_cateM + "$" + ec_cateS + "$" + ec_title + "$" + ec_role
+    count = 0;
+    for values in value :
+        saveData =  values.catetype +  "$" + values.subcatetype + "$" + values.title + "$" + values.role
+        if count == 0 :
+            returnData = returnData + saveData
+        else :
+            returnData = returnData + "|" + saveData
+        count = count + 1
+
+    return returnData
+
+@register.filter
+def getData(value, count) :
+
+    data = value.split("$")
+
+    return data[count]

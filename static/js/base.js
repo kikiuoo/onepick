@@ -54,7 +54,7 @@ $(document).ready(function () {
     $(document).on("click", ".footer .companyLink span", function (){
        var url = $(this).attr("data-url");
 
-       window.location.href = url;
+       window.open(url);
     });
 
 

@@ -12,7 +12,9 @@ $(document).ready(function(){
     });
 
     $(document).on("click", ".delBtn", function (){
-        window.location.href = "/profile/delete/"+num+"/";
+        if( confirm("프로필 정보를 삭제하겠습니까?") == true) {
+            window.location.href = "/profile/delete/" + num + "/";
+        }
     });
 
     $(document).on("click", ".shareBtn", function (){
@@ -49,7 +51,7 @@ $(document).ready(function(){
         var nowType = $(this).attr("data-nowType");
         var num = $(this).attr("data-num");
 
-        updatePick("profile", nowType, num );
+        updatePick("profile", nowType );
 
         if( nowType == "off" ){
             $(this).attr("data-nowType", "on");
@@ -126,6 +128,12 @@ $(document).ready(function(){
         viewImage(viewImageCount);
     });
 
+    $(document).on("click", ".closePopup", function (e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        $(".popupBack").css("display", "none");
+    });
 
 });
 
@@ -163,7 +171,7 @@ function viewImage(viewImageCount) {
 }
 
 
-function updatePick(tableName, nowType, num){
+function updatePick(tableName, nowType){
     $.ajax({
       url: "/ajax/updatePick/",
       type: "GET",

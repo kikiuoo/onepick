@@ -144,7 +144,7 @@
             {% endif %}
 
 
-            {% if foreign|getArrayCount > 0 %}
+            {% if foreign|getArrayCount > 0 and profiles.foreign|default:"" != ""  %}
             <div class="title">외국어 능력</div>
                 {% for foreigns in foreign %}
                     <div class="content">{{ foreigns|replace:"$| " }}</div>
@@ -152,7 +152,7 @@
             {% endif %}
 
 
-            {% if talent|getArrayCount > 0 %}
+            {% if talent|getArrayCount > 0 and profiles.talent|default:"" != "" %}
             <div class="title">특기</div>
                 {% for talents in talent %}
                     <div class="content">{{ talents }}</div>
@@ -196,7 +196,7 @@
             <div class="blank"></div>
 
             {% for youtube in youtubes %}
-            <iframe width="560" height="315" src="{{ youtube|parsingYoutube }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="{{ youtube|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             {% endfor %}
         </div>
         {% endif %}
@@ -233,6 +233,7 @@
 </div>
 
 <div class="popupBack">
+    <div class="closePopup"></div>
     <div class="leftBtn"></div>
 
     <img src="https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profiles.profileimage }}"  class="viewImage">

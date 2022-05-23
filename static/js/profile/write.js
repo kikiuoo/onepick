@@ -351,6 +351,7 @@ $(document).ready(function (){
                 var src = e.target.result;
 
                 $("#mainImage").css("background-image", "url('"+src+"'");
+                $("#mainImg").val("");
             }
 
             reader.readAsDataURL(thisImage[0].files[0]);
@@ -391,6 +392,28 @@ $(document).ready(function (){
 
             reader.readAsDataURL(thisImage[0].files[0]);
         }
+    });
+
+    $(document).on("click", ".upload-sub2", function (){
+       var image = $(this).attr("data-image");
+       var id = $(this).attr("id");
+
+       var removeImage = ""
+       if( id == "profiles" ){
+           removeImage = $("#removeImage_detail")
+       }else{
+           removeImage = $("#removeImage_art")
+       }
+
+       var removeImageText = removeImage.val();
+
+       var remove = removeImageText.split('|');
+       remove.push(image);
+       var removeText = remove.join("|");
+
+       $(this).parent().remove();
+       removeImage.val(removeText);
+
     });
 
     $(document).on("keyup", "#introduction", function(e){
@@ -442,6 +465,47 @@ $(document).ready(function (){
         $("#list_"+dataID).remove();
 
         textArea.val(saveData);
+
+    });
+
+    $(document).on("click", ".subBtn2", function (){
+        var id = $(this).attr("id");
+        var dataID = $(this).attr("data-id");
+        var values = $(this).attr("data-value");
+
+        var textArea = "";
+        var delTextArea = "";
+        var array = [];
+
+        if( id == "carSub" ){
+            textArea = $("#saveCareer");
+            delTextArea = $("#delCareer");
+        }else if(id == "eCarSub"){
+            textArea = $("#etcSaveCareer");
+            delTextArea = $("#etcDelCareer");
+        }
+
+        array = textArea.val().split("|");
+
+        for(var i = 0; i < array.length; i++ ){
+            if( array[i] == values ){
+                array.splice(i,1);
+                i--;
+            }
+        }
+
+        var saveData = array.join('|');
+        $("#list_"+dataID).remove();
+
+        textArea.val(saveData);
+
+        // 삭제된 내용 del에 추가
+        var delArray = delTextArea.val().split("|");
+        if( delTextArea.val() == "" ) delArray = [];
+        delArray.push(values);
+        var delData = delArray.join('|');
+
+        delTextArea.val(delData);
 
     });
 
@@ -535,11 +599,19 @@ $(document).ready(function (){
             alert("경력을 입력해주세요.");
             return;
         }
+        var allCareer_y = $("#allCareer_y").find("option:selected").val();
+        var allCareer_m = $("#allCareer_m").find("option:selected").val();
+        
+        if( notCareer == false && ( allCareer_y == "" || allCareer_m == "" )){
+            alert("총 경력을 선택해주세요.");
+            return;
+        }
 
         //이미지.
         var mainImage = $("#input-mainImage").val();
+        var mainImg = $("#mainImg").val();
 
-        if( mainImage == "" ){
+        if( mainImage == "" && mainImg == "" ){
             alert("메인 프로필 사진을 등록해주세요.");
             return;
         }

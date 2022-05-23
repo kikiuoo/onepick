@@ -15,4 +15,6 @@ urlpatterns = [
 
     path('join/<num>/', views.join, name='joins'),
     path('joins/updateUser/', views.joinUpdate, name="join-update"),
+
+    path('agreement/<int:num>/', views.agreement, name="user-agreement"),
 ]

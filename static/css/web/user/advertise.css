@@ -1,0 +1,118 @@
+.body{
+    display: inline-block;
+    margin-top: 39px;
+    width: 100%;
+}
+
+.body .mainTitle{
+    position: relative;
+    font-size: 28px;
+    font-weight: bold;
+    color: #1f1f1f;
+}
+
+
+.winBox{
+    width: 1200px;
+    padding: 40px 60px 72px 29px;
+    border-radius: 33px;
+    background-color: rgba(192, 192, 192, 0.15);
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.winBox .joinInfo{
+    font-size: 0px;
+    margin-bottom: 30px;
+}
+
+.winBox .joinInfo .title{
+    position: relative;
+    display: inline-block;
+    width: 107px;
+    height: 56px;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: #1f1f1f;
+    line-height: 56px;
+    vertical-align: top;
+}
+
+.winBox .joinInfo .content{
+    display: inline-block;
+    width: 1000px;
+}
+
+.winBox .joinInfo .content input{
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 11px;
+    background-color: #fff;
+    border: 0px;
+    padding: 0px 20px;
+    box-sizing: border-box;
+    color: #1f1f1f;
+}
+
+.winBox .joinInfo .content textarea{
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 11px;
+    background-color: #fff;
+    border: 0px;
+    box-sizing: border-box;
+    color: #1f1f1f;
+
+    padding: 20px;
+    line-height: 1.5em;
+
+    resize: none;
+    font-family: 'Spoqa Han Sans' !important;
+}
+
+
+.winBox .joinInfo .content input::placeholder,
+.winBox .joinInfo .content textarea::placeholder{
+    font-size: 18px;
+    font-weight: bold;
+    color: #c0c0c0;
+}
+.winBox .joinInfo .content input:focus,
+.winBox .joinInfo .content textarea:focus{
+    outline: none;
+}
+
+.winBox .joinInfo .content #title,
+.winBox .joinInfo .content #email{
+    width: 1000px;
+    height: 56px;
+    line-height: 56px;
+}
+
+.winBox .joinInfo .content #content{
+    width: 1000px;
+    height: 950px;
+    line-height: 1.5em;
+}
+
+.btnBox{
+    width: 100%;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.btnBox .sendBtn{
+    display: inline-block;
+    width: 220px;
+    height: 82px;
+    line-height: 82px;
+    border-radius: 22px;
+    background-color: #ff8aae;
+    cursor: pointer;
+
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}

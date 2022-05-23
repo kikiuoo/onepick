@@ -254,3 +254,10 @@ def joinUpdate(request):
     updateUser.save()
 
     return redirect("/")
+
+
+def agreement(request, num) :
+
+    agree = UserAgree.objects.get(num=num)
+
+    return render(request, 'user/agreement.html', {'agree': agree })

@@ -422,6 +422,19 @@
     display: none;
 }
 
+.popupBack .closePopup{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/bigClose.png");
+    background-position: center;
+    background-repeat:  no-repeat;
+}
+
 .popupBack .viewImage{
     position: absolute;
     left: 50%;
