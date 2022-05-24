@@ -6,9 +6,26 @@ $(document).ready(function () {
         window.location.href = "/";
     });
 
-    // Search 클릭 이벤트. (공통)
-    $(document).on("click", ".header .searchBtn", function(){
-         $(".searchBox").css("display", "inline-block");
+    $(document).on("click", ".search", function (){
+
+        var search = $("#search").val();
+
+        if( search == "" ){
+            alert("검색할 내용을 입력해주세요.");
+            return;
+        }
+
+        if( cateType == "profile" ){
+            window.location.href = "/search/profile/"+search+"/1/";
+        }else{
+            window.location.href = "/search/audition/"+search+"/1/";
+        }
+    });
+
+    $(document).on("keyup", "#search", function(e){
+       if( e.keyCode == 13 ){
+           $(".search").trigger("click");
+       }
     });
 
     // 메뉴 버튼 이벤트 (공통)
@@ -40,7 +57,9 @@ $(document).ready(function () {
 
     /* Header 버튼 Web 이벤트 */
     $(document).on("click",".header .login", function(){
-        $(".loginPopup").css("display", "block");
+
+        window.location.href = "/users/login/local/";
+
     });
 
     /* Header 버튼 모바일 이벤트 */
@@ -58,53 +77,7 @@ $(document).ready(function () {
     });
 
 
-    /* Login Popup 버튼 공통 이벤트 */
-    $(document).on("click", ".loginPopup .loginClose", function (){
-       $(".loginPopup").css("display", "none");
-       $(".socialLogin").css("display", "block");
-       $(".onepickLogin").css("display", "none");
-    });
 
-    $(document).on("click", ".loginPopup .socialBtn", function (){
-        var loginType = $(this).attr("id");
-
-        // 각 API 구현 필요.
-        if( loginType == "kakaoLogin" ){
-            window.location.href = "/users/login/kakao/";
-        }else if( loginType == "gogleLogin" ){
-            window.location.href = "/users/login/google/";
-        }else if( loginType == "appleLogin" ){
-
-        }else if( loginType == "facebookLogin" ){
-
-        }
-    });
-
-    $(document).on("click", ".loginPopup .sendOneLogin", function(){
-        $(".socialLogin").css("display", "none");
-        $(".onepickLogin").css("display", "block");
-    });
-
-    $(document).on("click", ".loginPopup .loginBtn" , function (){
-       // 로그인 기능 추가.
-    });
-
-    $(document).on("click", ".loginPopup .idSearchBox span", function (){
-        // 비밀번호 찾기/ id 찾기 기능 추가
-        var type = $(this).attr("id");
-
-        if( type == "findID" ){
-
-        }else  if( type == "findPW" ) {
-
-        }
-    });
-
-    $(document).on("keyup", "#onepickId, #onepickPW", function(e){
-       if( e.keyCode == 13 ){
-           $(".loginBtn").trigger("click");
-       }
-    });
 
     // 기존 회원 로그인
     $(document).on("click", ".loginBtn", function (){

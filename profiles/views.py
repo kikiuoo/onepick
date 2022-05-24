@@ -292,7 +292,7 @@ def pofile_write_callback(request) :
                                              skincolor=skinColor, haircolor=hairColor, foreign=saveForeign, mainyoutube=youtube_main,
                                              youtube=sYoutube, talent=saveSpecialty, comment=introduction, intercate=cate_m,
                                              intersubcate=cate_s, iscareer=notCareer, careeryear=allCareer_y, careermonth=allCareer_m,
-                                             regdate=nowTime, viewcount=0, cviewcount=0, public=notView,isdelete=0 )
+                                             regdate=nowTime, viewcount=0, cviewcount=0, public=notView,isdelete=0, pickcount=0 )
 
     key = str(ProfileInfo.objects.latest('num').num)
 

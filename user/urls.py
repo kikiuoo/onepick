@@ -17,4 +17,6 @@ urlpatterns = [
     path('joins/updateUser/', views.joinUpdate, name="join-update"),
 
     path('agreement/<int:num>/', views.agreement, name="user-agreement"),
+
+    path('ajax/findOldUser/', views.ajax_findOldUser, name="user-ajax-findOldUser"),
 ]

@@ -87,46 +87,6 @@
     </div>
     <!-- footer -->
 
-    <!-- Login PopUp -->
-    <div class="loginPopup">
-        <div class="loginBox">
-            <div class="loginClose"></div>
-            <div class="loginLogo">
-                <span>글로벌 NO.1 오디션 플랫폼</span>
-                <div class="Logo"></div>
-            </div>
-
-            <div class="socialLogin">
-                <div class="title">원픽과 함께 당신의 꿈을<br>PICK 하러 가보실까요?</div>
-                <div class="socialBox">
-                    <div class="socialBtn" id="kakaoLogin"></div>
-                    <div class="socialBtn" id="gogleLogin"></div>
-                    <div class="socialBtn" id="appleLogin"></div>
-                    <div class="socialBtn" id="facebookLogin"></div>
-                </div>
-                <div class="sendOneLogin">기존 원픽 계정이 있어요</div>
-            </div>
-
-            <div class="onepickLogin">
-                <div class="loginInfo">
-                    원픽 사이트(myonepick.com)의<br>
-                    아이디 패스워드가 있으신 분은<br>
-                    기존 계정으로 로그인이 가능합니다.
-                </div>
-
-                <input type="text" value="" id="onepickId" placeholder="아이디 입력"/>
-                <input type="password" value="" id="onepickPW" placeholder="비밀번호 입력"/>
-                <div class="loginBtn">로그인</div>
-
-                <div class="idSearchBox">
-                    <span id="findID">아이디 찾기</span>
-                    <span id="findPW">비밀번호 찾기</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Login PopUp -->
-
     <!-- mobile Menu Popup -->
     <div class="menuPopup pcNone">
         <div class="sideMenu">
@@ -171,23 +131,10 @@
     <!-- mobile Menu Popup -->
 
 
-    <div class="regCompanyPopup">
-        <div class="regCompanyBox">
-            <div class="closeBtn"></div>
-            <div class="title">
-                오디션 등록 / 알바픽 등록을<br>위해 먼저 기업회원 전환이<br>필요합니다.
-            </div>
-            <div class="regInfo">
-                기업회원은 자유롭게 오디션 및 알바공고를<br>등록하고 프로필 열람 및 오디션 제안 기능을<br>사용하실 수 있습니다.
-            </div>
-            <div class="regCompanyBtn">지금 기업회원 전환하기 →</div>
-            <div class="close">다음에 할래요</div>
-        </div>
-    </div>
-
     <script>
         var userType = "{{ request.session.userType }}";
         var userID = "{{ request.session.id }}";
+        var cateType = "{{ cateType }}";
     </script>
 </body>
 </html>

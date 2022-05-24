@@ -41,7 +41,7 @@ class AuditionInfo(models.Model):
     education = models.CharField(max_length=50, blank=True, null=True)
     image = models.CharField(max_length=1000, blank=True, null=True)
     essential = models.CharField(max_length=500, blank=True, null=True)
-    field_preparation = models.CharField(db_column='\tpreparation', max_length=500, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it started with '_'.
+    field_preparation = models.CharField(db_column='preparation', max_length=500, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it started with '_'.
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
     updtime = models.DateTimeField(db_column='updTime', blank=True, null=True)  # Field name made lowercase.
     viewcount = models.IntegerField(db_column='viewCount', blank=True, null=True)  # Field name made lowercase.
@@ -251,6 +251,16 @@ class ProfileViewCompany(models.Model):
     class Meta:
         managed = False
         db_table = 'profile_view_company'
+
+class QaAdvertise(models.Model):
+    num = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=100, blank=True, null=True)
+    content = models.CharField(max_length=500, blank=True, null=True)
+    email = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'qa_advertise'
 
 
 class UserAgree(models.Model):

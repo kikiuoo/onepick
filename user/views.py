@@ -143,6 +143,8 @@ def googleLoginCallback(request):
 
 
 def localLogin (request) :
+    """
+
     if request.method == "GET" :
         return JsonResponse({"code": "1", "message" : "잘못된 접근입니다."})
     elif request.method == "POST" :
@@ -152,8 +154,6 @@ def localLogin (request) :
 
         pw = md5_generator(password)
         userIN = UserInfo.objects.filter(nickname=username, password=pw)
-
-        """
 
         if userIN.count() > 0 :
             for row in userIN.values_list():
@@ -166,10 +166,11 @@ def localLogin (request) :
             return JsonResponse({"code": "0"} )
         else :
             return JsonResponse({"code": "1", 'message' : "아이디 혹은 비밀번호가 일치 하지 않습니다."})
-            
-        """
+
     else:
-        return JsonResponse({"code": "1", "message" : "잘못된 접근입니다."})
+        """
+
+    return render(request, 'user/login.html')
 
 def locallogout (request) :
     del request.session['id']
@@ -261,3 +262,13 @@ def agreement(request, num) :
     agree = UserAgree.objects.get(num=num)
 
     return render(request, 'user/agreement.html', {'agree': agree })
+
+
+def ajax_findOldUser(request) :
+
+    userName = request.GET.get("userName","")
+    userPhone = request.GET.get("userPhone","")
+
+    userInfo = UserInfo.objects.filter(name=userName, phone=userPhone, usertype="S-NORMAL")
+
+    return render(request, 'user/ajax_findOldUser.html', {'userInfo': userInfo })

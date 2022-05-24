@@ -1,0 +1,59 @@
+{% extends 'picktalk/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/user/login.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/user/login.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/user/login.js' %}"></script>
+
+<div class="inBox" style="margin-top: 90px">
+    <div class="logoBox">
+        <div class="logo"></div>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="loginBox">
+        <div class="inputBox">
+            <input type="text" name="userID" id="userID" placeholder="아이디 입력">
+            <input type="password" name="userPW" id="userPW" placeholder="패스워드 입력">
+        </div>
+        <div class="button loginBtn">로그인</div>
+        <div class="searchInfo">아이디/비밀번호 찾기</div>
+    </div>
+
+    <div class="socialBox">
+        <div class="socialBtn" id="kakaoLogin"></div>
+        <div class="socialBtn" id="gogleLogin"></div>
+        <div class="socialBtn" id="appleLogin"></div>
+    </div>
+</div>
+
+
+<div class="inBox">
+    <div class="textInfo">
+        기존 원픽 사이트(myonepick.com)의 계정이 있는 분들은 아래 정보 인증을 통해 연동 절차를 진행하실 수 있습니다.
+    </div>
+    <div class="loginBox userInfoBox">
+        <div class="inputBox">
+            <input type="text" name="userName" id="userName" placeholder="이름 입력">
+            <input type="text" name="userPhone" id="userPhone" placeholder="전화번호 입력">
+        </div>
+        <div class="button findUser">확인</div>
+    </div>
+
+    <div class="loginBox loginBox2">
+        <div class="inputBox2">
+        </div>
+        <div class="button findBtn">선택</div>
+    </div>
+
+    <div class="nonInfo">
+        입력하신 정보와 일치하는 계정 정보가 없습니다. 정보를 확인해 주세요.
+    </div>
+</div>
+
+{% endblock %}

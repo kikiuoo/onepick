@@ -1,0 +1,142 @@
+{% extends 'picktalk/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/audi/index.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/audi/index.css' %}" > <!-- 모바일 버전 -->
+
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/profile/list.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/profile/list.css' %}" > <!-- 모바일 버전 -->
+
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/audi/audi_base.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/audi/audi_base.css' %}" > <!-- 모바일 버전 -->
+
+
+<!-- JS 파일 -->
+<script src="{% static 'js/search.js' %}"></script>
+
+<!-- 분야 카테고리 -->
+<div class="subCate">
+    <div class="cate {% if cateType == "audition"  %} active {% endif %}" data-url="/search/audition/{{ search }}/1/">오디션</div>
+    <div class="cate {% if cateType == "profile"  %} active {% endif %}" data-url="/search/profile/{{ search }}/1/">프로필</div>
+</div>
+
+<div class="searchTitle"><span>'{{ search }}'</span>에 대한 검색 결과 (총 <span>{{ searching|length }}</span>건)</div>
+
+{% if searching|length > 0 %}
+    {% if cateType == "audition" %}
+    <div class="inBox" style="padding-top: 0px">
+        <div class="audiList">
+            {% for auditions in searching %}
+            <div class="audiListBox" data-num="{{ auditions.0 }}">
+                <div class="companyName">{{ auditions.8 }}</div>
+                <div class="sContent">
+                    <div class="lTitle">{{ auditions.1 }}</div>
+                    <div class="lAppel">
+                        <span>모집분야</span>
+                        <p>{{ auditions.2 }}</p>
+                        <span>경력</span>
+                        <p>{{ auditions.3 }}</p>
+                        <span>나이</span>
+                        <p>{{ auditions.4 }}</p>
+                    </div>
+                </div>
+                <div class="date">
+                    {% if auditions.7 == '1' %}
+                    <div class="endDate">상시모집</div>
+                    {% elif auditions.7 == '0' %}
+                    <div class="endDate">~ {{ auditions.5|date:'Y/m/d' }}</div>
+                    {% endif %}
+                    {% if auditions.9 == 0 %}
+                    <div class="regDate">오늘 등록</div>
+                    {% else %}
+                    <div class="regDate">{{ auditions.9 }}일 전 등록</div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <div class="inBox">
+        {% for profile in searching %}
+        <div class="profile" data-num="{{ profile.0 }}">
+            <div class="imageBox">
+                <div class="profileImage"   style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profile.1 }}");'></div>
+                {% if profile.16 != "" %}
+                <div class="youtube">
+                    <iframe width="560" height="315" src="{{ profile.16|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                {% endif %}
+            </div>
+            <div class="contentBox">
+                <div class="name">{{ profile.7|updateUserName }} ({{ profile.8|userAge }})</div>
+                <div class="detailInfo">
+                    키 {{ profile.2|userHight }} cm | 몸무게 {{ profile.3|userHight }} kg<br>
+                    {% if profile.10 == 'man' %}
+                    {{ profile.11 }} |
+                    {% endif %}
+                    {% if profile.9 == "" %}
+                        소속사 없음
+                    {% else %}
+                        소속사 있음
+                    {% endif %} <br>
+                    {{ profile.12 }} {{ profile.13 }}
+                    {% if profile.14 != "" %}
+                     <br>특기 {{ profile.14|getTalent }}
+                    {% endif %}
+                </div>
+
+                {% if profile.17 == '0' %}
+                <div class="career">
+                    <div class="careerTitle">영화</div>
+                    <div class="careerContent">{{ profile.0|getCareer:"movie" }}</div>
+                    <div class="careerTitle">TV드라마,웹드라마</div>
+                    <div class="careerContent">{{ profile.0|getCareer:"drama" }}</div>
+                    <div class="careerTitle">광고/기타</div>
+                    <div class="careerContent">{{ profile.0|getCareer:"etc" }}</div>
+                </div>
+                {% else %}
+                <div class="career">
+                    <div class="careerTitle">자기 소개</div>
+                    <div class="introduction">{{ profile.15 }}</div>
+                </div>
+                {% endif %}
+
+                <div class="viewBox">
+                    <div class="countBox">
+                        <span class="viewCount"></span>
+                        <p>{{ profile.4 }}</p>
+                    </div>
+                    <div class="countBox">
+                        <span class="pickCount"></span>
+                        <p>{{ profile.5 }}</p>
+                    </div>
+                    <div class="countBox">
+                        <span class="comViewCount"></span>
+                        <p>{{ profile.6 }}</p>
+                    </div>
+                </div>
+            </div>
+
+            {% if profile.18 == 0 or profile.18 == "0" %}
+            <div class="pickBtn" data-nowType="off"></div>
+            {% else %}
+            <div class="pickBtn pickOn " data-nowType="on"></div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% else %}
+    <div class="noneSearch">검색결과가 없습니다.</div>
+{% endif %}
+
+<script>
+    var word = "{{ search }}";
+</script>
+
+
+{% endblock %}
