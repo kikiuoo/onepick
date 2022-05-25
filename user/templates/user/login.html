@@ -6,6 +6,14 @@
 <link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/user/login.css' %}"> <!-- pc 버전 -->
 <link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/user/login.css' %}" > <!-- 모바일 버전 -->
 
+<script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
+
+<meta name="appleid-signin-client-id" content="picktalk">
+<meta name="appleid-signin-scope" content="email">
+<meta name="appleid-signin-redirect-uri" content="https://ksnpick.com/users/login/apple/callback/">
+<meta name="appleid-signin-state" content="aaa">
+<meta name="appleid-signin-use-popup" content="false">
+
 <!-- JS 파일 -->
 <script src="{% static 'js/user/login.js' %}"></script>
 
@@ -28,7 +36,7 @@
     <div class="socialBox">
         <div class="socialBtn" id="kakaoLogin"></div>
         <div class="socialBtn" id="gogleLogin"></div>
-        <div class="socialBtn" id="appleLogin"></div>
+        <div class="socialBtn" id="appleLogin appleid-signin"  data-mode="logo-only" data-color="black" data-border="false" data-border-radius="15" data-size="60"></div>
     </div>
 </div>
 
