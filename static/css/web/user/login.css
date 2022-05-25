@@ -120,6 +120,7 @@
 .inBox .socialBox .socialBtn#kakaoLogin{background-image: url("../../../image/web/kakaoIcon.png")}
 .inBox .socialBox .socialBtn#gogleLogin{background-image: url("../../../image/web/gogleIcon.png")}
 .inBox .socialBox .socialBtn#appleLogin{background-image: url("../../../image/web/appleIcon.png")}
+.inBox .socialBox .socialBtn#naverLogin{background-image: url("../../../image/web/naverIcon.png")}
 
 .textInfo{
     text-align: center;

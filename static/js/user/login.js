@@ -42,7 +42,9 @@ $(document).ready(function(){
         }else if( loginType == "gogleLogin" ){
             window.location.href = "/users/login/google/";
         }else if( loginType == "appleLogin" ){
-
+           // window.location.href = "/users/login/apple/";
+        }else if( loginType == "naverLogin" ){
+            window.location.href = "/users/login/naver/";
         }
 
     });
@@ -59,6 +61,17 @@ $(document).ready(function(){
        }
     });
 
+    document.addEventListener('AppleIDSignInOnSuccess', (data) => {
+         //handle successful response
+         alert("AppleIDSignInOnSuccess")
+         //todo success logic
+    });
+    //애플로 로그인 실패 시.
+    document.addEventListener('AppleIDSignInOnFailure', (error) => {
+         //handle error.
+         alert("AppleIDSignInOnFailure")
+         //todo fail logic
+    });
 
 });
 

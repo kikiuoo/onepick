@@ -32,6 +32,12 @@ $(document).ready(function (){
             return;
         }
 
+        // 기업회원 픽기능 제한
+        if( userType == "COMPAYN" ||  userType == "S-COMPANY" ){
+           alert("해당 기능의 권한이 없습니다.") ;
+           return;
+        }
+
         var nowType = $(this).attr("data-nowType");
         var num = $(this).parent().attr("data-num");
 
@@ -68,6 +74,12 @@ $(document).ready(function (){
         if( userID == ""){
             alert("로그인 후 이용가능합니다.");
             return;
+        }
+
+        // 일반회원 픽기능 제한
+        if( userType == "NORMAL" ||  userType == "S-NORMAL" ){
+           alert("해당 기능의 권한이 없습니다.") ;
+           return;
         }
 
         var nowType = $(this).attr("data-nowType");

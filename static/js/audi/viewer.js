@@ -15,6 +15,12 @@ $(document).ready(function(){
              return;
         }
 
+         // 기업회원 픽기능 제한
+        if( userType == "COMPAYN" ||  userType == "S-COMPANY" ){
+           alert("해당 기능의 권한이 없습니다.") ;
+           return;
+        }
+
         var nowType = $(this).attr("data-nowType");
         var num = $(this).attr("data-num");
 

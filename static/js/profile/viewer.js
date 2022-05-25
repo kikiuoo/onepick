@@ -48,6 +48,12 @@ $(document).ready(function(){
              return;
         }
 
+         // 일반회원 픽기능 제한
+        if( userType == "NORMAL" ||  userType == "S-NORMAL" ){
+           alert("해당 기능의 권한이 없습니다.") ;
+           return;
+        }
+
         var nowType = $(this).attr("data-nowType");
         var num = $(this).attr("data-num");
 
