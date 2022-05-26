@@ -12,8 +12,8 @@ from picktalk.models import *
 
 import hashlib
 
-loginUrl = "https://ksnpick.com/users/login"
-#loginUrl = "http://localhost:8000/users/login"
+#loginUrl = "https://ksnpick.com/users/login"
+loginUrl = "http://localhost:8000/users/login"
 
 
 def md5_generator(str):
@@ -45,33 +45,13 @@ def kakao_login_callback(request):
 
     profile_json = user_info_response.json()
     kakao_account = profile_json.get("kakao_account")
-    profile = kakao_account.get("profile")
 
     id = str(profile_json.get("id"))
     email = kakao_account.get("email", None)
 
-    isKakao = UserInfo.objects.filter( userid="kakao_"+id, jointype="KAKAO" )
+    returnUrl = userLogin(request, "google_"+id, email, "", "", "", "KAKAO")
 
-    if( isKakao.count() <= 0 ) :
-        # 계정이 있는 경우 로그인.
-        nowTime = timezone.now()
-        kakaoUser = UserInfo.objects.create(userid="kakao_"+id, email=email, jointype="KAKAO", regtime=nowTime, lastlogin=nowTime,
-                                            logincount=1, usertype="NORMAL")
-
-        key = str(UserInfo.objects.latest('num').num)
-
-        return redirect("/users/join/"+key+"/")
-    else :
-        kakao = UserInfo.objects.filter(userid="kakao_"+id, jointype="KAKAO")
-
-        for row in kakao.values_list():
-            userID = row[1]
-            userType = row[29]
-
-        setSession(request, userID, userType)
-        updateLastVisit(userID)
-
-        return redirect("/")
+    return redirect(returnUrl)
 
 
 
@@ -116,39 +96,56 @@ def googleLoginCallback(request):
     sub = profile_json.get("sub")
     email = profile_json.get("email")
 
-    isGoogle = UserInfo.objects.filter( userid="google_"+sub,  jointype="GOOGLE" )
+    returnUrl = userLogin(request, "google_"+sub, email, "", "", "", "GOOGLE")
 
-    if( isGoogle.count() <= 0 ) :
-        # 계정이 있는 경우 로그인.
-        nowTime = timezone.now()
-        googleUser = UserInfo.objects.create(userid="google_"+sub, email=email, jointype="GOOGLE", regtime=nowTime, lastlogin=nowTime,
-                                            logincount=1, usertype="NORMAL")
-
-        key = str(UserInfo.objects.latest('num').num)
-
-        return redirect("/users/join/" + key + "/")
-
-    else:
-        google = UserInfo.objects.filter(userid="google_" + sub, jointype="GOOGLE")
-
-        for row in google.values_list():
-            userID = row[1]
-            userType = row[29]
-
-        setSession(request, userID, userType)
-        updateLastVisit(userID)
-
-        return redirect("/")
-
-def appleLoginCallback(requset) :
+    return redirect(returnUrl)
 
 
+def naver_login(request):
+    client_id = "0HGf7pdIAXwsh0Jvwa6_"
+    redirect_uri = loginUrl + "/naver/callback/"
 
-    return redirect("/")
+    print(f"https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id={client_id}&redirect_uri={redirect_uri}&state=RAMDOM_STATE")
+    return redirect(
+        f"https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id={client_id}&redirect_uri={redirect_uri}&state=RAMDOM_STATE"
+    )
+
+def naver_login_callback(request):
+    code = request.GET.get("code", None)
+    state = request.GET.get("state", None)
+    client_id = "0HGf7pdIAXwsh0Jvwa6_"
+    client_secret = "_5rS6cXipg"
+    redirect_uri = loginUrl + "/naver/callback/"
+
+    request_access_token = requests.post(
+        f"https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&code={code}&state={state}",
+        headers={"Accept": "application/json"},
+    )
+
+    access_token = request_access_token.json().get('access_token')
+    user_info_response = requests.get('https://openapi.naver.com/v1/nid/me?token_type=access_token&access_token='+access_token)
+
+    profile_json = user_info_response.json()
+    response = profile_json.get("response")
+    print(response)
+
+    id = response.get("id")
+    email = response.get("email", None)
+    gender = response.get("gender", None)
+    name = response.get("name", None)
+    birthday = response.get("birthday", None)
+    birthyear = response.get("birthyear", None)
+
+    returnUrl = userLogin(request, "naver_"+id, email, gender, name, birthyear+"-"+birthday, "NAVER")
+
+    return redirect(returnUrl)
+
 
 def localLogin (request) :
-    """
 
+    return render(request, 'user/login.html')
+
+def localLoginCallback (request) :
     if request.method == "GET" :
         return JsonResponse({"code": "1", "message" : "잘못된 접근입니다."})
     elif request.method == "POST" :
@@ -157,24 +154,53 @@ def localLogin (request) :
 
 
         pw = md5_generator(password)
-        userIN = UserInfo.objects.filter(nickname=username, password=pw)
+        userIN = UserInfo.objects.filter(userid=username, password=pw)
 
         if userIN.count() > 0 :
-            for row in userIN.values_list():
-                userID = row[1]
-                userType = row[29]
+            userIN = UserInfo.objects.get(userid=username, password=pw)
 
-            setSession(request, id, nickname, userType)
-            updateLastVisit(id)
+            request.session['id'] = userIN.userid
+            request.session['userType'] = userIN.usertype
+            request.session.set_expiry(0)
+
+            updateLastVisit(userIN.userid)
 
             return JsonResponse({"code": "0"} )
         else :
             return JsonResponse({"code": "1", 'message' : "아이디 혹은 비밀번호가 일치 하지 않습니다."})
 
     else:
-        """
+        return JsonResponse({"code": "1", "message": "잘못된 접근입니다."})
 
-    return render(request, 'user/login.html')
+
+def userLogin(request, id, email, gender, name, birth, joinType) :
+
+    returnUrl = ""
+    isUser = UserInfo.objects.filter(userid=id, jointype=joinType)
+
+    if isUser.count() <= 0 :
+        nowTime = timezone.now()
+        addUser = UserInfo.objects.create(userid=id, email=email, jointype=joinType, gender=gender, name=name,
+                                          birth=birth, regtime=nowTime, lastlogin=nowTime, logincount=1,
+                                          usertype="NORMAL")
+        key = addUser.userid
+
+        returnUrl = "/users/join/" + str(key) + "/join/"
+    else :
+        isUser = UserInfo.objects.get(userid=id, jointype=joinType)
+
+        userID = isUser.userid
+        userType = isUser.usertype
+
+        request.session['id'] = userID
+        request.session['userType'] = userType
+        request.session.set_expiry(0)
+
+        updateLastVisit(userID)
+
+        returnUrl = "/"
+    return returnUrl
+
 
 def locallogout (request) :
     del request.session['id']
@@ -182,13 +208,6 @@ def locallogout (request) :
 
     return JsonResponse({"code": "0"} )
 
-# 세션 생성.
-def setSession(request, id, usertype) :
-    request.session['id'] = id
-    request.session['userType'] = usertype
-    request.session.set_expiry(0)
-
-    return ""
 
 def updateLastVisit(userID) :
     nowTime = timezone.now()
@@ -198,15 +217,19 @@ def updateLastVisit(userID) :
     updateTime.lastlogin = nowTime
     updateTime.save()
 
-    insertLogin = UserLogin.objects.create(userid=userID)
+    insertLogin = UserLogin.objects.create(userid=userID, accesstime=nowTime)
 
     return ""
 
+def joinView(request) :
+
+    return render(request, 'user/joinView.html')
 
 
-def join(request, num) :
+# 회원가입.
+def join(request, userID, type) :
 
-    user = UserInfo.objects.get(num=num)
+    user = UserInfo.objects.get(num=userID)
     userAgree = UserAgree.objects.filter(use="1").order_by("order")
 
     email = user.email.split('@')
@@ -259,6 +282,45 @@ def joinUpdate(request):
     updateUser.save()
 
     return redirect("/")
+
+
+
+# id, pw 찾기
+def finduser(request) :
+
+    return render(request, 'user/findUser.html')
+
+def findPW (request) :
+    if request.method == "GET" :
+        return JsonResponse({"code": "1", "message" : "잘못된 접근입니다."})
+    elif request.method == "POST" :
+        userID = request.POST['userID']
+        userName = request.POST['userName']
+
+        userIN = UserInfo.objects.filter(userid=userID, name=userName)
+
+        if userIN.count() > 0 :
+            return JsonResponse({"code": "0"} )
+        else :
+            return JsonResponse({"code": "1", 'message' : "아이디와 이름이 일치하는 정보가 없습니다."})
+
+    else:
+        return JsonResponse({"code": "1", "message": "잘못된 접근입니다."})
+
+def updatePW(request) :
+    if request.method == "GET" :
+        return JsonResponse({"code": "1", "message" : "잘못된 접근입니다."})
+    elif request.method == "POST" :
+        userID = request.POST['userID']
+        password = request.POST['password']
+
+        userIN = UserInfo.objects.get(userid=userID)
+        userIN.password = md5_generator(password)
+        userIN.save()
+
+        return JsonResponse({"code": "0"} )
+    else:
+        return JsonResponse({"code": "1", "message": "잘못된 접근입니다."})
 
 
 def agreement(request, num) :

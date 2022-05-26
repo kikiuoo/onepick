@@ -17,19 +17,23 @@ $(document).ready(function(){
         find_old_user(userName, userPhone);
     });
 
+    $(document).on("keyup", "#userName, #userPhone", function(e){
+       if( e.keyCode == 13 ){
+           $(".findBtn").trigger("click");
+       }
+    });
+
     $(document).on("click", ".findBtn", function (){
 
         var id =  $('.s_userID:checked').val();
         var type =  $('.s_userID:checked').attr("data-type");
 
-        alert(id + " " + type);
-
         if( type == "" ){
             // 기존 회원 정보 연동.
+            window.location.href = "/users/join/"+id+"/oldUser/"
         }else{
             // 소셜로그인 연동
         }
-
     });
 
 
@@ -46,7 +50,6 @@ $(document).ready(function(){
         }else if( loginType == "naverLogin" ){
             window.location.href = "/users/login/naver/";
         }
-
     });
 
     $(document).on("keyup", "#userID, #userPW", function(e){
@@ -55,22 +58,24 @@ $(document).ready(function(){
        }
     });
 
-    $(document).on("keyup", "#userName, #userPhone", function(e){
-       if( e.keyCode == 13 ){
-           $(".findUser").trigger("click");
-       }
+    // 기존 회원 로그인
+    $(document).on("click", ".loginBtn", function (){
+        var userID = $("#userID").val();
+        var userPW = $("#userPW").val();
+
+        if( userID == "" ){
+            alert("아이디를 입력해 주세요.");
+            return;
+        }
+        else if( userPW == "" ){
+            alert("패스워드를 입력해 주세요.");
+            return;
+        }
+        login(userID, userPW);
     });
 
-    document.addEventListener('AppleIDSignInOnSuccess', (data) => {
-         //handle successful response
-         alert("AppleIDSignInOnSuccess")
-         //todo success logic
-    });
-    //애플로 로그인 실패 시.
-    document.addEventListener('AppleIDSignInOnFailure', (error) => {
-         //handle error.
-         alert("AppleIDSignInOnFailure")
-         //todo fail logic
+    $(document).on("click", ".searchInfo", function (){
+        window.location.href = "/users/findUser/"
     });
 
 });
@@ -94,6 +99,26 @@ function find_old_user(userName, userPhone){
             $(".inputBox2").empty().append(data);
             $(".loginBox2").css("display", "block");
         }
+      },
+      error: function (request, status, error){
+
+      }
+   });
+}
+
+function login(username, password){
+   $.ajax({
+      url: "/users/login/logincallback/",
+      type: "POST",
+      dataType: "json",
+      data:{"username" : username, "password" : password},
+
+      success: function(data){
+          if( data.code == "0" ){
+              window.location.href = "/";
+          }else{
+              alert( data.message );
+          }
       },
       error: function (request, status, error){
 

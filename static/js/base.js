@@ -62,6 +62,13 @@ $(document).ready(function () {
 
     });
 
+    /* Header 버튼 Web 이벤트 */
+    $(document).on("click",".header .join", function(){
+
+        window.location.href = "/users/joinView/";
+
+    });
+
     /* Header 버튼 모바일 이벤트 */
     // menuBtn 이벤트 (모바일)
     $(document).on("click", ".header .menuBtn", function (){
@@ -76,27 +83,6 @@ $(document).ready(function () {
        window.open(url);
     });
 
-
-
-
-    // 기존 회원 로그인
-    $(document).on("click", ".loginBtn", function (){
-
-        var userID = $("#onepickId").val();
-        var userPW = $("#onepickPW").val();
-
-        if( userID == "" ){
-            alert("아이디를 입력해 주세요.");
-            return;
-        }
-        else if( userPW == "" ){
-            alert("패스워드를 입력해 주세요.");
-            return;
-        }
-
-        login(userID, userPW);
-
-    });
 
     $(document).on("click", ".logout", function(){
         logout();
@@ -164,28 +150,6 @@ $(document).ready(function () {
        window.location.href = "/company/regCompany/"
     });
 });
-
-
-function login(username, password){
-   $.ajax({
-      url: "/users/login/local/",
-      type: "POST",
-      dataType: "json",
-      data:{"username" : username, "password" : password},
-
-      success: function(data){
-
-          if( data.code == "0" ){
-              window.location.href = "/";
-          }else{
-              alert( data.message );
-          }
-      },
-      error: function (request, status, error){
-
-      }
-   });
-}
 
 
 function logout(){
