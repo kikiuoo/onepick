@@ -33,6 +33,9 @@ $(document).ready(function(){
             window.location.href = "/users/join/"+id+"/oldUser/"
         }else{
             // 소셜로그인 연동
+            // 로컬 스토리지에 저장 후 입력폼으로 이동 후 소셜 로그인과 체크 후 제어.
+            window.localStorage.setItem("userID", id);
+            window.location.href = "/users/joinView/";
         }
     });
 

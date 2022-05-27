@@ -1,7 +1,7 @@
 {% if userInfo|length > 0 %}
     {% for user in userInfo %}
         {% if user.jointype == "KAKAO" or user.jointype == "kakao"  %}
-        <label><input type="radio" name="s_userID" class="s_userID" value="{{ user.userid }}" data-type="{{ user.jointype }}"><span>카카오 아이디</span> </label>
+        <label><input type="radio" name="ㅇ" class="s_userID" value="{{ user.userid }}" data-type="{{ user.jointype }}"><span>카카오 아이디</span> </label>
         {% elif user.jointype == "facebook" or user.jointype == "FACEBOOK"  %}
         <label><input type="radio" name="s_userID" class="s_userID" value="{{ user.userid }}" data-type="{{ user.jointype }}"><span>페이스북 아이디</span> </label>
         {% elif user.jointype == "google" or user.jointype == "GOOGLE"  %}

@@ -127,7 +127,6 @@ def naver_login_callback(request):
 
     profile_json = user_info_response.json()
     response = profile_json.get("response")
-    print(response)
 
     id = response.get("id")
     email = response.get("email", None)
@@ -185,7 +184,7 @@ def userLogin(request, id, email, gender, name, birth, joinType) :
                                           usertype="NORMAL")
         key = addUser.userid
 
-        returnUrl = "/users/join/" + str(key) + "/join/"
+        returnUrl = "/users/join/" + str(key) + "/social/"
     else :
         isUser = UserInfo.objects.get(userid=id, jointype=joinType)
 
@@ -228,24 +227,9 @@ def joinView(request) :
 
 # 회원가입.
 def join(request, userID, type) :
+    user = UserInfo.objects.get(userid=userID)
 
-    user = UserInfo.objects.get(num=userID)
-    userAgree = UserAgree.objects.filter(use="1").order_by("order")
-
-    email = user.email.split('@')
-
-    if user.birth != '' and user.birth != None :
-        birth = user.birth.split('-')
-    else :
-        birth = ""
-
-    if user.phone != '' and user.phone != None :
-        phone = [user.phone[0:3], user.phone[3:7], user.phone[7:]]
-    else :
-        phone = ""
-
-    return render(request, 'user/join.html', {'user': user, 'userAgree' : userAgree, 'email' : email, 'birth' : birth
-                                              , 'phone' : phone})
+    return render(request, 'user/join.html', {'user': user, 'type': type})
 
 
 
@@ -338,3 +322,35 @@ def ajax_findOldUser(request) :
     userInfo = UserInfo.objects.filter(name=userName, phone=userPhone, usertype="S-NORMAL")
 
     return render(request, 'user/ajax_findOldUser.html', {'userInfo': userInfo })
+
+
+def comfirmPhone(requset):
+
+    return "/"
+
+
+
+def sendSMS( receiver, title, msg ) :
+
+    send_url = 'https://apis.aligo.in/send/'  # 요청을 던지는 URL, 현재는 문자보내기
+
+    # ================================================================== 문자 보낼 때 필수 key값
+    # API key, userid, sender, receiver, msg
+    # API키, 알리고 사이트 아이디, 발신번호, 수신번호, 문자내용
+
+    sms_data = {'key': 'cl40fh7a45efop5rdoz2vhyqpizi5eus',  # api key
+                'userid': 'ksnpick',  # 알리고 사이트 아이디
+                'sender': '01028814491',  # 발신번호
+                'receiver': receiver,  # 수신번호 (,활용하여 1000명까지 추가 가능)
+                'msg': msg,  # 문자 내용
+                'msg_type': title,  # 메세지 타입 (SMS, LMS)
+                'title': 'title',  # 메세지 제목 (장문에 적용)
+                'destination': receiver,  # %고객명% 치환용 입력
+                # 'rdate' : '예약날짜',
+                # 'rtime' : '예약시간',
+                # 'testmode_yn' : '' #테스트모드 적용 여부 Y/N
+                }
+    send_response = requests.post(send_url, data=sms_data)
+
+    return send_response.json()
+

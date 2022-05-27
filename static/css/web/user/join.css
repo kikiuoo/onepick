@@ -1,0 +1,297 @@
+.body{
+    display: inline-block;
+    margin-top: 39px;
+    width: 100%;
+}
+
+.body .mainTitle{
+    position: relative;
+    font-size: 28px;
+    font-weight: bold;
+    color: #1f1f1f;
+}
+
+.body .mainTitle p{
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+    margin-left: 10px;
+
+    font-size: 12px;
+    font-weight: bold;
+    color: #c0c0c0;
+}
+
+.winBox{
+    width: 1200px;
+    padding: 40px 60px 30px 30px;
+    border-radius: 33px;
+    background-color: rgba(192, 192, 192, 0.15);
+    box-sizing: border-box;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.winBox .joinInfo{
+    font-size: 0px;
+    margin-bottom: 30px;
+}
+
+.winBox .joinInfo .title,
+.winBox .joinInfo .title2{
+    position: relative;
+    display: inline-block;
+    width: 110px;
+    height: 56px;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: #1f1f1f;
+    line-height: 56px;
+    vertical-align: top;
+    box-sizing: border-box;
+}
+
+.winBox .joinInfo .title2{
+    width: 160px;
+}
+
+.winBox .joinInfo .content,
+.winBox .joinInfo .content2{
+    display: inline-block;
+    width: 1000px;
+    box-sizing: border-box;
+}
+.winBox .joinInfo .content2{
+    width: 950px;
+}
+
+input{
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 11px;
+    background-color: #fff;
+    border: 0px;
+    padding: 0px 20px;
+    box-sizing: border-box;
+    color: #1f1f1f;
+
+    height: 56px;
+    line-height: 56px;
+    width: 100%;
+}
+
+textarea{
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 11px;
+    background-color: #fff;
+    border: 0px;
+    box-sizing: border-box;
+    color: #1f1f1f;
+
+    padding: 20px;
+    line-height: 1.5em;
+
+    resize: none;
+    font-family: 'Spoqa Han Sans' !important;
+}
+
+
+input::placeholder,
+textarea::placeholder{
+    font-size: 18px;
+    font-weight: bold;
+    color: #c0c0c0;
+}
+
+input:focus,
+textarea:focus{
+    outline: none;
+}
+
+#title{
+    width: 1000px;
+    height: 56px;
+    line-height: 56px;
+}
+
+select{
+    width: 196px;
+    height: 56px;
+    border-radius: 11px;
+    padding:0px 20px;
+    box-sizing: border-box;
+    border: 0px;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: #c0c0c0;
+    background:url('../../../image/web/arrow.png') no-repeat right 16px center;
+    background-color: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin-right: 22px;
+}
+
+select:focus{
+    outline: none;
+}
+
+.inputBox2{
+    font-size: 0px;
+    width: 620px;
+    margin: 0 auto;
+    font-size: 10px;
+    overflow: auto;
+    padding-top: 5px;
+    vertical-align: middle;
+    min-height: 56px;
+}
+.inputBox2 label{
+    display: inline-block;
+    height: 30px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.inputBox2 label span{
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #454545;
+    margin-right: 40px;
+}
+.inputBox2 .userType{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 0px;
+    margin-right: 15px;
+    box-sizing: border-box;
+    vertical-align: top;
+    outline: none;
+    border-radius:50%;
+    padding:0px;
+
+    border: solid 1px #c0c0c0;
+    background-color: #f6f6f6;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+
+.inputBox2 .userType:checked{
+    border: solid 1px #c0c0c0;
+    background-color: #f6f6f6;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border-radius: 100%;
+}
+
+.inputBox2 .userType:checked:before {
+    content:'';
+    display:block;
+    width:60%;
+    height:60%;
+    margin: 20% auto;
+    border-radius:50%;
+  	background:#ff8aae;
+}
+
+#email1{ width: 196px; margin-right: 10px; }
+#email_select{ width: 306px; }
+#email2{ width: 320px; margin-right: 10px;  }
+#phone1, #phone2, #phone3, #brith1{ width: 156px; margin-right: 10px; }
+#confirm{ width : 186px; margin-right: 10px; }
+#brith2{width: 86px; margin-right: 10px; }
+#brith3{width: 86px; margin-right: 30px; }
+#addr1{ width: 854px; margin-right: 17px; margin-bottom: 10px }
+#companyAddr1{ width: 807px; margin-right: 17px; margin-bottom: 10px }
+
+.confirmPhone, .findConfirm, .findAddr, .findAddr2{
+    display: inline-block;
+    width: 126px;
+    height: 56px;
+    line-height: 56px;
+    border-radius: 11px;
+    background-color: #ff8aae;
+    margin-right: 20px;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+
+.findAddr, .findAddr2{ margin-right: 0px; }
+.upload-hidden{ display: none; }
+
+.info_pink{
+    margin-top: 48px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff8aae;
+    margin-bottom: 17px;
+}
+
+.btnBox{
+    text-align: center;
+}
+
+.sendBtn{
+    display: inline-block;
+    width: 220px;
+    height: 82px;
+    line-height: 82px;
+    flex-grow: 0;
+    border-radius: 22px;
+    background-color: #ff8aae;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+
+}
+
+.imageSelect{
+    display: inline-block;
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    background-color: #fff;
+    padding-top: 75px;
+    margin-right: 20px;
+    box-sizing: border-box;
+
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #afafaf;
+    vertical-align: top;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+#artLicense{
+    font-size: 14px;
+}
+
+.imageSelect .addImage{
+    height: 28px;
+    width: 28px;
+    position: absolute;
+
+    top: 38px;
+    left: 56px;
+
+    background-image: url("../../../image/web/addImgBtn.png");
+}

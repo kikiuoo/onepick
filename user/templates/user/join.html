@@ -12,96 +12,158 @@
 
 <div class="body">
     <form action="/users/joins/updateUser/" method="post" id="saveUserForm">
-        {% csrf_token %}
-        <input type="hidden" value="{{ user.num }}" id="num" name="num"/>
+    {% csrf_token %}
 
-        <div class="joinInfo">
-            <div class="title">ID</div>
-            <div class="content">{{ user.userid }}</div>
-        </div>
+        <div class="mainTitle">오디션 등록</div>
+        <div class="winBox">
+            <input type="hidden" value="{{ user.num }}" id="num" name="num"/>
+
+            <div class="joinInfo">
+                <div class="title">회원 종류</div>
+                <div class="content inputBox2">
+                    <label><input type="radio" name="userType" class="userType" value="NORMAL" checked><span> 개인 회원</span> </label>
+                    <label><input type="radio" name="userType" class="userType" value="S-COMPANY"><span> 기업 회원</span> </label>
+                </div>
+            </div>
+
+            <div class="joinInfo">
+                <div class="title">ID</div>
+                <div class="content">
+                    <input type="text" value="{{ user.userid }}" id="userID" name="userID" disabled />
+                    <input type="text" value="" id="oldUserID" name="oldUserID" />
+                </div>
+            </div>
+
+            <div class="joinInfo">
+                <div class="title">비밀번호</div>
+                <div class="content">
+                    <input type="password" value="" id="pw1" name="pw1" style="margin-bottom: 10px" placeholder="비밀번호를 입력해주세요."/>
+                    <input type="password" value="" id="pw2" name="pw2" placeholder="비밀번호 확인을 입력해주세요."/>
+                </div>
+            </div>
+
+            <div class="joinInfo">
+                <div class="title">이름</div>
+                <div class="content"><input type="text" value="{{ user.name|default:"" }}" id="name" name="name" maxlength="5" placeholder="이름을 입력해주세요"/> </div>
+            </div>
+
+            <div class="joinInfo">
+                <div class="title">e-mail</div>
+                <div class="content">
+                    <input type="text" value="{{ email.0|default:"" }}" id="email1" name="email1" placeholder="이메일"/>
+                    <input type="text" value="{{ email.1|default:"" }}" id="email2" name="email2" placeholder="이메일 주소"/>
+                    <select name="email_select" id="email_select">
+                        <option value="">직접입력</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="nate.com">nate.com</option>
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="yahoo.com">yahoo.com</option>
+                        <option value="hanmail.net">hanmail.net</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="joinInfo">
+                <div class="title">전화번호</div>
+                <div class="content">
+                    <select name="phone1" id="phone1">
+                        <option value="">선택</option>
+                        <option value="010" {% if phone.0 == "010" %} selected {% endif %}>010</option>
+                        <option value="011" {% if phone.0 == "011" %} selected {% endif %}>011</option>
+                        <option value="016" {% if phone.0 == "016" %} selected {% endif %}>016</option>
+                        <option value="017" {% if phone.0 == "017" %} selected {% endif %}>017</option>
+                        <option value="019" {% if phone.0 == "019" %} selected {% endif %}>019</option>
+                    </select>
+                    <input type="text" value="{{ phone.1|default:"" }}" id="phone2" name="phone2" maxlength="4" placeholder="입력"/>
+                    <input type="text" value="{{ phone.2|default:"" }}" id="phone3" name="phone3" maxlength="4" placeholder="입력"/>
+
+                    <div class="confirmPhone">인증하기</div>
+
+                    <input type="text" value="" id="confirm" name="confirm" maxlength="4" placeholder="인증번호 입력"/>
+                    <div class="findConfirm">인증완료</div>
+                    <input type="checkbox" name="confirmCheck" id="confirmCheck">
+                </div>
+            </div>
 
 
-        <div class="joinInfo">
-            <div class="title">이름</div>
-            <div class="content"><input type="text" value="{{ user.name|default:"" }}" id="name" name="name" maxlength="5"/> </div>
-        </div>
 
+            <div class="joinInfo">
+                <div class="title">생년월일,성별</div>
+                <div class="content">
+                    <input type="text" value="{{ birth.0|default:"" }}" id="brith1" name="brith1" maxlength="4"/>
+                    <input type="text" value="{{ birth.1|default:"" }}" id="brith2" name="brith2" maxlength="2"/>
+                    <input type="text" value="{{ birth.2|default:"" }}" id="brith3" name="brith3" maxlength="2"/>
 
-        <div class="joinInfo">
-            <div class="title">전화번호</div>
-            <div class="content">
-                <select name="phone1" id="phone1">
-                    <option value="010" {% if phone.0 == "010" %} selected {% endif %}>010</option>
-                    <option value="011" {% if phone.0 == "011" %} selected {% endif %}>011</option>
-                    <option value="016" {% if phone.0 == "016" %} selected {% endif %}>016</option>
-                    <option value="017" {% if phone.0 == "017" %} selected {% endif %}>017</option>
-                    <option value="019" {% if phone.0 == "019" %} selected {% endif %}>019</option>
-                </select> -
-                <input type="text" value="{{ phone.1|default:"" }}" id="phone2" name="phone2" maxlength="4"/> -
-                <input type="text" value="{{ phone.2|default:"" }}" id="phone3" name="phone3" maxlength="4"/>
+                    <select name="gender" id="gender">
+                        <option value="" disabled selected>성별</option>
+                        <option value="man">남성</option>
+                        <option value="girl">여성</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="joinInfo">
+                <div class="title">주소</div>
+                <div class="content">
+                    <input type="text" value="" id="addr1" name="addr1" placeholder="주소 검색"/>
+                    <div class="findAddr">우편번호 검색</div>
+                    <input type="text" value="" id="addr2" name="addr2" placeholder="상세 주소 검색"/>
+                </div>
             </div>
         </div>
 
 
-        <div class="joinInfo">
-            <div class="title">e-mail</div>
-            <div class="content">
-                <input type="text" value="{{ email.0|default:"" }}" id="email11" name="email1"/> @
-                <input type="text" value="{{ email.1|default:"" }}" id="email12" name="email12"/>
-                <select name="email_select" id="email_select">
-                    <option value="">  이메일주소 직접입력  </option>
-                    <option value="naver.com">naver.com</option>
-                    <option value="nate.com">nate.com</option>
-                    <option value="gmail.com">gmail.com</option>
-                    <option value="yahoo.com">yahoo.com</option>
-                    <option value="hanmail.net">hanmail.net</option>
-                </select>
-
-
-                <label><input type="radio" value="1" name="agreeMail" id="agreeMail" checked> 동의 </label>
-                <label><input type="radio" value="0" name="agreeMail" id="agreeMail"> 미동의 </label>
-            </div>
+        <div class="mainTitle">
+            기업 정보
+            <p>기업 정보는 추후에 마이페이지에서도 등록 가능합니다.</p>
         </div>
+        <div class="winBox">
+            <input type="hidden" value="{{ user.num }}" id="num" name="num"/>
 
-
-        <div class="joinInfo">
-            <div class="title">생년월일</div>
-            <div class="content">
-                <input type="text" value="{{ birth.0|default:"" }}" id="brith1" name="brith1" maxlength="4"/> 년
-                <input type="text" value="{{ birth.1|default:"" }}" id="brith2" name="brith2" maxlength="2"/> 월
-                <input type="text" value="{{ birth.2|default:"" }}" id="brith3" name="brith3" maxlength="2"/> 일
-
-                <label><input  type="radio" value="lunar" name="brithType" {% if user.birthtype == "lunar" %} checked {% endif %}> 음력 </label>
-                <label><input  type="radio" value="solar" name="brithType" {% if user.birthtype == "solar" or user.birthtype == None %} checked {% endif %}> 양력 </label>
-            </div>
-        </div>
-
-
-        <div class="joinInfo">
-            <div class="title">성별</div>
-            <div class="content">
-                <label><input type="radio" value="man" name="gender" id="gender" {% if user.gender == "man" or user.gender == None %} checked {% endif %}> 남자 </label>
-                <label><input type="radio" value="girl" name="gender" id="gender" {% if user.gender == "girl" %} checked {% endif %}> 여자 </label>
-
-            </div>
-        </div>
-
-
-        {% for agree in userAgree %}
-        <div class="joinInfo">
-            <div class="title">{{ agree.title }}</div>
-            <div class="content2">
-                <textarea>{{ agree.content }}</textarea>
+            <div class="joinInfo">
+                <div class="title2">사업자명</div>
+                <div class="content2"><input type="text" value="" id="companyName" name="companyName" placeholder="사업자명을 입력해주세요."/></div>
             </div>
 
-            <label><input type="checkbox" name="{{ agree.savecolumn }}"  id="agree_{{forloop.counter}}" class="agree"> 동의합니다. </label>
-        </div>
-        {% endfor %}
+            <div class="joinInfo">
+                <div class="title2">사업자 등록번호</div>
+                <div class="content2"><input type="text" value="" id="license" name="license" placeholder="사업자 등록 번호를 입력해주세요."/> </div>
+            </div>
 
-        <label><input type="checkbox" id="allCheck"> 전체 동의 </label>
+            <div class="joinInfo">
+                <div class="title2">사업장 주소</div>
+                <div class="content2">
+                    <input type="text" value="" id="companyAddr1" name="companyAddr1" placeholder="주소 검색"/>
+                    <div class="findAddr2">우편번호 검색</div>
+                    <input type="text" value="" id="companyAddr2" name="companyAddr2" placeholder="상세 주소 검색"/>>
+                </div>
+            </div>
+
+            <div class="joinInfo">
+                <div class="title2">웹사이트</div>
+                <div class="content2">
+                    <input type="text" value="" id="webSite" name="webSite" placeholder="웹사이트 주소를 입력해주세요."/>
+                </div>
+            </div>
+
+            <div class="joinInfo">
+                <div class="title2">파일</div>
+                <div class="content2">
+                    <label class="imageSelect" id="logo" for="input-logo"> <div class="addImage"></div>로고 이미지<br>등록</label>
+                    <label class="imageSelect" id="license" for="input-license"> <div class="addImage"></div>사업자 등록증<br>이미지 등록</label>
+                    <label class="imageSelect" id="artLicense" for="input-artLicense"> <div class="addImage"></div>대중 문화 예술 기획업<br>등록증 등록</label>
+                    <input type="file" name="userImage[]" id="input-logo" class="upload-hidden input-file" data-type="logo">
+                    <input type="file" name="userImage[]" id="input-license" class="upload-hidden input-file" data-type="license">
+                    <input type="file" name="userImage[]" id="input-artLicense" class="upload-hidden input-file" data-type="artLicense">
+                </div>
+            </div>
+         </div>
+
     </form>
-
-    <div class="sendBtn">저장</div>
+    <div class="info_pink">확인 버튼을 누르시면, 원픽의 이용약관 및 개인 정보 취급 방침에 동의하시는 것으로 간주됩니다.</div>
+    <div class="btnBox">
+        <div class="sendBtn">확인</div>
+    </div>
 </div>
 
 {% endblock %}
