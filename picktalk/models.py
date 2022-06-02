@@ -9,6 +9,7 @@ from django.db import models
 
 
 
+
 class AuditionApply(models.Model):
     num = models.BigAutoField(primary_key=True)
     auditionnum = models.PositiveBigIntegerField(db_column='auditionNum')  # Field name made lowercase.
@@ -41,7 +42,7 @@ class AuditionInfo(models.Model):
     education = models.CharField(max_length=50, blank=True, null=True)
     image = models.CharField(max_length=1000, blank=True, null=True)
     essential = models.CharField(max_length=500, blank=True, null=True)
-    field_preparation = models.CharField(db_column='preparation', max_length=500, blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it started with '_'.
+    preparation = models.CharField(max_length=500, blank=True, null=True)
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
     updtime = models.DateTimeField(db_column='updTime', blank=True, null=True)  # Field name made lowercase.
     viewcount = models.IntegerField(db_column='viewCount', blank=True, null=True)  # Field name made lowercase.
@@ -100,7 +101,6 @@ class CateSub(models.Model):
         db_table = 'cate_sub'
 
 
-
 class EventBanner(models.Model):
     num = models.BigAutoField(primary_key=True)
     viewtype = models.CharField(db_column='viewType', max_length=50, blank=True, null=True)  # Field name made lowercase.
@@ -135,7 +135,7 @@ class ProfileCareer(models.Model):
 
 
 class ProfileComment(models.Model):
-    num = models.BigIntegerField(primary_key=True)
+    num = models.BigAutoField(primary_key=True)
     profilenum = models.PositiveBigIntegerField(db_column='profileNum')  # Field name made lowercase.
     userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
     content = models.CharField(max_length=500, blank=True, null=True)
@@ -222,8 +222,9 @@ class ProfileShare(models.Model):
 class ProfileSuggest(models.Model):
     num = models.BigAutoField(primary_key=True)
     userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    suuserid = models.CharField(db_column='suUserID', max_length=100)  # Field name made lowercase.
     auditionnum = models.PositiveBigIntegerField(db_column='auditionNum')  # Field name made lowercase.
-    comment = models.CharField(max_length=500, blank=True, null=True)
+    comment = models.TextField(blank=True, null=True)
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
@@ -232,7 +233,7 @@ class ProfileSuggest(models.Model):
 
 
 class ProfileView(models.Model):
-    num = models.BigIntegerField(primary_key=True)
+    num = models.BigAutoField(primary_key=True)
     profilenum = models.PositiveBigIntegerField(db_column='profileNum')  # Field name made lowercase.
     userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
@@ -243,7 +244,7 @@ class ProfileView(models.Model):
 
 
 class ProfileViewCompany(models.Model):
-    num = models.BigIntegerField(primary_key=True)
+    num = models.BigAutoField(primary_key=True)
     profilenum = models.PositiveBigIntegerField(db_column='profileNum')  # Field name made lowercase.
     userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
@@ -251,6 +252,7 @@ class ProfileViewCompany(models.Model):
     class Meta:
         managed = False
         db_table = 'profile_view_company'
+
 
 class QaAdvertise(models.Model):
     num = models.AutoField(primary_key=True)
@@ -261,6 +263,19 @@ class QaAdvertise(models.Model):
     class Meta:
         managed = False
         db_table = 'qa_advertise'
+
+
+class QaNotice(models.Model):
+    num = models.BigIntegerField(blank=True, null=True)
+    userid = models.CharField(db_column='userID', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    title = models.CharField(max_length=100, blank=True, null=True)
+    content = models.CharField(max_length=500, blank=True, null=True)
+    image = models.CharField(max_length=500, blank=True, null=True)
+    regdate = models.DateTimeField(db_column='regDate', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'qa_notice'
 
 
 class UserAgree(models.Model):
@@ -283,6 +298,7 @@ class UserCompany(models.Model):
     userid = models.CharField(db_column='userID', max_length=100, blank=True, null=True)  # Field name made lowercase.
     logoimage = models.CharField(db_column='logoImage', max_length=200, blank=True, null=True)  # Field name made lowercase.
     licenseimage = models.CharField(db_column='licenseImage', max_length=200, blank=True, null=True)  # Field name made lowercase.
+    artlicenseimage = models.CharField(db_column='artLicenseImage', max_length=200, blank=True, null=True)  # Field name made lowercase.
     license = models.CharField(max_length=200, blank=True, null=True)
     companyname = models.CharField(db_column='companyName', max_length=50, blank=True, null=True)  # Field name made lowercase.
     addr1 = models.CharField(max_length=100, blank=True, null=True)
@@ -355,3 +371,14 @@ class UserSearch(models.Model):
     class Meta:
         managed = False
         db_table = 'user_search'
+
+
+class UserSms(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    phonenum = models.CharField(db_column='phoneNum', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    certifier = models.CharField(max_length=10, blank=True, null=True)
+    regdate = models.DateTimeField(db_column='regDate', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'user_sms'

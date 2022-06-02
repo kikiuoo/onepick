@@ -28,5 +28,10 @@ urlpatterns = [
 
     path('agreement/<int:num>/', views.agreement, name="user-agreement"),
 
+    path('mypage/<type>/', views.userMypage, name="user-agreement"),
+    path('info/update/', views.updateUser, name="user-agreement"),
+
     path('ajax/findOldUser/', views.ajax_findOldUser, name="user-ajax-findOldUser"),
+    path('ajax/phoneComfirm/', views.ajax_phoneComfirm, name="user-ajax-phoneComfirm"),
+    path('ajax/checkConfirm/', views.ajax_checkConfirm, name="user-ajax-checkConfirm"),
 ]

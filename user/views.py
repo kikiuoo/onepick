@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import auth
 from django.http import HttpResponse, JsonResponse
+from django.db.models import Q
 from django.utils import timezone
 import json
 import os
@@ -11,6 +12,10 @@ import os
 from picktalk.models import *
 
 import hashlib
+import random
+from django.conf import settings
+import boto3
+from django.db import connection
 
 #loginUrl = "https://ksnpick.com/users/login"
 loginUrl = "http://localhost:8000/users/login"
@@ -49,7 +54,7 @@ def kakao_login_callback(request):
     id = str(profile_json.get("id"))
     email = kakao_account.get("email", None)
 
-    returnUrl = userLogin(request, "google_"+id, email, "", "", "", "KAKAO")
+    returnUrl = userLogin(request, "kakao_"+id, email, "", "", "", "KAKAO")
 
     return redirect(returnUrl)
 
@@ -175,7 +180,7 @@ def localLoginCallback (request) :
 def userLogin(request, id, email, gender, name, birth, joinType) :
 
     returnUrl = ""
-    isUser = UserInfo.objects.filter(userid=id, jointype=joinType)
+    isUser = UserInfo.objects.filter(userid=id)
 
     if isUser.count() <= 0 :
         nowTime = timezone.now()
@@ -186,7 +191,7 @@ def userLogin(request, id, email, gender, name, birth, joinType) :
 
         returnUrl = "/users/join/" + str(key) + "/social/"
     else :
-        isUser = UserInfo.objects.get(userid=id, jointype=joinType)
+        isUser = UserInfo.objects.get(userid=id)
 
         userID = isUser.userid
         userType = isUser.usertype
@@ -195,9 +200,12 @@ def userLogin(request, id, email, gender, name, birth, joinType) :
         request.session['userType'] = userType
         request.session.set_expiry(0)
 
-        updateLastVisit(userID)
+        if isUser.phone == None or isUser.email == None or isUser.name == None :
+            returnUrl = "/users/join/" + str(userID) + "/social/"
+        else :
+            updateLastVisit(userID)
+            returnUrl = "/"
 
-        returnUrl = "/"
     return returnUrl
 
 
@@ -227,6 +235,7 @@ def joinView(request) :
 
 # 회원가입.
 def join(request, userID, type) :
+
     user = UserInfo.objects.get(userid=userID)
 
     return render(request, 'user/join.html', {'user': user, 'type': type})
@@ -236,34 +245,116 @@ def join(request, userID, type) :
 def joinUpdate(request):
 
     num = request.POST['num']
+    joinType = request.POST['joinType']
+    userType = request.POST.get('userType',"")
+    userID = request.POST.get('user_id',"")
+    oldUserID = request.POST.get('oldUserID',"")
+    pw1 = request.POST.get('pw1',"")
     name = request.POST['name']
+    email1 = request.POST['email1']
+    email2 = request.POST['email2']
     phone1 = request.POST['phone1']
     phone2 = request.POST['phone2']
     phone3 = request.POST['phone3']
-    email11 = request.POST['email1']
-    email12 = request.POST['email12']
-    brith1 = request.POST['brith1']
-    brith2 = request.POST['brith2']
-    brith3 = request.POST['brith3']
-    birthType = request.POST['brithType']
-    gender = request.POST['gender']
-    agreeMail = request.POST["agreeMail"]
+    brith1 = request.POST.get('brith1',"")
+    brith2 = request.POST.get('brith2',"")
+    brith3 = request.POST.get('brith3',"")
+    gender = request.POST.get('gender',"")
+    addr1 = request.POST.get('addr1',"")
+    addr2 = request.POST.get('addr2',"")
+    companyName = request.POST.get('companyName',"")
+    license = request.POST.get('license',"")
+    companyAddr1 = request.POST.get('companyAddr1',"")
+    companyAddr2 = request.POST.get('companyAddr2',"")
+    webSite = request.POST.get('webSite',"")
+    logo = request.FILES.getlist('logo[]')
+    licenseImage = request.FILES.getlist('licenseImage[]')
+    artLicense = request.FILES.getlist('artLicense[]')
 
-    updateUser = UserInfo.objects.get(num = int(num))
-    updateUser.name = name
-    updateUser.phone = phone1+phone2+phone3
-    updateUser.email = email11 + "@" +email12
-    updateUser.birth = brith1 + "-" + brith2 + "-" + brith3
-    updateUser.birthType = birthType
-    updateUser.gender = gender
+    if oldUserID == "" :
+        userInfo = UserInfo.objects.get(num=num)
+    else :
+        userInfo = UserInfo.objects.get(userid=oldUserID)
+        updateUserID(userID, oldUserID)
 
-    # 약관 동의
-    updateUser.agreeusage = "1"
-    updateUser.agreeprivacy = "1"
-    updateUser.agreemarketing = "1"
-    updateUser.agreeemail = agreeMail
+    if joinType == "oldUser" :
+        userInfo.pw = md5_generator(pw1)
+        userInfo.jointype = "OLDUSER"
 
-    updateUser.save()
+    userInfo.name = name
+    userInfo.email = email1+"@"+email2
+    userInfo.phone = phone1+phone2+phone3
+    userInfo.gender = gender
+    userInfo.birth = brith1+"-"+brith2+"-"+brith3
+
+    if userType == "NORMAL" :
+        # 일반회원 등록
+        userInfo.addr1 = addr1
+        userInfo.addr2 = addr2
+        userInfo.usertype = "NORMAL"
+    else :
+        userInfo.usertype = "S-COMPANY"
+
+        # 이미지 등록
+        s3_client = boto3.client(
+            's3',
+            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+        )
+
+        nowTime = timezone.now()
+
+        # 로고
+        for image in logo:
+            sub = image.name.split('.')[-1]
+            imgName = userID + "_userMain_" + str(nowTime)
+            imageName = md5_generator(imgName) + "." + sub
+
+            s3_client.upload_fileobj(
+                image,
+                settings.AWS_STORAGE_BUCKET_NAME,
+                "media/photos/company/" + imageName,
+                ExtraArgs={
+                    "ContentType": image.content_type,
+                }
+            )
+            logoImage = "photos/company/" + imageName
+
+        for image in licenseImage:
+            sub = image.name.split('.')[-1]
+            imgName = userID + "_userMain_" + str(nowTime)
+            imageName = md5_generator(imgName) + "." + sub
+
+            s3_client.upload_fileobj(
+                image,
+                settings.AWS_STORAGE_BUCKET_NAME,
+                "media/photos/company/" + imageName,
+                ExtraArgs={
+                    "ContentType": image.content_type,
+                }
+            )
+            licenseImages = "photos/company/" + imageName
+
+        for image in artLicense:
+            sub = image.name.split('.')[-1]
+            imgName = userID + "_userMain_" + str(nowTime)
+            imageName = md5_generator(imgName) + "." + sub
+
+            s3_client.upload_fileobj(
+                image,
+                settings.AWS_STORAGE_BUCKET_NAME,
+                "media/photos/company/" + imageName,
+                ExtraArgs={
+                    "ContentType": image.content_type,
+                }
+            )
+            artLicense = "photos/company/" + imageName
+
+        userCompany = UserCompany.objects.create(userid=userID, logoimage=logoImage, licenseimage=licenseImages, artlicenseimage=artLicense,
+                                                 license=license,companyname=companyName, addr1=companyAddr1, addr2=companyAddr2, website=webSite,
+                                                 regtime=nowTime)
+
+    userInfo.save()
 
     return redirect("/")
 
@@ -314,6 +405,80 @@ def agreement(request, num) :
     return render(request, 'user/agreement.html', {'agree': agree })
 
 
+def userMypage(request, type) :
+
+    try:
+        cursor = connection.cursor()
+        user = request.session.get('id', '')
+
+        userInfo = UserInfo.objects.get(userid=user)
+
+        if type == "user" :
+            company = ""
+            data1 = ProfileInfo.objects.filter(userid=user, isdelete=0)
+            query = "SELECT  ai.num, ai.title, ps.comment, UC.logoImage " \
+                    "FROM profile_suggest AS ps LEFT JOIN audition_info AS ai ON ps.auditionNum = ai.num " \
+                    "     LEFT JOIN user_company AS UC ON ai.userID  = UC.userID " \
+                    "WHERE ps.userID = '"+user+"'"
+
+            result = cursor.execute(query)
+            data2 = cursor.fetchall()
+
+            query = "SELECT  ai.num, ai.title, ai.endDate, ai.ordinary, UC.logoImage " \
+                    "FROM audition_pick AS ap LEFT JOIN audition_info AS ai ON ap.auditionNum = ai.num " \
+                    "     LEFT JOIN user_company AS UC ON ai.userID  = UC.userID " \
+                    "WHERE ap.userID = '"+user+"'"
+
+            result = cursor.execute(query)
+            data3 = cursor.fetchall()
+
+        else :
+            company = UserCompany.objects.get(userid=user)
+            data1 = AuditionInfo.objects.filter(userid=user)
+            query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, ps.COMMENT " \
+                    "FROM profile_suggest AS ps LEFT JOIN profile_info AS p ON ps.profileNum = p.num " \
+                    "     LEFT JOIN user_info AS ui ON ps.userID  = ui.userID  " \
+                    "WHERE ps.suUserID = '"+user+"' and p.isDelete = '0' limit 2"
+
+            result = cursor.execute(query)
+            data2 = cursor.fetchall()
+
+            query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, COMMENT, mainYoutube, isCareer " \
+                    "FROM profile_pick AS pp LEFT JOIN profile_info AS p ON pp.profileNum = p.num " \
+                    "     LEFT JOIN user_info AS ui ON p.userID  = ui.userID  " \
+                    "WHERE pp.userID = '"+user+"'  and p.isDelete = '0' limit 2"
+
+            result = cursor.execute(query)
+            data3 = cursor.fetchall()
+
+
+        notice = QaNotice.objects.all().order_by("-regdate")[:5]
+
+        connection.commit()
+        connection.close()
+
+    except:
+        connection.rollback()
+
+    return render(request, 'user/mypage.html', {"type" : type, "userInfo" : userInfo, "company" : company,
+                                                "data1" : data1, "data2" : data2, "data3":data3, "notice" : notice })
+
+def updateUser(request) :
+
+    user = request.session.get('id', '')
+
+    userInfo = UserInfo.objects.get(userid=user)
+    email = userInfo.email.split('@')
+    birth = userInfo.birth.split('-')
+
+    phone = ["","",""]
+    phone[0] = userInfo.phone[0:3]
+    phone[1] = userInfo.phone[3:7]
+    phone[2] = userInfo.phone[7:11]
+
+    return render(request, 'user/userInfo.html', {"userInfo" : userInfo, "email" : email, "birth":birth, "phone" : phone} )
+
+
 def ajax_findOldUser(request) :
 
     userName = request.GET.get("userName","")
@@ -323,6 +488,49 @@ def ajax_findOldUser(request) :
 
     return render(request, 'user/ajax_findOldUser.html', {'userInfo': userInfo })
 
+
+def ajax_phoneComfirm(request) :
+
+    userPhone = request.POST.get("phoneNum","")
+    certifier = ""
+
+    isUser = UserInfo.objects.filter(phone=userPhone, usertype="NORMAL") | UserInfo.objects.filter(phone=userPhone, usertype="COMPANY")  | UserInfo.objects.filter(phone=userPhone, usertype="S-COMPANY")
+
+    if isUser.count() > 0 :
+        return JsonResponse({"code": "1", "message" :  "이미 등록된 전화번호입니다."})
+    else :
+        while len(certifier) < 4:
+            num = random.randint(0, 9)
+            certifier = certifier + str(num)
+
+        nowTime = timezone.now()
+        saveSms = UserSms.objects.create(phonenum=userPhone, certifier=certifier, regdate=nowTime)
+
+        send = sendSMS(userPhone, "인증번호 전송", "[ONEPICK 본인확인] 인증번호 [" + certifier + "]를 입력해주세요.")
+
+        return JsonResponse({"code": "0"})
+
+def ajax_checkConfirm(request) :
+
+    userPhone = request.POST.get("phoneNum","")
+    confirm = request.POST.get("confirm","")
+
+    findSMS = UserSms.objects.filter(phonenum=userPhone).order_by("-num")[:1]
+
+    for row in findSMS :
+        saveConfirm = row.certifier
+
+    code = ""
+    msg = ""
+    if confirm == saveConfirm :
+        findSMS = UserSms.objects.filter(phonenum=userPhone).order_by("-num")
+        findSMS.delete()
+        code = "0"
+    else :
+        code = "1"
+        msg = "입력한 인증번호가 다릅니다."
+
+    return JsonResponse({"code": code, "message" :  msg})
 
 def comfirmPhone(requset):
 
@@ -354,3 +562,19 @@ def sendSMS( receiver, title, msg ) :
 
     return send_response.json()
 
+def updateUserID(userID, oldUserID) :
+
+    userdel = UserInfo.objects.filter(userid=userID)
+    userdel.delete()
+    userInfo = UserInfo.objects.filter(userid=oldUserID)
+    for row in userInfo :
+        row.userid = userID
+        row.save()
+    print(userInfo )
+    audiInfo = AuditionInfo.objects.filter(userid=oldUserID).update(userid=userID)
+    proCareer = ProfileCareer.objects.filter(userid=oldUserID).update(userid=userID)
+    proComment = ProfileComment.objects.filter(userid=oldUserID).update(userid=userID)
+    proEtcCar = ProfileEtccareer.objects.filter(userid=oldUserID).update(userid=userID)
+    proInfo = ProfileInfo.objects.filter(userid=oldUserID).update(userid=userID)
+
+    return ""

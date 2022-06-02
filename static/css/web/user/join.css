@@ -66,6 +66,14 @@
     width: 950px;
 }
 
+.winBox .joinInfo .type{
+    font-size: 18px;
+    font-weight: bold;
+    color: #1f1f1f;
+    line-height: 56px;
+}
+
+
 input{
     font-size: 18px;
     font-weight: bold;
@@ -206,8 +214,8 @@ select:focus{
 #email2{ width: 320px; margin-right: 10px;  }
 #phone1, #phone2, #phone3, #brith1{ width: 156px; margin-right: 10px; }
 #confirm{ width : 186px; margin-right: 10px; }
-#brith2{width: 86px; margin-right: 10px; }
-#brith3{width: 86px; margin-right: 30px; }
+#brith2{width: 96px; margin-right: 10px; }
+#brith3{width: 96px; margin-right: 30px; }
 #addr1{ width: 854px; margin-right: 17px; margin-bottom: 10px }
 #companyAddr1{ width: 807px; margin-right: 17px; margin-bottom: 10px }
 
@@ -279,6 +287,10 @@ select:focus{
     vertical-align: top;
     cursor: pointer;
     overflow: hidden;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 #artLicense{
@@ -294,4 +306,8 @@ select:focus{
     left: 56px;
 
     background-image: url("../../../image/web/addImgBtn.png");
+}
+
+.companyInfo{
+    display: none;
 }

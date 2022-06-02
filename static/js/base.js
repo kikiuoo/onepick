@@ -146,8 +146,19 @@ $(document).ready(function () {
        $(".regCompanyPopup").css("display", "none");
     });
 
-    $(document).on("click", ".regCompanyPopup .regCompanyBtn", function(){
-       window.location.href = "/company/regCompany/"
+    $(document).on("click", ".mypage", function(){
+
+       if( userID == null || userID == ""){
+            alert("로그인 후 이용가능합니다.");
+            return;
+        }
+
+        if( userType == "COMPANY" || userType == "S-COMPANY" ){
+            window.location.href = "/users/mypage/company/";
+        }else{
+            window.location.href = "/users/mypage/user/";
+        }
+
     });
 });
 

@@ -38,7 +38,7 @@
             연락처 {{ userInfo.phone|phoneReplace:"*" }}<br>
             이메일 {{ userInfo.email|emailReplace:"*" }}<br>
             {% endif %}
-            주소 ({{ userInfo.zipcode|default:"" }}) {{ userInfo.addr1|default:"" }} {{ userInfo.addr2|default:"" }}
+            주소 {{ userInfo.addr1|default:"" }} {{ userInfo.addr2|default:"" }}
         </div>
         <div class="info">
             {{ userInfo.nationality }} |

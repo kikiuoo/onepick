@@ -1,6 +1,7 @@
 from django import template
 from django.utils import timezone
 from django.db import connection
+import math
 
 from picktalk.models import *
 
@@ -27,11 +28,14 @@ def updateUserName(values):
 
 @register.filter
 def userAge(values):
-    birth = values.split('-')
-    nowTime = str(timezone.now())
-    year = nowTime.split('-')
+    if values != None :
+        birth = values.split('-')
+        nowTime = str(timezone.now())
+        year = nowTime.split('-')
 
-    age = int(year[0]) - int(birth[0]) + 1
+        age = int(year[0]) - int(birth[0]) + 1
+    else :
+        age = ""
 
     return age
 
@@ -97,6 +101,12 @@ def replace(value, keys):
     return returnValue
 
 @register.filter
+def replace_2(value, keys):
+    key = keys.split(",")
+    returnValue = value.replace(key[0], key[1])
+    return returnValue
+
+@register.filter
 def allReplace(value, key):
 
     returnValue = ""
@@ -157,6 +167,21 @@ def getSubCate(value):
     cate = CateSub.objects.get(subcate=value)
 
     return cate.catename
+
+
+@register.filter
+def getSubCates(value):
+
+    subCate = value.split("|")
+
+    returnValue = []
+    for cate in subCate :
+        cates = CateSub.objects.get(subcate=cate)
+        returnValue.append(cates.catename)
+
+    sCate = ", ".join(returnValue)
+
+    return sCate
 
 @register.filter
 def getArrayCount(value):
@@ -244,3 +269,96 @@ def getData(value, count) :
     data = value.split("$")
 
     return data[count]
+
+
+@register.filter
+def getPersent(num) :
+
+    profile = ProfileInfo.objects.get(num=num)
+    userInfo = UserInfo.objects.get(userid=profile.userid)
+
+    count = 25;
+
+    if userInfo.nationality == None or userInfo.nationality == ""  :
+        count = count - 1
+
+    if userInfo.military == None or userInfo.military == "" :
+        count = count - 1
+
+    if userInfo.entertain == None or userInfo.entertain == "" :
+        count = count - 1
+
+    if userInfo.finalschool == None or userInfo.finalschool == "" :
+        count = count - 1
+
+    if userInfo.school == None or userInfo.school == "" :
+        count = count - 1
+
+    if userInfo.major == None or userInfo.major == "" :
+        count = count - 1
+
+    if profile.height == None  or profile.height == "":
+        count = count - 1
+
+    if profile.weight == None  or profile.weight == "":
+        count = count - 1
+
+    if profile.topsize == None or profile.topsize == "" :
+        count = count - 1
+
+    if profile.bottomsize == None or profile.bottomsize == "":
+        count = count - 1
+
+    if profile.shoessize == None or profile.shoessize == "":
+        count = count - 1
+
+    if profile.skincolor == None or profile.skincolor == "":
+        count = count - 1
+
+    if profile.haircolor == None or profile.haircolor == "":
+        count = count - 1
+
+    if profile.intercate == None or profile.intercate == "":
+        count = count - 1
+
+    if profile.intersubcate == None or profile.intersubcate == "":
+        count = count - 1
+
+    if profile.iscareer != "0":
+        career = ProfileCareer.objects.filter(profilenum=num)
+        if career.count() < 0 :
+            count = count - 1
+
+    if profile.profileimage == None or profile.profileimage == "":
+        count = count - 1
+
+    if profile.detailimage == None or profile.detailimage == "":
+        count = count - 1
+
+    if profile.artimage == None or profile.artimage == "":
+        count = count - 1
+
+    if profile.youtube == None or profile.youtube == "":
+        count = count - 1
+
+    if profile.foreign == None or profile.foreign == "":
+        count = count - 1
+
+    if profile.talent == None or profile.talent == "":
+        count = count - 1
+
+    if profile.comment == None or profile.comment == "":
+        count = count - 1
+
+    etcCareer = ProfileEtccareer.objects.filter(profilenum=num)
+    if etcCareer.count() < 0 :
+        count = count - 1
+
+    persent = (count / 25) * 100
+
+    return round(persent)
+
+@register.filter
+def applyCount(num) :
+    audiApply = AuditionApply.objects.filter(auditionnum=num)
+    return audiApply.count()
