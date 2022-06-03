@@ -201,6 +201,14 @@
     font-size: 0px;
 }
 
+.contentBox .viewBox{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 90px;
+    font-size: 0px;
+}
+
 .viewBox .countBox{
     display: inline-block;
     height: 43px;

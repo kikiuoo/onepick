@@ -304,10 +304,11 @@ def joinUpdate(request):
 
         nowTime = timezone.now()
 
+        count = 0
         # 로고
         for image in logo:
             sub = image.name.split('.')[-1]
-            imgName = userID + "_userMain_" + str(nowTime)
+            imgName = userID + "_userMain_" + str(nowTime) + str(count)
             imageName = md5_generator(imgName) + "." + sub
 
             s3_client.upload_fileobj(
@@ -319,10 +320,11 @@ def joinUpdate(request):
                 }
             )
             logoImage = "photos/company/" + imageName
+            count = count + 1
 
         for image in licenseImage:
             sub = image.name.split('.')[-1]
-            imgName = userID + "_userMain_" + str(nowTime)
+            imgName = userID + "_userMain_" + str(nowTime) + str(count)
             imageName = md5_generator(imgName) + "." + sub
 
             s3_client.upload_fileobj(
@@ -334,10 +336,11 @@ def joinUpdate(request):
                 }
             )
             licenseImages = "photos/company/" + imageName
+            count = count + 1
 
         for image in artLicense:
             sub = image.name.split('.')[-1]
-            imgName = userID + "_userMain_" + str(nowTime)
+            imgName = userID + "_userMain_" + str(nowTime) + str(count)
             imageName = md5_generator(imgName) + "." + sub
 
             s3_client.upload_fileobj(
@@ -349,6 +352,7 @@ def joinUpdate(request):
                 }
             )
             artLicense = "photos/company/" + imageName
+            count = count + 1
 
         userCompany = UserCompany.objects.create(userid=userID, logoimage=logoImage, licenseimage=licenseImages, artlicenseimage=artLicense,
                                                  license=license,companyname=companyName, addr1=companyAddr1, addr2=companyAddr2, website=webSite,
@@ -438,7 +442,8 @@ def userMypage(request, type) :
             query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, ps.COMMENT " \
                     "FROM profile_suggest AS ps LEFT JOIN profile_info AS p ON ps.profileNum = p.num " \
                     "     LEFT JOIN user_info AS ui ON ps.userID  = ui.userID  " \
-                    "WHERE ps.suUserID = '"+user+"' and p.isDelete = '0' limit 2"
+                    "WHERE ps.suUserID = '"+user+"' and p.isDelete = '0' " \
+                    "order by ps.regTime desc limit 2"
 
             result = cursor.execute(query)
             data2 = cursor.fetchall()
@@ -446,7 +451,8 @@ def userMypage(request, type) :
             query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, COMMENT, mainYoutube, isCareer " \
                     "FROM profile_pick AS pp LEFT JOIN profile_info AS p ON pp.profileNum = p.num " \
                     "     LEFT JOIN user_info AS ui ON p.userID  = ui.userID  " \
-                    "WHERE pp.userID = '"+user+"'  and p.isDelete = '0' limit 2"
+                    "WHERE pp.userID = '"+user+"'  and p.isDelete = '0' " \
+                    "order by pp.regTime desc  limit 2"
 
             result = cursor.execute(query)
             data3 = cursor.fetchall()
@@ -469,14 +475,183 @@ def updateUser(request) :
 
     userInfo = UserInfo.objects.get(userid=user)
     email = userInfo.email.split('@')
-    birth = userInfo.birth.split('-')
+
+    birth = ""
+    userCompany = ""
+    if userInfo.usertype == "NORMAL" or  userInfo.usertype == "S-NORMAL" :
+        birth = userInfo.birth.split('-')
+
+    else :
+        userCompany = UserCompany.objects.get(userid=user)
 
     phone = ["","",""]
     phone[0] = userInfo.phone[0:3]
     phone[1] = userInfo.phone[3:7]
     phone[2] = userInfo.phone[7:11]
 
-    return render(request, 'user/userInfo.html', {"userInfo" : userInfo, "email" : email, "birth":birth, "phone" : phone} )
+    return render(request, 'user/userInfo.html', {"userInfo" : userInfo, "userCompany" : userCompany,
+                                                  "email" : email, "birth":birth, "phone" : phone} )
+
+
+def updateCallback(request) :
+
+    userID = request.POST.get("user_id", "")
+    userInfo = UserInfo.objects.get(userid=userID)
+
+    password = request.POST.get("pw1", "")
+    name = request.POST.get("name", "")
+    email1 = request.POST.get("email1", "")
+    email2 = request.POST.get("email2", "")
+    phone1 = request.POST.get("phone1", "")
+    phone2 = request.POST.get("phone2", "")
+    phone3 = request.POST.get("phone3", "")
+
+    if userInfo.usertype == "NORMAL" or userInfo.usertype == "S-NORMAL" : # 일반 회원
+
+        brith1 = request.POST.get("brith1", "")
+        brith2 = request.POST.get("brith2", "")
+        brith3 = request.POST.get("brith3", "")
+        gender = request.POST.get("gender", "")
+        addr1 = request.POST.get("addr1", "")
+        addr2 = request.POST.get("addr2", "")
+
+        if password != "":
+            userInfo.password = md5_generator(password)
+
+        userInfo.name = name
+        userInfo.email = email1 + "@" + email2
+        userInfo.phone = phone1 + phone2 + phone3
+        userInfo.birth = brith1 + "-" + brith2 + "-" +brith3
+        userInfo.gender = gender
+        userInfo.addr1 = addr1
+        userInfo.addr2 = addr2
+
+        url = "/users/mypage/user/"
+
+    else :
+        userCompany = UserCompany.objects.get(userid=userID)
+
+        companyName = request.POST.get("companyName", "")
+        license = request.POST.get("license", "")
+        companyAddr1 = request.POST.get("companyAddr1", "")
+        companyAddr2 = request.POST.get("companyAddr2", "")
+        webSite = request.POST.get("webSite", "")
+
+        logoImg = request.POST.get("logoImg", "")
+        licenseImg = request.POST.get("licenseImg", "")
+        artLicenseImg = request.POST.get("artLicenseImg", "")
+
+        logo = request.FILES.getlist("logo[]", "")
+        licenseImage = request.FILES.getlist("licenseImage[]", "")
+        artLicense = request.FILES.getlist("artLicense[]", "")
+
+        # 이미지 등록
+        s3_client = boto3.client(
+            's3',
+            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+        )
+
+        s3 = boto3.resource('s3',
+                            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+                            )
+
+        nowTime = timezone.now()
+        count = 0;
+        # 로고
+        logoImage = logoImg
+        if len(logo) > 0:
+            # 기존 이미지 삭제
+            for rmImages in logoImg:
+                if (rmImages == ""): continue
+                img = rmImages.replace("photos/company/", "")
+                s3.Object(settings.AWS_STORAGE_BUCKET_NAME, "media/photos/company/" + img).delete()
+
+            for image in logo:
+                sub = image.name.split('.')[-1]
+                imgName = userID + "_userMain_" + str(nowTime) + str(count)
+                imageName = md5_generator(imgName) + "." + sub
+
+                s3_client.upload_fileobj(
+                    image,
+                    settings.AWS_STORAGE_BUCKET_NAME,
+                    "media/photos/company/" + imageName,
+                    ExtraArgs={
+                        "ContentType": image.content_type,
+                    }
+                )
+                logoImage = "photos/company/" + imageName
+                count = count + 1
+
+        licenseImages = licenseImg
+        if len(licenseImage) > 0:
+            # 기존 이미지 삭제
+            for rmImages in licenseImg:
+                if (rmImages == ""): continue
+                img = rmImages.replace("photos/company/", "")
+                s3.Object(settings.AWS_STORAGE_BUCKET_NAME, "media/photos/company/" + img).delete()
+
+            for image in licenseImage:
+                sub = image.name.split('.')[-1]
+                imgName = userID + "_userMain_" + str(nowTime) + str(count)
+                imageName = md5_generator(imgName) + "." + sub
+
+                s3_client.upload_fileobj(
+                    image,
+                    settings.AWS_STORAGE_BUCKET_NAME,
+                    "media/photos/company/" + imageName,
+                    ExtraArgs={
+                        "ContentType": image.content_type,
+                    }
+                )
+                licenseImages = "photos/company/" + imageName
+                count = count + 1
+
+        artLicenses = artLicenseImg
+        if len(artLicense) > 0:
+            # 기존 이미지 삭제
+            for rmImages in artLicenseImg:
+                if (rmImages == ""): continue
+                img = rmImages.replace("photos/company/", "")
+                s3.Object(settings.AWS_STORAGE_BUCKET_NAME, "media/photos/company/" + img).delete()
+
+            for image in artLicense:
+                sub = image.name.split('.')[-1]
+                imgName = userID + "_userMain_" + str(nowTime) + str(count)
+                imageName = md5_generator(imgName) + "." + sub
+
+                s3_client.upload_fileobj(
+                    image,
+                    settings.AWS_STORAGE_BUCKET_NAME,
+                    "media/photos/company/" + imageName,
+                    ExtraArgs={
+                        "ContentType": image.content_type,
+                    }
+                )
+                artLicenses = "photos/company/" + imageName
+                count = count + 1
+
+        userInfo.name = name
+        userInfo.email = email1 + "@" + email2
+        userInfo.phone = phone1 + phone2 + phone3
+
+        userCompany.name = companyName
+        userCompany.license = license
+        userCompany.logoimage = logoImage
+        userCompany.licenseimage = licenseImages
+        userCompany.artlicenseimage = artLicenses
+        userCompany.addr1 = companyAddr1
+        userCompany.addr2 = companyAddr2
+        userCompany.website = webSite
+
+        userCompany.save()
+
+        url = "/users/mypage/company/"
+
+    userInfo.save()
+
+    return redirect(url)
 
 
 def ajax_findOldUser(request) :

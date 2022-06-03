@@ -5,12 +5,14 @@ $(document).ready(function (){
         e.stopPropagation();
 
         var type = $(this).attr("data-type");
+        var num = $(this).attr("data-num");
 
         if( type == "userInfo" ){
             window.location.href = "/users/info/update/";
         }else if( type == "profile" ){
-            var num = $(this).attr("data-num");
             window.location.href = "/profile/edit/"+num+"/";
+        }else if( type == "audition" ){
+            window.location.href = "/audi/edit/" +num +"/";
         }
 
     });
@@ -25,11 +27,13 @@ $(document).ready(function (){
         if( confirm("데이터를 삭제하시겠습니까?") == true ) {
             if( type == "profile" ){
                 window.location.href = "/profile/delete/" + num + "/";
+            }else if( type == "audition" ){
+                window.location.href = "/audi/del/"+num +"/";
             }
         }
     });
 
-    $(document).on("click", ".myProfile", function (){
+    $(document).on("click", ".myProfile, .profile", function (){
         var num = $(this).attr("data-num");
 
         window.open("/profile/profileDetail/actor/" + num + "/") ;
@@ -50,16 +54,14 @@ $(document).ready(function (){
              return;
         }
 
-         // 기업회원 픽기능 제한
-        if( userType == "COMPAYN" ||  userType == "S-COMPANY" ){
-           alert("해당 기능의 권한이 없습니다.") ;
-           return;
-        }
-
         var nowType = $(this).attr("data-nowType");
         var num = $(this).parent().attr("data-num");
 
-        updatePick("audition", nowType, num );
+        if( type == "user" ){
+             updatePick("audition", nowType, num );
+        }else{
+             updatePick("profile", nowType, num );
+        }
 
         if( nowType == "off" ){
             $(this).attr("data-nowType", "on");
@@ -69,6 +71,8 @@ $(document).ready(function (){
             $(this).removeClass("pickOn");
         }
     });
+
+    $(document)
 });
 
 function updatePick(tableName, nowType, num){

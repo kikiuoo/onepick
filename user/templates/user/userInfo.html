@@ -7,17 +7,15 @@
 <link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/user/join.css' %}" > <!-- 모바일 버전 -->
 
 <!-- JS 파일 -->
-<script src="{% static 'js/user/join.js' %}"></script>
+<script src="{% static 'js/user/userInfo.js' %}"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <div class="body">
-    <form action="/users/joins/updateUser/" method="post" id="saveUserForm" enctype="multipart/form-data"  autocomplete="off">
+    <form action="/users/info/updateCallback/" method="post" id="saveUserForm" enctype="multipart/form-data"  autocomplete="off">
     {% csrf_token %}
 
         <div class="mainTitle">회원 정보</div>
         <div class="winBox">
-            <input type="hidden" value="{{ userInfo.num }}" id="num" name="num"/>
-
             <div class="joinInfo">
                 <div class="title">회원 종류</div>
                 <div class="content type">
@@ -36,7 +34,7 @@
                 </div>
             </div>
 
-            {% if userInfo.jointype == "NORMAL"  %}
+            {% if userInfo.jointype == "OLDUSER"  %}
             <div class="joinInfo">
                 <div class="title">비밀번호</div>
                 <div class="content">
@@ -82,7 +80,7 @@
                     {% endif %}
                 </div>
                 <div class="content">
-                    <select name="phone1" id="phone1" style="color: #1f1f1f">
+                    <select name="phone1" id="phone1" style="color: #1f1f1f" >
                         <option value="">선택</option>
                         <option value="010" {% if phone.0 == "010" %} selected {% endif %}>010</option>
                         <option value="011" {% if phone.0 == "011" %} selected {% endif %}>011</option>
@@ -106,27 +104,25 @@
             <div class="joinInfo nonCompany">
                 <div class="title">생년월일,성별</div>
                 <div class="content">
-                    <select name="brith1" id="brith1">
+                    <select name="brith1" id="brith1" style="color: #1f1f1f">
                         <option value="" disabled selected>연도</option>
                     </select>
 
-                    <select name="brith2" id="brith2">
+                    <select name="brith2" id="brith2" style="color: #1f1f1f">
                         <option value="" disabled selected>월</option>
                     </select>
 
-                    <select name="brith3" id="brith3">
+                    <select name="brith3" id="brith3" style="color: #1f1f1f">
                         <option value="" disabled selected>일</option>
                     </select>
 
-                    <select name="gender" id="gender">
+                    <select name="gender" id="gender" style="color: #1f1f1f">
                         <option value="" disabled selected>성별</option>
                         <option value="man" {% if userInfo.gender == "man" %}selected{% endif %}>남성</option>
                         <option value="girl" {% if userInfo.gender == "girl" %}selected{% endif %}>여성</option>
                     </select>
                 </div>
             </div>
-            {% endif %}
-
             <div class="joinInfo nonCompany">
                 <div class="title">주소</div>
                 <div class="content">
@@ -135,6 +131,9 @@
                     <input type="text" value="{{ userInfo.addr2|default:"" }}" id="addr2" name="addr2" placeholder="상세 주소 검색"/>
                 </div>
             </div>
+
+            {% endif %}
+
         </div>
 
         {% if userInfo.usertype == "COMPANY" or userInfo.usertype == "S-COMPANY" %}
@@ -145,46 +144,51 @@
         <div class="winBox">
             <div class="joinInfo">
                 <div class="title2">사업자명</div>
-                <div class="content2"><input type="text" value="" id="companyName" name="companyName" placeholder="사업자명을 입력해주세요."/></div>
+                <div class="content2"><input type="text" value="{{ userCompany.name }}" id="companyName" name="companyName" placeholder="사업자명을 입력해주세요."/></div>
             </div>
 
             <div class="joinInfo">
                 <div class="title2">사업자 등록번호</div>
-                <div class="content2"><input type="text" value="" id="license" name="license" placeholder="사업자 등록 번호를 입력해주세요."/> </div>
+                <div class="content2"><input type="text" value="{{ userCompany.license }}" id="license" name="license" placeholder="사업자 등록 번호를 입력해주세요."/> </div>
             </div>
 
             <div class="joinInfo">
                 <div class="title2">사업장 주소</div>
                 <div class="content2">
-                    <input type="text" value="" id="companyAddr1" name="companyAddr1" placeholder="주소 검색" disabled/>
+                    <input type="text" value="{{ userCompany.addr1 }}" id="companyAddr1" name="companyAddr1" placeholder="주소 검색" readonly/>
                     <div class="findAddr2" data-type="company">우편번호 검색</div>
-                    <input type="text" value="" id="companyAddr2" name="companyAddr2" placeholder="상세 주소 검색"/>>
+                    <input type="text" value="{{ userCompany.addr2 }}" id="companyAddr2" name="companyAddr2" placeholder="상세 주소 검색"/>>
                 </div>
             </div>
 
             <div class="joinInfo">
                 <div class="title2">웹사이트</div>
                 <div class="content2">
-                    <input type="text" value="" id="webSite" name="webSite" placeholder="웹사이트 주소를 입력해주세요."/>
+                    <input type="text" value="{{ userCompany.website }}" id="webSite" name="webSite" placeholder="웹사이트 주소를 입력해주세요."/>
                 </div>
             </div>
 
             <div class="joinInfo">
                 <div class="title2">파일</div>
                 <div class="content2">
-                    <label class="imageSelect" id="logo" for="input-logo"> <div class="addImage"></div>로고 이미지<br>등록</label>
-                    <label class="imageSelect" id="licenseImage" for="input-license"> <div class="addImage"></div>사업자 등록증<br>이미지 등록</label>
-                    <label class="imageSelect" id="artLicense" for="input-artLicense"> <div class="addImage"></div>대중 문화 예술 기획업<br>등록증 등록</label>
-                    <input type="file" name="logo[]" id="input-logo" class="upload-hidden input-file" data-type="logo">
-                    <input type="file" name="licenseImage[]" id="input-license" class="upload-hidden input-file" data-type="license">
-                    <input type="file" name="artLicense[]" id="input-artLicense" class="upload-hidden input-file" data-type="artLicense">
+                    <label class="imageSelect" id="logo" for="input-logo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ userCompany.logoimage }}");'></label>
+                    <label class="imageSelect" id="licenseImage" for="input-license" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ userCompany.licenseimage }}");'></label>
+                    <label class="imageSelect" id="artLicense" for="input-artLicense" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ userCompany.artlicenseimage }}");'></label>
+
+                    <input type="file" name="logo[]" id="input-logo" class="upload-hidden input-file" data-type="logo" value="{{ userCompany.logoimage }}">
+                    <input type="file" name="licenseImage[]" id="input-license" class="upload-hidden input-file" data-type="license" value="{{ userCompany.licenseimage }}">
+                    <input type="file" name="artLicense[]" id="input-artLicense" class="upload-hidden input-file" data-type="artLicense" value="{{ userCompany.artlicenseimage }}">
+
+                    <input type="hidden" name="logoImg" id="logoImg" value="{{ userCompany.logoimage }}">
+                    <input type="hidden" name="licenseImg" id="licenseImg" value="{{ userCompany.licenseimage }}">
+                    <input type="hidden" name="artLicenseImg" id="artLicenseImg" value="{{ userCompany.artlicenseimage }}">
                 </div>
             </div>
          </div>
          {% endif %}
 
     </form>
-    <div class="info_pink">확인 버튼을 누르시면, 원픽의 이용약관 및 개인 정보 취급 방침에 동의하시는 것으로 간주됩니다.</div>
+    <!--<div class="info_pink">확인 버튼을 누르시면, 원픽의 이용약관 및 개인 정보 취급 방침에 동의하시는 것으로 간주됩니다.</div>-->
     <div class="btnBox">
         <div class="sendBtn">확인</div>
     </div>
@@ -192,6 +196,12 @@
 
 <script>
     var joinType = "{{ type }}";
+    var brith1 = "{{ birth.0 }}";
+    var brith2 = "{{ birth.1 }}";
+    var brith3 = "{{ birth.2 }}";
+
+    var phone = "{{ userInfo.phone }}";
+    var userType = "{{ userInfo.usertype }}"
 </script>
 
 {% endblock %}

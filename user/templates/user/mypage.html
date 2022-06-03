@@ -128,8 +128,8 @@
         {% for data in data1 %}
         <div class="regAudi" data-num="{{ data.num }}">
             <div class="btnBox">
-                <div class="editBtn"></div>
-                <div class="delBtn"></div>
+                <div class="editBtn" data-type="audition" data-num="{{ data.num }}"></div>
+                <div class="delBtn" data-type="audition" data-num="{{ data.num }}"></div>
             </div>
 
             <div class="audiTitle">{{ data.title }}</div>
@@ -149,14 +149,14 @@
             </div>
 
             <div class="volunteer">총 지원자 <span>{{ data.num|applyCount }}</span>명</div>
-            <div class="audiVolunteer">오디션 지원자 보기</div>
+            <div class="audiVolunteer" data-type="audiProfile">오디션 지원자 보기</div>
         </div>
         {% endfor %}
     </div>
 
-    <div class="mTtitle">제안한 프로필 <span>전체보기</span></div>
+    <div class="mTtitle">제안한 프로필 <span data-type="suggest">전체보기</span></div>
     {% for data in data2 %}
-    <div class="myProfile">
+    <div class="myProfile" data-num="{{ data.0 }}">
         <div class="userImage" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ data.1 }}");'></div>
         <div class="userInfoBox">
             <div class="userName">{{ data.4 }} ({{ data.5|userAge }})</div>
@@ -176,7 +176,7 @@
     </div>
     {% endfor %}
 
-    <div class="mTtitle">픽한 프로필 <span>전체보기</span></div>
+    <div class="mTtitle">픽한 프로필 <span data-type="pick">전체보기</span></div>
     <div class="inBox">
         {% for data in data3 %}
         <div class="profile" data-num="{{ data.0 }}">
@@ -257,5 +257,9 @@
     </div>
     {% endif %}
 </div>
+
+<script>
+    var type = "{{ type }}";
+</script>
 
 {% endblock %}
