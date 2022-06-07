@@ -25,6 +25,29 @@
     cursor: pointer;
 }
 
+
+.mTtitle .apply{
+    position: relative;
+    display: inline-block;
+    right: auto;
+    left: auto;
+    margin-top: 0px;
+    width: 200px;
+    height: 33px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #ff8aae;
+    vertical-align: middle;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+.mTtitle .apply p{
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+}
+
 .userInfo{
     position: relative;
     width: 1200px;
@@ -72,7 +95,6 @@
     position: relative;
     font-size: 0px;
     width: 590px;
-    height: 340px;
     padding: 20px;
     border-radius: 33px;
     border: solid 1px #c0c0c0;
@@ -81,6 +103,7 @@
     margin-right: 10px;
     margin-bottom: 30px;
     cursor: pointer;
+    vertical-align: top;
 }
 
 .btnBox{
@@ -685,3 +708,25 @@
     background-image: url("../../../image/web/pick_on.png");
 }
 
+.page{
+    font-size: 0px;
+    margin-top: 45px;
+    text-align: center;
+}
+
+.page .pages{
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    color: #959595;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.page .pages:first-child{
+    margin-left: 0px;
+}
+
+.page .pages.nowPage{
+    color: #ff8aae;
+}

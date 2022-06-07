@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('list/<cate_type>/', views.listView, name='listView'),
     path('profileDetail/<cate_type>/<int:num>/', views.viewer, name='listView'),
+    path('profileDetail_all/<cate_type>/<int:num>/', views.viewer_all, name='listView'),
 
     path('write/', views.pofile_write, name="profile-write"),
     path('write/callback/', views.pofile_write_callback, name="profile-writeCallback"),
@@ -19,4 +20,7 @@ urlpatterns = [
     path('ajax/saveComment/', views.saveComment, name="profile-saveComment"),
     path('ajax/reloadComment/', views.reloadComment, name="profile-reloadComment"),
     path('ajax/deleteComment/', views.deleteComment, name="profile-deleteComment"),
+    path('ajax/profileSuggest/', views.profileSuggest, name="profile-profileSuggest"),
+
+    path('print/<type>/<int:num>/', views.printProfile, name="profile-print"),
 ]

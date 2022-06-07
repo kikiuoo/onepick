@@ -71,13 +71,18 @@
         <div class="image"  style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profile.1 }}");'></div>
         <div class="info">
             <div class="name">{{ profile.6|updateUserName }} ({{ profile.7|userAge }})</div>
-            <div class="hight">키 {{ profile.2|userHight }}cm</div>
-            <div class="entertain">
-                {% if profile.9 == "" %}
-                    소속사 없음
+            <div class="infoDetail">
+                키 {{ data.2 }}cm | 몸무게 {{ data.3 }}kg<br>
+                {% if data.7 == "man" %} 군필 | {% endif %}
+                {% if data.6|default:"" == "" %}
+                소속사 없음<br>
                 {% else %}
-                    소속사 있음
+                소속사 있음<br>
                 {% endif %}
+            </div>
+            <div class="infoDetail">
+                {{ data.9 }} {{ data.10 }}<br>
+                특기 {{ data.11|replace_2:"|, " }}
             </div>
 
             <div class="viewBox">

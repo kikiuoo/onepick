@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>원픽|나만의 ONEPICK</title>
+    <!-- Index CSS 파일 및 JS 파일 include -->
+    {% load static %}
+    {% load my_filter %}
+    <link rel="stylesheet" href="{% static 'css/web/profile/print_width.css' %}"> <!-- pc 버전 -->
+
+    <link rel="icon" type="image/x-icon" href="{% static 'image/favicon.ico' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/favicon.ico' %}">
+
+
+    <script src="{% static 'js/profile/qrcode.js' %}"></script>
+</head>
+<body>
+
+
+
+
+<div class="page">
+    <div class="imageBox"></div>
+
+    <div class="InfoBox">
+        <div class="logoImage"></div>
+
+        <div class="name">강다운</div>
+        <div class="userInfo">1888/12/12 (20세)</div>
+
+        <div class="userInfo_B">키 170cm / 몸무게 50 kg</div>
+
+        <div class="userInfo">군필 |  소속사 없음</div>
+        <div class="userInfo">중앙대학교 연극영화과</div>
+        <div class="userInfo">특기 요리 노래부르기 기타연주</div>
+
+        <div id="qrcode"></div>
+
+        <div class="careerBox">
+            <div class="logo"><span></span>영화</div>
+            <div class="content">
+                장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
+                장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
+                장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
+                장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
+                장편 영화 | 영화 제복 | 지나가는 행인 10 역
+            </div>
+        </div>
+
+        <div class="careerBox">
+            <div class="logo"><span></span>TV드라마<br>웹드라마</div>
+            <div class="content">
+                장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
+                장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
+                장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
+                장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
+                장편 영화 | 영화 제복 | 지나가는 행인 10 역
+            </div>
+        </div>
+
+        <div class="careerBox">
+            <div class="logo"><span></span>광고,기타</div>
+            <div class="content">
+                장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
+                장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
+                장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
+                장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
+                장편 영화 | 영화 제복 | 지나가는 행인 10 역
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+var qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: "https://ksnpick.com/profile/profileDetail/actor/8/",
+	width: 108,
+	height: 108,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+</script>
+
+</body>
+</html>

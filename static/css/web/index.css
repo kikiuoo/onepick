@@ -2,7 +2,7 @@
 .mainBanner{
     width: 1220px;
     height: 450px;
-    border-radius: 22px;
+    border-radius: 20px;
     background-color: #c4c4c4;
     margin-bottom : 50px;
     cursor: pointer;
@@ -11,7 +11,7 @@
 /* Index 제목 */
 .mainTitle{
     position : relative;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: bold;
     color: #282828;
     padding: 0px 10px;
@@ -24,10 +24,10 @@
     height : 36px;
     line-height : 36px;
     margin-top : -18px;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 16px;
     color: #959595;
     cursor: pointer;
+    font-weight: normal;
 }
 
 /* 내부 Box 간격 조정 */
@@ -37,7 +37,8 @@
 }
 
 .titleMargin{
-    margin-top : 75px;
+    margin-top : 50px;
+    margin-bottom: 10px;
 }
 
 .noneMargin{
@@ -49,15 +50,15 @@
     position : relative;
     display : inline-block;
     width: 285px;
-    height: 280px;
-    border-radius: 33px;
+    height: 235px;
+    border-radius: 20px;
     border: solid 1px #c0c0c0;
     background-color: #fff;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-right: 20px;
     box-sizing: border-box;
     overflow: hidden;
-    padding: 0px 10px;
+    padding: 10px;
 
     cursor:pointer;
 }
@@ -67,12 +68,10 @@
 }
 
 .audition .audiLogo{
-    position: absolute;
     background-color : #fff;
-    width : calc(100% - 10px);
-    height :128px;
-    top: 10px;
-    left: 10px;
+    width : 265px;
+    height :100px;
+    margin-bottom: 30px;
 
     background-position: center;
     background-repeat:  no-repeat;
@@ -81,14 +80,12 @@
 
 .audition .audiTitle{
     display : block;
-    height : 76px;
-    margin-top: 148px;
+    height : 45px;
 
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 1.65;
+    font-size: 16px;
+    line-height: 1.5;
     letter-spacing: normal;
-    color: #292929;
+    color: #1f1f1f;
 
     /* 2줄 이상일 경우 ... 처리 */
     white-space : normal;
@@ -100,19 +97,19 @@
 
 .audition .audiTerm{
     padding-left: 10px;
-    height : 26px;
-    font-size: 20px;
+    height : 19px;
+    font-size: 15px;
     font-weight: bold;
     letter-spacing: normal;
-    color: #1f1f1f;
+    color: #454545;
 }
 
 .pickBtn{
     position: absolute;
     bottom: 20px;
-    right: 20px;
-    width: 41px;
-    height: 41px;
+    right: 18px;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
 
     background-image: url("../../image/web/pick_off.png");
@@ -131,15 +128,15 @@
     position: relative;
     font-size: 0px;
     width: 590px;
-    height: 280px;
-    border-radius: 33px;
+    height: 270px;
+    border-radius: 20px;
     border: solid 1px #c0c0c0;
     background-color: #fff;
     display : inline-block;
     margin-right : 20px;
     cursor:  pointer;
     box-sizing: border-box;
-    margin-top: 20px;
+    margin-bottom: 20px;
     overflow: hidden;
 
     background-repeat: no-repeat;
@@ -153,48 +150,44 @@
 
 .profile .image{
     display : inline-block;
-    width: 380px;
-    height: 280px;
+    width: 240px;
+    height: 270px;
     box-sizing: border-box;
     vertical-align: top;
 
     background-size: 100% auto;
     background-position: top center;
+    background-repeat: no-repeat;
 }
 
 .profile .info{
     position: relative;
     display : inline-block;
     width: 208px;
-    height: 280px;
-    padding: 50px 20px;
+    height: 270px;
+    padding: 30px 20px;
     vertical-align: top;
 
     box-sizing: border-box;
 }
 
 .profile .info .name{
-    font-size: 28px;
+    font-size: 18px;
     font-weight: bold;
-    color: #282828;
+    color: #454545;
 }
 
-.profile .info .hight{
-    margin-top: 27px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #4d4d4d;
-}
-.profile .info .entertain{
-    margin-top: 10px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #4d4d4d;
+.profile .info .infoDetail{
+    margin-top: 18px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #1f1f1f;
+    margin-bottom: 10px;
 }
 
 .viewBox{
     position: absolute;
-    bottom: 15px;
+    bottom: 20px;
     left: 20px;
     width: 90px;
     font-size: 0px;
@@ -230,7 +223,6 @@
     padding: 0px;
 
     font-size: 12px;
-    font-weight: 500;
     text-align: center;
     color: #ff8aae;
 }

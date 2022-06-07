@@ -12,30 +12,11 @@
 <script src="{% static 'js/profile/viewer.js' %}"></script>
 
 <div class="inBox">
-
-    <div class="btnBox">
-        {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
-        <div class="editBtn" data-num="{{ auditions.0 }}"></div>
-        <div class="delBtn" data-num="{{ auditions.0 }}"></div>
-        <div class="printBtn" data-num="{{ auditions.0 }}">
-            <div class="vector">
-                <span data-type="width">가로형</span>
-                <p>|</p>
-                <span data-type="column">세로형</span>
-            </div>
-        </div>
-        {% endif %}
-        <div class="shareBtn"></div>
-    </div>
-
     <div class="mainImage"  style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profiles.profileimage }}");' id="image_1"  data-id="1"   data-image="https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profiles.profileimage }}"></div>
     <div class="userInfo">
 
-        {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
         <div class="userName">{{ userInfo.name }},{{ userInfo.birth|userAge }}세({{ userInfo.birth|replace:"-|/" }})</div>
-        {% else %}
-        <div class="userName">{{ userInfo.name|updateUserName }},{{ userInfo.birth|userAge }}세({{ userInfo.birth|replace:"-|/" }})</div>
-        {% endif %}
+
         <div class="info">
             {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
             연락처 {{ userInfo.phone }}<br>

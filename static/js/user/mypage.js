@@ -45,7 +45,14 @@ $(document).ready(function (){
         window.open('/audi/audiDetail/all/' +num +"/") ;
     });
 
-     $(document).on("click", ".pickBtn", function(e){
+
+    $(document).on("click", ".notiList", function (){
+        var num = $(this).attr("data-num");
+
+        window.open('/notice/viewer/'+num+'/') ;
+    });
+
+    $(document).on("click", ".pickBtn", function(e){
         e.preventDefault();
         e.stopPropagation();
 
@@ -72,7 +79,21 @@ $(document).ready(function (){
         }
     });
 
-    $(document)
+    $(document).on("click", ".mTtitle span, .audiVolunteer", function (){
+        var type = $(this).attr("data-type");
+        var num = $(this).attr("data-num");
+
+        if( type == "notice" ){
+            window.location.href = "/notice/list/1/1/";
+        }else if( type == "pick" ){
+            window.location.href = "/proList/pick/1/1/";
+        }else if( type == "suggest" ){
+            window.location.href = "/proList/suggest/1/1/";
+        }else if( type == "audiProfile" ){
+            window.location.href = "/proList/audi/1/"+num+"/";
+        }
+
+    });
 });
 
 function updatePick(tableName, nowType, num){

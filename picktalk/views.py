@@ -182,3 +182,90 @@ def searchList(request, cateType, search, page) :
         connection.close()
 
         return render(request, 'picktalk/search.html', {"cateType": cateType, "searching": searching, "search":search })
+
+def notice(request, num) :
+    notice = QaNotice.objects.get(num=num)
+
+    image = ""
+    if notice.image != "" and notice.image != None :
+        image = notice.image.split("|")
+
+    return render(request, 'picktalk/notice.html', {"notice": notice, "image" : image})
+
+
+def notiList(request, page) :
+
+    block = 10
+    start = (page - 1) * block
+    end = page * block
+
+    noti = QaNotice.objects.all()
+    notice = noti.order_by("-regdate")[start:end]
+
+    allPage = ( noti.count() / block ) + 1
+
+    paging = getPageList( page, allPage )
+
+    return render(request, 'picktalk/notiList.html', {"notice": notice, "paging" : paging, "page":page})
+
+
+def proList(request, type, page, num) :
+
+    block = 10
+    start = (page - 1) * block
+    end = page * block
+
+    cursor = connection.cursor()
+    user = request.session.get('id', '')
+
+    if type == "audi" :
+        query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCareer " \
+                "FROM audition_apply AS audi LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
+                "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
+                "WHERE audi.auditionNum = '"+num+"' " \
+                "order by audi.regTime desc limit "+ str(start) + ", " + str(end)
+
+    elif type == "pick" :
+        query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, COMMENT, mainYoutube, isCareer " \
+                "FROM profile_pick AS pp LEFT JOIN profile_info AS p ON pp.profileNum = p.num " \
+                "     LEFT JOIN user_info AS ui ON p.userID  = ui.userID  " \
+                "WHERE pp.userID = '"+user+"'  and p.isDelete = '0' " \
+                "order by pp.regTime desc  limit "+ str(start) + ", " + str(end)
+
+    elif type == "suggest" :
+        query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, ps.COMMENT " \
+                "FROM profile_suggest AS ps LEFT JOIN profile_info AS p ON ps.profileNum = p.num " \
+                "     LEFT JOIN user_info AS ui ON ps.userID  = ui.userID  " \
+                "WHERE ps.suUserID = '" + user + "' and p.isDelete = '0' " \
+                "order by ps.regTime desc limit "+ str(start) + ", " + str(end)
+
+    result = cursor.execute(query)
+    profile = cursor.fetchall()
+
+    connection.commit()
+    connection.close()
+
+    return render(request, 'user/proList.html', {"type": type, "page":page, "profile": profile,
+                                                 "allCount" : cursor.rowcount })
+
+def getPageList ( nowPage, allPage) :
+
+    sPage = nowPage - 2
+    if sPage <= 0 :
+        startPage = 1
+    elif sPage + 4 > allPage :
+        startPage = allPage - 4
+    else :
+        startPage = sPage
+
+    ePage = 1
+    if allPage < 5 :
+        ePage = allPage
+    elif startPage + 4 > allPage :
+        ePage = allPage
+    else :
+        ePage = startPage + 4
+
+    paging = list(range(int(startPage), int(ePage)+1))
+
+    return paging

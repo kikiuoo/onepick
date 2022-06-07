@@ -1,7 +1,7 @@
 import datetime
 
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.template import  loader
 from django.db import connection
 
@@ -84,6 +84,7 @@ def audi_detail(request, cate_type, num) :
         cursor = connection.cursor()
 
         user = request.session.get('id', '')
+        userType = request.session.get('userType', '')
 
         if user:
             nowTime = timezone.now()
@@ -116,13 +117,20 @@ def audi_detail(request, cate_type, num) :
 
         audiCate = ', '.join(audiSubCate)
 
+        if userType == "NORMAL" :
+            userInfo = UserInfo.objects.get(userid=user)
+            data1 = ProfileInfo.objects.filter(userid=user)
+        else :
+            userInfo = ""
+            data1 = ""
         connection.commit()
         connection.close()
     except:
         connection.rollback()
         print('Faild DB Connection')
 
-    return render(request, 'audition/viewer.html', {"audition": audition, "audiCate" : audiCate, "image" : image})
+    return render(request, 'audition/viewer.html', {"audition": audition, "audiCate" : audiCate, "image" : image
+                                                    ,"userInfo": userInfo,"data1": data1})
 
 
 def audi_write(request) :
@@ -334,3 +342,18 @@ def audiAjaxGetCate(request) :
     catesub = CateSub.objects.filter(catecode=cate).order_by("cateorder")
 
     return render(request, 'audition/ajax_cate.html', {'catesub':catesub})
+
+
+
+def audiApply(request) :
+
+    profileCheck = request.GET['profileCheck']
+    num = request.GET['num']
+    writeUID = request.GET['writeUID']
+    userID = request.GET['userID']
+
+    nowTime = timezone.now()
+
+    saveApply = AuditionApply.objects.create( auditionnum=num, profilenum=profileCheck, regtime=nowTime)
+
+    return JsonResponse({"code": "0"})

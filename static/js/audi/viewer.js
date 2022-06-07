@@ -35,11 +35,6 @@ $(document).ready(function(){
         }
     });
 
-   // 오디션 지원 기능 추가
-    $(document).on("click", ".auditionBtn", function(){
-       // 오디션 지원 기능 추가 필요,
-    });
-
     $(document).on("click", ".companySite", function () {
         var url = $(this).attr("data-url");
 
@@ -73,7 +68,58 @@ $(document).ready(function(){
        }
     });
 
+
+   // 오디션 지원 기능 추가
+    $(document).on("click", ".supportBtn", function(){
+       // 오디션 지원 기능 추가 필요,
+        if( userType == "NORMAL") {
+            $(".audiApplyBack").css("display", "block");
+        }else{
+            alert("권한이 없습니다.");
+        }
+    });
+
+    $(document).on("click" , ".closeSPopup", function (){
+        $(".audiApplyBack").css("display", "none");
+    });
+
+
+    $(document).on("click", ".sendProfile", function (){
+        var profileCheck = $(".profileCheck:checked").val();
+
+        if( profileCheck == "" ){
+            alert("제출할 프로필을 선택해 주세요");
+            return;
+        }
+
+        saveApply(profileCheck, num, writeUID, userID);
+    });
+
+
+
 });
+
+
+
+function  saveApply(profileCheck, num, writeUID, userID){
+    $.ajax({
+      url: "/audi/ajax/audiApply/",
+      type: "GET",
+      dataType: "json",
+      data:{"profileCheck":profileCheck, "num" : num, "writeUID" : writeUID, "userID" : userID},
+
+      success: function(data){
+          if( data.code == "0"){
+              alert("정상적으로 오디션 제안되었습니다.");
+              $(".audiApplyBack").css("display", "none");
+          }
+      },
+      error: function (request, status, error){
+
+      }
+   });
+}
+
 
 function updatePick(tableName, nowType, num){
     $.ajax({

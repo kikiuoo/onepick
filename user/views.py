@@ -745,7 +745,7 @@ def updateUserID(userID, oldUserID) :
     for row in userInfo :
         row.userid = userID
         row.save()
-    print(userInfo )
+
     audiInfo = AuditionInfo.objects.filter(userid=oldUserID).update(userid=userID)
     proCareer = ProfileCareer.objects.filter(userid=oldUserID).update(userid=userID)
     proComment = ProfileComment.objects.filter(userid=oldUserID).update(userid=userID)

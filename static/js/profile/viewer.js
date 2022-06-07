@@ -68,9 +68,8 @@ $(document).ready(function(){
         }
     });
 
-   // 오디션 제안 기능 추가
-    $(document).on("click", ".auditionBtn", function(){
-       // 오디션 제안 기능 추가 필요,
+    $(document).on("change", "select", function(){
+        $(this).css("color", "#1f1f1f");
     });
 
     $(document).on("click", ".saveComment", function (){
@@ -139,6 +138,59 @@ $(document).ready(function(){
         e.stopPropagation();
 
         $(".popupBack").css("display", "none");
+    });
+
+
+   // 오디션 제안 기능 추가
+    $(document).on("click", ".auditionBtn", function(){
+
+        if( userType == "COMPANY") {
+            $(".suggestBack").css("display", "block");
+        }else{
+            alert("권한이 없습니다.");
+        }
+    });
+
+    $(document).on("click" , ".closeSPopup", function (){
+        $(".suggestBack").css("display", "none");
+    });
+
+
+    $(document).on("click", ".suggestBtn", function (){
+        var audiNum = $("#audi").find("option:selected").val();
+        var comment = $("#sugComment").val();
+
+        if( audiNum == "" ){
+            alert("제안할 오디션을 선택해 주세요.");
+            return;
+        }
+
+        if( comment == "" ){
+            alert("제안할 내용을 입력해주세요.");
+            return;
+        }
+
+        saveSuggest(audiNum, comment, num, writeUID, userID);
+    });
+
+    $(document).on("click", ".printBtn", function (){
+       var css = $(".vector").css("display");
+
+       if( css == "block" ){
+           $(".vector").css("display", "none");
+       }else{
+           $(".vector").css("display", "block");
+       }
+    });
+
+
+    $(document).on("click", ".vector span" , function (e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        var type = $(this).attr("data-type");
+
+        window.open("/profile/print/"+type+"/"+num+"/");
     });
 
 });
@@ -249,5 +301,27 @@ function deleteComment(num){
 
       }
 
+   });
+}
+
+
+function saveSuggest(audiNum, comment, num, writeUID, userID){
+    $.ajax({
+      url: "/profile/ajax/profileSuggest/",
+      type: "GET",
+      dataType: "json",
+      data:{"audiNum":audiNum, "comment" : comment, "num" : num, "writeUID" : writeUID, "userID" : userID},
+
+      success: function(data){
+          if( data.code == "0"){
+              alert("정상적으로 오디션 제안되었습니다.");
+              $("#audi").val("");
+              $("#sugComment").val("");
+              $(".suggestBack").css("display", "none");
+          }
+      },
+      error: function (request, status, error){
+
+      }
    });
 }

@@ -223,6 +223,7 @@ class ProfileSuggest(models.Model):
     num = models.BigAutoField(primary_key=True)
     userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
     suuserid = models.CharField(db_column='suUserID', max_length=100)  # Field name made lowercase.
+    profilenum = models.PositiveBigIntegerField(db_column='profileNum')  # Field name made lowercase.
     auditionnum = models.PositiveBigIntegerField(db_column='auditionNum')  # Field name made lowercase.
     comment = models.TextField(blank=True, null=True)
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
@@ -266,7 +267,7 @@ class QaAdvertise(models.Model):
 
 
 class QaNotice(models.Model):
-    num = models.BigIntegerField(blank=True, null=True)
+    num =models.AutoField(primary_key=True)
     userid = models.CharField(db_column='userID', max_length=100, blank=True, null=True)  # Field name made lowercase.
     title = models.CharField(max_length=100, blank=True, null=True)
     content = models.CharField(max_length=500, blank=True, null=True)

@@ -117,21 +117,84 @@ def viewer(request, cate_type, num) :
     nowTime = timezone.now()
 
     if userType == "COMPANY" or userType == "S-COMPANY" :
+        userID = request.session.get('id', '')
         profiles.cviewcount = profiles.cviewcount + 1
         profiles.save()
         viewAdd = ProfileViewCompany.objects.create(profilenum=num, userid=user, regtime=nowTime)
+
+        audiList = AuditionInfo.objects.filter(userid=userID, isdelete="0")
 
     else :
         profiles.viewcount = profiles.viewcount +1
         profiles.save()
         viewAdd = ProfileView.objects.create(profilenum=num, userid=user, regtime=nowTime)
+        audiList = ""
     
 
     return render(request, 'profiles/viewer.html', { 'profiles':profiles, "userInfo":userInfo, "foreign" : foreign,
                                                      "careerEtc":careerEtc, "comment":comment, "pickCheck" : pickCheck,
                                                      "profileImages" : profileImages, "artImages" : artImages,
                                                      "youtubes" : youtubes, "movieCareer" : movieCareer, "dramaCareer" : dramaCareer,
-                                                     "etcCareer": etcCareer, "talent" : talent})
+                                                     "etcCareer": etcCareer, "talent" : talent, "audiList" : audiList})
+
+
+def viewer_all(request, cate_type, num):
+    # 프로필 정보.
+    profiles = ProfileInfo.objects.get(num=num)
+    writeUser = profiles.userid
+
+    # 프로필 등록자 정보
+    userInfo = UserInfo.objects.get(userid=writeUser)
+    careerEtc = ProfileEtccareer.objects.filter(profilenum=num).order_by("num")
+    comment = ProfileComment.objects.filter(profilenum=num).order_by("-num")
+
+    user = request.session.get('id', '')
+    if user:
+        pick = ProfilePick.objects.filter(userid=user)
+        if pick.count() == 0:
+            pickCheck = "0"
+        else:
+            pickCheck = "1"
+
+    else:
+        pickCheck = "0"
+
+    profileImages = profiles.detailimage.split("|")
+    artImages = profiles.artimage.split("|")
+    youtubes = profiles.youtube.split("|")
+    foreign = profiles.foreign.split("|")
+    talent = profiles.talent.split("|")
+
+    # 세부 분야별 경력정보
+    movieCareer = getCareerList(num, "movie")
+    dramaCareer = getCareerList(num, "drama")
+    etcCareer = getCareerList(num, "etc")
+
+    userType = request.session.get('userType', '')
+
+    nowTime = timezone.now()
+
+    if userType == "COMPANY" or userType == "S-COMPANY":
+        userID = request.session.get('id', '')
+        profiles.cviewcount = profiles.cviewcount + 1
+        profiles.save()
+        viewAdd = ProfileViewCompany.objects.create(profilenum=num, userid=user, regtime=nowTime)
+
+        audiList = AuditionInfo.objects.filter(userid=userID, isdelete="0")
+
+    else:
+        profiles.viewcount = profiles.viewcount + 1
+        profiles.save()
+        viewAdd = ProfileView.objects.create(profilenum=num, userid=user, regtime=nowTime)
+        audiList = ""
+
+    return render(request, 'profiles/viewer_all.html', {'profiles': profiles, "userInfo": userInfo, "foreign": foreign,
+                                                    "careerEtc": careerEtc, "comment": comment, "pickCheck": pickCheck,
+                                                    "profileImages": profileImages, "artImages": artImages,
+                                                    "youtubes": youtubes, "movieCareer": movieCareer,
+                                                    "dramaCareer": dramaCareer,
+                                                    "etcCareer": etcCareer, "talent": talent, "audiList": audiList})
+
 
 def pofile_write(request) :
 
@@ -139,7 +202,9 @@ def pofile_write(request) :
     user = UserInfo.objects.get(userid=userID)
     cate = CateMain.objects.all()
 
-    return render(request, 'profiles/write.html', { 'user':user, 'cate' : cate })
+    checkProfile = ProfileInfo.objects.filter(userid=userID)
+
+    return render(request, 'profiles/write.html', { 'user':user, 'cate' : cate, "checkProfile" : checkProfile })
 
 def pofile_write_callback(request) :
 
@@ -791,3 +856,24 @@ def deleteComment(request) :
     comment.delete()
 
     return JsonResponse({"code": "0"})
+
+def profileSuggest(request) :
+
+    audiNum = request.GET['audiNum']
+    comment = request.GET['comment']
+    num = request.GET['num']
+    writeUID = request.GET['writeUID']
+    userID = request.GET['userID']
+
+    nowTime = timezone.now()
+
+    saveSuggest = ProfileSuggest.objects.create(userid=writeUID, suuserid=userID, profilenum=num, auditionnum=audiNum,
+                                                comment=comment, regtime=nowTime)
+
+    return JsonResponse({"code": "0"})
+
+
+def printProfile(request, type, num) :
+
+
+    return render(request, 'profiles/profile_width.html' )

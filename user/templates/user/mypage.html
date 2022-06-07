@@ -149,7 +149,7 @@
             </div>
 
             <div class="volunteer">총 지원자 <span>{{ data.num|applyCount }}</span>명</div>
-            <div class="audiVolunteer" data-type="audiProfile">오디션 지원자 보기</div>
+            <div class="audiVolunteer" data-type="audiProfile" data-num="{{ data.num }}">오디션 지원자 보기</div>
         </div>
         {% endfor %}
     </div>
@@ -245,10 +245,10 @@
     {% endif %}
 
     {% if notice.count > 0 %}
-    <div class="mTtitle">공지사항 <span>전체보기</span></div>
+    <div class="mTtitle" style="margin-top: 30px">공지사항 <span data-type="notice">전체보기</span></div>
     <div class="notiBox">
         {% for noti in notice %}
-        <div class="notiList">
+        <div class="notiList" data-num="{{ noti.num }}">
             <div class="title">{{ noti.title }}</div>
             <div class="name">{{ noti.userid }}</div>
             <div class="date">{{ noti.regdate|date:"Y/m/d" }}</div>

@@ -1,0 +1,33 @@
+{% extends 'picktalk/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/notice.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/notice.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/notice.js' %}"></script>
+
+
+<div class="inBox">
+    <div class="titleBox">
+        <div class="title">{{ notice.title }}</div>
+        <div class="userInfo">관리자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ notice.regdate|date:"Y/m/d" }}</div>
+    </div>
+
+    <div class="content">
+        {{ notice.content }}
+        
+        {% if image != "" %}
+            <div class="imgBox">
+                {% for img in image %}
+                <img src="https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ img }}" width="800">
+                {% endfor %}
+            </div>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

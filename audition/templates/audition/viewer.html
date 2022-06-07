@@ -4,6 +4,7 @@
 
 <!-- Index CSS 파일 및 JS 파일 include -->
 {% load static %}
+{% load my_filter %}
 <link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/audi/viewer.css' %}"> <!-- pc 버전 -->
 <link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/audi/viewer.css' %}" > <!-- 모바일 버전 -->
 
@@ -96,8 +97,76 @@
     {% endif %}
 </div>
 
+<div class="audiApplyBack">
+    <div class="audiApplyPopup">
+        <div class="aTitle">오디션 지원</div>
+        <div class="closeSPopup"></div>
+
+        <div class="profileList">
+            {% for data in data1 %}
+            <div class="myProfile" data-num="{{ data.num }}">
+                <div class="btnBox">
+                    <input type="radio" class="profileCheck" name="profile" value="{{ data.num }}" id="check_{{ forloop.counter0 }}">
+                    <label class="checkProfile" for="check_{{ forloop.counter0 }}"></label>
+                </div>
+
+                <div class="userImage" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ data.profileimage }}");'></div>
+                <div class="userInfoBox">
+                    <div class="userName">{{ userInfo.name }} ({{ userInfo.birth|userAge }})
+                        {% if data.public == "on" %}
+                            <span></span>
+                        {% endif %}
+                    </div>
+                    <div class="pUInfo">
+                        키 {{ data.height }}cm | 몸무게 {{ data.weight }}kg<br>
+                        {% if userInfo.gender == "man" %} 군필 | {% endif %}
+                        {% if userInfo.entertain|default:"" == "" %}
+                        소속사 없음<br>
+                        {% else %}
+                        소속사 있음<br>
+                        {% endif %}
+                        {{ userInfo.school }} {{ userInfo.major }}<br>
+                        특기 {{ data.talent|replace_2:"|, " }}
+                   </div>
+
+                    {% with data.num|getPersent as persent %}
+                    <div class="proComplete">프로필 완성도 <span>{{ persent }}</span>%</div>
+                    <div class="proProgressBox">
+                        <div class="progressBar" style="width: {{ persent }}%"></div>
+                    </div>
+                    {% endwith %}
+
+                    <div class="viewBox">
+                        <div class="countBox">
+                            <span class="viewCount"></span>
+                            <p>{{ data.viewcount }}</p>
+                        </div>
+                        <div class="countBox">
+                            <span class="pickCount"></span>
+                            <p>{{ data.pickcount }}</p>
+                        </div>
+                        <div class="countBox">
+                            <span class="comViewCount"></span>
+                            <p>{{ data.cviewcount }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="aBtnBox">
+            <div class="sendProfile">선택한 프로필로 지원하기</div>
+        </div>
+    </div>
+</div>
+
+
+
 <script>
     var isDelete = "{{ auditions.29 }}";
+    var num = "{{ auditions.0 }}";
+    var writeUID = "{{ auditions.1 }}";
 </script>
 
 {% endfor %}

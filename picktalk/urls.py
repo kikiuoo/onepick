@@ -10,4 +10,9 @@ urlpatterns = [
 
     path("search/<cateType>/<search>/<int:page>/", views.searchList, name="searchList"),
 
+    path("notice/viewer/<int:num>/", views.notice, name="notice"),
+    path("notice/list/<int:page>/", views.notiList, name="notiList"),
+
+    path("proList/<type>/<int:page>/<num>/", views.proList, name="proList"),
+
 ]

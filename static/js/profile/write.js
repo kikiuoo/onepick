@@ -2,6 +2,11 @@ var mainYoutube = 0;
 var addListCount = 0;
 $(document).ready(function (){
 
+    if( checkProfile >= 3){
+        alert("프로필은 3개까지만 등록가능합니다.");
+        window.history.go(-1);
+    }
+
     // 기본정보 선택시 글자 색상 변경
     $(document).on("change", "select", function(){
         $(this).css("color", "#1f1f1f");

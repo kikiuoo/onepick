@@ -1,0 +1,29 @@
+{% extends 'picktalk/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/user/mypage.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/user/mypage.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/notice.js' %}"></script>
+
+<div class="mTtitle">공지사항</div>
+<div class="notiBox">
+    {% for noti in notice %}
+    <div class="notiList" data-num="{{ noti.num }}">
+        <div class="title">{{ noti.title }}</div>
+        <div class="name">{{ noti.userid }}</div>
+        <div class="date">{{ noti.regdate|date:"Y/m/d" }}</div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="page">
+    {% for pages in paging %}
+        <div class="pages {% if pages == page %} nowPage {% endif %}"  data-page="{{ pages }}">{{ pages }}</div>
+    {% endfor %}
+</div>
+
+{% endblock %}

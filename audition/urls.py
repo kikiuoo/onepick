@@ -14,4 +14,5 @@ urlpatterns = [
     path('del/<int:num>/', views.audi_delete, name='audi-delete'),
 
     path('ajax/getSubCate/', views.audiAjaxGetCate, name="audi-getCate"),
+    path('ajax/audiApply/', views.audiApply, name="audi-audiApply"),
 ]

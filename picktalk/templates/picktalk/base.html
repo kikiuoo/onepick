@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width">
 
     {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/base.css' %}"> <!-- PC 버전 -->
     <link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/base.css' %}" > <!-- 모바일 버전 -->
 
@@ -38,6 +39,10 @@
         <!-- header -->
         <div class="header">
             <div class="logo"></div>
+
+            <div class="menu mobileNone" data-url="/audi/main/all/">오디션</div>
+            <div class="menu mobileNone" data-url="/profile/list/actor/">프로필</div>
+
             <div class="searchBox">
                 <input type="text" name="search" id="search" placeholder="오디션,인물 검색"/>
                 <div class="search"></div>
@@ -57,9 +62,6 @@
             </div>
             <div class="line"></div>
             {% endif %}
-
-            <div class="menu mobileNone" data-url="/audi/main/all/">오디션</div>
-            <div class="menu mobileNone" data-url="/profile/list/actor/">프로필</div>
 
             {% if request.session.id == "" or request.session.id == null %}
             <div class="login mobileNone">로그인</div>
