@@ -5,32 +5,37 @@
 */
 
 /* Index Main Banner */
-.mainBanner{
+.mobilBanner{
+    position: relative;
     width: 100%;
-    min-width: 300px; /* width가 100%인경우 최소 수치 300. */
-    height: 125px;
-    border-radius: 22px;
-    background-color: #c4c4c4;
+    padding-bottom: 36%;
     margin-bottom: 30px;
+}
+.mainBanner{
+    position: absolute !important;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #c4c4c4;
 }
 
 /* Index 제목 */
 .mainTitle{
     position: relative;
-    margin-bottom: 14px;
-    padding : 3px;
-    font-size: 15px;
+    margin-bottom: 10px;
+    font-size: 14px;
     font-weight: bold;
     color: #282828;
 }
 
 .mainTitle span{
     position: absolute;
-    right: 3px;
+    right: 8px;
     bottom: 0px;
 
     font-size: 10px;
-    font-weight: bold;
     color: #959595;
 }
 
@@ -45,12 +50,11 @@
     position: relative;
     display:  inline-block;
     width: calc(50% - 5.5px);
-    height: 160px;
+    padding-bottom: calc(50% - 5.5px);
     margin-right: 11px;
     margin-bottom: 10px;
     box-sizing: border-box;
     overflow: hidden;
-    padding: 12px 6px;
 
     border-radius: 22px;
     border: solid 1px #c0c0c0;
@@ -66,7 +70,7 @@
     top: 12px;
     left: 6px;
     width: calc(100% - 12px);
-    height: 74px;
+    padding-bottom: 36%;
     background-color: #fff;
 
     background-position: left center;
@@ -75,13 +79,14 @@
 }
 
 .audition .audiTitle{
-    margin-top: 70px;
-    margin-bottom: 10px;
+    position: absolute;
+    width: calc(100% - 12px);
+    height: 38px;
+    top: calc(36% + 20px);
+    left: 6px;
     font-size: 11px;
     line-height: 1.6;
-    font-weight: bold;
-    color: #292929;
-    min-height: 40px;
+    color: #454545;
     box-sizing: border-box;
 
     /* 2줄 이상일 경우 ... 처리 */
@@ -92,6 +97,9 @@
     -webkit-box-orient:vertical;
 }
 .audition .audiTerm{
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
     padding-left : 4px;
     font-size: 12px;
     font-weight: bold;
@@ -115,86 +123,61 @@
     background-image: url("../../image/mobile/pick_on.png");
 }
 
+.titleMargin{
+    margin-top: 20px;
+}
+
 /* 프로필 정보 CSS */
 .profile{
-    display:  inline-block;
-    width: calc(50% - 8px);
-    padding-bottom: 50%;
-    margin-right: 16px;
-    margin-bottom: 16px;
-    border-radius: 22px;
-    background-color: #c4c4c4;
-
-    background-position: top;
-    background-repeat:  no-repeat;
-    background-size: cover;
-}
-
-.profile:nth-child(2n){
-    margin-right: 0px;
-}
-
-/* 소베너 CSS */
-.subBanner{
-    padding-bottom: 23.5%;
-    background-color: #c4c4c4;
-    border-radius: 18px;
-
-    background-position: center;
-    background-repeat:  no-repeat;
-    background-size: cover;
-}
-
-.subBanner:nth-child(2){
-    display:  none;
-}
-
-/* 알바픽 정보 */
-.partTime{
     position: relative;
     display:  inline-block;
-    width: calc(50% - 8px);
-    margin-right: 16px;
-    margin-bottom: 16px;
-    border-radius: 22px;
-    padding : 18px 22px;
-    box-shadow: 0 1px 13px 0 rgba(235, 235, 235, 0.9);
+    width: 100%;
+    padding-bottom: 55%;
+    margin-bottom: 10px;
+    border-radius: 20px;
     background-color: #fff;
+    border: solid 1px #c0c0c0;
+    overflow: hidden;
+    cursor: pointer;
+    min-height: 186px;
     box-sizing: border-box;
 }
-.partTime:nth-child(2n){
-    margin-right: 0px;
-}
 
-.partTime .partDay{
+.profile .image{
     position: absolute;
-    right: 18px;
-    top: 18px;
-    padding: 4px 10px;
-    border-radius: 33px;
-    background-color: #ff8aae;
+    width: 44%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
 
-    font-family: 'Spoqa Han Sans';
-    font-size: 9px;
-    font-weight: bold;
-    color: #fff;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: top center;
 }
 
-.partTime .partLogo{
-    width: 100%;
-    padding-bottom: 23.4%;
-    background-color: #c4c4c4;
-    margin-bottom: 2px;
+.profile .info{
+    position: absolute;
+    width: 56%;
+    height: 100%;
+    box-sizing: border-box;
+
+    top: 0px;
+    right: 0px;
+    padding: 14px 10px;
 }
 
-.partTime .partTitle{
-    margin-bottom: 7px;
-    font-family: 'Spoqa Han Sans';
-    font-size: 10px;
-    line-height: 1.4;
+.profile .info .name{
+    font-size: 14px;
     font-weight: bold;
-    color: #292929;
-    min-height: 28px;
+    color: #454545;
+    margin-bottom: 12px;
+}
+
+.profile .info .infoDetail{
+    font-size: 12px;
+    line-height: 1.5;
+    color: #1f1f1f;
+    margin-bottom: 12px;
 
     /* 2줄 이상일 경우 ... 처리 */
     white-space : normal;
@@ -204,18 +187,44 @@
     -webkit-box-orient:vertical;
 }
 
-.partTime .partInfo{
-    display:  inline-block;
-    margin-bottom: 4px;
-    margin-right: 3px;
-    background-color: #f4f4f4;
-    border-radius: 22px;
-    padding: 3px 8px;
+.viewBox{
+    position: absolute;
+    left: 10px;
+    bottom: 8px;
+}
 
-    font-family: 'Spoqa Han Sans';
+.viewBox .countBox{
+    display: inline-block;
+    height: 34px;
+    width: 22px;
+    margin-right: 5px;
+}
+
+.viewBox .countBox:nth-child(3){
+    margin-right: 0px;
+}
+
+.viewBox .countBox span{
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.viewBox .countBox span.viewCount{ background-image: url("../../image/web/viewCount.png")}
+.viewBox .countBox span.pickCount{ background-image: url("../../image/web/pickCount.png")}
+.viewBox .countBox span.comViewCount{ background-image: url("../../image/web/companyView.png")}
+
+.viewBox .countBox p{
+    margin: 0px;
+    padding: 0px;
+
     font-size: 8px;
-    font-weight: bold;
-    color: #292929;
+    text-align: center;
+    color: #ff8aae;
 }
 
 .swiper-button-prev , .swiper-button-next{

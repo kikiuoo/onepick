@@ -2,30 +2,21 @@
     cursor: pointer;
     width: 1220px;
     height: 340px;
-    border-radius: 22px;
+    border-radius: 20px;
     background-color: #c4c4c4;
 }
 
 .title{
     position : relative;
     margin-top: 40px;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: bold;
-    color: #1f1f1f;
+    color: #282828;
     padding : 0px 10px;
 }
 
-.title span{
-    position: absolute;
-    right: 0px;
-    font-size: 24px;
-    font-weight: bold;
-    color: #1f1f1f;
-    cursor: pointer;
-}
-
 .inBox{
-    padding: 20px 10px 0px;
+    padding: 0px 10px;
     font-size: 0px;
 }
 
@@ -33,11 +24,12 @@
     position : relative;
     display : inline-block;
     width: 285px;
-    height: 280px;
-    border-radius: 33px;
+    height: 235px;
+    border-radius: 20px;
     border: solid 1px #c0c0c0;
     background-color: #fff;
-    margin-top: 20px;
+
+    margin-top: 10px;
     margin-right: 20px;
     box-sizing: border-box;
     overflow: hidden;
@@ -51,12 +43,10 @@
 }
 
 .inBox .audition .audiLogo{
-    position: absolute;
     background-color : #fff;
-    width : calc(100% - 10px);
-    height :128px;
-    top: 10px;
-    left: 10px;
+    width : 265px;
+    height :100px;
+    margin-bottom: 30px;
 
     background-position: center;
     background-repeat:  no-repeat;
@@ -65,14 +55,12 @@
 
 .inBox .audition .audiTitle{
     display : block;
-    height : 76px;
-    margin-top: 148px;
+    height : 45px;
 
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 1.65;
+    font-size: 16px;
+    line-height: 1.5;
     letter-spacing: normal;
-    color: #292929;
+    color: #1f1f1f;
 
     /* 2줄 이상일 경우 ... 처리 */
     white-space : normal;
@@ -84,19 +72,19 @@
 
 .inBox .audition .audiTerm{
     padding-left: 10px;
-    height : 26px;
-    font-size: 20px;
+    height : 19px;
+    font-size: 15px;
     font-weight: bold;
     letter-spacing: normal;
-    color: #1f1f1f;
+    color: #454545;
 }
 
-.audition .pickBtn{
+.pickBtn{
     position: absolute;
     bottom: 20px;
-    right: 20px;
-    width: 41px;
-    height: 41px;
+    right: 18px;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
 
     background-image: url("../../../image/web/pick_off.png");
@@ -105,15 +93,15 @@
     background-size: cover;
 }
 
-.audition .pickBtn.pickOn{
+.pickBtn.pickOn{
     background-image: url("../../../image/web/pick_on.png");
 }
 
 
 .audiList{
     width: 1200px;
-    margin: 20px 0 0;
-    padding: 0px 50px 15px;
+    margin: 10px 0 0;
+    padding: 0px 50px;
     border-radius: 33px;
     border: solid 1px #c0c0c0;
     background-color: #fff;
@@ -122,7 +110,7 @@
 }
 
 .audiList .audiListBox{
-    padding : 36px 20px 21.5px;
+    padding : 11px 20px 11px 41px;
     border-top : 1px solid #c0c0c0;
     cursor: pointer;
 }
@@ -131,42 +119,33 @@
     border-top : 0px;
 }
 
-.audiList .audiListBox .companyName{
+.audiList .audiListBox .audiLogo{
     display: inline-block;
-    width: 300px;
-    height: 62px;
-    line-height: 62px;
-    font-size: 22px;
-    font-weight: bold;
-    color: #1f1f1f;
-    box-sizing: border-box;
-    vertical-align: top;
-    margin-left: 24px;
+    width: 183px;
+    height: 87px;
+    margin-right: 71px;
 
-
-    /* 2줄 이상일 경우 ... 처리 */
-    white-space : normal;
-    overflow: hidden;
-    -webkit-line-clamp:1;
-    -webkit-box-orient:vertical;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .audiList .audiListBox .sContent{
     display: inline-block;
     width: 580px;
-    height: 62px;
+    height: 87px;
     box-sizing: border-box;
     vertical-align: top;
     margin-left: 24px;
+    padding: 18px 0px 0px 19px;
 }
 
 .audiList .audiListBox .sContent .lTitle{
     display: inline-block;
     width: 580px;
-    height: 26px;
-    line-height: 26px;
-    font-size: 20px;
-    font-weight: bold;
+    height: 20px;
+    line-height: 20px;
+    font-size: 16px;
     color: #1f1f1f;
     box-sizing: border-box;
     vertical-align: top;
@@ -185,7 +164,7 @@
 .audiList .audiListBox .sContent .lAppel span{
     display: inline-block;
     margin-right: 10px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     color: #959595;
 }
@@ -194,9 +173,8 @@
     display: inline-block;
     margin: 0px;
     padding: 0px;
-    margin-right: 20px;
-    font-size: 20px;
-    font-weight: bold;
+    margin-right: 30px;
+    font-size: 16px;
     color: #1f1f1f;
 }
 

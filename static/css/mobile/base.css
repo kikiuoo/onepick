@@ -6,11 +6,12 @@ body{
     padding : 0px;
     margin : 0px;
     position: relative;
-    font-family: 'Spoqa Han Sans' !important;
+    background-color: #fff;
+    font-family: 'Noto Sans KR', sans-serif !important;
 }
 
 .container{
-    padding : 30px 17px;
+    padding : 20px 18px;
     margin : 0 auto;
     box-sizing: border-box;
 }
@@ -23,16 +24,16 @@ body{
 .header{
     position: relative;
     font-size: 0px;
-    margin-bottom: 25px;
-    height: 24px;
+    margin-bottom: 20px;
+    padding: 0px 2px;
+    height: 30px;
     box-sizing: border-box;
     border: 1px solid #fff;
 }
 
 .header .logo{
-    width: 94px;
-    height: 15px;
-    margin-top: 4.5px;
+    width: 30px;
+    height: 30px;
 
     background-image: url("../../image/mobile/logo.png");
     background-position: center;
@@ -43,9 +44,9 @@ body{
 
 .header .searchBox{
     position: absolute;
-    right: 34px;
-    top: -4px;
-    height: 28px;
+    right: 36px;
+    top: -2px;
+    height: 26px;
     width: 170px;
     border-radius: 33px;
     border: solid 1px #ff8aae;
@@ -66,6 +67,7 @@ body{
     line-height: 28px;
     font-weight: bold;
     color: #ff8aae;
+    font-family: 'Noto Sans KR', sans-serif
 }
 .header .searchBox #search::placeholder{
     font-size: 10px;
@@ -77,12 +79,12 @@ body{
 }
 .header .searchBox .search{
     display:  inline-block;
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 15px;
     box-sizing:border-box;
     vertical-align: top;
     cursor: pointer;
-    margin-top: 6px;
+    margin-top: 4px;
 
     background-image : url('../../image/mobile/searchBtn.png');
     background-size : cover;
@@ -124,73 +126,57 @@ body{
     right: 0px;
     top: 0px;
     height: 100%;
-    width: 70%;
+    width: 262px;
     box-sizing: border-box;
     background-color: #fff;
-    padding : 50px 34px 50px 43px;
-}
-
-.menuPopup .sideMenu .m_loginBox{
-    margin-top: 28px;
-    margin-bottom: 11.5px;
-}
-
-.menuPopup .sideMenu .m_loginBox .login{
-    height: 23px;
-    line-height: 23px;
-    padding : 0px 6px;
-
-    font-size: 11px;
-    font-weight: bold;
-    color: #bbb;
-    text-align: right;
-    cursor: pointer;
+    padding : 50px 34px 50px 40px;
 }
 
 .menuPopup .sideMenu .infoBox{
     position: relative;
-    height: 23px;
-    line-height: 23px;
-    padding : 0px 6px;
-    font-size: 0px;
-    margin: 13px 0px;
-    cursor: pointer;
-}
+    margin-bottom: 11.5px;
 
-.menuPopup .sideMenu .infoBox span{
-    display: inline-block;
-    height: 23px;
-    line-height: 23px;
-    font-size: 15px;
-    font-weight: bold;
-    color: #ff8aae;
-    padding-left: 33px;
-}
-
-.menuPopup .sideMenu .infoBox .logout{
-    position: absolute;
-    right: 15px;
-    height: 23px;
-    line-height: 23px;
-    display: inline-block;
-    font-size: 11px;
-    font-weight: bold;
-    color: #bbb;
-    text-align: right;
-    cursor: pointer;
 }
 
 .menuPopup .sideMenu .infoBox .infoIcon{
     position: absolute;
-    width: 20px;
-    height: 20px;
-    margin-top: 1.5px;
+    width: 24px;
+    height: 24px;
+    top: 0px;
+    left: -2px;
     box-sizing: border-box;
 
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.menuPopup .sideMenu .m_loginBox .login,
+.menuPopup .sideMenu .m_loginBox .mypage{
+    width: 56px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #ff8aae;
+    padding-left: 27px;
+    cursor: pointer;
+}
+
+.menuPopup .sideMenu .infoBox .join,
+.menuPopup .sideMenu .infoBox .logout{
+    position: absolute;
+    right: 1px;
+    height: 23px;
+    line-height: 23px;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    color: #bbb;
+    text-align: right;
+    cursor: pointer;
+}
+
 
 .menuPopup .sideMenu .infoBox p{
     height: 23px;
@@ -217,8 +203,9 @@ body{
 
 .menuPopup .sideMenu .m_inbox{
     border-top: 1px solid #dfdfdf;
-    padding-top: 19px;
-    padding-bottom: 19px;
+    padding-top: 17.5px;
+    padding-bottom: 19.5px;
+    padding-left: 7.5px;
 }
 .menuPopup .sideMenu .infoBox#login .infoIcon{ background-image: url("../../image/mobile/mypageIcon.png"); }
 .menuPopup .sideMenu .infoBox#mypick .infoIcon{ background-image: url("../../image/mobile/myPick.png"); }
@@ -229,67 +216,50 @@ body{
 .menuPopup .sideMenu .infoBox#choice .infoIcon{ background-image: url("../../image/mobile/pickChoiceIcon.png"); }
 .menuPopup .sideMenu .infoBox#setting .infoIcon{ background-image: url("../../image/mobile/settingIcon.png"); }
 
-/* menu 버튼 클릭시 변경된 디자인 */
-
-
-.header .searchBtn{
-    width: 24px;
-    height: 24px;
-    position: absolute;
-    top: -3px;
-    right: 43px;
-
-    background-image: url("../../image/mobile/searchBtn.png");
-    background-position: center;
-    background-size: 80%;
-    background-repeat: no-repeat;
-    cursor: pointer;
-}
-
-.header .menu{
-    display: inline-block;
-    width: 50%;
-    font-size: 16px;
+.menuPopup .sideMenu .infoBox#profileReg p{
+    font-size: 13px;
     font-weight: bold;
-    color: #1f1f1f;
-    text-align: center;
-    cursor: pointer;
+    color: #7f84ea;
 }
+
+.menuPopup .sideMenu .infoBox#auditonReg p{
+    font-size: 13px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+
+/* menu 버튼 클릭시 변경된 디자인 */
 
 /* Mobile Base Footer CSS */
 .footer{
     background-color: #f8f8f8;
-    padding: 13px 20px;
+    padding: 14px 20px;
 }
 
 .footer .company{
     display: inline-block;
-    font-size: 13px;
-    color: #000000;
-    font-weight: 500;
-    margin-bottom: 16px;
+    font-size: 10px;
+    color: #454545;
+    margin-bottom: 10px;
 }
 
 .footer .companyLink{
     font-size: 0px;
-    margin-bottom: 11px;
+    margin-bottom: 10px;
 }
 
 .footer .companyLink span{
     display: inline-block;
-    font-size: 13px;
-    font-weight: 500;
-    color: #1f1f1f;
-    margin-right: 24px;
+    font-size: 10px;
+    color: #6f6f6f;
+    margin-right: 30px;
     cursor: pointer;
 }
 
 .footer .info{
     display: inline-block;
     font-size: 10px;
-    font-weight: 500;
     color: #1f1f1f;
-    line-height: 1em;
 }
 
 /* 로그인 Popup 디자인 추가되면 구현 예정 */

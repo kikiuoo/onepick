@@ -11,6 +11,8 @@ from django.conf import settings
 from django.utils import timezone
 import hashlib
 
+from myonepick.common import *
+
 
 def md5_generator(str):
     m = hashlib.md5()
@@ -23,7 +25,7 @@ def md5_generator(str):
 #     /audi/main/actor/ : 배우 탭 활성화, 기본 탭.
 #     /audi/main/model/ : 모델 탭 활성화
 #     /audi/main/singer/ : 가수 탭 활성화
-def audi_index(request, cate_type): # 오디션 Main
+def audi_index(request, cate_type, page): # 오디션 Main
     try:
         cursor = connection.cursor()
 
@@ -60,24 +62,32 @@ def audi_index(request, cate_type): # 오디션 Main
         result = cursor.execute(query)
         finishAudi = cursor.fetchall()
 
-        query = "SELECT ai.num, ai.title, cm.cateName, ai.career, ai.age, ai.endDate, ai.regTime, ai.ordinary, uc.companyName, DATEDIFF(NOW(),  ai.regTime) AS diffDate " \
+        block = 10
+        start = (page - 1) * block
+        end = page * block
+
+        query = "SELECT ai.num, ai.title, cm.cateName, ai.career, ai.age, ai.endDate, ai.regTime, ai.ordinary, uc.logoImage, DATEDIFF(NOW(),  ai.regTime) AS diffDate " \
                 "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode " \
                 "    LEFT JOIN  user_company AS uc ON ai.userID = uc.userID " \
                 "where  ai.isDelete = '0' or ai.isDelete is null "\
-                "ORDER BY ai.regTime DESC limit 15"
+                "ORDER BY ai.regTime DESC limit "+ str(start) +", "+ str(end)
 
         result = cursor.execute(query)
         audition = cursor.fetchall()
 
+        allPage = (len(audition) / block) + 1
+        paging = getPageList(page, allPage)
+
         connection.commit()
         connection.close()
+
     except:
         connection.rollback()
         print('Faild DB Connection')
 
 
-    return render(request, 'audition/index.html', {'cateType' : cate_type , 'subBanner' : subBanner, "recomAudi" : recomAudi, "finishAudi" : finishAudi, "audition": audition} )
-
+    return render(request, 'audition/index.html', {'cateType' : cate_type , 'subBanner' : subBanner, "recomAudi" : recomAudi,
+                                                   "finishAudi" : finishAudi, "audition": audition, "paging" : paging } )
 #     /audi/audiDetail/(category)/(글번호)
 def audi_detail(request, cate_type, num) :
     try :

@@ -29,7 +29,7 @@ $(document).ready(function () {
     });
 
     // 메뉴 버튼 이벤트 (공통)
-    $(document).on("click", ".header .menu", function(){
+    $(document).on("click", ".header .menu, .menuCate", function(){
        var url = $(this).attr("data-url");
 
        if(url == "#") { alert("서비스 준비중입니다."); return; }
@@ -37,7 +37,7 @@ $(document).ready(function () {
        window.location.href = url;
     });
 
-    $(document).on("click", ".audiRegBtn", function(){
+    $(document).on("click", ".audiRegBtn, #auditonReg", function(){
 
         if( userID ){
             window.location.href = "/audi/write/";
@@ -47,7 +47,7 @@ $(document).ready(function () {
 
     });
 
-    $(document).on("click", ".profileRegBtn", function (){
+    $(document).on("click", ".profileRegBtn, #profileReg", function (){
         if( userID ){
             window.location.href = "/profile/write/";
         }else{
@@ -56,14 +56,14 @@ $(document).ready(function () {
     });
 
     /* Header 버튼 Web 이벤트 */
-    $(document).on("click",".header .login", function(){
+    $(document).on("click",".login", function(){
 
         window.location.href = "/users/login/local/";
 
     });
 
     /* Header 버튼 Web 이벤트 */
-    $(document).on("click",".header .join", function(){
+    $(document).on("click",".join", function(){
 
         window.location.href = "/users/joinView/";
 
@@ -97,53 +97,6 @@ $(document).ready(function () {
     $(document).on("click", ".menuPopup .sideMenu", function(e){
         e.preventDefault();
         e.stopPropagation();
-    });
-
-    $(document).on("click", ".menuPopup .infoBox", function(){
-        var urlType = $(this).attr("id");
-
-        if( urlType == "login" ){
-            return;
-        }else if( urlType == "mypick" ){
-            window.location.href = "#";
-        }else if( urlType == "auditonReg" ){
-            window.location.href = "#";
-        }else if( urlType == "profileReg" ){
-            window.location.href = "#";
-        }else if( urlType == "parttimeReg" ){
-            window.location.href = "#";
-        }else if( urlType == "advice" ){
-            window.location.href = "#";
-        }else if( urlType == "choice" ){
-            window.location.href = "#";
-        }else if( urlType == "setting" ){
-            window.location.href = "#";
-        }
-    });
-
-
-    // 기업회원 등록 팝업 제어
-    $(document).on("click", ".registerBox .regiBtn", function (){
-        var btnType = $(this).attr("data-type");
-
-       if( userID == null || userID == ""){
-            alert("로그인 후 이용가능합니다.");
-            return;
-        }
-
-        if( btnType == "audition" ){
-            if( userType == "COMPANY"){
-                window.location.href = "/audi/write/"
-            }else if( userType == "NORMAL"){
-                $(".registerBox").css("display", "none");
-                $(".regCompanyPopup").css("display", "block");
-            }
-        }
-
-    });
-
-    $(document).on("click", ".regCompanyPopup .close, .regCompanyPopup .closeBtn", function(){
-       $(".regCompanyPopup").css("display", "none");
     });
 
     $(document).on("click", ".mypage", function(){

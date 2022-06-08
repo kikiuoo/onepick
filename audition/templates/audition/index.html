@@ -76,7 +76,7 @@
     <div class="audiList">
         {% for auditions in audition %}
         <div class="audiListBox" data-num="{{ auditions.0 }}">
-            <div class="companyName">{{ auditions.8 }}</div>
+            <div class="audiLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ auditions.8 }}");'></div>
             <div class="sContent">
                 <div class="lTitle">{{ auditions.1 }}</div>
                 <div class="lAppel">

@@ -1,15 +1,13 @@
 .subCate{
     padding-left: 10px;
     font-size: 0px;
-    margin-bottom: 30px;
-    margin-top: 12px;
+    margin-bottom: 20px;
 }
 .subCate .cate{
     display: inline-block;
-    margin-right: 37px;
-    font-size: 36px;
+    font-size: 24px;
     font-weight: bold;
-    color: #b9b9b9;
+    color: #282828;
     cursor: pointer;
 }
 

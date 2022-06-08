@@ -13,22 +13,23 @@
 
 <!-- 본문 내용 -->
 <!-- 메인 베너 -->
-<div class="swiper mySwiper mainBanner">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
-        <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
-        <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
-        <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
-        <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
-        <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
-        <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
+<div class="mobilBanner">
+    <div class="swiper mySwiper mainBanner">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
+            <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
+            <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
+            <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
+            <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
+            <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
+            <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
+        </div>
+        <div class="swiper-pagination"></div>
+
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
     </div>
-    <div class="swiper-pagination"></div>
-
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
 </div>
-
 
 <!-- 본문 내용 : 오디션 정보 -->
 <div class="mainTitle">
@@ -62,7 +63,7 @@
 <!-- 본문 내용 : 프로필 정보 -->
 <div class="mainTitle titleMargin">
     프로필 정보
-    <span class="mobileNone" data-url="/profile/list/actor/">전체보기</span>
+    <span data-url="/profile/list/actor/">전체보기</span>
 </div>
 
 <div class="inBox">
@@ -70,38 +71,38 @@
     <div class="profile" data-num="{{ profile.0 }}">
         <div class="image"  style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profile.1 }}");'></div>
         <div class="info">
-            <div class="name">{{ profile.6|updateUserName }} ({{ profile.7|userAge }})</div>
+            <div class="name">{{ profile.4|updateUserName }} ({{ profile.5|userAge }})</div>
             <div class="infoDetail">
-                키 {{ data.2 }}cm | 몸무게 {{ data.3 }}kg<br>
-                {% if data.7 == "man" %} 군필 | {% endif %}
-                {% if data.6|default:"" == "" %}
+                키 {{ profile.2|userHight }}cm | 몸무게 {{ profile.3|userHight }}kg<br>
+                {% if profile.7 == "man" %} 군필 | {% endif %}
+                {% if profile.6|default:"" == "" %}
                 소속사 없음<br>
                 {% else %}
                 소속사 있음<br>
                 {% endif %}
             </div>
             <div class="infoDetail">
-                {{ data.9 }} {{ data.10 }}<br>
-                특기 {{ data.11|replace_2:"|, " }}
+                {{ profile.9 }} {{ profile.10 }}<br>
+                특기 {{ profile.11|replace_2:"|, " }}
             </div>
 
             <div class="viewBox">
                 <div class="countBox">
                     <span class="viewCount"></span>
-                    <p>{{ profile.3 }}</p>
+                    <p>{{ profile.13 }}</p>
                 </div>
                 <div class="countBox">
                     <span class="pickCount"></span>
-                    <p>{{ profile.4 }}</p>
+                    <p>{{ profile.14 }}</p>
                 </div>
                 <div class="countBox">
                     <span class="comViewCount"></span>
-                    <p>{{ profile.5 }}</p>
+                    <p>{{ profile.15 }}</p>
                 </div>
             </div>
         </div>
 
-        {% if profile.9 == 0 or profile.9 == "0" %}
+        {% if profile.12 == 0 or profile.12 == "0" %}
         <div class="pickBtn" data-nowType="off"></div>
         {% else %}
         <div class="pickBtn pickOn " data-nowType="on"></div>
@@ -110,69 +111,6 @@
     {% endfor %}
 
     <div class="profileBlank"></div>
-</div>
-
-<!--
-    본문 내용 : 소베너
-    모바일/PC 표시 순서가 다름.
-
-    방법 1 : HTML 구문 2개 생성. Class로 제어.
-    방법 2 : css order 속성 사용하여 순서 변경
-
-    결론, 방법 2로 사용시 화면이 정상적으로 표시 X. 따라서 방법 1 사용.
--->
-<div class="inBox mobileNone">
-    {% for pickChoise in pickChoises %}
-    <div class="subBanner" data-url="{{ pickChoise.url }}"  style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ pickChoise.image }}");'></div>
-    {% endfor %}
-</div>
-
-<!-- 본문 내용 : 알바픽 정보 -- DB 정보 없음.
-<div class="mainTitle titleMargin">
-    알바픽 정보
-    <span class="mobileNone" data-url="#">전체보기</span>
-</div>
-
-<div class="inBox">
-    <div class="partTime">
-        <div class="partDay">D-5</div>
-        <div class="partLogo"></div>
-        <div class="partTitle">현대백화점 목동점 와인판매 아르바이트</div>
-        <span class="partInfo">시급 9,500원</span>
-        <span class="partInfo">시간협의</span>
-        <span class="partInfo">5일단기</span>
-    </div>
-    <div class="partTime">
-        <div class="partDay">D-5</div>
-        <div class="partLogo"></div>
-        <div class="partTitle">현대백화점 목동점 와인판매 아르바이트</div>
-        <span class="partInfo">시급 9,500원</span>
-        <span class="partInfo">시간협의</span>
-        <span class="partInfo">5일단기</span>
-    </div>
-    <div class="partTime">
-        <div class="partDay">D-5</div>
-        <div class="partLogo"></div>
-        <div class="partTitle">현대백화점 목동점 와인판매 아르바이트</div>
-        <span class="partInfo">시급 9,500원</span>
-        <span class="partInfo">시간협의</span>
-        <span class="partInfo">5일단기</span>
-    </div>
-    <div class="partTime noneMargin">
-        <div class="partDay">D-5</div>
-        <div class="partLogo"></div>
-        <div class="partTitle">현대백화점 목동점 와인판매 아르바이트 현대백화점 목동점 와인판매 아르바이트</div>
-        <span class="partInfo">시급 9,500원</span>
-        <span class="partInfo">시간협의</span>
-        <span class="partInfo">5일단기</span>
-    </div>
-</div>
--- -->
-<!-- 모바일용 소베너: PC와 표출위치가 달라 HTML 코드로 제어 -->
-<div class="inBox pcNone">
-    {% for pickChoise in pickChoises %}
-    <div class="subBanner" data-url="{{ pickChoise.url }}" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ pickChoise.image }}");'></div>
-    {% endfor %}
 </div>
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>

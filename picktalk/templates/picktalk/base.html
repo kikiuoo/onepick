@@ -40,7 +40,7 @@
         <div class="header">
             <div class="logo"></div>
 
-            <div class="menu mobileNone" data-url="/audi/main/all/">오디션</div>
+            <div class="menu mobileNone" data-url="/audi/main/all/1/">오디션</div>
             <div class="menu mobileNone" data-url="/profile/list/actor/">프로필</div>
 
             <div class="searchBox">
@@ -54,13 +54,11 @@
                 <div class="icon"></div>
                 <div class="name">오디션 등록</div>
             </div>
-            <div class="line"></div>
             {% elif request.session.userType == "NORMAL" and request.session.id != null %}
             <div class="profileRegBtn">
                 <div class="icon"></div>
                 <div class="name">프로필 등록</div>
             </div>
-            <div class="line"></div>
             {% endif %}
 
             {% if request.session.id == "" or request.session.id == null %}
@@ -96,22 +94,24 @@
     <div class="menuPopup pcNone">
         <div class="sideMenu">
             <div class="m_loginBox">
-                {% if request.session.id == "" or request.session.id == null %}
-                <div class="login">로그인/회원가입</div>
-                {% else %}
                 <div class="infoBox" id="login">
+                {% if request.session.id == "" or request.session.id == null %}
                     <div class="infoIcon"></div>
-                    <span>{{ request.session.id }}</span>
-                    <div class="logout">로그아웃하기</div>
-                </div>
+                    <span class="login">로그인</span>
+                    <div class="join">회원가입</div>
+                {% else %}
+                    <div class="infoIcon"></div>
+                    <span class="mypage">마이페이지</span>
+                    <div class="logout">로그아웃</div>
                 {% endif %}
+                </div>
             </div>
 
             <div class="m_inbox">
-                <div class="menuCate" id="audition">
+                <div class="menuCate" id="audition" data-url="/audi/main/all/1/">
                     <p>오디션</p>
                 </div>
-                <div class="menuCate" id="profile">
+                <div class="menuCate" id="profile" data-url="/profile/list/actor/">
                     <p>프로필</p>
                 </div>
             </div>

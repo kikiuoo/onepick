@@ -10,6 +10,8 @@ from email.mime.text import MIMEText
 
 from picktalk.models import *
 
+from myonepick.common import *
+
 # Create your views here.
 
 # Index 페이지 Query 내용
@@ -39,18 +41,18 @@ def index(request):
 
         # 프로필
         if user:
-            query = "SELECT p.num, profileImage, height, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user +"' AND profileNum = p.num ) AS proPick " \
+            query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user +"' AND profileNum = p.num ) AS proPick, viewCount, pickCount, cViewCount " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
                     "WHERE public = '0' and isDelete = '0' " \
                     "ORDER BY regDate DESC " \
-                    "LIMIT 4"
+                    "LIMIT 6"
         else:
-            query = "SELECT p.num, profileImage, height, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, '0' AS proPick " \
+            query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, '0' AS proPick, viewCount, pickCount, cViewCount " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui " \
                     "     ON p.userID = ui.userID " \
                     "WHERE public = '0' and isDelete = '0' " \
                     "ORDER BY regDate DESC  " \
-                    "LIMIT 4"
+                    "LIMIT 6"
 
         result = cursor.execute(query)
         profiles = cursor.fetchall()
@@ -248,24 +250,3 @@ def proList(request, type, page, num) :
     return render(request, 'user/proList.html', {"type": type, "page":page, "profile": profile,
                                                  "allCount" : cursor.rowcount })
 
-def getPageList ( nowPage, allPage) :
-
-    sPage = nowPage - 2
-    if sPage <= 0 :
-        startPage = 1
-    elif sPage + 4 > allPage :
-        startPage = allPage - 4
-    else :
-        startPage = sPage
-
-    ePage = 1
-    if allPage < 5 :
-        ePage = allPage
-    elif startPage + 4 > allPage :
-        ePage = allPage
-    else :
-        ePage = startPage + 4
-
-    paging = list(range(int(startPage), int(ePage)+1))
-
-    return paging
