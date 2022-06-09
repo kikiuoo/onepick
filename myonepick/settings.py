@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-x0@zo^2*wmd9%%o*@*$r2l%4wh0ts+0iha7u1qlss!b*0*!5*$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ksnpick.com', '127.0.0.1', 'localhost', '3.35.16.229', '172.31.33.129']
+ALLOWED_HOSTS = ["ksnpick.com", "139.150.74.98", "127.0.0.1","localhost"]
 
 
 # Application definition
@@ -110,9 +110,9 @@ DATABASES = {
     'default' :{
         'ENGINE' : 'django.db.backends.mysql',
         'NAME' : 'onepick',
-        'USER' : 'admin',
-        'PASSWORD' : 'Q8iy-_ntkRs',
-        'HOST' : 'picktalk.c5vctp8izdfi.ap-northeast-2.rds.amazonaws.com',
+        'USER' : 'onepick',
+        'PASSWORD' : 'onepick@)@@',
+        'HOST' : 'localhost',
         'PORT' : '3306',
     }
 }
@@ -150,8 +150,7 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-
-
+""" 
 AWS_ACCESS_KEY_ID = 'AKIARCIZISC6QEB3E2EW'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'picktalk'
@@ -172,7 +171,7 @@ DEFAULT_FILE_STORAGE = 'picktalk.storage_backends.MediaStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
-""" 
+"""
 
 AWS_ACCESS_KEY_ID = 'AKIARCIZISC6QEB3E2EW'
 AWS_SECRET_ACCESS_KEY = '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'
@@ -190,7 +189,7 @@ STATIC_ROOT = '/usr/local/lib/python3.8/dist-packages/django/contrib/admin'
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-"""
+
 """
 ## 카카오 키들은 나중에 accounts.view에서 쓰일 예정
 AUTHENTICATION_BACKENDS = (
