@@ -3,5 +3,7 @@ import subprocess
 
 socSrvProc = subprocess.check_output("pgrep -lf manage.py | wc -l", shell=True)
 
+print(socSrvProc)
+
 if int(socSrvProc) == 0 :
     os.system("python /data/onepick/manage.py runserver 0.0.0.0:80 &")
