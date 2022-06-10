@@ -1,9 +1,9 @@
 .content{
     position: relative;
-    width: 1188px;
-    margin-left: 28px;
-    padding: 30px 68px 30px 32px;
-    border-radius: 33px;
+    width: 1200px;
+    margin-left: 10px;
+    padding: 40px 50px;
+    border-radius: 20px;
     border: solid 1px #c0c0c0;
     background-color: #fff;
     box-sizing: border-box;
@@ -11,20 +11,21 @@
 
 .btnBox{
     position: absolute;
-    right: 72px;
-    top: 44px;
+    right: 50px;
+    top: 34px;
     font-size: 0px;
 }
 
 .btnBox div{
     display: inline-block;
-    width: 41px;
-    height: 41px;
+    width: 26px;
+    height: 26px;
     margin-left: 20px;
     cursor: pointer;
 
     background-repeat: no-repeat;
     background-position: center;
+    background-size: auto 100%;
 }
 
 .btnBox div.editBtn{ background-image: url("../../../image/web/update.png"); }
@@ -33,10 +34,10 @@
 .btnBox div.shareBtn{ background-image: url("../../../image/web/share.png"); }
 
 .content .companyLogo{
-    width: 300px;
-    height: 110px;
-    margin-left: 10px;
-    margin-bottom: 10px;
+    width: 183px;
+    height: 87px;
+    margin-left: 31px;
+    margin-bottom: 26px;
 
     background-position: center;
     background-repeat: no-repeat;
@@ -44,12 +45,9 @@
 }
 
 .content .companySite{
-    height: 28px;
-    margin-left: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 18px;
 
-    font-size: 22px;
-    font-weight: 500;
+    font-size: 16px;
     color: #1f1f1f;
     text-decoration: underline;
     text-underline-position: under;
@@ -57,13 +55,10 @@
 }
 
 .content .title{
-    width: 850px;
-    margin-left: 10px;
-    font-size: 30px;
+    font-size:  20px;
     font-weight: bold;
-    line-height: 1.67;
-    color: #1f1f1f;
-    margin-bottom: 19.5px;
+    color: #454545;
+    margin-bottom: 16.5px;
 }
 
 .content .line{
@@ -75,31 +70,32 @@
 
 .content .line .supportBtn{
     position: absolute;
-    width: 164px;
-    height: 54px;
-    border-radius: 22px;
+    width: 150px;
+    height: 50px;
+    border-radius: 20px;
     background-color: #ff8aae;
 
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     color: #fff;
     text-align: center;
-    line-height: 54px;
+    line-height: 50px;
     right: 0px;
-    top: -70px;
+    top: -69.5px;
     cursor: pointer;
 }
 
 .content .line .pickBtn{
     position: absolute;
-    width: 41px;
-    height: 41px;
+    width: 32px;
+    height: 32px;
     top: -62.5px;
-    right: 194px;
+    right: 170px;
     cursor: pointer;
 
     background-image: url("../../../image/web/pick_off.png");
     background-position: center;
+    background-size: cover;
 }
 
 .content .line .pickBtn.pickOn{
@@ -109,14 +105,12 @@
 .content .line .deadline{
     position: absolute;
     right: 0px;
-    top: 24.5px;
-    width: 156px;
-    height: 66px;
-    line-height: 66px;
+    top: 19.5px;
+    padding : 12px 27px;
     background-color: rgba(255, 138, 174, 0.1);
-    border-radius: 11px;
+    border-radius: 10px;
 
-    font-size: 22px;
+    font-size: 16px;
     font-weight: bold;
     color: #ff8aae;
     text-align: center;
@@ -136,21 +130,29 @@
 }
 
 .conditionBox span{
-    margin-top: 21px;
+    margin-top: 20px;
     display: inline-block;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     color: #959595;
     margin-bottom: 14px;
+    vertical-align: top;
 }
 
-.conditionBox p{
+.conditionBox .contentBox{
+    display: inline-block;
+    font-size: 15px;
+    color: #1f1f1f;
+    margin-bottom: 10px;
+    width: 300px;
+    vertical-align: top;
+}
+
+.conditionBox .contentBox p{
+    display: inline-block;
     padding: 0px;
     margin:0px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #1f1f1f;
-    margin-bottom: 14px;
+
 }
 
 .conditionBox p.inline{
