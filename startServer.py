@@ -7,10 +7,9 @@ for q in psutil.process_iter():
         print(q.name())
         if q.name() == 'python3.8':
             if len(q.cmdline()) > 1 and 'manage.py' in q.cmdline()[1]:
-                os.system("python /data/onepick/manage.py runserver 0.0.0.0:80 &")
-                
+                print("있음")
             else :
-                print("없음")
+                os.system("python /data/onepick/manage.py runserver 0.0.0.0:80 &")
 
         else :
             print("없음2")
