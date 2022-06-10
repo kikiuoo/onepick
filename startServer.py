@@ -9,7 +9,8 @@ for q in psutil.process_iter():
                 
             else :
                 print("없음")
-
+        else :
+            print("없음2")
 
 
     except psutil.AccessDenied:
