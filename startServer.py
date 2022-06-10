@@ -1,9 +1,11 @@
-import os
-import subprocess
+import psutil
 
-socSrvProc = subprocess.check_output("pgrep -lf manage.py | wc -l", shell=True)
 
-print(int(socSrvProc))
+for q in psutil.process_iter():
+    try:
+        if q.name() == 'manage.py':
+            if len(q.cmdline()) > 1 and '실행하고 있는 python 파일 이름' in q.cmdline()[1]:
+                print("존재")
 
-if int(socSrvProc) == 0 :
-    os.system("python /data/onepick/manage.py runserver 0.0.0.0:80 &")
+    except psutil.AccessDenied:
+        continue
