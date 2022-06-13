@@ -17,8 +17,8 @@ from django.conf import settings
 import boto3
 from django.db import connection
 
-#loginUrl = "https://ksnpick.com/users/login"
-loginUrl = "http://localhost:8000/users/login"
+loginUrl = "https://ksnpick.com/users/login"
+#loginUrl = "http://localhost:8000/users/login"
 
 
 def md5_generator(str):
