@@ -112,7 +112,7 @@ DATABASES = {
         'NAME' : 'onepick',
         'USER' : 'onepick',
         'PASSWORD' : 'onepick@)@@',
-        'HOST' : '127.0.0.1',
+        'HOST' : '139.150.74.98',
         'PORT' : '3306',
     }
 }
@@ -189,6 +189,9 @@ STATIC_ROOT = '/usr/local/lib/python3.8/dist-packages/django/contrib/admin'
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 """
 ## 카카오 키들은 나중에 accounts.view에서 쓰일 예정

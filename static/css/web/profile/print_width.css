@@ -13,15 +13,15 @@ body {
 }
 
 .page{
-    width: 1754px;
-    height: 1240px;
+    width: 297mm;
+    height: 210mm;
     margin: 10mm auto;
-    padding: 50px;
-    border: 1px #D3D3D3 solid;
+    padding: 32px;
     border-radius: 5px;
-    background: white;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     font-size: 0px;
+    border: 1px solid red;
+    background-color: #c0c0c0;
 }
 
 @page {
@@ -29,36 +29,32 @@ body {
     margin: 0;
 }
 @media print {
-    html, body {
-        width: 1754px;
-        height: 1240px;
+    html, body{
+        margin :0px;
+        padding :0px;
+        width: calc(297mm - 5px);
+        height: calc(210mm - 5px);
     }
     .page {
+        background-color: #c0c0c0;
+        width: calc(297mm - 5px);
+        height: calc(210mm - 5px);
         margin: 0;
         border: initial;
         border-radius: initial;
-        width: initial;
         min-height: initial;
         box-shadow: initial;
-        background: initial;
         page-break-after: always;
-        padding: 0px;
+        box-sizing: border-box;
+        border: 1px solid red;
     }
 }
 
 
 .imageBox{
     display: inline-block;
-    width: 950px;
-    height: 1140px;
+    width: 100px;
+    height: 100px;
     border: 1px solid red;
-    vertical-align: top;
-}
-
-.InfoBox{
-    display: inline-block;
-    height: 1140px;
-    width: 702px;
-    border: 1px solid blue;
     vertical-align: top;
 }

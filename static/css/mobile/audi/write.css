@@ -1,0 +1,292 @@
+.mainTitle{
+    position: relative;
+    font-size: 15px;
+    font-weight: bold;
+    color: #454545;
+    margin-bottom: 10px;
+}
+
+.body .mainTitle p{
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+
+    position: absolute;
+    right: 5px;
+    bottom: 0px;
+
+    font-size: 8px;
+    font-weight: bold;
+    color: #c0c0c0;
+}
+
+.body .mainTitle p .pink{
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #ff8aae;
+    border-radius: 50%;
+
+    top: 50%;
+    margin-top: -2px;
+    left: -10px;
+}
+
+.winBox{
+    width: 100%;
+    padding : 20px 18px;
+    background-color: rgba(192, 192, 192, 0.15);
+    border-radius: 22px;
+    box-sizing: border-box;
+}
+
+.winBox .joinInfo {
+    margin-bottom: 20px;
+}
+
+.winBox .joinInfo .title{
+    position: relative;
+    font-size: 15px;
+    color: #1f1f1f;
+    vertical-align: top;
+    padding-left: 3px;
+    margin-bottom: 8px;
+}
+
+.winBox .joinInfo .title .pink{
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #ff8aae;
+    border-radius: 50%;
+
+    top: 50%;
+    margin-top: -2px;
+    left: -4px;
+}
+
+.winBox .joinInfo .content input{
+    width: 100%;
+    height: 40px;
+    border: 0px;
+    padding: 0px 10px;
+    box-sizing: border-box;
+    border-radius: 11px;
+    color: #1f1f1f;
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 40px;
+    font-size: 13px;
+    background-color: #fff;
+}
+
+.winBox .joinInfo .content textarea{
+    font-size: 13px;
+    border-radius: 11px;
+    background-color: #fff;
+    border: 0px;
+    box-sizing: border-box;
+    color: #1f1f1f;
+
+    padding: 15px 20px;
+    line-height: 1.5em;
+    width: 100%;
+
+    resize: none;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.winBox .joinInfo .content select{
+    width: 120px;
+    height: 40px;
+    border-radius: 10px;
+    padding:0px 10px;
+    box-sizing: border-box;
+    border: 0px;
+
+    font-size: 13px;
+    color: #c0c0c0;
+    background:url('../../../image/mobile/arrow.png') no-repeat right 16px center;
+    background-color: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin-right: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+
+.winBox .joinInfo .content input::placeholder,
+.winBox .joinInfo .content textarea::placeholder{
+    font-size: 15px;
+    font-weight: bold;
+    color: #c0c0c0;
+}
+.winBox .joinInfo .content input:focus,
+.winBox .joinInfo .content textarea:focus,
+.winBox .joinInfo .content select:focus{
+    outline: none;
+}
+
+.winBox .joinInfo .content .cateExpand{
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #fff;
+    vertical-align: top;
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    cursor: pointer;
+    font-size: 13px;
+    text-align: center;
+    line-height: 40px;
+    color:#c0c0c0;
+}
+
+.winBox .joinInfo .content .cateExpand input{
+    display: none;
+}
+
+#startDate, #endDate, #auditionDate, #auditionTime{
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.mobileBox{
+    position: relative;
+    height: 16px;
+    margin-top: 10px;
+}
+
+.textCheck{
+    position: absolute;
+    right: 20px;
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    color: #c0c0c0;
+    cursor: pointer;
+    margin-left: 10px;
+
+}
+
+.textCheck input{
+    display: none;
+}
+
+.textCheck .check{
+    position: absolute;
+    top: 50%;
+    margin-top: -7px;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-left: 5px;
+
+    background-position: center;
+    background-image: url("../../../image/mobile/textCheck_off.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.textCheck .check.on{
+    background-image: url("../../../image/mobile/textCheck_on.png");
+}
+
+#age, #gender{ width: 90px; margin-right: 10px; }
+#career{ width: 90px; margin-right: 0px; }
+#essential{ height: 80px; }
+#preparation{ height: 200px }
+
+.imageBox{
+    display: inline-block;
+}
+
+#fileLabel{
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    background-color: #fff;
+    line-height: 100px;
+
+    font-size: 8px;
+    font-weight: bold;
+    text-align: center;
+    color: #afafaf;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+#fileLabel .addImage{
+    height: 16px;
+    width: 16px;
+    position: absolute;
+
+    top: 21px;
+    left: 32px;
+
+    background-image: url("../../../image/mobile/addImgBtn.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.upload-hidden{
+    display: none;
+}
+
+.upload-display{
+    position: relative;
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    background-color: #fff;
+    margin-right: 20px;
+
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% auto;
+    vertical-align: top;
+}
+
+.upload-display .upload-sub,
+.upload-display .upload-sub2{
+    position: absolute;
+    right: -8px;
+    top : -8px;
+    width: 16px;
+    height: 16px;
+    background-color: #ff8aae;
+    border-radius:50%;
+    cursor: pointer;
+
+
+    background-image: url("../../../image/mobile/subImgBtn.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.btnBox{
+    text-align: center;
+    margin-top: 30px;
+}
+
+.sendBtn{
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #ff8aae;
+    line-height: 50px;
+
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}

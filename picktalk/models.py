@@ -42,7 +42,7 @@ class AuditionInfo(models.Model):
     education = models.CharField(max_length=50, blank=True, null=True)
     image = models.CharField(max_length=1000, blank=True, null=True)
     essential = models.CharField(max_length=500, blank=True, null=True)
-    preparation = models.CharField(max_length=500, blank=True, null=True)
+    preparation = models.CharField(max_length=1000, blank=True, null=True)
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
     updtime = models.DateTimeField(db_column='updTime', blank=True, null=True)  # Field name made lowercase.
     viewcount = models.IntegerField(db_column='viewCount', blank=True, null=True)  # Field name made lowercase.

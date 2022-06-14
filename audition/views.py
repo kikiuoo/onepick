@@ -9,15 +9,8 @@ from picktalk.models import *
 import boto3
 from django.conf import settings
 from django.utils import timezone
-import hashlib
 
 from myonepick.common import *
-
-
-def md5_generator(str):
-    m = hashlib.md5()
-    m.update(str.encode())
-    return m.hexdigest()
 
 
 # 오디션 /audi ...
@@ -66,11 +59,18 @@ def audi_index(request, cate_type, page): # 오디션 Main
         start = (page - 1) * block
         end = page * block
 
-        query = "SELECT ai.num, ai.title, cm.cateName, ai.career, ai.age, ai.endDate, ai.regTime, ai.ordinary, uc.logoImage, DATEDIFF(NOW(),  ai.regTime) AS diffDate " \
-                "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode " \
-                "    LEFT JOIN  user_company AS uc ON ai.userID = uc.userID " \
-                "where  ai.isDelete = '0' or ai.isDelete is null "\
-                "ORDER BY ai.regTime DESC limit "+ str(start) +", "+ str(end)
+        if user:
+            query = "SELECT ai.num, ai.title, cm.cateName, ai.career, ai.age, ai.endDate, ai.regTime, ai.ordinary, uc.logoImage, DATEDIFF(NOW(),  ai.regTime) AS diffDate, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user + "' AND auditionNum = ai.num ) AS audiPick " \
+                    "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode " \
+                    "    LEFT JOIN  user_company AS uc ON ai.userID = uc.userID " \
+                    "where  ai.isDelete = '0' or ai.isDelete is null " \
+                    "ORDER BY ai.regTime DESC limit " + str(start) + ", " + str(end)
+        else:
+            query = "SELECT ai.num, ai.title, cm.cateName, ai.career, ai.age, ai.endDate, ai.regTime, ai.ordinary, uc.logoImage, DATEDIFF(NOW(),  ai.regTime) AS diffDate , '0' AS audiPick " \
+                    "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode " \
+                    "    LEFT JOIN  user_company AS uc ON ai.userID = uc.userID " \
+                    "where  ai.isDelete = '0' or ai.isDelete is null " \
+                    "ORDER BY ai.regTime DESC limit " + str(start) + ", " + str(end)
 
         result = cursor.execute(query)
         audition = cursor.fetchall()
@@ -87,7 +87,7 @@ def audi_index(request, cate_type, page): # 오디션 Main
 
 
     return render(request, 'audition/index.html', {'cateType' : cate_type , 'subBanner' : subBanner, "recomAudi" : recomAudi,
-                                                   "finishAudi" : finishAudi, "audition": audition, "paging" : paging } )
+                                                   "finishAudi" : finishAudi, "audition": audition, "paging" : paging, "page" : page } )
 #     /audi/audiDetail/(category)/(글번호)
 def audi_detail(request, cate_type, num) :
     try :
@@ -150,12 +150,6 @@ def audi_write(request) :
     return render(request, 'audition/write.html', {'cate':cate})
 
 
-session = boto3.Session(
-    aws_access_key_id = settings.AWS_ACCESS_KEY_ID,
-    aws_secret_access_key = settings.AWS_SECRET_ACCESS_KEY,
-)
-
-
 def audi_write_callback(request) :
 
     userID = request.POST['userID']
@@ -184,41 +178,24 @@ def audi_write_callback(request) :
 
     userImage = request.FILES.getlist('userImage[]')
 
-    s3_client = boto3.client(
-        's3',
-        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-    )
-
     nowTime = timezone.now()
-    image = ""
+    imageURL = ""
     count = 0
     for image in userImage :
-        count = count + 1
         sub = image.name.split('.')[-1]
-        imgName = userID + "_" + image.name + "_" + str(nowTime)
-        imageName = md5_generator(imgName) + "." + sub
-
-        s3_client.upload_fileobj(
-            image,
-            settings.AWS_STORAGE_BUCKET_NAME,
-            "media/photos/audition/image/" + imageName,
-            ExtraArgs={
-                "ContentType": image.content_type,
-            }
-        )
+        url = uploadFile(image,"photos/audition/image", sub)
 
         if( count == 1) :
-            imageURL = "photos/audition/image/" + imageName
+            imageURL = url
         else :
-            imageURL = imageURL + "|" + "photos/audition/image/" + imageName
+            imageURL = imageURL + "|" +  url
 
 
     saveAudition = AuditionInfo.objects.create(userid=userID, title=title, cate=cateMain, subcate=catesub,
                                                startdate=startDate, enddate=endDate, ordinary=ordinary,
                                                auditiondate=auditionDate, auditiontime=auditionTime, each=each,
                                                age=age, gender=gender, career=career, image=imageURL, essential=essential,
-                                               field_preparation=preparation, regtime=nowTime, viewcount=0, recorder=0, isdelete=0)
+                                               preparation=preparation, regtime=nowTime, viewcount=0, recorder=0, isdelete=0)
 
     key = str(AuditionInfo.objects.latest('num').num)
 
@@ -266,34 +243,16 @@ def audi_edit_callback( request ) :
 
     userImage = request.FILES.getlist('userImage[]')
 
-
-    s3_client = boto3.client(
-        's3',
-        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-    )
-
     # 이미지 등록.
     nowTime = timezone.now()
     image = ""
     count = 0
     addImage = []
     for image in userImage:
-        count = count + 1
         sub = image.name.split('.')[-1]
-        imgName = userID + "_" + image.name + "_" + str(nowTime)
-        imageName = md5_generator(imgName) + "." + sub
+        url = uploadFile(image, "photos/audition/image", sub) # 파일 업로드
 
-        s3_client.upload_fileobj(
-            image,
-            settings.AWS_STORAGE_BUCKET_NAME,
-            "media/photos/audition/image/" + imageName,
-            ExtraArgs={
-                "ContentType": image.content_type,
-            }
-        )
-
-        addImage.append("photos/audition/image/" + imageName)
+        addImage.append(url)
 
     updateAudition = AuditionInfo.objects.get(num = num)
 
@@ -303,16 +262,10 @@ def audi_edit_callback( request ) :
     # 이미지 삭제.
     rmImage = removeImage.split('|')
     if( removeImage != "") :
-        s3 = boto3.resource('s3',
-                            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-                            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-                            )
-
-        for rmImages in rmImage :
-            if( rmImages == ""): continue
-            img = rmImages.replace("photos/audition/image/", "")
-            s3.Object(settings.AWS_STORAGE_BUCKET_NAME, "media/photos/audition/image/" +  img).delete()
-            dbImage.remove(rmImages)
+      for rmImages in rmImage :
+         if( rmImages == ""): continue
+         deleteFile(rmImages)
+         dbImage.remove(rmImages)
 
 
     saveImage = dbImage + addImage

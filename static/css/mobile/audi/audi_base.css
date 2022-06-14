@@ -3,23 +3,15 @@
 }
 
 .subCate{
-    text-align: center;
     font-size: 0px;
-    margin-bottom: 16px;
+    padding: 0px 2px;
+    margin-bottom: 10px;
 }
 
 .subCate .cate{
-    height: 34px;
-    line-height: 34px;
-    display: inline-block;
-    margin-left: 15px;
-    padding: 0px 15px;
-
-    font-size: 15px;
+    font-size: 16px;
     font-weight: bold;
-    color: #b9b9b9;
-    cursor: pointer;
-    text-align: center;
+    color: #282828;
 }
 
 .subCate .cate:first-child{
@@ -27,7 +19,5 @@
 }
 
 .subCate .cate.active{
-    border-radius: 33px;
-    background-color: #ff8aae;
-    color: #fff;
+    color: #282828;
 }

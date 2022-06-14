@@ -11,16 +11,18 @@
 <script src="{% static 'js/audi/index.js' %}"></script>
 
 <!-- 메인 베너  subBanner -->
-<div class="swiper mySwiper mainBanner">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide" style="background-color: darkkhaki"></div>
-        <div class="swiper-slide" style="background-color: darkred"></div>
-        <div class="swiper-slide" style="background-color: goldenrod"></div>
-    </div>
-    <div class="swiper-pagination"></div>
+<div class="mobileBanner">
+    <div class="swiper mySwiper mainBanner">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-color: darkkhaki"></div>
+            <div class="swiper-slide" style="background-color: darkred"></div>
+            <div class="swiper-slide" style="background-color: goldenrod"></div>
+        </div>
+        <div class="swiper-pagination"></div>
 
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
 </div>
 
 <!-- 추천 오디션 -->
@@ -69,7 +71,6 @@
     {% endfor %}
 </div>
 
-
 <!-- 전체 오디션 -->
 <div class="title">전체 오디션</div>
 <div class="inBox" style="padding-top: 0px">
@@ -100,10 +101,23 @@
                 <div class="regDate">{{ auditions.9 }}일 전 등록</div>
                 {% endif %}
             </div>
+
+            {% if auditions.10 == 0 or auditions.10 == "0" %}
+            <div class="pickBtn" data-nowType="off"></div>
+            {% else %}
+            <div class="pickBtn pickOn " data-nowType="on"></div>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
 </div>
+
+<div class="page">
+    {% for pages in paging %}
+        <div class="pages {% if pages == page %} nowPage {% endif %}"  data-page="{{ pages }}">{{ pages }}</div>
+    {% endfor %}
+</div>
+
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 

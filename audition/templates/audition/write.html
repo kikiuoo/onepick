@@ -27,7 +27,6 @@
             <input type="hidden" value="" id="num" name="num"/>
             <input type="hidden" value="{{ request.session.id }}" id="userID" name="userID"/>
 
-
             <div class="joinInfo">
                 <div class="title">제목 <span class="pink"></span></div>
                 <div class="content"><input type="text" value="" id="title" name="title" placeholder="오디션 공고 제목을 입력해주세요."/> </div>
@@ -55,11 +54,13 @@
             <div class="joinInfo">
                 <div class="title">모집 기간 <span class="pink"></span></div>
                 <div class="content">
-                    <input type="text" value="" name="startDate" id="startDate" placeholder="2022-05-11"> <span>~</span>
+                    <input type="text" value="" name="startDate" id="startDate" placeholder="2022-05-11"><span>~</span>
                     <input type="text" value="" name="endDate" id="endDate" placeholder="2022-05-11">
 
 
-                    <label class="textCheck ordinary"><input type="checkbox" value="1" name="ordinary" id="ordinary"> 상시모집 <div class="check"></div> </label>
+                    <div class="mobileBox">
+                        <label class="textCheck ordinary"><input type="checkbox" value="1" name="ordinary" id="ordinary"> 상시모집 <div class="check"></div> </label>
+                    </div>
                 </div>
             </div>
 
@@ -69,7 +70,9 @@
                     <input type="text" value="" id="auditionDate" name="auditionDate" placeholder="2022-05-11"/>
                     <input type="text" value="" id="auditionTime" name="auditionTime" placeholder="11:10:00"/>
 
-                    <label class="textCheck each"><input type="checkbox" value="1" name="each" id="each"> 합격자 개별연락 <div class="check"></div></label>
+                    <div class="mobileBox">
+                        <label class="textCheck each"><input type="checkbox" value="1" name="each" id="each"> 합격자 개별연락 <div class="check"></div></label>
+                    </div>
                 </div>
             </div>
 

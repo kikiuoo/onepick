@@ -1,160 +1,393 @@
-/* 페이지 타이틀 */
-.pageTitle{
-    font-size: 18px;
-    font-weight: bold;
-    color: #1f1f1f;
-    margin-bottom: 4px;
-}
-
-/* 회사로고 */
-.companyLogo{
-    width: 100%;
-    padding-bottom: 20%;
-    background-color: #ddd;
-    margin-bottom: 15px;
-}
-
 /* 본문 내용 */
 .content{
     position: relative;
-    padding : 0px 5px;
-}
-
-.content .contentTitle{
-    font-size: 16px;
-    font-weight: bold;
-    color: #1f1f1f;
-    margin-bottom: 15px;
-}
-
-.content .urlLink{
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 500;
-    color: #1f1f1f;
-    margin-bottom: 11px;
-}
-
-.content .finishDay{
-    position: absolute;
-    right: 5px;
-    top: 0px;
-    border-radius: 11px;
-    background-color: rgba(255, 138, 174, 0.1);
-    padding : 9px 18px;
-
-    font-size: 12px;
-    font-weight: bold;
-    color: #ff8aae;
-}
-
-.content .info{
-    display: flex;
-    margin-bottom: 16px;
-}
-
-.content .info .title{
-    order :1;
-    display: inline-block;
-    width: 64px;
-
-    font-size: 12px;
-    font-weight: bold;
-    color: #1f1f1f;
-    line-height: 2.5em;
-}
-
-.content .info .infoContent{
-    order :2;
-    display: inline-block;
-    width: calc(100% - 64px);
-}
-
-
-
-
-.content .info .contentBox{
-    display: flex;
+    box-sizing: border-box;
     width: 100%;
+    padding: 20px 10px;
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
 }
 
-.content .info .infoContent .subTitle{
-    order :1;
-    width: 35px;
-    line-height: 2em;
-
-    font-size: 14px;
-    font-weight: bold;
-    color: #afafaf;
-    vertical-align: top;
-}
-.content .info .infoContent .subInfo{
-    order :2;
-    width: auto;
-    vertical-align: top;
-}
-
-.content .info .infoContent .subInfo:nth-child(2){
-    width: calc(100% - 35px);
-}
-
-.content .info .infoContent .subInfo span{
-    display: inline-block;
-    padding: 9px;
-    border-radius: 11px;
-    background-color: rgba(221, 221, 221, 0.28);
-    margin-right: 13px ;
-    margin-bottom: 12px;
-
-    font-size: 13px;
-    font-weight: bold;
-    color: #292929;
-}
-
-.content .info .infoContent .subInfo.important span{
-    color: #ff8aae;
-}
-
-.content .info .infoContent .subInfo.important{
-    font-size: 13px;
-    font-weight: bold;
-    color: #ff8aae;
-}
-
-/* 버튼 */
-.buttonBox{
-    margin-top: 39px;
-    text-align: center;
+.btnBox{
+    position: absolute;
+    right: 20px;
+    top: 30px;
     font-size: 0px;
 }
 
-.buttonBox .scrapBtn{
+.btnBox div{
     display: inline-block;
-    width: 118px;
-    height: 39px;
-    line-height: 39px;
-    border-radius: 11px;
-    box-shadow: 0 1px 13px 0 rgba(255, 138, 174, 0.25);
-    background-color: #fff;
-    margin-right: 12px;
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
     cursor: pointer;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 100%;
+}
+
+.btnBox div.editBtn{ background-image: url("../../../image/web/update.png"); }
+.btnBox div.delBtn{ background-image: url("../../../image/web/delete.png"); }
+.btnBox div.printBtn{ background-image: url("../../../image/web/print.png"); }
+.btnBox div.shareBtn{ background-image: url("../../../image/web/share.png"); }
+
+
+.content .companyLogo{
+    width: 150px;
+    height: 54px;
+    margin-left: 10px;
+    margin-bottom: 6px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.content .companySite{
+    margin-bottom: 10px;
+
+    font-size: 12px;
+    color: #1f1f1f;
+    cursor: pointer;
+}
+
+.content .title{
+    font-size:  16px;
+    font-weight: bold;
+    color: #454545;
+    line-height: 1.5;
+    margin-bottom: 66.5px;
+}
+
+.content .line{
+    position: relative;
+    width: 100%;
+    height: 1px;
+    background-color: #c0c0c0;
+}
+
+.content .line .supportBtn{
+    position: absolute;
+    width: 118px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #ff8aae;
 
     font-size: 14px;
     font-weight: bold;
-    color: #ff8aae;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    right: 10px;
+    top: -49.5px;
+    cursor: pointer;
 }
 
-.buttonBox .auditionBtn{
+.content .line .pickBtn{
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: -41.5px;
+    right: 143px;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/pick_off.png");
+    background-position: center;
+    background-size: cover;
+}
+
+.content .line .pickBtn.pickOn{
+    background-image: url("../../../image/web/pick_on.png");
+}
+
+.content .line .deadline{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    padding : 7px 16px;
+    background-color: rgba(255, 138, 174, 0.1);
+    border-radius: 20px;
+
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff8aae;
+    text-align: center;
+}
+
+
+.conditionBox{
+    padding: 20px  10px;
+    font-size: 0px;
+}
+
+.conditionBox .condLeft,
+.conditionBox .condRight{
     display: inline-block;
-    width: 118px;
-    height: 39px;
-    line-height: 39px;
-    border-radius: 11px;
-    box-shadow: 0 1px 13px 0 rgba(255, 138, 174, 0.25);
+    vertical-align: top;
+}
+
+.conditionBox span, .infoTitle{
+    display: inline-block;
+    font-size: 13px;
+    font-weight: bold;
+    color: #959595;
+    vertical-align: top;
+    margin-right: 12px;
+    width: 70px;
+}
+
+.conditionBox .contentBox,
+.infoContent{
+    display: inline-block;
+    font-size: 13px;
+    color: #1f1f1f;
+    margin-bottom: 20px;
+    width: calc(100% - 85px);
+    vertical-align: top;
+    word-break: break-all;
+}
+
+.conditionBox .contentBox p{
+    display: block;
+    padding: 0px;
+    margin:0px;
+    margin-top: 8px;
+
+}
+.conditionBox .contentBox p:first-child{
+    margin-top: 0px;
+}
+
+
+.conditionBox .important{
+    margin: 0px;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: bold;
+    color: #ff8aae;
+    width: 100%;
+}
+.infoBox{
+    margin-top: 13px;
+}
+
+.infoContent p{
+    margin: 0px;
+}
+
+.imageBox{
+    padding: 20px 7px;
+}
+
+.audiApplyBack{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background-color: rgba(84, 84, 84, 0.7);
+    display: none;
+    z-index: 10;
+
+}
+
+.audiApplyBack .audiApplyPopup{
+    position: absolute;
+    width: 90%;
+    height: 450px;
+    padding: 20px 7px;
+    border-radius: 20px;
+    background-color: #fff;
+    box-sizing: border-box;
+    top: 50%;
+    margin-top: -250px;
+    left: 5%;
+
+}
+
+.aTitle{
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    color: #1f1f1f;
+    margin-bottom: 35px;
+}
+
+.profileList{
+    overflow: hidden;
+    height: 270px;
+    overflow-y: auto;
+    margin-bottom: 30px;
+}
+
+.aBtnBox{
+    text-align: center;
+}
+
+.sendProfile{
+    display: inline-block;
+    width: 180px;
+    height: 50px;
+    border-radius: 10px;
+    line-height: 50px;
     background-color: #ff8aae;
     cursor: pointer;
 
     font-size: 14px;
     font-weight: bold;
+    text-align: center;
     color: #fff;
+}
+
+
+
+.myProfile{
+    position: relative;
+    display:  inline-block;
+    width: 100%;
+    padding-bottom: 55%;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    background-color: #fff;
+    border: solid 1px #c0c0c0;
+    overflow: hidden;
+    cursor: pointer;
+    min-height: 186px;
+    box-sizing: border-box;
+}
+
+.myProfile .btnBox{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 10;
+}
+
+.myProfile .btnBox  input[type=radio]{
+    display: none;
+}
+
+.myProfile .btnBox  input[type=radio]+label{
+    display: inline-block;
+    cursor: pointer;
+
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.myProfile .btnBox  input[type=radio]+label{
+    background-image: url("../../../image/web/check_off.png");
+}
+.myProfile .btnBox  input[type=radio]:checked+label{
+    background-image: url("../../../image/web/check_on.png");
+}
+
+
+.myProfile .userImage{
+    position: absolute;
+    width: 44%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: top center;
+}
+
+.myProfile .userInfoBox{
+    position: absolute;
+    width: 56%;
+    height: 100%;
+    box-sizing: border-box;
+
+    top: 0px;
+    right: 0px;
+    padding: 14px 10px;
+}
+
+.myProfile .userInfoBox .userName{
+    font-size: 14px;
+    font-weight: bold;
+    color: #454545;
+    margin-bottom: 12px;
+}
+
+.myProfile .userInfoBox .userName span{
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 2px;
+
+    background-repeat:  no-repeat;
+    background-position: center;
+    background-image: url("../../../image/web/lock.png");
+    background-size: 80%;
+}
+
+.myProfile .userInfoBox .pUInfo{
+    font-size: 12px;
+    line-height: 1.5;
+    color: #1f1f1f;
+    margin-bottom: 12px;
+
+    /* 2줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    display : -webkit-box;
+    -webkit-line-clamp:4;
+    -webkit-box-orient:vertical;
+}
+
+.myProfile .userInfoBox .proComplete{
+    font-size: 9px;
+    font-weight: bold;
+    color: #ff8aae;
+    margin-bottom: 6px;
+}
+
+.myProfile .userInfoBox .progress{
+    position: absolute;
+    width: 108px;
+    bottom: 15px;
+    left: 10px;
+}
+
+.myProfile .userInfoBox .proProgressBox{
+    width: 108px;
+    height: 11px;
+    border-radius: 20px;
+    background-color: #f5f5f5;
+    overflow: hidden;
+}
+
+.myProfile .userInfoBox .proProgressBox .progressBar{
+    width: 70%;
+    height: 11px;
+    border-radius: 20px;
+    background-color: #ff8aae;
+}
+
+.myProfile .comment{
+    font-size: 9px;
+    color: #1f1f1f;
+}
+
+.closeSPopup{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/closeIcon.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

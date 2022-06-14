@@ -141,7 +141,7 @@
                 <div class="title">파일</div>
                 <div class="content">
                     {% for images in image %}
-                    <div class="upload-display" style="background-image: url('https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ images }}')">
+                    <div class="upload-display" style="background-image: url('{% get_media_prefix %}{{ images }}')">
                         <div class="upload-sub2" data-image="{{ images }}"></div>
                     </div>
                     {% endfor %}
