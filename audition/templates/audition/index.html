@@ -14,9 +14,9 @@
 <div class="mobileBanner">
     <div class="swiper mySwiper mainBanner">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" style="background-color: darkkhaki"></div>
-            <div class="swiper-slide" style="background-color: darkred"></div>
-            <div class="swiper-slide" style="background-color: goldenrod"></div>
+            {% for banner in subBanner %}
+            <div class="swiper-slide banner" data-url="{{ banner.url }}" style='background-image: url("/media/{{ banner.wimage }}")'></div>
+            {% endfor %}
         </div>
         <div class="swiper-pagination"></div>
 

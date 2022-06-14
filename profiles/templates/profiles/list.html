@@ -11,66 +11,90 @@
 <!-- JS 파일 -->
 <script src="{% static 'js/profile/list.js' %}"></script>
 
-<div class="filterBox">
-    <select name="order" id="order">
+<div class="pcNone" style="position: relative;width: 100%">
+    <select name="order" id="order2">
         <option value="newest">최신순</option>
         <option value="popular">인기순</option>
         <option value="recommend">추천많은순</option>
     </select>
 
-    <select name="nationality" id="nationality">
-        <option value="" selected>국적</option>
-        <option value="내국인">내국인</option>
-        <option value="외국인">외국인</option>
-    </select>
-
-    <select name="geneder" id="geneder">
-        <option value="" selected>성별</option>
-        <option value="man">남성</option>
-        <option value="girl">여성</option>
-    </select>
-
-    <input type="text" id="age1" value="" placeholder="나이">
-    <span>~</span>
-    <input type="text" id="age2" value="" placeholder="나이">
-
-    <select name="military" id="military">
-        <option value="" selected>병역 구분</option>
-        <option value="해당없음">해당없음</option>
-        <option value="미필">미필</option>
-        <option value="군필">군필</option>
-    </select>
-
-    <input type="text" id="school" value="" placeholder="학교명">
-
-    <input type="text" id="height1" value="" placeholder="키">
-    <span>~</span>
-    <input type="text" id="height2" value="" placeholder="키">
-
-    <select name="foreign" id="foreign">
-        <option value="" selected>외국어 선택</option>
-        <option value="영어">영어</option>
-        <option value="일어">일어</option>
-        <option value="중국어">중국어</option>
-        <option value="독일어">독일어</option>
-        <option value="프랑스어">프랑스어</option>
-        <option value="러시아어">러시아어</option>
-        <option value="베트남어">베트남어</option>
-    </select>
-
-    <select name="good" id="good">
-        <option value="" selected>외국어 수준</option>
-        <option value="상">상</option>
-        <option value="중">중</option>
-        <option value="하">하</option>
-    </select>
-
-    <input type="text" id="career1" value="" placeholder="경력">
-    <span>~</span>
-    <input type="text" id="career2" value="" placeholder="경력">
+    <div class="filterBtn">필터<span></span></div>
 
     <div class="resetBox">
         <div class="icon"></div> 필터 초기화
+    </div>
+</div>
+
+
+<div class="filterBox">
+    <div class="filterInBox">
+        <div class="filterTitle pcNone">검색 필터</div>
+        <div class="closeBtn pcNone"></div>
+        <select name="order" id="order" class="mobileNone">
+            <option value="newest">최신순</option>
+            <option value="popular">인기순</option>
+            <option value="recommend">추천많은순</option>
+        </select>
+
+        <select name="nationality" id="nationality">
+            <option value="" selected>국적</option>
+            <option value="내국인">내국인</option>
+            <option value="외국인">외국인</option>
+        </select>
+
+        <select name="geneder" id="geneder">
+            <option value="" selected>성별</option>
+            <option value="man">남성</option>
+            <option value="girl">여성</option>
+        </select>
+
+        <select name="military" id="military">
+            <option value="" selected>병역 구분</option>
+            <option value="해당없음">해당없음</option>
+            <option value="미필">미필</option>
+            <option value="군필">군필</option>
+        </select>
+
+        <input type="text" id="age1" value="" placeholder="나이">
+        <span>~</span>
+        <input type="text" id="age2" value="" placeholder="나이">
+
+
+        <input type="text" id="height1" value="" placeholder="키">
+        <span>~</span>
+        <input type="text" id="height2" value="" placeholder="키">
+
+        <select name="foreign" id="foreign">
+            <option value="" selected>외국어 선택</option>
+            <option value="영어">영어</option>
+            <option value="일어">일어</option>
+            <option value="중국어">중국어</option>
+            <option value="독일어">독일어</option>
+            <option value="프랑스어">프랑스어</option>
+            <option value="러시아어">러시아어</option>
+            <option value="베트남어">베트남어</option>
+        </select>
+
+        <select name="good" id="good">
+            <option value="" selected>외국어 수준</option>
+            <option value="상">상</option>
+            <option value="중">중</option>
+            <option value="하">하</option>
+        </select>
+
+        <input type="text" id="career1" value="" placeholder="경력">
+        <span>~</span>
+        <input type="text" id="career2" value="" placeholder="경력">
+
+        <input type="text" id="school" value="" placeholder="학교명">
+
+        <div class="resetBox mobileNone">
+            <div class="icon"></div> 필터 초기화
+        </div>
+
+        <div class="btnBox pcNone">
+            <div class="filterSave">필터 적용</div>
+        </div>
     </div>
 </div>
 
@@ -79,7 +103,7 @@
     {% for profile in profiles %}
     <div class="profile" data-num="{{ profile.0 }}">
         <div class="imageBox">
-            <div class="profileImage"   style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profile.1 }}");'></div>
+            <div class="profileImage" style='background-image: url("/media/{{ profile.1 }}");'></div>
             {% if profile.16 != "" %}
             <div class="youtube">
                 <iframe width="560" height="315" src="{{ profile.16|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

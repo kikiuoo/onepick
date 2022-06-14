@@ -103,6 +103,12 @@ $(document).ready(function (){
        window.location.href = url;
     });
 
+    $(document).on("click", ".banner", function (){
+        var url = $(this).attr("data-url");
+
+        window.open(url);
+    });
+
 });
 
 

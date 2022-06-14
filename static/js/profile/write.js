@@ -105,12 +105,12 @@ $(document).ready(function (){
 
             if( mainYoutubeCheck == true || array.length == 0 ){
                 addHtml = '<div id="list_'+addListCount+'"><label class="textCheck mainYoutube" style="color: #ff8aae "><input type="radio" id="mainYoutube" value="'+mainYoutube+'" name="mainYoutube" checked> 메인 영상으로 설정 <div class="check" style="background-image:url(/static/image/web/textCheck_on.png)"></div></label>';
-                addHtml = addHtml + '<input type="text" value="'+y_link+'" style="width: 868px; margin-right: 10px" disabled>';
+                addHtml = addHtml + '<input type="text" value="'+y_link+'" class="y_link" disabled>';
                 addHtml = addHtml + '<div class="subBtn" id="linkSub" data-id="'+addListCount+'" data-value="'+saveData+'"></div></div>';
             }else{
                 addHtml = '<div id="list_'+addListCount+'"><label class="textCheck mainYoutube"><input type="radio" value="'+mainYoutube+'" id="mainYoutube" name="mainYoutube"> 메인 영상으로 설정 <div class="check"></div></label>';
-                addHtml = addHtml + '<input type="text" value="'+y_link+'" style="width: 868px; margin-right: 10px" disabled>';
-                addHtml = addHtml + '<div class="subBtn" id="linkSub" data-id="'+addListCount+'" data-value="'+saveData+'"></div></div>';
+                addHtml = addHtml + '<input type="text" value="'+y_link+'" class="y_link"  disabled>';
+                addHtml = addHtml + '<div class="subBtn" id="linkSub" data-id="'+addListCount+'"data-value="'+saveData+'"></div></div>';
             }
 
             // select 박스, input 박스 초기화

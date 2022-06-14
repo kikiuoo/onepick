@@ -8,6 +8,7 @@ import hashlib
 from audition.views import md5_generator
 from django.http import HttpResponse, JsonResponse
 from django.db import connection
+from myonepick.common import *
 
 
 # Create your views here.
@@ -265,30 +266,17 @@ def pofile_write_callback(request) :
     introduction = request.POST['introduction']
     notView = request.POST.get('notView',"0")
 
-    # 이미지 등록
-    s3_client = boto3.client(
-        's3',
-        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-    )
-
     nowTime = timezone.now()
 
+    image_main = ""
+    count = 0
     # 메인 이미지 등록
-    for image in mainImage :
+    for image in mainImage:
+        count = count + 1
         sub = image.name.split('.')[-1]
-        imgName = userID + "_userMain_" + str(nowTime)
-        imageName = md5_generator(imgName) + "." + sub
+        url = uploadFile(image, "photos/profiles/main/", sub)
 
-        s3_client.upload_fileobj(
-            image,
-            settings.AWS_STORAGE_BUCKET_NAME,
-            "media/photos/profiles/main/" + imageName,
-            ExtraArgs={
-                "ContentType": image.content_type,
-            }
-        )
-        image_main = "photos/profiles/main/" + imageName
+        image_main = url
 
     # 프로필 이미지 등록.
     image_profile = ""
@@ -297,21 +285,12 @@ def pofile_write_callback(request) :
         for image in profileImage:
             count = count + 1
             sub = image.name.split('.')[-1]
-            imgName = userID + "_profile_" + str(count) + "_" + str(nowTime)
-            imageName = md5_generator(imgName) + "." + sub
+            url = uploadFile(image, "photos/profile/additional/", sub)
 
-            s3_client.upload_fileobj(
-                image,
-                settings.AWS_STORAGE_BUCKET_NAME,
-                "media/photos/profile/additional/" + imageName,
-                ExtraArgs={
-                    "ContentType": image.content_type,
-                }
-            )
             if (count == 1):
-                image_profile = "photos/profile/additional/" + imageName
+                image_profile = url
             else:
-                image_profile = image_profile + "|" + "photos/profile/additional/" + imageName
+                image_profile = image_profile + "|" + url
 
     image_act = ""
     if len(userImage) != 0 :
@@ -319,24 +298,12 @@ def pofile_write_callback(request) :
         for image in userImage:
             count = count + 1
             sub = image.name.split('.')[-1]
-            imgName = userID + "_actImage_" + str(count)  + "_" + str(nowTime)
-            imageName = md5_generator(imgName) + "." + sub
+            url = uploadFile(image, "photos/profile/additional/", sub)
 
-            s3_client.upload_fileobj(
-                image,
-                settings.AWS_STORAGE_BUCKET_NAME,
-                "media/photos/profile/additional/" + imageName,
-                ExtraArgs={
-                    "ContentType": image.content_type,
-                }
-            )
             if (count == 1):
-                image_act = "photos/profile/additional/" + imageName
+                image_act = url
             else:
-                image_act = image_act + "|" + "photos/profile/additional/" + imageName
-
-
-
+                image_act = url
 
     # 기본정보 수정.
     userInfo = UserInfo.objects.get(userid=userID)

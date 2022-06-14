@@ -44,11 +44,11 @@ $(document).ready(function(){
 
 
     // 필터 적용
-    $(document).on("change", "#order, #nationality, #geneder, #military, #foreign, #good", function(){
+    $(document).on("change", "#order, #nationality, #geneder, #military, #foreign, #good, #order2", function(){
 
         var index = $(this).find("option:selected").index();
 
-        if( index == 0 && $(this).attr("id") != 'id' ){
+        if( index == 0 && ( $(this).attr("id") != 'order' && $(this).attr("id") != 'order2' ) ){
             $(this).css("color", "#c0c0c0");
         }else{
             $(this).css("color", "#1f1f1f");
@@ -129,8 +129,14 @@ $(document).ready(function(){
         var career2 = $("#career2").val();
 
         getProfileList( order, nationality, geneder, military, foreign, good, age1, age2, school, height1, height2, career1, career2);
+    });
 
+    $(document).on("click", ".filterBtn", function (){
+        $(".filterBox").css("display", "block");
+    });
 
+    $(document).on("click", ".filterSave, .closeBtn", function (){
+        $(".filterBox").css("display", "none");
     });
 });
 

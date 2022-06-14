@@ -50,6 +50,13 @@ $(document).ready(function(){
         }
     });
 
+
+    $(document).on("click", ".banner", function (){
+        var url = $(this).attr("data-url");
+
+        window.open(url);
+    });
+
 });
 
 function updatePick(tableName, nowType, num){

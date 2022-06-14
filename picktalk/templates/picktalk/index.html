@@ -16,13 +16,9 @@
 <div class="mobilBanner">
     <div class="swiper mySwiper mainBanner">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
-            <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
-            <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
-            <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
-            <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
-            <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
-            <div class="swiper-slide" data-url style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ banner.logoImage }}")'></div>
+            {% for banner in mainbanner %}
+            <div class="swiper-slide banner" data-url="{{ banner.url }}" style='background-image: url("/media/{{ banner.wimage }}")'></div>
+            {% endfor %}
         </div>
         <div class="swiper-pagination"></div>
 

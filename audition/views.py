@@ -182,6 +182,7 @@ def audi_write_callback(request) :
     imageURL = ""
     count = 0
     for image in userImage :
+        count = count + 1
         sub = image.name.split('.')[-1]
         url = uploadFile(image,"photos/audition/image", sub)
 
@@ -245,8 +246,7 @@ def audi_edit_callback( request ) :
 
     # 이미지 등록.
     nowTime = timezone.now()
-    image = ""
-    count = 0
+
     addImage = []
     for image in userImage:
         sub = image.name.split('.')[-1]

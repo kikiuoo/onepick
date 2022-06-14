@@ -18,7 +18,13 @@
     width: 100%;
     height: 100%;
     border-radius: 10px;
-    background-color: #c4c4c4;
+    background-color: #fff;
+}
+
+.mainBanner .banner{
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
 }
 
 /* Index 제목 */
