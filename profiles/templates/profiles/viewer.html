@@ -13,7 +13,7 @@
 
 <div class="inBox">
 
-    <div class="btnBox">
+    <div class="btnBox mobileNone">
         {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
         <div class="editBtn" data-num="{{ auditions.0 }}"></div>
         <div class="delBtn" data-num="{{ auditions.0 }}"></div>
@@ -28,14 +28,35 @@
         <div class="shareBtn"></div>
     </div>
 
-    <div class="mainImage"  style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profiles.profileimage }}");' id="image_1"  data-id="1"   data-image="https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profiles.profileimage }}"></div>
+    <div class="mainImage"  style='background-image: url("/media/{{ profiles.profileimage }}");' id="image_1"  data-id="1"   data-image="/media/{{ profiles.profileimage }}"></div>
+    <div class="blankBox pcNone"></div>
     <div class="userInfo">
+         <div class="userName">
+             {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
+                {{ userInfo.name }},{{ userInfo.birth|userAge }}세({{ userInfo.birth|replace:"-|/" }})
+             {% else %}
+                 {{ userInfo.name|updateUserName }},{{ userInfo.birth|userAge }}세({{ userInfo.birth|replace:"-|/" }})
+             {% endif %}
 
-        {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
-        <div class="userName">{{ userInfo.name }},{{ userInfo.birth|userAge }}세({{ userInfo.birth|replace:"-|/" }})</div>
-        {% else %}
-        <div class="userName">{{ userInfo.name|updateUserName }},{{ userInfo.birth|userAge }}세({{ userInfo.birth|replace:"-|/" }})</div>
-        {% endif %}
+             <div class="snsBox">
+                <div class="instagram" data-url="{{ userInfo.instargram }}"></div>
+                <div class="youtube" data-url="{{ userInfo.instargram }}"></div>
+                {% if userInfo.instargram|default:"" != "" %}
+                {% endif %}
+
+                {% if userInfo.youtube|default:"" != "" %}
+                {% endif %}
+            </div>
+
+            <div class="btnBox pcNone">
+                {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
+                <div class="editBtn" data-num="{{ auditions.0 }}"></div>
+                <div class="delBtn" data-num="{{ auditions.0 }}"></div>
+                {% endif %}
+                <div class="shareBtn"></div>
+            </div>
+         </div>
+
         <div class="info">
             {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
             연락처 {{ userInfo.phone }}<br>
@@ -46,6 +67,7 @@
             {% endif %}
             주소 {{ userInfo.addr1|default:"" }} {{ userInfo.addr2|default:"" }}
         </div>
+
         <div class="info">
             {{ userInfo.nationality }} |
             {% if userInfo.gender == "man" %}
@@ -57,16 +79,6 @@
             소속사 있음<br>
             {% endif %}
             {{ userInfo.school }} {{ userInfo.major }}
-        </div>
-
-        <div class="snsBox">
-            {% if userInfo.instargram|default:"" != "" %}
-            <div class="instagram" data-url="{{ userInfo.instargram }}"></div>
-            {% endif %}
-
-            {% if userInfo.youtube|default:"" != "" %}
-            <div class="youtube" data-url="{{ userInfo.instargram }}"></div>
-            {% endif %}
         </div>
 
         <div class="info">
@@ -81,12 +93,12 @@
 
         {% if profiles.iscareer == "0" %}
             {% if profiles.careeryear == "11" %}
-            <div class="allCareer">총 경력 10년이상</div>
+            <div class="allCareer mobileNone">총 경력 10년이상</div>
             {% else %}
-            <div class="allCareer">총 경력 {{ profiles.careeryear }}년 {{ profiles.careermonth  }}</div>
+            <div class="allCareer mobileNone">총 경력 {{ profiles.careeryear }}년 {{ profiles.careermonth  }}</div>
             {% endif %}
         {% endif %}
-
+        <div class="blankBox2 pcNone"></div>
         <div class="viewBox">
             <div class="countBox">
                 <span class="viewCount"></span>
@@ -110,6 +122,14 @@
 
         <div class="auditionBtn">오디션 제안</div>
     </div>
+
+    {% if profiles.iscareer == "0" %}
+        {% if profiles.careeryear == "11" %}
+        <div class="allCareer pcNone">총 경력 10년이상</div>
+        {% else %}
+        <div class="allCareer pcNone">총 경력 {{ profiles.careeryear }}년 {{ profiles.careermonth  }}</div>
+        {% endif %}
+    {% endif %}
 
     <div class="careerBox">
         <div class="leftBox">
@@ -167,8 +187,10 @@
         </div>
     </div>
 
+    <div class="line"></div>
+
     <div class="introduction">
-        {{ profiles.comment }}
+        {{ profiles.comment|linebreaks }}
     </div>
 
     <div class="viewDetail">
@@ -178,7 +200,7 @@
             <div class="blank"></div>
 
             {% for profileImage in profileImages %}
-            <img src="https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profileImage }}" data-id="{{ forloop.counter|addNum:1 }}" id="image_{{ forloop.counter|addNum:1 }}"  data-image="https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profileImage }}" height="440px">
+            <img src="/media/{{ profileImage }}" data-id="{{ forloop.counter|addNum:1 }}" id="image_{{ forloop.counter|addNum:1 }}"  data-image="/media/{{ profileImage }}" height="440px">
             {% endfor %}
         </div>
         {% endif %}
@@ -189,7 +211,7 @@
             <div class="blank"></div>
             {% with imageCount=profileImages|getArrayCount  %}
             {% for artImage in artImages %}
-            <img src="https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ artImage }}" data-id="{{ forloop.counter|addNum:imageCount|addNum:1 }}" id="image_{{ forloop.counter|addNum:imageCount|addNum:1 }}"  data-image="https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ artImage }}" height="440px">
+            <img src="/media/{{ artImage }}" data-id="{{ forloop.counter|addNum:imageCount|addNum:1 }}" id="image_{{ forloop.counter|addNum:imageCount|addNum:1 }}"  data-image="/media/{{ artImage }}" height="440px">
             {% endfor %}
             {% endwith %}
         </div>
@@ -242,7 +264,7 @@
     <div class="closePopup"></div>
     <div class="leftBtn"></div>
 
-    <img src="https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profiles.profileimage }}"  class="viewImage">
+    <img src="/media/{{ profiles.profileimage }}"  class="viewImage">
 
     <div class="rightBtn"></div>
 

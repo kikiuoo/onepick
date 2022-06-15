@@ -451,19 +451,6 @@ def pofile_edit_callback(request) :
 
     profiles = ProfileInfo.objects.get(num=num)
 
-
-    # 이미지 등록
-    s3_client = boto3.client(
-        's3',
-        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-    )
-
-    s3 = boto3.resource('s3',
-                        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-                        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-                        )
-
     nowTime = timezone.now()
 
     # 메인 이미지 등록
@@ -471,24 +458,12 @@ def pofile_edit_callback(request) :
         # 기존 이미지 삭제
         for rmImages in mainImg:
             if (rmImages == ""): continue
-            img = rmImages.replace("photos/profiles/main/", "")
-            s3.Object(settings.AWS_STORAGE_BUCKET_NAME, "media/photos/profiles/main/" + img).delete()
-        
-        #신규 이미지 업데이트
+            deleteFile(rmImages)
+
         for image in mainImage:
             sub = image.name.split('.')[-1]
-            imgName = userID + "_userMain_" + str(nowTime)
-            imageName = md5_generator(imgName) + "." + sub
-
-            s3_client.upload_fileobj(
-                image,
-                settings.AWS_STORAGE_BUCKET_NAME,
-                "media/photos/profiles/main/" + imageName,
-                ExtraArgs={
-                    "ContentType": image.content_type,
-                }
-            )
-            image_main = "photos/profiles/main/" + imageName
+            url = uploadFile(image, "photos/profiles/main/", sub)  # 파일 업로드
+            image_main = url
 
     else :
         image_main = mainImg
@@ -498,15 +473,9 @@ def pofile_edit_callback(request) :
     profileImgArr = profiles.detailimage.split("|")
     rmImage = removeImage_detail.split('|')
     if (removeImage_detail != ""):
-        s3 = boto3.resource('s3',
-                            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-                            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-                            )
-
         for rmImages in rmImage:
             if (rmImages == ""): continue
-            img = rmImages.replace("photos/profile/additional/", "")
-            s3.Object(settings.AWS_STORAGE_BUCKET_NAME, "media/photos/profile/additional/" + img).delete()
+            deleteFile(rmImages)
             profileImgArr.remove(rmImages)
 
     addImage = []
@@ -515,19 +484,8 @@ def pofile_edit_callback(request) :
         for image in profileImage:
             count = count + 1
             sub = image.name.split('.')[-1]
-            imgName = userID + "_profile_" + str(count) + "_" + str(nowTime)
-            imageName = md5_generator(imgName) + "." + sub
-
-            s3_client.upload_fileobj(
-                image,
-                settings.AWS_STORAGE_BUCKET_NAME,
-                "media/photos/profile/additional/" + imageName,
-                ExtraArgs={
-                    "ContentType": image.content_type,
-                }
-            )
-
-            addImage.append("photos/profile/additional/" + imageName)
+            url = uploadFile(image, "photos/profile/additional/", sub)  # 파일 업로드
+            addImage.append(url)
 
     profileDetail_image =  profileImgArr + addImage
     proDetail = "|".join(profileDetail_image)
@@ -536,36 +494,19 @@ def pofile_edit_callback(request) :
     actImageArr = profiles.artimage.split("|")
     rmImage = removeImage_art.split('|')
     if (removeImage_art != ""):
-        s3 = boto3.resource('s3',
-                            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-                            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-                            )
-
         for rmImages in rmImage:
             if (rmImages == ""): continue
-            img = rmImages.replace("photos/profile/additional/", "")
-            s3.Object(settings.AWS_STORAGE_BUCKET_NAME, "media/photos/profile/additional/" + img).delete()
+            deleteFile(rmImages)
             actImageArr.remove(rmImages)
 
     addImage = []
     if len(userImage) != 0:
         count = 0
-        for image in userImage:
+        for image in profileImage:
             count = count + 1
             sub = image.name.split('.')[-1]
-            imgName = userID + "_userImage_" + str(count) + "_" + str(nowTime)
-            imageName = md5_generator(imgName) + "." + sub
-
-            s3_client.upload_fileobj(
-                image,
-                settings.AWS_STORAGE_BUCKET_NAME,
-                "media/photos/profile/additional/" + imageName,
-                ExtraArgs={
-                    "ContentType": image.content_type,
-                }
-            )
-
-            addImage.append("photos/profile/additional/" + imageName)
+            url = uploadFile(image, "photos/profile/additional/", sub)  # 파일 업로드
+            addImage.append(url)
 
     artImageDetail = actImageArr + addImage
     artImage = "|".join(artImageDetail)
@@ -836,6 +777,11 @@ def profileSuggest(request) :
 
     saveSuggest = ProfileSuggest.objects.create(userid=writeUID, suuserid=userID, profilenum=num, auditionnum=audiNum,
                                                 comment=comment, regtime=nowTime)
+
+    writer = UserInfo.objects.get(userid=writeUID)
+    sender = UserCompany.objects.get(userid=userID)
+
+    sendSMS(writer.phone, "오디션 제안", "[ONEPICK] " +sender.name + "에서 오디션 제안이 도착했습니다." )
 
     return JsonResponse({"code": "0"})
 
