@@ -50,6 +50,17 @@
     background-size: cover;
 }
 
+.winBox .title .foldIcon_2{
+    position: absolute;
+    top: -3px;
+    right: 0px;
+    width: 24px;
+    height: 24px;
+
+    background-image: url("../../../image/mobile/fold_close.png");
+    background-size: cover;
+}
+
 .winBox .inputBox input,
 .winBox .inputBox textarea,
 .profile_imageBox input{

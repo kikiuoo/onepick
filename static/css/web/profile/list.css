@@ -78,10 +78,11 @@
 
 #nationality, #military{ width: 110px; }
 #geneder{ width: 110px; }
-#age1, #age2,#height1, #height2, #career1, #career2{ width: 80px; }
+#age1, #age2,#height1, #height2{ width: 80px; }
+#career1{ width: 140px; }
 #school{ width: 200px; margin-right: 0px; }
 #foreign{ width: 140px; }
-#good{ width: 140px; margin-right: 0px; }
+#good{ width: 140px; }
 
 .filterBox .resetBox{
     position: absolute;

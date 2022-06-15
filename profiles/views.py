@@ -45,29 +45,37 @@ def getCateType(cate_type):
     return cate
 
 
-def listView(request, cate_type): # 오디션 Main
+def listView(request, cate_type, page): # 오디션 Main
 
     try:
         cursor = connection.cursor()
 
         user = request.session.get('id', '')
 
+        intercate = ""
+        if cate_type == "actor" :
+            intercate = " and p.interCate = 'mainCate1' "
+        elif cate_type == "model" :
+            intercate = " and p.interCate = 'mainCate2' "
+        elif cate_type == "singer" :
+            intercate = " and p.interCate = 'mainCate3' "
+
         # 프로필
         if user:
             query = "SELECT p.num , profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, " \
                     "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
-                    "WHERE public = '0' and isDelete = '0' " \
+                    "WHERE public = '0' and isDelete = '0' " + intercate + " " \
                     "ORDER BY regDate DESC " \
-                    "LIMIT 15"
+                    "LIMIT 10"
         else:
             query = "SELECT p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain," \
                     "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, '0' AS proPick " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui " \
                     "     ON p.userID = ui.userID " \
-                    "WHERE public = '0' and isDelete = '0' " \
+                    "WHERE public = '0' and isDelete = '0' " + intercate + " " \
                     "ORDER BY regDate DESC  " \
-                    "LIMIT 15"
+                    "LIMIT 10"
 
         result = cursor.execute(query)
         profiles = cursor.fetchall()
@@ -643,7 +651,8 @@ def getProfile(request) :
     height1 = request.POST['height1']
     height2 = request.POST['height2']
     career1 = request.POST['career1']
-    career2 = request.POST['career2']
+    page = request.POST['page']
+    cate_type = request.POST['cate_type']
 
     orderby = ""
     if order == "popular":
@@ -684,25 +693,36 @@ def getProfile(request) :
     if height1 != "" and height2 != "" :
         where = where + " and height >= '"+ height1 + "' and height <= '"+ height2 + "' "
 
-    if career1 != "" and career2 != "" :
-        where = where + " and careerYear >= '"+ career1 + "' and careerYear <= '"+ career2 + "' "
+    if career1 != "" :
+        where = where + " and careerYear >= '"+ career1 +"' "
+
+    if cate_type == "actor":
+        where = where + " and p.interCate = 'mainCate1' "
+    elif cate_type == "model":
+        where = where + " and p.interCate = 'mainCate2' "
+    elif cate_type == "singer":
+        where = where + " and p.interCate = 'mainCate3' "
 
     try:
         cursor = connection.cursor()
         user = request.session.get('id', '')
+
+        block = 10
+        start = (int(page) - 1) * block
+        end = int(page) * block
 
         # 프로필
         if user:
             query = "SELECT p.num , profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, " \
                     "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
-                    "WHERE public = '0' and isDelete = '0' " + where + orderby + " LIMIT 15"
+                    "WHERE public = '0' and isDelete = '0' " + where + orderby + " LIMIT " + str(start) + ", " + str(end)
         else:
             query = "SELECT p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain," \
                     "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, '0' AS proPick " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui " \
                     "     ON p.userID = ui.userID " \
-                    "WHERE public = '0' and isDelete = '0' " + where + orderby + " LIMIT 15"
+                    "WHERE public = '0' and isDelete = '0' " + where + orderby + " LIMIT " + str(start) + ", " + str(end)
 
         result = cursor.execute(query)
         profiles = cursor.fetchall()

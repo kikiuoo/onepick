@@ -44,7 +44,7 @@ $(document).ready(function(){
 
 
     // 필터 적용
-    $(document).on("change", "#order, #nationality, #geneder, #military, #foreign, #good, #order2", function(){
+    $(document).on("change", "#order, #nationality, #geneder, #military, #foreign, #good, #order2, #career1", function(){
 
         var index = $(this).find("option:selected").index();
 
@@ -65,14 +65,15 @@ $(document).ready(function(){
         var school = $("#school").val();
         var height1 = $("#height1").val();
         var height2 = $("#height2").val();
-        var career1 = $("#career1").val();
-        var career2 = $("#career2").val();
+        var career1 = $("#career1").find("option:selected").val();
 
-        getProfileList( order, nationality, geneder, military, foreign, good, age1, age2, school, height1, height2, career1, career2);
+        page = 1;
+
+        getProfileList( order, nationality, geneder, military, foreign, good, age1, age2, school, height1, height2, career1);
 
     });
 
-    $(document).on("keyup", "#age1, #age2, #school, #height1, #height2, #career1, #career2", function(){
+    $(document).on("keyup", "#age1, #age2, #school, #height1, #height2", function(){
 
         var order = $("#order").find("option:selected").val();
         var nationality = $("#nationality").find("option:selected").val();
@@ -85,10 +86,11 @@ $(document).ready(function(){
         var school = $("#school").val();
         var height1 = $("#height1").val();
         var height2 = $("#height2").val();
-        var career1 = $("#career1").val();
-        var career2 = $("#career2").val();
+        var career1 = $("#career1").find("option:selected").val();
 
-        getProfileList( order, nationality, geneder, military, foreign, good, age1, age2, school, height1, height2, career1, career2);
+        page = 1;
+
+        getProfileList( order, nationality, geneder, military, foreign, good, age1, age2, school, height1, height2, career1);
 
     });
 
@@ -106,7 +108,6 @@ $(document).ready(function(){
         $("#height1").val("");
         $("#height2").val("");
         $("#career1").val("");
-        $("#career2").val("");
 
         $("#nationality").css("color", "#c0c0c0");
         $("#geneder").css("color", "#c0c0c0");
@@ -126,9 +127,10 @@ $(document).ready(function(){
         var height1 = $("#height1").val();
         var height2 = $("#height2").val();
         var career1 = $("#career1").val();
-        var career2 = $("#career2").val();
 
-        getProfileList( order, nationality, geneder, military, foreign, good, age1, age2, school, height1, height2, career1, career2);
+        page = 1;
+
+        getProfileList( order, nationality, geneder, military, foreign, good, age1, age2, school, height1, height2, career1);
     });
 
     $(document).on("click", ".filterBtn", function (){
@@ -138,19 +140,46 @@ $(document).ready(function(){
     $(document).on("click", ".filterSave, .closeBtn", function (){
         $(".filterBox").css("display", "none");
     });
+
+
+    $(window).scroll(function() {
+        console.log($(window).scrollTop() + " " + ( $(document).height() - $(window).height() ) + " " + $(document).height() + " " +$(window).height());
+        if ($(window).scrollTop() == ($(document).height() - $(window).height()- 100)) {
+            page++;
+
+            var order = $("#order").find("option:selected").val();
+            var nationality = $("#nationality").find("option:selected").val();
+            var geneder = $("#geneder").find("option:selected").val();
+            var military = $("#military").find("option:selected").val();
+            var foreign = $("#foreign").find("option:selected").val();
+            var good = $("#good").find("option:selected").val();
+            var age1 = $("#age1").val();
+            var age2 = $("#age2").val();
+            var school = $("#school").val();
+            var height1 = $("#height1").val();
+            var height2 = $("#height2").val();
+            var career1 = $("#career1").val();
+
+            getProfileList( order, nationality, geneder, military, foreign, good, age1, age2, school, height1, height2, career1)
+        }
+    });
 });
 
-function getProfileList( order, nationality, geneder, military, foreign, good, age1, age2, school, height1, height2, career1, career2){
+function getProfileList( order, nationality, geneder, military, foreign, good, age1, age2, school, height1, height2, career1){
     $.ajax({
       url: "/profile/ajax/getProfile/",
       type: "POST",
       dataType: "html",
       data:{"order":order, "nationality" : nationality, "geneder" : geneder, "military" : military,
             "foreign":foreign, "good" : good, "age1" : age1, "age2" : age2, "school":school,
-            "height1" : height1, "height2" : height2, "career1" : career1, "career2" : career2},
+            "height1" : height1, "height2" : height2, "career1" : career1, "page":page, "cate_type":cateType },
 
       success: function(data){
-          $(".inBox").empty().append(data);
+          if( page == 1 ) {
+              $(".inBox").empty().append(data);
+          }else{
+              $(".inBox").append(data);
+          }
       },
       error: function (request, status, error){
           alert(error);

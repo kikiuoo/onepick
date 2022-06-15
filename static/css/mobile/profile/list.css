@@ -193,12 +193,10 @@
     outline: none;
 }
 
-#geneder, #nationality, #military{ width: calc(33.3% - 5px); margin-right: 7px; }
-#military{ margin-right: 0px; }
-#age2, #height2, #career2, #good{ margin-right: 0px }
-#age1, #age2,#height1, #height2, #career1, #career2{ width: calc(50% - 28px);}
-#foreign, #good{ width: calc(50% - 8px);}
-#age1, #height1, #career1{ margin-right: 24px}
+#age2, #height2, #career2, #good,#geneder, #career1{ margin-right: 0px }
+#age1, #age2,#height1, #height2, #career2{ width: calc(50% - 28px);}
+#foreign, #good, #geneder, #nationality, #military, #career1{ width: calc(50% - 8px);}
+#age1, #height1{ margin-right: 24px}
 #school{ width: 100%; }
 
 

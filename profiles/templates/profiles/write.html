@@ -18,11 +18,11 @@
         <input type="hidden" value="{{ request.session.id }}" id="userID" name="userID"/>
 
         <div class="winBox">
-            <div class="title">
+            <div class="title"  data-id="userInfo">
                 회원 정보<span>회원 정보는 마이페이지에서 수정 가능합니다.</span>
                 <div class="foldIcon pcNone"></div>
             </div>
-            <div class="inputBox">
+            <div class="inputBox f_userInfo">
                 <input type="text" id="name" value="{{ user.name|default:"" }}" disabled>
                 <input type="text" id="birth" value="{{ user.birth|default:"" }}" disabled>
                 {% if user.gender == "man" %}
@@ -37,11 +37,11 @@
         </div>
 
         <div class="winBox">
-            <div class="title">
+            <div class="title" data-id="staticInfo">
                 기본 정보
                 <div class="foldIcon pcNone"></div>
             </div>
-            <div class="inputBox">
+            <div class="inputBox f_staticInfo">
                 <select name="nationality" id="nationality" {% if user.nationality|default:"" != '' %} style="color: #1f1f1f;" {% endif %}>
                     <option value="" disabled selected>국적</option>
                     <option value="내국인" {% if user.nationality == '내국인' %}selected{% endif %}>내국인</option>
@@ -97,11 +97,11 @@
         </div>
 
         <div class="winBox">
-            <div class="title">
+            <div class="title" data-id="bodyInfo">
                 신체 정보
                 <div class="foldIcon pcNone"></div>
             </div>
-            <div class="inputBox">
+            <div class="inputBox f_bodyInfo">
                 <div class="inText mini">
                     <input type="text" name="height" id="height" value="" placeholder="키">
                     <span>cm</span>
@@ -168,11 +168,11 @@
         </div>
 
         <div class="winBox">
-            <div class="title">
+            <div class="title" data-id="areaInfo">
                 지원분야
                 <div class="foldIcon pcNone"></div>
             </div>
-            <div class="inputBox">
+            <div class="inputBox f_areaInfo">
                 <select name="cate_m" id="cate_m">
                     <option value="" disabled selected>선택</option>
                     {% for cates in cate %}
@@ -184,8 +184,8 @@
                     <option value="" disabled selected>세부 분야</option>
                 </select>
             </div>
-            <div class="title">경력 <label class="textCheck"><input type="checkbox" name="notCareer" id="notCareer"> 경력없음 <div class="check"></div>  </label></div>
-            <div class="inputBox">
+            <div class="title f_areaInfo">경력 <label class="textCheck"><input type="checkbox" name="notCareer" id="notCareer"> 경력없음 <div class="check"></div>  </label></div>
+            <div class="inputBox f_areaInfo">
                 <div class="careerList">
                     <textarea name="saveCareer" id="saveCareer"></textarea>
                 </div>
@@ -205,7 +205,7 @@
                 <div class="addBtn" id="careerAdd"></div>
             </div>
 
-            <div class="leftInputBox">
+            <div class="leftInputBox f_areaInfo">
                 <select name="allCareer_y" id="allCareer_y">
                     <option value="" disabled selected>총 경력 년수</option>
                     <option value="1">1년</option>
@@ -239,16 +239,16 @@
         </div>
 
         <div class="winBox">
-            <div class="title">
+            <div class="title" data-id="imageInfo">
                 프로필 사진
                 <div class="foldIcon pcNone"></div>
             </div>
-            <div class="info" style="margin-bottom: 0px">
+            <div class="info f_imageInfo" style="margin-bottom: 0px">
                 대표 이미지는 프로필 상세페이지에 들어가기 전, 프로필 리스트에서 보이게 되는 썸네일 이미지 입니다. 대표이미지는 필수 등록입니다.<br>
                 프로필 이미지는 최대 10장의 사진 업로드가 가능합니다. 프로필 대표 이미지는 상반신 위주의 사진으로 등록해주세요.
             </div>
 
-            <div class="profile_imageBox mainImageBox">
+            <div class="profile_imageBox mainImageBox f_imageInfo">
                 <label id="mainImage" for="input-mainImage"> <div class="addImage"></div> 대표 이미지 등록</label>
                 <input type="file" name="mainImage[]" id="input-mainImage" class="upload-hidden input-file" data-type="mainImage">
                 <input type="hidden" name="mainImg" id="mainImg" value="">
@@ -258,25 +258,25 @@
                 <input type="file" name="profileImage[]" id="input-file" class="upload-hidden input-file" data-type="profileImage">
             </div>
 
-            <div class="title">작품 사진</div>
-            <div class="info">
+            <div class="title f_imageInfo">작품 사진</div>
+            <div class="info f_imageInfo">
                 활동했던 작품의 캡쳐 이미지를 등록할 수 있습니다.<br>
                 작품 이미지는 최대 10장의 사진 업로드가 가능합니다.
             </div>
 
-            <div class="profile_imageBox userImageBox">
+            <div class="profile_imageBox userImageBox f_imageInfo">
                 <div class="imageBox"></div>
                 <label id="pieceLabel" for="input-piece"> <div class="addImage"></div> 이미지 등록</label>
                 <input type="file" name="userImage[]" id="input-piece" class="upload-hidden input-file" data-type="userImage">
             </div>
 
-            <div class="title">프로필 영상</div>
-            <div class="info">
+            <div class="title f_imageInfo">프로필 영상</div>
+            <div class="info f_imageInfo">
                 프로필 영상은 유투브에 업로드 된 영상의 '공유' 버튼을 누르면 나오는 링크를 입력해 주세요.<br>
                 영상이 여러개 일 경우, 메인으로 보여질 영상은 아래 리스트에서 설정 가능합니다.
             </div>
 
-            <div class="profile_imageBox">
+            <div class="profile_imageBox f_imageInfo">
                 <div class="youtubeList">
                     <textarea name="youSave" id="youSave"></textarea>
                 </div>
@@ -288,11 +288,11 @@
         </div>
 
         <div class="winBox">
-            <div class="title">
+            <div class="title" data-id="etcInfo">
                 기타 경력
                 <div class="foldIcon pcNone"></div>
             </div>
-            <div class="inputBox">
+            <div class="inputBox f_etcInfo">
 
                 <div class="etcCareerList">
                     <textarea name="etcSaveCareer" id="etcSaveCareer"></textarea>
@@ -315,8 +315,8 @@
                 <div class="addBtn" id="eCareerAdd"></div>
             </div>
 
-            <div class="title">외국어 능력</div>
-            <div class="inputBox">
+            <div class="title f_etcInfo">외국어 능력</div>
+            <div class="inputBox f_etcInfo">
                 <div class="foreignList">
                     <textarea name="saveForeign" id="saveForeign"></textarea>
                 </div>
@@ -342,8 +342,8 @@
                 <div class="addBtn" id="foreignAdd"></div>
             </div>
 
-            <div class="title">특기</div>
-            <div class="inputBox">
+            <div class="title f_etcInfo">특기</div>
+            <div class="inputBox f_etcInfo">
                 <div class="specialtyList">
                     <textarea name="saveSpecialty" id="saveSpecialty"></textarea>
 
@@ -355,14 +355,14 @@
         </div>
 
         <div class="winBox">
-            <div class="title">
+            <div class="title" data-id="introInfo">
                 자기소개 <span style="font-size: 14px;">(<span class="text" style="font-size: 14px;margin:0;">0</span> / 1000자)</span>
                 <div class="foldIcon pcNone"></div>
             </div>
-            <div class="info">
+            <div class="info f_introInfo">
                 경력 사항이 없는 경우 자기소개를 100자 이상 필수로 작성해주세요.
             </div>
-            <div class="inputBox">
+            <div class="inputBox f_introInfo">
                 <textarea name="introduction" id="introduction" placeholder="자기소개를 입력해주세요."></textarea>
             </div>
         </div>

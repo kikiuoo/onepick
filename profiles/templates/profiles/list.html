@@ -48,6 +48,10 @@
             <option value="girl">여성</option>
         </select>
 
+        <input type="text" id="age1" value="" placeholder="나이">
+        <span>~</span>
+        <input type="text" id="age2" value="" placeholder="나이">
+
         <select name="military" id="military">
             <option value="" selected>병역 구분</option>
             <option value="해당없음">해당없음</option>
@@ -55,10 +59,15 @@
             <option value="군필">군필</option>
         </select>
 
-        <input type="text" id="age1" value="" placeholder="나이">
-        <span>~</span>
-        <input type="text" id="age2" value="" placeholder="나이">
 
+        <select name="career1" id="career1">
+            <option value="" selected>경력 선택</option>
+            <option value="1">1년 이상</option>
+            <option value="2">2년 이상</option>
+            <option value="3">3년 이상</option>
+            <option value="5">5년 이상</option>
+            <option value="10">10년 이상</option>
+        </select>
 
         <input type="text" id="height1" value="" placeholder="키">
         <span>~</span>
@@ -81,10 +90,6 @@
             <option value="중">중</option>
             <option value="하">하</option>
         </select>
-
-        <input type="text" id="career1" value="" placeholder="경력">
-        <span>~</span>
-        <input type="text" id="career2" value="" placeholder="경력">
 
         <input type="text" id="school" value="" placeholder="학교명">
 
@@ -171,6 +176,7 @@
 
 <script>
     var cateType = '{{ cateType }}';
+    var page = "{{ page }}";
 </script>
 
 {% endblock %}

@@ -7,6 +7,26 @@ $(document).ready(function (){
         window.history.go(-1);
     }
 
+    $(document).on("click", ".title", function (){
+       var width = $(this).css("width");
+       width = width.replaceAll("px", "");
+       var id = $(this).attr("data-id");
+
+       if( width < 768 && id != undefined ){
+           var display = $(".f_"+id).css("display");
+
+           if( display == "block" || display === undefined ){
+                 $(".f_"+id).css("display", "none");
+                 $(this).children("div").removeClass("foldIcon");
+                 $(this).children("div").addClass("foldIcon_2");
+           }else{
+                 $(".f_"+id).css("display", "block");
+                 $(this).children("div").removeClass("foldIcon_2");
+                 $(this).children("div").addClass("foldIcon");
+           }
+       }
+    });
+
     // 기본정보 선택시 글자 색상 변경
     $(document).on("change", "select", function(){
         $(this).css("color", "#1f1f1f");
