@@ -342,6 +342,7 @@ class UserInfo(models.Model):
     agreeprivacy = models.CharField(db_column='agreePrivacy', max_length=10, blank=True, null=True)  # Field name made lowercase.
     agreemarketing = models.CharField(db_column='agreeMarketing', max_length=10, blank=True, null=True)  # Field name made lowercase.
     agreeemail = models.CharField(db_column='agreeEmail', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    agreesms = models.CharField(db_column='agreeSms', max_length=10, blank=True,null=True)  # Field name made lowercase.
     jointype = models.CharField(db_column='joinType', max_length=20, blank=True, null=True)  # Field name made lowercase.
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
     lastlogin = models.DateTimeField(db_column='lastLogin', blank=True, null=True)  # Field name made lowercase.

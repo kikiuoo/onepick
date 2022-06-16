@@ -6,24 +6,25 @@ $(document).ready(function(){
     var day = (now.getDate()) > 9 ? ''+(now.getDate()) : '0'+(now.getDate());
     //년도 selectbox만들기
     for(var i = 1960 ; i <= year ; i++) {
-        $('#brith1').append('<option value="' + i + '">' + i + '년</option>');
+        $('#brith1').append('<option value="' + i + '">' + i + '</option>');
     }
 
     // 월별 selectbox 만들기
     for(var i=1; i <= 12; i++) {
         var mm = i > 9 ? i : "0"+i ;
-        $('#brith2').append('<option value="' + mm + '">' + mm + '월</option>');
+        $('#brith2').append('<option value="' + mm + '">' + mm + '</option>');
     }
 
     // 일별 selectbox 만들기
     for(var i=1; i <= 31; i++) {
         var dd = i > 9 ? i : "0"+i ;
-        $('#brith3').append('<option value="' + dd + '">' + dd+ '일</option>');
+        $('#brith3').append('<option value="' + dd + '">' + dd+ '</option>');
     }
 
 
     if(joinType == "social" && localStorage.getItem('userID') != "" ){
         $("#oldUserID").val( localStorage.getItem('userID') );
+        window.localStorage.removeItem('userID');
     }
 
     $(document).on("change", "select", function(){
@@ -275,6 +276,20 @@ $(document).ready(function(){
 
         $("#saveUserForm").submit();
     });
+
+    $(document).on("change", ".emailCheck, .phoneCheck", function(){
+
+        var checked = $(this).children().is(":checked");
+
+        if( checked == true ){
+            $(this).css("color", "#ff8aae");
+            $(this).children("div").css("background-image", 'url("/static/image/web/textCheck_on.png")');
+        }else{
+            $(this).css("color", "#c0c0c0");
+            $(this).children("div").css("background-image", 'url("/static/image/web/textCheck_off.png")');
+        }
+    });
+
 });
 
 

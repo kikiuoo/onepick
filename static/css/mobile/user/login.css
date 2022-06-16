@@ -1,19 +1,15 @@
 .mainTitle{
-    font-size: 24px;
+    font-size: 15px;
     font-weight: bold;
     color: #454545;
-    margin-bottom: 20px;
-    margin-left: 10px;
+    margin-bottom: 22px;
 }
 
 
 .inBox{
     display: inline-block;
-    width: 590px;
-    height: 440px;
-    padding: 50px 95px;
-    margin-left: 10px;
-    margin-right: 10px;
+    width: 100%;
+    padding: 20px;
     margin-bottom: 30px;
     border-radius: 20px;
     border: solid 1px #c0c0c0;
@@ -22,20 +18,14 @@
     vertical-align: top;
 }
 
-.inBox:last-child{
-    padding: 50px 45px;
-    margin-right: 0px;
-}
-
 .loginBox .inputBox_find{
-    padding: 0px 40px;
-    margin-top: 40px;
+    margin-top: 14px;
 }
 
 .loginBox .inputBox input,
 .loginBox .inputBox_find input{
-    width: 400px;
-    height: 50px;
+    width: 100%;
+    height: 40px;
     border-radius: 10px;
     background-color: #f6f6f6;
     box-sizing: border-box;
@@ -45,14 +35,14 @@
     padding: 0px 20px;
     resize: none;
 
-    font-size: 15px;
+    font-size: 12px;
     color: #1f1f1f;
     font-family: 'Noto Sans KR', sans-serif;
 }
 
 .loginBox .inputBox input::placeholder,
 .loginBox .inputBox_find input::placeholder{
-    font-size: 15px;
+    font-size: 12px;
     color: #c0c0c0;
 }
 .loginBox .inputBox input:focus,
@@ -63,28 +53,22 @@
 .loginBox .button{
     vertical-align: top;
     display: inline-block;
-    width: 400px;
-    height: 60px;
-    line-height: 60px;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
     border-radius: 10px;
     background-color: #ff8aae;
     cursor: pointer;
 
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bold;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 16px;
     color: #fff;
 }
 
-.findUser, .findBtn, .reInputBtn{
-    margin-left: 40px;
-}
-
 .loginBox .searchInfo{
-    padding-top: 10px;
-
-    font-size: 13px;
+    font-size: 11px;
     font-weight: bold;
     color: #959595;
     cursor: pointer;
@@ -94,16 +78,19 @@
 .inBox .socialBox{
     text-align: center;
     font-size: 0px;
-    margin-top: 40px;
-    padding-bottom: 9px;
+    margin-top: 20px;
+    padding-bottom: 4px;
 }
 
 .inBox .socialBox .socialBtn{
     display: inline-block;
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     margin-left: 20px;
     cursor: pointer;
+
+    background-position: center;
+    background-size: cover;
 }
 
 .inBox .socialBox .socialBtn:first-child{
@@ -121,6 +108,7 @@
     line-height: 1.33;
     text-align: center;
     color: #ff8aae;
+    padding: 0px 8px;
 }
 
 .loginBox2, .loginBox3{
@@ -128,9 +116,9 @@
 }
 
 .subTitle{
-    height: 50px;
-
-    font-size: 18px;
+    height: 70px;
+    line-height: 70px;
+    font-size: 13px;
     font-weight: bold;
     text-align: center;
     color: #ff8aae;
@@ -145,7 +133,7 @@
 
     height: 200px;
     overflow: auto;
-    padding-top: 40px;
+    padding: 21px 20px 0px;
     box-sizing: border-box;
 }
 .inputBox2 label{
@@ -157,18 +145,18 @@
 
 .inputBox2 label span{
     display: inline-block;
-    height: 30px;
-    line-height: 30px;
-    font-size: 16px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
     color: #1f1f1f;
     vertical-align: top;
 }
 .inputBox2 .s_userID{
     display: inline-block;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     margin: 0px;
-    margin-right: 15px;
+    margin-right: 8px;
     box-sizing: border-box;
     vertical-align: top;
     outline: none;
@@ -199,11 +187,12 @@
   	background:#ff8aae;
 }
 
+
 .nonInfo{
     margin-top: 40px;
     margin-bottom: 54px;
 
-    font-size: 18px;
+    font-size: 10px;
     font-weight: bold;
     line-height: 1.33;
     text-align: center;
@@ -212,21 +201,13 @@
 
 }
 
-.title{
-    padding-left: 10px;
-    margin-top: 22px;
-    font-size: 28px;
-    font-weight: bold;
-    color: #1f1f1f;
-}
-
 .fInfo{
     display: inline-block;
-    font-size: 14px;
+    font-size: 10px;
     color: #959595;
     margin-top: -10px;
     margin-bottom: 150px;
-    padding-left: 20px;
+    padding: 0px 10px;
 }
 
 .findPw{
@@ -238,30 +219,29 @@
 
 .inBox2{
     display: inline-block;
-    width: 1200px;
-    height: 400px;
+    width: 100%;
     padding: 58px 50px;
-    margin-left: 10px;
     border-radius: 20px;
     border: solid 1px #c0c0c0;
     background-color: #fff;
     box-sizing: border-box;
     vertical-align: top;
     margin-bottom: 130px;
+    margin-top: -10px;
 }
 
 .inBox2 .logoBox{
     text-align: center;
-    height: 74px;
+    padding-top: 10px;
+    padding-bottom: 20px;
     border-bottom: 1px solid #c0c0c0;
-    margin-bottom: 30px;
-    padding-bottom: 38px;
+    margin-bottom: 20px;
 }
 
 .inBox2 .logoBox .logo{
     display: inline-block;
-    height: 74px;
-    width: 252px;
+    height: 40px;
+    width: 140px;
 
     background-image: url("../../../image/web/login_logo.png");
     background-size: 100%;
@@ -271,25 +251,30 @@
 
 
 .inBox2 .textInfo{
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
+    line-height: 1.5;
     text-align: center;
     color: #454545;
+    padding: 0px 56px;
 }
 
 .inBox2 .socialBox{
     text-align: center;
     font-size: 0px;
-    margin-top: 42px;
-    padding-bottom: 9px;
+    margin-top: 20px;
+    padding-bottom: 20px;
 }
 
 .inBox2 .socialBox .socialBtn{
     display: inline-block;
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     margin-left: 20px;
     cursor: pointer;
+
+    background-position: center;
+    background-size: cover;
 }
 
 .inBox2 .socialBox .socialBtn:first-child{

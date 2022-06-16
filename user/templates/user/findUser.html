@@ -9,14 +9,15 @@
 <!-- JS 파일 -->
 <script src="{% static 'js/user/findUser.js' %}"></script>
 
-<div class="title">아이디 찾기</div>
-<div class="inBox inBox2" style="margin-top: 90px">
+<div class="mainTitle mobileNone">아이디/비밀번호 찾기</div>
+<div class="mainTitle pcNone">아이디 찾기</div>
+<div class="inBox" style=" height: auto">
     <div class="loginBox">
         <div class="inputBox">
             <input type="text" name="userName" id="userName" placeholder="이름 입력">
             <input type="text" name="userPhone" id="userPhone" placeholder="전화번호 입력">
         </div>
-        <div class="button idFindBtn">찾기</div>
+        <div class="button idFindBtn">아이디 찾기</div>
     </div>
 
     <div class="loginBox loginBox2">
@@ -26,29 +27,25 @@
     </div>
 
     <div class="nonInfo">
-        입력하신 정보와 일치하는 계정 정보가 없습니다. 정보를 확인해 주세요.
+        입력하신 정보와 일치하는 계정 정보가 없습니다.<br>정보를 확인해 주세요.
     </div>
 </div>
 
-<div class="fInfo">
-    회원 정보의 등록된 이름과 전화번호를 정확히 입력해주세요.<br>
-    회원님 본인의 정보를 모를실 때는 관리자(onepick@myonepick.com)에게 이메일로 문의해 주시기 바랍니다.
-</div>
 
-<div class="title">비밀번호 찾기</div>
-<div class="inBox inBox2">
+<div class="mainTitle pcNone">비밀번호 찾기</div>
+<div class="inBox" style="margin-right: 0px; height: auto">
     <div class="loginBox">
         <div class="inputBox">
             <input type="text" name="userID" id="userID" placeholder="아이디 입력">
             <input type="text" name="userName2" id="userName2" placeholder="이름 입력">
         </div>
-        <div class="button pwFindBtn">찾기</div>
+        <div class="button pwFindBtn">비밀번호 찾기</div>
     </div>
 </div>
 
 <div class="fInfo">
-    회원 정보의 등록된 아이디와 이름을 정확히 입력해주세요.<br>
-    회원님 본인의 정보를 모를실 때는 관리자(onepick@myonepick.com)에게 이메일로 문의해 주시기 바랍니다.
+    회원 정보의 등록된 개인정보를 정확히 입력해주세요.<br>
+    회원님 본인의 정보를 모르실 때는 관리자(onepick@myonepick.com)에게 이메일로 문의해 주시기 바랍니다.
 </div>
 
 <div class="findPw">

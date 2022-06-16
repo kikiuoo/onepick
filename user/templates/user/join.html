@@ -121,6 +121,15 @@
                     <input type="text" value="{{ user.addr2|default:"" }}" id="addr2" name="addr2" placeholder="상세 주소 검색"/>
                 </div>
             </div>
+
+
+            <div class="joinInfo">
+                <div class="title">광고 수신 동의</div>
+                <div class="content" style="padding-top: 13px">
+                    <label class="textCheck emailCheck"><input type="checkbox" name="emailCheck" id="emailCheck" value="1" checked> 이메일 <div class="check  on"></div>  </label>
+                    <label class="textCheck phoneCheck"><input type="checkbox" name="phoneCheck" id="phoneCheck" value="1" checked> SMS <div class="check  on"></div>  </label>
+                </div>
+            </div>
         </div>
 
 
@@ -160,7 +169,7 @@
                 <div class="content2">
                     <label class="imageSelect" id="logo" for="input-logo"> <div class="addImage"></div>로고 이미지<br>등록</label>
                     <label class="imageSelect" id="licenseImage" for="input-license"> <div class="addImage"></div>사업자 등록증<br>이미지 등록</label>
-                    <label class="imageSelect" id="artLicense" for="input-artLicense"> <div class="addImage"></div>대중 문화 예술 기획업<br>등록증 등록</label>
+                    <label class="imageSelect" id="artLicense" for="input-artLicense"> <div class="addImage"></div>대중 문화 예술<br>기획업 등록증 등록</label>
                     <input type="file" name="logo[]" id="input-logo" class="upload-hidden input-file" data-type="logo">
                     <input type="file" name="licenseImage[]" id="input-license" class="upload-hidden input-file" data-type="license">
                     <input type="file" name="artLicense[]" id="input-artLicense" class="upload-hidden input-file" data-type="artLicense">

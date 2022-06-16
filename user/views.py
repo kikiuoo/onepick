@@ -16,6 +16,7 @@ import random
 from django.conf import settings
 import boto3
 from django.db import connection
+from myonepick.common import *
 
 loginUrl = "http://ksnpick.com/users/login"
 #loginUrl = "http://localhost:8000/users/login"
@@ -271,6 +272,17 @@ def joinUpdate(request):
     licenseImage = request.FILES.getlist('licenseImage[]')
     artLicense = request.FILES.getlist('artLicense[]')
 
+    phoneCheck = request.POST.get('phoneCheck',"")
+    emailCheck = request.POST.get('emailCheck',"")
+
+    if phoneCheck != "1" :
+        phoneCheck = "0"
+
+    if emailCheck != "1":
+        emailCheck = "0"
+
+    print ( oldUserID )
+
     if oldUserID == "" :
         userInfo = UserInfo.objects.get(num=num)
     else :
@@ -287,6 +299,12 @@ def joinUpdate(request):
     userInfo.gender = gender
     userInfo.birth = brith1+"-"+brith2+"-"+brith3
 
+    userInfo.agreeusage = "1"
+    userInfo.agreeprivacy = "1"
+    userInfo.agreemarketing = "1"
+    userInfo.agreeemail = emailCheck
+    userInfo.agreesms = phoneCheck
+
     if userType == "NORMAL" :
         # 일반회원 등록
         userInfo.addr1 = addr1
@@ -295,66 +313,32 @@ def joinUpdate(request):
     else :
         userInfo.usertype = "S-COMPANY"
 
-        # 이미지 등록
-        s3_client = boto3.client(
-            's3',
-            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-        )
-
         nowTime = timezone.now()
 
         count = 0
         # 로고
         for image in logo:
-            sub = image.name.split('.')[-1]
-            imgName = userID + "_userMain_" + str(nowTime) + str(count)
-            imageName = md5_generator(imgName) + "." + sub
-
-            s3_client.upload_fileobj(
-                image,
-                settings.AWS_STORAGE_BUCKET_NAME,
-                "media/photos/company/" + imageName,
-                ExtraArgs={
-                    "ContentType": image.content_type,
-                }
-            )
-            logoImage = "photos/company/" + imageName
             count = count + 1
+            sub = image.name.split('.')[-1]
+            url = uploadFile(image, "photos/company/", sub)
+            logoImage = url
 
+        count = 0
         for image in licenseImage:
-            sub = image.name.split('.')[-1]
-            imgName = userID + "_userMain_" + str(nowTime) + str(count)
-            imageName = md5_generator(imgName) + "." + sub
-
-            s3_client.upload_fileobj(
-                image,
-                settings.AWS_STORAGE_BUCKET_NAME,
-                "media/photos/company/" + imageName,
-                ExtraArgs={
-                    "ContentType": image.content_type,
-                }
-            )
-            licenseImages = "photos/company/" + imageName
             count = count + 1
+            sub = image.name.split('.')[-1]
+            url = uploadFile(image, "photos/company/", sub)
+            licenseImages = url
 
+        count = 0
         for image in artLicense:
-            sub = image.name.split('.')[-1]
-            imgName = userID + "_userMain_" + str(nowTime) + str(count)
-            imageName = md5_generator(imgName) + "." + sub
-
-            s3_client.upload_fileobj(
-                image,
-                settings.AWS_STORAGE_BUCKET_NAME,
-                "media/photos/company/" + imageName,
-                ExtraArgs={
-                    "ContentType": image.content_type,
-                }
-            )
-            artLicense = "photos/company/" + imageName
             count = count + 1
+            sub = image.name.split('.')[-1]
+            url = uploadFile(image, "photos/company/", sub)
+            artLicenses = url
 
-        userCompany = UserCompany.objects.create(userid=userID, logoimage=logoImage, licenseimage=licenseImages, artlicenseimage=artLicense,
+
+        userCompany = UserCompany.objects.create(userid=userID, logoimage=logoImage, licenseimage=licenseImages, artlicenseimage=artLicenses,
                                                  license=license,companyname=companyName, addr1=companyAddr1, addr2=companyAddr2, website=webSite,
                                                  regtime=nowTime)
 
@@ -713,29 +697,7 @@ def comfirmPhone(requset):
 
 
 
-def sendSMS( receiver, title, msg ) :
 
-    send_url = 'https://apis.aligo.in/send/'  # 요청을 던지는 URL, 현재는 문자보내기
-
-    # ================================================================== 문자 보낼 때 필수 key값
-    # API key, userid, sender, receiver, msg
-    # API키, 알리고 사이트 아이디, 발신번호, 수신번호, 문자내용
-
-    sms_data = {'key': 'cl40fh7a45efop5rdoz2vhyqpizi5eus',  # api key
-                'userid': 'ksnpick',  # 알리고 사이트 아이디
-                'sender': '01028814491',  # 발신번호
-                'receiver': receiver,  # 수신번호 (,활용하여 1000명까지 추가 가능)
-                'msg': msg,  # 문자 내용
-                'msg_type': title,  # 메세지 타입 (SMS, LMS)
-                'title': 'title',  # 메세지 제목 (장문에 적용)
-                'destination': receiver,  # %고객명% 치환용 입력
-                # 'rdate' : '예약날짜',
-                # 'rtime' : '예약시간',
-                # 'testmode_yn' : '' #테스트모드 적용 여부 Y/N
-                }
-    send_response = requests.post(send_url, data=sms_data)
-
-    return send_response.json()
 
 def updateUserID(userID, oldUserID) :
 

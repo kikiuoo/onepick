@@ -81,6 +81,15 @@ $(document).ready(function(){
         window.location.href = "/users/findUser/"
     });
 
+    $(document).on("click", ".reInputBtn", function (){
+        $("#userName").val('');
+        $("#userPhone").val('');
+
+        $(".userInfoBox").css("display", "block");
+        $(".loginBox2").css("display", "none");
+        $(".loginBox3").css("display", "none");
+    });
+
 });
 
 function find_old_user(userName, userPhone){
@@ -94,11 +103,10 @@ function find_old_user(userName, userPhone){
         if( data == "" ){
             $(".userInfoBox").css("display", "block");
             $(".loginBox2").css("display", "none");
-            $(".nonInfo").css("display", "block");
+            $(".loginBox3").css("display", "none");
         }else{
             $(".userInfoBox").css("display", "none");
-            $(".nonInfo").css("display", "none");
-
+            $(".loginBox3").css("display", "none");
             $(".inputBox2").empty().append(data);
             $(".loginBox2").css("display", "block");
         }
