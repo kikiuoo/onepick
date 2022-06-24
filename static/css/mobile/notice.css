@@ -1,7 +1,7 @@
 .inBox{
     position: relative;
-    width: 1200px;
-    padding: 50px;
+    width: 100%;
+    padding: 20px 10px;
     border-radius: 33px;
     border: solid 1px #c0c0c0;
     background-color: #fff;
@@ -13,28 +13,27 @@
 
 .titleBox {
     border-bottom: 1px solid #c0c0c0;
-    padding-bottom: 27px;
-    margin-bottom: 30px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .titleBox .title{
-    font-size: 20px;
-    font-weight: bold;
-    line-height: 1.65;
+    font-size: 14px;
+    line-height: 1.57;
     color: #000;
-    margin-bottom: 4px;
+    margin-bottom: 10px;
 }
 
 .titleBox .userInfo{
-    font-size: 18px;
-    font-weight: normal;
-    line-height: 1.83;
+    font-size: 14px;
     color: #959595;
+    text-align: right;
+    padding-right: 10px;
 }
 
 .content{
     padding: 0px 10px ;
-    font-size: 18px;
+    font-size: 13px;
     line-height: 1.83;
     color: #1f1f1f;
 }
@@ -53,26 +52,28 @@
 
 
 .inBox .inputBox{
+    padding : 20px 7px 0px;
     box-sizing: border-box;
     width: 100%;
 }
 
 .inBox .commentList{
+    padding : 10px;
     box-sizing: border-box;
     width: 100%;
 }
 
 .inBox .inputBox #comment{
-    width: 938px;
-    height: 50px;
-    padding: 0px 15px;
+    width: calc(100% - 95px);
+    height: 40px;
+    padding: 0px 10px;
     border-radius: 10px;
     background-color: #f6f6f6;
     box-sizing: border-box;
     outline: none;
     border: 0px;
 
-    font-size: 16px;
+    font-size: 13px;
     margin-right: 10px;
 }
 .inBox .inputBox #comment::placeholder{
@@ -82,21 +83,22 @@
 
 .inBox .inputBox .saveComment{
     display: inline-block;
-    width: 150px;
-    height: 50px;
-    line-height: 50px;
+    width: 85px;
+    height: 40px;
+    line-height: 40px;
     text-align: center;
     border-radius: 10px;
     background-color: #ff8aae;
 
-    font-size: 16px;
+    font-size: 13px;
     font-weight: bold;
     color: #fff;
     cursor: pointer;
 }
 
 .comments{
-    padding: 19px 10px;
+    position: relative;
+    padding: 10px;
     border-top: 1px solid #c0c0c0;
 }
 
@@ -106,46 +108,39 @@
 
 .comments .name{
     display: inline-block;
-    width: 240px;
-    font-size: 16px;
+    font-size: 12px;
     color: #1f1f1f;
-    vertical-align: middle;
+    margin-bottom: 10px;
 }
 
 .comments .comContent{
     display: inline-block;
-    width: 688px;
-    font-size: 16px;
+    width: 100%;
+    font-size: 12px;
     color: #1f1f1f;
-    vertical-align: middle;
 }
 
 .comments .commentDelete{
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin-right: 48px;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    right: 15px;
+    top: 10px;
     vertical-align: middle;
     cursor: pointer;
 
     background-image: url("../../image/web/closeIcon.png");
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 60%;
-}
-
-.comments .nonDelete{
-    display: inline-block;
-    width: 12px;
-    margin-right: 48px;
+    background-size: 100%;
 }
 
 .comments .date{
     display: inline-block;
-    width: 90px;
-    font-size: 16px;
+    width: 100%;
+    font-size: 12px;
     color: #1f1f1f;
-    vertical-align: middle;
+    text-align: right;
 }
 
 .comments .nonComments{
@@ -153,4 +148,3 @@
     color: #959595;
     text-align: center;
 }
-

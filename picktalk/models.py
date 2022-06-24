@@ -278,6 +278,41 @@ class QaNotice(models.Model):
         managed = False
         db_table = 'qa_notice'
 
+class QaQanda(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    userid = models.CharField(db_column='userID', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    cate = models.CharField(max_length=20, blank=True, null=True)
+    title = models.CharField(max_length=100, blank=True, null=True)
+    content = models.CharField(max_length=500, blank=True, null=True)
+    regdate = models.DateTimeField(db_column='regDate', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'qa_qanda'
+
+
+class QaQandaCate(models.Model):
+    num = models.AutoField(primary_key=True)
+    catecode = models.CharField(db_column='cateCode', unique=True, max_length=50)  # Field name made lowercase.
+    catename = models.CharField(db_column='cateName', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    cateorder = models.IntegerField(db_column='cateOrder', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'qa_qanda_cate'
+
+
+class QaQandaComment(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    qanum = models.PositiveBigIntegerField(db_column='qaNum')  # Field name made lowercase.
+    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    content = models.CharField(max_length=500, blank=True, null=True)
+    regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'qa_qanda_comment'
+
 
 class UserAgree(models.Model):
     num = models.AutoField(primary_key=True)

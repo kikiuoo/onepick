@@ -38,189 +38,220 @@
 
     {% if type == "user" %}
     <div class="mTtitle">내 프로필 관리</div>
-    {% for data in data1 %}
-    <div class="myProfile" data-num="{{ data.num }}">
-        <div class="btnBox">
-            <div class="editBtn" data-type="profile" data-num="{{ data.num }}"></div>
-            <div class="delBtn" data-type="profile" data-num="{{ data.num }}"></div>
-        </div>
-
-        <div class="userImage" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ data.profileimage }}");'></div>
-        <div class="userInfoBox">
-            <div class="userName">{{ userInfo.name }} ({{ userInfo.birth|userAge }})
-                {% if data.public == "on" %}
-                    <span></span>
-                {% endif %}
+    {% if data1.count > 0 %}
+        {% for data in data1 %}
+        <div class="myProfile" data-num="{{ data.num }}">
+            <div class="btnBox">
+                <div class="editBtn" data-type="profile" data-num="{{ data.num }}"></div>
+                <div class="delBtn" data-type="profile" data-num="{{ data.num }}"></div>
             </div>
-            <div class="pUInfo">
-                키 {{ data.height }}cm | 몸무게 {{ data.weight }}kg<br>
-                {% if userInfo.gender == "man" %} 군필 | {% endif %}
-                {% if userInfo.entertain|default:"" == "" %}
-                소속사 없음<br>
-                {% else %}
-                소속사 있음<br>
-                {% endif %}
-                {{ userInfo.school }} {{ userInfo.major }}<br>
-                특기 {{ data.talent|replace_2:"|, " }}
-           </div>
 
-            {% with data.num|getPersent as persent %}
-            <div class="proComplete">프로필 완성도 <span>{{ persent }}</span>%</div>
-            <div class="proProgressBox">
-                <div class="progressBar" style="width: {{ persent }}%"></div>
-            </div>
-            {% endwith %}
-
-            <div class="viewBox">
-                <div class="countBox">
-                    <span class="viewCount"></span>
-                    <p>{{ data.viewcount }}</p>
+            <div class="userImage" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ data.profileimage }}");'></div>
+            <div class="userInfoBox">
+                <div class="userName">{{ userInfo.name }} ({{ userInfo.birth|userAge }})
+                    {% if data.public == "on" %}
+                        <span></span>
+                    {% endif %}
                 </div>
-                <div class="countBox">
-                    <span class="pickCount"></span>
-                    <p>{{ data.pickcount }}</p>
-                </div>
-                <div class="countBox">
-                    <span class="comViewCount"></span>
-                    <p>{{ data.cviewcount }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
+                <div class="pUInfo">
+                    키 {{ data.height }}cm | 몸무게 {{ data.weight }}kg<br>
+                    {% if userInfo.gender == "man" %} 군필 | {% endif %}
+                    {% if userInfo.entertain|default:"" == "" %}
+                    소속사 없음<br>
+                    {% else %}
+                    소속사 있음<br>
+                    {% endif %}
+                    {{ userInfo.school }} {{ userInfo.major }}<br>
+                    특기 {{ data.talent|replace_2:"|, " }}
+               </div>
 
-    <div class="mTtitle">제안 받은 오디션</div>
-    <div class="auditionList">
-        {% for data in data2 %}
-        <div class="audiList">
-            <div class="logo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ data.3 }}");'></div>
-            <div class="content">
-                <div class="audiTitle">{{ data.1 }}</div>
-                <div class="comment">{{ data.2|linebreaks }}</div>
+                {% with data.num|getPersent as persent %}
+                <div class="progre">
+                    <div class="proComplete">프로필 완성도 <span>{{ persent }}</span>%</div>
+                    <div class="proProgressBox">
+                        <div class="progressBar" style="width: {{ persent }}%"></div>
+                    </div>
+                </div>
+                {% endwith %}
+
+                <div class="viewBox mobileNone">
+                    <div class="countBox">
+                        <span class="viewCount"></span>
+                        <p>{{ data.viewcount }}</p>
+                    </div>
+                    <div class="countBox">
+                        <span class="pickCount"></span>
+                        <p>{{ data.pickcount }}</p>
+                    </div>
+                    <div class="countBox">
+                        <span class="comViewCount"></span>
+                        <p>{{ data.cviewcount }}</p>
+                    </div>
+                </div>
             </div>
-            <div class="audiBtn" data-num="{{ data.0 }}">오디션 공고 보기</div>
         </div>
         {% endfor %}
-    </div>
+    {% else %}
+        <div class="nonProfile"> 등록된 프로필이 없습니다.<br>프로필을 등록해 주세요.</div>
+    {% endif %}
+
+    <div class="mTtitle">제안 받은 오디션</div>
+    {% if data2|getArrayCount > 0 %}
+        <div class="auditionList">
+            {% for data in data2 %}
+            <div class="audiList">
+                <div class="logo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ data.3 }}");'></div>
+                <div class="content">
+                    <div class="audiTitle">{{ data.1 }}</div>
+                    <div class="comment">{{ data.2|linebreaks }}</div>
+                </div>
+                <div class="audiBtn" data-num="{{ data.0 }}">오디션 공고 보기</div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="nonProfile"> 제안 받은 오디션이 없습니다.</div>
+    {% endif %}
 
     <div class="mTtitle">내가 픽한 오디션</div>
     <div class="inBox">
-        {% for data in data3 %}
-         <div class="audition" data-num="{{ data.0 }}">
-            <div class="audiLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ data.4 }}");'></div>
-            <div class="audiTitle">{{ data.1 }}</div>
-            <div class="audiTerm">
-                {% if data.3 == "1" %}
-                    상시모집
-                {% else %}
-                    ~ {{ data.2|date:'Y-m-d' }}
-                {% endif %}
-            </div>
+        {% if data3|getArrayCount > 0 %}
+            {% for data in data3 %}
+             <div class="audition" data-num="{{ data.0 }}">
+                <div class="audiLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ data.4 }}");'></div>
+                <div class="audiTitle">{{ data.1 }}</div>
+                <div class="audiTerm">
+                    {% if data.3 == "1" %}
+                        상시모집
+                    {% else %}
+                        ~ {{ data.2|date:'Y-m-d' }}
+                    {% endif %}
+                </div>
 
-            <div class="pickBtn pickOn " data-nowType="on"></div>
-        </div>
-        {% endfor %}
+                <div class="pickBtn pickOn " data-nowType="on"></div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="nonProfile"> 픽한 오디션이 없습니다.</div>
+        {% endif %}
     </div>
 
     {% else %}
     <div class="mTtitle">등록 오디션 관리</div>
-    <div class="inBox" style="margin-bottom: 10px">
-        {% for data in data1 %}
-        <div class="regAudi" data-num="{{ data.num }}">
-            <div class="btnBox">
-                <div class="editBtn" data-type="audition" data-num="{{ data.num }}"></div>
-                <div class="delBtn" data-type="audition" data-num="{{ data.num }}"></div>
-            </div>
-
-            <div class="audiTitle">{{ data.title }}</div>
-            <div class="audiTerm">
-                {% if data.ordinary == "1" %}
-                    상시모집
-                {% else %}
-                    ~ {{ data.enddate|date:'Y-m-d' }}
-                {% endif %}
-            </div>
-            <div class="cate">
-                <div class="cTitle">모집분야</div>
-                <div class="cContent">
-                    {{ data.cate|getMainCate }}<br>
-                    {{ data.subcate|getSubCates }}
+    <div class="inBox">
+        {% if data1|getArrayCount > 0 %}
+            {% for data in data1 %}
+            <div class="regAudi" data-num="{{ data.num }}">
+                <div class="btnBox">
+                    <div class="editBtn" data-type="audition" data-num="{{ data.num }}"></div>
+                    <div class="delBtn" data-type="audition" data-num="{{ data.num }}"></div>
                 </div>
-            </div>
 
-            <div class="volunteer">총 지원자 <span>{{ data.num|applyCount }}</span>명</div>
-            <div class="audiVolunteer" data-type="audiProfile" data-num="{{ data.num }}">오디션 지원자 보기</div>
-        </div>
-        {% endfor %}
+                <div class="audiTitle">{{ data.title }}</div>
+                <div class="audiTerm">
+                    {% if data.ordinary == "1" %}
+                        상시모집
+                    {% else %}
+                        ~ {{ data.enddate|date:'Y-m-d' }}
+                    {% endif %}
+                </div>
+                <div class="cate">
+                    <div class="cTitle">모집분야</div>
+                    <div class="cContent">
+                        {{ data.cate|getMainCate }}<br>
+                        {{ data.subcate|getSubCates }}
+                    </div>
+                </div>
+
+                <div class="volunteer">총 지원자 <span>{{ data.num|applyCount }}</span>명</div>
+                <div class="audiVolunteer" data-type="audiProfile" data-num="{{ data.num }}">오디션 지원자 보기</div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="nonProfile"> 등록한 오디션이 없습니다.</div>
+        {% endif %}
     </div>
 
     <div class="mTtitle">제안한 프로필 <span data-type="suggest">전체보기</span></div>
-    {% for data in data2 %}
-    <div class="myProfile" data-num="{{ data.0 }}">
-        <div class="userImage" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ data.1 }}");'></div>
-        <div class="userInfoBox">
-            <div class="userName">{{ data.4 }} ({{ data.5|userAge }})</div>
-            <div class="pUInfo">
-                키 {{ data.2 }}cm | 몸무게 {{ data.3 }}kg<br>
-                {% if data.7 == "man" %} 군필 | {% endif %}
-                {% if data.6|default:"" == "" %}
-                소속사 없음<br>
-                {% else %}
-                소속사 있음<br>
-                {% endif %}
-                {{ data.9 }} {{ data.10 }}<br>
-                특기 {{ data.11|replace_2:"|, " }}
-           </div>
-           <div class="comment">{{ data.12|linebreaks }}</div>
+    {% if data2|getArrayCount > 0 %}
+        <div class="inBox">
+        {% for data in data2 %}
+            <div class="profile" data-num="{{ data.0 }}">
+                <div class="imageBox">
+                    <div class="profileImage"   style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ data.1 }}");'></div>
+                </div>
+                <div class="contentBox">
+                    <div class="name">{{ data.4 }} ({{ data.5|userAge }})</div>
+                    <div class="detailInfo">
+                        키 {{ data.2 }}cm | 몸무게 {{ data.3 }}kg<br>
+                        {% if data.7 == "man" %} 군필 | {% endif %}
+                        {% if data.6|default:"" == "" %}
+                        소속사 없음<br>
+                        {% else %}
+                        소속사 있음<br>
+                        {% endif %}
+                        {{ data.9 }} {{ data.10 }}<br>
+                        특기 {{ data.11|replace_2:"|, " }}
+                   </div>
+                   <div class="comment mobileNone">{{ data.12|linebreaks }}</div>
+                </div>
+
+                <div class="comment pcNone">{{ data.12|linebreaks }}</div>
+            </div>
+        {% endfor %}
         </div>
-    </div>
-    {% endfor %}
+    {% else %}
+        <div class="nonProfile"> 제안한 프로필이 없습니다.</div>
+    {% endif %}
 
     <div class="mTtitle">픽한 프로필 <span data-type="pick">전체보기</span></div>
     <div class="inBox">
-        {% for data in data3 %}
-        <div class="profile" data-num="{{ data.0 }}">
-            <div class="imageBox">
-                <div class="profileImage"   style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ data.1 }}");'></div>
-                {% if profile.16 != "" %}
-                <div class="youtube">
-                    <iframe width="560" height="315" src="{{ data.16|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                {% endif %}
-            </div>
-            <div class="contentBox">
-                <div class="name">{{ data.7|updateUserName }} ({{ data.8|userAge }})</div>
-                <div class="detailInfo">
-                    키 {{ data.2|userHight }} cm | 몸무게 {{ data.3|userHight }} kg<br>
-                    {% if data.10 == 'man' %}
-                    {{ data.11 }} |
-                    {% endif %}
-                    {% if data.9 == "" %}
-                        소속사 없음
-                    {% else %}
-                        소속사 있음
-                    {% endif %} <br>
-                    {{ data.12 }} {{ data.13 }}
-                    {% if data.14 != "" %}
-                     <br>특기 {{ data.14|getTalent }}
+        {% if data3|getArrayCount > 0 %}
+            {% for data in data3 %}
+            <div class="profile" data-num="{{ data.0 }}">
+                <div class="imageBox">
+                    <div class="profileImage"   style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ data.1 }}");'></div>
+                    {% if profile.16 != "" %}
+                    <div class="youtube">
+                        <iframe width="560" height="315" src="{{ data.16|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
                     {% endif %}
                 </div>
+                <div class="contentBox">
+                    <div class="name">{{ data.7|updateUserName }} ({{ data.8|userAge }})</div>
+                    <div class="detailInfo">
+                        키 {{ data.2|userHight }} cm | 몸무게 {{ data.3|userHight }} kg<br>
+                        {% if data.10 == 'man' %}
+                        {{ data.11 }} |
+                        {% endif %}
+                        {% if data.9 == "" %}
+                            소속사 없음
+                        {% else %}
+                            소속사 있음
+                        {% endif %} <br>
+                        {{ data.12 }} {{ data.13 }}
+                        {% if data.14 != "" %}
+                         <br>특기 {{ data.14|getTalent }}
+                        {% endif %}
+                    </div>
 
-                {% if profile.17 == '0' %}
-                <div class="career">
-                    <div class="careerTitle">영화</div>
-                    <div class="careerContent">{{ data.0|getCareer:"movie" }}</div>
-                    <div class="careerTitle">TV드라마,웹드라마</div>
-                    <div class="careerContent">{{ data.0|getCareer:"drama" }}</div>
-                    <div class="careerTitle">광고/기타</div>
-                    <div class="careerContent">{{ data.0|getCareer:"etc" }}</div>
+                    {% if profile.17 == '0' %}
+                    <div class="career">
+                        <div class="careerTitle">영화</div>
+                        <div class="careerContent">{{ data.0|getCareer:"movie" }}</div>
+                        <div class="careerTitle">TV드라마,웹드라마</div>
+                        <div class="careerContent">{{ data.0|getCareer:"drama" }}</div>
+                        <div class="careerTitle">광고/기타</div>
+                        <div class="careerContent">{{ data.0|getCareer:"etc" }}</div>
+                    </div>
+                    {% else %}
+                    <div class="career">
+                        <div class="careerTitle">자기 소개</div>
+                        <div class="introduction">{{ data.15 }}</div>
+                    </div>
+                    {% endif %}
                 </div>
-                {% else %}
-                <div class="career">
-                    <div class="careerTitle">자기 소개</div>
-                    <div class="introduction">{{ data.15 }}</div>
-                </div>
-                {% endif %}
+                <div class="blank pcNone"></div>
 
                 <div class="viewBox">
                     <div class="countBox">
@@ -236,11 +267,13 @@
                         <p>{{ data.6 }}</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="pickBtn pickOn " data-nowType="on"></div>
-        </div>
-        {% endfor %}
+                <div class="pickBtn pickOn " data-nowType="on"></div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="nonProfile"> 픽한 프로필이 없습니다.</div>
+        {% endif %}
     </div>
     {% endif %}
 
@@ -250,8 +283,23 @@
         {% for noti in notice %}
         <div class="notiList" data-num="{{ noti.num }}">
             <div class="title">{{ noti.title }}</div>
-            <div class="name">{{ noti.userid }}</div>
             <div class="date">{{ noti.regdate|date:"Y/m/d" }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if notice.count > 0 %}
+    <div class="mTtitle" style="margin-top: 30px">문의하기 <span data-type="qanda">전체보기</span></div>
+    <div class="notiBox">
+        {% for qa in qanda %}
+        <div class="notiList" data-num="{{ qa.0 }}">
+            <div class="title">
+                <span>[{{ qa.1 }}]</span>
+                {{ qa.2 }}
+                [{{ qa.4 }}]
+            </div>
+            <div class="date">{{ qa.3|date:"Y/m/d" }}</div>
         </div>
         {% endfor %}
     </div>

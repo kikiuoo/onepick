@@ -20,11 +20,10 @@
 /* 검색결과 */
 .searchTitle{
     padding-left: 10px;
-    font-size: 22px;
-    font-weight: bold;
+    font-size: 16px;
     text-align: left;
-    color: #454545;
-    margin-bottom: 2px;
+    color: #1f1f1f;
+    margin-bottom: 20px;
 }
 
 .searchTitle span{

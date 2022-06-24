@@ -51,6 +51,32 @@ $(document).ready(function(){
         }
     });
 
+
+    $(window).scroll(function() {
+
+        if( cateType == "audition") return;
+
+        console.log($(window).scrollTop() + " " + ( $(document).height() - $(window).height() ) + " " + $(document).height() + " " +$(window).height());
+        if ($(window).scrollTop() == ($(document).height() - $(window).height()- 100)) {
+            page++;
+
+            var order = $("#order").find("option:selected").val();
+            var nationality = $("#nationality").find("option:selected").val();
+            var geneder = $("#geneder").find("option:selected").val();
+            var military = $("#military").find("option:selected").val();
+            var foreign = $("#foreign").find("option:selected").val();
+            var good = $("#good").find("option:selected").val();
+            var age1 = $("#age1").val();
+            var age2 = $("#age2").val();
+            var school = $("#school").val();
+            var height1 = $("#height1").val();
+            var height2 = $("#height2").val();
+            var career1 = $("#career1").val();
+
+            getProfileList( order, nationality, geneder, military, foreign, good, age1, age2, school, height1, height2, career1)
+        }
+    });
+
 });
 
 

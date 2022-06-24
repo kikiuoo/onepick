@@ -27,44 +27,54 @@
 
 {% if searching|length > 0 %}
     {% if cateType == "audition" %}
-    <div class="inBox" style="padding-top: 0px">
-        <div class="audiList">
-            {% for auditions in searching %}
-            <div class="audiListBox" data-num="{{ auditions.0 }}">
-                <div class="companyName">{{ auditions.8 }}</div>
-                <div class="sContent">
-                    <div class="lTitle">{{ auditions.1 }}</div>
-                    <div class="lAppel">
-                        <span>모집분야</span>
-                        <p>{{ auditions.2 }}</p>
-                        <span>경력</span>
-                        <p>{{ auditions.3 }}</p>
-                        <span>나이</span>
-                        <p>{{ auditions.4 }}</p>
-                    </div>
-                </div>
-                <div class="date">
-                    {% if auditions.7 == '1' %}
-                    <div class="endDate">상시모집</div>
-                    {% elif auditions.7 == '0' %}
-                    <div class="endDate">~ {{ auditions.5|date:'Y/m/d' }}</div>
-                    {% endif %}
-                    {% if auditions.9 == 0 %}
-                    <div class="regDate">오늘 등록</div>
-                    {% else %}
-                    <div class="regDate">{{ auditions.9 }}일 전 등록</div>
-                    {% endif %}
+    <div class="audiList">
+        {% for auditions in searching %}
+        <div class="audiListBox" data-num="{{ auditions.0 }}">
+            <div class="audiLogo" style='background-image: url("/media/{{ auditions.8 }}");'></div>
+            <div class="sContent">
+                <div class="lTitle">{{ auditions.1 }}</div>
+                <div class="lAppel">
+                    <span>모집분야</span>
+                    <p>{{ auditions.2 }}</p>
+                    <span>경력</span>
+                    <p>{{ auditions.3 }}</p>
+                    <span>나이</span>
+                    <p>{{ auditions.4 }}</p>
                 </div>
             </div>
-            {% endfor %}
+            <div class="date">
+                {% if auditions.7 == '1' %}
+                <div class="endDate">상시모집</div>
+                {% elif auditions.7 == '0' %}
+                <div class="endDate">~ {{ auditions.5|date:'Y/m/d' }}</div>
+                {% endif %}
+                {% if auditions.9 == 0 %}
+                <div class="regDate">오늘 등록</div>
+                {% else %}
+                <div class="regDate">{{ auditions.9 }}일 전 등록</div>
+                {% endif %}
+            </div>
+
+            {% if auditions.10 == 0 or auditions.10 == "0" %}
+            <div class="pickBtn" data-nowType="off"></div>
+            {% else %}
+            <div class="pickBtn pickOn " data-nowType="on"></div>
+            {% endif %}
         </div>
+        {% endfor %}
     </div>
+
+    <div class="page">
+    {% for pages in paging %}
+        <div class="pages {% if pages == page %} nowPage {% endif %}"  data-page="{{ pages }}">{{ pages }}</div>
+    {% endfor %}
+</div>
     {% else %}
     <div class="inBox">
         {% for profile in searching %}
         <div class="profile" data-num="{{ profile.0 }}">
             <div class="imageBox">
-                <div class="profileImage"   style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profile.1 }}");'></div>
+                <div class="profileImage"   style='background-image: url("/media/{{ profile.1 }}");'></div>
                 {% if profile.16 != "" %}
                 <div class="youtube">
                     <iframe width="560" height="315" src="{{ profile.16|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -136,6 +146,8 @@
 
 <script>
     var word = "{{ search }}";
+    var page = "{{ page }}";
+    var cateType = "{{ cateType }}";
 </script>
 
 

@@ -87,12 +87,15 @@
         {% endfor %}
     </div>
 {% elif type == "suggest" %}
+    <div class="inBox">
     {% for data in profile %}
-    <div class="myProfile" data-num="{{ data.0 }}">
-        <div class="userImage" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ data.1 }}");'></div>
-        <div class="userInfoBox">
-            <div class="userName">{{ data.4 }} ({{ data.5|userAge }})</div>
-            <div class="pUInfo">
+    <div class="profile" data-num="{{ data.0 }}">
+        <div class="imageBox">
+            <div class="profileImage"   style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ data.1 }}");'></div>
+        </div>
+        <div class="contentBox">
+            <div class="name">{{ data.4 }} ({{ data.5|userAge }})</div>
+            <div class="detailInfo">
                 키 {{ data.2 }}cm | 몸무게 {{ data.3 }}kg<br>
                 {% if data.7 == "man" %} 군필 | {% endif %}
                 {% if data.6|default:"" == "" %}
@@ -103,10 +106,13 @@
                 {{ data.9 }} {{ data.10 }}<br>
                 특기 {{ data.11|replace_2:"|, " }}
            </div>
-           <div class="comment">{{ data.12|linebreaks }}</div>
+           <div class="comment mobileNone">{{ data.12|linebreaks }}</div>
         </div>
+
+        <div class="comment pcNone">{{ data.12|linebreaks }}</div>
     </div>
     {% endfor %}
+    </div>
 {% endif %}
 
 <script>

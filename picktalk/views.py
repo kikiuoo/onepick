@@ -1,6 +1,6 @@
 import smtplib
 from django.db.models import Subquery
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import  loader
 from django.db import connection
@@ -145,13 +145,33 @@ def searchList(request, cateType, search, page) :
         print(nowTime)
         saveSearch = UserSearch.objects.create(userid=user, search=search, regdate=nowTime)
 
+        block = 10
+        start = (page - 1) * block
+        end = page * block
+
         if cateType == "audition" :
-            query = "SELECT ai.num, ai.title, cm.cateName, ai.career, ai.age, ai.endDate, ai.regTime, ai.ordinary, uc.companyName, DATEDIFF(NOW(),  ai.regTime) AS diffDate " \
-                    "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode " \
-                    "    LEFT JOIN  user_company AS uc ON ai.userID = uc.userID " \
-                    "where (ai.isDelete = '0' or ai.isDelete is null ) and " \
-                    "      ( title LIKE '%" + search + "%' OR age LIKE '%" + search + "%' OR gender LIKE '%" + search + "%' OR career LIKE '%" + search + "%' OR essential LIKE '%" + search + "%'  OR preparation LIKE '%" + search + "%' ) " \
-                    "ORDER BY ai.regTime DESC limit 15"
+            if user:
+                query = "SELECT ai.num, ai.title, cm.cateName, ai.career, ai.age, ai.endDate, ai.regTime, ai.ordinary, uc.logoImage, DATEDIFF(NOW(),  ai.regTime) AS diffDate, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user + "' AND auditionNum = ai.num ) AS audiPick " \
+                        "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode " \
+                        "    LEFT JOIN  user_company AS uc ON ai.userID = uc.userID " \
+                        "where  ai.isDelete = '0' or ai.isDelete is null " \
+                        "     and ( title LIKE '%" + search + "%' OR age LIKE '%" + search + "%' OR gender LIKE '%" + search + "%' OR career LIKE '%" + search + "%' OR essential LIKE '%" + search + "%'  OR preparation LIKE '%" + search + "%' ) " \
+                        "ORDER BY ai.regTime DESC limit " + str(start) + ", " + str(end)
+            else:
+                query = "SELECT ai.num, ai.title, cm.cateName, ai.career, ai.age, ai.endDate, ai.regTime, ai.ordinary, uc.logoImage, DATEDIFF(NOW(),  ai.regTime) AS diffDate , '0' AS audiPick " \
+                        "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode " \
+                        "    LEFT JOIN  user_company AS uc ON ai.userID = uc.userID " \
+                        "where  ai.isDelete = '0' or ai.isDelete is null " \
+                        "     and ( title LIKE '%" + search + "%' OR age LIKE '%" + search + "%' OR gender LIKE '%" + search + "%' OR career LIKE '%" + search + "%' OR essential LIKE '%" + search + "%'  OR preparation LIKE '%" + search + "%' ) " \
+                        "ORDER BY ai.regTime DESC limit " + str(start) + ", " + str(end)
+
+            result = cursor.execute(query)
+            searching = cursor.fetchall()
+
+            print(searching)
+
+            allPage = (len(searching) / block) + 1
+            paging = getPageList(page, allPage)
 
         else :
             if user:
@@ -164,7 +184,7 @@ def searchList(request, cateType, search, page) :
                         "      ( career > 0 OR etcCareer > 0 OR `foreign` LIKE '%" + search + "%' OR talent LIKE '%" + search + "' OR `comment` LIKE '%" + search + "%' OR `careerYear` LIKE '%" + search + "%' OR `careerMonth` LIKE '%" + search + "%' " \
                         "        OR `foreign` LIKE '%" + search + "%' OR `birth` LIKE '%" + search + "%' OR `finalSchool` LIKE '%" + search + "%' OR `school` LIKE '%" + search + "%' OR `major` LIKE '%" + search + "%' OR `entertain` LIKE '%" + search + "%' OR `military` LIKE '%" + search + "%')  " \
                         "ORDER BY regDate DESC " \
-                        "LIMIT 15"
+                        " LIMIT " + str(start) + ", " + str(end)
             else:
                 query = "SELECT p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain," \
                         "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, '0' AS proPick " \
@@ -175,15 +195,17 @@ def searchList(request, cateType, search, page) :
                         "      ( career > 0 OR etcCareer > 0 OR `foreign` LIKE '%" + search + "%' OR talent LIKE '%" + search + "' OR `comment` LIKE '%" + search + "%' OR `careerYear` LIKE '%" + search + "%' OR `careerMonth` LIKE '%" + search + "%' " \
                         "        OR `foreign` LIKE '%" + search + "%' OR `birth` LIKE '%" + search + "%' OR `finalSchool` LIKE '%" + search + "%' OR `school` LIKE '%" + search + "%' OR `major` LIKE '%" + search + "%' OR `entertain` LIKE '%" + search + "%' OR `military` LIKE '%" + search + "%')  " \
                         "ORDER BY regDate DESC  " \
-                        "LIMIT 15"
+                        " LIMIT " + str(start) + ", " + str(end)
 
-        result = cursor.execute(query)
-        searching = cursor.fetchall()
+            result = cursor.execute(query)
+            searching = cursor.fetchall()
+            paging = ""
 
         connection.commit()
         connection.close()
 
-        return render(request, 'picktalk/search.html', {"cateType": cateType, "searching": searching, "search":search })
+        return render(request, 'picktalk/search.html', {"cateType": cateType, "searching": searching, "search":search, "page" : page,
+                                                        "paging" : paging})
 
 def notice(request, num) :
     notice = QaNotice.objects.get(num=num)
@@ -250,3 +272,92 @@ def proList(request, type, page, num) :
     return render(request, 'user/proList.html', {"type": type, "page":page, "profile": profile,
                                                  "allCount" : cursor.rowcount })
 
+def qandaList(request, page) :
+
+    block = 10
+    start = (page - 1) * block
+    end = page * block
+
+    cursor = connection.cursor()
+
+    query = "SELECT qq.num, cateName, title, regDate, IFNULL(commCnt, 0) AS commCnt " \
+            "FROM qa_qanda AS qq LEFT JOIN qa_qanda_cate AS qqc  ON qq.cate = qqc.cateCode " \
+            "     LEFT JOIN ( SELECT COUNT(*) AS commCnt, qaNum FROM qa_qanda_comment GROUP BY qaNum ) AS qqc ON qq.num = qqc.qaNum " \
+            "order by qq.regDate desc limit " + str(start) + ", " + str(end)
+
+    result = cursor.execute(query)
+    qandaList = cursor.fetchall()
+
+    connection.commit()
+    connection.close()
+
+    allPage = (len(qandaList) / block) + 1
+
+    paging = getPageList(page, allPage)
+
+    return render(request, 'picktalk/qandaList.html', {"qandaList": qandaList,  "paging" : paging, "page":page})
+
+
+def qandaWrite(request) :
+
+    cates = QaQandaCate.objects.all()
+
+    return render(request, 'picktalk/qandaWrite.html', {"cates": cates})
+
+def qandaWriteCallBack(request) :
+
+    cate = request.POST['cate']
+    title = request.POST['title']
+    content = request.POST['content']
+
+    user = request.session.get('id', '')
+
+    nowTime = timezone.now()
+
+    saveQaQanda = QaQanda.objects.create(userid=user, cate=cate, title=title, content=content, regdate=nowTime)
+
+    return redirect("/qanda/list/1/")
+
+
+def qandaView(request, num) :
+
+    qanda = QaQanda.objects.get(num=num)
+    cate = QaQandaCate.objects.get(catecode=qanda.cate)
+    user = UserInfo.objects.get(userid=qanda.userid)
+
+    comment = QaQandaComment.objects.filter(qanum=num).order_by("-num")
+
+    return render(request, 'picktalk/qandaView.html', {"qanda": qanda, "cate" : cate, "user" : user,
+                                                       "comment" : comment })
+
+
+def qaSaveComment(request) :
+
+    comment = request.GET['comment']
+    num = request.GET['num']
+    userID = request.session['id']
+
+    nowTime = timezone.now()
+
+    print(num)
+
+    save = QaQandaComment.objects.create(qanum=str(num),userid=userID,content=comment,regtime=nowTime)
+
+    return JsonResponse({"code": "0"})
+
+
+def qaReloadComment(request) :
+    num = request.GET['num']
+
+    comment = QaQandaComment.objects.filter(qanum=num).order_by("-num")
+
+    return render(request, 'picktalk/ajax_comment.html', {'comment': comment})
+
+def qaDeleteComment(request) :
+
+    num = request.GET['num']
+
+    comment = QaQandaComment.objects.get(num=num)
+    comment.delete()
+
+    return JsonResponse({"code": "0"})

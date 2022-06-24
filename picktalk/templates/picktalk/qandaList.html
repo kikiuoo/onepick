@@ -1,0 +1,36 @@
+{% extends 'picktalk/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/user/mypage.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/user/mypage.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/qandaList.js' %}"></script>
+
+<div class="mTtitle">문의사항</div>
+<div class="notiBox">
+    {% for qanda in qandaList %}
+    <div class="notiList" data-num="{{ qanda.0 }}">
+        <div class="title">
+            <span>[{{ qanda.1 }}]</span>
+            {{ qanda.2 }}
+            [{{ qanda.4 }}]
+        </div>
+        <div class="date">{{ qanda.3|date:"Y/m/d" }}</div>
+    </div>
+    {% endfor %}
+
+    <div class="addQandA mobileNone">문의 등록하기</div>
+</div>
+
+<div class="page">
+    {% for pages in paging %}
+        <div class="pages {% if pages == page %} nowPage {% endif %}"  data-page="{{ pages }}">{{ pages }}</div>
+    {% endfor %}
+</div>
+
+<div class="addQandA pcNone">문의 등록하기</div>
+
+{% endblock %}

@@ -15,4 +15,14 @@ urlpatterns = [
 
     path("proList/<type>/<int:page>/<num>/", views.proList, name="proList"),
 
+    path("qanda/list/<int:page>/", views.qandaList, name="qandaList"),
+
+    path("qanda/write/", views.qandaWrite, name="qandaWrite"),
+    path("qanda/writeCallBack/", views.qandaWriteCallBack, name="qandaWriteCallBack"),
+    path("qanda/viewer/<int:num>/", views.qandaView, name="qandaView"),
+
+    path("qanda/ajax/saveComment/", views.qaSaveComment, name="qaSaveComment"),
+    path("qanda/ajax/reloadComment/", views.qaReloadComment, name="qaReloadComment"),
+    path("qanda/ajax/deleteComment/", views.qaDeleteComment, name="qaDeleteComment"),
+
 ]
