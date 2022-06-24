@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from picktalk.models import *
-import boto3
 import datetime
 from django.utils import timezone
 from django.conf import settings

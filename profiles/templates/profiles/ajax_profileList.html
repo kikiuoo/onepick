@@ -2,7 +2,7 @@
 {% for profile in profiles %}
 <div class="profile" data-num="{{ profile.0 }}">
     <div class="imageBox">
-        <div class="profileImage"   style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profile.1 }}");'></div>
+        <div class="profileImage"   style='background-image: url("/media/{{ profile.1 }}");'></div>
         {% if profile.16 != "" %}
         <div class="youtube">
             <iframe width="560" height="315" src="{{ profile.16|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

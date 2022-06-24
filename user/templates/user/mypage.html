@@ -46,7 +46,7 @@
                 <div class="delBtn" data-type="profile" data-num="{{ data.num }}"></div>
             </div>
 
-            <div class="userImage" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ data.profileimage }}");'></div>
+            <div class="userImage" style='background-image: url("/media/{{ data.profileimage }}");'></div>
             <div class="userInfoBox">
                 <div class="userName">{{ userInfo.name }} ({{ userInfo.birth|userAge }})
                     {% if data.public == "on" %}
@@ -100,7 +100,7 @@
         <div class="auditionList">
             {% for data in data2 %}
             <div class="audiList">
-                <div class="logo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ data.3 }}");'></div>
+                <div class="logo" style='background-image: url("/media/{{ data.3 }}");'></div>
                 <div class="content">
                     <div class="audiTitle">{{ data.1 }}</div>
                     <div class="comment">{{ data.2|linebreaks }}</div>
@@ -118,7 +118,7 @@
         {% if data3|getArrayCount > 0 %}
             {% for data in data3 %}
              <div class="audition" data-num="{{ data.0 }}">
-                <div class="audiLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ data.4 }}");'></div>
+                <div class="audiLogo" style='background-image: url("/media/{{ data.4 }}");'></div>
                 <div class="audiTitle">{{ data.1 }}</div>
                 <div class="audiTerm">
                     {% if data.3 == "1" %}
@@ -178,7 +178,7 @@
         {% for data in data2 %}
             <div class="profile" data-num="{{ data.0 }}">
                 <div class="imageBox">
-                    <div class="profileImage"   style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ data.1 }}");'></div>
+                    <div class="profileImage"   style='background-image: url("/media/{{ data.1 }}");'></div>
                 </div>
                 <div class="contentBox">
                     <div class="name">{{ data.4 }} ({{ data.5|userAge }})</div>
@@ -210,7 +210,7 @@
             {% for data in data3 %}
             <div class="profile" data-num="{{ data.0 }}">
                 <div class="imageBox">
-                    <div class="profileImage"   style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ data.1 }}");'></div>
+                    <div class="profileImage"   style='background-image: url("/media/{{ data.1 }}");'></div>
                     {% if profile.16 != "" %}
                     <div class="youtube">
                         <iframe width="560" height="315" src="{{ data.16|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

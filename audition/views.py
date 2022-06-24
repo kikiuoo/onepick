@@ -6,7 +6,6 @@ from django.template import  loader
 from django.db import connection
 
 from picktalk.models import *
-import boto3
 from django.conf import settings
 from django.utils import timezone
 

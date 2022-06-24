@@ -171,9 +171,9 @@
             <div class="joinInfo">
                 <div class="title2">파일</div>
                 <div class="content2">
-                    <label class="imageSelect" id="logo" for="input-logo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ userCompany.logoimage }}");'></label>
-                    <label class="imageSelect" id="licenseImage" for="input-license" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ userCompany.licenseimage }}");'></label>
-                    <label class="imageSelect" id="artLicense" for="input-artLicense" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ userCompany.artlicenseimage }}");'></label>
+                    <label class="imageSelect" id="logo" for="input-logo" style='background-image: url("/media/{{ userCompany.logoimage }}");'></label>
+                    <label class="imageSelect" id="licenseImage" for="input-license" style='background-image: url("/media/{{ userCompany.licenseimage }}");'></label>
+                    <label class="imageSelect" id="artLicense" for="input-artLicense" style='background-image: url("/media/{{ userCompany.artlicenseimage }}");'></label>
 
                     <input type="file" name="logo[]" id="input-logo" class="upload-hidden input-file" data-type="logo" value="{{ userCompany.logoimage }}">
                     <input type="file" name="licenseImage[]" id="input-license" class="upload-hidden input-file" data-type="license" value="{{ userCompany.licenseimage }}">

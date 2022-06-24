@@ -14,7 +14,6 @@ from picktalk.models import *
 import hashlib
 import random
 from django.conf import settings
-import boto3
 from django.db import connection
 from myonepick.common import *
 
@@ -444,6 +443,14 @@ def userMypage(request, type) :
 
         notice = QaNotice.objects.all().order_by("-regdate")[:5]
 
+        query = "SELECT qq.num, cateName, title, regDate, IFNULL(commCnt, 0) AS commCnt " \
+                "FROM qa_qanda AS qq LEFT JOIN qa_qanda_cate AS qqc  ON qq.cate = qqc.cateCode " \
+                "     LEFT JOIN ( SELECT COUNT(*) AS commCnt, qaNum FROM qa_qanda_comment GROUP BY qaNum ) AS qqc ON qq.num = qqc.qaNum " \
+                "order by qq.regDate desc limit 5 "
+
+        result = cursor.execute(query)
+        qanda = cursor.fetchall()
+
         connection.commit()
         connection.close()
 
@@ -451,7 +458,8 @@ def userMypage(request, type) :
         connection.rollback()
 
     return render(request, 'user/mypage.html', {"type" : type, "userInfo" : userInfo, "company" : company,
-                                                "data1" : data1, "data2" : data2, "data3":data3, "notice" : notice })
+                                                "data1" : data1, "data2" : data2, "data3":data3, "notice" : notice,
+                                                "qanda" : qanda })
 
 def updateUser(request) :
 
@@ -529,18 +537,6 @@ def updateCallback(request) :
         licenseImage = request.FILES.getlist("licenseImage[]", "")
         artLicense = request.FILES.getlist("artLicense[]", "")
 
-        # 이미지 등록
-        s3_client = boto3.client(
-            's3',
-            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-        )
-
-        s3 = boto3.resource('s3',
-                            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-                            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-                            )
-
         nowTime = timezone.now()
         count = 0;
         # 로고
@@ -549,23 +545,12 @@ def updateCallback(request) :
             # 기존 이미지 삭제
             for rmImages in logoImg:
                 if (rmImages == ""): continue
-                img = rmImages.replace("photos/company/", "")
-                s3.Object(settings.AWS_STORAGE_BUCKET_NAME, "media/photos/company/" + img).delete()
+                deleteFile(rmImages)
 
             for image in logo:
                 sub = image.name.split('.')[-1]
-                imgName = userID + "_userMain_" + str(nowTime) + str(count)
-                imageName = md5_generator(imgName) + "." + sub
-
-                s3_client.upload_fileobj(
-                    image,
-                    settings.AWS_STORAGE_BUCKET_NAME,
-                    "media/photos/company/" + imageName,
-                    ExtraArgs={
-                        "ContentType": image.content_type,
-                    }
-                )
-                logoImage = "photos/company/" + imageName
+                url = uploadFile(image, "photos/company/", sub)  # 파일 업로드
+                logoImage = url
                 count = count + 1
 
         licenseImages = licenseImg
@@ -573,23 +558,12 @@ def updateCallback(request) :
             # 기존 이미지 삭제
             for rmImages in licenseImg:
                 if (rmImages == ""): continue
-                img = rmImages.replace("photos/company/", "")
-                s3.Object(settings.AWS_STORAGE_BUCKET_NAME, "media/photos/company/" + img).delete()
+                deleteFile(rmImages)
 
             for image in licenseImage:
                 sub = image.name.split('.')[-1]
-                imgName = userID + "_userMain_" + str(nowTime) + str(count)
-                imageName = md5_generator(imgName) + "." + sub
-
-                s3_client.upload_fileobj(
-                    image,
-                    settings.AWS_STORAGE_BUCKET_NAME,
-                    "media/photos/company/" + imageName,
-                    ExtraArgs={
-                        "ContentType": image.content_type,
-                    }
-                )
-                licenseImages = "photos/company/" + imageName
+                url = uploadFile(image, "photos/company/", sub)  # 파일 업로드
+                licenseImages = url
                 count = count + 1
 
         artLicenses = artLicenseImg
@@ -597,23 +571,12 @@ def updateCallback(request) :
             # 기존 이미지 삭제
             for rmImages in artLicenseImg:
                 if (rmImages == ""): continue
-                img = rmImages.replace("photos/company/", "")
-                s3.Object(settings.AWS_STORAGE_BUCKET_NAME, "media/photos/company/" + img).delete()
+                deleteFile(rmImages)
 
             for image in artLicense:
                 sub = image.name.split('.')[-1]
-                imgName = userID + "_userMain_" + str(nowTime) + str(count)
-                imageName = md5_generator(imgName) + "." + sub
-
-                s3_client.upload_fileobj(
-                    image,
-                    settings.AWS_STORAGE_BUCKET_NAME,
-                    "media/photos/company/" + imageName,
-                    ExtraArgs={
-                        "ContentType": image.content_type,
-                    }
-                )
-                artLicenses = "photos/company/" + imageName
+                url = uploadFile(image, "photos/company/", sub)  # 파일 업로드
+                artLicenses = url
                 count = count + 1
 
         userInfo.name = name

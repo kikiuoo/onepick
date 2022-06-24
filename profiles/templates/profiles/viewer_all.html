@@ -12,7 +12,7 @@
 <script src="{% static 'js/profile/viewer.js' %}"></script>
 
 <div class="inBox">
-    <div class="mainImage"  style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profiles.profileimage }}");' id="image_1"  data-id="1"   data-image="https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profiles.profileimage }}"></div>
+    <div class="mainImage"  style='background-image: url("/media/{{ profiles.profileimage }}");' id="image_1"  data-id="1"   data-image="/media/{{ profiles.profileimage }}"></div>
     <div class="userInfo">
 
         <div class="userName">{{ userInfo.name }},{{ userInfo.birth|userAge }}세({{ userInfo.birth|replace:"-|/" }})</div>
@@ -159,7 +159,7 @@
             <div class="blank"></div>
 
             {% for profileImage in profileImages %}
-            <img src="https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profileImage }}" data-id="{{ forloop.counter|addNum:1 }}" id="image_{{ forloop.counter|addNum:1 }}"  data-image="https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profileImage }}" height="440px">
+            <img src="/media/{{ profileImage }}" data-id="{{ forloop.counter|addNum:1 }}" id="image_{{ forloop.counter|addNum:1 }}"  data-image="/media/{{ profileImage }}" height="440px">
             {% endfor %}
         </div>
         {% endif %}
@@ -170,7 +170,7 @@
             <div class="blank"></div>
             {% with imageCount=profileImages|getArrayCount  %}
             {% for artImage in artImages %}
-            <img src="https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ artImage }}" data-id="{{ forloop.counter|addNum:imageCount|addNum:1 }}" id="image_{{ forloop.counter|addNum:imageCount|addNum:1 }}"  data-image="https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ artImage }}" height="440px">
+            <img src="/media/{{ artImage }}" data-id="{{ forloop.counter|addNum:imageCount|addNum:1 }}" id="image_{{ forloop.counter|addNum:imageCount|addNum:1 }}"  data-image="/media/{{ artImage }}" height="440px">
             {% endfor %}
             {% endwith %}
         </div>
@@ -223,7 +223,7 @@
     <div class="closePopup"></div>
     <div class="leftBtn"></div>
 
-    <img src="https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profiles.profileimage }}"  class="viewImage">
+    <img src="/media/{{ profiles.profileimage }}"  class="viewImage">
 
     <div class="rightBtn"></div>
 

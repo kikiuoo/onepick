@@ -36,7 +36,7 @@
 <div class="inBox">
     {% for audition in auditions %}
     <div class="audition" data-num="{{ audition.0 }}">
-        <div class="audiLogo" style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ audition.4 }}");'></div>
+        <div class="audiLogo" style='background-image: url("/media/{{ audition.4 }}");'></div>
         <div class="audiTitle">{{ audition.1 }}</div>
         <div class="audiTerm">
             {% if audition.3 == "1" %}
@@ -65,7 +65,7 @@
 <div class="inBox">
     {% for profile in profiles %}
     <div class="profile" data-num="{{ profile.0 }}">
-        <div class="image"  style='background-image: url("https://picktalk.s3.ap-northeast-2.amazonaws.com/media/{{ profile.1 }}");'></div>
+        <div class="image"  style='background-image: url("/media/{{ profile.1 }}");'></div>
         <div class="info">
             <div class="name">{{ profile.4|updateUserName }} ({{ profile.5|userAge }})</div>
             <div class="infoDetail">
