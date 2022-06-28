@@ -36,20 +36,20 @@ $(document).ready(function (){
     $(document).on("click", ".myProfile, .profile", function (){
         var num = $(this).attr("data-num");
 
-        window.open("/profile/profileDetail/actor/" + num + "/") ;
+        window.location.href = "/profile/profileDetail/actor/" + num + "/";
     });
 
     $(document).on("click", ".audiBtn, .audition", function (){
         var num = $(this).attr("data-num");
 
-        window.open('/audi/audiDetail/all/' +num +"/") ;
+        window.location.href = '/audi/audiDetail/all/' +num +"/";
     });
 
 
     $(document).on("click", ".notiList", function (){
         var num = $(this).attr("data-num");
 
-        window.open('/notice/viewer/'+num+'/') ;
+        window.location.href = '/notice/viewer/'+num+'/';
     });
 
     $(document).on("click", ".pickBtn", function(e){

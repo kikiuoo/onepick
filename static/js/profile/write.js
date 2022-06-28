@@ -419,6 +419,29 @@ $(document).ready(function (){
         }
     });
 
+    $(document).on("click", ".upload-sub", function (){
+       var image = $(this).attr("data-image");
+       var id = $(this).attr("id");
+
+       var removeImage = ""
+       if( id == "profiles" ){
+           removeImage = $("#removeImage_detail")
+       }else{
+           removeImage = $("#removeImage_art")
+       }
+
+       var removeImageText = removeImage.val();
+
+       var remove = removeImageText.split('|');
+       remove.push(image);
+       var removeText = remove.join("|");
+
+       $(this).parent().remove();
+       removeImage.val(removeText);
+
+    });
+
+
     $(document).on("click", ".upload-sub2", function (){
        var image = $(this).attr("data-image");
        var id = $(this).attr("id");

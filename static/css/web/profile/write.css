@@ -325,6 +325,7 @@
     vertical-align: top;
     cursor: pointer;
     overflow: hidden;
+
 }
 
 #mainImage{
@@ -399,7 +400,7 @@
 
 #mainImage{
     background-position: top center;
-    background-size: 100%;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
 }
 
