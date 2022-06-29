@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-x0@zo^2*wmd9%%o*@*$r2l%4wh0ts+0iha7u1qlss!b*0*!5*$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["ksnpick.com", "139.150.74.98", "127.0.0.1","localhost"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -48,21 +48,8 @@ INSTALLED_APPS = [
 
     'picktalk.apps.PicktalkConfig',
     'user',
-    'albapick',
-    'apply',
     'audition',
-    'banner',
-    'company',
-    'models',
     'profiles',
-
-    #allauth
-    #'allauth',
-    #'allauth.account',
-    #'allauth.socialaccount',
-
-    #provider
-    #'allauth.socialaccount.providers.kakao',
 ]
 
 MIDDLEWARE = [
@@ -154,10 +141,15 @@ USE_TZ = False
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 #STATIC_ROOT = os.path.join(BASE_DIR, '.static_root')
-STATIC_ROOT = '/usr/local/lib/python3.8/dist-packages/django/contrib/admin'
-
-STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+STATIC_URL = 'static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+STATIC_ROOT = os.path.join(BASE_DIR,"static")
+STATIC_ROOT = '/usr/local/lib/python3.8/dist-packages/django/contrib/admin'
+
 MEDIA_URL = '/media/'
+
