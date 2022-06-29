@@ -148,7 +148,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-STATIC_ROOT = os.path.join(BASE_DIR,"static")
+#STATIC_ROOT = os.path.join(BASE_DIR,"static")
 STATIC_ROOT = '/usr/local/lib/python3.8/dist-packages/django/contrib/admin'
 
 MEDIA_URL = '/media/'
