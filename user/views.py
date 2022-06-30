@@ -16,7 +16,7 @@ import random
 from django.conf import settings
 from django.db import connection
 from myonepick.common import *
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_protect
 
 loginUrl = "http://ksnpick.com/users/login"
 #loginUrl = "http://localhost:8000/users/login"
@@ -601,7 +601,7 @@ def updateCallback(request) :
 
     return redirect(url)
 
-@csrf_exempt
+@csrf_protect
 def ajax_findOldUser(request) :
 
     userName = request.GET.get("userName","")
@@ -611,7 +611,7 @@ def ajax_findOldUser(request) :
 
     return render(request, 'user/ajax_findOldUser.html', {'userInfo': userInfo })
 
-@csrf_exempt
+@csrf_protect
 def ajax_phoneComfirm(request) :
 
     userPhone = request.POST.get("phoneNum","")
@@ -633,7 +633,7 @@ def ajax_phoneComfirm(request) :
 
         return JsonResponse({"code": "0"})
 
-@csrf_exempt
+@csrf_protect
 def ajax_checkConfirm(request) :
 
     userPhone = request.POST.get("phoneNum","")
