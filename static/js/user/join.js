@@ -294,6 +294,8 @@ $(document).ready(function(){
 
 
 function saveConfirm(phoneNum){
+    alert(csrftoken);
+
    $.ajax({
       url: "/users/ajax/phoneComfirm/",
       type: "POST",
