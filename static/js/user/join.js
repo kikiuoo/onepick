@@ -298,7 +298,7 @@ function saveConfirm(phoneNum){
 
    $.ajax({
       url: "/users/ajax/phoneComfirm/",
-      type: "POST",
+      type: "GET",
       dataType: "json",
       data:{"phoneNum" : phoneNum},
 
@@ -319,7 +319,7 @@ function saveConfirm(phoneNum){
 function checkConfirm(phoneNum, confirm){
    $.ajax({
       url: "/users/ajax/checkConfirm/",
-      type: "POST",
+      type: "GET",
       dataType: "json",
       data:{"phoneNum" : phoneNum, "confirm" : confirm},
 

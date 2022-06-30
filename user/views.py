@@ -601,7 +601,6 @@ def updateCallback(request) :
 
     return redirect(url)
 
-@csrf_exempt
 def ajax_findOldUser(request) :
 
     userName = request.GET.get("userName","")
@@ -611,10 +610,9 @@ def ajax_findOldUser(request) :
 
     return render(request, 'user/ajax_findOldUser.html', {'userInfo': userInfo })
 
-@csrf_exempt
 def ajax_phoneComfirm(request) :
 
-    userPhone = request.POST.get("phoneNum","")
+    userPhone = request.GET.get("phoneNum","")
     certifier = ""
 
     isUser = UserInfo.objects.filter(phone=userPhone, usertype="NORMAL") | UserInfo.objects.filter(phone=userPhone, usertype="COMPANY")  | UserInfo.objects.filter(phone=userPhone, usertype="S-COMPANY")
@@ -633,11 +631,10 @@ def ajax_phoneComfirm(request) :
 
         return JsonResponse({"code": "0"})
 
-@csrf_exempt
 def ajax_checkConfirm(request) :
 
-    userPhone = request.POST.get("phoneNum","")
-    confirm = request.POST.get("confirm","")
+    userPhone = request.GET.get("phoneNum","")
+    confirm = request.GET.get("confirm","")
 
     findSMS = UserSms.objects.filter(phonenum=userPhone).order_by("-num")[:1]
 
