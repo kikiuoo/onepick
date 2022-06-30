@@ -17,7 +17,6 @@ from django.conf import settings
 from django.db import connection
 from myonepick.common import *
 from django.views.decorators.csrf import csrf_exempt
-출처: https://taptorestart.tistory.com/entry/Q-장고django에서-post-put-delete-방식-사용-위해서-csrf-끄는-방법은 [Tap to restart:티스토리]
 
 loginUrl = "http://ksnpick.com/users/login"
 #loginUrl = "http://localhost:8000/users/login"
