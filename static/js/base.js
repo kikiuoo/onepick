@@ -119,7 +119,7 @@ $(document).ready(function () {
 function logout(){
    $.ajax({
       url: "/users/logout/local/",
-      type: "POST",
+      type: "GET",
       dataType: "json",
       success: function(data){
 
