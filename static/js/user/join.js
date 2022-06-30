@@ -295,7 +295,7 @@ $(document).ready(function(){
 
 function saveConfirm(phoneNum){
    $.ajax({
-      url: "../..//users/ajax/phoneComfirm/",
+      url: "../../users/ajax/phoneComfirm/",
       type: "POST",
       dataType: "json",
       data:{"phoneNum" : phoneNum, "csrfmiddlewaretoken" : csrftoken},
