@@ -298,7 +298,7 @@ function saveConfirm(phoneNum){
       url: "/users/ajax/phoneComfirm/",
       type: "POST",
       dataType: "json",
-      data:{"phoneNum" : phoneNum},
+      data:{"phoneNum" : phoneNum, "csrfmiddlewaretoken" : csrftoken},
 
       success: function(data){
           if( data.code == "0" ){
@@ -319,7 +319,7 @@ function checkConfirm(phoneNum, confirm){
       url: "/users/ajax/checkConfirm/",
       type: "POST",
       dataType: "json",
-      data:{"phoneNum" : phoneNum, "confirm" : confirm},
+      data:{"phoneNum" : phoneNum, "confirm" : confirm, "csrfmiddlewaretoken" : csrftoken},
 
       success: function(data){
           if( data.code == "0" ){
