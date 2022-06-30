@@ -7,9 +7,6 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-
-
-
 class AuditionApply(models.Model):
     num = models.BigAutoField(primary_key=True)
     auditionnum = models.PositiveBigIntegerField(db_column='auditionNum')  # Field name made lowercase.
