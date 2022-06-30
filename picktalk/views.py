@@ -113,9 +113,9 @@ def advertise(request) :
 
 def advertise_callBack(request) :
 
-    email = request.POST.get("email");
-    title = request.POST.get("title");
-    content = request.POST.get("content");
+    email = request.GET.get("email");
+    title = request.GET.get("title");
+    content = request.GET.get("content");
 
     saveAdvertise = QaAdvertise.objects.create(email=email, title=title, content=content)
 

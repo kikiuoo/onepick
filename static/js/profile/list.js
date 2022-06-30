@@ -168,7 +168,7 @@ $(document).ready(function(){
 function getProfileList( order, nationality, geneder, military, foreign, good, age1, age2, school, height1, height2, career1){
     $.ajax({
       url: "/profile/ajax/getProfile/",
-      type: "POST",
+      type: "GET",
       dataType: "html",
       data:{"order":order, "nationality" : nationality, "geneder" : geneder, "military" : military,
             "foreign":foreign, "good" : good, "age1" : age1, "age2" : age2, "school":school,

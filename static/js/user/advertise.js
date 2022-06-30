@@ -60,7 +60,7 @@ $(document).ready(function(){
 function saveAdvertise(email, title, content){
    $.ajax({
       url: "/advertise/callBack/",
-      type: "POST",
+      type: "GET",
       dataType: "json",
       data:{"email" : email, "title" : title, "content" : content},
 

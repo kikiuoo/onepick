@@ -638,20 +638,20 @@ def audiAjaxGetCateEtc(request) :
 
 def getProfile(request) :
 
-    order = request.POST['order']
-    nationality = request.POST['nationality']
-    geneder = request.POST['geneder']
-    military = request.POST['military']
-    foreign = request.POST['foreign']
-    good = request.POST['good']
-    age1 = request.POST['age1']
-    age2 = request.POST['age2']
-    school = request.POST['school']
-    height1 = request.POST['height1']
-    height2 = request.POST['height2']
-    career1 = request.POST['career1']
-    page = request.POST['page']
-    cate_type = request.POST['cate_type']
+    order = request.GET['order']
+    nationality = request.GET['nationality']
+    geneder = request.GET['geneder']
+    military = request.GET['military']
+    foreign = request.GET['foreign']
+    good = request.GET['good']
+    age1 = request.GET['age1']
+    age2 = request.GET['age2']
+    school = request.GET['school']
+    height1 = request.GET['height1']
+    height2 = request.GET['height2']
+    career1 = request.GET['career1']
+    page = request.GET['page']
+    cate_type = request.GET['cate_type']
 
     orderby = ""
     if order == "popular":

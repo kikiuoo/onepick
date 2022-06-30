@@ -120,7 +120,7 @@ function find_old_user(userName, userPhone){
 function login(username, password){
    $.ajax({
       url: "/users/login/logincallback/",
-      type: "POST",
+      type: "GET",
       dataType: "json",
       data:{"username" : username, "password" : password},
 

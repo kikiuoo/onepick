@@ -152,11 +152,8 @@ def localLogin (request) :
 
 def localLoginCallback (request) :
     if request.method == "GET" :
-        return JsonResponse({"code": "1", "message" : "잘못된 접근입니다."})
-    elif request.method == "POST" :
-        username = request.POST['username']
-        password = request.POST['password']
-
+        username = request.GET['username']
+        password = request.GET['password']
 
         pw = md5_generator(password)
         userIN = UserInfo.objects.filter(userid=username, password=pw)
@@ -372,8 +369,6 @@ def findPW (request) :
 
 def updatePW(request) :
     if request.method == "GET" :
-        return JsonResponse({"code": "1", "message" : "잘못된 접근입니다."})
-    elif request.method == "POST" :
         userID = request.POST['userID']
         password = request.POST['password']
 

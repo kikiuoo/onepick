@@ -118,7 +118,7 @@ function chechUser_pw( userID, userName ){
 function update_pw( userID, password ){
    $.ajax({
       url: "/users/updatePW/",
-      type: "POST",
+      type: "GET",
       dataType: "json",
       data:{"userID" : userID, "password" : password},
 
