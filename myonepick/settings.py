@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+    'crosheaders',
+
     'picktalk.apps.PicktalkConfig',
     'user',
     'audition',
@@ -53,6 +55,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', #최상단에 추가해주기
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -60,6 +63,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+]
+
+CORS_ALLOWED_ORIGINS = [
+	# 허용할 Origin 추가
+    "http://ksnpick.com",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "http://localhost",
+    "http://127.0.0.1"
 ]
 
 ROOT_URLCONF = 'myonepick.urls'
