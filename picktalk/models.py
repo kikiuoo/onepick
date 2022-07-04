@@ -46,10 +46,12 @@ class AuditionInfo(models.Model):
     recommend = models.CharField(max_length=10, blank=True, null=True)
     recorder = models.PositiveIntegerField(db_column='recOrder', blank=True, null=True)  # Field name made lowercase.
     isdelete = models.CharField(db_column='isDelete', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    contenttype = models.CharField(db_column='contentType', max_length=10, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'audition_info'
+
 
 
 class AuditionPick(models.Model):

@@ -89,57 +89,37 @@ def audi_index(request, cate_type, page): # 오디션 Main
                                                    "finishAudi" : finishAudi, "audition": audition, "paging" : paging, "page" : page } )
 #     /audi/audiDetail/(category)/(글번호)
 def audi_detail(request, cate_type, num) :
-    try :
-        cursor = connection.cursor()
 
-        user = request.session.get('id', '')
-        userType = request.session.get('userType', '')
+    user = request.session.get('id', '')
+    userType = request.session.get('userType', '')
 
-        if user:
-            nowTime = timezone.now()
-            saveView =  AuditionView.objects.create( auditionnum=num, userid=user, regtime=nowTime )
-            updateView = AuditionInfo.objects.get(num=num)
-            updateView.viewcount = updateView.viewcount + 1
-            updateView.save()
 
-            query = "SELECT ai.*, cm.cateName, uc.logoImage, uc.webSite, DATEDIFF(ai.auditionDate,  NOW()) AS diffDate, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user + "' AND auditionNum = ai.num ) AS audiPick, isDelete " \
-                    "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode  " \
-                    "     LEFT JOIN  user_company AS uc ON ai.userID = uc.userID  " \
-                    "WHERE ai.num = '" + str(num) + "' limit 1"
+    audition = AuditionInfo.objects.get(num=num)
+    companyInfo = UserCompany.objects.get(userid=audition.userid)
+
+    if user:
+        nowTime = timezone.now()
+        saveView = AuditionView.objects.create(auditionnum=num, userid=user, regtime=nowTime)
+        updateView = AuditionInfo.objects.get(num=num)
+        updateView.viewcount = updateView.viewcount + 1
+        updateView.save()
+
+        userInfo = UserInfo.objects.get(userid=user)
+
+        pick = AuditionPick.objects.filter(userid=user)
+        if pick.count() == 0:
+            pickCheck = "0"
         else:
-            query = "SELECT ai.*, cm.cateName, uc.logoImage, uc.webSite, DATEDIFF(ai.auditionDate,  NOW()) AS diffDate, 0 as audiPick, isDelete " \
-                    "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode  " \
-                    "     LEFT JOIN  user_company AS uc ON ai.userID = uc.userID  " \
-                    "WHERE ai.num = '" + str(num) + "' limit 1"
+            pickCheck = "1"
 
-        result = cursor.execute(query)
-        audition = cursor.fetchall()
-        print(audition)
+    else:
+        pickCheck = "0"
+        userInfo = ""
 
-        audiSubCate = []
-        for row in audition:
-            subCate = row[4].split('|')
-            image = row[15].split('|')
-            for sub in subCate:
-                cateName = CateSub.objects.get(subcate=sub)
-                audiSubCate.append(cateName.catename)
+    images = audition.image.split("|")
 
-        audiCate = ', '.join(audiSubCate)
-
-        if userType == "NORMAL" :
-            userInfo = UserInfo.objects.get(userid=user)
-            data1 = ProfileInfo.objects.filter(userid=user)
-        else :
-            userInfo = ""
-            data1 = ""
-        connection.commit()
-        connection.close()
-    except:
-        connection.rollback()
-        print('Faild DB Connection')
-
-    return render(request, 'audition/viewer.html', {"audition": audition, "audiCate" : audiCate, "image" : image
-                                                    ,"userInfo": userInfo,"data1": data1})
+    return render(request, 'audition/viewer.html', {"audition": audition, "companyInfo" : companyInfo, "image" : images
+                                                    ,"userInfo": userInfo,"pickCheck": pickCheck})
 
 
 def audi_write(request) :

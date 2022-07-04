@@ -11,32 +11,29 @@
 <!-- JS 파일 -->
 <script src="{% static 'js/audi/viewer.js' %}"></script>
 
-{% for auditions in audition %}
-
-
 <!-- 본문 내용 -->
 <div class="content">
     <div class="btnBox">
-        {% if  request.session.userType == "admin" or  request.session.id == auditions.1 %}
-        <div class="editBtn" data-num="{{ auditions.0 }}"></div>
-        <div class="delBtn" data-num="{{ auditions.0 }}"></div>
+        {% if  request.session.userType == "admin" or  request.session.id == audition.userid %}
+        <div class="editBtn" data-num="{{ audition.num }}"></div>
+        <div class="delBtn" data-num="{{ audition.num }}"></div>
         {% endif %}
         <!--<div class="printBtn"></div>-->
         <div class="shareBtn"></div>
     </div>
 
-    <div class="companyLogo" style='background-image: url("/media/{{ auditions.25 }}")'></div>
-    <div class="companySite" data-url="{{ auditions.26 }}">{{ auditions.26 }}</div>
+    <div class="companyLogo" style='background-image: url("/media/{{ companyInfo.logoimage }}")'></div>
+    <div class="companySite" data-url="{{ companyInfo.website }}">{{ companyInfo.website|default:"" }}</div>
     <div class="title">{{ auditions.2 }}</div>
 
     <div class="line">
-        {% if auditions.28 == 0 or auditions.28 == "0" %}
-        <div class="pickBtn" data-nowType="off"  data-num="{{ auditions.0 }}"></div>
+        {% if pickCheck == 0 or pickCheck == "0" %}
+        <div class="pickBtn" data-nowType="off"  data-num="{{ audition.num }}"></div>
         {% else %}
-        <div class="pickBtn pickOn " data-nowType="on" data-num="{{ auditions.0 }}"></div>
+        <div class="pickBtn pickOn " data-nowType="on" data-num="{{ audition.num }}"></div>
         {% endif %}
         <div class="supportBtn">오디션 지원</div>
-        {% if auditions.7 == '0' %}
+        {% if audition.ordinary == '0' %}
             {% if auditions.27 > 0 %}
             <div class="deadline">마감 {{ auditions.27 }}일 전</div>
             {% elif auditions.27 == 0 %}
@@ -50,53 +47,70 @@
     <div class="conditionBox">
         <div class="condLeft">
             <span>모집 분야</span>
+            {% if audition.contenttype == "old" %}
             <div class="contentBox">
-                <p>{{ auditions.24 }}</p>
-                <p>{{ audiCate }}</p>
+                <p>{{ audition.cate }}</p>
+                <p>{{ audition.subcate }}</p>
             </div>
+            {% else %}
+            <div class="contentBox">
+                <p>{{ audition.cate }}</p>
+                <p>{{ audition.subcate }}</p>
+            </div>
+            {% endif %}
 
             <span>모집 조건</span>
             <div class="contentBox">
-                <p>나이 {{ auditions.11 }}</p>
-                <p>경력 {{ auditions.13 }}</p>
-                <p>성별 {{ auditions.12 }}</p>
+                {% if audition.contenttype == "old" %}
+                    <p>나이 {{ auditions.11 }}</p>
+                {% else %}
+                    <p>나이 {{ audition.age }}</p>
+                {% endif %}
+                <p>경력 {{ audition.career }}</p>
+                <p>성별 {{ audition.gender }}</p>
             </div>
         </div>
         <div class="condRight">
             <span>모집기간</span>
             <div class="contentBox">
-                {% if auditions.7 == '0' %}
-                <p>{{ auditions.5|date:'Y/m/d' }} ~ {{ auditions.6|date:'Y/m/d' }}</p>
+                {% if audition.ordinary == '0' %}
+                <p>{{ audition.startdate|date:'Y/m/d' }} ~ {{ audition.enddate|date:'Y/m/d' }}</p>
                 {% else %}
                 <p>상시모집</p>
                 {% endif %}
             </div>
             <span>오디션</span>
             <div class="contentBox">
-                {% if auditions.7 == '0' %}
-                <p>{{ auditions.8|date:'Y/m/d' }} {{ auditions.9|date:' H시 i분' }}<span class="important">합격자 개별연락</span> </p>
-                {% elif auditions.7 == '1' %}
+                {% if audition.ordinary == '0' %}
+                <p>{{ audition.auditiondate|date:'Y/m/d' }} {{ audition.auditiontime|date:' H시 i분' }}<span class="important">합격자 개별연락</span> </p>
+                {% elif audition.ordinary == '1' %}
                 <p><span class="important" style="margin:0px">합격자 개별연락</span></p>
                 {% endif %}
             </div>
         </div>
 
-        {% if auditions.16 %}
+        {% if audition.essential %}
         <div class="infoBox">
             <div class="infoTitle">필수 사항</div>
-            <div class="infoContent">{{ auditions.16|linebreaks }}</div>
+            <div class="infoContent">{{ audition.essential|linebreaks }}</div>
         </div>
         {% endif %}
 
-        {% if auditions.17 %}
+        {% if audition.preparation %}
         <div class="infoBox" style="margin-top: 30px">
            <div class="infoTitle">상세 내용</div>
-           <div class="infoContent">{{ auditions.17|linebreaks }}</div>
+           {% if audition.contenttype == "old" %}
+               {% autoescape off %}
+                <div class="infoContent">{{ audition.preparation }}</div>
+               {% endautoescape %}
+           {% else %}
+           <div class="infoContent">{{ audition.preparation|linebreaks }}</div>
+           {% endif %}
         </div>
         {% endif %}
     </div>
 
-    {% if auditions.15 %}
+    {% if audition.image%}
     <div class="line"></div>
     <div class="imageBox">
         {% for images in image %}
@@ -180,5 +194,4 @@
     var writeUID = "{{ auditions.1 }}";
 </script>
 
-{% endfor %}
 {% endblock %}

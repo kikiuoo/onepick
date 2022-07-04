@@ -69,7 +69,7 @@
     cursor:pointer;
 }
 
-.audition:nth-child(4){
+.audition:nth-child(4n){
     margin-right: 0px;
 }
 
