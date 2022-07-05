@@ -46,8 +46,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
-    'crosheaders',
-
     'picktalk.apps.PicktalkConfig',
     'user',
     'audition',
