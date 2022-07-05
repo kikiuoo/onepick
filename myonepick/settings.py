@@ -104,8 +104,6 @@ WSGI_APPLICATION = 'myonepick.wsgi.application'
 #    }
 #}
 
-WSGI_APPLICATION = 'wsgi.application'
-
 DATABASES = {
     'default' :{
         'ENGINE' : 'django.db.backends.mysql',
