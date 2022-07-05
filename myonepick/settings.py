@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
-    'crosheaders',
+    #'crosheaders',
 
     'picktalk.apps.PicktalkConfig',
     'user',
@@ -112,7 +112,7 @@ DATABASES = {
         'NAME' : 'onepick',
         'USER' : 'onepick',
         'PASSWORD' : 'onepick@)@@',
-        'HOST' : '127.0.0.1',
+        'HOST' : 'ksnpick.com',
         'PORT' : '3306',
     }
 }
