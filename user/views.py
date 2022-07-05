@@ -151,28 +151,24 @@ def localLogin (request) :
     return render(request, 'user/login.html')
 
 def localLoginCallback (request) :
-    if request.method == "GET" :
-        username = request.GET['username']
-        password = request.GET['password']
+    username = request.GET['username']
+    password = request.GET['password']
 
-        pw = md5_generator(password)
-        userIN = UserInfo.objects.filter(userid=username, password=pw)
+    pw = md5_generator(password)
+    userIN = UserInfo.objects.filter(userid=username, password=pw)
 
-        if userIN.count() > 0 :
-            userIN = UserInfo.objects.get(userid=username, password=pw)
+    if userIN.count() > 0:
+        userIN = UserInfo.objects.get(userid=username, password=pw)
 
-            request.session['id'] = userIN.userid
-            request.session['userType'] = userIN.usertype
-            request.session.set_expiry(0)
+        request.session['id'] = userIN.userid
+        request.session['userType'] = userIN.usertype
+        request.session.set_expiry(0)
 
-            updateLastVisit(userIN.userid)
+        updateLastVisit(userIN.userid)
 
-            return JsonResponse({"code": "0"} )
-        else :
-            return JsonResponse({"code": "1", 'message' : "아이디 혹은 비밀번호가 일치 하지 않습니다."})
-
+        return JsonResponse({"code": "0"})
     else:
-        return JsonResponse({"code": "1", "message": "잘못된 접근입니다."})
+        return JsonResponse({"code": "1", 'message': "아이디 혹은 비밀번호가 일치 하지 않습니다."})
 
 
 def userLogin(request, id, email, gender, name, birth, joinType) :
