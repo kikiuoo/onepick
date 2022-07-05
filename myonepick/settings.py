@@ -104,13 +104,15 @@ WSGI_APPLICATION = 'myonepick.wsgi.application'
 #    }
 #}
 
+WSGI_APPLICATION = 'wsgi.application'
+
 DATABASES = {
     'default' :{
         'ENGINE' : 'django.db.backends.mysql',
         'NAME' : 'onepick',
         'USER' : 'onepick',
         'PASSWORD' : 'onepick@)@@',
-        'HOST' : '127.0.0.1',
+        'HOST' : 'ksnpick.com',
         'PORT' : '3306',
     }
 }
