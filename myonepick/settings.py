@@ -75,6 +75,20 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1",
 ]
 
+CORS_ALLOWED_ORIGIN_REGEXES = [
+r"^http://\w+\.ksnpick\.com$",
+]
+
+CORS_ALLOW_METHODS = [
+'DELETE',
+'GET',
+'OPTIONS',
+'PATCH',
+'POST',
+'PUT',
+]
+
+
 ROOT_URLCONF = 'myonepick.urls'
 
 TEMPLATES = [
