@@ -87,6 +87,8 @@ def audi_index(request, cate_type, page): # 오디션 Main
 
     return render(request, 'audition/index.html', {'cateType' : cate_type , 'subBanner' : subBanner, "recomAudi" : recomAudi,
                                                    "finishAudi" : finishAudi, "audition": audition, "paging" : paging, "page" : page } )
+
+
 #     /audi/audiDetail/(category)/(글번호)
 def audi_detail(request, cate_type, num) :
 
