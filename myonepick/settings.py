@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'user',
     'audition',
     'profiles',
-    'app',
 ]
 
 MIDDLEWARE = [
