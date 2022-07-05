@@ -95,7 +95,6 @@ def audi_detail(request, cate_type, num) :
     user = request.session.get('id', '')
     userType = request.session.get('userType', '')
 
-
     audition = AuditionInfo.objects.get(num=num)
     companyInfo = UserCompany.objects.get(userid=audition.userid)
 
@@ -121,7 +120,7 @@ def audi_detail(request, cate_type, num) :
     images = audition.image.split("|")
 
     return render(request, 'audition/viewer.html', {"audition": audition, "companyInfo" : companyInfo, "image" : images
-                                                    ,"userInfo": userInfo,"pickCheck": pickCheck})
+                                                    ,"userInfo": userInfo,"pickCheck": pickCheck});
 
 
 def audi_write(request) :
