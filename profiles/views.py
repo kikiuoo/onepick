@@ -53,11 +53,11 @@ def listView(request, cate_type, page): # 오디션 Main
 
         intercate = ""
         if cate_type == "actor" :
-            intercate = " and p.interCate = 'mainCate1' "
+            intercate = " and ( p.interCate = 'mainCate1' || p.interCate like '%배우%' ) "
         elif cate_type == "model" :
-            intercate = " and p.interCate = 'mainCate2' "
+            intercate = " and ( p.interCate = 'mainCate2' || p.interCate like '%배우%' ) "
         elif cate_type == "singer" :
-            intercate = " and p.interCate = 'mainCate3' "
+            intercate = " and ( p.interCate = 'mainCate3' || p.interCate like '%가수%' ) "
 
         # 프로필
         if user:
@@ -84,7 +84,7 @@ def listView(request, cate_type, page): # 오디션 Main
 
     except:
         connection.rollback()
-    return render(request, 'profiles/list.html', { 'profiles':profiles, "cateType" : cate_type })
+    return render(request, 'profiles/list.html', { 'profiles':profiles, "cateType" : cate_type, "page" : page })
 
 
 def viewer(request, cate_type, num) :
@@ -110,10 +110,16 @@ def viewer(request, cate_type, num) :
         pickCheck = "0"
 
     profileImages = profiles.detailimage.split("|")
-    artImages = profiles.artimage.split("|")
+    if(  profiles.artimage ) :
+        artImages = profiles.artimage.split("|")
+    else :
+        artImages = ""
     youtubes = profiles.youtube.split("|")
     foreign = profiles.foreign.split("|")
-    talent = profiles.talent.split("|")
+    if (profiles.artimage):
+        talent = profiles.talent.split("|")
+    else :
+        talent = ""
 
     # 세부 분야별 경력정보
     movieCareer = getCareerList(num, "movie")
@@ -696,11 +702,11 @@ def getProfile(request) :
         where = where + " and careerYear >= '"+ career1 +"' "
 
     if cate_type == "actor":
-        where = where + " and p.interCate = 'mainCate1' "
+        where = where + "and ( p.interCate = 'mainCate1' || p.interCate like '%배우%' ) "
     elif cate_type == "model":
-        where = where + " and p.interCate = 'mainCate2' "
+        where = where + "and ( p.interCate = 'mainCate2' || p.interCate like '%모델%' ) "
     elif cate_type == "singer":
-        where = where + " and p.interCate = 'mainCate3' "
+        where = where + "and ( p.interCate = 'mainCate3' || p.interCate like '%가수%' ) "
 
     try:
         cursor = connection.cursor()

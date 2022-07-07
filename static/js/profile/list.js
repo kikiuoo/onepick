@@ -143,8 +143,8 @@ $(document).ready(function(){
 
 
     $(window).scroll(function() {
-        console.log($(window).scrollTop() + " " + ( $(document).height() - $(window).height() ) + " " + $(document).height() + " " +$(window).height());
-        if ($(window).scrollTop() == ($(document).height() - $(window).height()- 100)) {
+        console.log(page + " " +$(window).scrollTop() + " " + ( $(document).height() - $(window).height() - 100 ) + " " + $(document).height() + " " +$(window).height());
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height())) {
             page++;
 
             var order = $("#order").find("option:selected").val();

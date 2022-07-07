@@ -116,7 +116,12 @@
             {% endif %}
         </div>
         <div class="contentBox">
+            {% if profile.7 != None %}
             <div class="name">{{ profile.7|updateUserName }} ({{ profile.8|userAge }})</div>
+            {% else %}
+            <div class="name">*** ({{ profile.8|userAge }})</div>
+            {% endif %}
+
             <div class="detailInfo">
                 키 {{ profile.2|userHight }} cm | 몸무게 {{ profile.3|userHight }} kg<br>
                 {% if profile.10 == 'man' %}
@@ -128,7 +133,7 @@
                     소속사 있음
                 {% endif %} <br>
                 {{ profile.12 }} {{ profile.13 }}
-                {% if profile.14 != "" %}
+                {% if profile.14 != None %}
                  <br>특기 {{ profile.14|getTalent }}
                 {% endif %}
             </div>

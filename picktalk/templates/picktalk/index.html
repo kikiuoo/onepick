@@ -67,7 +67,11 @@
     <div class="profile" data-num="{{ profile.0 }}">
         <div class="image"  style='background-image: url("/media/{{ profile.1 }}");'></div>
         <div class="info">
+            {% if profile.4 != None %}
             <div class="name">{{ profile.4|updateUserName }} ({{ profile.5|userAge }})</div>
+            {% else %}
+            <div class="name">*** ({{ profile.5|userAge }})</div>
+            {% endif %}
             <div class="infoDetail">
                 키 {{ profile.2|userHight }}cm | 몸무게 {{ profile.3|userHight }}kg<br>
                 {% if profile.7 == "man" %} 군필 | {% endif %}
@@ -79,7 +83,11 @@
             </div>
             <div class="infoDetail">
                 {{ profile.9 }} {{ profile.10 }}<br>
-                특기 {{ profile.11|replace_2:"|, " }}
+                {% if profile.11 != None %}
+                    특기 {{ profile.11|replace_2:"|, " }}
+                {% else %}
+                    특기 -
+                {% endif %}
             </div>
 
             <div class="viewBox">
