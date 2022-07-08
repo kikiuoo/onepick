@@ -33,9 +33,12 @@ def userAge(values):
         nowTime = str(timezone.now())
         year = nowTime.split('-')
 
-        age = int(year[0]) - int(birth[0]) + 1
+        if birth[0] != "" :
+            age = int(year[0]) - int(birth[0]) + 1
+        else :
+            age = "-"
     else :
-        age = ""
+        age = "-"
 
     return age
 
@@ -147,7 +150,10 @@ def emailReplace(value, key):
             returnValue = returnValue + key
         count = count + 1;
 
-    returnValue = returnValue + "@" + email[1]
+    if len(email) >= 2 :
+        returnValue = returnValue + "@" + email[1]
+    else :
+        returnValue = value
 
     return returnValue
 

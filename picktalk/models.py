@@ -175,12 +175,12 @@ class ProfileInfo(models.Model):
     skincolor = models.CharField(db_column='skinColor', max_length=50, blank=True, null=True)  # Field name made lowercase.
     haircolor = models.CharField(db_column='hairColor', max_length=50, blank=True, null=True)  # Field name made lowercase.
     foreign = models.CharField(max_length=500, blank=True, null=True)
-    mainyoutube = models.CharField(db_column='mainYoutube', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    mainyoutube = models.CharField(db_column='mainYoutube', max_length=500, blank=True, null=True)  # Field name made lowercase.
     youtube = models.CharField(max_length=500, blank=True, null=True)
     talent = models.CharField(max_length=500, blank=True, null=True)
-    comment = models.CharField(max_length=1000, blank=True, null=True)
-    intercate = models.CharField(db_column='interCate', max_length=50, blank=True, null=True)  # Field name made lowercase.
-    intersubcate = models.CharField(db_column='interSubCate', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    comment = models.CharField(max_length=10000, blank=True, null=True)
+    intercate = models.CharField(db_column='interCate', max_length=200, blank=True, null=True)  # Field name made lowercase.
+    intersubcate = models.CharField(db_column='interSubCate', max_length=200, blank=True, null=True)  # Field name made lowercase.
     iscareer = models.CharField(db_column='isCareer', max_length=10, blank=True, null=True)  # Field name made lowercase.
     careeryear = models.CharField(db_column='careerYear', max_length=10, blank=True, null=True)  # Field name made lowercase.
     careermonth = models.CharField(db_column='careerMonth', max_length=10, blank=True, null=True)  # Field name made lowercase.
@@ -190,6 +190,7 @@ class ProfileInfo(models.Model):
     pickcount = models.IntegerField(db_column='pickCount', blank=True, null=True)  # Field name made lowercase.
     public = models.CharField(max_length=10, blank=True, null=True)
     isdelete = models.CharField(db_column='isDelete', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    contenttype = models.CharField(db_column='contentType', max_length=50, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
