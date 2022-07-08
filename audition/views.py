@@ -30,12 +30,12 @@ def audi_index(request, cate_type, page): # 오디션 Main
             query = "SELECT AI.num, AI.title, AI.endDate, AI.ordinary, UC.logoImage, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user + "' AND auditionNum = AI.num ) AS audiPick" \
                     " FROM audition_info AS AI LEFT JOIN user_company AS UC ON AI.userID  = UC.userID " \
                     "WHERE recommend = '1' and (AI.isDelete = '0' or AI.isDelete is null) " \
-                    "order by AI.recOrder ASC LIMIT 4 "
+                    "order by AI.recOrder ASC, AI.regTime DESC "
         else:
             query = "SELECT AI.num, AI.title, AI.endDate, AI.ordinary, UC.logoImage, '0' AS audiPick" \
                     " FROM audition_info AS AI LEFT JOIN user_company AS UC ON AI.userID  = UC.userID " \
                     "WHERE recommend = '1' and (AI.isDelete = '0' or AI.isDelete is null) " \
-                    "order by AI.recOrder ASC LIMIT 4 "
+                    "order by AI.recOrder ASC, AI.regTime DESC"
 
         result = cursor.execute(query)
         recomAudi = cursor.fetchall()
