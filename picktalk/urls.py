@@ -9,6 +9,7 @@ urlpatterns = [
     path("advertise/callBack/", views.advertise_callBack, name="advertise-callback"),
 
     path("search/<cateType>/<search>/<int:page>/", views.searchList, name="searchList"),
+    path("search/ajaxProfile/", views.getSearchProfile, name="getSearchProfile"),
 
     path("notice/viewer/<int:num>/", views.notice, name="notice"),
     path("notice/list/<int:page>/", views.notiList, name="notiList"),

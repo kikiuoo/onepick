@@ -74,7 +74,12 @@
             {% endif %}
             <div class="infoDetail">
                 키 {{ profile.2|userHight }}cm | 몸무게 {{ profile.3|userHight }}kg<br>
-                {% if profile.7 == "man" %} 군필 | {% endif %}
+                {% if userInfo.8 != None %}
+                    {% if profile.7 == "man" %}
+                    {{ userInfo.8 }} |
+                    {% endif %}
+                {% endif %}
+
                 {% if profile.6|default:"" == "" %}
                 소속사 없음<br>
                 {% else %}

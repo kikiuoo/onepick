@@ -9,7 +9,7 @@ $(document).ready(function(){
     $(document).on("click", ".profile", function (){
        var num = $(this).attr("data-num");
 
-       window.location.href = "/profile/profileDetail/" + cateType + "/" + num + "/" ;
+       window.open( "/profile/profileDetail/" + cateType + "/" + num + "/" );
     });
 
     $(document).on("click", ".profile .pickBtn", function(e){

@@ -18,7 +18,7 @@
 
         <div class="detailInfo">
             키 {{ profile.2|userHight }} cm | 몸무게 {{ profile.3|userHight }} kg<br>
-            {% if profile.10 == 'man' %}
+            {% if profile.10 == 'man' and profile.11 != None %}
             {{ profile.11 }} |
             {% endif %}
             {% if profile.9 == "" %}

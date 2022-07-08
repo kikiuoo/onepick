@@ -23,7 +23,7 @@
     <div class="cate {% if cateType == "profile"  %} active {% endif %}" data-url="/search/profile/{{ search }}/1/">프로필</div>
 </div>
 
-<div class="searchTitle"><span>'{{ search }}'</span>에 대한 검색 결과 (총 <span>{{ searching|length }}</span>건)</div>
+<div class="searchTitle"><span>'{{ search }}'</span>에 대한 검색 결과 (총 <span>{{ allList }}</span>건)</div>
 
 {% if searching|length > 0 %}
     {% if cateType == "audition" %}
@@ -82,10 +82,15 @@
                 {% endif %}
             </div>
             <div class="contentBox">
+                {% if profile.7 != None %}
                 <div class="name">{{ profile.7|updateUserName }} ({{ profile.8|userAge }})</div>
+                {% else %}
+                <div class="name">*** ({{ profile.8|userAge }})</div>
+                {% endif %}
+
                 <div class="detailInfo">
                     키 {{ profile.2|userHight }} cm | 몸무게 {{ profile.3|userHight }} kg<br>
-                    {% if profile.10 == 'man' %}
+                    {% if profile.10 == 'man' and profile.11 != None %}
                     {{ profile.11 }} |
                     {% endif %}
                     {% if profile.9 == "" %}
@@ -94,7 +99,7 @@
                         소속사 있음
                     {% endif %} <br>
                     {{ profile.12 }} {{ profile.13 }}
-                    {% if profile.14 != "" %}
+                    {% if profile.14 != None %}
                      <br>특기 {{ profile.14|getTalent }}
                     {% endif %}
                 </div>

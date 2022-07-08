@@ -723,13 +723,13 @@ def getProfile(request) :
             query = "SELECT p.num , profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, " \
                     "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
-                    "WHERE public = '0' and isDelete = '0'  and ui.userID != '' " + where + orderby + " LIMIT " + str(start) + ", " + str(end)
+                    "WHERE public = '0' and isDelete = '0'  and ui.userID != '' " + where + orderby + " LIMIT " + str(start) + ", " + str(block)
         else:
             query = "SELECT p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain," \
                     "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, '0' AS proPick " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui " \
                     "     ON p.userID = ui.userID " \
-                    "WHERE public = '0' and isDelete = '0'  and ui.userID != '' " + where + orderby + " LIMIT " + str(start) + ", " + str(end)
+                    "WHERE public = '0' and isDelete = '0'  and ui.userID != '' " + where + orderby + " LIMIT " + str(start) + ", " + str(block)
 
         result = cursor.execute(query)
         profiles = cursor.fetchall()

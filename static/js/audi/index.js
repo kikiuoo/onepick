@@ -57,6 +57,13 @@ $(document).ready(function(){
         window.open(url);
     });
 
+
+    $(document).on("click", ".pages", function(){
+        var pages = $(this).attr("data-page");
+
+        window.location.href = "/audi/main/all/"+pages+"/";
+    });
+
 });
 
 function updatePick(tableName, nowType, num){

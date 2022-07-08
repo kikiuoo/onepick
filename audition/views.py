@@ -54,27 +54,39 @@ def audi_index(request, cate_type, page): # 오디션 Main
         result = cursor.execute(query)
         finishAudi = cursor.fetchall()
 
-        block = 10
+        block = 15
         start = (page - 1) * block
         end = page * block
 
+        print( start )
+        print( end )
+
+        query = "select * " \
+                "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode " \
+                "    LEFT JOIN  user_company AS uc ON ai.userID = uc.userID " \
+                "where  ai.isDelete = '0' or ai.isDelete is null " \
+                "ORDER BY ai.regTime DESC "
+
+        result = cursor.execute(query)
+        allList = cursor.fetchall()
+
         if user:
-            query = "SELECT ai.num, ai.title, cm.cateName, ai.career, ai.age, ai.endDate, ai.regTime, ai.ordinary, uc.logoImage, DATEDIFF(NOW(),  ai.regTime) AS diffDate, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user + "' AND auditionNum = ai.num ) AS audiPick " \
+            query = "SELECT ai.num, ai.title, cm.cateName, ai.career, ai.age, ai.endDate, ai.regTime, ai.ordinary, uc.logoImage, DATEDIFF(NOW(),  ai.regTime) AS diffDate, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user + "' AND auditionNum = ai.num ) AS audiPick, contentType, ai.cate " \
                     "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode " \
                     "    LEFT JOIN  user_company AS uc ON ai.userID = uc.userID " \
                     "where  ai.isDelete = '0' or ai.isDelete is null " \
-                    "ORDER BY ai.regTime DESC limit " + str(start) + ", " + str(end)
+                    "ORDER BY ai.regTime DESC limit " + str(start) + ", " + str(block)
         else:
-            query = "SELECT ai.num, ai.title, cm.cateName, ai.career, ai.age, ai.endDate, ai.regTime, ai.ordinary, uc.logoImage, DATEDIFF(NOW(),  ai.regTime) AS diffDate , '0' AS audiPick " \
+            query = "SELECT ai.num, ai.title, cm.cateName, ai.career, ai.age, ai.endDate, ai.regTime, ai.ordinary, uc.logoImage, DATEDIFF(NOW(),  ai.regTime) AS diffDate , '0' AS audiPick, contentType, ai.cate " \
                     "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode " \
                     "    LEFT JOIN  user_company AS uc ON ai.userID = uc.userID " \
                     "where  ai.isDelete = '0' or ai.isDelete is null " \
-                    "ORDER BY ai.regTime DESC limit " + str(start) + ", " + str(end)
+                    "ORDER BY ai.regTime DESC limit " + str(start) + ", " + str(block)
 
         result = cursor.execute(query)
         audition = cursor.fetchall()
 
-        allPage = (len(audition) / block) + 1
+        allPage = (len(allList) / block) + 1
         paging = getPageList(page, allPage)
 
         connection.commit()
@@ -82,8 +94,6 @@ def audi_index(request, cate_type, page): # 오디션 Main
 
     except:
         connection.rollback()
-        print('Faild DB Connection')
-
 
     return render(request, 'audition/index.html', {'cateType' : cate_type , 'subBanner' : subBanner, "recomAudi" : recomAudi,
                                                    "finishAudi" : finishAudi, "audition": audition, "paging" : paging, "page" : page } )
@@ -118,8 +128,10 @@ def audi_detail(request, cate_type, num) :
 
     images = audition.image.split("|")
 
+    d_day = finalDate(audition.enddate)
+
     return render(request, 'audition/viewer.html', {"audition": audition, "companyInfo" : companyInfo, "image" : images
-                                                    ,"userInfo": userInfo,"pickCheck": pickCheck})
+                                                    ,"userInfo": userInfo,"pickCheck": pickCheck, "D_day" : d_day})
 
 
 def audi_write(request) :

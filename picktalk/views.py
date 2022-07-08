@@ -135,45 +135,67 @@ def advertise_callBack(request) :
 
 
 def searchList(request, cateType, search, page) :
+    try:
         cursor = connection.cursor()
 
         user = request.session.get('id', '')
 
         # 검색 결과 등록
-        nowTime = timezone.now()
-        nowTime = timezone.now()
-        print(nowTime)
-        saveSearch = UserSearch.objects.create(userid=user, search=search, regdate=nowTime)
+        if page == 1 :
+            nowTime = timezone.now()
+            saveSearch = UserSearch.objects.create(userid=user, search=search, regdate=nowTime)
 
         block = 10
         start = (page - 1) * block
         end = page * block
 
         if cateType == "audition" :
+
+            query = "SELECT * " \
+                    "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode " \
+                    "    LEFT JOIN  user_company AS uc ON ai.userID = uc.userID " \
+                    "where ( ai.isDelete = '0' or ai.isDelete is null ) " \
+                    "     and ( title LIKE '%" + search + "%' OR age LIKE '%" + search + "%' OR gender LIKE '%" + search + "%' OR career LIKE '%" + search + "%' OR essential LIKE '%" + search + "%'  OR preparation LIKE '%" + search + "%' ) " \
+                    "ORDER BY ai.regTime DESC ";
+
+            result = cursor.execute(query)
+            allList = cursor.fetchall()
+
             if user:
                 query = "SELECT ai.num, ai.title, cm.cateName, ai.career, ai.age, ai.endDate, ai.regTime, ai.ordinary, uc.logoImage, DATEDIFF(NOW(),  ai.regTime) AS diffDate, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user + "' AND auditionNum = ai.num ) AS audiPick " \
                         "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode " \
                         "    LEFT JOIN  user_company AS uc ON ai.userID = uc.userID " \
-                        "where  ai.isDelete = '0' or ai.isDelete is null " \
+                        "where ( ai.isDelete = '0' or ai.isDelete is null ) " \
                         "     and ( title LIKE '%" + search + "%' OR age LIKE '%" + search + "%' OR gender LIKE '%" + search + "%' OR career LIKE '%" + search + "%' OR essential LIKE '%" + search + "%'  OR preparation LIKE '%" + search + "%' ) " \
                         "ORDER BY ai.regTime DESC limit " + str(start) + ", " + str(end)
             else:
                 query = "SELECT ai.num, ai.title, cm.cateName, ai.career, ai.age, ai.endDate, ai.regTime, ai.ordinary, uc.logoImage, DATEDIFF(NOW(),  ai.regTime) AS diffDate , '0' AS audiPick " \
                         "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode " \
                         "    LEFT JOIN  user_company AS uc ON ai.userID = uc.userID " \
-                        "where  ai.isDelete = '0' or ai.isDelete is null " \
+                        "where ( ai.isDelete = '0' or ai.isDelete is null ) " \
                         "     and ( title LIKE '%" + search + "%' OR age LIKE '%" + search + "%' OR gender LIKE '%" + search + "%' OR career LIKE '%" + search + "%' OR essential LIKE '%" + search + "%'  OR preparation LIKE '%" + search + "%' ) " \
                         "ORDER BY ai.regTime DESC limit " + str(start) + ", " + str(end)
 
             result = cursor.execute(query)
             searching = cursor.fetchall()
 
-            print(searching)
-
-            allPage = (len(searching) / block) + 1
+            allPage = (len(allList) / block) + 1
             paging = getPageList(page, allPage)
 
         else :
+
+            query = "SELECT * " \
+                    "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
+                    "     LEFT JOIN ( SELECT profileNum, COUNT(*) AS career FROM profile_career WHERE title LIKE '%" + search + "%' OR `role` LIKE '%" + search + "%' group by profileNum ) AS c ON p.num = c.profileNum " \
+                    "     LEFT JOIN ( SELECT profileNum, COUNT(*) AS etcCareer FROM profile_etccareer WHERE title LIKE '%" + search + "%' OR `role` LIKE '%" + search + "%' group by profileNum ) AS d ON p.num = d.profileNum " \
+                    "WHERE public = '0' and isDelete = '0'  and ui.userID != '' and  " \
+                    "      ( career > 0 OR etcCareer > 0 OR `foreign` LIKE '%" + search + "%' OR talent LIKE '%" + search + "' OR `comment` LIKE '%" + search + "%' OR `careerYear` LIKE '%" + search + "%' OR `careerMonth` LIKE '%" + search + "%' " \
+                    "        OR `foreign` LIKE '%" + search + "%' OR `birth` LIKE '%" + search + "%' OR `finalSchool` LIKE '%" + search + "%' OR `school` LIKE '%" + search + "%' OR `major` LIKE '%" + search + "%' OR `entertain` LIKE '%" + search + "%' OR `military` LIKE '%" + search + "%')  " \
+                    "ORDER BY regDate DESC "
+
+            result = cursor.execute(query)
+            allList = cursor.fetchall()
+
             if user:
                 query = "SELECT p.num , profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, " \
                         "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick " \
@@ -204,8 +226,70 @@ def searchList(request, cateType, search, page) :
         connection.commit()
         connection.close()
 
-        return render(request, 'picktalk/search.html', {"cateType": cateType, "searching": searching, "search":search, "page" : page,
-                                                        "paging" : paging})
+
+
+    except:
+        connection.rollback()
+
+    return render(request, 'picktalk/search.html', {"cateType": cateType, "searching": searching, "search":search, "page" : page,
+                                                        "paging" : paging, "allList" : len(allList) })
+
+
+
+
+def getSearchProfile(request) :
+
+    try :
+        cursor = connection.cursor()
+
+        page = request.GET['page']
+        search = request.GET['word']
+
+        page = int(page)
+
+        user = request.session.get('id', '')
+        block = 10
+        start = (page - 1) * block
+        end = page * block
+
+        if user:
+            query = "SELECT p.num , profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, " \
+                    "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick " \
+                    "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
+                    "     LEFT JOIN ( SELECT profileNum, COUNT(*) AS career FROM profile_career WHERE title LIKE '%" + search + "%' OR `role` LIKE '%" + search + "%' group by profileNum ) AS c ON p.num = c.profileNum " \
+                    "     LEFT JOIN ( SELECT profileNum, COUNT(*) AS etcCareer FROM profile_etccareer WHERE title LIKE '%" + search + "%' OR `role` LIKE '%" + search + "%' group by profileNum ) AS d ON p.num = d.profileNum " \
+                    "WHERE public = '0' and isDelete = '0'  and ui.userID != '' and  " \
+                    "      ( career > 0 OR etcCareer > 0 OR `foreign` LIKE '%" + search + "%' OR talent LIKE '%" + search + "' OR `comment` LIKE '%" + search + "%' OR `careerYear` LIKE '%" + search + "%' OR `careerMonth` LIKE '%" + search + "%' " \
+                    "        OR `foreign` LIKE '%" + search + "%' OR `birth` LIKE '%" + search + "%' OR `finalSchool` LIKE '%" + search + "%' OR `school` LIKE '%" + search + "%' OR `major` LIKE '%" + search + "%' OR `entertain` LIKE '%" + search + "%' OR `military` LIKE '%" + search + "%')  " \
+                    "ORDER BY regDate DESC " \
+                    " LIMIT " + str(start) + ", " + str(block)
+
+        else:
+            query = "SELECT p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain," \
+                    "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, '0' AS proPick " \
+                    "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
+                    "     LEFT JOIN ( SELECT profileNum, COUNT(*) AS career FROM profile_career WHERE title LIKE '%" + search + "%' OR `role` LIKE '%" + search + "%' ) AS c ON p.num = c.profileNum " \
+                    "     LEFT JOIN ( SELECT profileNum, COUNT(*) AS etcCareer FROM profile_etccareer WHERE title LIKE '%" + search + "%' OR `role` LIKE '%" + search + "%' ) AS d ON p.num = d.profileNum " \
+                    "WHERE public = '0' and isDelete = '0'  and ui.userID != '' and  " \
+                    "      ( career > 0 OR etcCareer > 0 OR `foreign` LIKE '%" + search + "%' OR talent LIKE '%" + search + "' OR `comment` LIKE '%" + search + "%' OR `careerYear` LIKE '%" + search + "%' OR `careerMonth` LIKE '%" + search + "%' " \
+                    "        OR `foreign` LIKE '%" + search + "%' OR `birth` LIKE '%" + search + "%' OR `finalSchool` LIKE '%" + search + "%' OR `school` LIKE '%" + search + "%' OR `major` LIKE '%" + search + "%' OR `entertain` LIKE '%" + search + "%' OR `military` LIKE '%" + search + "%')  " \
+                    "ORDER BY regDate DESC  " \
+                    " LIMIT " + str(start) + ", " + str(block)
+
+        print(query)
+
+        result = cursor.execute(query)
+        searching = cursor.fetchall()
+
+        connection.commit()
+        connection.close()
+
+    except:
+        connection.rollback()
+
+    return render(request, 'profiles/ajax_profileList.html', {'profiles':searching})
+
+
 
 def notice(request, num) :
     notice = QaNotice.objects.get(num=num)
@@ -254,14 +338,14 @@ def proList(request, type, page, num) :
                 "FROM profile_pick AS pp LEFT JOIN profile_info AS p ON pp.profileNum = p.num " \
                 "     LEFT JOIN user_info AS ui ON p.userID  = ui.userID  " \
                 "WHERE pp.userID = '"+user+"'  and p.isDelete = '0' " \
-                "order by pp.regTime desc  limit "+ str(start) + ", " + str(end)
+                "order by pp.regTime desc  limit "+ str(start) + ", " + str(block)
 
     elif type == "suggest" :
         query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, ps.COMMENT " \
                 "FROM profile_suggest AS ps LEFT JOIN profile_info AS p ON ps.profileNum = p.num " \
                 "     LEFT JOIN user_info AS ui ON ps.userID  = ui.userID  " \
                 "WHERE ps.suUserID = '" + user + "' and p.isDelete = '0' " \
-                "order by ps.regTime desc limit "+ str(start) + ", " + str(end)
+                "order by ps.regTime desc limit "+ str(start) + ", " + str(block)
 
     result = cursor.execute(query)
     profile = cursor.fetchall()
@@ -283,7 +367,7 @@ def qandaList(request, page) :
     query = "SELECT qq.num, cateName, title, regDate, IFNULL(commCnt, 0) AS commCnt " \
             "FROM qa_qanda AS qq LEFT JOIN qa_qanda_cate AS qqc  ON qq.cate = qqc.cateCode " \
             "     LEFT JOIN ( SELECT COUNT(*) AS commCnt, qaNum FROM qa_qanda_comment GROUP BY qaNum ) AS qqc ON qq.num = qqc.qaNum " \
-            "order by qq.regDate desc limit " + str(start) + ", " + str(end)
+            "order by qq.regDate desc limit " + str(start) + ", " + str(block)
 
     result = cursor.execute(query)
     qandaList = cursor.fetchall()

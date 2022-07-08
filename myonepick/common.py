@@ -4,6 +4,7 @@ import hashlib
 import os
 import requests
 from django.conf import settings
+import datetime
 
 def getPageList ( nowPage, allPage) :
 
@@ -78,3 +79,20 @@ def sendSMS( receiver, title, msg ) :
     send_response = requests.post(send_url, data=sms_data)
 
     return send_response.json()
+
+
+def finalDate(date) :
+
+    print(date)
+
+    if date == "" or date == None : return ""
+
+    endDate = str(date).split(" ");
+    lastDate = endDate[0].split("-")
+
+    today = datetime.date.today()
+    target_date = datetime.date(int(lastDate[0]), int(lastDate[1]), int(lastDate[2]))
+
+    d_day = target_date - today
+
+    return d_day.days

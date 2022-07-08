@@ -24,7 +24,7 @@
 
     <div class="companyLogo" style='background-image: url("/media/{{ companyInfo.logoimage }}")'></div>
     <div class="companySite" data-url="{{ companyInfo.website }}">{{ companyInfo.website|default:"" }}</div>
-    <div class="title">{{ auditions.2 }}</div>
+    <div class="title">{{ audition.title }}</div>
 
     <div class="line">
         {% if pickCheck == 0 or pickCheck == "0" %}
@@ -34,9 +34,9 @@
         {% endif %}
         <div class="supportBtn">오디션 지원</div>
         {% if audition.ordinary == '0' %}
-            {% if auditions.27 > 0 %}
-            <div class="deadline">마감 {{ auditions.27 }}일 전</div>
-            {% elif auditions.27 == 0 %}
+            {% if D_day > 0 %}
+            <div class="deadline">마감 {{ D_day }}일 전</div>
+            {% elif D_day == 0 %}
             <div class="deadline">오늘 마감</div>
             {% else %}
             <div class="deadline">마감된 오디션</div>
@@ -62,7 +62,13 @@
             <span>모집 조건</span>
             <div class="contentBox">
                 {% if audition.contenttype == "old" %}
-                    <p>나이 {{ auditions.11 }}</p>
+                    <p>나이
+                        {% if audition.age == "0" %}
+                            무관
+                        {% else %}
+                            {{ audition.age }} ~
+                        {% endif %}
+                    </p>
                 {% else %}
                     <p>나이 {{ audition.age }}</p>
                 {% endif %}
@@ -189,9 +195,9 @@
 
 
 <script>
-    var isDelete = "{{ auditions.29 }}";
-    var num = "{{ auditions.0 }}";
-    var writeUID = "{{ auditions.1 }}";
+    var isDelete = "{{ audition.isdelete }}";
+    var num = "{{ audition.num }}";
+    var writeUID = "{{ audition.userid }}";
 </script>
 
 {% endblock %}

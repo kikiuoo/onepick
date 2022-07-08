@@ -368,3 +368,9 @@ def getPersent(num) :
 def applyCount(num) :
     audiApply = AuditionApply.objects.filter(auditionnum=num)
     return audiApply.count()
+
+
+@register.filter
+def audiListCate(cate) :
+    cates = cate.split(",")
+    return cates[0]

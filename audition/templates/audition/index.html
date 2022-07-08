@@ -4,6 +4,7 @@
 
 <!-- Index CSS 파일 및 JS 파일 include -->
 {% load static %}
+{% load my_filter %}
 <link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/audi/index.css' %}"> <!-- pc 버전 -->
 <link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/audi/index.css' %}" > <!-- 모바일 버전 -->
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -80,6 +81,21 @@
             <div class="audiLogo" style='background-image: url("/media/{{ auditions.8 }}");'></div>
             <div class="sContent">
                 <div class="lTitle">{{ auditions.1 }}</div>
+
+                {% if auditions.11 == "old" %}
+                <div class="lAppel">
+                    <span>모집분야</span>
+                    <p>{{ auditions.12|audiListCate }}</p>
+                    <span>경력</span>
+                    <p>{{ auditions.3 }}</p>
+                    <span>나이</span>
+                    {% if auditions.4 == "0"  %}
+                        <p>무관</p>
+                    {% else %}
+                        <p>{{ auditions.4 }} ~</p>
+                    {% endif %}
+                </div>
+                {% else %}
                 <div class="lAppel">
                     <span>모집분야</span>
                     <p>{{ auditions.2 }}</p>
@@ -88,6 +104,7 @@
                     <span>나이</span>
                     <p>{{ auditions.4 }}</p>
                 </div>
+                {% endif %}
             </div>
             <div class="date">
                 {% if auditions.7 == '1' %}

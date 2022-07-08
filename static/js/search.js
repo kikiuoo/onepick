@@ -16,9 +16,15 @@ $(document).ready(function(){
             //return;
        }
 
-       window.open( '/audi/audiDetail/all/' +num +"/" );
+       window.location.href =  '/audi/audiDetail/all/' +num +"/";
     });
 
+
+    $(document).on("click", ".profile", function (){
+       var num = $(this).attr("data-num");
+
+       window.open( "/profile/profileDetail/" + cateType + "/" + num + "/" );
+    });
 
      // 프로필 픽 기능. ( 구현 필요 )
     $(document).on("click", ".profile .pickBtn", function(e){
@@ -56,28 +62,41 @@ $(document).ready(function(){
 
         if( cateType == "audition") return;
 
-        console.log($(window).scrollTop() + " " + ( $(document).height() - $(window).height() ) + " " + $(document).height() + " " +$(window).height());
-        if ($(window).scrollTop() == ($(document).height() - $(window).height()- 100)) {
+        console.log(page + " " +$(window).scrollTop() + " " + ( $(document).height() - $(window).height() - 100 ) + " " + $(document).height() + " " +$(window).height());
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height())) {
             page++;
 
-            var order = $("#order").find("option:selected").val();
-            var nationality = $("#nationality").find("option:selected").val();
-            var geneder = $("#geneder").find("option:selected").val();
-            var military = $("#military").find("option:selected").val();
-            var foreign = $("#foreign").find("option:selected").val();
-            var good = $("#good").find("option:selected").val();
-            var age1 = $("#age1").val();
-            var age2 = $("#age2").val();
-            var school = $("#school").val();
-            var height1 = $("#height1").val();
-            var height2 = $("#height2").val();
-            var career1 = $("#career1").val();
-
-            getProfileList( order, nationality, geneder, military, foreign, good, age1, age2, school, height1, height2, career1)
+            getProfileList( page, word)
         }
     });
 
+    $(document).on("click", ".pages", function(){
+        var pages = $(this).attr("data-page");
+
+        window.location.href = "/search/audition/"+word+"/"+pages+"/";
+    });
+
 });
+
+function getProfileList( page, word){
+    $.ajax({
+      url: "/search/ajaxProfile/",
+      type: "GET",
+      dataType: "html",
+      data:{"page":page, "word" : word },
+
+      success: function(data){
+          if( page == 1 ) {
+              $(".inBox").empty().append(data);
+          }else{
+              $(".inBox").append(data);
+          }
+      },
+      error: function (request, status, error){
+          alert(error);
+      }
+   });
+}
 
 
 function updatePick(tableName, nowType, num){
