@@ -129,9 +129,9 @@
 
 .audiList .audiListBox .audiLogo{
     display: inline-block;
-    width: 183px;
-    height: 87px;
-    margin-right: 71px;
+    width: 265px;
+    height: 100px;
+    margin-right: 6px;
 
     background-repeat: no-repeat;
     background-position: center;
@@ -146,6 +146,7 @@
     vertical-align: top;
     margin-left: 24px;
     padding: 18px 0px 0px 19px;
+    margin-top: 6px;
 }
 
 .audiList .audiListBox .sContent .lTitle{
