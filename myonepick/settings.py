@@ -47,9 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     'picktalk.apps.PicktalkConfig',
-    'user',
-    'audition',
-    'profiles',
+    'user.apps.UserConfig',
+    'audition.apps.AuditionConfig',
+    'profiles.apps.ProfilesConfig',
     'corsheaders',
 ]
 
