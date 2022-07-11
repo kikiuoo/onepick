@@ -15,7 +15,9 @@
 <div class="content">
     <div class="btnBox">
         {% if  request.session.userType == "admin" or  request.session.id == audition.userid %}
+        {% if audition.contenttype != "old" %}
         <div class="editBtn" data-num="{{ audition.num }}"></div>
+        {% endif %}
         <div class="delBtn" data-num="{{ audition.num }}"></div>
         {% endif %}
         <!--<div class="printBtn"></div>-->

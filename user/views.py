@@ -413,6 +413,7 @@ def userMypage(request, type) :
 
         else :
             company = UserCompany.objects.get(userid=user)
+            print(company)
             data1 = AuditionInfo.objects.filter(userid=user)
             query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, ps.COMMENT " \
                     "FROM profile_suggest AS ps LEFT JOIN profile_info AS p ON ps.profileNum = p.num " \
@@ -513,6 +514,10 @@ def updateCallback(request) :
         url = "/users/mypage/user/"
 
     else :
+
+        if password != "":
+            userInfo.password = md5_generator(password)
+
         userCompany = UserCompany.objects.get(userid=userID)
 
         companyName = request.POST.get("companyName", "")

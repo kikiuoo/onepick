@@ -28,7 +28,7 @@ $(document).ready(function(){
         var id =  $('.s_userID:checked').val();
         var type =  $('.s_userID:checked').attr("data-type");
 
-        if( type == "" ){
+        if( type == "oldUser" || type == "" ){
             // 기존 회원 정보 연동.
             window.location.href = "/users/join/"+id+"/oldUser/"
         }else{
@@ -104,6 +104,8 @@ function find_old_user(userName, userPhone){
             $(".userInfoBox").css("display", "block");
             $(".loginBox2").css("display", "none");
             $(".loginBox3").css("display", "none");
+
+            alert("검색된 데이터가 없습니다.");
         }else{
             $(".userInfoBox").css("display", "none");
             $(".loginBox3").css("display", "none");
@@ -112,7 +114,6 @@ function find_old_user(userName, userPhone){
         }
       },
       error: function (request, status, error){
-
       }
    });
 }

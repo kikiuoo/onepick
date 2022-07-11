@@ -45,7 +45,7 @@
                         소속사 있음
                     {% endif %} <br>
                     {{ data.12 }} {{ data.13 }}
-                    {% if data.14 != "" %}
+                    {% if data.14 != None %}
                      <br>특기 {{ data.14|getTalent }}
                     {% endif %}
                 </div>
@@ -66,19 +66,21 @@
                 </div>
                 {% endif %}
 
-                <div class="viewBox">
-                    <div class="countBox">
-                        <span class="viewCount"></span>
-                        <p>{{ data.4 }}</p>
-                    </div>
-                    <div class="countBox">
-                        <span class="pickCount"></span>
-                        <p>{{ data.5 }}</p>
-                    </div>
-                    <div class="countBox">
-                        <span class="comViewCount"></span>
-                        <p>{{ data.6 }}</p>
-                    </div>
+            </div>
+
+
+            <div class="viewBox">
+                <div class="countBox">
+                    <span class="viewCount"></span>
+                    <p>{{ data.4 }}</p>
+                </div>
+                <div class="countBox">
+                    <span class="pickCount"></span>
+                    <p>{{ data.5 }}</p>
+                </div>
+                <div class="countBox">
+                    <span class="comViewCount"></span>
+                    <p>{{ data.6 }}</p>
                 </div>
             </div>
 

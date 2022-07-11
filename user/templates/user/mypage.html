@@ -28,7 +28,7 @@
         {% else %}
         <div class="userName">
             {{ userInfo.name }}
-            <span>기업회원 - {{ company.name }}</span>
+            <span>기업회원 - {{ company.companyname }}</span>
         </div>
         <div class="uInfo">{{ userInfo.phone }}</div>
         <div class="uInfo">{{ userInfo.email }}</div>
@@ -143,7 +143,9 @@
             {% for data in data1 %}
             <div class="regAudi" data-num="{{ data.num }}">
                 <div class="btnBox">
+                    {% if data.contenttype != "old" %}
                     <div class="editBtn" data-type="audition" data-num="{{ data.num }}"></div>
+                    {% endif %}
                     <div class="delBtn" data-type="audition" data-num="{{ data.num }}"></div>
                 </div>
 
@@ -157,10 +159,17 @@
                 </div>
                 <div class="cate">
                     <div class="cTitle">모집분야</div>
+                    {% if data.contenttype == "old" %}
+                    <div class="cContent">
+                        {{ data.cate }}<br>
+                        {{ data.subcate }}
+                    </div>
+                    {% else %}
                     <div class="cContent">
                         {{ data.cate|getMainCate }}<br>
                         {{ data.subcate|getSubCates }}
                     </div>
+                    {% endif %}
                 </div>
 
                 <div class="volunteer">총 지원자 <span>{{ data.num|applyCount }}</span>명</div>
@@ -230,7 +239,7 @@
                             소속사 있음
                         {% endif %} <br>
                         {{ data.12 }} {{ data.13 }}
-                        {% if data.14 != "" %}
+                        {% if data.14 != None %}
                          <br>특기 {{ data.14|getTalent }}
                         {% endif %}
                     </div>

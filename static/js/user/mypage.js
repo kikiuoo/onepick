@@ -39,7 +39,7 @@ $(document).ready(function (){
         window.location.href = "/profile/profileDetail/actor/" + num + "/";
     });
 
-    $(document).on("click", ".audiBtn, .audition", function (){
+    $(document).on("click", ".audiBtn, .audition, .regAudi", function (){
         var num = $(this).attr("data-num");
 
         window.location.href = '/audi/audiDetail/all/' +num +"/";
