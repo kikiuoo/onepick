@@ -50,10 +50,11 @@ INSTALLED_APPS = [
     'user',
     'audition',
     'profiles',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
-    #'corsheaders.middleware.CorsMiddleware', #최상단에 추가해주기
+    'corsheaders.middleware.CorsMiddleware', #최상단에 추가해주기
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -110,7 +111,8 @@ DATABASES = {
         'NAME' : 'onepick',
         'USER' : 'onepick',
         'PASSWORD' : 'onepick@)@@',
-        'HOST' : '127.0.0.1',
+        #'HOST' : '127.0.0.1',
+        'HOST' : 'ksnpick.com',
         'PORT' : '3306',
     }
 }
