@@ -290,3 +290,24 @@
     text-align: center;
     color: #fff;
 }
+
+.datepicker-top-left, .datepicker-top-right {
+    border-top-color: #ff8aae !important;
+}
+
+.datepicker-top-left:before, .datepicker-top-right:before {
+    border-bottom-color: #ff8aae !important;
+}
+
+.highlighted {
+    background-color: rgba(255, 138, 174, 0.3) !important;
+}
+
+
+.datepicker-panel>ul>li:hover {
+    background-color: rgba(255, 138, 174, 0.3) !important;
+}
+
+.datepicker-panel>ul>li.picked, .datepicker-panel>ul>li.picked:hover {
+    color: #ff8aae !important;
+}

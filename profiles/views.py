@@ -383,11 +383,31 @@ def pofile_edit(request, num) :
     connection.commit()
     connection.close()
 
-    profileImages = profiles.detailimage.split("|")
-    artImages = profiles.artimage.split("|")
-    youtubes = profiles.youtube.split("|")
-    foreign = profiles.foreign.split("|")
-    talent = profiles.talent.split("|")
+    if profiles.detailimage != None :
+        profileImages = profiles.detailimage.split("|")
+    else :
+        profileImages = ""
+
+    if profiles.artimage != None :
+        artImages = profiles.artimage.split("|")
+    else :
+        artImages = ""
+
+    if profiles.youtube != None :
+        youtubes = profiles.youtube.split("|")
+    else :
+        youtubes = ""
+
+    if profiles.foreign != None :
+        foreign = profiles.foreign.split("|")
+    else :
+        foreign = ""
+
+    if profiles.talent != None :
+        talent = profiles.talent.split("|")
+    else :
+        talent = ""
+
     careerEtc = ProfileEtccareer.objects.filter(profilenum=num).order_by("num")
 
     return render(request, 'profiles/edit.html', { 'user':user, 'cate' : cate, 'num' : num, 'profiles' : profiles,

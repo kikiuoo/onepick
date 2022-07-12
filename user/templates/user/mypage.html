@@ -62,7 +62,9 @@
                     소속사 있음<br>
                     {% endif %}
                     {{ userInfo.school }} {{ userInfo.major }}<br>
+                    {% if data.talent != None %}
                     특기 {{ data.talent|replace_2:"|, " }}
+                    {% endif %}
                </div>
 
                 {% with data.num|getPersent as persent %}

@@ -162,6 +162,10 @@ def localLoginCallback (request) :
 
         request.session['id'] = userIN.userid
         request.session['userType'] = userIN.usertype
+
+        #request.session['id'] = 'kakao_2327478409'
+        #request.session['userType'] = 'NORMAL'
+
         request.session.set_expiry(0)
 
         updateLastVisit(userIN.userid)
@@ -365,8 +369,8 @@ def findPW (request) :
 
 def updatePW(request) :
     if request.method == "GET" :
-        userID = request.POST['userID']
-        password = request.POST['password']
+        userID = request.GET['userID']
+        password = request.GET['password']
 
         userIN = UserInfo.objects.get(userid=userID)
         userIN.password = md5_generator(password)
@@ -605,6 +609,17 @@ def ajax_findOldUser(request) :
     userInfo = UserInfo.objects.filter(name=userName, phone=userPhone, usertype="S-NORMAL")
 
     return render(request, 'user/ajax_findOldUser.html', {'userInfo': userInfo })
+
+
+def ajax_findUser(request) :
+
+    userName = request.GET.get("userName","")
+    userPhone = request.GET.get("userPhone","")
+
+    userInfo = UserInfo.objects.filter(name=userName, phone=userPhone)
+
+    return render(request, 'user/ajax_findOldUser.html', {'userInfo': userInfo })
+
 
 def ajax_phoneComfirm(request) :
 

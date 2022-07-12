@@ -26,10 +26,10 @@ class AuditionInfo(models.Model):
     userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
     title = models.CharField(max_length=100, blank=True, null=True)
     cate = models.CharField(max_length=50, blank=True, null=True)
-    subcate = models.CharField(db_column='subCate', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    subcate = models.CharField(db_column='subCate', max_length=500, blank=True, null=True)  # Field name made lowercase.
     startdate = models.DateTimeField(db_column='startDate', blank=True, null=True)  # Field name made lowercase.
     enddate = models.DateTimeField(db_column='endDate', blank=True, null=True)  # Field name made lowercase.
-    ordinary = models.CharField(max_length=10, blank=True, null=True)
+    ordinary = models.CharField(max_length=100, blank=True, null=True)
     auditiondate = models.DateField(db_column='auditionDate', blank=True, null=True)  # Field name made lowercase.
     auditiontime = models.TimeField(db_column='auditionTime', blank=True, null=True)  # Field name made lowercase.
     each = models.CharField(max_length=10, blank=True, null=True)
@@ -39,7 +39,7 @@ class AuditionInfo(models.Model):
     education = models.CharField(max_length=50, blank=True, null=True)
     image = models.CharField(max_length=1000, blank=True, null=True)
     essential = models.CharField(max_length=500, blank=True, null=True)
-    preparation = models.CharField(max_length=1000, blank=True, null=True)
+    preparation = models.TextField(blank=True, null=True)
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
     updtime = models.DateTimeField(db_column='updTime', blank=True, null=True)  # Field name made lowercase.
     viewcount = models.IntegerField(db_column='viewCount', blank=True, null=True)  # Field name made lowercase.
@@ -51,7 +51,6 @@ class AuditionInfo(models.Model):
     class Meta:
         managed = False
         db_table = 'audition_info'
-
 
 
 class AuditionPick(models.Model):
@@ -222,8 +221,8 @@ class ProfileShare(models.Model):
 class ProfileSuggest(models.Model):
     num = models.BigAutoField(primary_key=True)
     userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
-    suuserid = models.CharField(db_column='suUserID', max_length=100)  # Field name made lowercase.
-    profilenum = models.PositiveBigIntegerField(db_column='profileNum')  # Field name made lowercase.
+    suuserid = models.CharField(db_column='suUserID', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    profilenum = models.BigIntegerField(db_column='profileNum', blank=True, null=True)  # Field name made lowercase.
     auditionnum = models.PositiveBigIntegerField(db_column='auditionNum')  # Field name made lowercase.
     comment = models.TextField(blank=True, null=True)
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
@@ -267,24 +266,27 @@ class QaAdvertise(models.Model):
 
 
 class QaNotice(models.Model):
-    num =models.AutoField(primary_key=True)
+    num = models.BigAutoField(primary_key=True)
     userid = models.CharField(db_column='userID', max_length=100, blank=True, null=True)  # Field name made lowercase.
     title = models.CharField(max_length=100, blank=True, null=True)
-    content = models.CharField(max_length=500, blank=True, null=True)
+    content = models.CharField(max_length=10000, blank=True, null=True)
     image = models.CharField(max_length=500, blank=True, null=True)
     regdate = models.DateTimeField(db_column='regDate', blank=True, null=True)  # Field name made lowercase.
+    contenttype = models.CharField(db_column='contentType', max_length=20, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'qa_notice'
+
 
 class QaQanda(models.Model):
     num = models.BigAutoField(primary_key=True)
     userid = models.CharField(db_column='userID', max_length=100, blank=True, null=True)  # Field name made lowercase.
     cate = models.CharField(max_length=20, blank=True, null=True)
     title = models.CharField(max_length=100, blank=True, null=True)
-    content = models.CharField(max_length=500, blank=True, null=True)
+    content = models.CharField(max_length=10000, blank=True, null=True)
     regdate = models.DateTimeField(db_column='regDate', blank=True, null=True)  # Field name made lowercase.
+    contenttype = models.CharField(db_column='contentType', max_length=20, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -342,7 +344,7 @@ class UserCompany(models.Model):
     name = models.CharField(max_length=20, blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
     website = models.CharField(db_column='webSite', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    comment = models.CharField(max_length=200, blank=True, null=True)
+    comment = models.CharField(max_length=10000, blank=True, null=True)
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
     updtime = models.DateTimeField(db_column='updTime', blank=True, null=True)  # Field name made lowercase.
 
@@ -366,18 +368,18 @@ class UserInfo(models.Model):
     finalschool = models.CharField(db_column='finalSchool', max_length=50, blank=True, null=True)  # Field name made lowercase.
     school = models.CharField(max_length=50, blank=True, null=True)
     major = models.CharField(max_length=50, blank=True, null=True)
-    entertain = models.CharField(max_length=10, blank=True, null=True)
+    entertain = models.CharField(max_length=100, blank=True, null=True)
     military = models.CharField(max_length=10, blank=True, null=True)
     zipcode = models.CharField(db_column='zipCode', max_length=10, blank=True, null=True)  # Field name made lowercase.
     addr1 = models.CharField(max_length=100, blank=True, null=True)
     addr2 = models.CharField(max_length=100, blank=True, null=True)
-    instargram = models.CharField(max_length=100, blank=True, null=True)
-    youtube = models.CharField(max_length=100, blank=True, null=True)
+    instargram = models.CharField(max_length=200, blank=True, null=True)
+    youtube = models.CharField(max_length=200, blank=True, null=True)
     agreeusage = models.CharField(db_column='agreeUsage', max_length=10, blank=True, null=True)  # Field name made lowercase.
     agreeprivacy = models.CharField(db_column='agreePrivacy', max_length=10, blank=True, null=True)  # Field name made lowercase.
     agreemarketing = models.CharField(db_column='agreeMarketing', max_length=10, blank=True, null=True)  # Field name made lowercase.
     agreeemail = models.CharField(db_column='agreeEmail', max_length=10, blank=True, null=True)  # Field name made lowercase.
-    agreesms = models.CharField(db_column='agreeSms', max_length=10, blank=True,null=True)  # Field name made lowercase.
+    agreesms = models.CharField(db_column='agreeSms', max_length=10, blank=True, null=True)  # Field name made lowercase.
     jointype = models.CharField(db_column='joinType', max_length=20, blank=True, null=True)  # Field name made lowercase.
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
     lastlogin = models.DateTimeField(db_column='lastLogin', blank=True, null=True)  # Field name made lowercase.

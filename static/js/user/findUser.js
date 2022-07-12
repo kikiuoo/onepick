@@ -70,7 +70,7 @@ $(document).ready(function(){
 
 function find_old_user(userName, userPhone){
     $.ajax({
-      url: "/users/ajax/findOldUser/",
+      url: "/users/ajax/findUser/",
       type: "GET",
       dataType: "html",
       data:{"userName":userName, "userPhone" : userPhone},
@@ -103,6 +103,7 @@ function chechUser_pw( userID, userName ){
 
       success: function(data){
           if( data.code == "0" ){
+              $(".pwFindBox").css("display", "none");
               $(".findPw").css("display", "block");
           }else{
               alert( data.message );

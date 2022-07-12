@@ -196,18 +196,26 @@ def getArrayCount(value):
 
 @register.filter
 def getUserName(valuse):
-    user = UserInfo.objects.get(userid=valuse)
-    userName = user.name
+    print(" 아이디 : " + valuse)
+
+    user = UserInfo.objects.filter(userid=valuse)
 
     returnValue = ""
 
-    count = 0
-    for values in userName:
-        if count == 0 or count == (len(userName)-1):
-            returnValue = returnValue + values
-        else:
-            returnValue = returnValue + "*"
-        count = count + 1;
+    if user.count() > 0 :
+        for row in user :
+            userName = row.name
+
+            count = 0
+            for values in userName:
+                if count == 0 or count == (len(userName)-1):
+                    returnValue = returnValue + values
+                else:
+                    returnValue = returnValue + "*"
+                count = count + 1;
+
+    else :
+        returnValue = '***'
 
     return returnValue
 

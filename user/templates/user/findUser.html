@@ -4,7 +4,7 @@
 <!-- Index CSS 파일 및 JS 파일 include -->
 {% load static %}
 <link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/user/login.css' %}"> <!-- pc 버전 -->
-<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/user/login.css' %}" > <!-- 모바일 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/user/loXgin.css' %}" > <!-- 모바일 버전 -->
 
 <!-- JS 파일 -->
 <script src="{% static 'js/user/findUser.js' %}"></script>
@@ -34,32 +34,31 @@
 
 <div class="mainTitle pcNone">비밀번호 찾기</div>
 <div class="inBox" style="margin-right: 0px; height: auto">
-    <div class="loginBox">
+    <div class="loginBox pwFindBox">
         <div class="inputBox">
             <input type="text" name="userID" id="userID" placeholder="아이디 입력">
             <input type="text" name="userName2" id="userName2" placeholder="이름 입력">
         </div>
         <div class="button pwFindBtn">비밀번호 찾기</div>
     </div>
+
+    <div class="findPw">
+        <div class="loginBox">
+            <div class="inputBox">
+                <input type="password" name="pw1" id="pw1" placeholder="비밀번호 입력" style="width: 100%">
+                <input type="password" name="pw2" id="pw2" placeholder="비밀번호 재입력" style="width: 100%">
+            </div>
+            <div class="button setPWBtn" style="width: 100%">재설정</div>
+        </div>
+    </div>
 </div>
+
 
 <div class="fInfo">
     회원 정보의 등록된 개인정보를 정확히 입력해주세요.<br>
     회원님 본인의 정보를 모르실 때는 관리자(onepick@myonepick.com)에게 이메일로 문의해 주시기 바랍니다.
 </div>
 
-<div class="findPw">
-    <div class="title">비밀번호 재설정</div>
-    <div class="inBox inBox2" style="margin-top: 90px">
-        <div class="loginBox">
-            <div class="inputBox">
-                <input type="password" name="pw1" id="pw1" placeholder="비밀번호 입력">
-                <input type="password" name="pw2" id="pw2" placeholder="비밀번호 재입력">
-            </div>
-            <div class="button setPWBtn">재설정</div>
-        </div>
-    </div>
-</div>
 
 
 {% endblock %}

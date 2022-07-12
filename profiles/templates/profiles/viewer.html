@@ -260,7 +260,11 @@
         {% if comment|getArrayCount > 0 %}
             {% for comments in comment %}
             <div class="comments">
+                {% if comments.userid != None %}
                 <div class="name">{{ comments.userid|getUserName }}</div>
+                {% else %}
+                <div class="name">-</div>
+                {% endif %}
                 <div class="comContent">{{ comments.content }}</div>
                 {% if request.session.userType == "admin" or request.session.id == comments.userid  %}
                 <div class="commentDelete" data-num="{{ comments.num }}"></div>

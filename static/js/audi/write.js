@@ -67,8 +67,10 @@ $(document).ready(function(){
             $("#auditionDate").val("");
             $("#auditionTime").val("");
 
-            $("#startDate").removeAttr("disabled")
-            $("#endDate").removeAttr("disabled")
+            $("#startDate").removeAttr("disabled");
+            $("#endDate").removeAttr("disabled");
+            $("#startDate").removeAttr("disabled");
+            $("#endDate").removeAttr("disabled");
         }
     });
 
@@ -97,7 +99,7 @@ $(document).ready(function(){
         $("#career").css("color", "#1f1f1f");
     });
 
-
+    /*
     $( "#startDate, #endDate, #auditionDate" ).datepicker({
         changeMonth: true,
         changeYear: true,
@@ -105,6 +107,11 @@ $(document).ready(function(){
     });
 
     $.datepicker.regional[ "kr" ];
+    */
+
+    $('[data-toggle="datepicker"]').datepicker({
+        format: 'yyyy-mm-dd'
+    });
 
 
      $("#auditionTime").timepicker({

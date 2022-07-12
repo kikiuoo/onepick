@@ -233,6 +233,14 @@
     display: none;
 }
 
+.findPw .title{
+    margin-top: 0px;
+}
+
+.findPw .inBox2{
+    height: auto;
+}
+
 
 /* -------------------------------------------------- */
 
@@ -300,3 +308,8 @@
 .inBox2 .socialBox .socialBtn#gogleLogin{background-image: url("../../../image/web/gogleIcon.png")}
 .inBox2 .socialBox .socialBtn#appleLogin{background-image: url("../../../image/web/appleIcon.png")}
 .inBox2 .socialBox .socialBtn#naverLogin{background-image: url("../../../image/web/naverIcon.png")}
+
+
+.loginBox2 .findBtn{
+    margin-left: 0px;
+}

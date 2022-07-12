@@ -33,6 +33,7 @@ urlpatterns = [
     path('info/updateCallback/', views.updateCallback, name="user-updateCallback"),
 
     path('ajax/findOldUser/', views.ajax_findOldUser, name="user-ajax-findOldUser"),
+    path('ajax/findUser/', views.ajax_findUser, name="user-ajax-findUser"),
     path('ajax/phoneComfirm/', views.ajax_phoneComfirm, name="user-ajax-phoneComfirm"),
     path('ajax/checkConfirm/', views.ajax_checkConfirm, name="user-ajax-checkConfirm"),
 ]

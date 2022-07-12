@@ -17,7 +17,13 @@
     </div>
 
     <div class="content">
-        {{ notice.content }}
+        {% if notice.contenttype == "old" %}
+           {% autoescape off %}
+            {{ notice.content }}
+           {% endautoescape %}
+       {% else %}
+            {{ notice.content|linebreaks }}
+       {% endif %}
         
         {% if image != "" %}
             <div class="imgBox">
