@@ -22,7 +22,7 @@ $(document).ready(function(){
         var id =  $('.s_userID:checked').val();
         var type =  $('.s_userID:checked').attr("data-type");
 
-        if( type == "oldUser" || type == "" ){
+        if( type == "oldUser" || type == "" || type == "" ){
             // 기존 회원 정보 연동.
             window.location.href = "/users/join/"+id+"/oldUser/"
         }else{

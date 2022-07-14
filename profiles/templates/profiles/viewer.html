@@ -17,7 +17,7 @@
         {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
         <div class="editBtn" data-num="{{ auditions.0 }}"></div>
         <div class="delBtn" data-num="{{ auditions.0 }}"></div>
-        <div class="printBtn" data-num="{{ auditions.0 }}" style="display: none">
+        <div class="printBtn" data-num="{{ auditions.0 }}">
             <div class="vector">
                 <span data-type="width">가로형</span>
                 <p>|</p>

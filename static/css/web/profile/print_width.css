@@ -20,8 +20,6 @@ body {
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     font-size: 0px;
-    border: 1px solid red;
-    background-color: #c0c0c0;
 }
 
 @page {
@@ -46,15 +44,26 @@ body {
         box-shadow: initial;
         page-break-after: always;
         box-sizing: border-box;
-        border: 1px solid red;
     }
 }
 
 
 .imageBox{
     display: inline-block;
-    width: 100px;
-    height: 100px;
-    border: 1px solid red;
+    width: 606px;
+    height: 730px;
     vertical-align: top;
+    box-sizing: border-box;
+
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.InfoBox{
+    display: inline-block;
+    border : 1px solid red;
+    height: 100%;
+    padding-left: 27px;
+    padding-top: 12px;
 }

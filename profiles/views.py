@@ -851,5 +851,8 @@ def profileSuggest(request) :
 
 def printProfile(request, type, num) :
 
+    profile = ProfileInfo.objects.get(num=num)
 
-    return render(request, 'profiles/profile_width.html' )
+
+
+    return render(request, 'profiles/profile_width.html', {'profile': profile})
