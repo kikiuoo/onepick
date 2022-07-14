@@ -17,12 +17,6 @@ $(document).ready(function(){
         find_old_user(userName, userPhone);
     });
 
-    $(document).on("keyup", "#userName, #userPhone", function(e){
-       if( e.keyCode == 13 ){
-           $(".findBtn").trigger("click");
-       }
-    });
-
     $(document).on("click", ".findBtn", function (){
 
         var id =  $('.s_userID:checked').val();
@@ -53,12 +47,6 @@ $(document).ready(function(){
         }else if( loginType == "naverLogin" ){
             window.location.href = "/users/login/naver/";
         }
-    });
-
-    $(document).on("keyup", "#userID, #userPW", function(e){
-       if( e.keyCode == 13 ){
-           $(".loginBtn").trigger("click");
-       }
     });
 
     // 기존 회원 로그인

@@ -192,7 +192,13 @@ def getSubCates(value):
 @register.filter
 def getArrayCount(value):
 
-    return len(value)
+    print(value)
+
+    returnLen = 0;
+    if value != "" :
+        returnLen = len(value)
+
+    return returnLen
 
 @register.filter
 def getUserName(valuse):

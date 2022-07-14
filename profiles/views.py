@@ -93,8 +93,6 @@ def viewer(request, cate_type, num) :
     profiles = ProfileInfo.objects.get(num=num)
     writeUser = profiles.userid
 
-    print(writeUser)
-
     #프로필 등록자 정보
     userInfo = UserInfo.objects.get(userid=writeUser)
     careerEtc = ProfileEtccareer.objects.filter(profilenum=num).order_by("num")
@@ -111,14 +109,20 @@ def viewer(request, cate_type, num) :
     else :
         pickCheck = "0"
 
-    profileImages = profiles.detailimage.split("|")
+    if (profiles.detailimage):
+        profileImages = profiles.detailimage.split("|")
+    else:
+        profileImages = ""
+
     if(  profiles.artimage ) :
         artImages = profiles.artimage.split("|")
     else :
         artImages = ""
+
     youtubes = profiles.youtube.split("|")
     foreign = profiles.foreign.split("|")
-    if (profiles.artimage):
+
+    if (profiles.talent):
         talent = profiles.talent.split("|")
     else :
         talent = ""
