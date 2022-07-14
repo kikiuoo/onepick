@@ -21,7 +21,7 @@ def index(request):
         cursor = connection.cursor()
 
         # 메인 베너
-        mainbanner = EventBanner.objects.filter(position="main")
+        mainbanner = EventBanner.objects.filter(position="main", nowview="1")
 
         user = request.session.get('id', '')
 
