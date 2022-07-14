@@ -521,7 +521,10 @@ def pofile_edit_callback(request) :
 
 
     # 프로필 이미지 처리
-    profileImgArr = profiles.detailimage.split("|")
+    if profiles.detailimage != None :
+        profileImgArr = profiles.detailimage.split("|")
+    else :
+        profileImgArr = []
     rmImage = removeImage_detail.split('|')
     if (removeImage_detail != ""):
         for rmImages in rmImage:
@@ -542,7 +545,11 @@ def pofile_edit_callback(request) :
     proDetail = "|".join(profileDetail_image)
 
     # 작품 이미지 등록
-    actImageArr = profiles.artimage.split("|")
+    if profiles.artimage != None :
+        actImageArr = profiles.artimage.split("|")
+    else :
+        actImageArr = []
+
     rmImage = removeImage_art.split('|')
     if (removeImage_art != ""):
         for rmImages in rmImage:
@@ -595,6 +602,7 @@ def pofile_edit_callback(request) :
     profiles.careeryear=allCareer_y
     profiles.careermonth=allCareer_m
     profiles.public=notView
+    profiles.contenttype=""
     profiles.save()
 
 
