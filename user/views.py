@@ -681,10 +681,17 @@ def updateUserID(userID, oldUserID) :
         row.userid = userID
         row.save()
 
+    userCompany = UserCompany.objects.filter(userid=oldUserID).update(userid=userID)
     audiInfo = AuditionInfo.objects.filter(userid=oldUserID).update(userid=userID)
+    audiPick = AuditionPick.objects.filter(userid=oldUserID).update(userid=userID)
+
     proCareer = ProfileCareer.objects.filter(userid=oldUserID).update(userid=userID)
     proComment = ProfileComment.objects.filter(userid=oldUserID).update(userid=userID)
     proEtcCar = ProfileEtccareer.objects.filter(userid=oldUserID).update(userid=userID)
     proInfo = ProfileInfo.objects.filter(userid=oldUserID).update(userid=userID)
+    proPick = ProfilePick.objects.filter(userid=oldUserID).update(userid=userID)
+
+    qaQandA = QaQanda.objects.filter(userid=oldUserID).update(userid=userID)
+    qaComment = QaQandaComment.objects.filter(userid=oldUserID).update(userid=userID)
 
     return ""
