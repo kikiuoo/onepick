@@ -287,7 +287,7 @@ def joinUpdate(request):
         updateUserID(userID, oldUserID)
 
     if joinType == "oldUser" :
-        userInfo.pw = md5_generator(pw1)
+        userInfo.password = md5_generator(pw1)
         userInfo.jointype = "OLDUSER"
 
     userInfo.name = name
