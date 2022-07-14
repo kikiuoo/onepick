@@ -28,9 +28,13 @@
             주소 {{ userInfo.addr1|default:"" }} {{ userInfo.addr2|default:"" }}
         </div>
         <div class="info">
-            {{ userInfo.nationality }} |
-            {% if userInfo.gender == "man" %}
-            {{ userInfo.military }} |
+            {% if userInfo.nationality != None %}
+                {{ userInfo.nationality }} |
+            {% endif %}
+            {% if userInfo.military != None %}
+                {% if userInfo.gender == "man" %}
+                {{ userInfo.military }} |
+                {% endif %}
             {% endif %}
             {% if userInfo.entertain|default:"" == "" %}
             소속사 없음<br>
@@ -56,8 +60,10 @@
             {% else %}
             키 {{ profiles.height|userHight }} cm | 몸무게 {{ profiles.weight|userHight }} kg<br>
             {% endif %}
-            상의 {{ profiles.topsize }} | 하의 {{ profiles.bottomsize }} | 신발 {{ profiles.shoessize }} |
-            피부 {{ profiles.skincolor }}호 | 머리색 {{ profiles.haircolor }}
+            {% if profiles.contenttype != "old" %}
+                상의 {{ profiles.topsize }} | 하의 {{ profiles.bottomsize }} | 신발 {{ profiles.shoessize }} |
+                피부 {{ profiles.skincolor }}호 | 머리색 {{ profiles.haircolor }}
+            {% endif %}
         </div>
 
         {% if profiles.iscareer == "0" %}
@@ -95,7 +101,11 @@
     <div class="careerBox">
         <div class="leftBox">
             <div class="title">지원분야</div>
-            <div class="content">{{ profiles.intercate|getMainCate }} {{ profiles.intersubcate|getSubCate }}</div>
+            {% if profiles.contenttype == "old" %}
+                <div class="content">{{ profiles.intercate }}<br>{{ profiles.intersubcate }}</div>
+            {% else %}
+                <div class="content">{{ profiles.intercate|getMainCate }} {{ profiles.intersubcate|getSubCate }}</div>
+            {% endif %}
             <div class="title">영화</div>
             {% if movieCareer|getArrayCount > 0 %}
                 {% for movieCareers in movieCareer %}

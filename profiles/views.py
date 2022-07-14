@@ -179,11 +179,23 @@ def viewer_all(request, cate_type, num):
     else:
         pickCheck = "0"
 
-    profileImages = profiles.detailimage.split("|")
-    artImages = profiles.artimage.split("|")
+    if (profiles.detailimage):
+        profileImages = profiles.detailimage.split("|")
+    else:
+        profileImages = ""
+
+    if (profiles.artimage):
+        artImages = profiles.artimage.split("|")
+    else:
+        artImages = ""
+
     youtubes = profiles.youtube.split("|")
     foreign = profiles.foreign.split("|")
-    talent = profiles.talent.split("|")
+
+    if (profiles.talent):
+        talent = profiles.talent.split("|")
+    else:
+        talent = ""
 
     # 세부 분야별 경력정보
     movieCareer = getCareerList(num, "movie")
