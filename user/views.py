@@ -239,7 +239,7 @@ def join(request, userID, type) :
     return render(request, 'user/join.html', {'user': user, 'type': type})
 
 
-
+@csrf_exempt
 def joinUpdate(request):
 
     num = request.POST['num']
