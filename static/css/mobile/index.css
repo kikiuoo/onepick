@@ -241,3 +241,8 @@
     width: 6px !important;
     height: 6px !important;
 }
+
+.swiper-button-next,
+.swiper-button-prev{
+    color: #c0c0c0 !important;
+}
