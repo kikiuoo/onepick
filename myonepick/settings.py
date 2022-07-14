@@ -77,6 +77,8 @@ CORS_ALLOWED_ORIGINS = [
 
 ROOT_URLCONF = 'myonepick.urls'
 
+CSRF_TRUSTED_ORIGINS = ['http://ksnpick.com']
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
