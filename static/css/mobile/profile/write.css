@@ -148,7 +148,7 @@
 
 #ec_cateM, #ec_cateS{ margin-right: 10px; margin-bottom: 10px }
 
-#good{width: 116px;}
+#good{width: 116px; margin-right: 10px;}
 #specialty{width: 226px; margin-right: 0px}
 #foreign{margin-right: 10px}
 
@@ -161,7 +161,7 @@
     margin-bottom: 9px;
     cursor: pointer;
 
-    background-image: url("../../../image/web/addBtn.png");
+    background-image: url("../../../image/mobile/addBtn.png");
     background-size: cover;
     background-position: center;
 }
@@ -175,7 +175,8 @@
     margin-bottom: 9px;
     cursor: pointer;
 
-    background-image: url("../../../image/web/subBtn.png");
+    background-image: url("../../../image/mobile/subBtn.png");
+    background-size: 160%;
     background-position: center;
 }
 

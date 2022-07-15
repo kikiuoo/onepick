@@ -16,7 +16,7 @@
         <div class="userInfo">{{ notice.regdate|date:"Y/m/d" }}</div>
     </div>
 
-    <div class="content">
+    <div class="content notice">
         {% if notice.contenttype == "old" %}
            {% autoescape off %}
             {{ notice.content }}

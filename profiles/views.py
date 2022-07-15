@@ -100,7 +100,7 @@ def viewer(request, cate_type, num) :
 
     user = request.session.get('id', '')
     if user :
-        pick = ProfilePick.objects.filter(userid=user, num=num)
+        pick = ProfilePick.objects.filter(userid=user, profilenum=num)
         if pick.count() == 0 :
             pickCheck = "0"
         else :

@@ -647,10 +647,11 @@
     height: 60px;
     border-radius: 10px;
     background-color: #ff8aae;
-    line-height: 50px;
+    line-height: 60px;
 
     font-size: 18px;
     text-align: center;
+    font-weight: bold;
     color: #fff;
     cursor: pointer;
 }

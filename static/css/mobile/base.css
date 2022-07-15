@@ -87,7 +87,7 @@ body{
     margin-top: 4px;
 
     background-image : url('../../image/mobile/searchBtn.png');
-    background-size : cover;
+    background-size : 100%;
     background-repeat : no-repeat;
     background-position : center;
 }

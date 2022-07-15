@@ -110,7 +110,7 @@
     background-color: rgba(255, 138, 174, 0.1);
     border-radius: 20px;
 
-    font-size: 16px;
+    font-size: 11px;
     font-weight: bold;
     color: #ff8aae;
     text-align: center;
@@ -376,6 +376,10 @@
 .myProfile .comment{
     font-size: 9px;
     color: #1f1f1f;
+}
+
+.mWidth{
+    width: 65%;
 }
 
 .closeSPopup{

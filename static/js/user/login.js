@@ -41,7 +41,8 @@ $(document).ready(function(){
         if( loginType == "kakaoLogin" ){
             window.location.href = "/users/login/kakao/";
         }else if( loginType == "gogleLogin" ){
-            window.location.href = "/users/login/google/";
+            alert("서비스 준비중 입니다.")
+            //window.location.href = "/users/login/google/";
         }else if( loginType == "appleLogin" ){
            // window.location.href = "/users/login/apple/";
         }else if( loginType == "naverLogin" ){
@@ -63,6 +64,12 @@ $(document).ready(function(){
             return;
         }
         login(userID, userPW);
+    });
+
+    $("#userPW").on("keyup",function(key){
+        if(key.keyCode==13){
+            $(".loginBtn").trigger("click");
+        }
     });
 
     $(document).on("click", ".searchInfo", function (){

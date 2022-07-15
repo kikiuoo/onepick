@@ -32,7 +32,15 @@ $(document).ready(function(){
     });
 
     $(document).on("click", ".instagram, .youtube", function (){
-        var url = $(this).attr("data-url");
+        var b_rul = $(this).attr("data-url");
+
+        var Url = /(http|https):\/\/((\w+)[.])+(asia|biz|cc|cn|com|de|eu|in|info|jobs|jp|kr|mobi|mx|name|net|nz|org|travel|tv|tw|uk|us)(\/(\w*))*$/i;
+        var urlTest = Url.test(b_rul);
+
+        if(!urlTest){
+            alert("올바른 url이 아닙니다.");
+            return false;
+        }
 
         window.open(url);
     });
@@ -144,7 +152,7 @@ $(document).ready(function(){
    // 오디션 제안 기능 추가
     $(document).on("click", ".auditionBtn", function(){
 
-        if( userType == "COMPANY") {
+        if( userType == "COMPANY" || userType == "admin") {
             $(".suggestBack").css("display", "block");
         }else{
             alert("권한이 없습니다.");

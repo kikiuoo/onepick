@@ -114,6 +114,7 @@
 .inBox{
     position: relative;
     font-size: 0px;
+    padding-left: 10px;
 }
 .inBox .profile{
     position: relative;

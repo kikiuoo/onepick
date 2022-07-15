@@ -116,7 +116,7 @@ def audi_detail(request, cate_type, num) :
 
         userInfo = UserInfo.objects.get(userid=user)
 
-        pick = AuditionPick.objects.filter(userid=user)
+        pick = AuditionPick.objects.filter(userid=user, auditionnum=num)
         if pick.count() == 0:
             pickCheck = "0"
         else:
@@ -292,7 +292,7 @@ def audi_delete(request, num):
     updateAudition.isdelete = '1'
     updateAudition.save()
 
-    return redirect('/audi/main/all/')
+    return redirect('/audi/main/all/1/')
 
 def audiAjaxGetCate(request) :
 

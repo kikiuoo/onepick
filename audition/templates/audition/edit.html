@@ -140,11 +140,13 @@
             <div class="joinInfo" style="margin-bottom: 0px">
                 <div class="title">파일</div>
                 <div class="content">
+                    {% if images|getArrayCount > 0 %}
                     {% for images in image %}
                     <div class="upload-display" style="background-image: url('{% get_media_prefix %}{{ images }}')">
                         <div class="upload-sub2" data-image="{{ images }}"></div>
                     </div>
                     {% endfor %}
+                    {% endif %}
 
                     <div class="imageBox"></div>
 

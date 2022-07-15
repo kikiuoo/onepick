@@ -114,7 +114,7 @@
                     <span>kg</span>
                 </div>
                 <br>
-                <select name="topSize" id="topSize" style="color: #1f1f1f;">
+                <select name="topSize" id="topSize" {% if profiles.topsize != None %} style="color: #1f1f1f;" {% endif %}>
                     <option value="" disabled selected>상의 사이즈</option>
                     <option value="XS" {% if profiles.topsize == "XS" %} selected {% endif %}>XS</option>
                     <option value="S" {% if profiles.topsize == "S" %} selected {% endif %}>S</option>
@@ -124,7 +124,7 @@
                     <option value="2XL" {% if profiles.topsize == "2XL" %} selected {% endif %}>2XL</option>
                 </select>
 
-                <select name="bottomSize" id="bottomSize" style="color: #1f1f1f;">
+                <select name="bottomSize" id="bottomSize" {% if profiles.bottomsize != None %} style="color: #1f1f1f;" {% endif %}>
                     <option value="" disabled selected>하의 사이즈</option>
                     <option value="24~26" {% if profiles.bottomsize == "24~26" %} selected {% endif %}>24~26</option>
                     <option value="26~28" {% if profiles.bottomsize == "26~28" %} selected {% endif %}>26~28</option>
@@ -136,7 +136,7 @@
                     <option value="38~40" {% if profiles.bottomsize == "38~40" %} selected {% endif %}>38~40</option>
                 </select>
 
-                <select name="shoesSize" id="shoesSize" style="color: #1f1f1f;">
+                <select name="shoesSize" id="shoesSize" {% if profiles.shoessize != None %} style="color: #1f1f1f;" {% endif %}>
                     <option value="" disabled selected>발 사이즈</option>
                     <option value="220" {% if profiles.shoessize == 220 %} selected {% endif %}>220</option>
                     <option value="230" {% if profiles.shoessize == 230 %} selected {% endif %}>230</option>
@@ -149,7 +149,7 @@
                     <option value="300" {% if profiles.shoessize == 300 %} selected {% endif %}>300</option>
                 </select>
 
-                <select name="skinColor" id="skinColor" style="color: #1f1f1f;">
+                <select name="skinColor" id="skinColor" {% if profiles.skincolor != None %} style="color: #1f1f1f;" {% endif %}>
                     <option value="" disabled selected>피부색</option>
                     <option value="17" {% if profiles.skincolor == "17" %} selected {% endif %}>17호</option>
                     <option value="19" {% if profiles.skincolor == "19" %} selected {% endif %}>19호</option>
@@ -159,7 +159,7 @@
                 </select>
 
 
-                <select name="hairColor" id="hairColor" style="color: #1f1f1f;">
+                <select name="hairColor" id="hairColor" {% if profiles.haircolor != None %} style="color: #1f1f1f;" {% endif %}>
                     <option value="" disabled selected>머리색</option>
                     <option value="검정" {% if profiles.haircolor == "검정" %} selected {% endif %}>검정</option>
                     <option value="갈색" {% if profiles.haircolor == "갈색" %} selected {% endif %}>갈색</option>

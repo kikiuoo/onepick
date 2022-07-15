@@ -51,13 +51,13 @@
             <span>모집 분야</span>
             {% if audition.contenttype == "old" %}
             <div class="contentBox">
-                <p>{{ audition.cate }}</p>
+                <p class="mWidth">{{ audition.cate }}</p>
                 <p>{{ audition.subcate }}</p>
             </div>
             {% else %}
             <div class="contentBox">
-                <p>{{ audition.cate }}</p>
-                <p>{{ audition.subcate }}</p>
+                <p>{{ audition.cate|getMainCate }}</p>
+                <p>{{ audition.subcate|getSubCates }}</p>
             </div>
             {% endif %}
 

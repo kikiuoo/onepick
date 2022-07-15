@@ -15,7 +15,7 @@ $(document).ready(function(){
 
        if( userID == ""){
             alert("로그인 후 이용가능합니다.");
-            //return;
+            return;
        }
 
        window.location.href = '/audi/audiDetail/'+cateType+'/' +num +"/";

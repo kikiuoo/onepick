@@ -24,8 +24,7 @@
     display: inline-block;
     width: 100px;
 
-    font-size: 15px;
-    font-weight: bold;
+    font-size: 13px;
     color: #1f1f1f;
     vertical-align: top;
     margin-bottom: 8px;
@@ -49,7 +48,6 @@
 
 .winBox .joinInfo .content textarea{
     font-size: 13px;
-    font-weight: bold;
     border-radius: 10px;
     background-color: #fff;
     border: 0px;

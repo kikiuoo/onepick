@@ -17,7 +17,7 @@ $(document).ready(function (){
 
        if( userID == ""){
             alert("로그인 후 이용가능합니다.");
-            //return;
+            return;
        }
 
        window.location.href = "/audi/audiDetail/actor/" + num + "/" //  ../audi/audiDetail/actor(기본값)/글번호/
@@ -60,7 +60,7 @@ $(document).ready(function (){
 
        if( userID == ""){
             alert("로그인 후 이용가능합니다.");
-            //return;
+            return;
        }
        window.location.href = "/profile/profileDetail/actor/" + num + "/" //  ../profile/profDetail/글번호/
     });

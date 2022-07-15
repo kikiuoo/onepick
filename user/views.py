@@ -402,7 +402,7 @@ def userMypage(request, type) :
             query = "SELECT  ai.num, ai.title, ps.comment, UC.logoImage " \
                     "FROM profile_suggest AS ps LEFT JOIN audition_info AS ai ON ps.auditionNum = ai.num " \
                     "     LEFT JOIN user_company AS UC ON ai.userID  = UC.userID " \
-                    "WHERE ps.userID = '"+user+"'"
+                    "WHERE ps.userID = '"+user+"' and ai.isDelete = '0'"
 
             result = cursor.execute(query)
             data2 = cursor.fetchall()
@@ -410,15 +410,15 @@ def userMypage(request, type) :
             query = "SELECT  ai.num, ai.title, ai.endDate, ai.ordinary, UC.logoImage " \
                     "FROM audition_pick AS ap LEFT JOIN audition_info AS ai ON ap.auditionNum = ai.num " \
                     "     LEFT JOIN user_company AS UC ON ai.userID  = UC.userID " \
-                    "WHERE ap.userID = '"+user+"'"
+                    "WHERE ap.userID = '"+user+"' and ai.isDelete = '0'"
 
             result = cursor.execute(query)
             data3 = cursor.fetchall()
 
         else :
             company = UserCompany.objects.get(userid=user)
-            print(company)
-            data1 = AuditionInfo.objects.filter(userid=user)
+
+            data1 = AuditionInfo.objects.filter(userid=user, isdelete="0")
             query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, ps.COMMENT " \
                     "FROM profile_suggest AS ps LEFT JOIN profile_info AS p ON ps.profileNum = p.num " \
                     "     LEFT JOIN user_info AS ui ON ps.userID  = ui.userID  " \
