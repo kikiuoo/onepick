@@ -237,13 +237,13 @@
     padding: 0px 18px;
 
     font-size: 15px;
-    font-weight: bold;
     text-align: left;
     color: #c0c0c0;
     background:url('../../../image/web/arrow.png') no-repeat right 16px center;
     background-color: #fff;
     -webkit-appearance: none;
     -moz-appearance: none;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .info{

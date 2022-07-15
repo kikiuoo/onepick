@@ -122,16 +122,20 @@ def audi_detail(request, cate_type, num) :
         else:
             pickCheck = "1"
 
+        data1 = ProfileInfo.objects.filter(userid=user, isdelete=0)
+
     else:
         pickCheck = "0"
         userInfo = ""
+
+        data1 = ""
 
     images = audition.image.split("|")
 
     d_day = finalDate(audition.enddate)
 
     return render(request, 'audition/viewer.html', {"audition": audition, "companyInfo" : companyInfo, "image" : images
-                                                    ,"userInfo": userInfo,"pickCheck": pickCheck, "D_day" : d_day})
+                                                    ,"userInfo": userInfo,"pickCheck": pickCheck, "D_day" : d_day, "data1" : data1})
 
 
 def audi_write(request) :
