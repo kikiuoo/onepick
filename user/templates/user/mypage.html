@@ -39,60 +39,62 @@
     {% if type == "user" %}
     <div class="mTtitle">내 프로필 관리</div>
     {% if data1.count > 0 %}
-        {% for data in data1 %}
-        <div class="myProfile" data-num="{{ data.num }}">
-            <div class="btnBox">
-                <div class="editBtn" data-type="profile" data-num="{{ data.num }}"></div>
-                <div class="delBtn" data-type="profile" data-num="{{ data.num }}"></div>
+        <div class="inBox">
+            {% for data in data1 %}
+            <div class="myProfile" data-num="{{ data.num }}">
+                <div class="btnBox">
+                    <div class="editBtn" data-type="profile" data-num="{{ data.num }}"></div>
+                    <div class="delBtn" data-type="profile" data-num="{{ data.num }}"></div>
+                </div>
+
+                <div class="userImage" style='background-image: url("/media/{{ data.profileimage }}");'></div>
+                <div class="userInfoBox">
+                    <div class="userName">{{ userInfo.name }} ({{ userInfo.birth|userAge }})
+                        {% if data.public == "on" %}
+                            <span></span>
+                        {% endif %}
+                    </div>
+                    <div class="pUInfo">
+                        키 {{ data.height }}cm | 몸무게 {{ data.weight }}kg<br>
+                        {% if userInfo.gender == "man" %} 군필 | {% endif %}
+                        {% if userInfo.entertain|default:"" == "" %}
+                        소속사 없음<br>
+                        {% else %}
+                        소속사 있음<br>
+                        {% endif %}
+                        {{ userInfo.school }} {{ userInfo.major }}<br>
+                        {% if data.talent != None %}
+                        특기 {{ data.talent|replace_2:"|, " }}
+                        {% endif %}
+                   </div>
+
+                    {% with data.num|getPersent as persent %}
+                    <div class="progre">
+                        <div class="proComplete">프로필 완성도 <span>{{ persent }}</span>%</div>
+                        <div class="proProgressBox">
+                            <div class="progressBar" style="width: {{ persent }}%"></div>
+                        </div>
+                    </div>
+                    {% endwith %}
+
+                    <div class="viewBox mobileNone">
+                        <div class="countBox">
+                            <span class="viewCount"></span>
+                            <p>{{ data.viewcount }}</p>
+                        </div>
+                        <div class="countBox">
+                            <span class="pickCount"></span>
+                            <p>{{ data.pickcount }}</p>
+                        </div>
+                        <div class="countBox">
+                            <span class="comViewCount"></span>
+                            <p>{{ data.cviewcount }}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="userImage" style='background-image: url("/media/{{ data.profileimage }}");'></div>
-            <div class="userInfoBox">
-                <div class="userName">{{ userInfo.name }} ({{ userInfo.birth|userAge }})
-                    {% if data.public == "on" %}
-                        <span></span>
-                    {% endif %}
-                </div>
-                <div class="pUInfo">
-                    키 {{ data.height }}cm | 몸무게 {{ data.weight }}kg<br>
-                    {% if userInfo.gender == "man" %} 군필 | {% endif %}
-                    {% if userInfo.entertain|default:"" == "" %}
-                    소속사 없음<br>
-                    {% else %}
-                    소속사 있음<br>
-                    {% endif %}
-                    {{ userInfo.school }} {{ userInfo.major }}<br>
-                    {% if data.talent != None %}
-                    특기 {{ data.talent|replace_2:"|, " }}
-                    {% endif %}
-               </div>
-
-                {% with data.num|getPersent as persent %}
-                <div class="progre">
-                    <div class="proComplete">프로필 완성도 <span>{{ persent }}</span>%</div>
-                    <div class="proProgressBox">
-                        <div class="progressBar" style="width: {{ persent }}%"></div>
-                    </div>
-                </div>
-                {% endwith %}
-
-                <div class="viewBox mobileNone">
-                    <div class="countBox">
-                        <span class="viewCount"></span>
-                        <p>{{ data.viewcount }}</p>
-                    </div>
-                    <div class="countBox">
-                        <span class="pickCount"></span>
-                        <p>{{ data.pickcount }}</p>
-                    </div>
-                    <div class="countBox">
-                        <span class="comViewCount"></span>
-                        <p>{{ data.cviewcount }}</p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     {% else %}
         <div class="nonProfile"> 등록된 프로필이 없습니다.<br>프로필을 등록해 주세요.</div>
     {% endif %}

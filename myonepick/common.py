@@ -66,7 +66,7 @@ def sendSMS( receiver, title, msg ) :
 
     sms_data = {'key': 'cl40fh7a45efop5rdoz2vhyqpizi5eus',  # api key
                 'userid': 'ksnpick',  # 알리고 사이트 아이디
-                'sender': '01028814491',  # 발신번호
+                'sender': '0234424440',  # 발신번호
                 'receiver': receiver,  # 수신번호 (,활용하여 1000명까지 추가 가능)
                 'msg': msg,  # 문자 내용
                 'msg_type': title,  # 메세지 타입 (SMS, LMS)

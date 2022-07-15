@@ -41,10 +41,10 @@
 }
 
 .winBox .joinInfo .type{
-    font-size: 18px;
+    font-size: 13px;
     font-weight: bold;
     color: #1f1f1f;
-    line-height: 56px;
+    line-height: 30px;
 }
 
 
@@ -80,7 +80,7 @@ select{
     box-sizing: border-box;
     border: 0px;
 
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
     color: #c0c0c0;
     background:url('../../../image/web/arrow.png') no-repeat right 10px center;
@@ -202,19 +202,20 @@ select:focus{
 
 .sendBtn{
     display: inline-block;
-    width: 180px;
-    height: 60px;
-    line-height: 60px;
+    width: 100px;
+    height: 50px;
+    line-height: 50px;
     flex-grow: 0;
     border-radius: 20px;
     background-color: #ff8aae;
     box-sizing: border-box;
     cursor: pointer;
 
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bold;
     text-align: center;
     color: #fff;
+    margin-bottom: 20px;
 
 }
 

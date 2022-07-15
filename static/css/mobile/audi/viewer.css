@@ -85,6 +85,23 @@
     cursor: pointer;
 }
 
+.content .line .supportBtn_end{
+    position: absolute;
+    width: 118px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #c0c0c0;
+
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    right: 10px;
+    top: -49.5px;
+    cursor: pointer;
+}
+
 .content .line .pickBtn{
     position: absolute;
     width: 24px;

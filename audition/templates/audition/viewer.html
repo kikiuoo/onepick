@@ -34,13 +34,15 @@
         {% else %}
         <div class="pickBtn pickOn " data-nowType="on" data-num="{{ audition.num }}"></div>
         {% endif %}
-        <div class="supportBtn">오디션 지원</div>
         {% if audition.ordinary == '0' %}
             {% if D_day > 0 %}
+            <div class="supportBtn">오디션 지원</div>
             <div class="deadline">마감 {{ D_day }}일 전</div>
             {% elif D_day == 0 %}
+            <div class="supportBtn">오디션 지원</div>
             <div class="deadline">오늘 마감</div>
             {% else %}
+            <div class="supportBtn_end">오디션 마감</div>
             <div class="deadline">마감된 오디션</div>
             {% endif %}
         {% endif %}

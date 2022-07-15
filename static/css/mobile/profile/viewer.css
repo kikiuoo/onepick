@@ -321,7 +321,7 @@
     margin-right: 10px;
 }
 .inBox .inputBox #comment::placeholder{
-    font-size: 16px;
+    font-size: 13px;
     color: #c0c0c0;
 }
 
@@ -409,13 +409,14 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
 
     background-image: url("../../../image/web/bigClose.png");
     background-position: center;
     background-repeat:  no-repeat;
+    background-size: cover;
 }
 
 .popupBack .viewImage{
