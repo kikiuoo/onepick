@@ -57,7 +57,7 @@
 }
 
 .btnBox div.editBtn{ background-image: url("../../../image/web/update.png"); }
-.btnBox div.delBtn{ background-image: url("../../../image/web/delete.png"); }
+.btnBox div.delBtn{ background-image: url("../../../image/web/delete.png"); background-size: 80% }
 .btnBox div.shareBtn{ background-image: url("../../../image/web/share.png"); }
 .btnBox div.printBtn{ background-image: url("../../../image/web/print.png"); }
 

@@ -59,6 +59,16 @@
                 <div class="icon"></div>
                 <div class="name">프로필 등록</div>
             </div>
+            {% elif request.session.userType == "admin" and request.session.id != null %}
+            <div class="profileRegBtn" style="margin-right: 130px">
+                <div class="icon"></div>
+                <div class="name">프로필 등록</div>
+            </div>
+
+            <div class="audiRegBtn">
+                <div class="icon"></div>
+                <div class="name">오디션 등록</div>
+            </div>
             {% endif %}
 
             {% if request.session.id == "" or request.session.id == null %}

@@ -48,8 +48,13 @@ $(document).ready(function (){
 
     $(document).on("click", ".notiList", function (){
         var num = $(this).attr("data-num");
+        var type = $(this).attr("data-type");
 
-        window.location.href = '/notice/viewer/'+num+'/';
+        if( type == "notice" ) {
+            window.location.href = '/notice/viewer/' + num + '/';
+        }else {
+            window.location.href = '/qanda/viewer/' + num + '/';
+        }
     });
 
     $(document).on("click", ".pickBtn", function(e){

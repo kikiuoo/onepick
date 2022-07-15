@@ -100,7 +100,7 @@ def viewer(request, cate_type, num) :
 
     user = request.session.get('id', '')
     if user :
-        pick = ProfilePick.objects.filter(userid=user)
+        pick = ProfilePick.objects.filter(userid=user, num=num)
         if pick.count() == 0 :
             pickCheck = "0"
         else :
@@ -860,7 +860,18 @@ def profileSuggest(request) :
 def printProfile(request, type, num) :
 
     profile = ProfileInfo.objects.get(num=num)
+    userInfo = UserInfo.objects.get(userid=profile.userid)
 
+    career = ProfileCareer.objects.filter(profilenum=num)
+    movieCareer = getCareerList(num, "movie")
+    dramaCareer = getCareerList(num, "drama")
+    etcCareer = getCareerList(num, "etc")
 
+    if (profile.detailimage):
+        profileImages = profile.detailimage.split("|")
+    else:
+        profileImages = ""
 
-    return render(request, 'profiles/profile_width.html', {'profile': profile})
+    return render(request, 'profiles/profile_width.html', {'profile': profile, 'userInfo': userInfo, 'career':career,
+                                                           'movieCareer':movieCareer, 'dramaCareer':dramaCareer, 'etcCareer':etcCareer,
+                                                           'profileImages':profileImages })

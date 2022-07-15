@@ -144,36 +144,51 @@
         <div class="winBox">
             <div class="joinInfo">
                 <div class="title2">사업자명</div>
-                <div class="content2"><input type="text" value="{{ userCompany.name }}" id="companyName" name="companyName" placeholder="사업자명을 입력해주세요."/></div>
+                <div class="content2"><input type="text" value="{{ userCompany.name|default:"" }}" id="companyName" name="companyName" placeholder="사업자명을 입력해주세요."/></div>
             </div>
 
             <div class="joinInfo">
                 <div class="title2">사업자 등록번호</div>
-                <div class="content2"><input type="text" value="{{ userCompany.license }}" id="license" name="license" placeholder="사업자 등록 번호를 입력해주세요."/> </div>
+                <div class="content2"><input type="text" value="{{ userCompany.license|default:"" }}" id="license" name="license" placeholder="사업자 등록 번호를 입력해주세요."/> </div>
             </div>
 
             <div class="joinInfo">
                 <div class="title2">사업장 주소</div>
                 <div class="content2">
-                    <input type="text" value="{{ userCompany.addr1 }}" id="companyAddr1" name="companyAddr1" placeholder="주소 검색" readonly/>
+                    <input type="text" value="{{ userCompany.addr1|default:"" }}" id="companyAddr1" name="companyAddr1" placeholder="주소 검색" readonly/>
                     <div class="findAddr2" data-type="company">우편번호 검색</div>
-                    <input type="text" value="{{ userCompany.addr2 }}" id="companyAddr2" name="companyAddr2" placeholder="상세 주소 검색"/>>
+                    <input type="text" value="{{ userCompany.addr2|default:"" }}" id="companyAddr2" name="companyAddr2" placeholder="상세 주소 검색"/>>
                 </div>
             </div>
 
             <div class="joinInfo">
                 <div class="title2">웹사이트</div>
                 <div class="content2">
-                    <input type="text" value="{{ userCompany.website }}" id="webSite" name="webSite" placeholder="웹사이트 주소를 입력해주세요."/>
+                    <input type="text" value="{{ userCompany.website|default:"" }}" id="webSite" name="webSite" placeholder="웹사이트 주소를 입력해주세요."/>
                 </div>
             </div>
 
             <div class="joinInfo">
                 <div class="title2">파일</div>
                 <div class="content2">
-                    <label class="imageSelect" id="logo" for="input-logo" style='background-image: url("/media/{{ userCompany.logoimage }}");'></label>
-                    <label class="imageSelect" id="licenseImage" for="input-license" style='background-image: url("/media/{{ userCompany.licenseimage }}");'></label>
+                    {% if userCompany.logoimage %}
+                        <label class="imageSelect" id="logo" for="input-logo" style='background-image: url("/media/{{ userCompany.logoimage }}");'></label>
+                    {% else %}
+                        <label class="imageSelect" id="logo" for="input-logo"> <div class="addImage"></div>로고 이미지<br>등록</label>
+                    {% endif %}
+
+
+                    {% if userCompany.licenseimage %}
+                        <label class="imageSelect" id="licenseImage" for="input-license" style='background-image: url("/media/{{ userCompany.licenseimage }}");'></label>
+                    {% else %}
+                        <label class="imageSelect" id="licenseImage" for="input-license"> <div class="addImage"></div>사업자 등록증<br>이미지 등록</label>
+                    {% endif %}
+
+                    {% if userCompany.artlicenseimage %}
                     <label class="imageSelect" id="artLicense" for="input-artLicense" style='background-image: url("/media/{{ userCompany.artlicenseimage }}");'></label>
+                    {% else %}
+                        <label class="imageSelect" id="artLicense" for="input-artLicense"> <div class="addImage"></div>대중 문화 예술<br>기획업 등록증 등록</label>
+                    {% endif %}
 
                     <input type="file" name="logo[]" id="input-logo" class="upload-hidden input-file" data-type="logo" value="{{ userCompany.logoimage }}">
                     <input type="file" name="licenseImage[]" id="input-license" class="upload-hidden input-file" data-type="license" value="{{ userCompany.licenseimage }}">

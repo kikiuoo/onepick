@@ -9,14 +9,14 @@
 
 .mTtitle span{
     position: absolute;
-    right: 20px;
+    right: 15px;
     top: 50%;
     margin-top: -10px;
     width: 67px;
     height: 20px;
 
     font-size: 16px;
-    font-weight: bold;
+    font-weight: normal;
     color: #959595;
     cursor: pointer;
 }

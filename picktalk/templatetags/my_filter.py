@@ -388,3 +388,9 @@ def applyCount(num) :
 def audiListCate(cate) :
     cates = cate.split(",")
     return cates[0]
+
+@register.filter
+def splits(values, splitKey) :
+    spl = splitKey.split("|")
+    returnValue = str(values).split( str(spl[1]) )
+    return returnValue[ int(spl[0]) ]

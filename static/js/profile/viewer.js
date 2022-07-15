@@ -190,6 +190,10 @@ $(document).ready(function(){
 
         var type = $(this).attr("data-type");
 
+        if( type == "column" ){
+            alert("서비스 준비중입니다.");
+            return;
+        }
         window.open("/profile/print/"+type+"/"+num+"/");
     });
 

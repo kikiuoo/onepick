@@ -50,7 +50,7 @@
 
 .winBox .inputBox input,
 .winBox .inputBox textarea,
-#y_link, .profile_imageBox input{
+.profile_imageBox input{
     width: 140px;
     height: 50px;
     margin-right: 10px;
@@ -100,7 +100,8 @@
 
 
 .winBox .inputBox input::placeholder,
-.winBox .inputBox textarea::placeholder{
+.winBox .inputBox textarea::placeholder,
+#y_link::placeholder{
     font-size: 15px;
     color: #c0c0c0;
 }
@@ -137,8 +138,8 @@
 
 #snsUrl{ width: 808px; }
 #c_title{ width: 288px; }
-#c_role{ width: 358px; margin:0px }
-#y_link{ width: 868px; }
+#c_role{ width: 358px; margin-right: 10px; }
+#y_link, .y_link{ width: 868px !important; }
 #ec_title{ width: 288px; margin-right: 10px; }
 #ec_role{ width: 358px; }
 #good{width: 116px;}
@@ -235,7 +236,7 @@
     margin-right: 20px;
     padding: 0px 18px;
 
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
     text-align: left;
     color: #c0c0c0;

@@ -26,58 +26,240 @@
         <div class="InfoBox">
             <div class="logoImage"></div>
 
-            <div class="name">강다운</div>
-            <div class="userInfo">1888/12/12 (20세)</div>
+            <div class="name">{{ userInfo.name }}</div>
+            <div class="userInfo">{{ userInfo.birth|replace:"-|/" }} ({{ userInfo.birth|userAge }}세)</div>
 
-            <div class="userInfo_B">키 170cm / 몸무게 50 kg</div>
+            <div class="userInfo_B">키 {{ profile.height|splits:"0|." }}cm / 몸무게 {{ profile.weight|splits:"0|." }} kg</div>
 
-            <div class="userInfo">군필 |  소속사 없음</div>
-            <div class="userInfo">중앙대학교 연극영화과</div>
+            <div class="userInfo">
+                {% if userInfo.military != None %}
+                    {% if userInfo.gender == "man" %}
+                    {{ userInfo.military }} |
+                    {% endif %}
+                {% endif %}
+
+                {% if userInfo.entertain|default:"" == "" %}
+                소속사 없음<br>
+                {% else %}
+                소속사 있음<br>
+                {% endif %}
+            </div>
+            <div class="userInfo">{{ userInfo.school }} {{ userInfo.major }}</div>
             <div class="userInfo">특기 요리 노래부르기 기타연주</div>
 
             <div id="qrcode"></div>
 
+            {% if career.count >= 15 %}
+            <div class="manyCareer">
+                {% if profileImages|getArrayCount >= 2 %}
+                <div class="images" style='background-image: url("/media/{{ profileImages.0 }}");'></div>
+                <div class="images" style='background-image: url("/media/{{ profileImages.1 }}");'></div>
+                {% elif profileImages|getArrayCount > 0 %}
+                <div class="images" style='background-image: url("/media/{{ profileImages.0 }}");'></div>
+                {% endif %}
+            </div>
+            {% elif career.count < 15 and career > 0 %}
             <div class="careerBox">
                 <div class="logo"><span></span>영화</div>
                 <div class="content">
-                    장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
-                    장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
-                    장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
-                    장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
-                    장편 영화 | 영화 제복 | 지나가는 행인 10 역
+                    {% if movieCareer|getArrayCount > 0 %}
+                        {% for movieCareers in movieCareer %}
+                            {{ movieCareers.3 }} | {{ movieCareers.4 }} | {{ movieCareers.1 }} | {{ movieCareers.2 }}
+                        {% endfor %}
+                    {% else %}
+                        경력없음
+                    {% endif %}
                 </div>
             </div>
 
             <div class="careerBox">
                 <div class="logo"><span></span>TV드라마<br>웹드라마</div>
                 <div class="content">
-                    장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
-                    장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
-                    장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
-                    장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
-                    장편 영화 | 영화 제복 | 지나가는 행인 10 역
+                    {% if dramaCareer|getArrayCount > 0 %}
+                        {% for dramas in dramaCareer %}
+                            {{ dramas.3 }} | {{ dramas.4 }} | {{ dramas.1 }} | {{ dramas.2 }}
+                        {% endfor %}
+                    {% else %}
+                        경력없음
+                    {% endif %}
                 </div>
             </div>
 
             <div class="careerBox">
                 <div class="logo"><span></span>광고,기타</div>
                 <div class="content">
-                    장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
-                    장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
-                    장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
-                    장편 영화 | 영화 제복 | 지나가는 행인 10 역<br>
-                    장편 영화 | 영화 제복 | 지나가는 행인 10 역
+                    {% if etcCareer|getArrayCount > 0 %}
+                        {% for etcs in etcCareer %}
+                            {{ etcs.3 }} | {{ etcs.4 }} | {{ etcs.1 }} | {{ etcs.2 }}
+                        {% endfor %}
+                    {% else %}
+                        경력없음
+                    {% endif %}
                 </div>
             </div>
+            {% else %}
+            <div class="careerBox smallMargin">
+                <div class="logo"><span></span>영화</div>
+                <div class="content">
+                    {% if movieCareer|getArrayCount > 0 %}
+                        {% for movieCareers in movieCareer %}
+                            {{ movieCareers.3 }} | {{ movieCareers.4 }} | {{ movieCareers.1 }} | {{ movieCareers.2 }}
+                        {% endfor %}
+                    {% else %}
+                        경력없음
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="careerBox smallMargin">
+                <div class="logo"><span></span>TV드라마<br>웹드라마</div>
+                <div class="content">
+                    {% if dramaCareer|getArrayCount > 0 %}
+                        {% for dramas in dramaCareer %}
+                            {{ dramas.3 }} | {{ dramas.4 }} | {{ dramas.1 }} | {{ dramas.2 }}
+                        {% endfor %}
+                    {% else %}
+                        경력없음
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="careerBox smallMargin">
+                <div class="logo"><span></span>광고,기타</div>
+                <div class="content">
+                    {% if etcCareer|getArrayCount > 0 %}
+                        {% for etcs in etcCareer %}
+                            {{ etcs.3 }} | {{ etcs.4 }} | {{ etcs.1 }} | {{ etcs.2 }}
+                        {% endfor %}
+                    {% else %}
+                        경력없음
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="careerBox smallMargin">
+                <div class="logo"><span></span>자기소개</div>
+                <div class="content" style="height: 261px; overflow: hidden">
+                    {{ profile.comment|linebreaks }}
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
 
+{% if career.count >= 15 %}
+<div class="page">
+    <div class="inbox">
+        <div class="InfoBox">
+            <div class="careerBox">
+                <div class="logo"><span></span>영화</div>
+                <div class="content">
+                    {% if movieCareer|getArrayCount > 0 %}
+                        {% for movieCareers in movieCareer %}
+                            {{ movieCareers.3 }} | {{ movieCareers.4 }} | {{ movieCareers.1 }} | {{ movieCareers.2 }}
+                        {% endfor %}
+                    {% else %}
+                        경력없음
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="careerBox">
+                <div class="logo"><span></span>TV드라마<br>웹드라마</div>
+                <div class="content">
+                    {% if dramaCareer|getArrayCount > 0 %}
+                        {% for dramas in dramaCareer %}
+                            {{ dramas.3 }} | {{ dramas.4 }} | {{ dramas.1 }} | {{ dramas.2 }}
+                        {% endfor %}
+                    {% else %}
+                        경력없음
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="careerBox">
+                <div class="logo"><span></span>광고,기타</div>
+                <div class="content">
+                    {% if etcCareer|getArrayCount > 0 %}
+                        {% for etcs in etcCareer %}
+                            {{ etcs.3 }} | {{ etcs.4 }} | {{ etcs.1 }} | {{ etcs.2 }}
+                        {% endfor %}
+                    {% else %}
+                        경력없음
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="subProfile">
+            {% if profileImages|getArrayCount >= 6 %}
+            <div class="profileImage" style='background-image: url("/media/{{ profileImages.2 }}");'></div>
+            <div class="profileImage" style='background-image: url("/media/{{ profileImages.3 }}");'></div>
+            <div class="profileImage" style='background-image: url("/media/{{ profileImages.4 }}");'></div>
+            <div class="profileImage" style='background-image: url("/media/{{ profileImages.5 }}");'></div>
+            {% elif profileImages|getArrayCount >= 5 %}
+            <div class="profileImage" style='background-image: url("/media/{{ profileImages.2 }}");'></div>
+            <div class="profileImage" style='background-image: url("/media/{{ profileImages.3 }}");'></div>
+            <div class="profileImage" style='background-image: url("/media/{{ profileImages.4 }}");'></div>
+            {% elif profileImages|getArrayCount >= 4 %}
+            <div class="profileImage" style='background-image: url("/media/{{ profileImages.2 }}");'></div>
+            <div class="profileImage" style='background-image: url("/media/{{ profileImages.3 }}");'></div>
+            {% elif profileImages|getArrayCount >= 3 %}
+            <div class="profileImage" style='background-image: url("/media/{{ profileImages.2 }}");'></div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% elif profileImages|getArrayCount > 0 and career.count < 15 %}
+<div class="page">
+    <div class="inbox">
+        {% if profileImages|getArrayCount >= 10 %}
+            <div class="inBox_10">
+                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.0 }}");'></div>
+                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.1 }}");'></div>
+                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.2 }}");'></div>
+                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.3 }}");'></div>
+                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.4 }}");'></div>
+                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.5 }}");'></div>
+                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.6 }}");'></div>
+                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.7 }}");'></div>
+                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.8 }}");'></div>
+                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.9 }}");'></div>
+            </div>
+        {% elif profileImages|getArrayCount >= 9 %}
+            <div class="inBox_9">
+                <div class="imageBox_8" style='background-image: url("/media/{{ profileImages.0 }}");'></div>
+                <div class="imageBox_8" style='background-image: url("/media/{{ profileImages.1 }}");'></div>
+                <div class="imageBox_8" style='background-image: url("/media/{{ profileImages.2 }}");'></div>
+                <div class="imageBox_8" style='background-image: url("/media/{{ profileImages.3 }}");'></div>
+                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.4 }}");'></div>
+                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.5 }}");'></div>
+                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.6 }}");'></div>
+                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.7 }}");'></div>
+                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.8 }}");'></div>
+            </div>
+        {% elif profileImages|getArrayCount >= 8 %}
+            {% for profile in profileImages %}
+            <div class="imageBox_8" style='background-image: url("/media/{{ profile }}");'></div>
+            {% endfor %}
+        {% elif profileImages|getArrayCount >= 7 %}
+        {% elif profileImages|getArrayCount >= 6 %}
+        {% elif profileImages|getArrayCount >= 5 %}
+        {% elif profileImages|getArrayCount >= 4 %}
+        {% elif profileImages|getArrayCount >= 3 %}
+        {% elif profileImages|getArrayCount >= 2 %}
+        {% elif profileImages|getArrayCount >= 1 %}
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+
 <script type="text/javascript">
 var qrcode = new QRCode(document.getElementById("qrcode"), {
 	text: "https://ksnpick.com/profile/profileDetail/actor/8/",
-	width: 108,
-	height: 108,
+	width: 68,
+	height: 68,
 	colorDark : "#000000",
 	colorLight : "#ffffff",
 	correctLevel : QRCode.CorrectLevel.H
