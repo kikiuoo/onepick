@@ -463,7 +463,11 @@ def updateUser(request) :
     user = request.session.get('id', '')
 
     userInfo = UserInfo.objects.get(userid=user)
-    email = userInfo.email.split('@')
+
+    if userInfo.email :
+        email = userInfo.email.split('@')
+    else :
+        email = ["", ""]
 
     birth = ""
     userCompany = ""
