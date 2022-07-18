@@ -106,6 +106,12 @@ $(document).ready(function (){
     $(document).on("click", ".banner", function (){
         var url = $(this).attr("data-url");
 
+        // 기능 구현 필요
+        if( userID == ""){
+            alert("로그인 후 이용가능합니다.");
+            return;
+        }
+
         window.open(url);
     });
 
