@@ -70,6 +70,9 @@ def index(request):
                   {'auditions': auditions, 'profiles': profiles , 'mainbanner' : mainbanner, 'subBanner' : subBanner })
 
 
+def downstime(request) :
+
+    return render(request, 'picktalk/downstime.html')
 
 def updatePick(request) :
 
