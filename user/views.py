@@ -18,7 +18,7 @@ from django.db import connection
 from myonepick.common import *
 from django.views.decorators.csrf import csrf_exempt
 
-loginUrl = "http://ksnpick.com/users/login"
+loginUrl = "http://myonepick.com/users/login"
 #loginUrl = "http://localhost:8000/users/login"
 
 
