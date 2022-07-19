@@ -84,7 +84,9 @@ $(document).ready(function (){
         }
     });
 
-    $(document).on("click", ".mTtitle span, .audiVolunteer", function (){
+    $(document).on("click", ".mTtitle span, .audiVolunteer", function (e){
+        e.preventDefault();
+        e.stopPropagation();
         var type = $(this).attr("data-type");
         var num = $(this).attr("data-num");
 

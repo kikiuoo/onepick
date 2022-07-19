@@ -12,7 +12,7 @@
 
 <div class="mTtitle">
     {% if type == "audi" %}
-        오디션 지원자 보기 <span class="apply">총 지원자 <p>{{ allCount }}</p>명 </span>
+        오디션 지원자 보기 <span class="apply">총 지원자 <p>{{ allList }}</p>명 </span>
     {% elif type == "pick" %}
         픽한 프로필 보기
     {% elif type == "suggest" %}
@@ -84,7 +84,11 @@
                 </div>
             </div>
 
+            {% if data.18 == 0 or data.18 == "0" %}
+            <div class="pickBtn" data-nowType="off"></div>
+            {% else %}
             <div class="pickBtn pickOn " data-nowType="on"></div>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
@@ -119,6 +123,7 @@
 
 <script>
     var type = "{{ type }}";
+    var page = "{{ page }}";
 </script>
 
 {% endblock %}

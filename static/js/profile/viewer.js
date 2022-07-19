@@ -42,7 +42,7 @@ $(document).ready(function(){
             return false;
         }
 
-        window.open(url);
+        window.open(b_rul);
     });
 
 

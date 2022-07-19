@@ -381,9 +381,9 @@ def pofile_write_callback(request) :
 def pofile_edit(request, num) :
 
     userID = request.session['id']
-    user = UserInfo.objects.get(userid=userID)
-    cate = CateMain.objects.all()
     profiles = ProfileInfo.objects.get(num=num)
+    user = UserInfo.objects.get(userid=profiles.userid)
+    cate = CateMain.objects.all()
     catesub = CateSub.objects.filter(catecode=profiles.intercate).order_by("cateorder")
 
     cursor = connection.cursor()
@@ -435,7 +435,10 @@ def pofile_edit(request, num) :
 def pofile_edit_callback(request) :
     # 기본정보
     num = request.POST['num']
-    userID = request.POST['userID']
+
+    profiles = ProfileInfo.objects.get(num=num)
+
+    userID = profiles.userid
     nationality = request.POST['nationality']
     military = request.POST['military']
     entertain = request.POST['entertain']

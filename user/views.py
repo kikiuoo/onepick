@@ -163,7 +163,7 @@ def localLoginCallback (request) :
         request.session['id'] = userIN.userid
         request.session['userType'] = userIN.usertype
 
-        #request.session['id'] = 'kakao_2327478409'
+        #request.session['id'] = 'ahdongkim1004'
         #request.session['userType'] = 'NORMAL'
 
         request.session.set_expiry(0)
@@ -418,7 +418,7 @@ def userMypage(request, type) :
         else :
             company = UserCompany.objects.get(userid=user)
 
-            data1 = AuditionInfo.objects.filter(userid=user, isdelete="0")
+            data1 = AuditionInfo.objects.filter(userid=user, isdelete="0").order_by("-regtime")
             query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, ps.COMMENT " \
                     "FROM profile_suggest AS ps LEFT JOIN profile_info AS p ON ps.profileNum = p.num " \
                     "     LEFT JOIN user_info AS ui ON ps.userID  = ui.userID  " \

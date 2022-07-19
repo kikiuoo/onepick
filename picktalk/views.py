@@ -329,26 +329,79 @@ def proList(request, type, page, num) :
     cursor = connection.cursor()
     user = request.session.get('id', '')
 
-    if type == "audi" :
-        query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCareer " \
+    if type == "audi":
+
+        query = "SELECT * " \
                 "FROM audition_apply AS audi LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
                 "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
-                "WHERE audi.auditionNum = '"+num+"' " \
-                "order by audi.regTime desc limit "+ str(start) + ", " + str(end)
+                "WHERE audi.auditionNum = '" + num + "' "
 
-    elif type == "pick" :
-        query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, COMMENT, mainYoutube, isCareer " \
+        result = cursor.execute(query)
+        allList = cursor.fetchall()
+
+        if user:
+            query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCareer, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user + "' AND auditionNum = audi.num ) AS proPick  " \
+                    "FROM audition_apply AS audi LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
+                    "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
+                    "WHERE audi.auditionNum = '" + num + "' " \
+                    "order by audi.regTime desc limit " + str(start) + ", " + str(end)
+
+        else:
+            if type == "audi":
+                query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCaree, '0' AS proPickr " \
+                        "FROM audition_apply AS audi LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
+                        "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
+                        "WHERE audi.auditionNum = '" + num + "' " \
+                        "order by audi.regTime desc limit " + str( start) + ", " + str(end)
+
+    elif type == "pick":
+
+        query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, COMMENT, mainYoutube, isCareer, '0' AS proPick " \
                 "FROM profile_pick AS pp LEFT JOIN profile_info AS p ON pp.profileNum = p.num " \
                 "     LEFT JOIN user_info AS ui ON p.userID  = ui.userID  " \
-                "WHERE pp.userID = '"+user+"'  and p.isDelete = '0' " \
-                "order by pp.regTime desc  limit "+ str(start) + ", " + str(block)
+                "WHERE pp.userID = '" + user + "'  and p.isDelete = '0' "
 
-    elif type == "suggest" :
-        query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, ps.COMMENT " \
+        result = cursor.execute(query)
+        allList = cursor.fetchall()
+
+        if user:
+            query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, COMMENT, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick  " \
+                    "FROM profile_pick AS pp LEFT JOIN profile_info AS p ON pp.profileNum = p.num " \
+                    "     LEFT JOIN user_info AS ui ON p.userID  = ui.userID  " \
+                    "WHERE pp.userID = '" + user + "'  and p.isDelete = '0' " \
+                    "order by pp.regTime desc  limit " + str(start) + ", " + str(block)
+
+        else:
+            query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, COMMENT, mainYoutube, isCareer, '0' AS proPick " \
+                    "FROM profile_pick AS pp LEFT JOIN profile_info AS p ON pp.profileNum = p.num " \
+                    "     LEFT JOIN user_info AS ui ON p.userID  = ui.userID  " \
+                    "WHERE pp.userID = '" + user + "'  and p.isDelete = '0' " \
+                    "order by pp.regTime desc  limit " + str(start) + ", " + str(block)
+
+    elif type == "suggest":
+
+        query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, ps.COMMENT, '0' AS proPick " \
                 "FROM profile_suggest AS ps LEFT JOIN profile_info AS p ON ps.profileNum = p.num " \
                 "     LEFT JOIN user_info AS ui ON ps.userID  = ui.userID  " \
-                "WHERE ps.suUserID = '" + user + "' and p.isDelete = '0' " \
-                "order by ps.regTime desc limit "+ str(start) + ", " + str(block)
+                "WHERE ps.suUserID = '" + user + "' and p.isDelete = '0' "
+
+        result = cursor.execute(query)
+        allList = cursor.fetchall()
+
+
+        if user:
+            query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, ps.COMMENT, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick  " \
+            "FROM profile_suggest AS ps LEFT JOIN profile_info AS p ON ps.profileNum = p.num " \
+            "     LEFT JOIN user_info AS ui ON ps.userID  = ui.userID  " \
+            "WHERE ps.suUserID = '" + user + "' and p.isDelete = '0' " \
+            "order by ps.regTime desc limit " + str(start) + ", " + str(block)
+
+        else :
+            query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, ps.COMMENT, '0' AS proPick " \
+                    "FROM profile_suggest AS ps LEFT JOIN profile_info AS p ON ps.profileNum = p.num " \
+                    "     LEFT JOIN user_info AS ui ON ps.userID  = ui.userID  " \
+                    "WHERE ps.suUserID = '" + user + "' and p.isDelete = '0' " \
+                    "order by ps.regTime desc limit "+ str(start) + ", " + str(block)
 
     result = cursor.execute(query)
     profile = cursor.fetchall()
@@ -357,7 +410,7 @@ def proList(request, type, page, num) :
     connection.close()
 
     return render(request, 'user/proList.html', {"type": type, "page":page, "profile": profile,
-                                                 "allCount" : cursor.rowcount })
+                                                 "allCount" : cursor.rowcount, "allList" : len(allList) })
 
 def qandaList(request, page) :
 

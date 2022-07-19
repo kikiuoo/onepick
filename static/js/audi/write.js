@@ -136,6 +136,11 @@ $(document).ready(function(){
         var id = $(this).attr("id");
            /* file 태그 변경 */
 
+        if( this.files[0].size > 999999 ){
+            alert("이미지는 1MB지만 업로드 가능합니다.");
+            return;
+        }
+
         addCount++;
 
         $("#fileLabel").attr("for", "input_"+addCount);

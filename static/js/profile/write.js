@@ -365,6 +365,11 @@ $(document).ready(function (){
         var id = $(this).attr("id");
         var type = $(this).attr("data-type");
 
+        if( this.files[0].size > 999999 ){
+            alert("이미지는 1MB지만 업로드 가능합니다.");
+            return;
+        }
+
         if(type == "mainImage"){
             $("#mainImage .addImage").css("display", "none");
             $("#mainImage").text('');
@@ -583,7 +588,8 @@ $(document).ready(function (){
             alert("학교명을 입력해주세요.");
             return;
         }
-        if( major == "" ){
+
+        if( school != "고등학교졸업" && school != "고등학교졸업예정" && school != "중학교졸업"  && major == "" ){
             alert("학과명을 입력해주세요.");
             return;
         }
