@@ -448,3 +448,8 @@ def qaDeleteComment(request) :
     comment.delete()
 
     return JsonResponse({"code": "0"})
+
+
+def gsdv(request) :
+
+    return render(request, 'picktalk/gsdv.txt')

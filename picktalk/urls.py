@@ -27,4 +27,6 @@ urlpatterns = [
     path("qanda/ajax/reloadComment/", views.qaReloadComment, name="qaReloadComment"),
     path("qanda/ajax/deleteComment/", views.qaDeleteComment, name="qaDeleteComment"),
 
+    path(".well-known/pki-validation/gsdv.txt", views.gsdv, name="gsdv"),
+
 ]
