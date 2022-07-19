@@ -1,27 +1,5 @@
-{% extends 'picktalk/base.html' %}
-{% block context %}
-
-<!-- Index CSS 파일 및 JS 파일 include -->
-{% load static %}
 {% load my_filter %}
-<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/user/mypage.css' %}"> <!-- pc 버전 -->
-<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/user/mypage.css' %}" > <!-- 모바일 버전 -->
-
-<!-- JS 파일 -->
-<script src="{% static 'js/user/proList.js' %}"></script>
-
-<div class="mTtitle">
-    {% if type == "audi" %}
-        오디션 지원자 보기 <span class="apply">총 지원자 <p>{{ allList }}</p>명 </span>
-    {% elif type == "pick" %}
-        픽한 프로필 보기
-    {% elif type == "suggest" %}
-        제안한 프로필 보기
-    {% endif %}
-</div>
-
 {% if type == "audi" %}
-    <div class="inBox">
         {% for data in profile %}
         <div class="profile" data-num="{{ data.0 }}">
             <div class="imageBox">
@@ -91,9 +69,7 @@
             {% endif %}
         </div>
         {% endfor %}
-    </div>
 {% elif type == "pick" %}
-    <div class="inBox">
         {% for data in profile %}
         <div class="profile" data-num="{{ data.0 }}">
             <div class="imageBox">
@@ -163,9 +139,7 @@
             {% endif %}
         </div>
         {% endfor %}
-    </div>
 {% elif type == "suggest" %}
-    <div class="inBox">
     {% for data in profile %}
     <div class="profile" data-num="{{ data.0 }}">
         <div class="imageBox">
@@ -190,13 +164,4 @@
         <div class="comment pcNone">{{ data.12|linebreaks }}</div>
     </div>
     {% endfor %}
-    </div>
 {% endif %}
-
-<script>
-    var type = "{{ type }}";
-    var page = "{{ page }}";
-    var num = "{{ num }}";
-</script>
-
-{% endblock %}

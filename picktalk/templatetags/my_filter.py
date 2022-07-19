@@ -394,3 +394,22 @@ def splits(values, splitKey) :
     spl = splitKey.split("|")
     returnValue = str(values).split( str(spl[1]) )
     return returnValue[ int(spl[0]) ]
+
+@register.filter
+def userAddr(values) :
+    addr = values.replace(")", " ")
+    addr = addr.replace("(", "")
+    addr = addr.replace("  ", " ")
+
+    if addr == "" :
+        returnValue = "";
+    else :
+        addrs = addr.split(' ')
+        print(addrs)
+
+        if len(addrs) > 2 :
+            returnValue = addrs[1] + " " + addrs[2];
+        else :
+            returnValue = "";
+
+    return returnValue

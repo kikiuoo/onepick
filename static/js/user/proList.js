@@ -32,6 +32,16 @@ $(document).ready(function (){
             $(this).removeClass("pickOn");
         }
     });
+
+
+    $(window).scroll(function() {
+        console.log(page + " " +$(window).scrollTop() + " " + ( $(document).height() - $(window).height() - 100 ) + " " + $(document).height() + " " +$(window).height());
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height())) {
+            page++;
+
+            getProfileList( page );
+        }
+    });
 });
 
 function updatePick(tableName, nowType, num){
@@ -49,3 +59,22 @@ function updatePick(tableName, nowType, num){
       }
    });
 }
+
+function getProfileList( page ){
+    $.ajax({
+      url: "/proList2/"+type+"/"+page+"/"+num+"/",
+      type: "GET",
+      dataType: "html",
+      success: function(data){
+          if( page == 1 ) {
+              $(".inBox").empty().append(data);
+          }else{
+              $(".inBox").append(data);
+          }
+      },
+      error: function (request, status, error){
+          alert(error);
+      }
+   });
+}
+

@@ -16,6 +16,7 @@ urlpatterns = [
     path("notice/list/<int:page>/", views.notiList, name="notiList"),
 
     path("proList/<type>/<int:page>/<num>/", views.proList, name="proList"),
+    path("proList2/<type>/<int:page>/<num>/", views.proList2, name="proList"),
 
     path("qanda/list/<int:page>/", views.qandaList, name="qandaList"),
 

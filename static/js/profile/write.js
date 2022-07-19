@@ -294,7 +294,7 @@ $(document).ready(function (){
         var id = $(this).children().attr("id");
 
         // 라디오 박스 처리
-        if( id == "mainYoutube" ) {
+        if( id == "mainYoutube"  ) {
             // 전체 해제
             $(".mainYoutube").css("color", "#c0c0c0");
             $(".mainYoutube").children("div").css("background-image", 'url("/static/image/web/textCheck_off.png")');
@@ -303,7 +303,21 @@ $(document).ready(function (){
             $(this).css("color", "#ff8aae");
             $(this).children("div").css("background-image", 'url("/static/image/web/textCheck_on.png")');
             $(this).children("input").attr("checked", "true");
-        }else {
+        }if( id == "notView"  ) {
+            // 전체 해제
+
+             if (checked == true) {
+
+                $(this).css("color", "#ff8aae");
+                $(this).children("div").css("background-image", 'url("/static/image/web/textCheck_on.png")');
+                $(this).children("input").attr("checked", "true");
+            }else{
+
+                $(this).css("color", "#c0c0c0");
+                $(this).children("div").css("background-image", 'url("/static/image/web/textCheck_off.png")');
+                $(this).children("input").removeAttr("checked", "true");
+            }
+        }else{
 
             if (checked == true) {
                 $(this).css("color", "#ff8aae");

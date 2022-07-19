@@ -502,6 +502,7 @@ def pofile_edit_callback(request) :
     delCareer = request.POST.get("delCareer", "")
     etcDelCareer = request.POST.get("etcDelCareer", "")
 
+    print(notView)
 
     profiles = ProfileInfo.objects.get(num=num)
 

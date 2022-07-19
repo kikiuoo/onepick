@@ -37,7 +37,10 @@ $(document).ready(function(){
         var Url = /(http|https):\/\/((\w+)[.])+(asia|biz|cc|cn|com|de|eu|in|info|jobs|jp|kr|mobi|mx|name|net|nz|org|travel|tv|tw|uk|us)(\/(\w*))*$/i;
         var urlTest = Url.test(b_rul);
 
-        if(!urlTest){
+        var Url2 = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+        var urlTest2 = Url2.test(b_rul);
+
+        if(!urlTest && !urlTest2){
             alert("올바른 url이 아닙니다.");
             return false;
         }

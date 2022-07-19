@@ -70,7 +70,7 @@
                     이메일 {{ userInfo.email|emailReplace:"*" }}<br>
                 {% endif %}
 
-                주소 {{ userInfo.addr1|default:"" }}
+                주소 {{ userInfo.addr1|userAddr }}
             {% endif %}
         </div>
 

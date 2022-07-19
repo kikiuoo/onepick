@@ -143,10 +143,12 @@
     var swiper = new Swiper(".mySwiper", {
         slidesPerView: 1,
         spaceBetween: 30,
+        {% if subBanner.count > 0 %}
         autoplay: {
           delay: 2500,
           disableOnInteraction: false,
         },
+        {% endif %}
         loop: true,
         pagination: {
           el: ".swiper-pagination",

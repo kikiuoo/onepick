@@ -15,7 +15,19 @@
     <div class="mainImage"  style='background-image: url("/media/{{ profiles.profileimage }}");' id="image_1"  data-id="1"   data-image="/media/{{ profiles.profileimage }}"></div>
     <div class="userInfo">
 
-        <div class="userName">{{ userInfo.name }},{{ userInfo.birth|userAge }}세({{ userInfo.birth|replace:"-|/" }})</div>
+        <div class="userName">
+            {{ userInfo.name }},{{ userInfo.birth|userAge }}세({{ userInfo.birth|replace:"-|/" }})
+
+            <div class="snsBox">
+                {% if userInfo.instargram|default:"" != "" %}
+                <div class="instagram" data-url="{{ userInfo.instargram }}"></div>
+                {% endif %}
+
+                {% if userInfo.youtube|default:"" != "" %}
+                <div class="youtube" data-url="{{ userInfo.instargram }}"></div>
+                {% endif %}
+            </div>
+        </div>
 
         <div class="info">
             {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
@@ -25,7 +37,7 @@
             연락처 {{ userInfo.phone|phoneReplace:"*" }}<br>
             이메일 {{ userInfo.email|emailReplace:"*" }}<br>
             {% endif %}
-            주소 {{ userInfo.addr1|default:"" }} {{ userInfo.addr2|default:"" }}
+            주소 {{ userInfo.addr1|userAddr }}
         </div>
         <div class="info">
             {% if userInfo.nationality != None %}
@@ -44,15 +56,6 @@
             {{ userInfo.school }} {{ userInfo.major }}
         </div>
 
-        <div class="snsBox">
-            {% if userInfo.instargram|default:"" != "" %}
-            <div class="instagram" data-url="{{ userInfo.instargram }}"></div>
-            {% endif %}
-
-            {% if userInfo.youtube|default:"" != "" %}
-            <div class="youtube" data-url="{{ userInfo.instargram }}"></div>
-            {% endif %}
-        </div>
 
         <div class="info">
             {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
