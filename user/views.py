@@ -18,7 +18,7 @@ from django.db import connection
 from myonepick.common import *
 from django.views.decorators.csrf import csrf_exempt
 
-loginUrl = "http://myonepick.com/users/login"
+loginUrl = "https://myonepick.com/users/login"
 #loginUrl = "http://localhost:8000/users/login"
 
 
@@ -64,7 +64,7 @@ def kakao_login_callback(request):
 
 # 구글 로그인 API 호출
 def googleLogin(request):
-    app_key = "823806029358-6tgcgl07h192l7dcsbi6va1jp0lphnne.apps.googleusercontent.com"
+    app_key = "329992018312-vcfcr44dgjat5q47pf91902rp8hh1ei0.apps.googleusercontent.com"
     scope = "https://www.googleapis.com/auth/userinfo.email " + \
             "https://www.googleapis.com/auth/userinfo.profile"
 
@@ -81,8 +81,9 @@ def googleLogin(request):
 # 구글 로그인 처리.
 def googleLoginCallback(request):
     code = request.GET.get('code')
-    client_id = "823806029358-6tgcgl07h192l7dcsbi6va1jp0lphnne.apps.googleusercontent.com"
-    client_secret = "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"
+    client_id = "329992018312-vcfcr44dgjat5q47pf91902rp8hh1ei0.apps.googleusercontent.com"
+    client_secret = "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"
+    #AIzaSyDK6_FmteverNdo8r3womycHKb8MbboFbo
 
     redirection_uri = loginUrl + "/google/callback/"
     grant_type = 'authorization_code'
@@ -101,6 +102,7 @@ def googleLoginCallback(request):
 
     sub = profile_json.get("sub")
     email = profile_json.get("email")
+    print(sub + " " + email)
 
     returnUrl = userLogin(request, "google_"+sub, email, "", "", "", "GOOGLE")
 
@@ -198,7 +200,7 @@ def userLogin(request, id, email, gender, name, birth, joinType) :
         request.session['userType'] = userType
         request.session.set_expiry(0)
 
-        if isUser.phone == None or isUser.email == None or isUser.name == None :
+        if isUser.phone == None or isUser.email == None or isUser.name == None or isUser.usertype == "S-NORMAL" :
             returnUrl = "/users/join/" + str(userID) + "/social/"
         else :
             updateLastVisit(userID)

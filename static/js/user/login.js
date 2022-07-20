@@ -41,8 +41,7 @@ $(document).ready(function(){
         if( loginType == "kakaoLogin" ){
             window.location.href = "/users/login/kakao/";
         }else if( loginType == "gogleLogin" ){
-            alert("서비스 준비중 입니다.")
-            //window.location.href = "/users/login/google/";
+            window.location.href = "/users/login/google/";
         }else if( loginType == "appleLogin" ){
            // window.location.href = "/users/login/apple/";
         }else if( loginType == "naverLogin" ){
