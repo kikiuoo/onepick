@@ -32,7 +32,7 @@
                 {% endif %}
                 <input type="text" id="phone" value="{{ user.phone|default:"" }}" disabled>
                 <input type="text" id="email" value="{{ user.email|default:""}}" disabled>
-                <input type="text" id="addr" value="({{ user.addr|default:"" }}) {{ user.addr1|default:"" }} {{ user.addr2|default:"" }}" disabled>
+                <input type="text" id="addr" value="{{ user.addr1|default:"" }} {{ user.addr2|default:"" }}" disabled>
             </div>
         </div>
 
