@@ -65,7 +65,7 @@ def listView(request, cate_type, page): # 오디션 Main
                     "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
                     "WHERE public = '0' and isDelete = '0'  and ui.userID != '' " + intercate + " " \
-                    "ORDER BY regDate DESC " \
+                    "ORDER BY `upDate` Desc, regDate DESC " \
                     "LIMIT 10"
         else:
             query = "SELECT p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain," \
@@ -73,7 +73,7 @@ def listView(request, cate_type, page): # 오디션 Main
                     "FROM profile_info AS p LEFT JOIN user_info AS ui " \
                     "     ON p.userID = ui.userID " \
                     "WHERE public = '0' and isDelete = '0'  and ui.userID != '' " + intercate + " " \
-                    "ORDER BY regDate DESC  " \
+                    "ORDER BY `upDate` Desc, regDate DESC  " \
                     "LIMIT 10"
 
         result = cursor.execute(query)
@@ -545,7 +545,11 @@ def pofile_edit_callback(request) :
             url = uploadFile(image, "photos/profile/additional/", sub)  # 파일 업로드
             addImage.append(url)
 
-    profileDetail_image =  profileImgArr + addImage
+    if len(profileImgArr) > 0 :
+        profileDetail_image = profileImgArr + addImage
+    else :
+        profileDetail_image = addImage
+
     proDetail = "|".join(profileDetail_image)
 
     # 작품 이미지 등록
@@ -607,6 +611,7 @@ def pofile_edit_callback(request) :
     profiles.careermonth=allCareer_m
     profiles.public=notView
     profiles.contenttype=""
+    profiles.update=nowTime
     profiles.save()
 
 
@@ -715,7 +720,7 @@ def getProfile(request) :
     elif order == "recommend":
         orderby = " order by pickCount desc "
     else:
-        orderby = " order by regDate desc "
+        orderby = " order by `upDate` Desc, regDate DESC "
 
     where = ""
     if nationality != "" :

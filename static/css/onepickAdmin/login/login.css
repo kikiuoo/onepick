@@ -1,0 +1,27 @@
+/* PC Base CSS */
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+
+/* PC Base CSS */
+body{
+    position:  relative;
+    padding : 0px;
+    margin : 0px;
+    font-family: 'Noto Sans KR', sans-serif !important;
+}
+
+
+.container{
+    width: 590px;
+    border: 1px solid red;
+    margin:  0 auto;
+    margin-top: 192px;
+}
+
+.logo{
+    width: 252px;
+    height: 74px;
+
+    margin: 0 auto;;
+    border: 1px solid red;
+
+}

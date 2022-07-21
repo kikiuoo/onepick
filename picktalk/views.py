@@ -44,14 +44,14 @@ def index(request):
             query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user +"' AND profileNum = p.num ) AS proPick, viewCount, pickCount, cViewCount " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
                     "WHERE public = '0' and isDelete = '0' and ui.userID != '' " \
-                    "ORDER BY regDate DESC " \
+                    "ORDER BY `upDate` Desc, regDate DESC  " \
                     "LIMIT 6"
         else:
             query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, '0' AS proPick, viewCount, pickCount, cViewCount " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui " \
                     "     ON p.userID = ui.userID " \
                     "WHERE public = '0' and isDelete = '0' and ui.userID != '' " \
-                    "ORDER BY regDate DESC  " \
+                    "ORDER BY `upDate` Desc, regDate DESC   " \
                     "LIMIT 6"
 
         result = cursor.execute(query)

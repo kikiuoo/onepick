@@ -184,6 +184,7 @@ class ProfileInfo(models.Model):
     careeryear = models.CharField(db_column='careerYear', max_length=10, blank=True, null=True)  # Field name made lowercase.
     careermonth = models.CharField(db_column='careerMonth', max_length=10, blank=True, null=True)  # Field name made lowercase.
     regdate = models.DateTimeField(db_column='RegDate', blank=True, null=True)  # Field name made lowercase.
+    update = models.DateTimeField(db_column='upDate', blank=True, null=True)  # Field name made lowercase.
     viewcount = models.IntegerField(db_column='viewCount', blank=True, null=True)  # Field name made lowercase.
     cviewcount = models.IntegerField(db_column='cViewCount', blank=True, null=True)  # Field name made lowercase.
     pickcount = models.IntegerField(db_column='pickCount', blank=True, null=True)  # Field name made lowercase.
@@ -194,6 +195,7 @@ class ProfileInfo(models.Model):
     class Meta:
         managed = False
         db_table = 'profile_info'
+
 
 
 class ProfilePick(models.Model):

@@ -60,7 +60,13 @@ $(document).ready(function(){
             $(this).css("color", "#1f1f1f");
         }
 
-        var order = $("#order").find("option:selected").val();
+        var order = "";
+        if( $("#order2.mobileNone").css("display") == "block" ){
+            order = $("#order2").find("option:selected").val();
+        }else{
+            order = $("#order").find("option:selected").val();
+        }
+
         var nationality = $("#nationality").find("option:selected").val();
         var geneder = $("#geneder").find("option:selected").val();
         var military = $("#military").find("option:selected").val();
@@ -81,7 +87,13 @@ $(document).ready(function(){
 
     $(document).on("keyup", "#age1, #age2, #school, #height1, #height2", function(){
 
-        var order = $("#order").find("option:selected").val();
+        var order = "";
+        if( $("#order2.mobileNone").css("display") == "block" ){
+            order = $("#order2").find("option:selected").val();
+        }else{
+            order = $("#order").find("option:selected").val();
+        }
+
         var nationality = $("#nationality").find("option:selected").val();
         var geneder = $("#geneder").find("option:selected").val();
         var military = $("#military").find("option:selected").val();

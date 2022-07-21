@@ -17,8 +17,8 @@ def adminCheck(request): # 오디션 Main
     user = request.session.get('adminID', '')
 
     returnURL = "onepickAdmin/login/login.html"
+
     if user :
         returnURL = "onepickAdmin/main.html"
-
 
     return render(request, returnURL )
