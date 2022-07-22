@@ -214,6 +214,7 @@
 
     <div class="line"></div>
 
+    {% if profiles.comment != "" and profiles.comment != None %}
     <div class="introduction">
 
         {% if request.session.userType == "NORMAL" and request.session.id != userInfo.userid %}
@@ -223,6 +224,7 @@
         {{ profiles.comment|linebreaks }}
         </span>
     </div>
+    {% endif %}
 
     <div class="viewDetail">
         {% if profiles.detailimage|default:"" != "" %}
