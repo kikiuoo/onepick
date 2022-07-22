@@ -218,6 +218,7 @@
 }
 
 .introduction{
+    position: relative;
     padding: 13px;
     box-sizing: border-box;
     font-size: 15px;
@@ -589,4 +590,32 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+}
+
+
+.inBox .userInfo .info.blurInfo,
+.inBox .introduction .blurInfo{
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+}
+
+
+.blur{
+    position: absolute;
+    height: 220px;
+    top: 80px;
+    left: 0px;
+    width: 100%;
+
+    font-size: 14px;
+    line-height: 220px;
+    text-align: center;
+    color: #ff8aae;
+    font-weight: bold;
+}
+
+
+.introduction .blur{
+    height: 100px;
+    line-height: 100px;
 }

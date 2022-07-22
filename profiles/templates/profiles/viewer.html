@@ -34,8 +34,10 @@
          <div class="userName">
              {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
                 {{ userInfo.name }},{{ userInfo.birth|userAge }}세({{ userInfo.birth|replace:"-|/" }})
+             {% elif request.session.userType == "COMPANY" %}
+                {{ userInfo.name }},{{ userInfo.birth|userAge }}세({{ userInfo.birth|replace:"-|/" }})
              {% else %}
-                 {{ userInfo.name|updateUserName }},{{ userInfo.birth|userAge }}세({{ userInfo.birth|replace:"-|/" }})
+                 {{ userInfo.name|updateUserName }},{{ userInfo.birth|userAge }}세(****/**/**)
              {% endif %}
 
              <div class="snsBox">
@@ -57,7 +59,12 @@
             </div>
          </div>
 
-        <div class="info">
+
+        {% if request.session.userType == "NORMAL"  and request.session.id != userInfo.userid %}
+        <div class="blur">기업 회원만 열람 가능합니다.</div>
+        {% endif %}
+
+        <div class="info  {% if request.session.userType == "NORMAL"  and request.session.id != userInfo.userid %}blurInfo{% endif %}">
             {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
             연락처 {{ userInfo.phone }}<br>
             이메일 {{ userInfo.email }}<br>
@@ -74,7 +81,7 @@
             {% endif %}
         </div>
 
-        <div class="info">
+        <div class="info  {% if request.session.userType == "NORMAL"  and request.session.id != userInfo.userid %}blurInfo{% endif %}">
             {% if userInfo.nationality != None %}
                 {{ userInfo.nationality }} |
             {% endif %}
@@ -92,7 +99,7 @@
             {{ userInfo.school }} {{ userInfo.major }}
         </div>
 
-        <div class="info">
+        <div class="info  {% if request.session.userType == "NORMAL"  and request.session.id != userInfo.userid %}blurInfo{% endif %}">
             {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
             키 {{ profiles.height }} cm | 몸무게 {{ profiles.weight }} kg<br>
             {% else %}
@@ -208,7 +215,13 @@
     <div class="line"></div>
 
     <div class="introduction">
+
+        {% if request.session.userType == "NORMAL" and request.session.id != userInfo.userid %}
+        <div class="blur">기업 회원만 열람 가능합니다.</div>
+        {% endif %}
+        <span {% if request.session.userType == "NORMAL"  and request.session.id != userInfo.userid %}class="blurInfo"{% endif %}>
         {{ profiles.comment|linebreaks }}
+        </span>
     </div>
 
     <div class="viewDetail">

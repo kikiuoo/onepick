@@ -122,6 +122,13 @@
     font-size: 16px;
     line-height: 1.88;
     color: #1f1f1f;
+
+}
+
+.inBox .userInfo .info.blurInfo,
+.inBox .introduction .blurInfo{
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
 }
 
 .inBox .userInfo .info:nth-child(3){
@@ -280,6 +287,7 @@
 }
 
 .introduction{
+    position: relative;
     padding: 20px 30px;
     box-sizing: border-box;
     font-size: 15px;
@@ -670,4 +678,24 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+}
+
+.blur{
+    position: absolute;
+    height: 300px;
+    top: 80px;
+    left: 0px;
+    width: 100%;
+
+    font-size: 14px;
+    line-height: 300px;
+    text-align: center;
+    color: #ff8aae;
+    font-weight: bold;
+}
+
+
+.introduction .blur{
+    height: 100px;
+    line-height: 100px;
 }

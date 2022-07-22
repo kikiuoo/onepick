@@ -34,6 +34,11 @@ $(document).ready(function(){
     $(document).on("click", ".instagram, .youtube", function (){
         var b_rul = $(this).attr("data-url");
 
+        if( userType == 'NORMAL' && writeUID != userID ){
+            alert("기업회원만 열람 가능합니다.");
+            return;
+        }
+
         var Url = /(http|https):\/\/((\w+)[.])+(asia|biz|cc|cn|com|de|eu|in|info|jobs|jp|kr|mobi|mx|name|net|nz|org|travel|tv|tw|uk|us)(\/(\w*))*$/i;
         var urlTest = Url.test(b_rul);
 
