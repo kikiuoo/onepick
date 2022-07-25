@@ -225,6 +225,7 @@
     line-height: 1.69;
     color: #1f1f1f;
     word-break: break-all;
+    min-height: 100px;
 }
 
 .introduction p{
