@@ -14,7 +14,7 @@
 <div class="inBox">
     <div class="titleBox">
         <div class="title"><span>[{{ cate.catename }}]</span> {{ qanda.title }}</div>
-        <div class="userInfo">{{ user.name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ qanda.regdate|date:"Y/m/d" }}</div>
+        <div class="userInfo">{{ user.userid|getUserName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ qanda.regdate|date:"Y/m/d" }}</div>
     </div>
 
     <div class="content">
