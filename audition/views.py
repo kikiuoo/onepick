@@ -280,7 +280,7 @@ def audi_edit_callback( request ) :
     updateAudition.career = career
     updateAudition.image = imageUrl
     updateAudition.essential = essential
-    updateAudition.field_preparation = preparation
+    updateAudition.preparation = preparation
     updateAudition.updtime = nowTime
 
     updateAudition.save()
