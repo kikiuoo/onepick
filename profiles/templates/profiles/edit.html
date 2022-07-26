@@ -335,6 +335,8 @@
                 <input type="file" name="mainImage[]" id="input-mainImage" class="upload-hidden input-file" data-type="mainImage">
                 <input type="hidden" name="mainImg" id="mainImg" value="{{ profiles.profileimage }}">
 
+                <input type="file" name="profileImage[]" id="input-file" class="upload-hidden input-file" data-type="profileImage">
+
                 <div class="imageBox">
                     {% if profiles.detailimage|default:"" != "" %}
                         {% for images in profileImages %}
@@ -345,7 +347,6 @@
                     {% endif %}
                 </div>
                 <label id="fileLabel" for="input-file"> <div class="addImage"></div> 이미지 등록</label>
-                <input type="file" name="profileImage[]" id="input-file" class="upload-hidden input-file" data-type="profileImage">
 
                 <textarea name="removeImage_detail" id="removeImage_detail" style="display: none"></textarea>
             </div>
@@ -357,6 +358,7 @@
             </div>
 
             <div class="profile_imageBox userImageBox f_imageInfo">
+                <input type="file" name="userImage[]" id="input-piece" class="upload-hidden input-file" data-type="userImage">
                 <div class="imageBox">
                     {% if profiles.artimage|default:"" != "" %}
                         {% for images in artImages %}
@@ -367,7 +369,6 @@
                     {% endif %}
                 </div>
                 <label id="pieceLabel" for="input-piece"> <div class="addImage"></div> 이미지 등록</label>
-                <input type="file" name="userImage[]" id="input-piece" class="upload-hidden input-file" data-type="userImage">
 
                 <textarea name="removeImage_art" id="removeImage_art" style="display: none"></textarea>
             </div>
