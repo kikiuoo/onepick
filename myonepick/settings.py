@@ -69,6 +69,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
 	# 허용할 Origin 추가
     "http://ksnpick.com",
+    "http://139.150.71.95",
     "http://myonepick.com",
     "https://myonepick.com",
     "http://localhost:8000",
@@ -79,7 +80,7 @@ CORS_ALLOWED_ORIGINS = [
 
 ROOT_URLCONF = 'myonepick.urls'
 
-CSRF_TRUSTED_ORIGINS = ['http://ksnpick.com','http://myonepick.com','https://myonepick.com']
+CSRF_TRUSTED_ORIGINS = ['http://ksnpick.com','http://myonepick.com', "http://139.150.71.95",'https://myonepick.com']
 
 TEMPLATES = [
     {
