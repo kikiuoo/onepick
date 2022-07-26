@@ -129,7 +129,7 @@
     var swiper = new Swiper(".mySwiper", {
         slidesPerView: 1,
         spaceBetween: 30,
-        {% if mainbanner > 0 %}
+        {% if mainbanner.count > 0 %}
         autoplay: {
           delay: 2500,
           disableOnInteraction: false,

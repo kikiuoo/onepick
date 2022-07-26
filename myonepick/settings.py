@@ -117,8 +117,8 @@ DATABASES = {
         'NAME' : 'onepick',
         'USER' : 'onepick',
         'PASSWORD' : 'onepick@)@@',
-        #'HOST' : '127.0.0.1',
-        'HOST' : 'myonepick.com',
+        'HOST' : '127.0.0.1',
+        #'HOST' : 'myonepick.com',
         'PORT' : '3306',
     }
 }
