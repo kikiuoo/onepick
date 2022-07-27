@@ -304,7 +304,7 @@ def joinUpdate(request):
     userInfo.agreeemail = emailCheck
     userInfo.agreesms = phoneCheck
 
-    if userType == "NORMAL" :
+    if userType == "NORMAL" or  userType == "S-NORMAL" :
         # 일반회원 등록
         userInfo.addr1 = addr1
         userInfo.addr2 = addr2
