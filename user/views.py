@@ -137,13 +137,13 @@ def naver_login_callback(request):
     response = profile_json.get("response")
 
     id = response.get("id")
-    email = response.get("email", None)
-    gender = response.get("gender", None)
-    name = response.get("name", None)
-    birthday = response.get("birthday", None)
-    birthyear = response.get("birthyear", None)
+    #email = response.get("email", None)
+    #gender = response.get("gender", None)
+    #name = response.get("name", None)
+    #birthday = response.get("birthday", None)
+    #birthyear = response.get("birthyear", None)
 
-    returnUrl = userLogin(request, "naver_"+id, email, gender, name, birthyear+"-"+birthday, "NAVER")
+    returnUrl = userLogin(request, "naver_"+id, "", "", "", "", "NAVER")
 
     return redirect(returnUrl)
 
