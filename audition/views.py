@@ -310,6 +310,11 @@ def audiApply(request) :
     writeUID = request.GET['writeUID']
     userID = request.GET['userID']
 
+    findApply = AuditionApply.objects.filter(auditionnum=num, profilenum=profileCheck)
+
+    if findApply.count() > 0 :
+        return JsonResponse({"code": "1", "msg" : "이미 지원하셨습니다."})
+
     nowTime = timezone.now()
 
     saveApply = AuditionApply.objects.create( auditionnum=num, profilenum=profileCheck, regtime=nowTime)

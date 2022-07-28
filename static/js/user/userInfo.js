@@ -276,6 +276,22 @@ $(document).ready(function(){
 
         $("#saveUserForm").submit();
     });
+
+
+     $(document).on("change", ".emailCheck, .phoneCheck", function(){
+
+        var checked = $(this).children().is(":checked");
+
+        if( checked == true ){
+            $(this).css("color", "#ff8aae");
+            $(this).children("div").css("background-image", 'url("/static/image/web/textCheck_on.png")');
+            $(this).children("input").attr("checked","true");;
+        }else{
+            $(this).css("color", "#c0c0c0");
+            $(this).children("div").css("background-image", 'url("/static/image/web/textCheck_off.png")');
+            $(this).children("input").removeAttr("checked");;
+        }
+    });
 });
 
 

@@ -57,13 +57,14 @@ def parsingYoutube_view(values) :
 @register.filter
 def getTalent(values) :
 
-    if values != None :
+    print(values)
 
-        talent = values.split('|')
+    if values != None and values != "" :
+       talent = values.split('|')
 
-        returnDate = ""
-        count = 0;
-        for talents in talent :
+       returnDate = ""
+       count = 0;
+       for talents in talent :
             count = count + 1
             returnDate = returnDate + " " + talents
 
@@ -383,8 +384,23 @@ def getPersent(num) :
 
 @register.filter
 def applyCount(num) :
-    audiApply = AuditionApply.objects.filter(auditionnum=num)
-    return audiApply.count()
+
+    try:
+        cursor = connection.cursor()
+
+        query = "SELECT COUNT( DISTINCT(profileNum)) FROM audition_apply WHERE auditionNum = '"+str(num)+"' "
+
+        result = cursor.execute(query)
+        apply = cursor.fetchall()
+
+        connection.close()
+
+    except:
+        connection.rollback()
+
+    print(apply[0][0])
+
+    return apply[0][0]
 
 
 @register.filter

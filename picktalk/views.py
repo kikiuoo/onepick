@@ -331,28 +331,24 @@ def proList(request, type, page, num) :
 
     if type == "audi":
 
-        query = "SELECT * " \
-                "FROM audition_apply AS audi LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
-                "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
-                "WHERE audi.auditionNum = '" + num + "' "
+        query = "SELECT profileNum, regTime FROM audition_apply WHERE auditionNum = '" + num + "' GROUP BY profileNum ORDER BY regTime DESC "
 
         result = cursor.execute(query)
         allList = cursor.fetchall()
 
         if user:
-            query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCareer, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user + "' AND auditionNum = audi.num ) AS proPick  " \
-                    "FROM audition_apply AS audi LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
+            query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick  " \
+                    "FROM ( SELECT profileNum, regTime FROM audition_apply WHERE auditionNum = '" + num + "' GROUP BY profileNum ORDER BY regTime DESC ) AS audi " \
+                    "LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
                     "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
-                    "WHERE audi.auditionNum = '" + num + "' " \
                     "order by audi.regTime desc limit " + str(start) + ", " + str(end)
 
         else:
-            if type == "audi":
-                query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCaree, '0' AS proPickr " \
-                        "FROM audition_apply AS audi LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
-                        "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
-                        "WHERE audi.auditionNum = '" + num + "' " \
-                        "order by audi.regTime desc limit " + str( start) + ", " + str(end)
+            query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCaree, '0' AS proPickr " \
+                    "FROM ( SELECT profileNum, regTime FROM audition_apply WHERE auditionNum = '" + num + "' GROUP BY profileNum ORDER BY regTime DESC ) AS audi " \
+                    "LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
+                    "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
+                    "order by audi.regTime desc limit " + str( start) + ", " + str(end)
 
     elif type == "pick":
 
@@ -424,19 +420,19 @@ def proList2(request, type, page, num) :
     if type == "audi":
 
         if user:
-            query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCareer, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user + "' AND auditionNum = audi.num ) AS proPick  " \
-                    "FROM audition_apply AS audi LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
+            query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick  " \
+                    "FROM ( SELECT profileNum, regTime FROM audition_apply WHERE auditionNum = '" + num + "' GROUP BY profileNum ORDER BY regTime DESC ) AS audi " \
+                    "LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
                     "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
-                    "WHERE audi.auditionNum = '" + num + "' " \
                     "order by audi.regTime desc limit " + str(start) + ", " + str(end)
 
         else:
-            if type == "audi":
-                query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCaree, '0' AS proPickr " \
-                        "FROM audition_apply AS audi LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
-                        "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
-                        "WHERE audi.auditionNum = '" + num + "' " \
-                        "order by audi.regTime desc limit " + str( start) + ", " + str(end)
+            query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCaree, '0' AS proPickr " \
+                    "FROM ( SELECT profileNum, regTime FROM audition_apply WHERE auditionNum = '" + num + "' GROUP BY profileNum ORDER BY regTime DESC ) AS audi " \
+                    "LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
+                    "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
+                    "order by audi.regTime desc limit " + str( start) + ", " + str(end)
+
 
     elif type == "pick":
 
@@ -472,6 +468,8 @@ def proList2(request, type, page, num) :
 
     result = cursor.execute(query)
     profile = cursor.fetchall()
+
+    print(profile)
 
     connection.commit()
     connection.close()

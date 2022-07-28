@@ -87,7 +87,7 @@ $(document).ready(function(){
     $(document).on("click", ".sendProfile", function (){
         var profileCheck = $(".profileCheck:checked").val();
 
-        if( profileCheck == "" ){
+        if( profileCheck == "" || profileCheck == undefined ){
             alert("제출할 프로필을 선택해 주세요");
             return;
         }
@@ -110,8 +110,10 @@ function  saveApply(profileCheck, num, writeUID, userID){
 
       success: function(data){
           if( data.code == "0"){
-              alert("정상적으로 오디션 제안되었습니다.");
+              alert("정상적으로 오디션 지원되었습니다.");
               $(".audiApplyBack").css("display", "none");
+          }else if( data.code == "1"){
+              alert(data.msg);
           }
       },
       error: function (request, status, error){

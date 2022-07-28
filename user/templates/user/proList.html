@@ -22,6 +22,8 @@
 
 {% if type == "audi" %}
     <div class="inBox">
+        
+
         {% for data in profile %}
         <div class="profile" data-num="{{ data.0 }}">
             <div class="imageBox">
@@ -45,8 +47,9 @@
                         소속사 있음
                     {% endif %} <br>
                     {{ data.12 }} {{ data.13 }}
+
                     {% if data.14 != None %}
-                     <br>특기 {{ profile.14|getTalent }}
+                     <br>특기 {{ data.14|getTalent }}
                     {% endif %}
                 </div>
 

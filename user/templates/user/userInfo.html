@@ -134,6 +134,25 @@
 
             {% endif %}
 
+
+            <div class="joinInfo">
+                <div class="title">광고 수신 동의</div>
+                <div class="content" style="padding-top: 13px">
+                    {% if userInfo.agreeemail == "Y" or userInfo.agreeemail == "1"  %}
+                    <label class="textCheck emailCheck"><input type="checkbox" name="emailCheck" id="emailCheck" value="1" checked> 이메일 <div class="check  on"></div>  </label>
+                    {% else %}
+                    <label class="textCheck emailCheck" style="color: #c0c0c0"><input type="checkbox" name="emailCheck" id="emailCheck" value="1"> 이메일 <div class="check "></div>  </label>
+                    {% endif %}
+
+
+                    {% if userInfo.agreesms == "Y" or userInfo.agreesms == "1"  %}
+                    <label class="textCheck phoneCheck"><input type="checkbox" name="phoneCheck" id="phoneCheck" value="1" checked> SMS <div class="check on"></div>  </label>
+                    {% else %}
+                    <label class="textCheck phoneCheck" style="color: #c0c0c0"><input type="checkbox" name="phoneCheck" id="phoneCheck" value="1"> SMS <div class="check"></div>  </label>
+                    {% endif %}
+
+                </div>
+            </div>
         </div>
 
         {% if userInfo.usertype == "COMPANY" or userInfo.usertype == "S-COMPANY" %}

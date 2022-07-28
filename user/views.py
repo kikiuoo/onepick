@@ -501,6 +501,20 @@ def updateCallback(request) :
     phone2 = request.POST.get("phone2", "")
     phone3 = request.POST.get("phone3", "")
 
+    phoneCheck = request.POST.get('phoneCheck',"")
+    emailCheck = request.POST.get('emailCheck',"")
+
+    print( "adfajdflkajsdfl ajd" + phoneCheck + "  sdfsdfsdfsdf " + emailCheck)
+
+    if phoneCheck != "1" :
+        phoneCheck = "0"
+
+    if emailCheck != "1":
+        emailCheck = "0"
+
+    userInfo.agreeemail = emailCheck
+    userInfo.agreesms = phoneCheck
+
     if userInfo.usertype == "NORMAL" or userInfo.usertype == "S-NORMAL" : # 일반 회원
 
         brith1 = request.POST.get("brith1", "")
@@ -520,6 +534,7 @@ def updateCallback(request) :
         userInfo.gender = gender
         userInfo.addr1 = addr1
         userInfo.addr2 = addr2
+        userInfo.usertype = "NORMAL"
 
         url = "/users/mypage/user/"
 

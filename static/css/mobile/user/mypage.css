@@ -545,6 +545,7 @@
     background-color: #fff;
     box-sizing: border-box;
     cursor: pointer;
+    padding-bottom: 80px;
 }
 
 .inBox .profile .imageBox{
@@ -701,4 +702,14 @@
     font-weight: bold;
     text-align: center;
     color: #fff;
+}
+
+.apply {
+    width: 100px !important;
+}
+
+.apply p{
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
 }
