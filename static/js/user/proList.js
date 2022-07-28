@@ -34,9 +34,13 @@ $(document).ready(function (){
     });
 
 
+    var pageHeight = $(document).height() - $(window).height();
     $(window).scroll(function() {
-        console.log(page + " " +$(window).scrollTop() + " " + ( $(document).height() - $(window).height() - 100 ) + " " + $(document).height() + " " +$(window).height());
-        if ($(window).scrollTop() >= ($(document).height() - $(window).height())) {
+        var scrollH = $(window).scrollTop();
+        var pageH = ( pageHeight * page ) - 100;
+
+        console.log(page + " " +scrollH + " " + pageH);
+        if (scrollH >= pageH) {
             page++;
 
             getProfileList( page );

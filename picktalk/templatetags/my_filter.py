@@ -56,15 +56,20 @@ def parsingYoutube_view(values) :
 
 @register.filter
 def getTalent(values) :
-    talent = values.split('|')
 
-    returnDate = ""
-    count = 0;
-    for talents in talent :
-        count = count + 1
-        returnDate = returnDate + " " + talents
+    if values != None :
 
-        if count > 3 : break
+        talent = values.split('|')
+
+        returnDate = ""
+        count = 0;
+        for talents in talent :
+            count = count + 1
+            returnDate = returnDate + " " + talents
+
+            if count > 3 : break
+    else :
+        returnDate = ""
 
     return returnDate
 
@@ -191,8 +196,6 @@ def getSubCates(value):
 
 @register.filter
 def getArrayCount(value):
-
-    print(value)
 
     returnLen = 0;
     if value != "" :

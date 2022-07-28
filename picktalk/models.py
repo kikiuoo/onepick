@@ -116,6 +116,33 @@ class EventBanner(models.Model):
         db_table = 'event_banner'
 
 
+class MailDetail(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    mailnum = models.BigIntegerField(db_column='mailNum', blank=True, null=True)  # Field name made lowercase.
+    userid = models.CharField(db_column='userID', max_length=200, blank=True, null=True)  # Field name made lowercase.
+    status = models.CharField(max_length=50, blank=True, null=True)
+    comment = models.CharField(max_length=100, blank=True, null=True)
+    regdate = models.DateTimeField(db_column='regDate', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'mail_detail'
+
+
+class MailList(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    title = models.CharField(max_length=100, blank=True, null=True)
+    content = models.TextField(blank=True, null=True)
+    send = models.IntegerField(blank=True, null=True)
+    success = models.IntegerField(blank=True, null=True)
+    fail = models.IntegerField(blank=True, null=True)
+    regdate = models.DateTimeField(db_column='regDate', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'mail_list'
+
+
 class ProfileCareer(models.Model):
     num = models.BigAutoField(primary_key=True)
     userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.

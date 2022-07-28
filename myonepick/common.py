@@ -5,6 +5,8 @@ import os
 import requests
 from django.conf import settings
 import datetime
+import smtplib
+from email.mime.text import MIMEText
 
 def getPageList ( nowPage, allPage) :
 
@@ -27,6 +29,22 @@ def getPageList ( nowPage, allPage) :
     paging = list(range(int(startPage), int(ePage)+1))
 
     return paging
+
+
+
+def getPageList_v2 ( nowPage, allPage) :
+
+    pageArea = int( (nowPage/10) + 1 ) * 10
+
+    sPage = pageArea-9
+    ePage = pageArea+1
+    if int(allPage) < ePage:
+        ePage = int(allPage) + 1
+
+    paging = list(range(sPage, ePage))
+
+    return paging
+
 
 
 def  uploadFile(uploadFile, fileurl, sub):
@@ -96,3 +114,23 @@ def finalDate(date) :
     d_day = target_date - today
 
     return d_day.days
+
+
+def sendMails(title, content, mail) :
+    try :
+        print( title+ " " +  content + " " + mail)
+
+        smtp = smtplib.SMTP('smtp.gmail.com', 587)
+        smtp.ehlo()
+        smtp.starttls()
+        smtp.login("ksonepick@gmail.com", "cfbfdpogjnchjrvk")  # 로그인 정보
+
+        msg = MIMEText(content, 'html')
+        msg['Subject'] = title
+
+        smtp.sendmail("ksonepick@gmail.com", mail, msg.as_string())
+        smtp.quit()
+
+    except :
+        return "FAIL"
+    return "OK"

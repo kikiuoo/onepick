@@ -1,0 +1,96 @@
+{% extends 'onepickAdmin/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/onepickAdmin/cs/mailing.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/summernote-lite.css' %}"> <!-- pc 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/onepickAdmin/cs/mailing.js' %}"></script>
+<script src="{% static 'js/summernote/summernote-lite.min.js' %}"></script>
+<script src="{% static 'js/summernote/summernote-ko-KR.min.js' %}"></script>
+
+<div class="inBox">
+    <div class="title">메일 전송</div>
+
+    <div class="viewBox">
+        <input type="text" id="title" placeholder="제목을 입력해주세요.">
+
+        <div class="summernote"></div>
+    </div>
+
+    <div class="viewBox">
+        <div class="inTitle">
+            <span>수신자 선택 (<span id="selCount">0</span> / <span id="allCount">{{ userList|getArrayCount }}</span>)</span>
+        </div>
+
+        <div class="filterBox">
+            <select name="userType" id="userType">
+                <option value="" selected>회원구분</option>
+                <option value="NORMAL">일반회원</option>
+                <option value="COMPANY">기업회원</option>
+                <option value="admin">관리자</option>
+            </select>
+
+            <select name="geneder" id="geneder">
+                <option value="" selected>성별</option>
+                <option value="man">남성</option>
+                <option value="girl">여성</option>
+            </select>
+
+            <input type="text" id="age2" value="" placeholder="나이">
+            <span>~</span>
+            <input type="text" id="age1" value="" placeholder="나이">
+
+            <input type="text" id="name" value="" placeholder="이름">
+
+        </div>
+
+
+        <div class="in_line"></div>
+
+        <div class="contentBox">
+            {% for user in userList %}
+            <div class="contentList">
+                <div class="name">{{ user.2 }}</div>
+                <div class="userType">
+                    {% if user.5 == "NORMAL" or user.5 == "S-NORMAL"  %} 일반
+                    {% elif  user.5 == "COMPANY" or user.5 == "S-COMPANY" %} 기업
+                    {% elif  user.5 == "admin" %} 관리자 {% endif %}
+                </div>
+                <div class="email">{{ user.0 }}</div>
+                <div class="gender">
+                    {% if user.3 == "man" %} 남성
+                    {% else %} 여성 {% endif %}
+                </div>
+                {% if user.4|userAge > 99  %}
+                <div class="age">00</div>
+                {% else %}
+                <div class="age">{{ user.4|userAge }}</div>
+                {% endif %}
+                <div class="checkBox">
+                    <input type="checkbox" class="profileCheck" name="profile" value="{{ user.1 }}" id="check_{{ forloop.counter0 }}">
+                    <label class="checkProfile" for="check_{{ forloop.counter0 }}"></label>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="btnBox">
+        <div class="sendBtn">전송하기</div>
+        <label class="textCheck"><input type="checkbox" name="allCheck" id="allCheck" value="1"> 전체선택 <div class="check"></div></label>
+    </div>
+
+</div>
+
+<script>
+  $.ajaxSetup({
+    headers: { "X-CSRFToken": '{{csrf_token}}' }
+  });
+</script>
+
+{% endblock %}
