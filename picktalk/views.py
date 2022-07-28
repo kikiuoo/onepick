@@ -170,14 +170,14 @@ def searchList(request, cateType, search, page) :
                         "    LEFT JOIN  user_company AS uc ON ai.userID = uc.userID " \
                         "where ( ai.isDelete = '0' or ai.isDelete is null ) " \
                         "     and ( title LIKE '%" + search + "%' OR age LIKE '%" + search + "%' OR gender LIKE '%" + search + "%' OR career LIKE '%" + search + "%' OR essential LIKE '%" + search + "%'  OR preparation LIKE '%" + search + "%' ) " \
-                        "ORDER BY ai.regTime DESC limit " + str(start) + ", " + str(end)
+                        "ORDER BY ai.regTime DESC limit " + str(start) + ", " + str(block)
             else:
                 query = "SELECT ai.num, ai.title, cm.cateName, ai.career, ai.age, ai.endDate, ai.regTime, ai.ordinary, uc.logoImage, DATEDIFF(NOW(),  ai.regTime) AS diffDate , '0' AS audiPick " \
                         "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode " \
                         "    LEFT JOIN  user_company AS uc ON ai.userID = uc.userID " \
                         "where ( ai.isDelete = '0' or ai.isDelete is null ) " \
                         "     and ( title LIKE '%" + search + "%' OR age LIKE '%" + search + "%' OR gender LIKE '%" + search + "%' OR career LIKE '%" + search + "%' OR essential LIKE '%" + search + "%'  OR preparation LIKE '%" + search + "%' ) " \
-                        "ORDER BY ai.regTime DESC limit " + str(start) + ", " + str(end)
+                        "ORDER BY ai.regTime DESC limit " + str(start) + ", " + str(block)
 
             result = cursor.execute(query)
             searching = cursor.fetchall()
@@ -209,7 +209,7 @@ def searchList(request, cateType, search, page) :
                         "      ( career > 0 OR etcCareer > 0 OR `foreign` LIKE '%" + search + "%' OR talent LIKE '%" + search + "' OR `comment` LIKE '%" + search + "%' OR `careerYear` LIKE '%" + search + "%' OR `careerMonth` LIKE '%" + search + "%' " \
                         "        OR `foreign` LIKE '%" + search + "%' OR `birth` LIKE '%" + search + "%' OR `finalSchool` LIKE '%" + search + "%' OR `school` LIKE '%" + search + "%' OR `major` LIKE '%" + search + "%' OR `entertain` LIKE '%" + search + "%' OR `military` LIKE '%" + search + "%')  " \
                         "ORDER BY regDate DESC " \
-                        " LIMIT " + str(start) + ", " + str(end)
+                        " LIMIT " + str(start) + ", " + str(block)
             else:
                 query = "SELECT p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain," \
                         "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, '0' AS proPick " \
@@ -220,7 +220,7 @@ def searchList(request, cateType, search, page) :
                         "      ( career > 0 OR etcCareer > 0 OR `foreign` LIKE '%" + search + "%' OR talent LIKE '%" + search + "' OR `comment` LIKE '%" + search + "%' OR `careerYear` LIKE '%" + search + "%' OR `careerMonth` LIKE '%" + search + "%' " \
                         "        OR `foreign` LIKE '%" + search + "%' OR `birth` LIKE '%" + search + "%' OR `finalSchool` LIKE '%" + search + "%' OR `school` LIKE '%" + search + "%' OR `major` LIKE '%" + search + "%' OR `entertain` LIKE '%" + search + "%' OR `military` LIKE '%" + search + "%')  " \
                         "ORDER BY regDate DESC  " \
-                        " LIMIT " + str(start) + ", " + str(end)
+                        " LIMIT " + str(start) + ", " + str(block)
 
             result = cursor.execute(query)
             searching = cursor.fetchall()
@@ -341,14 +341,14 @@ def proList(request, type, page, num) :
                     "FROM ( SELECT profileNum, regTime FROM audition_apply WHERE auditionNum = '" + num + "' GROUP BY profileNum ORDER BY regTime DESC ) AS audi " \
                     "LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
                     "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
-                    "order by audi.regTime desc limit " + str(start) + ", " + str(end)
+                    "order by audi.regTime desc limit " + str(start) + ", " + str(block)
 
         else:
             query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCaree, '0' AS proPickr " \
                     "FROM ( SELECT profileNum, regTime FROM audition_apply WHERE auditionNum = '" + num + "' GROUP BY profileNum ORDER BY regTime DESC ) AS audi " \
                     "LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
                     "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
-                    "order by audi.regTime desc limit " + str( start) + ", " + str(end)
+                    "order by audi.regTime desc limit " + str( start) + ", " + str(block)
 
     elif type == "pick":
 
@@ -424,14 +424,14 @@ def proList2(request, type, page, num) :
                     "FROM ( SELECT profileNum, regTime FROM audition_apply WHERE auditionNum = '" + num + "' GROUP BY profileNum ORDER BY regTime DESC ) AS audi " \
                     "LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
                     "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
-                    "order by audi.regTime desc limit " + str(start) + ", " + str(end)
+                    "order by audi.regTime desc limit " + str(start) + ", " + str(block)
 
         else:
             query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCaree, '0' AS proPickr " \
                     "FROM ( SELECT profileNum, regTime FROM audition_apply WHERE auditionNum = '" + num + "' GROUP BY profileNum ORDER BY regTime DESC ) AS audi " \
                     "LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
                     "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
-                    "order by audi.regTime desc limit " + str( start) + ", " + str(end)
+                    "order by audi.regTime desc limit " + str( start) + ", " + str(block)
 
 
     elif type == "pick":
