@@ -72,7 +72,7 @@ $(document).ready(function(){
    // 오디션 지원 기능 추가
     $(document).on("click", ".supportBtn", function(){
        // 오디션 지원 기능 추가 필요,
-        if( userType == "NORMAL" || userType == "admin") {
+        if( userType == "NORMAL" || userType == "S-NORMAL" || userType == "admin") {
             $(".audiApplyBack").css("display", "block");
         }else{
             alert("권한이 없습니다.");
