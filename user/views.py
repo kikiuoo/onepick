@@ -196,15 +196,15 @@ def userLogin(request, id, email, gender, name, birth, joinType) :
         userID = isUser.userid
         userType = isUser.usertype
 
+        request.session['id'] = userID
+        request.session['userType'] = userType
+        request.session.set_expiry(0)
+
         if isUser.phone == None or isUser.email == None or isUser.name == None or isUser.usertype == "S-NORMAL" \
             or isUser.phone == "" or isUser.email == "" or isUser.name == "" :
             returnUrl = "/users/join/" + str(userID) + "/social/"
         else :
             updateLastVisit(userID)
-
-            request.session['id'] = userID
-            request.session['userType'] = userType
-            request.session.set_expiry(0)
 
             returnUrl = "/"
 

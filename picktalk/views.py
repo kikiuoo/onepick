@@ -16,14 +16,32 @@ from myonepick.common import *
 
 # Index 페이지 Query 내용
 def index(request):
+    user = request.session.get('id', '')
+
+    print(user)
+
+    if user:
+        # 메인 진입시 회원정보 누락시 회원가입 페이지 이동.
+        isUser = UserInfo.objects.get(userid=user)
+
+        print(isUser)
+
+        if (isUser.phone == None or isUser.email == None or isUser.name == None or isUser.usertype == "S-NORMAL"  \
+            or isUser.phone == "" or isUser.email == "" or isUser.name == "") and (isUser.jointype == 'oldUser' or isUser.jointype == 'OLDUSER'):
+            returnUrl = "/users/join/" + str(user) + "/oldUser/"
+
+            return redirect(returnUrl)
+        elif isUser.phone == None or isUser.email == None or isUser.name == None or isUser.usertype == "S-NORMAL" \
+                or isUser.phone == "" or isUser.email == "" or isUser.name == "" :
+            returnUrl = "/users/join/" + str(user) + "/social/"
+
+            return redirect(returnUrl)
 
     try :
         cursor = connection.cursor()
 
         # 메인 베너
         mainbanner = EventBanner.objects.filter(position="main", nowview="1")
-
-        user = request.session.get('id', '')
 
         if user :
             query = "SELECT AI.num, AI.title, AI.endDate, AI.ordinary, UC.logoImage, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user +"' AND auditionNum = AI.num ) AS audiPick " \
@@ -320,7 +338,7 @@ def notiList(request, page) :
     return render(request, 'picktalk/notiList.html', {"notice": notice, "paging" : paging, "page":page})
 
 
-def proList(request, type, page, num) :
+def proList(request, type, page, num, filter) :
 
     block = 10
     start = (page - 1) * block
@@ -331,21 +349,25 @@ def proList(request, type, page, num) :
 
     if type == "audi":
 
-        query = "SELECT profileNum, regTime FROM audition_apply WHERE auditionNum = '" + num + "' GROUP BY profileNum ORDER BY regTime DESC "
+        addWhere = ""
+        if filter == "pass" :
+            addWhere = " and pick = 'Y' "
+
+        query = "SELECT profileNum, regTime FROM audition_apply WHERE auditionNum = '" + num + "' "+addWhere+" GROUP BY profileNum ORDER BY regTime DESC "
 
         result = cursor.execute(query)
         allList = cursor.fetchall()
 
         if user:
-            query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick  " \
-                    "FROM ( SELECT profileNum, regTime FROM audition_apply WHERE auditionNum = '" + num + "' GROUP BY profileNum ORDER BY regTime DESC ) AS audi " \
+            query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick, audi.COMMENT, audi.pick  " \
+                    "FROM ( SELECT profileNum, COMMENT, pick,  regTime FROM audition_apply WHERE auditionNum = '" + num + "' "+addWhere+" GROUP BY profileNum ORDER BY regTime DESC ) AS audi " \
                     "LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
                     "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
                     "order by audi.regTime desc limit " + str(start) + ", " + str(block)
 
         else:
-            query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCaree, '0' AS proPickr " \
-                    "FROM ( SELECT profileNum, regTime FROM audition_apply WHERE auditionNum = '" + num + "' GROUP BY profileNum ORDER BY regTime DESC ) AS audi " \
+            query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCaree, '0' AS proPickr, audi.COMMENT, audi.pick  " \
+                    "FROM ( SELECT profileNum, COMMENT, pick,  regTime FROM audition_apply WHERE auditionNum = '" + num + "' "+addWhere+" GROUP BY profileNum ORDER BY regTime DESC ) AS audi " \
                     "LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
                     "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
                     "order by audi.regTime desc limit " + str( start) + ", " + str(block)
@@ -405,10 +427,10 @@ def proList(request, type, page, num) :
     connection.commit()
     connection.close()
 
-    return render(request, 'user/proList.html', {"type": type, "page":page, "profile": profile,
+    return render(request, 'user/proList.html', {"type": type, "page":page, "profile": profile, "filter" : filter,
                                                  "allCount" : cursor.rowcount, "allList" : len(allList), "num": num })
 
-def proList2(request, type, page, num) :
+def proList2(request, type, page, num, filter) :
 
     block = 10
     start = (page - 1) * block
