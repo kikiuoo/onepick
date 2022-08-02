@@ -441,16 +441,20 @@ def proList2(request, type, page, num, filter) :
 
     if type == "audi":
 
+        addWhere = ""
+        if filter == "pass":
+            addWhere = " and pick = 'Y' "
+
         if user:
-            query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick  " \
-                    "FROM ( SELECT profileNum, regTime FROM audition_apply WHERE auditionNum = '" + num + "' GROUP BY profileNum ORDER BY regTime DESC ) AS audi " \
+            query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick, audi.COMMENT, audi.pick  " \
+                    "FROM ( SELECT profileNum, COMMENT, pick,  regTime FROM audition_apply WHERE auditionNum = '" + num + "' "+addWhere+" GROUP BY profileNum ORDER BY regTime DESC ) AS audi " \
                     "LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
                     "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
                     "order by audi.regTime desc limit " + str(start) + ", " + str(block)
 
         else:
-            query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCaree, '0' AS proPickr " \
-                    "FROM ( SELECT profileNum, regTime FROM audition_apply WHERE auditionNum = '" + num + "' GROUP BY profileNum ORDER BY regTime DESC ) AS audi " \
+            query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCaree, '0' AS proPickr, audi.COMMENT, audi.pick  " \
+                    "FROM ( SELECT profileNum, COMMENT, pick,  regTime FROM audition_apply WHERE auditionNum = '" + num + "' "+addWhere+" GROUP BY profileNum ORDER BY regTime DESC ) AS audi " \
                     "LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
                     "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
                     "order by audi.regTime desc limit " + str( start) + ", " + str(block)
@@ -592,3 +596,20 @@ def qaDeleteComment(request) :
 def gsdv(request) :
 
     return render(request, 'picktalk/gsdv.txt')
+
+def updateApplyPick(request) :
+
+    pick = request.GET["pick"]
+    auditionNum = request.GET["auditionNum"]
+    profileNum = request.GET["profileNum"]
+    comment = request.GET["comment"]
+
+    apply = AuditionApply.objects.filter(auditionnum=auditionNum, profilenum=profileNum)
+
+    for data in apply :
+        data.pick = pick
+        data.comment = comment
+
+        data.save()
+
+    return JsonResponse({"code": "0"})

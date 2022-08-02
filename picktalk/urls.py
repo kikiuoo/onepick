@@ -5,6 +5,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     #path('', views.downstime, name='downstime'),
     path("ajax/updatePick/", views.updatePick, name="ajax-updatepick"),
+    path("ajax/updateApplyPick/", views.updateApplyPick, name="ajax-updateApplyPick"),
 
     path("advertise/", views.advertise, name="advertisse"),
     path("advertise/callBack/", views.advertise_callBack, name="advertise-callback"),
@@ -15,8 +16,8 @@ urlpatterns = [
     path("notice/viewer/<int:num>/", views.notice, name="notice"),
     path("notice/list/<int:page>/", views.notiList, name="notiList"),
 
-    path("proList/<type>/<int:page>/<num>/", views.proList, name="proList"),
-    path("proList2/<type>/<int:page>/<num>/", views.proList2, name="proList"),
+    path("proList/<type>/<int:page>/<num>/<filter>/", views.proList, name="proList"),
+    path("proList2/<type>/<int:page>/<num>/<filter>/", views.proList2, name="proList"),
 
     path("qanda/list/<int:page>/", views.qandaList, name="qandaList"),
 

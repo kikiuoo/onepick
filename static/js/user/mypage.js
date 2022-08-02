@@ -93,11 +93,11 @@ $(document).ready(function (){
         if( type == "notice" ){
             window.location.href = "/notice/list/1/";
         }else if( type == "pick" ){
-            window.location.href = "/proList/pick/1/1/";
+            window.location.href = "/proList/pick/1/1/1/";
         }else if( type == "suggest" ){
-            window.location.href = "/proList/suggest/1/1/";
+            window.location.href = "/proList/suggest/1/1/1/";
         }else if( type == "audiProfile" ){
-            window.location.href = "/proList/audi/1/"+num+"/";
+            window.location.href = "/proList/audi/1/"+num+"/all/";
         }else if( type == "qanda" ){
             window.location.href = "/qanda/list/1/";
         }

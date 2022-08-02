@@ -22,78 +22,119 @@
 
 {% if type == "audi" %}
     <div class="inBox">
-        
 
-        {% for data in profile %}
-        <div class="profile" data-num="{{ data.0 }}">
-            <div class="imageBox">
-                <div class="profileImage"   style='background-image: url("/media/{{ data.1 }}");'></div>
-                {% if profile.16 != "" %}
-                <div class="youtube">
-                    <iframe width="560" height="315" src="{{ data.16|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                {% endif %}
-            </div>
-            <div class="contentBox">
-                <div class="name">{{ data.7 }} ({{ data.8|userAge }})</div>
-                <div class="detailInfo">
-                    키 {{ data.2 }} cm | 몸무게 {{ data.3 }} kg<br>
-                    {% if data.10 == 'man' and data.11 != None %}
-                        {{ data.11 }} |
-                    {% endif %}
-                    {% if data.9 == "" %}
-                        소속사 없음
-                    {% else %}
-                        소속사 있음
-                    {% endif %} <br>
-                    {{ data.12 }} {{ data.13 }}
-
-                    {% if data.14 != None %}
-                     <br>특기 {{ data.14|getTalent }}
-                    {% endif %}
-                </div>
-
-                {% if profile.17 == '0' %}
-                <div class="career">
-                    <div class="careerTitle">영화</div>
-                    <div class="careerContent">{{ data.0|getCareer:"movie" }}</div>
-                    <div class="careerTitle">TV드라마,웹드라마</div>
-                    <div class="careerContent">{{ data.0|getCareer:"drama" }}</div>
-                    <div class="careerTitle">광고/기타</div>
-                    <div class="careerContent">{{ data.0|getCareer:"etc" }}</div>
-                </div>
-                {% else %}
-                <div class="career">
-                    <div class="careerTitle">자기 소개</div>
-                    <div class="introduction">{{ data.15 }}</div>
-                </div>
-                {% endif %}
-
-            </div>
-
-
-            <div class="viewBox">
-                <div class="countBox">
-                    <span class="viewCount"></span>
-                    <p>{{ data.4 }}</p>
-                </div>
-                <div class="countBox">
-                    <span class="pickCount"></span>
-                    <p>{{ data.5 }}</p>
-                </div>
-                <div class="countBox">
-                    <span class="comViewCount"></span>
-                    <p>{{ data.6 }}</p>
-                </div>
-            </div>
-
-            {% if data.18 == 0 or data.18 == "0" %}
-            <div class="pickBtn" data-nowType="off"></div>
-            {% else %}
-            <div class="pickBtn pickOn " data-nowType="on"></div>
-            {% endif %}
+        <div class="filterBox">
+            <select name="listView" id="listView">
+                <option value="all" {% if filter == "all" %}selected{% endif %}>전체</option>
+                <option value="pass" {% if filter == "pass" %}selected{% endif %}>예비합격자</option>
+            </select>
         </div>
-        {% endfor %}
+
+        <div class="itemBox">
+
+            {% for data in profile %}
+            <div class="profile" data-num="{{ data.0 }}">
+                <div class="passBtn {% if data.20 == "Y" %}passOn{% endif %}"
+                    data-comment="{{ data.19|default:"" }}"
+                    data-num="{{ data.0 }}" data-image="/media/{{ data.1 }}"
+                    data-name="{{ data.7 }} ({{ data.8|userAge }})" id="pass_{{ data.0 }}"
+                >
+                    예비합격 <span></span>
+                </div>
+
+                <div class="imageBox">
+                    <div class="profileImage"   style='background-image: url("/media/{{ data.1 }}");'></div>
+                    {% if profile.16 != "" %}
+                    <div class="youtube">
+                        <iframe width="560" height="315" src="{{ data.16|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="contentBox">
+                    <div class="name">{{ data.7 }} ({{ data.8|userAge }})</div>
+                    <div class="detailInfo">
+                        키 {{ data.2 }} cm | 몸무게 {{ data.3 }} kg<br>
+                        {% if data.10 == 'man' and data.11 != None %}
+                            {{ data.11 }} |
+                        {% endif %}
+                        {% if data.9 == "" %}
+                            소속사 없음
+                        {% else %}
+                            소속사 있음
+                        {% endif %} <br>
+                        {{ data.12 }} {{ data.13 }}
+
+                        {% if data.14 != None %}
+                         <br>특기 {{ data.14|getTalent }}
+                        {% endif %}
+                    </div>
+
+                    {% if profile.17 == '0' %}
+                    <div class="career">
+                        <div class="careerTitle">영화</div>
+                        <div class="careerContent">{{ data.0|getCareer:"movie" }}</div>
+                        <div class="careerTitle">TV드라마,웹드라마</div>
+                        <div class="careerContent">{{ data.0|getCareer:"drama" }}</div>
+                        <div class="careerTitle">광고/기타</div>
+                        <div class="careerContent">{{ data.0|getCareer:"etc" }}</div>
+                    </div>
+                    {% else %}
+                    <div class="career">
+                        <div class="careerTitle">자기 소개</div>
+                        <div class="introduction">{{ data.15 }}</div>
+                    </div>
+                    {% endif %}
+
+                </div>
+
+
+                <div class="viewBox">
+                    <div class="countBox">
+                        <span class="viewCount"></span>
+                        <p>{{ data.4 }}</p>
+                    </div>
+                    <div class="countBox">
+                        <span class="pickCount"></span>
+                        <p>{{ data.5 }}</p>
+                    </div>
+                    <div class="countBox">
+                        <span class="comViewCount"></span>
+                        <p>{{ data.6 }}</p>
+                    </div>
+                </div>
+
+                {% if data.18 == 0 or data.18 == "0" %}
+                <div class="pickBtn" data-nowType="off"></div>
+                {% else %}
+                <div class="pickBtn pickOn " data-nowType="on"></div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+
+    <div class="popupBack">
+        <div class="popupBox">
+
+            <div class="popupTitle">예비 합격</div>
+            <div class="popupClose"></div>
+
+            <div class="profileBox">
+                <div class="image"></div>
+                <div class="profileName">이**(25)</div>
+                <div class="checkView"></div>
+
+                <textarea name="comment" id="comment"></textarea>
+                <input name="userNum" id="userNum" type="hidden">
+            </div>
+
+            <div class="popupBtnBox">
+                <div class="prePassBtn">예비 합격</div>
+                <div class="cancelPassBtn">예비 합격 취소</div>
+            </div>
+        </div>
     </div>
 {% elif type == "pick" %}
     <div class="inBox">
@@ -200,6 +241,7 @@
     var type = "{{ type }}";
     var page = "{{ page }}";
     var num = "{{ num }}";
+    var filter = "{{ filter }}";
 </script>
 
 {% endblock %}

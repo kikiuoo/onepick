@@ -763,3 +763,215 @@
     color: #fff;
     cursor: pointer;
 }
+
+.passBtn{
+    z-index: 5;
+    position: absolute;
+    border: 1px solid #e1e1e1;
+    right: 15px;
+    top: 15px;
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    line-height: 38px;
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: bold;
+    color: #e1e1e1;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+.passBtn span{
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    top: 5px;
+    right: 5px;
+
+    background-image: url("../../../image/web/check_off.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+}
+
+.passBtn.passOn{
+    border: 1px solid #ff8aae;
+    color: #ff8aae;
+}
+
+.passBtn.passOn span{
+    background-image: url("../../../image/web/check_on.png");
+}
+
+.filterBox{
+    position: absolute;
+    right: 10px;
+    top:  -50px;
+}
+
+.filterBox #listView{
+    width: 140px;
+    height: 40px;
+    border-radius: 10px;
+    padding:0px 12px;
+    box-sizing: border-box;
+    border: 1px solid #c0c0c0;
+
+    font-size: 15px;
+    color: #1f1f1f;
+    background:url('../../../image/web/arrow.png') no-repeat right 16px center;
+    background-color: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+
+select:focus{
+    outline: none;
+}
+
+.popupBack{
+    z-index: 10;
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.popupBack .popupBox{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -260px;
+    margin-left: -400px;
+    padding:  40px 105px;
+    box-sizing: border-box;
+
+    width: 800px;
+    height: 520px;
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+.popupBack .popupBox .popupTitle{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color:  #1f1f1f;
+    margin-bottom: 35px;
+}
+
+.popupBack .popupBox .popupClose{
+    position: absolute;
+    right: 40px;
+    top: 40px;
+
+    width: 22px;
+    height: 22px;
+
+    background-position: center;
+    background-image: url("../../../image/web/closeIcon.png");
+    background-repeat: no-repeat;
+    background-size: 90%;
+    cursor: pointer;
+}
+
+.popupBack .popupBox .profileBox{
+    position: relative;
+    width: 590px;
+    height: 270px;
+    border-radius: 20px;
+
+    padding-left: 260px;
+    border: 1px solid #c0c0c0;
+    box-sizing: border-box;
+}
+.popupBack .popupBox .profileBox .image{
+    position: absolute;
+    left: -1px;
+    top: -1px;
+
+    width: 241px;
+    height: 271px;
+    border-radius: 20px 0px 0px 20px;
+
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.popupBack .popupBox .profileBox .profileName{
+    margin-top: 25px;
+    margin-bottom: 22px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #454545;
+}
+
+.popupBack .popupBox .profileBox #comment{
+    font-size: 15px;
+    border-radius: 11px;
+    background-color: #fff;
+    border: 1px solid #c0c0c0;
+    box-sizing: border-box;
+    color: #1f1f1f;
+
+    padding: 20px;
+    line-height: 1.5em;
+    width: 310px;
+    height: 180px;
+    outline: none;
+
+    resize: none;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.popupBack .popupBox .profileBox .checkView{
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    top: 20px;
+    right: 20px;
+
+    background-image: url("../../../image/web/check_off.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+}
+
+.popupBack .popupBox .profileBox .checkView.on{
+    background-image: url("../../../image/web/check_on.png");
+}
+
+.popupBack .popupBox .popupBtnBox{
+    text-align: center;
+    font-size: 0px;
+    margin-top: 50px;
+}
+
+.popupBack .popupBox .popupBtnBox div{
+    display: inline-block;
+    width: 200px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.popupBack .popupBox .popupBtnBox div.prePassBtn{
+    background-color: #ff8aae;
+}
+.popupBack .popupBox .popupBtnBox div.cancelPassBtn{
+    background-color: #c0c0c0;
+    margin-left: 20px;
+}
