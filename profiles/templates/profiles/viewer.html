@@ -34,8 +34,8 @@
          <div class="userName">
              {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
                 {{ userInfo.name }},{{ userInfo.birth|userAge }}세({{ userInfo.birth|replace:"-|/" }})
-             {% elif request.session.userType == "COMPANY" %}
-                {{ userInfo.name }},{{ userInfo.birth|userAge }}세({{ userInfo.birth|replace:"-|/" }})
+             {% elif request.session.userType == "COMPANY" or request.session.userType == "S-COMPANY" %}
+                {{ userInfo.name|updateUserName }},{{ userInfo.birth|userAge }}세({{ userInfo.birth|replace:"-|/" }})
              {% else %}
                  {{ userInfo.name|updateUserName }},{{ userInfo.birth|userAge }}세(****/**/**)
              {% endif %}
