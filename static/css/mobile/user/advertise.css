@@ -92,7 +92,8 @@
     text-align: center;
 }
 
-.btnBox .sendBtn{
+.btnBox .sendBtn,
+.btnBox .sendBtn2{
     display: inline-block;
     width: 150px;
     height: 50px;

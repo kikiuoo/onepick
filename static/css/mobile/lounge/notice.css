@@ -11,6 +11,34 @@
     margin-bottom:30px;
 }
 
+.btnBox{
+    position: absolute;
+    z-index: 10;
+    right: 20px;
+    top: 25px;
+    font-size: 0px;
+}
+
+.btnBox div{
+    position: relative;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+    cursor: pointer;
+    vertical-align: top;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.btnBox div.editBtn{ background-image: url("../../../image/web/update.png"); }
+.btnBox div.delBtn{ background-image: url("../../../image/web/delete.png"); background-size: 80%; }
+.btnBox div.shareBtn{ background-image: url("../../../image/web/share.png"); }
+.btnBox div.printBtn{ background-image: url("../../../image/web/print.png"); }
+
+
 .titleBox {
     border-bottom: 1px solid #c0c0c0;
     padding-bottom: 10px;
@@ -20,6 +48,7 @@
 .titleBox .title{
     font-size: 14px;
     line-height: 1.57;
+    padding-right: 80px;
     color: #000;
     margin-bottom: 10px;
 }
@@ -134,7 +163,7 @@
     vertical-align: middle;
     cursor: pointer;
 
-    background-image: url("../../image/web/closeIcon.png");
+    background-image: url("../../../image/web/closeIcon.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;

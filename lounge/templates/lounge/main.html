@@ -1,0 +1,68 @@
+{% extends 'picktalk/base.html' %}
+
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/lounge/base.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/lounge/base.css' %}" > <!-- 모바일 버전 -->
+
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/lounge/main.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/lounge/main.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/lounge/main.js' %}"></script>
+
+<div class="inBox">
+
+    <div class="mTtitle" style="margin-top: 30px">공지사항 <span data-type="notice">전체보기</span></div>
+    <div class="notiBox">
+        {% for noti in qaList %}
+        <div class="notiList" data-type="notice" data-num="{{ noti.num }}">
+            <div class="title">{{ noti.title }}</div>
+            <div class="date">{{ noti.regdate|date:"Y/m/d" }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <div class="mTtitle" style="margin-top: 30px">원픽 매거진 <span data-type="magazine">전체보기</span></div>
+    <div class="notiBox">
+        {% for noti in magaList %}
+        <div class="notiList" data-type="magazine" data-num="{{ noti.num }}">
+            <div class="title">{{ noti.title }}</div>
+            <div class="date">{{ noti.regdate|date:"Y/m/d" }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <div class="mTtitle" style="margin-top: 30px">질문 게시판 <span data-type="qanda">전체보기</span></div>
+    <div class="notiBox">
+        {% for qa in qandaList %}
+        <div class="notiList" data-type="qa"  data-num="{{ qa.0 }}">
+            <div class="title">
+                <span>[{{ qa.1 }}]</span>
+                {{ qa.2 }}
+                [{{ qa.4 }}]
+            </div>
+            <div class="date">{{ qa.3|date:"Y/m/d" }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <div class="mTtitle" style="margin-top: 30px">자유 게시판 <span data-type="bull">전체보기</span></div>
+    <div class="notiBox">
+        {% for noti in bullList %}
+        <div class="notiList" data-type="bull" data-num="{{ noti.num }}">
+            <div class="title">{{ noti.title }}</div>
+            <div class="date">{{ noti.regdate|date:"Y/m/d" }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

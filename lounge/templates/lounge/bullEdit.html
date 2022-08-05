@@ -1,0 +1,37 @@
+{% extends 'picktalk/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/user/advertise.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/user/advertise.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/user/advertise.js' %}"></script>
+
+<div class="body">
+    <div class="mainTitle">자유수다 수정</div>
+
+    <div class="winBox">
+    <form action="/lounge/bull/editCallBack/" method="post" id="saveQanda" autocomplete="off">
+        {% csrf_token %}
+        <div class="joinInfo">
+            <div class="title">제목</div>
+            <div class="content"><input type="text" value="{{ bull.title }}" id="title" name="title" placeholder="제목을 입력해주세요"/></div>
+            <input type="hidden" name="num" id="num" value="{{ bull.num }}">
+        </div>
+
+
+        <div class="joinInfo">
+            <div class="title">내용</div>
+            <div class="content"><textarea id="content" name="content" placeholder="내용을 입력해주세요">{{ bull.content }}</textarea> </div>
+        </div>
+    </form>
+    </div>
+
+    <div class="btnBox">
+        <div class="sendBtn2">수정하기</div>
+    </div>
+</div>
+
+{% endblock %}

@@ -289,34 +289,6 @@
         {% endif %}
     </div>
     {% endif %}
-
-    {% if notice.count > 0 %}
-    <div class="mTtitle" style="margin-top: 30px">공지사항 <span data-type="notice">전체보기</span></div>
-    <div class="notiBox">
-        {% for noti in notice %}
-        <div class="notiList" data-type="notice" data-num="{{ noti.num }}">
-            <div class="title">{{ noti.title }}</div>
-            <div class="date">{{ noti.regdate|date:"Y/m/d" }}</div>
-        </div>
-        {% endfor %}
-    </div>
-    {% endif %}
-
-    {% if notice.count > 0 %}
-    <div class="mTtitle" style="margin-top: 30px">문의하기 <span data-type="qanda">전체보기</span></div>
-    <div class="notiBox">
-        {% for qa in qanda %}
-        <div class="notiList" data-type="qa"  data-num="{{ qa.0 }}">
-            <div class="title">
-                <span>[{{ qa.1 }}]</span>
-                {{ qa.2 }}
-                [{{ qa.4 }}]
-            </div>
-            <div class="date">{{ qa.3|date:"Y/m/d" }}</div>
-        </div>
-        {% endfor %}
-    </div>
-    {% endif %}
 </div>
 
 <script>

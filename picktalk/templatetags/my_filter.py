@@ -432,3 +432,15 @@ def userAddr(values) :
             returnValue = "";
 
     return returnValue
+
+
+@register.filter
+def getCmmCount(values, table) :
+
+    if table == "magazine" :
+        comm = BoardMagazineComment.objects.filter(mgnum=values)
+
+    elif table == "bulletin" :
+        comm = BoradBulletinComment.objects.filter(bulnum=values)
+
+    return len(comm)

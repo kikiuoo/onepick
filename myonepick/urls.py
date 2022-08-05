@@ -25,6 +25,7 @@ urlpatterns = [
     path('profile/', include('profiles.urls')),
     path('users/', include('user.urls')),
     path('onepickAdmin/', include('onepickAdmin.urls')),
+    path('lounge/', include('lounge.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()

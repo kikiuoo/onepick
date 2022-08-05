@@ -75,6 +75,58 @@ class AuditionView(models.Model):
         db_table = 'audition_view'
 
 
+class BoardMagazineComment(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    mgnum = models.PositiveBigIntegerField(db_column='mgNum')  # Field name made lowercase.
+    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    content = models.CharField(max_length=500, blank=True, null=True)
+    regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'board_magazine_comment'
+
+
+class BoradBulletin(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    userid = models.CharField(db_column='userID', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    cate = models.CharField(max_length=20, blank=True, null=True)
+    title = models.CharField(max_length=100, blank=True, null=True)
+    content = models.CharField(max_length=10000, blank=True, null=True)
+    regdate = models.DateTimeField(db_column='regDate', blank=True, null=True)  # Field name made lowercase.
+    contenttype = models.CharField(db_column='contentType', max_length=20, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'borad_bulletin'
+
+
+class BoradBulletinComment(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    bulnum = models.PositiveBigIntegerField(db_column='bulNum')  # Field name made lowercase.
+    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    content = models.CharField(max_length=500, blank=True, null=True)
+    regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'borad_bulletin_comment'
+
+
+class BoradMagazine(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    userid = models.CharField(db_column='userID', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    cate = models.CharField(max_length=20, blank=True, null=True)
+    title = models.CharField(max_length=100, blank=True, null=True)
+    content = models.CharField(max_length=10000, blank=True, null=True)
+    regdate = models.DateTimeField(db_column='regDate', blank=True, null=True)  # Field name made lowercase.
+    contenttype = models.CharField(db_column='contentType', max_length=20, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'borad_magazine'
+
+
 class CateMain(models.Model):
     num = models.AutoField(primary_key=True)
     catecode = models.CharField(db_column='cateCode', unique=True, max_length=50)  # Field name made lowercase.

@@ -441,17 +441,6 @@ def userMypage(request, type) :
             result = cursor.execute(query)
             data3 = cursor.fetchall()
 
-
-        notice = QaNotice.objects.all().order_by("-regdate")[:5]
-
-        query = "SELECT qq.num, cateName, title, regDate, IFNULL(commCnt, 0) AS commCnt " \
-                "FROM qa_qanda AS qq LEFT JOIN qa_qanda_cate AS qqc  ON qq.cate = qqc.cateCode " \
-                "     LEFT JOIN ( SELECT COUNT(*) AS commCnt, qaNum FROM qa_qanda_comment GROUP BY qaNum ) AS qqc ON qq.num = qqc.qaNum " \
-                "order by qq.regDate desc limit 5 "
-
-        result = cursor.execute(query)
-        qanda = cursor.fetchall()
-
         connection.commit()
         connection.close()
 
@@ -459,8 +448,7 @@ def userMypage(request, type) :
         connection.rollback()
 
     return render(request, 'user/mypage.html', {"type" : type, "userInfo" : userInfo, "company" : company,
-                                                "data1" : data1, "data2" : data2, "data3":data3, "notice" : notice,
-                                                "qanda" : qanda })
+                                                "data1" : data1, "data2" : data2, "data3":data3 })
 
 def updateUser(request) :
 

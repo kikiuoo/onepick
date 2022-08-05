@@ -7,9 +7,9 @@
 <link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/user/mypage.css' %}" > <!-- 모바일 버전 -->
 
 <!-- JS 파일 -->
-<script src="{% static 'js/qandaList.js' %}"></script>
+<script src="{% static 'js/lounge/qandaList.js' %}"></script>
 
-<div class="mTtitle">문의사항</div>
+<div class="mTtitle">질문 게시판</div>
 <div class="notiBox">
     {% for qanda in qandaList %}
     <div class="notiList" data-num="{{ qanda.0 }}">

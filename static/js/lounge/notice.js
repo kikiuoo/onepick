@@ -3,13 +3,13 @@ $(document).ready(function(){
     $(document).on("click", ".notiList", function (){
         var num = $(this).attr("data-num");
 
-        window.location.href = '/notice/viewer/'+num+'/' ;
+        window.location.href = '/lounge/notice/viewer/'+num+'/' ;
     });
 
     $(document).on("click", ".pages", function (){
         var page = $(this).attr("data-page");
 
-        window.location.href = "/notice/list/"+page+"/";
+        window.location.href = "/lounge/notice/list/"+page+"/";
     });
 
      $(document).on("click", ".saveComment", function (){
@@ -44,14 +44,29 @@ $(document).ready(function(){
        if(confirm("댓글을 삭제하시겠습니까?") == true){
            deleteComment(num);
        }
-    })
+    });
+
+    $(document).on("click", ".editBtn", function (){
+       var num = $(this).attr("data-num");
+
+       window.location.href = "/lounge/qanda/edit/"+num+"/";
+    });
+
+
+    $(document).on("click", ".delBtn", function (){
+       var num = $(this).attr("data-num");
+
+       window.location.href = "/lounge/qanda/delete/"+num+"/";
+    });
+
+
 
 });
 
 
 function saveComment(comment){
     $.ajax({
-      url: "/qanda/ajax/saveComment/",
+      url: "/lounge/qanda/ajax/saveComment/",
       type: "GET",
       dataType: "json",
       data:{"comment" : comment, "num" : num},
@@ -71,7 +86,7 @@ function saveComment(comment){
 
 function reloadComment(){
     $.ajax({
-      url: "/qanda/ajax/reloadComment/",
+      url: "/lounge/qanda/ajax/reloadComment/",
       type: "GET",
       dataType: "html",
       data:{ "num" : num},
@@ -89,7 +104,7 @@ function reloadComment(){
 
 function deleteComment(num){
     $.ajax({
-      url: "/qanda/ajax/deleteComment/",
+      url: "/lounge/qanda/ajax/deleteComment/",
       type: "GET",
       dataType: "json",
       data:{ "num" : num },

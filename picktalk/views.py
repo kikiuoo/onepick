@@ -311,33 +311,6 @@ def getSearchProfile(request) :
     return render(request, 'profiles/ajax_profileList.html', {'profiles':searching})
 
 
-
-def notice(request, num) :
-    notice = QaNotice.objects.get(num=num)
-
-    image = ""
-    if notice.image != "" and notice.image != None :
-        image = notice.image.split("|")
-
-    return render(request, 'picktalk/notice.html', {"notice": notice, "image" : image})
-
-
-def notiList(request, page) :
-
-    block = 10
-    start = (page - 1) * block
-    end = page * block
-
-    noti = QaNotice.objects.all()
-    notice = noti.order_by("-regdate")[start:end]
-
-    allPage = ( noti.count() / block ) + 1
-
-    paging = getPageList( page, allPage )
-
-    return render(request, 'picktalk/notiList.html', {"notice": notice, "paging" : paging, "page":page})
-
-
 def proList(request, type, page, num, filter) :
 
     block = 10
@@ -502,95 +475,6 @@ def proList2(request, type, page, num, filter) :
 
     return render(request, 'user/ajax_proList.html', {"type": type, "page":page, "profile": profile,"num": num })
 
-def qandaList(request, page) :
-
-    block = 10
-    start = (page - 1) * block
-    end = page * block
-
-    cursor = connection.cursor()
-
-    query = "SELECT qq.num, cateName, title, regDate, IFNULL(commCnt, 0) AS commCnt " \
-            "FROM qa_qanda AS qq LEFT JOIN qa_qanda_cate AS qqc  ON qq.cate = qqc.cateCode " \
-            "     LEFT JOIN ( SELECT COUNT(*) AS commCnt, qaNum FROM qa_qanda_comment GROUP BY qaNum ) AS qqc ON qq.num = qqc.qaNum " \
-            "order by qq.regDate desc limit " + str(start) + ", " + str(block)
-
-    result = cursor.execute(query)
-    qandaList = cursor.fetchall()
-
-    connection.commit()
-    connection.close()
-
-    allPage = (len(qandaList) / block) + 1
-
-    paging = getPageList(page, allPage)
-
-    return render(request, 'picktalk/qandaList.html', {"qandaList": qandaList,  "paging" : paging, "page":page})
-
-
-def qandaWrite(request) :
-
-    cates = QaQandaCate.objects.all()
-
-    return render(request, 'picktalk/qandaWrite.html', {"cates": cates})
-
-def qandaWriteCallBack(request) :
-
-    cate = request.POST['cate']
-    title = request.POST['title']
-    content = request.POST['content']
-
-    user = request.session.get('id', '')
-
-    nowTime = timezone.now()
-
-    saveQaQanda = QaQanda.objects.create(userid=user, cate=cate, title=title, content=content, regdate=nowTime)
-
-    return redirect("/qanda/list/1/")
-
-
-def qandaView(request, num) :
-
-    qanda = QaQanda.objects.get(num=num)
-    cate = QaQandaCate.objects.get(catecode=qanda.cate)
-    user = UserInfo.objects.get(userid=qanda.userid)
-
-    comment = QaQandaComment.objects.filter(qanum=num).order_by("-num")
-
-    return render(request, 'picktalk/qandaView.html', {"qanda": qanda, "cate" : cate, "user" : user,
-                                                       "comment" : comment })
-
-
-def qaSaveComment(request) :
-
-    comment = request.GET['comment']
-    num = request.GET['num']
-    userID = request.session['id']
-
-    nowTime = timezone.now()
-
-    print(num)
-
-    save = QaQandaComment.objects.create(qanum=str(num),userid=userID,content=comment,regtime=nowTime)
-
-    return JsonResponse({"code": "0"})
-
-
-def qaReloadComment(request) :
-    num = request.GET['num']
-
-    comment = QaQandaComment.objects.filter(qanum=num).order_by("-num")
-
-    return render(request, 'picktalk/ajax_comment.html', {'comment': comment})
-
-def qaDeleteComment(request) :
-
-    num = request.GET['num']
-
-    comment = QaQandaComment.objects.get(num=num)
-    comment.delete()
-
-    return JsonResponse({"code": "0"})
 
 
 def gsdv(request) :

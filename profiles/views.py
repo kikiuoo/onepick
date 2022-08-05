@@ -234,7 +234,7 @@ def pofile_write(request) :
     user = UserInfo.objects.get(userid=userID)
     cate = CateMain.objects.all()
 
-    checkProfile = ProfileInfo.objects.filter(userid=userID)
+    checkProfile = ProfileInfo.objects.filter(userid=userID, isdelete=0)
 
     return render(request, 'profiles/write.html', { 'user':user, 'cate' : cate, "checkProfile" : checkProfile })
 

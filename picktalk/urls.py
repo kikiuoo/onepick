@@ -13,21 +13,8 @@ urlpatterns = [
     path("search/<cateType>/<search>/<int:page>/", views.searchList, name="searchList"),
     path("search/ajaxProfile/", views.getSearchProfile, name="getSearchProfile"),
 
-    path("notice/viewer/<int:num>/", views.notice, name="notice"),
-    path("notice/list/<int:page>/", views.notiList, name="notiList"),
-
     path("proList/<type>/<int:page>/<num>/<filter>/", views.proList, name="proList"),
     path("proList2/<type>/<int:page>/<num>/<filter>/", views.proList2, name="proList"),
-
-    path("qanda/list/<int:page>/", views.qandaList, name="qandaList"),
-
-    path("qanda/write/", views.qandaWrite, name="qandaWrite"),
-    path("qanda/writeCallBack/", views.qandaWriteCallBack, name="qandaWriteCallBack"),
-    path("qanda/viewer/<int:num>/", views.qandaView, name="qandaView"),
-
-    path("qanda/ajax/saveComment/", views.qaSaveComment, name="qaSaveComment"),
-    path("qanda/ajax/reloadComment/", views.qaReloadComment, name="qaReloadComment"),
-    path("qanda/ajax/deleteComment/", views.qaDeleteComment, name="qaDeleteComment"),
 
     path(".well-known/pki-validation/gsdv.txt", views.gsdv, name="gsdv"),
 
