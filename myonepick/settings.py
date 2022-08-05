@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'audition',
     'profiles',
     'onepickAdmin',
+    'lounge',
     #'corsheaders',
 ]
 
