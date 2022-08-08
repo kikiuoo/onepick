@@ -1,5 +1,10 @@
 $(document).ready(function(){
 
+     if( userID == ""){
+        alert("로그인 후 이용가능합니다.");
+        window.history.back(-1);
+    }
+
     if( userType != 'admin' && isDelete == '1'){
         alert("잘못된 접근입니다.");
         window.history.back(-1);

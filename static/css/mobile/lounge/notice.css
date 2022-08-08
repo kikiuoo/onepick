@@ -182,3 +182,75 @@
     color: #959595;
     text-align: center;
 }
+
+.imageBox{
+    display: inline-block;
+}
+
+#fileLabel{
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    background-color: #fff;
+    line-height: 100px;
+
+    font-size: 8px;
+    font-weight: bold;
+    text-align: center;
+    color: #afafaf;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+#fileLabel .addImage{
+    height: 16px;
+    width: 16px;
+    position: absolute;
+
+    top: 21px;
+    left: 32px;
+
+    background-image: url("../../../image/mobile/addImgBtn.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.upload-hidden{
+    display: none;
+}
+
+.upload-display{
+    position: relative;
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    background-color: #fff;
+    margin-right: 20px;
+
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% auto;
+    vertical-align: top;
+}
+
+.upload-display .upload-sub,
+.upload-display .upload-sub2{
+    position: absolute;
+    right: -8px;
+    top : -8px;
+    width: 16px;
+    height: 16px;
+    background-color: #ff8aae;
+    border-radius:50%;
+    cursor: pointer;
+
+
+    background-image: url("../../../image/mobile/subImgBtn.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
