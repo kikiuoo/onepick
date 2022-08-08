@@ -209,7 +209,6 @@ def magaList(request, page) :
 def magaView(request, num) :
 
     magazine = BoradMagazine.objects.get(num=num)
-    user = UserInfo.objects.filter(userid=magazine.userid)
 
     if magazine.image :
         images = magazine.image.split("|")
@@ -218,7 +217,7 @@ def magaView(request, num) :
 
     comment = BoardMagazineComment.objects.filter(mgnum=num).order_by("-num")
 
-    return render(request, 'lounge/magaView.html', {"magazine": magazine, "user" : user, "image" : images, "comment" : comment})
+    return render(request, 'lounge/magaView.html', {"magazine": magazine, "image" : images, "comment" : comment})
 
 def magaWrite(request) :
 

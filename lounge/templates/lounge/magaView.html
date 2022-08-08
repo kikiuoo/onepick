@@ -23,11 +23,8 @@
 
     <div class="titleBox">
         <div class="title">{{ magazine.title }}</div>
-        {% if user.count > 0 %}
-        <div class="userInfo">{{ user.0.userid|getUserName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ magazine.regdate|date:"Y/m/d" }}</div>
-        {% else %}
-        <div class="userInfo">{{ magazine.regdate|date:"Y/m/d" }}</div>
-        {% endif %}
+
+        <div class="userInfo">원픽관리자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ magazine.regdate|date:"Y/m/d" }}</div>
     </div>
 
     <div class="content">
