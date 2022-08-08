@@ -211,9 +211,14 @@ def magaView(request, num) :
     magazine = BoradMagazine.objects.get(num=num)
     user = UserInfo.objects.filter(userid=magazine.userid)
 
+    if magazine.image :
+        images = magazine.image.split("|")
+    else :
+        images = ""
+
     comment = BoardMagazineComment.objects.filter(mgnum=num).order_by("-num")
 
-    return render(request, 'lounge/magaView.html', {"magazine": magazine, "user" : user, "comment" : comment})
+    return render(request, 'lounge/magaView.html', {"magazine": magazine, "user" : user, "image" : images, "comment" : comment})
 
 def magaWrite(request) :
 
@@ -224,11 +229,25 @@ def magaWriteCallBack(request) :
     title = request.POST['title']
     content = request.POST['content']
 
-    user = request.session.get('id', '')
+    userImage = request.FILES.getlist('userImage[]')
 
     nowTime = timezone.now()
+    imageURL = ""
+    count = 0
+    for image in userImage:
+        count = count + 1
+        sub = image.name.split('.')[-1]
+        url = uploadFile(image, "photos/magazine/image", sub)
 
-    saveQaQanda = BoradMagazine.objects.create(userid=user, title=title, content=content, regdate=nowTime)
+        if (count == 1):
+            imageURL = url
+        else:
+            imageURL = imageURL + "|" + url
+
+
+    user = request.session.get('id', '')
+
+    saveQaQanda = BoradMagazine.objects.create(userid=user, title=title, content=content, image=imageURL, regdate=nowTime)
 
     return redirect("/lounge/magazine/list/1/")
 
@@ -237,7 +256,9 @@ def magaEdit(request, num) :
 
     magazine = BoradMagazine.objects.get(num=num)
 
-    return render(request, 'lounge/magaEdit.html', {"magazine":magazine})
+    image = magazine.image.split('|')
+
+    return render(request, 'lounge/magaEdit.html', {"magazine":magazine, "image" : image})
 
 def magaEditCallBack(request) :
 
@@ -245,11 +266,40 @@ def magaEditCallBack(request) :
     title = request.POST['title']
     content = request.POST['content']
 
+    removeImage = request.POST.get('removeImage', "")
+
+    userImage = request.FILES.getlist('userImage[]')
+
+    # 이미지 등록.
     nowTime = timezone.now()
 
+    addImage = []
+    for image in userImage:
+        sub = image.name.split('.')[-1]
+        url = uploadFile(image, "photos/audition/image", sub)  # 파일 업로드
+
+        addImage.append(url)
+
+    # DB에서 이미지 저장된 내용 빼기.
     magazine = BoradMagazine.objects.get(num=num)
+    dbImage = magazine.image.split('|')
+
+    # 이미지 삭제.
+    rmImage = removeImage.split('|')
+    if (removeImage != ""):
+        for rmImages in rmImage:
+            if (rmImages == ""): continue
+            deleteFile(rmImages)
+            dbImage.remove(rmImages)
+
+    saveImage = dbImage + addImage
+    imageUrl = "|".join(saveImage)
+
+
+
     magazine.title = title
     magazine.content = content
+    magazine.image = imageUrl
     magazine.save()
 
     return redirect("/lounge/magazine/viewer/"+num+"/")
@@ -258,6 +308,13 @@ def magaEditCallBack(request) :
 def magaDelete(request, num) :
 
     magazine = BoradMagazine.objects.get(num=num)
+
+    # 이미지 삭제.
+    rmImage = magazine.image.split('|')
+    for rmImages in rmImage:
+        if (rmImages == ""): continue
+        deleteFile(rmImages)
+
     magazine.delete()
 
     return redirect("/lounge/magazine/list/1/")

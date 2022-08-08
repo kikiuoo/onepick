@@ -137,3 +137,72 @@
     color: #fff;
 }
 
+.imageBox{
+    display: inline-block;
+}
+
+#fileLabel{
+    display: inline-block;
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    background-color: #fff;
+    line-height: 180px;
+
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #afafaf;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+#fileLabel .addImage{
+    height: 28px;
+    width: 28px;
+    position: absolute;
+
+    top: 38px;
+    left: 56px;
+
+    background-image: url("../../../image/web/addImgBtn.png");
+}
+
+.upload-hidden{
+    display: none;
+}
+
+.upload-display{
+    position: relative;
+    display: inline-block;
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    background-color: #fff;
+    line-height: 180px;
+    margin-right: 20px;
+
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% auto;
+    vertical-align: top;
+}
+
+.upload-display .upload-sub,
+.upload-display .upload-sub2{
+    position: absolute;
+    right: -10px;
+    top : -10px;
+    width: 30px;
+    height: 30px;
+    background-color: #ff8aae;
+    border-radius:50%;
+    cursor: pointer;
+
+
+    background-image: url("../../../image/web/subImgBtn.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}

@@ -3,11 +3,12 @@
 
 <!-- Index CSS 파일 및 JS 파일 include -->
 {% load static %}
+{% load my_filter %}
 <link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/user/advertise.css' %}"> <!-- pc 버전 -->
 <link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/user/advertise.css' %}" > <!-- 모바일 버전 -->
 
 <!-- JS 파일 -->
-<script src="{% static 'js/user/advertise.js' %}"></script>
+<script src="{% static 'js/lounge/magaWrite.js' %}"></script>
 
 <div class="body">
     <div class="mainTitle">매거진 수정</div>
@@ -25,6 +26,28 @@
         <div class="joinInfo">
             <div class="title">내용</div>
             <div class="content"><textarea id="content" name="content" placeholder="내용을 입력해주세요">{{ magazine.content }}</textarea> </div>
+        </div>
+
+        <div class="joinInfo" style="margin-bottom: 0px">
+            <div class="title">파일</div>
+            <div class="content">
+                {% if image|getArrayCount > 0 %}
+                {% for images in image %}
+                <div class="upload-display" style="background-image: url('{% get_media_prefix %}{{ images }}')">
+                    <div class="upload-sub2" data-image="{{ images }}"></div>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                <input type="file" name="userImage[]" id="input-file" class="upload-hidden input-file">
+
+                <div class="imageBox"></div>
+
+                <label id="fileLabel" for="input-file"><div class="addImage"></div> 이미지 등록</label>
+
+
+                <textarea name="removeImage" id="removeImage" style="display: none"></textarea>
+            </div>
         </div>
     </form>
     </div>

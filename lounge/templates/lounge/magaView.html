@@ -38,6 +38,15 @@
        {% else %}
             {{ magazine.content|linebreaks }}
        {% endif %}
+
+
+       {% if image != "" %}
+            <div class="imgBox">
+                {% for img in image %}
+                <img src="/media/{{ img }}" width="800">
+                {% endfor %}
+            </div>
+       {% endif %}
     </div>
 </div>
 

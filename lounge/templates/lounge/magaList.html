@@ -22,7 +22,9 @@
     </div>
     {% endfor %}
 
+    {% if request.session.userType == "admin" and request.session.id != null %}
     <div class="addQandA mobileNone">매거진 등록하기</div>
+    {% endif %}
 </div>
 
 <div class="page">
