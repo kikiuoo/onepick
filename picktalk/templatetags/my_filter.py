@@ -91,7 +91,7 @@ def getCareer(num, type) :
 
         returnData = ""
         for row in career :
-            returnData = row[0] + "|" + row[1]
+            returnData = row[0] + "ㅣ" + row[1]
             
         if returnData == "" :
             returnData = "경력없음"

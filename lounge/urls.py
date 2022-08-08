@@ -8,9 +8,9 @@ urlpatterns = [
     path("notice/list/<int:page>/", views.notiList, name="notiList"),
 
     path("qanda/list/<int:page>/", views.qandaList, name="qandaList"),
+    path("qanda/myList/<int:page>/", views.qandaMyList, name="qandaMyList"),
     path("qanda/write/", views.qandaWrite, name="qandaWrite"),
     path("qanda/writeCallBack/", views.qandaWriteCallBack, name="qandaWriteCallBack"),
-
     path("qanda/edit/<int:num>/", views.qandaEdit, name="qandaEdit"),
     path("qanda/editCallBack/", views.qandaEditCallBack, name="qandaEditCallBack"),
     path("qanda/delete/<int:num>/", views.qandaDelete, name="qandaDelete"),

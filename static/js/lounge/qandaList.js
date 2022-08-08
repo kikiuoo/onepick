@@ -16,4 +16,16 @@ $(document).ready(function(){
        window.location.href = "/lounge/qanda/write/";
     });
 
+    $(document).on("click", "#myView", function (){
+        var check = $('input:checkbox[id="myView"]').is(":checked") ;
+
+        if( check == true ){
+            window.location.href = "/lounge/qanda/myList/1/";
+        }else{
+            window.location.href = "/lounge/qanda/list/1/";
+        }
+
+    });
+
+
 });

@@ -975,3 +975,33 @@ select:focus{
     background-color: #c0c0c0;
     margin-left: 20px;
 }
+
+.textCheck{
+    position: relative;
+    font-size: 16px;
+    font-weight: bold;
+    color: #c0c0c0;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.textCheck input{
+    display: none;
+}
+
+.textCheck .check{
+    position: absolute;
+    top: 50%;
+    margin-top: -11.5px;
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    margin-left: 5px;
+
+    background-position: center;
+    background-image: url("../../../image/web/textCheck_off.png");
+    background-repeat: no-repeat;
+}
+.textCheck .check.on{
+    background-image: url("../../../image/web/textCheck_on.png");
+}

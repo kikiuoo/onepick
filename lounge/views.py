@@ -87,7 +87,37 @@ def qandaList(request, page) :
 
     paging = getPageList(page, allPage)
 
-    return render(request, 'lounge/qandaList.html', {"qandaList": qandaList, "paging" : paging, "page":page})
+    return render(request, 'lounge/qandaList.html', {"qandaList": qandaList, "paging" : paging, "page":page,"type": "list"})
+
+
+
+def qandaMyList(request, page) :
+
+    block = 10
+    start = (page - 1) * block
+    end = page * block
+
+    cursor = connection.cursor()
+
+    user = request.session.get('id', '')
+
+    query = "SELECT qq.num, cateName, title, regDate, IFNULL(commCnt, 0) AS commCnt " \
+            "FROM qa_qanda AS qq LEFT JOIN qa_qanda_cate AS qqc  ON qq.cate = qqc.cateCode " \
+            "     LEFT JOIN ( SELECT COUNT(*) AS commCnt, qaNum FROM qa_qanda_comment GROUP BY qaNum ) AS qqc ON qq.num = qqc.qaNum " \
+            "where qq.userID = '"+user+"' " \
+            "order by qq.regDate desc limit " + str(start) + ", " + str(block)
+
+    result = cursor.execute(query)
+    qandaList = cursor.fetchall()
+
+    connection.commit()
+    connection.close()
+
+    allPage = (len(qandaList) / block) + 1
+
+    paging = getPageList(page, allPage)
+
+    return render(request, 'lounge/qandaList.html', {"qandaList": qandaList, "paging" : paging, "page":page,"type": "myList"})
 
 
 def qandaWrite(request) :
