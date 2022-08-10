@@ -44,8 +44,12 @@
         <div class="notiList" data-type="qa"  data-num="{{ qa.0 }}">
             <div class="title">
                 <span>[{{ qa.1 }}]</span>
-                {{ qa.2 }}
-                [{{ qa.4 }}]
+                {% if qa.5 == "Y" and qa.6 != request.session.id and request.session.userType != 'admin'  %}
+                    비밀글입니다.
+                {% else %}
+                    {{ qa.2 }}
+                    [{{ qa.4 }}]
+                {% endif %}
             </div>
             <div class="date">{{ qa.3|date:"Y/m/d" }}</div>
         </div>

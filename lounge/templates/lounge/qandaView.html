@@ -14,14 +14,18 @@
 <div class="inBox">
 
     <div class="btnBox">
-        {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
+        {% if request.session.userType == "admin" or request.session.id == qanda.userid  %}
         <div class="editBtn" data-num="{{ qanda.num }}"></div>
         <div class="delBtn" data-num="{{ qanda.num }}"></div>
         {% endif %}
     </div>
 
     <div class="titleBox">
+        {% if qanda.secret == "Y" and qanda.userid != request.session.id and request.session.userType != 'admin' %}
+            <div class="title">비밀글입니다.</div>
+        {% else %}
         <div class="title"><span>[{{ cate.catename }}]</span> {{ qanda.title }}</div>
+        {% endif %}
         {% if user.count > 0 %}
         <div class="userInfo">{{ user.0.userid|getUserName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ qanda.regdate|date:"Y/m/d" }}</div>
         {% else %}
@@ -30,16 +34,22 @@
     </div>
 
     <div class="content">
-        {% if qanda.contenttype == "old" %}
-           {% autoescape off %}
-            {{ qanda.content }}
-           {% endautoescape %}
-       {% else %}
-            {{ qanda.content|linebreaks }}
-       {% endif %}
+        {% if qanda.secret == "Y" and qanda.userid != request.session.id and request.session.userType != 'admin'   %}
+            비밀글입니다.
+        {% else %}
+            {% if qanda.contenttype == "old" %}
+               {% autoescape off %}
+                {{ qanda.content }}
+               {% endautoescape %}
+           {% else %}
+                {{ qanda.content|linebreaks }}
+           {% endif %}
+        {% endif %}
     </div>
 </div>
 
+{% if qanda.secret == "Y" and qanda.userid != request.session.id and request.session.userType != 'admin'   %}
+{% else %}
 <div class="inBox">
     <div class="inputBox">
         <input type="text" name="comment" id="comment" placeholder="댓글을 작성할 수 있습니다.">
@@ -47,7 +57,6 @@
     </div>
 
     <div class="commentList">
-
         {% if comment|getArrayCount > 0 %}
             {% for comments in comment %}
             <div class="comments">
@@ -72,6 +81,7 @@
         {% endif %}
     </div>
 </div>
+{% endif %}
 
 
 

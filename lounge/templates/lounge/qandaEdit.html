@@ -38,6 +38,14 @@
             <div class="title">내용</div>
             <div class="content"><textarea id="content" name="content" placeholder="내용을 입력해주세요">{{ qanda.content }}</textarea> </div>
         </div>
+
+        <div class="textRight">
+            {% if qanda.secret == "Y" %}
+            <label class="textCheck" style="color: #ff8aae"><input type="checkbox" name="secret" id="secret" value="Y" checked> 비공개 설정 <div class="check on"></div>  </label>
+            {% else %}
+            <label class="textCheck"><input type="checkbox" name="secret" id="secret" value="Y"> 비공개 설정 <div class="check"></div>  </label>
+            {% endif %}
+        </div>
     </form>
     </div>
 

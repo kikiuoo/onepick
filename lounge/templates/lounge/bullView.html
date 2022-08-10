@@ -14,7 +14,7 @@
 <div class="inBox">
 
     <div class="btnBox">
-        {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
+        {% if request.session.userType == "admin" or request.session.id == bull.userid  %}
         <div class="editBtn" data-num="{{ bull.num }}"></div>
         <div class="delBtn" data-num="{{ bull.num }}"></div>
         {% endif %}

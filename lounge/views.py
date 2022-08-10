@@ -20,7 +20,7 @@ def main(request):
 
     cursor = connection.cursor()
 
-    query = "SELECT qq.num, cateName, title, regDate, IFNULL(commCnt, 0) AS commCnt " \
+    query = "SELECT qq.num, cateName, title, regDate, IFNULL(commCnt, 0) AS commCnt, secret, qq.userID " \
             "FROM qa_qanda AS qq LEFT JOIN qa_qanda_cate AS qqc  ON qq.cate = qqc.cateCode " \
             "     LEFT JOIN ( SELECT COUNT(*) AS commCnt, qaNum FROM qa_qanda_comment GROUP BY qaNum ) AS qqc ON qq.num = qqc.qaNum " \
             "order by qq.regDate desc limit 5 "
@@ -72,7 +72,7 @@ def qandaList(request, page) :
 
     cursor = connection.cursor()
 
-    query = "SELECT qq.num, cateName, title, regDate, IFNULL(commCnt, 0) AS commCnt " \
+    query = "SELECT qq.num, cateName, title, regDate, IFNULL(commCnt, 0) AS commCnt, secret, qq.userID  " \
             "FROM qa_qanda AS qq LEFT JOIN qa_qanda_cate AS qqc  ON qq.cate = qqc.cateCode " \
             "     LEFT JOIN ( SELECT COUNT(*) AS commCnt, qaNum FROM qa_qanda_comment GROUP BY qaNum ) AS qqc ON qq.num = qqc.qaNum " \
             "order by qq.regDate desc limit " + str(start) + ", " + str(block)
@@ -101,7 +101,7 @@ def qandaMyList(request, page) :
 
     user = request.session.get('id', '')
 
-    query = "SELECT qq.num, cateName, title, regDate, IFNULL(commCnt, 0) AS commCnt " \
+    query = "SELECT qq.num, cateName, title, regDate, IFNULL(commCnt, 0) AS commCnt, secret, qq.userID " \
             "FROM qa_qanda AS qq LEFT JOIN qa_qanda_cate AS qqc  ON qq.cate = qqc.cateCode " \
             "     LEFT JOIN ( SELECT COUNT(*) AS commCnt, qaNum FROM qa_qanda_comment GROUP BY qaNum ) AS qqc ON qq.num = qqc.qaNum " \
             "where qq.userID = '"+user+"' " \
@@ -131,12 +131,13 @@ def qandaWriteCallBack(request) :
     cate = request.POST['cate']
     title = request.POST['title']
     content = request.POST['content']
+    secret = request.POST.get('secret', "N")
 
     user = request.session.get('id', '')
 
     nowTime = timezone.now()
 
-    saveQaQanda = QaQanda.objects.create(userid=user, cate=cate, title=title, content=content, regdate=nowTime)
+    saveQaQanda = QaQanda.objects.create(userid=user, cate=cate, title=title, content=content, regdate=nowTime, secret=secret)
 
     return redirect("/lounge/qanda/list/1/")
 
@@ -154,11 +155,13 @@ def qandaEditCallBack(request) :
     cate = request.POST['cate']
     title = request.POST['title']
     content = request.POST['content']
+    secret = request.POST.get('secret', "N")
 
     qanda = QaQanda.objects.get(num=num)
     qanda.title = title
     qanda.cate = cate
     qanda.content = content
+    qanda.secret = secret
     qanda.save()
 
     return redirect("/lounge/qanda/viewer/"+num+"/")
