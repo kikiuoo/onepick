@@ -132,7 +132,6 @@ function mainCounting(){
     if( userID == ""){ type = "ip"; }
     else{ uKey = userID; type = "id"; }
 
-    alert("check");
     $.ajax({
       url: "/ajax/updateCounting/",
       type: "GET",
