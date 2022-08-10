@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.http import JsonResponse
 from email.mime.text import MIMEText
 import socket
+from requests import get
 
 from picktalk.models import *
 
@@ -507,9 +508,8 @@ def updateCounting(request) :
     nowTime = timezone.now()
 
     if type == "ip" :
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("8.8.8.8", 80))
-        uKey = s.getsockname()[0]
+        ip = get('https://api.ipify.org').text
+        uKey = ip
 
     counting = UserCount.objects.create(type=type, ukey=uKey, device=device, regdate=nowTime)
 
