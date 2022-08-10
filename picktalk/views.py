@@ -502,14 +502,18 @@ def updateApplyPick(request) :
 
 def updateCounting(request) :
 
-    type = request.GET["type"]
-    uKey = request.GET["uKey"]
+    user = request.session.get('id', '')
+
+    ip = request.GET["ip"]
     device = request.GET["device"]
     nowTime = timezone.now()
 
-    if type == "ip" :
-        ip = get('https://api.ipify.org').text
+    if user == "" :
+        type = "ip"
         uKey = ip
+    else :
+        type = "id"
+        uKey = user
 
     counting = UserCount.objects.create(type=type, ukey=uKey, device=device, regdate=nowTime)
 

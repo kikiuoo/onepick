@@ -1,7 +1,5 @@
 $(document).ready(function (){
 
-    mainCounting();
-
     // 메인 베너 클릭 이벤트
     $(document).on("click", ".mainBanner", function (){
         // 추가 개발.
@@ -121,26 +119,17 @@ $(document).ready(function (){
 });
 
 function getIP(json){
-    console.log(json.ip);
-}
-
-function mainCounting(){
     var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
 
     var device = "";
 
     if(!isMobile) { device = "web";  } else { device = "mobile"; }
 
-    var uKey = "";
-    var type = "";
-    if( userID == ""){ type = "ip"; }
-    else{ uKey = userID; type = "id"; }
-
     $.ajax({
       url: "/ajax/updateCounting/",
       type: "GET",
       dataType: "json",
-      data:{"type":type, "uKey" : uKey, "device" : device},
+      data:{"ip" : json.ip, "device" : device},
 
       success: function(data){
 
@@ -149,6 +138,7 @@ function mainCounting(){
 
       }
    });
+
 }
 
 
