@@ -509,8 +509,19 @@ def updateCounting(request) :
 
     if type == "ip" :
         ip = get('https://api.ipify.org').text
-        uKey = ip
+        uKey = get_client_ip(request)
+
+        print(get_client_ip(request))
 
     counting = UserCount.objects.create(type=type, ukey=uKey, device=device, regdate=nowTime)
 
     return JsonResponse({"code": "0"})
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
