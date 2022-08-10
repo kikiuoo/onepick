@@ -4,6 +4,11 @@ $(document).ready(function(){
         var num = $(this).attr("data-num");
         var type = $(this).attr("data-type");
 
+        if( userID == "" ){
+            alert("로그인 후 이용 가능합니다.");
+            return;
+        }
+
         if( type == "notice" ) {
             window.location.href = '/lounge/notice/viewer/' + num + '/';
         }else if( type == "qa" ) {

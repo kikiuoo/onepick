@@ -3,6 +3,11 @@ $(document).ready(function(){
     $(document).on("click", ".notiList", function (){
         var num = $(this).attr("data-num");
 
+        if( userID == "" ){
+            alert("로그인 후 이용 가능합니다.");
+            return;
+        }
+
         window.location.href = '/lounge/bull/viewer/'+num+'/' ;
     });
 
@@ -13,7 +18,13 @@ $(document).ready(function(){
     });
 
     $(document).on("click", ".addQandA", function (){
-       window.location.href = "/lounge/bull/write/";
+
+        if( userID == "" ){
+            alert("로그인 후 이용 가능합니다.");
+            return;
+        }
+
+        window.location.href = "/lounge/bull/write/";
     });
 
 });
