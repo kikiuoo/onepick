@@ -16,12 +16,16 @@ def adminCheck(request):
 
     user = request.session.get('adminID', '')
 
-    returnURL = "onepickAdmin/login/login.html"
-
     if user :
         returnURL = "onepickAdmin/main.html"
 
-    return render( request, returnURL, {'pageType': "home" })
+        noticeList = QaNotice.objects.all().order_by("-regdate")[:5]
+
+        return render(request, returnURL, {'pageType': "home", "noticeList" : noticeList})
+
+    else :
+        returnURL = "onepickAdmin/login/login.html"
+        return render( request, returnURL, {'pageType': "home" })
 
 
 def adminLogin(request) :

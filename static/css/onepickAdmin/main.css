@@ -1,0 +1,66 @@
+.viewBox{
+    height: 378px;
+    margin-bottom: 44px;
+}
+.viewBox .inTitle {
+    padding : 0px 40px;
+}
+.viewBox .inTitle div{
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    margin-right: 85px;
+
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.viewBox .listTitle{ width: 825px; }
+.viewBox .listRegDate{ width: 78px; }
+.viewBox .listView{ width: 55px; }
+.viewBox .listEtc{ width: 46px; }
+
+
+.viewBox .contentList div{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 85px;
+    text-align: center;
+
+    font-size: 14px;
+    color: #1f1f1f;
+}
+
+.viewBox .inTitle div:last-child{ margin-right: 0px}
+
+.viewBox .contentList div.listTitle{text-align: left}
+
+.viewBox .contentList div.listView .pink{
+    font-weight: bold;
+    color: #ff8aae;
+}
+
+.viewBox .contentList div.listView .gray{
+    font-weight: bold;
+    color: #c0c0c0;
+}
+.viewBox .contentList div.listEtc{
+    margin-right: 0px;
+    font-size: 0px;
+}
+.viewBox .contentList div.listEtc div{
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-right: 0px;
+    margin-right: 10px;
+
+    background-size: auto 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.viewBox .contentList .listEtc .editBtn { background-image: url("../../image/web/update.png")}
+.viewBox .contentList .listEtc .delBtn { background-image: url("../../image/web/delete.png"); margin-right: 0px}

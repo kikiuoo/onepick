@@ -355,6 +355,8 @@ class QaNotice(models.Model):
     image = models.CharField(max_length=500, blank=True, null=True)
     regdate = models.DateTimeField(db_column='regDate', blank=True, null=True)  # Field name made lowercase.
     contenttype = models.CharField(db_column='contentType', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    viewtype = models.CharField(db_column='viewType', max_length=20, blank=True,
+                                   null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -433,6 +435,18 @@ class UserCompany(models.Model):
     class Meta:
         managed = False
         db_table = 'user_company'
+
+
+class UserCount(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    type = models.CharField(max_length=50, blank=True, null=True)
+    ukey = models.CharField(db_column='uKey', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    device = models.CharField(max_length=50, blank=True, null=True)
+    regdate = models.DateTimeField(db_column='regDate', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'user_count'
 
 
 class UserInfo(models.Model):

@@ -325,3 +325,27 @@
 .container{
     padding-left: 102px !important;
 }
+
+.checkUser { display: none; }
+
+.checkUser #phone{
+    width: 70%;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.button2{
+    vertical-align: top;
+    display: inline-block;
+    width: 25%;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 10px;
+    background-color: #ff8aae;
+    cursor: pointer;
+
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}

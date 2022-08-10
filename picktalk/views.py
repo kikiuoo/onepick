@@ -7,6 +7,7 @@ from django.db import connection
 from django.utils import timezone
 from django.http import JsonResponse
 from email.mime.text import MIMEText
+import socket
 
 from picktalk.models import *
 
@@ -495,5 +496,21 @@ def updateApplyPick(request) :
         data.comment = comment
 
         data.save()
+
+    return JsonResponse({"code": "0"})
+
+def updateCounting(request) :
+
+    type = request.GET["type"]
+    uKey = request.GET["uKey"]
+    device = request.GET["device"]
+    nowTime = timezone.now()
+
+    if type == "ip" :
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        uKey = s.getsockname()[0]
+
+    counting = UserCount.objects.create(type=type, ukey=uKey, device=device, regdate=nowTime)
 
     return JsonResponse({"code": "0"})

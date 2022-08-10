@@ -14,9 +14,9 @@ from myonepick.common import *
 
 def main(request):
 
-    qaList = QaNotice.objects.all().order_by("-regdate")[:1]
-    magaList = BoradMagazine.objects.order_by("-regdate")[:5]
-    bullList = BoradBulletin.objects.order_by("-regdate")[:5]
+    qaList = QaNotice.objects.filter(viewtype="Y").order_by("-regdate")[:1]
+    magaList = BoradMagazine.objects.all().order_by("-regdate")[:5]
+    bullList = BoradBulletin.objects.all().order_by("-regdate")[:5]
 
     cursor = connection.cursor()
 
@@ -53,7 +53,7 @@ def notiList(request, page) :
     start = (page - 1) * block
     end = page * block
 
-    noti = QaNotice.objects.all()
+    noti = QaNotice.objects.filter(viewtype="Y")
     notice = noti.order_by("-regdate")[start:end]
 
     allPage = ( noti.count() / block ) + 1

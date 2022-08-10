@@ -653,6 +653,29 @@ def ajax_phoneComfirm(request) :
 
         return JsonResponse({"code": "0"})
 
+def ajax_pwPhoneComfirm(request) :
+
+    userID = request.GET.get("userID","")
+    userPhone = request.GET.get("phoneNum","")
+    certifier = ""
+
+    isUser = UserInfo.objects.filter(userid=userID, phone=userPhone)
+
+    if isUser.count() > 0 :
+        while len(certifier) < 4:
+            num = random.randint(0, 9)
+            certifier = certifier + str(num)
+
+        nowTime = timezone.now()
+        saveSms = UserSms.objects.create(phonenum=userPhone, certifier=certifier, regdate=nowTime)
+
+        send = sendSMS(userPhone, "인증번호 전송", "[ONEPICK 본인확인] 인증번호 [" + certifier + "]를 입력해주세요.")
+
+        return JsonResponse({"code": "0"})
+    else :
+        return JsonResponse({"code": "1", "message" :  "아이디, 전화번호를 확인해주세요."})
+
+
 def ajax_checkConfirm(request) :
 
     userPhone = request.GET.get("phoneNum","")

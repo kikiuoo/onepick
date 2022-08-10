@@ -6,6 +6,7 @@ urlpatterns = [
     #path('', views.downstime, name='downstime'),
     path("ajax/updatePick/", views.updatePick, name="ajax-updatepick"),
     path("ajax/updateApplyPick/", views.updateApplyPick, name="ajax-updateApplyPick"),
+    path("ajax/updateCounting/", views.updateCounting, name="ajax-updateCounting"),
 
     path("advertise/", views.advertise, name="advertisse"),
     path("advertise/callBack/", views.advertise_callBack, name="advertise-callback"),

@@ -65,8 +65,82 @@ $(document).ready(function(){
          update_pw( userID, pw1 );
     });
 
+     $(document).on("click", ".sendVerifi", function(){
+        var userID = $("#userID").val();
+        var phone = $("#phone").val();
 
+        if( phone == "" ){
+            alert("전화번호를 입력해주세요.");
+            return;
+        }
+
+        saveConfirm( phone, userID );
+    });
+
+     $(document).on("click", ".checkVerifi", function(){
+        var userID = $("#userID").val();
+        var phone = $("#phone").val();
+        var verification = $("#verification").val();
+
+        if( phone == "" ){
+            alert("전화번호를 입력해주세요.");
+            return;
+        }
+
+        if( verification == "" ){
+            alert("인증번호를 입력해주세요.");
+            return;
+        }
+
+        checkConfirm( phone, verification );
+    });
 });
+
+function saveConfirm(phoneNum, userID){
+
+   $.ajax({
+      url: "/users/ajax/pwPhoneComfirm/",
+      type: "GET",
+      dataType: "json",
+      data:{"phoneNum" : phoneNum, "userID" : userID},
+
+      success: function(data){
+          if( data.code == "0" ){
+              alert("인증번호가 전송되었습니다.");
+              $(".confirmPhone").text("재전송");
+          }else{
+              alert( data.message );
+          }
+      },
+      error: function (request, status, error){
+
+      }
+   });
+}
+
+function checkConfirm(phoneNum, confirm){
+   $.ajax({
+      url: "/users/ajax/checkConfirm/",
+      type: "GET",
+      dataType: "json",
+      data:{"phoneNum" : phoneNum, "confirm" : confirm},
+
+      success: function(data){
+          if( data.code == "0" ){
+              alert("인증이 완료되었습니다.");
+              $(".findPw").css("display", "block");
+              $(".checkUser").css("display", "none");
+          }else{
+              alert( data.message );
+          }
+      },
+      error: function (request, status, error){
+
+      }
+   });
+}
+
+
 
 function find_old_user(userName, userPhone){
     $.ajax({
@@ -104,7 +178,7 @@ function chechUser_pw( userID, userName ){
       success: function(data){
           if( data.code == "0" ){
               $(".pwFindBox").css("display", "none");
-              $(".findPw").css("display", "block");
+              $(".checkUser").css("display", "block");
           }else{
               alert( data.message );
           }

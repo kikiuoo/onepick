@@ -1,4 +1,7 @@
 $(document).ready(function (){
+
+    mainCounting();
+
     // 메인 베너 클릭 이벤트
     $(document).on("click", ".mainBanner", function (){
         // 추가 개발.
@@ -116,6 +119,34 @@ $(document).ready(function (){
     });
 
 });
+
+function mainCounting(){
+    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
+
+    var device = "";
+
+    if(!isMobile) { device = "web";  } else { device = "mobile"; }
+
+    var uKey = "";
+    var type = "";
+    if( userID == ""){ type = "ip"; }
+    else{ uKey = userID; type = "id"; }
+
+    alert("check");
+    $.ajax({
+      url: "/ajax/updateCounting/",
+      type: "GET",
+      dataType: "json",
+      data:{"type":type, "uKey" : uKey, "device" : device},
+
+      success: function(data){
+
+      },
+      error: function (request, status, error){
+
+      }
+   });
+}
 
 
 function updatePick(tableName, nowType, num){

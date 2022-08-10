@@ -162,6 +162,10 @@ $(document).ready(function(){
         var licenseImage = $("#input-license").val();
         var artLicense = $("#input-artLicense").val();
 
+        var useAgree = $("#useAgree").is(":checked");
+        var infoGetAgree = $("#infoGetAgree").is(":checked");
+        var infoAgree = $("#infoAgree").is(":checked");
+
         if( userType == "NORMAL"){
 
             if( joinType == "oldUser"){
@@ -268,10 +272,27 @@ $(document).ready(function(){
                 return;
             }
 
+            /*  2022-08-10 대표님 요청으로 필수항목 제외.
             if( artLicense == "" ){
                 alert("대중 문화 예술 기획업 등록증 이미지를 등록해주세요.");
                 return;
             }
+            */
+        }
+
+        if( useAgree == false){
+            alert("이용약관 동의를 해주세요.");
+            return;
+        }
+
+        if( infoGetAgree == false){
+            alert("개인정보수집 동의를 해주세요.");
+            return;
+        }
+
+        if( infoAgree == false){
+            alert("개인정보 제3자 제공동의를 해주세요.");
+            return;
         }
 
         $("#saveUserForm").submit();
@@ -292,6 +313,73 @@ $(document).ready(function(){
         }
     });
 
+    $(document).on("click", ".useAgree", function(){
+        $(".popup").css("display", "block");
+        $(".infoGetAgreeBox").css("display", "none");
+        $(".infoAgreeBox").css("display", "none");
+        $(".agreeBox").css("display", "block");
+    });
+
+    $(document).on("click", ".infoGetAgree", function(){
+        $(".popup").css("display", "block");
+        $(".infoGetAgreeBox").css("display", "block");
+        $(".infoAgreeBox").css("display", "none");
+        $(".agreeBox").css("display", "none");
+    });
+
+    $(document).on("click", ".infoAgree", function(){
+        $(".popup").css("display", "block");
+        $(".infoGetAgreeBox").css("display", "none");
+        $(".infoAgreeBox").css("display", "block");
+        $(".agreeBox").css("display", "none");
+    });
+
+    $(document).on("click", ".agreeBtn", function(){
+        var type = $(this).attr("data-type");
+
+        if( type == "useAgree" ){
+            $(".useAgree").css("color", "#ff8aae");
+            $(".useAgree").css("text-decoration", "underline #ff8aae");
+            $(".useAgree").children("div").css("background-image", 'url("/static/image/web/textCheck_on.png")');
+            $(".useAgree").children("input").attr("checked","true");
+        }else if( type == "infoAgree" ){
+            $(".infoAgree").css("color", "#ff8aae");
+            $(".infoAgree").css("text-decoration", "underline #ff8aae");
+            $(".infoAgree").children("div").css("background-image", 'url("/static/image/web/textCheck_on.png")');
+            $(".infoAgree").children("input").attr("checked","true");
+        }else if( type == "infoGetAgree" ){
+            $(".infoGetAgree").css("color", "#ff8aae");
+            $(".infoGetAgree").css("text-decoration", "underline #ff8aae");
+            $(".infoGetAgree").children("div").css("background-image", 'url("/static/image/web/textCheck_on.png")');
+            $(".infoGetAgree").children("input").attr("checked","true");
+        }
+
+        $(".popup").css("display", "none");
+    });
+
+    $(document).on("click", ".notAgreeBtn", function(){
+        var type = $(this).attr("data-type");
+
+        if( type == "useAgree" ){
+            $(".useAgree").css("color", "#c0c0c0");
+            $(".useAgree").css("text-decoration", "underline #c0c0c0");
+            $(".useAgree").children("div").css("background-image", 'url("/static/image/web/textCheck_off.png")');
+            $(".useAgree").children("input").removeAttr("checked");
+            $("#useAgree").removeAttr("checked", true);
+        }else if( type == "infoAgree" ){
+            $(".infoAgree").css("color", "#c0c0c0");
+            $(".infoAgree").css("text-decoration", "underline #c0c0c0");
+            $(".infoAgree").children("div").css("background-image", 'url("/static/image/web/textCheck_off.png")');
+            $(".infoAgree").children("input").removeAttr("checked");
+        }else if( type == "infoGetAgree" ){
+            $(".infoGetAgree").css("color", "#c0c0c0");
+            $(".infoGetAgree").css("text-decoration", "underline #c0c0c0");
+            $(".infoGetAgree").children("div").css("background-image", 'url("/static/image/web/textCheck_off.png")');
+            $(".infoGetAgree").children("input").removeAttr("checked");
+        }
+
+        $(".popup").css("display", "none");
+    });
 });
 
 

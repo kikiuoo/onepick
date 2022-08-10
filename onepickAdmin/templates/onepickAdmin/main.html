@@ -3,11 +3,49 @@
 
 <!-- Index CSS 파일 및 JS 파일 include -->
 {% load static %}
-<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/index.css' %}"> <!-- pc 버전 -->
-<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/index.css' %}" > <!-- 모바일 버전 -->
+<link rel="stylesheet" href="{% static 'css/onepickAdmin/main.css' %}">
 
-<!-- JS 파일 -->
+    <!-- JS 파일 -->
 <script src="{% static 'js/index.js' %}"></script>
 
+<div class="inBox">
+    <div class="title">공지사항</div>
+
+    <div class="viewBox">
+       <div class="inTitle">
+            <div class="listTitle">제목</div>
+            <div class="listRegDate">등록일</div>
+            <div class="listView">노출 여부</div>
+            <div class="listEtc"></div>
+       </div>
+
+        <div class="contentBox">
+            {% for notice in noticeList %}
+             <div class="contentList">
+                <div class="listTitle">{{ notice.title }}</div>
+                <div class="listRegDate">{{ notice.regdate|date:"Y/m/d" }}</div>
+                <div class="listView">
+                    {% if notice.viewtype == "Y" %}
+                        <span class="pink">노출</span>
+                    {% else %}
+                        <span class="gray">미노출</span>
+                    {% endif %}
+                </div>
+                <div class="listEtc">
+                    <div class="editBtn" data-num="{{ notice.num }}"></div>
+                    <div class="delBtn" data-num="{{ notice.num }}"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+    <div class="title">회원수</div>
+
+    <div class="viewBox">
+    </div>
+</div>
 
 {% endblock %}

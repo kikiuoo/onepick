@@ -285,3 +285,28 @@
 .inBox2 .socialBox .socialBtn#gogleLogin{background-image: url("../../../image/web/gogleIcon.png")}
 .inBox2 .socialBox .socialBtn#appleLogin{background-image: url("../../../image/web/appleIcon.png")}
 .inBox2 .socialBox .socialBtn#naverLogin{background-image: url("../../../image/web/naverIcon.png")}
+
+
+.checkUser { display: none; }
+
+.checkUser #phone{
+    width: 70%;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.button2{
+    vertical-align: top;
+    display: inline-block;
+    width: 25%;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 10px;
+    background-color: #ff8aae;
+    cursor: pointer;
+
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}
