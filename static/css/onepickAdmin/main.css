@@ -64,3 +64,129 @@
 
 .viewBox .contentList .listEtc .editBtn { background-image: url("../../image/web/update.png")}
 .viewBox .contentList .listEtc .delBtn { background-image: url("../../image/web/delete.png"); margin-right: 0px}
+
+.graph{
+    position: relative;
+    padding: 40px 40px 82px 85px;
+    overflow: visible;
+}
+
+.graph .inBtnBox{
+    position: absolute;
+    right: 0px;
+    top: -50px;
+    font-size: 0px;
+}
+
+.graph .inBtnBox .typeBtn,
+.graph .inBtnBox .typeBtn2,
+.graph .inBtnBox .typeBtn3{
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    background-color: #fff;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 10px;
+    margin-left: 10px;
+
+    font-size: 15px;
+    color: #c0c0c0;
+    cursor: pointer;
+}
+
+.graph .inBtnBox .typeBtn.selected,
+.graph .inBtnBox .typeBtn2.selected,
+.graph .inBtnBox .typeBtn3.selected{
+    color: #ff8aae;
+}
+
+.graph .graphBox{
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+.graph .graphBox .line{
+    position: relative;
+    border-top: 1px solid #d8d8d8;
+    height: 50px;
+}
+
+.graph .graphBox .line .label{
+    position: absolute;
+    width: 32px;
+    height: 20px;
+    top: -13px;
+    left: -54px;
+
+    font-size: 14px;
+    color: #1f1f1f;
+    text-align: right;
+}
+
+.graph .graphBox .barBox{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    font-size: 0px;
+    text-align: center;
+}
+
+.graph .graphBox .barBox .barArea12{
+    position: relative;
+    display: inline-block;
+    width: 8.3%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.graph .graphBox .barBox .barArea14{
+    position: relative;
+    display: inline-block;
+    width: 7.1%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.graph .graphBox .barBox .barArea12 .xLabel,
+.graph .graphBox .barBox .barArea14 .xLabel{
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    bottom: -37px;
+
+    font-size: 14px;
+    text-align: center;
+}
+.graph .graphBox .barBox .barArea12 .bar,
+.graph .graphBox .barBox .barArea14 .bar{
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    margin-left: -7px;
+    width: 14px;
+    background-color: #ff8aae;
+    border-radius: 10px 10px 0px 0px;
+
+}
+
+.graph .graphBox .barBox .barArea12 .bar span,
+.graph .graphBox .barBox .barArea14 .bar span{
+    position: absolute;
+    left: 50%;
+    margin-left: -20px;
+    top: -30px;
+    width: 40px;
+    height: 20px;
+    border: 1px solid #f1f1f1;
+    border-radius: 10px;
+    background-color: rgba(255,138,174, 0.6);
+
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    line-height: 20px;
+}

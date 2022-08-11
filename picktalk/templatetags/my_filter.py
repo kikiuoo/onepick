@@ -444,3 +444,8 @@ def getCmmCount(values, table) :
         comm = BoradBulletinComment.objects.filter(bulnum=values)
 
     return len(comm)
+
+@register.filter
+def nowData(values, count):
+
+    return values[count]

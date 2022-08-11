@@ -9,6 +9,8 @@ urlpatterns = [
 
     path('loginCheck/', views.adminLogin, name='adminLogin'),
     path('logout/', views.adminLogout, name='adminLogout'),
+    path('ajax/getGraph/', views.ajaxGetGraph, name='ajaxGetGraph'),
+
 
     path('cs/mail/', viewsCs.mailMain, name='mailMain'),
     path('cs/ajaxUserList/', viewsCs.ajaxUserList, name='ajaxUserList'),
