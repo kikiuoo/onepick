@@ -95,6 +95,7 @@ class BoradBulletin(models.Model):
     content = models.CharField(max_length=10000, blank=True, null=True)
     regdate = models.DateTimeField(db_column='regDate', blank=True, null=True)  # Field name made lowercase.
     contenttype = models.CharField(db_column='contentType', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    viewcount = models.IntegerField(db_column='viewCount', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -113,6 +114,17 @@ class BoradBulletinComment(models.Model):
         db_table = 'borad_bulletin_comment'
 
 
+class BoradBulletinView(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    bullnum = models.PositiveBigIntegerField(db_column='bullNum')  # Field name made lowercase.
+    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'borad_bulletin_view'
+
+
 class BoradMagazine(models.Model):
     num = models.BigAutoField(primary_key=True)
     userid = models.CharField(db_column='userID', max_length=100, blank=True, null=True)  # Field name made lowercase.
@@ -122,10 +134,22 @@ class BoradMagazine(models.Model):
     image = models.CharField(max_length=10000, blank=True, null=True)
     regdate = models.DateTimeField(db_column='regDate', blank=True, null=True)  # Field name made lowercase.
     contenttype = models.CharField(db_column='contentType', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    viewcount = models.IntegerField(db_column='viewCount', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'borad_magazine'
+
+
+class BoradMagazineView(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    maganum = models.PositiveBigIntegerField(db_column='magaNum')  # Field name made lowercase.
+    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'borad_magazine_view'
 
 
 class CateMain(models.Model):
@@ -355,12 +379,23 @@ class QaNotice(models.Model):
     image = models.CharField(max_length=500, blank=True, null=True)
     regdate = models.DateTimeField(db_column='regDate', blank=True, null=True)  # Field name made lowercase.
     contenttype = models.CharField(db_column='contentType', max_length=20, blank=True, null=True)  # Field name made lowercase.
-    viewtype = models.CharField(db_column='viewType', max_length=20, blank=True,
-                                   null=True)  # Field name made lowercase.
+    viewtype = models.CharField(db_column='viewType', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    viewcount = models.IntegerField(db_column='viewCount', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'qa_notice'
+
+
+class QaNoticeView(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    noticenum = models.PositiveBigIntegerField(db_column='noticeNum')  # Field name made lowercase.
+    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'qa_notice_view'
 
 
 class QaQanda(models.Model):
@@ -371,7 +406,8 @@ class QaQanda(models.Model):
     content = models.CharField(max_length=10000, blank=True, null=True)
     regdate = models.DateTimeField(db_column='regDate', blank=True, null=True)  # Field name made lowercase.
     contenttype = models.CharField(db_column='contentType', max_length=20, blank=True, null=True)  # Field name made lowercase.
-    secret = models.CharField(db_column='secret', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    secret = models.CharField(max_length=20, blank=True, null=True)
+    viewcount = models.IntegerField(db_column='viewCount', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -399,6 +435,17 @@ class QaQandaComment(models.Model):
     class Meta:
         managed = False
         db_table = 'qa_qanda_comment'
+
+
+class QaQandaView(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    qanum = models.PositiveBigIntegerField(db_column='qaNum')  # Field name made lowercase.
+    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'qa_qanda_view'
 
 
 class UserAgree(models.Model):

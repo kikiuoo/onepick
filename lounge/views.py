@@ -44,6 +44,13 @@ def notice(request, num) :
     if notice.image != "" and notice.image != None :
         image = notice.image.split("|")
 
+    notice.viewcount = notice.viewcount + 1
+    notice.save()
+
+    nowTime = timezone.now()
+    user = request.session.get('id', '')
+    saveNoticeView = QaNoticeView.objects.create(noticenum=num, userid=user, regtime=nowTime)
+
     return render(request, 'lounge/notice.html', {"notice": notice, "image" : image})
 
 
@@ -183,6 +190,13 @@ def qandaView(request, num) :
 
     comment = QaQandaComment.objects.filter(qanum=num).order_by("-num")
 
+    qanda.viewcount = qanda.viewcount + 1
+    qanda.save()
+
+    nowTime = timezone.now()
+    users = request.session.get('id', '')
+    saveNoticeView = QaQandaView.objects.create(qanum=num, userid=users, regtime=nowTime)
+
     return render(request, 'lounge/qandaView.html', {"qanda": qanda, "cate" : cate, "user" : user,
                                                        "comment" : comment})
 
@@ -249,6 +263,13 @@ def magaView(request, num) :
         images = ""
 
     comment = BoardMagazineComment.objects.filter(mgnum=num).order_by("-num")
+
+    magazine.viewcount = magazine.viewcount + 1
+    magazine.save()
+
+    nowTime = timezone.now()
+    users = request.session.get('id', '')
+    saveView = BoradMagazineView.objects.create(maganum=num, userid=users, regtime=nowTime)
 
     return render(request, 'lounge/magaView.html', {"magazine": magazine, "image" : images, "comment" : comment})
 
@@ -412,6 +433,14 @@ def bullView(request, num) :
     user = UserInfo.objects.filter(userid=bull.userid)
 
     comment = BoradBulletinComment.objects.filter(bulnum=num).order_by("-num")
+
+
+    bull.viewcount = bull.viewcount + 1
+    bull.save()
+
+    nowTime = timezone.now()
+    users = request.session.get('id', '')
+    saveView = BoradBulletinView.objects.create(bullnum=num, userid=users, regtime=nowTime)
 
     return render(request, 'lounge/bullView.html', {"bull": bull, "user" : user, "comment" : comment})
 
