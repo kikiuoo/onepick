@@ -41,14 +41,13 @@ def adminCheck(request):
 
 
             cursor = connection.cursor()
-            query = "SELECT C, COUNT(*) AS counting " \
+            query = "SELECT C , COUNT(*) AS counting " \
                     "FROM( " \
-                    "	SELECT DATE_FORMAT(regDate,'%m/%d') AS C " \
-                    "	FROM user_count " \
-                    "	WHERE regDate >= '2022-07-29' " \
-                    "	ORDER BY regDate " \
+                    "	SELECT DATE_FORMAT(viewDay,'%m/%d') AS C   " \
+                    "	FROM view_count " \
                     ")AS a " \
-                    "GROUP BY C ORDER BY C DESC LIMIT 14 "
+                    "GROUP BY C  ORDER BY C DESC LIMIT 14"
+
 
             result = cursor.execute(query)
             connDay = cursor.fetchall()
@@ -152,29 +151,25 @@ def ajaxGetGraph(request) :
 
         elif dataType == "connect":
             if type == "day":
-                query = "SELECT C, COUNT(*) AS counting " \
+                query = "SELECT C , COUNT(*) AS counting " \
                         "FROM( " \
-                        "	SELECT DATE_FORMAT(regDate,'%m/%d') AS C " \
-                        "	FROM user_count " \
-                        "	WHERE regDate >= '2022-07-29' " \
-                        "	ORDER BY regDate " \
+                        "	SELECT DATE_FORMAT(viewDay,'%m/%d') AS C   " \
+                        "	FROM view_count " \
                         ")AS a " \
-                        "GROUP BY C ORDER BY C DESC LIMIT 14 "
+                        "GROUP BY C  ORDER BY C DESC LIMIT 14"
 
             elif type == "week":
                 query = "SELECT W, COUNT(*) AS counting  " \
                         "FROM( " \
-                        "	SELECT DATE_FORMAT(regDate,'%U') AS W,DATE_FORMAT(regDate,'%Y') AS Y  " \
-                        "	FROM user_count " \
-                        "	ORDER BY regDate " \
+                        "	SELECT DATE_FORMAT(viewDay,'%U') AS W ,DATE_FORMAT(viewDay,'%Y') AS Y   " \
+                        "	FROM view_count " \
                         ")AS a " \
                         "GROUP BY Y, W ORDER BY Y DESC, W DESC LIMIT 14  "
             elif type == "month":
                 query = "SELECT C, COUNT(*) AS counting " \
                         "FROM( " \
-                        "	SELECT DATE_FORMAT(regDate,'%Y/%m') AS C  " \
-                        "	FROM user_count " \
-                        "	ORDER BY regDate " \
+                        "	SELECT DATE_FORMAT(viewDay,'%Y/%m') AS C  " \
+                        "	FROM view_count " \
                         ")AS a " \
                         "GROUP BY C ORDER BY C DESC LIMIT 12 "
 
