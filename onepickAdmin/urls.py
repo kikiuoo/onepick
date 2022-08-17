@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 from . import viewsCs
+from . import viewsNotice
 
 urlpatterns = [
     path('', views.adminCheck, name='adminLoginCheck'),
@@ -11,6 +12,14 @@ urlpatterns = [
     path('logout/', views.adminLogout, name='adminLogout'),
     path('ajax/getGraph/', views.ajaxGetGraph, name='ajaxGetGraph'),
 
+    path('notice/list/<type>/<int:page>/', viewsNotice.list, name='list'),
+    path('notice/write/', viewsNotice.write, name='write'),
+    path('notice/writeCallBack/', viewsNotice.writeCallBack, name='writeCallBack'),
+    path('notice/viewer/<int:num>/', viewsNotice.viewer, name='viewer'),
+    path('notice/edit/<int:num>/', viewsNotice.edit, name='edit'),
+    path('notice/editCallBack/', viewsNotice.editCallBack, name='editCallBack'),
+    path('notice/summerImageUpload/', viewsNotice.summerImageUpload, name='summerImageUpload'),
+    path('notice/delete/<int:num>/', viewsNotice.delete, name='delete'),
 
     path('cs/mail/', viewsCs.mailMain, name='mailMain'),
     path('cs/ajaxUserList/', viewsCs.ajaxUserList, name='ajaxUserList'),

@@ -7,7 +7,6 @@
     background-color: #fff;
     box-sizing: border-box;
     font-size: 0px;
-    margin-left: 10px;
     margin-bottom:30px;
 }
 
@@ -24,7 +23,6 @@
     display: inline-block;
     width: 18px;
     height: 18px;
-    margin-left: 10px;
     cursor: pointer;
     vertical-align: top;
 
