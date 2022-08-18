@@ -147,7 +147,7 @@ def mailList(request, page):
 
     return render( request, "onepickAdmin/cs/mailList.html",
                    {'pageType': "cs", "mailList":mailList, "paging":paging, "page" : page,
-                    "leftPage" : page-1, "rightPage" : page+1, "lastPage" : paging[-1] })
+                    "leftPage" : page-1, "rightPage" : page+1, "lastPage" : allPage })
 
 def mailDetail(request, num):
 

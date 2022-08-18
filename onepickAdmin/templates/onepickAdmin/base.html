@@ -32,12 +32,12 @@
             <div class="menu {% if pageType == "notice" %}active{% endif %}" data-url="/onepickAdmin/notice/list/all/1/">
                 공지사항<span></span>
             </div>
-            <div class="menu dropMenu {% if pageType == "" %}active{% endif %}" data-url="/onepickAdmin/">
+            <div class="menu dropMenu {% if pageType == "user" %}active{% endif %}" data-url="/onepickAdmin/user/list/normal/1/">
                 회원 관리<span></span>
 
                 <ul>
-                    <li data-url="/onepickAdmin/cs/mail/">일반 회원 <div></div></li>
-                    <li data-url="/onepickAdmin/cs/qanda/">기업 회원 <div></div></li>
+                    <li data-url="/onepickAdmin/user/list/normal/1/">일반 회원 <div></div></li>
+                    <li data-url="/onepickAdmin/user/list/company/1/">기업 회원 <div></div></li>
                 </ul>
                 <div class="image"></div>
             </div>

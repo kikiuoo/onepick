@@ -27,7 +27,7 @@ $(document).ready(function(){
     // 일별 selectbox 만들기
     for(var i=1; i <= 31; i++) {
         var dd = i > 9 ? i : "0"+i ;
-        if( brith2 == dd ) {
+        if( brith3 == dd ) {
              $('#brith3').append('<option value="' + dd + '" selected>' + dd+ '일</option>');
         }else{
              $('#brith3').append('<option value="' + dd + '">' + dd+ '일</option>');

@@ -222,6 +222,8 @@ select:focus{
     background-color: #fff;
     border-radius: 10px;
     box-sizing: border-box;
+
+    z-index: 10;
 }
 
 .dropMenu ul li{
@@ -247,6 +249,7 @@ select:focus{
 
     background-image: url("../../image/onepickAdmin/menu_box.png");
     background-size: 100% auto;
+    z-index: 11;
 }
 
 .dropMenu ul li:first-child{

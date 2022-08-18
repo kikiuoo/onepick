@@ -31,7 +31,7 @@ def list(request, type, page):
     paging = getPageList_v2(page, allPage)
 
     return render( request, urlBase + "list.html", {'pageType': "notice", "noticeList":notice, "paging":paging, "page" : page,
-                                                    "leftPage" : page-1, "rightPage" : page+1, "lastPage" : paging[-1], "type":type })
+                                                    "leftPage" : page-1, "rightPage" : page+1, "lastPage" : allPage, "type":type })
 
 
 def write(request):

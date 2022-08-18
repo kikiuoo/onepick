@@ -34,7 +34,10 @@ def getPageList ( nowPage, allPage) :
 
 def getPageList_v2 ( nowPage, allPage) :
 
-    pageArea = int( (nowPage/10) + 1 ) * 10
+    if nowPage % 10 == 0 :
+        pageArea = nowPage
+    else :
+        pageArea = int( (nowPage/10) + 1 ) * 10
 
     sPage = pageArea-9
     ePage = pageArea+1
