@@ -144,7 +144,7 @@ def qandaWriteCallBack(request) :
 
     nowTime = timezone.now()
 
-    saveQaQanda = QaQanda.objects.create(userid=user, cate=cate, title=title, content=content, regdate=nowTime, secret=secret)
+    saveQaQanda = QaQanda.objects.create(userid=user, cate=cate, title=title, content=content, regdate=nowTime, secret=secret, viewcount=0)
 
     return redirect("/lounge/qanda/list/1/")
 
@@ -300,7 +300,7 @@ def magaWriteCallBack(request) :
 
     user = request.session.get('id', '')
 
-    saveQaQanda = BoradMagazine.objects.create(userid=user, title=title, content=content, image=imageURL, regdate=nowTime)
+    saveQaQanda = BoradMagazine.objects.create(userid=user, title=title, content=content, image=imageURL, regdate=nowTime, viewcount=0)
 
     return redirect("/lounge/magazine/list/1/")
 
@@ -457,7 +457,7 @@ def bullWriteCallBack(request) :
 
     nowTime = timezone.now()
 
-    saveQaQanda = BoradBulletin.objects.create(userid=user, title=title, content=content, regdate=nowTime)
+    saveQaQanda = BoradBulletin.objects.create(userid=user, title=title, content=content, regdate=nowTime, viewcount=0)
 
     return redirect("/lounge/bull/list/1/")
 
