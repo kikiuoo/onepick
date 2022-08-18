@@ -27,7 +27,7 @@ def adminCheck(request):
                     "FROM( " \
                     "	SELECT DATE_FORMAT(regTime,'%m/%d') AS C " \
                     "	FROM user_info " \
-                    "	WHERE regTime >= '2022-07-29' " \
+                    "	WHERE regTime >= '2022-07-29' and phone != '' " \
                     "	ORDER BY regTime " \
                     ")AS a " \
                     "GROUP BY C ORDER BY C DESC LIMIT 14 "
@@ -100,6 +100,9 @@ def adminLogin(request) :
         request.session['adminID'] = userIN.userid
         request.session['adminName'] = userIN.name
 
+        request.session['id'] = 'onepick'
+        request.session['userType'] = 'admin'
+
         request.session.set_expiry(0)
 
         return JsonResponse({"code": "0"})
@@ -128,7 +131,7 @@ def ajaxGetGraph(request) :
                         "FROM( " \
                         "	SELECT DATE_FORMAT(regTime,'%m/%d') AS C " \
                         "	FROM user_info " \
-                        "	WHERE regTime >= '2022-07-29' " \
+                        "	WHERE regTime >= '2022-07-29' and phone != '' " \
                         "	ORDER BY regTime " \
                         ")AS a " \
                         "GROUP BY C ORDER BY C DESC LIMIT 14 "
@@ -137,6 +140,7 @@ def ajaxGetGraph(request) :
                         "FROM( " \
                         "	SELECT DATE_FORMAT(regTime,'%U') AS W,DATE_FORMAT(regTime,'%Y') AS Y  " \
                         "	FROM user_info " \
+                        "   where phone != ''" \
                         "	ORDER BY regTime " \
                         ")AS a " \
                         "GROUP BY Y, W ORDER BY Y DESC, W DESC LIMIT 14  "
@@ -145,6 +149,7 @@ def ajaxGetGraph(request) :
                         "FROM( " \
                         "	SELECT DATE_FORMAT(regTime,'%Y/%m') AS C  " \
                         "	FROM user_info " \
+                        "   where phone != ''" \
                         "	ORDER BY regTime " \
                         ")AS a " \
                         "GROUP BY C ORDER BY C DESC LIMIT 12 "

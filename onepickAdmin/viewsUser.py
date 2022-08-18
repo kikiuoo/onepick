@@ -175,7 +175,7 @@ def excel (request, type, word) :
     ws = wb.add_sheet('회원 정보')  # 시트 추가
 
     row_num = 0
-    col_names = ['이름', '회원그룹', '연락처', '성별' ,'주소' , '가입일', '가입경로', '마지막 로그인 시간']
+    col_names = ['이름', '회원그룹', '연락처', '나이' ,'성별' ,'주소' , '가입일', '가입경로', '마지막 로그인 시간', '탈퇴유무', '프로필작성유무' ]
 
     # 열이름을 첫번째 행에 추가 시켜준다.
     for idx, col_name in enumerate(col_names):
@@ -193,8 +193,9 @@ def excel (request, type, word) :
         if word == "|" :
             word = ""
 
-        query = "SELECT name, userType, phone, gender, addr1, regTime, joinType, lastLogin  " \
-                "FROM user_info " \
+        query = "SELECT name, userType, phone, birth ,gender, addr1, regTime, joinType, lastLogin, " \
+                "       'N' as dropUser, (SELECT COUNT(*) FROM profile_info WHERE userID = A.userID) AS proCount   " \
+                "FROM user_info as A " \
                 "where userType like '%"+userType+"%' and ( `userID` like '%" + word + "%' or `name` like '%" + word + "%' or phone like '%" + word + "%' or `email` like '%" + word + "%' ) " \
                       " and phone != '' " \
                 "order by num desc "
@@ -227,12 +228,24 @@ def excel (request, type, word) :
                     ws.write(row_num, col_num, "미이전회원")
 
             elif col_num == 3 :
+
+                birth = attr.split('-')
+                nowTime = str(timezone.now())
+                year = nowTime.split('-')
+
+                if birth[0] != "":
+                    age = int(year[0]) - int(birth[0]) + 1
+                else:
+                    age = "-"
+                ws.write(row_num, col_num, age)
+
+            elif col_num == 4 :
                 if attr == "girl" :
                     ws.write(row_num, col_num, "여성")
                 elif attr == "man" :
                     ws.write(row_num, col_num, "남성")
 
-            elif col_num == 6 :
+            elif col_num == 7 :
                 if attr == "NAVER" :
                     ws.write(row_num, col_num, "네이버")
                 elif attr == "KAKAO" :
@@ -246,9 +259,14 @@ def excel (request, type, word) :
                 else :
                     ws.write(row_num, col_num, "기존회원")
 
-            elif col_num == 5 or col_num == 7:
+            elif col_num == 6 or col_num == 8:
                 ws.write(row_num, col_num, attr,date_format)
 
+            elif col_num == 10:
+                if int(attr) > 0 :
+                    ws.write(row_num, col_num, "Y")
+                else :
+                    ws.write(row_num, col_num, "N")
             else :
                 ws.write(row_num, col_num, attr)
 

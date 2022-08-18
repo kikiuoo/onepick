@@ -5,6 +5,7 @@ from . import views
 from . import viewsCs
 from . import viewsNotice
 from . import viewsUser
+from . import viewsProfile
 
 urlpatterns = [
     path('', views.adminCheck, name='adminLoginCheck'),
@@ -31,6 +32,10 @@ urlpatterns = [
     path('user/editCallback/', viewsUser.editCallback, name='editCallback'),
     path('user/updateComany/', viewsUser.updateComany, name='updateComany'),
     path('user/excel/<type>/<word>/', viewsUser.excel, name='excel'),
+
+    # Profile url
+    path('profile/list/<int:page>/', viewsProfile.list, name='list'),
+
 
 
     path('cs/mail/', viewsCs.mailMain, name='mailMain'),
