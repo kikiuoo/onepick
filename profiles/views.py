@@ -9,6 +9,8 @@ from django.http import HttpResponse, JsonResponse
 from django.db import connection
 from myonepick.common import *
 
+from django.views.decorators.csrf import csrf_exempt
+
 
 # Create your views here.
 # profile/list/actor/ -- 배우 리스트
@@ -238,6 +240,7 @@ def pofile_write(request) :
 
     return render(request, 'profiles/write.html', { 'user':user, 'cate' : cate, "checkProfile" : checkProfile })
 
+@csrf_exempt
 def pofile_write_callback(request) :
 
     # 기본정보
@@ -431,7 +434,7 @@ def pofile_edit(request, num) :
                                                    "artImages":artImages, "youtubes":youtubes, "foreign": foreign, "talent": talent,
                                                    "careerEtc":careerEtc})
 
-
+@csrf_exempt
 def pofile_edit_callback(request) :
     # 기본정보
     num = request.POST['num']
