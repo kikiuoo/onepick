@@ -27,7 +27,7 @@ def list(request, type, page):
         noticeList = QaNotice.objects.filter(viewtype="N").order_by("-regdate")
 
     notice = noticeList[start:end]
-    allPage = (len(noticeList) / block) + 1
+    allPage = int(len(noticeList) / block) + 1
     paging = getPageList_v2(page, allPage)
 
     return render( request, urlBase + "list.html", {'pageType': "notice", "noticeList":notice, "paging":paging, "page" : page,

@@ -34,7 +34,8 @@ urlpatterns = [
     path('user/excel/<type>/<word>/', viewsUser.excel, name='excel'),
 
     # Profile url
-    path('profile/list/<int:page>/', viewsProfile.list, name='list'),
+    path('profile/list/<type>/<int:page>/', viewsProfile.list, name='list'),
+    path('profile/listSearch/<type>/<word>/<int:page>/', viewsProfile.listSearch, name='listSearch'),
 
 
 

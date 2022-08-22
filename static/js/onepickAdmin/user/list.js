@@ -8,9 +8,15 @@ $(document).ready(function() {
 
    $(document).on("click", ".leftPage, .pages, .rightPage", function (){
        var page = $(this).attr("data-page");
+       var listType = $(this).attr("data-type");
 
-       window.location.href = "/onepickAdmin/user/list/"+type+"/"+page+"/";
+       if(listType == "search"){
+           window.location.href = "/onepickAdmin/user/listSearch/"+type+"/"+word+"/"+page+"/";
+       }else{
+           window.location.href = "/onepickAdmin/user/list/"+type+"/"+page+"/";
+       }
    });
+
     $(document).on("click", ".editBtn", function (e){
         e.preventDefault();
         e.stopPropagation();

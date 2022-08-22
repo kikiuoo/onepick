@@ -141,7 +141,7 @@ def mailList(request, page):
     except:
         connection.rollback()
 
-    allPage = (len(mailAll) / block) + 1
+    allPage = int(len(mailAll) / block) + 1
 
     paging = getPageList_v2(page, allPage)
 

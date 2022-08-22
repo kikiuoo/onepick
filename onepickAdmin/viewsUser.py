@@ -26,7 +26,7 @@ def list(request, type, page):
         userList = UserInfo.objects.filter(usertype__contains="COMPANY", phone__isnull=False).order_by("-regtime")
 
     user = userList[start:end]
-    allPage = (len(userList) / block) + 1
+    allPage = int(len(userList) / block) + 1
     paging = getPageList_v2(page, allPage)
 
     return render( request, urlBase + "list.html", {'pageType': "user", "userList":user, "paging":paging, "page" : page,
@@ -62,7 +62,7 @@ def listSearch(request, type, word, page):
     except:
         connection.rollback()
 
-    allPage = (len(userAll) / block) + 1
+    allPage = int(len(userAll) / block) + 1
     paging = getPageList_v2(page, allPage)
 
     return render( request, urlBase + "listSearch.html",
