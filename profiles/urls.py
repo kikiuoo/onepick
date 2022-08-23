@@ -16,7 +16,7 @@ urlpatterns = [
 
     path('ajax/getSubCate/', views.audiAjaxGetCate, name="profile-getCate"),
     path('ajax/getSubCate_etc/', views.audiAjaxGetCateEtc, name="profile-getCateEtc"),
-    path('ajax/getProfile/', views.getProfile, name="profile-getProfile"),
+    #path('ajax/getProfile/', views.getProfile, name="profile-getProfile"),
     path('ajax/saveComment/', views.saveComment, name="profile-saveComment"),
     path('ajax/reloadComment/', views.reloadComment, name="profile-reloadComment"),
     path('ajax/deleteComment/', views.deleteComment, name="profile-deleteComment"),

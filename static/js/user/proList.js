@@ -34,19 +34,6 @@ $(document).ready(function (){
     });
 
 
-    var pageHeight = $(document).height() - $(window).height();
-    $(window).scroll(function() {
-        var scrollH = $(window).scrollTop();
-        var pageH = ( pageHeight * page ) - 100;
-
-        console.log(page + " " +scrollH + " " + pageH);
-        if (scrollH >= pageH) {
-            page++;
-
-            getProfileList( page );
-        }
-    });
-
     $(document).on("change", "#listView", function(){
        var dataType = $(this).find("option:selected").val();
 
@@ -95,6 +82,14 @@ $(document).ready(function (){
 
         updateApplyPick('N', num, userNum, comment);
     });
+
+
+    $(document).on("click", ".leftPage, .pages, .rightPage", function (){
+        var pages = $(this).attr("data-page");
+
+        window.location.href = "/proList/"+type+"/"+pages+"/"+num+"/"+filter+"/";
+    });
+
 });
 
 function updateApplyPick(pick, auditionNum, profileNum, comment){

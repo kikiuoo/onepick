@@ -169,8 +169,8 @@ def searchList(request, cateType, search, page) :
             saveSearch = UserSearch.objects.create(userid=user, search=search, regdate=nowTime)
 
         block = 10
-        start = (page - 1) * block
-        end = page * block
+        start = (int(page) - 1) * block
+        end = int(page) * block
 
         if cateType == "audition" :
 
@@ -202,8 +202,6 @@ def searchList(request, cateType, search, page) :
             result = cursor.execute(query)
             searching = cursor.fetchall()
 
-            allPage = (len(allList) / block) + 1
-            paging = getPageList(page, allPage)
 
         else :
 
@@ -215,6 +213,8 @@ def searchList(request, cateType, search, page) :
                     "      ( career > 0 OR etcCareer > 0 OR `foreign` LIKE '%" + search + "%' OR talent LIKE '%" + search + "' OR `comment` LIKE '%" + search + "%' OR `careerYear` LIKE '%" + search + "%' OR `careerMonth` LIKE '%" + search + "%' " \
                     "        OR `foreign` LIKE '%" + search + "%' OR `birth` LIKE '%" + search + "%' OR `finalSchool` LIKE '%" + search + "%' OR `school` LIKE '%" + search + "%' OR `major` LIKE '%" + search + "%' OR `entertain` LIKE '%" + search + "%' OR `military` LIKE '%" + search + "%')  " \
                     "ORDER BY regDate DESC "
+
+            print(query)
 
             result = cursor.execute(query)
             allList = cursor.fetchall()
@@ -244,18 +244,19 @@ def searchList(request, cateType, search, page) :
 
             result = cursor.execute(query)
             searching = cursor.fetchall()
-            paging = ""
 
         connection.commit()
         connection.close()
 
-
+        allPage = int(len(allList) / block) + 1
+        paging = getPageList_v2(page, allPage)
 
     except:
         connection.rollback()
 
-    return render(request, 'picktalk/search.html', {"cateType": cateType, "searching": searching, "search":search, "page" : page,
-                                                        "paging" : paging, "allList" : len(allList) })
+    return render(request, 'picktalk/search.html',
+                  {"cateType": cateType, "searching": searching, "search":search, "paging":paging, "page" : page,
+                   "leftPage" : page-1, "rightPage" : page+1, "lastPage" : allPage,"allList":len(allList)})
 
 
 
@@ -298,8 +299,6 @@ def getSearchProfile(request) :
                     "        OR `foreign` LIKE '%" + search + "%' OR `birth` LIKE '%" + search + "%' OR `finalSchool` LIKE '%" + search + "%' OR `school` LIKE '%" + search + "%' OR `major` LIKE '%" + search + "%' OR `entertain` LIKE '%" + search + "%' OR `military` LIKE '%" + search + "%')  " \
                     "ORDER BY regDate DESC  " \
                     " LIMIT " + str(start) + ", " + str(block)
-
-        print(query)
 
         result = cursor.execute(query)
         searching = cursor.fetchall()
@@ -399,11 +398,16 @@ def proList(request, type, page, num, filter) :
     result = cursor.execute(query)
     profile = cursor.fetchall()
 
+    allPage = int(len(allList) / block) + 1
+    paging = getPageList_v2(page, allPage)
+
     connection.commit()
     connection.close()
 
-    return render(request, 'user/proList.html', {"type": type, "page":page, "profile": profile, "filter" : filter,
-                                                 "allCount" : cursor.rowcount, "allList" : len(allList), "num": num })
+    return render(request, 'user/proList.html',
+                  {"type": type, "profile": profile, "filter" : filter, "paging":paging, "page": page,
+                   "leftPage": page - 1, "rightPage": page + 1, "lastPage": allPage,
+                   "allCount" : cursor.rowcount, "allList" : len(allList), "num": num })
 
 def proList2(request, type, page, num, filter) :
 

@@ -63,11 +63,11 @@ def notiList(request, page) :
     noti = QaNotice.objects.filter(viewtype="Y")
     notice = noti.order_by("-regdate")[start:end]
 
-    allPage = ( noti.count() / block ) + 1
+    allPage = int( noti.count() / block ) + 1
+    paging = getPageList_v2(page, allPage)
 
-    paging = getPageList( page, allPage )
-
-    return render(request, 'lounge/notiList.html', {"notice": notice, "paging" : paging, "page":page})
+    return render(request, 'lounge/notiList.html', {"notice": notice, "paging" : paging, "page":page,
+                                                    "leftPage": page - 1, "rightPage": page + 1, "lastPage": allPage})
 
 
 
@@ -90,11 +90,13 @@ def qandaList(request, page) :
     connection.commit()
     connection.close()
 
-    allPage = (len(qandaList) / block) + 1
+    allPage = int(len(qandaList) / block) + 1
 
-    paging = getPageList(page, allPage)
+    paging = getPageList_v2(page, allPage)
 
-    return render(request, 'lounge/qandaList.html', {"qandaList": qandaList, "paging" : paging, "page":page,"type": "list"})
+    return render(request, 'lounge/qandaList.html',
+                  {"qandaList": qandaList, "paging" : paging, "page":page, "type": "list",
+                   "leftPage": page - 1, "rightPage": page + 1, "lastPage": allPage })
 
 
 
@@ -120,11 +122,12 @@ def qandaMyList(request, page) :
     connection.commit()
     connection.close()
 
-    allPage = (len(qandaList) / block) + 1
+    allPage = int(len(qandaList) / block) + 1
+    paging = getPageList_v2(page, allPage)
 
-    paging = getPageList(page, allPage)
-
-    return render(request, 'lounge/qandaList.html', {"qandaList": qandaList, "paging" : paging, "page":page,"type": "myList"})
+    return render(request, 'lounge/qandaList.html',
+                  {"qandaList": qandaList, "paging" : paging, "page":page,"type": "myList",
+                   "leftPage": page - 1, "rightPage": page + 1, "lastPage": allPage })
 
 
 def qandaWrite(request) :
@@ -247,11 +250,12 @@ def magaList(request, page) :
     magaAll = BoradMagazine.objects.all()
     magazine = magaAll.order_by("-regdate")[start:end]
 
-    allPage = ( magaAll.count() / block ) + 1
+    allPage = int( magaAll.count() / block ) + 1
 
-    paging = getPageList(page, allPage)
+    paging = getPageList_v2(page, allPage)
 
-    return render(request, 'lounge/magaList.html', {"magazine": magazine, "paging" : paging, "page":page})
+    return render(request, 'lounge/magaList.html', {"magazine": magazine, "paging" : paging, "page":page,
+                                                    "leftPage": page - 1, "rightPage": page + 1, "lastPage": allPage})
 
 def magaView(request, num) :
 
@@ -421,11 +425,12 @@ def bullList(request, page) :
     bullAll = BoradBulletin.objects.all()
     bulletin = bullAll.order_by("-regdate")[start:end]
 
-    allPage = ( bullAll.count() / block ) + 1
+    allPage = int( bullAll.count() / block ) + 1
 
-    paging = getPageList(page, allPage)
+    paging = getPageList_v2(page, allPage)
 
-    return render(request, 'lounge/bullList.html', {"bulletin": bulletin, "paging" : paging, "page":page})
+    return render(request, 'lounge/bullList.html', {"bulletin": bulletin, "paging" : paging, "page":page,
+                                                    "leftPage": page - 1, "rightPage": page + 1, "lastPage": allPage })
 
 def bullView(request, num) :
 

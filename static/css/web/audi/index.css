@@ -216,27 +216,60 @@
     right: 20px;
 }
 
+
 .page{
+    margin-top: 30px;
     font-size: 0px;
-    margin-top: 45px;
     text-align: center;
 }
 
-.page .pages{
+.pageBox{
+    display: inline-block;
+}
+
+.pages{
     display: inline-block;
     font-size: 20px;
     font-weight: bold;
     color: #959595;
     margin-left: 20px;
     cursor: pointer;
+    height: 32px;
+    line-height: 32px;
+    vertical-align: top;
 }
 
-.page .pages:first-child{
+.pages.nowPage{
+    color: #ff8aae;
+}
+
+.pages:nth-child(1){
     margin-left: 0px;
 }
 
-.page .pages.nowPage{
-    color: #ff8aae;
+.leftPage, .rightPage{
+    display: inline-block;
+    border: 1px solid #c0c0c0;
+    border-radius: 50px;
+    vertical-align: top;
+    width: 32px;
+    height: 32px;
+    background-color: #fff;
+
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.leftPage{
+    margin-right: 30px;
+    background-image: url("../../../image/web/left_off.png");
+}
+
+.rightPage{
+    margin-left: 30px;
+    background-image: url("../../../image/web/right_off.png");
 }
 
 .swiper-button-next,

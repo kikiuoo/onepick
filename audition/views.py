@@ -58,9 +58,6 @@ def audi_index(request, cate_type, page): # 오디션 Main
         start = (page - 1) * block
         end = page * block
 
-        print( start )
-        print( end )
-
         query = "select * " \
                 "FROM audition_info AS ai LEFT JOIN cate_main AS cm ON ai.cate = cm.cateCode " \
                 "    LEFT JOIN  user_company AS uc ON ai.userID = uc.userID " \
@@ -86,8 +83,8 @@ def audi_index(request, cate_type, page): # 오디션 Main
         result = cursor.execute(query)
         audition = cursor.fetchall()
 
-        allPage = (len(allList) / block) + 1
-        paging = getPageList(page, allPage)
+        allPage = int(len(allList) / block) + 1
+        paging = getPageList_v2(page, allPage)
 
         connection.commit()
         connection.close()
@@ -95,8 +92,10 @@ def audi_index(request, cate_type, page): # 오디션 Main
     except:
         connection.rollback()
 
-    return render(request, 'audition/index.html', {'cateType' : cate_type , 'subBanner' : subBanner, "recomAudi" : recomAudi,
-                                                   "finishAudi" : finishAudi, "audition": audition, "paging" : paging, "page" : page } )
+    return render(request, 'audition/index.html',
+                  {'cateType' : cate_type , 'subBanner' : subBanner, "recomAudi" : recomAudi,
+                   "finishAudi" : finishAudi, "audition": audition, "paging" : paging, "page" : page,
+                   "leftPage": page - 1, "rightPage": page + 1, "lastPage": allPage } )
 
 
 #     /audi/audiDetail/(category)/(글번호)

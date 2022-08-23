@@ -11,7 +11,7 @@ $(document).ready(function(){
         window.location.href = '/lounge/qanda/viewer/'+num+'/' ;
     });
 
-    $(document).on("click", ".pages", function (){
+    $(document).on("click", ".leftPage, .pages, .rightPage", function (){
         var page = $(this).attr("data-page");
 
         window.location.href = "/lounge/qanda/list/"+page+"/";

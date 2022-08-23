@@ -48,45 +48,116 @@ def getCateType(cate_type):
 
 def listView(request, cate_type, page): # 오디션 Main
 
+    order = request.GET.get('order', "")
+    nationality = request.GET.get('nationality', "")
+    geneder = request.GET.get('geneder', "")
+    military = request.GET.get('military', "")
+    foreign = request.GET.get('foreign', "")
+    good = request.GET.get('good', "")
+    age1 = request.GET.get('age1', "")
+    age2 = request.GET.get('age2', "")
+    school = request.GET.get('school', "")
+    height1 = request.GET.get('height1', "")
+    height2 = request.GET.get('height2', "")
+    career1 = request.GET.get('career1', "")
+
     try:
         cursor = connection.cursor()
 
         user = request.session.get('id', '')
 
-        intercate = ""
-        if cate_type == "actor" :
-            intercate = " and ( p.interCate = 'mainCate1' || p.interCate like '%배우%' ) "
-        elif cate_type == "model" :
-            intercate = " and ( p.interCate = 'mainCate2' || p.interCate like '%배우%' ) "
-        elif cate_type == "singer" :
-            intercate = " and ( p.interCate = 'mainCate3' || p.interCate like '%가수%' ) "
+        block = 10
+        start = (int(page) - 1) * block
+        end = int(page) * block
+
+        orderby = ""
+        if order == "popular":
+            orderby = " order by viewCount desc "
+        elif order == "recommend":
+            orderby = " order by pickCount desc "
+        else:
+            orderby = " order by `upDate` Desc, regDate DESC "
+
+        where = ""
+        if nationality != "":
+            where = where + " and nationality='" + nationality + "'"
+
+        if military != "":
+            where = where + " and military='" + military + "'"
+
+        if geneder != "":
+            where = where + " and gender='" + geneder + "'"
+
+        if foreign != "":
+            if good != "":
+                where = where + " and `foreign` like '%" + foreign + "$" + good + "%'"
+            else:
+                where = where + " and `foreign` like '%" + foreign + "%'"
+
+        if age1 != "" and age2 != "":
+            nowTime = str(timezone.now())
+            year = nowTime.split('-')
+
+            age_1 = int(year[0]) - int(age1) + 1
+            age_2 = int(year[0]) - int(age2) + 1
+
+            where = where + " and birth >= '" + str(age_1) + "-01-01' and birth <= '" + str(age_2) + "-12-31' "
+
+        if school != "":
+            where = where + " and school like '%" + school + "%'"
+
+        if height1 != "" and height2 != "":
+            where = where + " and height >= '" + height1 + "' and height <= '" + height2 + "' "
+
+        if career1 != "":
+            where = where + " and careerYear >= '" + career1 + "' "
+
+        if cate_type == "actor":
+            where = where + "and ( p.interCate = 'mainCate1' || p.interCate like '%배우%' ) "
+        elif cate_type == "model":
+            where = where + "and ( p.interCate = 'mainCate2' || p.interCate like '%모델%' ) "
+        elif cate_type == "singer":
+            where = where + "and ( p.interCate = 'mainCate3' || p.interCate like '%가수%' ) "
+
+        query = "SELECT * " \
+                "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
+                "WHERE public = '0' and isDelete = '0'  and ui.userID != '' " + where
+
+        result = cursor.execute(query)
+        profileList = cursor.fetchall()
 
         # 프로필
         if user:
             query = "SELECT p.num , profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, " \
                     "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
-                    "WHERE public = '0' and isDelete = '0'  and ui.userID != '' " + intercate + " " \
-                    "ORDER BY `upDate` Desc, regDate DESC " \
-                    "LIMIT 10"
+                    "WHERE public = '0' and isDelete = '0'  and ui.userID != '' " + where + orderby + " LIMIT " + str(start) + ", " + str(block)
+
         else:
             query = "SELECT p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain," \
                     "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, '0' AS proPick " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui " \
                     "     ON p.userID = ui.userID " \
-                    "WHERE public = '0' and isDelete = '0'  and ui.userID != '' " + intercate + " " \
-                    "ORDER BY `upDate` Desc, regDate DESC  " \
-                    "LIMIT 10"
+                    "WHERE public = '0' and isDelete = '0'  and ui.userID != '' " + where + orderby + " LIMIT " + str(start) + ", " + str(block)
 
         result = cursor.execute(query)
         profiles = cursor.fetchall()
+
+        allPage = int(len(profileList) / block) + 1
+        paging = getPageList_v2(page, allPage)
 
         connection.commit()
         connection.close()
 
     except:
         connection.rollback()
-    return render(request, 'profiles/list.html', { 'profiles':profiles, "cateType" : cate_type, "page" : page })
+
+    return render(request, 'profiles/list.html',
+                  { 'profiles':profiles, "cateType" : cate_type, "paging":paging, "page" : page,
+                    "leftPage" : page-1, "rightPage" : page+1, "lastPage" : allPage, "order":order
+                    , "nationality":nationality, "geneder":geneder, "military":military, "foreign":foreign
+                    , "good":good, "age1":age1, "age2":age2, "school":school, "height1":height1, "height2":height2, "career1":career1})
+
 
 
 def viewer(request, cate_type, num) :
@@ -700,6 +771,7 @@ def audiAjaxGetCateEtc(request) :
 
     return render(request, 'profiles/ajax_cate_etc.html', {'cate':cate})
 
+""" 무한스크롤 -> 페이징 변경 
 def getProfile(request) :
 
     order = request.GET['order']
@@ -797,7 +869,7 @@ def getProfile(request) :
         connection.rollback()
 
     return render(request, 'profiles/ajax_profileList.html', {'profiles':profiles})
-
+"""
 
 def getCareerList(profileNum, groupType) :
 

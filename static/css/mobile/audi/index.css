@@ -238,20 +238,61 @@
     height: 4px !important;
 }
 
+
 .page{
-    text-align: center;
     margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 0px;
+    text-align: center;
 }
 
-.page .pages{
+.pageBox{
+    display: inline-block;
+}
+
+.pages{
     display: inline-block;
     font-size: 16px;
     font-weight: bold;
-    text-align: left;
     color: #959595;
+    margin-left: 10px;
+    cursor: pointer;
+    height: 25px;
+    line-height: 25px;
+    vertical-align: top;
 }
-.page .pages.nowPage{
+
+.pages.nowPage{
     color: #ff8aae;
+}
+
+.pages:nth-child(1){
+    margin-left: 0px;
+}
+
+.leftPage, .rightPage{
+    display: inline-block;
+    border: 1px solid #c0c0c0;
+    border-radius: 50px;
+    vertical-align: top;
+    width: 25px;
+    height: 25px;
+    background-color: #fff;
+
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.leftPage{
+    margin-right: 15px;
+    background-image: url("../../../image/web/left_off.png");
+}
+
+.rightPage{
+    margin-left: 15px;
+    background-image: url("../../../image/web/right_off.png");
 }
 
 .swiper-button-next,

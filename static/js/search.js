@@ -57,23 +57,10 @@ $(document).ready(function(){
         }
     });
 
-
-    $(window).scroll(function() {
-
-        if( cateType == "audition") return;
-
-        console.log(page + " " +$(window).scrollTop() + " " + ( $(document).height() - $(window).height() - 100 ) + " " + $(document).height() + " " +$(window).height());
-        if ($(window).scrollTop() >= ($(document).height() - $(window).height())) {
-            page++;
-
-            getProfileList( page, word)
-        }
-    });
-
-    $(document).on("click", ".pages", function(){
+    $(document).on("click", ".leftPage, .pages, .rightPage", function (){
         var pages = $(this).attr("data-page");
 
-        window.location.href = "/search/audition/"+word+"/"+pages+"/";
+        window.location.href = "/search/"+cateType+"/"+word+"/"+pages+"/";
     });
 
 });

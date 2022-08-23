@@ -64,7 +64,7 @@ $(document).ready(function(){
     });
 
 
-    $(document).on("click", ".pages", function(){
+    $(document).on("click", ".leftPage, .pages, .rightPage", function(){
         var pages = $(this).attr("data-page");
 
         window.location.href = "/audi/main/all/"+pages+"/";

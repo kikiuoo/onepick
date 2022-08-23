@@ -1,4 +1,8 @@
 $(document).ready(function(){
+      // 기본정보 선택시 글자 색상 변경
+    $(document).on("change", "select", function(){
+        $(this).css("color", "#1f1f1f");
+    });
 
     $(document).on("change", ".order", function(){
         var orderType = $(".order").find("option:selected").val();
@@ -15,7 +19,7 @@ $(document).ready(function(){
             return;
         }
 
-       window.open( "/profile/profileDetail/" + cateType + "/" + num + "/" );
+       window.location.href =  "/profile/profileDetail/" + cateType + "/" + num + "/";
     });
 
     $(document).on("click", ".profile .pickBtn", function(e){
@@ -48,17 +52,7 @@ $(document).ready(function(){
         }
     });
 
-
-    // 필터 적용
-    $(document).on("change", "#order, #nationality, #geneder, #military, #foreign, #good, #order2, #career1", function(){
-
-        var index = $(this).find("option:selected").index();
-
-        if( index == 0 && ( $(this).attr("id") != 'order' && $(this).attr("id") != 'order2' ) ){
-            $(this).css("color", "#c0c0c0");
-        }else{
-            $(this).css("color", "#1f1f1f");
-        }
+     $(document).on("change", "#order2", function(){
 
         var order = "";
         if( $("#order2.mobileNone").css("display") == "block" ){
@@ -79,13 +73,14 @@ $(document).ready(function(){
         var height2 = $("#height2").val();
         var career1 = $("#career1").find("option:selected").val();
 
-        page = 1;
-
-        getProfileList( order, nationality, geneder, military, foreign, good, age1, age2, school, height1, height2, career1);
-
+        window.location.href = "/profile/list/"+cateType+"/1/?order="+order+"&nationality="+nationality+"&geneder="+geneder
+                                +"&military="+military+"&foreign="+foreign+"&good="+good+"&age1="+age1+"&age2="+age2
+                                +"&school="+school+"&height1="+height1+"&height2="+height2+"&career1="+career1;
     });
 
-    $(document).on("keyup", "#age1, #age2, #school, #height1, #height2", function(){
+
+
+    $(document).on("click", ".filterSave", function(){
 
         var order = "";
         if( $("#order2.mobileNone").css("display") == "block" ){
@@ -106,10 +101,9 @@ $(document).ready(function(){
         var height2 = $("#height2").val();
         var career1 = $("#career1").find("option:selected").val();
 
-        page = 1;
-
-        getProfileList( order, nationality, geneder, military, foreign, good, age1, age2, school, height1, height2, career1);
-
+        window.location.href = "/profile/list/"+cateType+"/1/?order="+order+"&nationality="+nationality+"&geneder="+geneder
+                                +"&military="+military+"&foreign="+foreign+"&good="+good+"&age1="+age1+"&age2="+age2
+                                +"&school="+school+"&height1="+height1+"&height2="+height2+"&career1="+career1;
     });
 
 
@@ -133,22 +127,7 @@ $(document).ready(function(){
         $("#foreign").css("color", "#c0c0c0");
         $("#good").css("color", "#c0c0c0");
 
-        var order = $("#order").find("option:selected").val();
-        var nationality = $("#nationality").find("option:selected").val();
-        var geneder = $("#geneder").find("option:selected").val();
-        var military = $("#military").find("option:selected").val();
-        var foreign = $("#foreign").find("option:selected").val();
-        var good = $("#good").find("option:selected").val();
-        var age1 = $("#age1").val();
-        var age2 = $("#age2").val();
-        var school = $("#school").val();
-        var height1 = $("#height1").val();
-        var height2 = $("#height2").val();
-        var career1 = $("#career1").val();
-
-        page = 1;
-
-        getProfileList( order, nationality, geneder, military, foreign, good, age1, age2, school, height1, height2, career1);
+        window.location.href = "/profile/list/"+cateType+"/1/";
     });
 
     $(document).on("click", ".filterBtn", function (){
@@ -156,9 +135,11 @@ $(document).ready(function(){
     });
 
     $(document).on("click", ".filterSave, .closeBtn", function (){
-        $(".filterBox").css("display", "none");
+        //$(".filterBox").css("display", "none");
     });
 
+    /*
+        2022-08-23 무한스크롤 -> 페이징
     var pageHeight = $(document).height() - $(window).height();
     $(window).scroll(function() {
         var scrollH = $(window).scrollTop();
@@ -183,29 +164,37 @@ $(document).ready(function(){
             getProfileList( order, nationality, geneder, military, foreign, good, age1, age2, school, height1, height2, career1)
         }
     });
+
+    */
+
+    $(document).on("click", ".leftPage, .pages, .rightPage", function (){
+        var pages = $(this).attr("data-page");
+
+        var order = "";
+        if( $("#order2.mobileNone").css("display") == "block" ){
+            order = $("#order2").find("option:selected").val();
+        }else{
+            order = $("#order").find("option:selected").val();
+        }
+
+        var nationality = $("#nationality").find("option:selected").val();
+        var geneder = $("#geneder").find("option:selected").val();
+        var military = $("#military").find("option:selected").val();
+        var foreign = $("#foreign").find("option:selected").val();
+        var good = $("#good").find("option:selected").val();
+        var age1 = $("#age1").val();
+        var age2 = $("#age2").val();
+        var school = $("#school").val();
+        var height1 = $("#height1").val();
+        var height2 = $("#height2").val();
+        var career1 = $("#career1").find("option:selected").val();
+
+        window.location.href = "/profile/list/"+cateType+"/"+pages+"/?order="+order+"&nationality="+nationality+"&geneder="+geneder
+                                +"&military="+military+"&foreign="+foreign+"&good="+good+"&age1="+age1+"&age2="+age2
+                                +"&school="+school+"&height1="+height1+"&height2="+height2+"&career1="+career1;
+
+    });
 });
-
-function getProfileList( order, nationality, geneder, military, foreign, good, age1, age2, school, height1, height2, career1){
-    $.ajax({
-      url: "/profile/ajax/getProfile/",
-      type: "GET",
-      dataType: "html",
-      data:{"order":order, "nationality" : nationality, "geneder" : geneder, "military" : military,
-            "foreign":foreign, "good" : good, "age1" : age1, "age2" : age2, "school":school,
-            "height1" : height1, "height2" : height2, "career1" : career1, "page":page, "cate_type":cateType },
-
-      success: function(data){
-          if( page == 1 ) {
-              $(".inBox").empty().append(data);
-          }else{
-              $(".inBox").append(data);
-          }
-      },
-      error: function (request, status, error){
-          alert(error);
-      }
-   });
-}
 
 
 function updatePick(tableName, nowType, num){
