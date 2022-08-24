@@ -1,9 +1,15 @@
 $(document).ready(function(){
 
      if( userID == ""){
-        alert("로그인 후 이용가능합니다.");
-        window.history.back(-1);
+       if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
+           window.location.href = "/users/login/local/?reUrl=/audi/audiDetail/actor/" + num +"/"
+           return;
+       } else {
+           window.location.href = "/";
+            return;
+       }
     }
+
 
     if( userType != 'admin' && isDelete == '1'){
         alert("잘못된 접근입니다.");

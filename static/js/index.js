@@ -1,11 +1,6 @@
 $(document).ready(function (){
 
-    // 메인 베너 클릭 이벤트
-    $(document).on("click", ".mainBanner", function (){
-        // 추가 개발.
-    });
-
-    // Title 전체보기 클릭 이벤트 (Web 만 사용)
+      // Title 전체보기 클릭 이벤트 (Web 만 사용)
     $(document).on("click", ".mainTitle span", function(){
         var url = $(this).attr("data-url");
 
@@ -17,10 +12,13 @@ $(document).ready(function (){
        var num = $(this).attr("data-num");
 
        if( userID == ""){
-            alert("로그인 후 이용가능합니다.");
-            return;
+           if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
+               window.location.href = "/users/login/local/?reUrl=/audi/audiDetail/actor/" + num + "/"
+               return;
+           } else {
+                return;
+           }
        }
-
        window.location.href = "/audi/audiDetail/actor/" + num + "/" //  ../audi/audiDetail/actor(기본값)/글번호/
     });
 
@@ -29,9 +27,13 @@ $(document).ready(function (){
         e.stopPropagation();
 
         if( userID == ""){
-            alert("로그인 후 이용가능합니다.");
-            return;
-        }
+           if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
+               window.location.href = "/users/login/local/";
+               return;
+           } else {
+                return;
+           }
+       }
 
         // 기업회원 픽기능 제한
         if( userType == "COMPAYN" ||  userType == "S-COMPANY" ){
@@ -58,11 +60,15 @@ $(document).ready(function (){
     $(document).on("click", ".profile", function(){
        var num = $(this).attr("data-num");
 
-
        if( userID == ""){
-            alert("로그인 후 이용가능합니다.");
-            return;
+           if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
+               window.location.href = "/users/login/local/?reUrl=/profile/profileDetail/actor/" + num + "/"
+               return;
+           } else {
+                return;
+           }
        }
+
        window.location.href = "/profile/profileDetail/actor/" + num + "/" //  ../profile/profDetail/글번호/
     });
 
@@ -71,11 +77,14 @@ $(document).ready(function (){
         e.preventDefault();
         e.stopPropagation();
 
-        // 기능 구현 필요
         if( userID == ""){
-            alert("로그인 후 이용가능합니다.");
-            return;
-        }
+           if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
+               window.location.href = "/users/login/local/";
+               return;
+           } else {
+                return;
+           }
+       }
 
         // 일반회원 픽기능 제한
         if( userType == "NORMAL" ||  userType == "S-NORMAL" ){
@@ -107,11 +116,14 @@ $(document).ready(function (){
     $(document).on("click", ".banner", function (){
         var url = $(this).attr("data-url");
 
-        // 기능 구현 필요
         if( userID == ""){
-            alert("로그인 후 이용가능합니다.");
-            return;
-        }
+           if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
+               window.location.href = "/users/login/local/"
+               return;
+           } else {
+                return;
+           }
+       }
 
         window.open(url);
     });

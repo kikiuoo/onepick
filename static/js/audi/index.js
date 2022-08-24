@@ -14,8 +14,12 @@ $(document).ready(function(){
        var num = $(this).attr("data-num");
 
        if( userID == ""){
-            alert("로그인 후 이용가능합니다.");
-            return;
+           if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
+               window.location.href = "/users/login/local/?reUrl=/audi/audiDetail/"+cateType+'/' +num +"/"
+               return;
+           } else {
+                return;
+           }
        }
 
        window.location.href = '/audi/audiDetail/'+cateType+'/' +num +"/";
@@ -26,9 +30,13 @@ $(document).ready(function(){
         e.stopPropagation();
 
         if( userID == ""){
-            alert("로그인 후 이용가능합니다.")
-             return;
-        }
+           if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
+               window.location.href = "/users/login/local/";
+               return;
+           } else {
+                return;
+           }
+       }
 
          // 기업회원 픽기능 제한
         if( userType == "COMPAYN" ||  userType == "S-COMPANY" ){
@@ -54,11 +62,14 @@ $(document).ready(function(){
     $(document).on("click", ".banner", function (){
         var url = $(this).attr("data-url");
 
-        // 기능 구현 필요
         if( userID == ""){
-            alert("로그인 후 이용가능합니다.");
-            return;
-        }
+           if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
+               window.location.href = "/users/login/local/";
+               return;
+           } else {
+                return;
+           }
+       }
 
         window.open(url);
     });

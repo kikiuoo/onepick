@@ -53,6 +53,7 @@ $(document).ready(function(){
     $(document).on("click", ".loginBtn", function (){
         var userID = $("#userID").val();
         var userPW = $("#userPW").val();
+        var reUrl = $("#reUrl").val();
 
         if( userID == "" ){
             alert("아이디를 입력해 주세요.");
@@ -62,7 +63,7 @@ $(document).ready(function(){
             alert("패스워드를 입력해 주세요.");
             return;
         }
-        login(userID, userPW);
+        login(userID, userPW, reUrl);
     });
 
     $("#userPW").on("keyup",function(key){
@@ -112,7 +113,7 @@ function find_old_user(userName, userPhone){
    });
 }
 
-function login(username, password){
+function login(username, password, reUrl){
    $.ajax({
       url: "/users/login/logincallback/",
       type: "GET",
@@ -121,7 +122,11 @@ function login(username, password){
 
       success: function(data){
           if( data.code == "0" ){
-              window.location.href = "/";
+              if( reUrl != "" ){
+                  window.location.href = reUrl;
+              }else {
+                  window.location.href = "/";
+              }
           }else{
               alert( data.message );
           }

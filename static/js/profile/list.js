@@ -13,11 +13,14 @@ $(document).ready(function(){
     $(document).on("click", ".profile", function (){
        var num = $(this).attr("data-num");
 
-       // 기능 구현 필요
-        if( userID == ""){
-            alert("로그인 후 이용가능합니다.");
-            return;
-        }
+       if( userID == ""){
+           if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
+               window.location.href = "/users/login/local/?reUrl=/profile/profileDetail/" + cateType + "/" + num + "/";
+               return;
+           } else {
+               return;
+           }
+       }
 
        window.location.href =  "/profile/profileDetail/" + cateType + "/" + num + "/";
     });
@@ -26,11 +29,14 @@ $(document).ready(function(){
         e.preventDefault();
         e.stopPropagation();
 
-        // 기능 구현 필요
-        if( userID == ""){
-            alert("로그인 후 이용가능합니다.");
-            return;
-        }
+         if( userID == ""){
+           if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
+               window.location.href = "/users/login/local/";
+               return;
+           } else {
+               return;
+           }
+       }
 
          // 일반회원 픽기능 제한
         if( userType == "NORMAL" ||  userType == "S-NORMAL" ){

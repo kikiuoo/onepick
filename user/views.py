@@ -149,8 +149,9 @@ def naver_login_callback(request):
 
 
 def localLogin (request) :
+    reUrl = request.GET.get('reUrl',"")
 
-    return render(request, 'user/login.html')
+    return render(request, 'user/login.html', {"reUrl":reUrl})
 
 def localLoginCallback (request) :
     username = request.GET['username']
