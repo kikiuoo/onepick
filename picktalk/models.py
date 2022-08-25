@@ -301,6 +301,42 @@ class ProfileInfo(models.Model):
         db_table = 'profile_info'
 
 
+class ProfileInfoDelete(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    profileimage = models.CharField(db_column='profileImage', max_length=500, blank=True, null=True)  # Field name made lowercase.
+    detailimage = models.TextField(db_column='detailImage', blank=True, null=True)  # Field name made lowercase.
+    artimage = models.TextField(db_column='artImage', blank=True, null=True)  # Field name made lowercase.
+    height = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True)
+    weight = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True)
+    topsize = models.CharField(db_column='topSize', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    bottomsize = models.CharField(db_column='bottomSize', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    shoessize = models.IntegerField(db_column='shoesSize', blank=True, null=True)  # Field name made lowercase.
+    skincolor = models.CharField(db_column='skinColor', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    haircolor = models.CharField(db_column='hairColor', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    foreign = models.CharField(max_length=500, blank=True, null=True)
+    mainyoutube = models.CharField(db_column='mainYoutube', max_length=500, blank=True, null=True)  # Field name made lowercase.
+    youtube = models.CharField(max_length=500, blank=True, null=True)
+    talent = models.CharField(max_length=500, blank=True, null=True)
+    comment = models.CharField(max_length=10000, blank=True, null=True)
+    intercate = models.CharField(db_column='interCate', max_length=200, blank=True, null=True)  # Field name made lowercase.
+    intersubcate = models.CharField(db_column='interSubCate', max_length=200, blank=True, null=True)  # Field name made lowercase.
+    iscareer = models.CharField(db_column='isCareer', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    careeryear = models.CharField(db_column='careerYear', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    careermonth = models.CharField(db_column='careerMonth', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    regdate = models.DateTimeField(db_column='RegDate', blank=True, null=True)  # Field name made lowercase.
+    update = models.DateTimeField(db_column='upDate', blank=True, null=True)  # Field name made lowercase.
+    viewcount = models.IntegerField(db_column='viewCount', blank=True, null=True)  # Field name made lowercase.
+    cviewcount = models.IntegerField(db_column='cViewCount', blank=True, null=True)  # Field name made lowercase.
+    pickcount = models.IntegerField(db_column='pickCount', blank=True, null=True)  # Field name made lowercase.
+    public = models.CharField(max_length=10, blank=True, null=True)
+    isdelete = models.CharField(db_column='isDelete', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    contenttype = models.CharField(db_column='contentType', max_length=50, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'profile_info_delete'
+
 
 class ProfilePick(models.Model):
     num = models.BigAutoField(primary_key=True)
@@ -533,6 +569,46 @@ class UserInfo(models.Model):
     class Meta:
         managed = False
         db_table = 'user_info'
+
+
+class UserInfoQuit(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    userid = models.CharField(db_column='userID', unique=True, max_length=100)  # Field name made lowercase.
+    password = models.CharField(max_length=100, blank=True, null=True)
+    nickname = models.CharField(max_length=50, blank=True, null=True)
+    name = models.CharField(max_length=20, blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    email = models.CharField(max_length=100, blank=True, null=True)
+    birth = models.CharField(max_length=10, blank=True, null=True)
+    birthtype = models.CharField(db_column='birthType', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    gender = models.CharField(max_length=10, blank=True, null=True)
+    nationality = models.CharField(max_length=10, blank=True, null=True)
+    finalschool = models.CharField(db_column='finalSchool', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    school = models.CharField(max_length=50, blank=True, null=True)
+    major = models.CharField(max_length=50, blank=True, null=True)
+    entertain = models.CharField(max_length=100, blank=True, null=True)
+    military = models.CharField(max_length=10, blank=True, null=True)
+    zipcode = models.CharField(db_column='zipCode', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    addr1 = models.CharField(max_length=100, blank=True, null=True)
+    addr2 = models.CharField(max_length=100, blank=True, null=True)
+    instargram = models.CharField(max_length=200, blank=True, null=True)
+    youtube = models.CharField(max_length=200, blank=True, null=True)
+    agreeusage = models.CharField(db_column='agreeUsage', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    agreeprivacy = models.CharField(db_column='agreePrivacy', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    agreemarketing = models.CharField(db_column='agreeMarketing', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    agreeemail = models.CharField(db_column='agreeEmail', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    agreesms = models.CharField(db_column='agreeSms', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    jointype = models.CharField(db_column='joinType', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
+    lastlogin = models.DateTimeField(db_column='lastLogin', blank=True, null=True)  # Field name made lowercase.
+    logincount = models.IntegerField(db_column='loginCount', blank=True, null=True)  # Field name made lowercase.
+    usertype = models.CharField(db_column='userType', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    quitreason = models.CharField(db_column='quitReason', max_length=100, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'user_info_quit'
+
 
 
 class UserLogin(models.Model):

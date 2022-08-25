@@ -189,7 +189,7 @@ select:focus{
 #addr1{ width: 854px; margin-right: 17px; margin-bottom: 10px }
 #companyAddr1{ width: 807px; margin-right: 17px; margin-bottom: 10px }
 
-.confirmPhone, .findConfirm, .findAddr, .findAddr2{
+.confirmPhone, .findConfirm, .findAddr, .findAddr2, .pwBtn{
     display: inline-block;
     width: 126px;
     height: 50px;

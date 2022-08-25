@@ -31,6 +31,8 @@ urlpatterns = [
     path('mypage/<type>/', views.userMypage, name="user-userMypage"),
     path('info/update/', views.updateUser, name="user-updateUser"),
     path('info/updateCallback/', views.updateCallback, name="user-updateCallback"),
+    path('updatePW/', views.updatePW, name="user-updatePW"),
+    path('ajax/updatePWCallback/', views.updatePWCallback, name="user-updatePWCallback"),
 
     path('ajax/findOldUser/', views.ajax_findOldUser, name="user-ajax-findOldUser"),
     path('ajax/findUser/', views.ajax_findUser, name="user-ajax-findUser"),

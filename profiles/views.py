@@ -752,8 +752,40 @@ def pofile_edit_callback(request) :
 def pofile_delete(request, num) :
 
     profiles = ProfileInfo.objects.get(num=num)
-    profiles.isdelete = '1'
-    profiles.save()
+
+    saveDelete = ProfileInfoDelete.objects.create(
+        num=profiles.num,
+        userid=profiles.userid,
+        profileimage=profiles.profileimage,
+        detailimage=profiles.detailimage,
+        artimage=profiles.artimage,
+        height=profiles.height,
+        weight=profiles.weight,
+        topsize=profiles.topsize,
+        bottomsize=profiles.bottomsize,
+        shoessize=profiles.shoessize,
+        skincolor=profiles.skincolor,
+        haircolor=profiles.haircolor,
+        foreign=profiles.foreign,
+        mainyoutube=profiles.mainyoutube,
+        youtube=profiles.youtube,
+        talent=profiles.talent,
+        comment=profiles.comment,
+        intercate=profiles.intercate,
+        intersubcate=profiles.intersubcate,
+        iscareer=profiles.iscareer,
+        careeryear=profiles.careeryear,
+        careermonth=profiles.careermonth,
+        regdate=profiles.regdate,
+        update=profiles.update,
+        viewcount=profiles.viewcount,
+        cviewcount=profiles.cviewcount,
+        pickcount=profiles.pickcount,
+        public=profiles.public,
+        contenttype=profiles.contenttype
+    )
+
+    profiles.delete()
 
     return redirect("/")
 

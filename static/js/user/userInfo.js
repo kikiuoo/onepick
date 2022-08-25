@@ -39,6 +39,10 @@ $(document).ready(function(){
         $(this).css("color", "#1f1f1f");
     });
 
+    $(document).on("click", ".pwBtn", function(){
+       window.location.href = "/users/updatePW/"
+    });
+
     $(document).on("change", "#email_select", function (){
         var data = $("#email_select").find("option:selected").val();
         $("#email2").val(data);
@@ -155,18 +159,6 @@ $(document).ready(function(){
 
         if( userType == "NORMAL"){
 
-            if( joinType == "OLDUSER"){
-                if( pw1 == "" || pw2 == "" ){
-                    alert("비밀번호를 입력해주세요.");
-                    return;
-                }
-
-                if( pw1 != pw2 ){
-                    alert("입력하신 비밀번호가 다릅니다.");
-                    return;
-                }
-            }
-
             if( name == "" ){
                 alert("이름을 입력해주세요.");
                 return;
@@ -199,18 +191,6 @@ $(document).ready(function(){
                 return;
             }
         }else{
-            if( joinType == "OLDUSER"){
-                if( pw1 == "" || pw2 == "" ){
-                    alert("비밀번호를 입력해주세요.");
-                    return;
-                }
-
-                if( pw1 != pw2 ){
-                    alert("입력하신 비밀번호가 다릅니다.");
-                    return;
-                }
-            }
-
             if( name == "" ){
                 alert("담당자 이름을 입력해주세요.");
                 return;

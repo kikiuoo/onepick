@@ -34,12 +34,11 @@
                 </div>
             </div>
 
-            {% if userInfo.jointype == "OLDUSER"  %}
+            {% if userInfo.jointype == "OLDUSER" or userInfo.jointype == "oldUser"  %}
             <div class="joinInfo">
                 <div class="title">비밀번호</div>
                 <div class="content">
-                    <input type="password" value="" id="pw1" name="pw1" style="margin-bottom: 10px" placeholder="비밀번호를 입력해주세요."/>
-                    <input type="password" value="" id="pw2" name="pw2" placeholder="비밀번호 확인을 입력해주세요."/>
+                    <div class="pwBtn">비밀번호 변경</div>
                 </div>
             </div>
             {% endif %}
@@ -225,6 +224,8 @@
     <!--<div class="info_pink">확인 버튼을 누르시면, 원픽의 이용약관 및 개인 정보 취급 방침에 동의하시는 것으로 간주됩니다.</div>-->
     <div class="btnBox">
         <div class="sendBtn">확인</div>
+
+        <!--<div class="quitBtn">회원탈퇴</div>-->
     </div>
 </div>
 

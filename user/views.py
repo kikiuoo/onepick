@@ -730,3 +730,27 @@ def updateUserID(userID, oldUserID) :
     qaComment = QaQandaComment.objects.filter(userid=oldUserID).update(userid=userID)
 
     return ""
+
+
+def updatePW(request) :
+
+    return render(request, 'user/userPW.html')
+
+def updatePWCallback(request) :
+
+    user = request.session.get('id', '')
+    nowPW = request.GET.get("nowPW", "")
+    pw1 = request.GET.get("pw1", "")
+
+    findPassword = md5_generator(nowPW)
+    userInfo = UserInfo.objects.filter(userid=user, password=findPassword)
+
+    if userInfo.count() == 0 :
+        return JsonResponse({"code": "1", "message": "일치하는 정보가 없습니다."})
+    else :
+        userInfo = UserInfo.objects.get(userid=user)
+        savePW = md5_generator(pw1)
+        userInfo.password = savePW
+        userInfo.save()
+
+    return JsonResponse({"code": "0"})
