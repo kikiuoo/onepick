@@ -99,9 +99,8 @@ def adminLogin(request) :
 
         request.session['adminID'] = userIN.userid
         request.session['adminName'] = userIN.name
-
-        request.session['id'] = 'onepick'
-        request.session['userType'] = 'admin'
+        request.session['id'] = userIN.userid
+        request.session['userType'] = userIN.usertype
 
         request.session.set_expiry(0)
 
