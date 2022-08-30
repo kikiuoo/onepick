@@ -777,10 +777,46 @@ def quitCallback(request) :
     else :
         quit = quitCause
 
-    user = request.session.get('id', '')
-    userInfo = UserInfo.objects.get(userid=user)
-
     nowTime = timezone.now()
+    user = request.session.get('id', '')
+
+    userInfo = UserInfo.objects.get(userid=user)
+    profiles = ProfileInfo.objects.filter(userid=user)
+
+    for profile in profiles:
+        saveDelete = ProfileInfoDelete.objects.create(
+            num=profile.num,
+            userid=profile.userid,
+            profileimage=profile.profileimage,
+            detailimage=profile.detailimage,
+            artimage=profile.artimage,
+            height=profile.height,
+            weight=profile.weight,
+            topsize=profile.topsize,
+            bottomsize=profile.bottomsize,
+            shoessize=profile.shoessize,
+            skincolor=profile.skincolor,
+            haircolor=profile.haircolor,
+            foreign=profile.foreign,
+            mainyoutube=profile.mainyoutube,
+            youtube=profile.youtube,
+            talent=profile.talent,
+            comment=profile.comment,
+            intercate=profile.intercate,
+            intersubcate=profile.intersubcate,
+            iscareer=profile.iscareer,
+            careeryear=profile.careeryear,
+            careermonth=profile.careermonth,
+            regdate=profile.regdate,
+            update=profile.update,
+            viewcount=profile.viewcount,
+            cviewcount=profile.cviewcount,
+            pickcount=profile.pickcount,
+            public=profile.public,
+            contenttype=profile.contenttype
+        )
+
+        profile.delete()
 
     userDelSave = UserInfoQuit.objects.create(
         num=userInfo.num,
