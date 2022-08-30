@@ -38,6 +38,9 @@
                 <ul>
                     <li data-url="/onepickAdmin/user/list/normal/1/">일반 회원 <div></div></li>
                     <li data-url="/onepickAdmin/user/list/company/1/">기업 회원 <div></div></li>
+                    {% if request.session.id == "onepick" %}
+                    <li data-url="/onepickAdmin/user/logList/1/">관리 로그<div></div></li>
+                    {% endif %}
                 </ul>
                 <div class="image"></div>
             </div>

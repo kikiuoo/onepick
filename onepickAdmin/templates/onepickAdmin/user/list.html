@@ -67,7 +67,9 @@
         </div>
 
         <div class="btnBox">
+            {% if request.session.id == "onepick" %}
             <div class="excelBtn">Excel 다운로드</div>
+            {% endif %}
         </div>
     </div>
 

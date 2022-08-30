@@ -23,10 +23,11 @@
 .viewBox .listJoin{ width: 212px; }
 .viewBox .listLastLogin{ width: 224px; }
 .viewBox .listEtc{ width: 60px; }
+.viewBox .listInfo{ width: calc(25% - 5px); }
 
 .viewBox .listGroup span{ font-weight: bold; color: #ff8aae; }
 
-.viewBox .contentList div{
+.viewBox .contentList div, .viewBox .contentList2 div{
     display: inline-block;
     vertical-align: top;
     text-align: center;

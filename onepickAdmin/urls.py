@@ -32,6 +32,7 @@ urlpatterns = [
     path('user/editCallback/', viewsUser.editCallback, name='editCallback'),
     path('user/updateComany/', viewsUser.updateComany, name='updateComany'),
     path('user/excel/<type>/<word>/', viewsUser.excel, name='excel'),
+    path('user/logList/<int:page>/', viewsUser.logList, name='logList'),
 
     # Profile url
     path('profile/list/<type>/<int:page>/', viewsProfile.list, name='list'),

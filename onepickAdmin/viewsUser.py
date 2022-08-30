@@ -286,3 +286,19 @@ def excel (request, type, word) :
     adminLog = AdminLog.objects.create(userid=user, viewtype="user_download", content=type, regdate=nowTime)
 
     return response
+
+
+def logList(request, page):
+
+    block = 10
+    start = (page - 1) * block
+    end = page * block
+
+    logList = AdminLog.objects.all().order_by("-regdate")
+
+    log = logList[start:end]
+    allPage = int(len(logList) / block) + 1
+    paging = getPageList_v2(page, allPage)
+
+    return render( request, urlBase + "logList.html", {'pageType': "user", "logList":log, "paging":paging, "page" : page,
+                                                    "leftPage" : page-1, "rightPage" : page+1, "lastPage" : allPage })
