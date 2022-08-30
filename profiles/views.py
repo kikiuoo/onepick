@@ -222,7 +222,14 @@ def viewer(request, cate_type, num) :
         profiles.save()
         viewAdd = ProfileView.objects.create(profilenum=num, userid=user, regtime=nowTime)
         audiList = ""
-    
+
+
+    userType = request.session['userType']
+    if userType == "admin":
+        nowTime = str(timezone.now())
+        user = request.session.get('id', '')
+        adminLog = AdminLog.objects.create(userid=user, viewtype="profile_view", content=num, regdate=nowTime)
+
 
     return render(request, 'profiles/viewer.html', { 'profiles':profiles, "userInfo":userInfo, "foreign" : foreign,
                                                      "careerEtc":careerEtc, "comment":comment, "pickCheck" : pickCheck,
@@ -292,6 +299,12 @@ def viewer_all(request, cate_type, num):
         profiles.save()
         viewAdd = ProfileView.objects.create(profilenum=num, userid=user, regtime=nowTime)
         audiList = ""
+
+    userType = request.session['userType']
+    if userType == "admin":
+        nowTime = str(timezone.now())
+        user = request.session.get('id', '')
+        adminLog = AdminLog.objects.create(userid=user, viewtype="profile_view", content=num, regdate=nowTime)
 
     return render(request, 'profiles/viewer_all.html', {'profiles': profiles, "userInfo": userInfo, "foreign": foreign,
                                                     "careerEtc": careerEtc, "comment": comment, "pickCheck": pickCheck,
@@ -746,6 +759,13 @@ def pofile_edit_callback(request) :
             getEtcCareer.delete()
 
 
+
+    userType = request.session['userType']
+    if userType == "admin" :
+        user = request.session.get('id', '')
+        adminLog = AdminLog.objects.create(userid=user, viewtype="profile_edit", content=num, regdate=nowTime)
+
+
     return redirect('/profile/profileDetail/all/' + num + "/")
 
 
@@ -786,6 +806,12 @@ def pofile_delete(request, num) :
     )
 
     profiles.delete()
+
+    userType = request.session['userType']
+    if userType == "admin":
+        nowTime = str(timezone.now())
+        user = request.session.get('id', '')
+        adminLog = AdminLog.objects.create(userid=user, viewtype="profile_del", content=num, regdate=nowTime)
 
     return redirect("/")
 

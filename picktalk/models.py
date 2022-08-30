@@ -7,6 +7,19 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
+
+class AdminLog(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    userid = models.CharField(db_column='userID', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    viewtype = models.CharField(db_column='viewType', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    content = models.CharField(max_length=50, blank=True, null=True)
+    regdate = models.DateTimeField(db_column='regDate', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'admin_log'
+
+
 class AuditionApply(models.Model):
     num = models.BigAutoField(primary_key=True)
     auditionnum = models.PositiveBigIntegerField(db_column='auditionNum')  # Field name made lowercase.

@@ -284,12 +284,24 @@ def audi_edit_callback( request ) :
 
     updateAudition.save()
 
+    userType = request.session['userType']
+    if userType == "admin":
+        nowTime = str(timezone.now())
+        user = request.session.get('id', '')
+        adminLog = AdminLog.objects.create(userid=user, viewtype="audition_edit", content=num, regdate=nowTime)
+
     return redirect('/audi/audiDetail/all/' + num + "/")
 
 def audi_delete(request, num):
     updateAudition = AuditionInfo.objects.get(num=num)
     updateAudition.isdelete = '1'
     updateAudition.save()
+
+    userType = request.session['userType']
+    if userType == "admin":
+        nowTime = str(timezone.now())
+        user = request.session.get('id', '')
+        adminLog = AdminLog.objects.create(userid=user, viewtype="audition_del", content=num, regdate=nowTime)
 
     return redirect('/audi/main/all/1/')
 

@@ -155,6 +155,11 @@ def editCallback(request) :
 
     userInfo.save()
 
+
+    nowTime = str(timezone.now())
+    user = request.session.get('adminID', '')
+    adminLog = AdminLog.objects.create(userid=user, viewtype="user_update", content=num, regdate=nowTime)
+
     return redirect(url)
 
 
@@ -165,6 +170,10 @@ def updateComany (request) :
 
     userInfo.usertype = "COMPANY"
     userInfo.save()
+
+    nowTime = str(timezone.now())
+    user = request.session.get('adminID', '')
+    adminLog = AdminLog.objects.create(userid=user, viewtype="user_update", content=num, regdate=nowTime)
 
     return JsonResponse({"code": "0"} )
 
@@ -271,5 +280,9 @@ def excel (request, type, word) :
                 ws.write(row_num, col_num, attr)
 
     wb.save(response)
+
+    nowTime = str(timezone.now())
+    user = request.session.get('adminID', '')
+    adminLog = AdminLog.objects.create(userid=user, viewtype="user_download", content=type, regdate=nowTime)
 
     return response
