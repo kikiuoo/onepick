@@ -604,6 +604,7 @@ class UserInfoQuit(models.Model):
     logincount = models.IntegerField(db_column='loginCount', blank=True, null=True)  # Field name made lowercase.
     usertype = models.CharField(db_column='userType', max_length=20, blank=True, null=True)  # Field name made lowercase.
     quitreason = models.CharField(db_column='quitReason', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    quitdate = models.DateTimeField(db_column='quitDate', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False

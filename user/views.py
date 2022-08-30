@@ -754,3 +754,74 @@ def updatePWCallback(request) :
         userInfo.save()
 
     return JsonResponse({"code": "0"})
+
+
+def quit(request) :
+
+    user = request.session.get('id', '')
+
+    userInfo = UserInfo.objects.get(userid=user)
+
+    return render(request, 'user/quit.html', { "userInfo" : userInfo })
+
+
+def quitCallback(request) :
+
+    quitCause = request.POST.get('quitCause', '')
+    quitEtcCause = request.POST.get("quitEtcCause", "")
+
+    print(quitCause)
+
+    if quitCause == "etc" :
+        quit = quitEtcCause
+    else :
+        quit = quitCause
+
+    user = request.session.get('id', '')
+    userInfo = UserInfo.objects.get(userid=user)
+
+    nowTime = timezone.now()
+
+    userDelSave = UserInfoQuit.objects.create(
+        num=userInfo.num,
+        userid=userInfo.userid,
+        password=userInfo.password,
+        nickname=userInfo.nickname,
+        name=userInfo.name,
+        phone=userInfo.phone,
+        email=userInfo.email,
+        birth=userInfo.birth,
+        birthtype=userInfo.birthtype,
+        gender=userInfo.gender,
+        nationality=userInfo.nationality,
+        finalschool=userInfo.finalschool,
+        school=userInfo.school,
+        major=userInfo.major,
+        entertain=userInfo.entertain,
+        military=userInfo.military,
+        zipcode=userInfo.zipcode,
+        addr1=userInfo.addr1,
+        addr2=userInfo.addr2,
+        instargram=userInfo.instargram,
+        youtube=userInfo.youtube,
+        agreeusage=userInfo.agreeusage,
+        agreeprivacy=userInfo.agreeprivacy,
+        agreeemail=userInfo.agreeemail,
+        agreemarketing=userInfo.agreemarketing,
+        agreesms=userInfo.agreesms,
+        jointype=userInfo.jointype,
+        regtime=userInfo.regtime,
+        lastlogin=userInfo.lastlogin,
+        logincount=userInfo.logincount,
+        usertype=userInfo.usertype,
+        quitreason=quit,
+        quitdate=nowTime
+    )
+
+    userInfo.delete()
+
+    del request.session['id']
+    del request.session['userType']
+
+    return redirect("/")
+

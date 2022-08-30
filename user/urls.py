@@ -34,6 +34,9 @@ urlpatterns = [
     path('updatePW/', views.updatePW, name="user-updatePW"),
     path('ajax/updatePWCallback/', views.updatePWCallback, name="user-updatePWCallback"),
 
+    path('quit/', views.quit, name="user-quit"),
+    path('quitCallback/', views.quitCallback, name="user-quitCallback"),
+
     path('ajax/findOldUser/', views.ajax_findOldUser, name="user-ajax-findOldUser"),
     path('ajax/findUser/', views.ajax_findUser, name="user-ajax-findUser"),
     path('ajax/pwPhoneComfirm/', views.ajax_pwPhoneComfirm, name="user-ajax-pwPhoneComfirm"),

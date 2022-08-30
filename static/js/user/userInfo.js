@@ -43,6 +43,18 @@ $(document).ready(function(){
        window.location.href = "/users/updatePW/"
     });
 
+    $(document).on("click", ".quitBtn", function (){
+        $(".popupBack").css("display","block");
+    });
+
+    $(document).on("click", ".closeSPopup", function (){
+        $(".popupBack").css("display","none");
+    });
+
+    $(document).on("click", ".quitContiBtn", function (){
+        window.location.href = "/users/quit/";
+    });
+
     $(document).on("change", "#email_select", function (){
         var data = $("#email_select").find("option:selected").val();
         $("#email2").val(data);
