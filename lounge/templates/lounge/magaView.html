@@ -58,7 +58,7 @@
         {% if comment|getArrayCount > 0 %}
             {% for comments in comment %}
             <div class="comments">
-                {% if comments.userid == "onepick" %}
+                {% if comments.userid|findUserType == "admin" %}
                 <div class="name">원픽관리자</div>
                 {% else %}
                 <div class="name">{{ comments.userid|getUserName }}</div>

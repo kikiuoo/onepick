@@ -449,3 +449,12 @@ def getCmmCount(values, table) :
 def nowData(values, count):
 
     return values[count]
+
+
+
+@register.filter
+def findUserType(values):
+
+    userInfo = UserInfo.objects.get(userid=values)
+
+    return userInfo.usertype
