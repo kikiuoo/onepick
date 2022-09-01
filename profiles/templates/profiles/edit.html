@@ -67,6 +67,7 @@
                 {% endif %}
 
                 <input type="text" name="entertain" id="entertain" value="{{ user.entertain|default:"" }}" placeholder="소속사가 있을경우, 소속사를 입력해주세요.">
+                <input type="text" name="academy" id="academy" value="{{ user.academy|default:"" }}" placeholder="학원 소속일 경우, 학원명을 입력해주세요.">
 
                 <select name="finalSchool" id="finalSchool" {% if user.finalschool|default:"" != '' %} style="color: #1f1f1f;" {% endif %}>
                     <option value="" disabled selected>최종 학력 선택</option>

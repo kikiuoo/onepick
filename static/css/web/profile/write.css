@@ -117,7 +117,8 @@
 #addr{ width: 1140px; margin:0px }
 
 #nationality{width: 150px;}
-#entertain{ width: 754px; margin:0px }
+#entertain{ width: 366px; margin-right: 22px; }
+#academy{ width: 366px; margin-right: 0px; }
 #finalSchool{ width: 250px; }
 #school{ width: 330px; margin-right: 20px; }
 #major{ width: 530px; margin:0px }

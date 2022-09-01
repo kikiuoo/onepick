@@ -620,3 +620,10 @@
     height: 100px;
     line-height: 100px;
 }
+
+.updateDate{
+    text-align: right;
+    font-size: 8px;
+    color: #c0c0c0;
+    margin-top: 8px;
+}

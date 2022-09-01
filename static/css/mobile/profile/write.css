@@ -127,7 +127,7 @@
 #birth{ margin-right: 0px; text-align: center; }
 #gender{ width: 80px; text-align: center;}
 #phone{ width: calc(100% - 90px); margin-right: 0px; text-align: center; }
-#email, #entertain, #major{ width: 100%; margin:0px; margin-bottom: 10px }
+#email, #entertain, #academy, #major{ width: 100%; margin:0px; margin-bottom: 10px }
 #addr{ width: 100%; height: 70px;  margin:0px }
 
 #nationality, #military, #finalSchool,#school, #cate_m,#cate_s{ width: calc(50% - 10px);}

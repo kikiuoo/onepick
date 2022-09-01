@@ -562,6 +562,7 @@ class UserInfo(models.Model):
     school = models.CharField(max_length=50, blank=True, null=True)
     major = models.CharField(max_length=50, blank=True, null=True)
     entertain = models.CharField(max_length=100, blank=True, null=True)
+    academy = models.CharField(max_length=100, blank=True, null=True)
     military = models.CharField(max_length=10, blank=True, null=True)
     zipcode = models.CharField(db_column='zipCode', max_length=10, blank=True, null=True)  # Field name made lowercase.
     addr1 = models.CharField(max_length=100, blank=True, null=True)

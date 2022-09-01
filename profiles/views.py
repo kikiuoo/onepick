@@ -331,6 +331,7 @@ def pofile_write_callback(request) :
     userID = request.POST['userID']
     nationality = request.POST['nationality']
     military = request.POST['military']
+    academy = request.POST['academy']
     entertain = request.POST['entertain']
     finalSchool = request.POST['finalSchool']
     school = request.POST['school']
@@ -425,15 +426,16 @@ def pofile_write_callback(request) :
 
     # 기본정보 수정.
     userInfo = UserInfo.objects.get(userid=userID)
-    userInfo.nationality = nationality;
-    userInfo.military = military;
-    userInfo.entertain = entertain;
-    userInfo.finalschool = finalSchool;
-    userInfo.school = school;
-    userInfo.major = major;
-    userInfo.instargram = instagram;
-    userInfo.youtube = youtube;
-    userInfo.save();
+    userInfo.nationality = nationality
+    userInfo.military = military
+    userInfo.entertain = entertain
+    userInfo.academy = academy
+    userInfo.finalschool = finalSchool
+    userInfo.school = school
+    userInfo.major = major
+    userInfo.instargram = instagram
+    userInfo.youtube = youtube
+    userInfo.save()
 
     nowTime = timezone.now()
 
@@ -529,6 +531,7 @@ def pofile_edit_callback(request) :
     nationality = request.POST['nationality']
     military = request.POST['military']
     entertain = request.POST['entertain']
+    academy = request.POST['academy']
     finalSchool = request.POST['finalSchool']
     school = request.POST['school']
     major = request.POST['major']
@@ -666,15 +669,16 @@ def pofile_edit_callback(request) :
 
     # 기본정보 수정.
     userInfo = UserInfo.objects.get(userid=userID)
-    userInfo.nationality = nationality;
-    userInfo.military = military;
-    userInfo.entertain = entertain;
-    userInfo.finalschool = finalSchool;
-    userInfo.school = school;
-    userInfo.major = major;
-    userInfo.instargram = instagram;
-    userInfo.youtube = youtube;
-    userInfo.save();
+    userInfo.nationality = nationality
+    userInfo.military = military
+    userInfo.entertain = entertain
+    userInfo.academy = academy
+    userInfo.finalschool = finalSchool
+    userInfo.school = school
+    userInfo.major = major
+    userInfo.instargram = instagram
+    userInfo.youtube = youtube
+    userInfo.save()
 
     profiles.profileimage = image_main
     profiles.detailimage =proDetail
