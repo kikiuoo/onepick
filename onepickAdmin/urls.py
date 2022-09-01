@@ -6,6 +6,7 @@ from . import viewsCs
 from . import viewsNotice
 from . import viewsUser
 from . import viewsProfile
+from . import viewsAudi
 
 urlpatterns = [
     path('', views.adminCheck, name='adminLoginCheck'),
@@ -38,6 +39,9 @@ urlpatterns = [
     path('profile/list/<type>/<int:page>/', viewsProfile.list, name='list'),
     path('profile/listSearch/<type>/<word>/<int:page>/', viewsProfile.listSearch, name='listSearch'),
 
+    # audition url
+    path('audi/list/<type>/<int:page>/', viewsAudi.list, name='list'),
+    path('audi/listSearch/<type>/<word>/<int:page>/', viewsAudi.listSearch, name='listSearch'),
 
 
     path('cs/mail/', viewsCs.mailMain, name='mailMain'),
