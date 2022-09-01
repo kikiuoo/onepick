@@ -13,6 +13,7 @@
 
 <!-- 본문 내용 -->
 <!-- 메인 베너 -->
+{% if mainbanner.count > 0 %}
 <div class="mobilBanner">
     <div class="swiper mySwiper mainBanner">
         <div class="swiper-wrapper">
@@ -25,6 +26,7 @@
         <div class="swiper-button-prev"></div>
     </div>
 </div>
+{% endif %}
 
 <!-- 본문 내용 : 오디션 정보 -->
 <div class="mainTitle">
@@ -130,7 +132,7 @@
     var swiper = new Swiper(".mySwiper", {
         slidesPerView: 1,
         spaceBetween: 30,
-        {% if mainbanner.count > 0 %}
+        {% if mainbanner.count > 1 %}
         autoplay: {
           delay: 2500,
           disableOnInteraction: false,

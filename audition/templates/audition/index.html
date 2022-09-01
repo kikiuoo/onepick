@@ -12,6 +12,7 @@
 <script src="{% static 'js/audi/index.js' %}"></script>
 
 <!-- 메인 베너  subBanner -->
+{% if subBanner.count > 0 %}
 <div class="mobileBanner">
     <div class="swiper mySwiper mainBanner">
         <div class="swiper-wrapper">
@@ -24,6 +25,7 @@
         <div class="swiper-button-prev"></div>
     </div>
 </div>
+{% endif %}
 
 <!-- 추천 오디션 -->
 <div class="title">추천 오디션</div>
@@ -153,7 +155,7 @@
     var swiper = new Swiper(".mySwiper", {
         slidesPerView: 1,
         spaceBetween: 30,
-        {% if subBanner.count > 0 %}
+        {% if subBanner.count > 1 %}
         autoplay: {
           delay: 2500,
           disableOnInteraction: false,
