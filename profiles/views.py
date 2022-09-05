@@ -658,14 +658,18 @@ def pofile_edit_callback(request) :
     addImage = []
     if len(userImage) != 0:
         count = 0
-        for image in profileImage:
+        for image in userImage:
             count = count + 1
             sub = image.name.split('.')[-1]
             url = uploadFile(image, "photos/profile/additional/", sub)  # 파일 업로드
             addImage.append(url)
 
-    artImageDetail = actImageArr + addImage
+    if len(actImageArr) > 0 :
+        artImageDetail = actImageArr + addImage
+    else :
+        artImageDetail = addImage
     artImage = "|".join(artImageDetail)
+
 
     # 기본정보 수정.
     userInfo = UserInfo.objects.get(userid=userID)

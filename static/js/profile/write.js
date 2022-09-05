@@ -50,12 +50,12 @@ $(document).ready(function (){
             var c_role = $("#c_role").val();
             var saveCareer = $("#saveCareer").val();
 
-            if( c_cateM == "" ){
+            if( c_cateM_val == "" ){
                 alert("경력 대분류를 선택해주세요");
                 return;
             }
 
-            if( c_cateS == "" ){
+            if( c_cateS_val == "" ){
                 alert("경력 세부분야를 선택해주세요");
                 return;
             }
