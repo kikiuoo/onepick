@@ -224,7 +224,7 @@ def viewer(request, cate_type, num) :
         audiList = ""
 
 
-    userType = request.session['userType']
+    userType = request.session.get('userType', '')
     if userType == "admin":
         nowTime = str(timezone.now())
         user = request.session.get('id', '')
