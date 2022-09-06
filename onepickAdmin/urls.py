@@ -7,6 +7,7 @@ from . import viewsNotice
 from . import viewsUser
 from . import viewsProfile
 from . import viewsAudi
+from . import viewsDisplay
 
 urlpatterns = [
     path('', views.adminCheck, name='adminLoginCheck'),
@@ -43,6 +44,9 @@ urlpatterns = [
     path('audi/list/<type>/<int:page>/', viewsAudi.list, name='list'),
     path('audi/listSearch/<type>/<word>/<int:page>/', viewsAudi.listSearch, name='listSearch'),
 
+    # display url
+    path('display/audi/', viewsDisplay.audiList, name='audiList'),
+
 
     path('cs/mail/', viewsCs.mailMain, name='mailMain'),
     path('cs/ajaxUserList/', viewsCs.ajaxUserList, name='ajaxUserList'),
@@ -50,5 +54,8 @@ urlpatterns = [
     path('cs/sendMail/', viewsCs.sendMail, name='sendMail'),
     path('cs/mailList/<int:page>/', viewsCs.mailList, name='mailList'),
     path('cs/mailDetail/<int:num>/', viewsCs.mailDetail, name='mailDetail'),
+    path('cs/youtube/', viewsCs.youtube, name='youtube'),
+    path('cs/youtubeLink/', viewsCs.youtubeLink, name='youtubeLink'),
+    path('cs/checkYoutube/', viewsCs.checkYoutube, name='checkYoutube'),
 
 ]

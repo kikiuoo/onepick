@@ -77,6 +77,17 @@ class AuditionPick(models.Model):
         db_table = 'audition_pick'
 
 
+class AuditionRecommend(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    distype = models.CharField(db_column='disType', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    auditionnum = models.CharField(db_column='auditionNum', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    disorder = models.IntegerField(db_column='disOrder', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'audition_recommend'
+
+
 class AuditionView(models.Model):
     num = models.BigAutoField(primary_key=True)
     auditionnum = models.PositiveBigIntegerField(db_column='auditionNum')  # Field name made lowercase.
@@ -545,6 +556,18 @@ class UserCount(models.Model):
         managed = False
         db_table = 'user_count'
 
+
+class UserError(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    email = models.CharField(max_length=100, blank=True, null=True)
+    name = models.CharField(max_length=100, blank=True, null=True)
+    gender = models.CharField(max_length=100, blank=True, null=True)
+    usertype = models.CharField(db_column='userType', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    birth = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'user_error'
 
 class UserInfo(models.Model):
     num = models.BigAutoField(primary_key=True)
