@@ -564,6 +564,7 @@ class UserError(models.Model):
     gender = models.CharField(max_length=100, blank=True, null=True)
     usertype = models.CharField(db_column='userType', max_length=100, blank=True, null=True)  # Field name made lowercase.
     birth = models.CharField(max_length=100, blank=True, null=True)
+    type = models.CharField(max_length=500, blank=True, null=True)
 
     class Meta:
         managed = False

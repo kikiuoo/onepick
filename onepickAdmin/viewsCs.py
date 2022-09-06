@@ -5,8 +5,7 @@ from django.http import HttpResponse, JsonResponse
 from django.template import  loader
 from django.db import connection
 
-import requests
-from bs4 import BeautifulSoup
+from pytube import YouTube
 
 from picktalk.models import *
 from django.db.models import Q
@@ -183,14 +182,9 @@ def youtube(request):
 
     return render( request, "onepickAdmin/cs/youtube.html", {'pageType': "cs", "userError" : userError })
 
-def youtubeLink(request):
-    link = request.GET.get('link',"")
-
-    return render( request, "onepickAdmin/cs/youtubeLink.html", { "link" : link })
-
 def checkYoutube(request) :
     # UserError 테이블 비우기
-    # UserError.objects.all().delete()
+    UserError.objects.all().delete()
 
     cursor = connection.cursor()
 
@@ -198,7 +192,7 @@ def checkYoutube(request) :
             "FROM profile_info AS pr LEFT JOIN user_info AS ui " \
             "     ON pr.userID = ui.userID  " \
             "WHERE lastLogin >= '2022-01-01' " \
-            "GROUP BY userID ORDER BY ui.userID limit 10"
+            "GROUP BY userID ORDER BY ui.userID"
 
     result = cursor.execute(query)
     loginList = cursor.fetchall()
@@ -206,32 +200,26 @@ def checkYoutube(request) :
     for user in loginList:
 
         if user[4] == "" or user[4] == None:
-            # checkUserInfo(user)
-            print("aa")
+            checkUserInfo(user, "None Youtube")
         else:
             youtubes = user[4].split('|')
 
             for youtu in youtubes:
+                try:
+                    yt = YouTube(youtu)
+                    print( yt.title )
+                    if yt.title == "" :
+                        checkUserInfo(user, "Youtube error(title None) : "+ youtu)
+                except:
+                    checkUserInfo(user, "Youtube error : " + youtu)
 
-                print(youtu)
+    return JsonResponse({"code": "0"})
 
-                page = requests.get("http://localhost:8080/onepickAdmin/cs/youtubeLink/?link=" + str(youtu))
-                soup = BeautifulSoup(page.text, "html.parser")
-
-                elements = soup.select('div.ytp-title-link')
-
-                print(elements)
-
-                for index, element in enumerate(elements, 1):
-                    print("{} 번째 게시글의 제목: {}".format(index, element.text))
-
-    return ""
-
-def checkUserInfo(user) :
+def checkUserInfo(user, type) :
 
     userFind = UserError.objects.filter(email=user[2])
 
     if len(userFind) == 0 :
-        UserError.objects.create(email=user[2],name=user[1],gender=user[3],usertype=user[7],brith=user[6])
+        UserError.objects.create(email=user[2],name=user[1],gender=user[3],usertype=user[6],birth=user[5], type=type)
 
     return ""

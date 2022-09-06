@@ -55,7 +55,6 @@ urlpatterns = [
     path('cs/mailList/<int:page>/', viewsCs.mailList, name='mailList'),
     path('cs/mailDetail/<int:num>/', viewsCs.mailDetail, name='mailDetail'),
     path('cs/youtube/', viewsCs.youtube, name='youtube'),
-    path('cs/youtubeLink/', viewsCs.youtubeLink, name='youtubeLink'),
     path('cs/checkYoutube/', viewsCs.checkYoutube, name='checkYoutube'),
 
 ]
