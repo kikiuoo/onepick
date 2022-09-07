@@ -51,7 +51,10 @@ def userHight(values) :
 
 @register.filter
 def parsingYoutube_view(values) :
-    youtubeUrl = values.replace('https://youtu.be/', 'https://www.youtube.com/embed/' )
+    if values == None :
+        youtubeUrl = "";
+    else :
+        youtubeUrl = values.replace('https://youtu.be/', 'https://www.youtube.com/embed/' )
     return youtubeUrl
 
 @register.filter

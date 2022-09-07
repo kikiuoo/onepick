@@ -19,9 +19,10 @@
 .viewBox .listCompany{ width: 15%; }
 .viewBox .listTitle{ width: 38%; }
 .viewBox .listRegDate{ width: 8%; }
-.viewBox .listDate{ width: 20%; }
+.viewBox .listDate{ width: 17%; }
 .viewBox .listView{ width: 9%; }
 .viewBox .listApply{ width: 8%; }
+.viewBox .listApplyView{ width: 3%; }
 
 .viewBox .listWish span{ font-weight: bold; color: #ff8aae; }
 
@@ -159,4 +160,14 @@
     background-size : 40%;
     background-repeat : no-repeat;
     background-position : center;
+}
+
+.viewBox .listApplyView .icon{
+    width: 100%;
+    height: 18px;
+    cursor: pointer;
+
+    background-image : url('../../../image/onepickAdmin/viewApply.png');
+    background-repeat: no-repeat;
+    background-position: center;
 }

@@ -28,4 +28,13 @@ $(document).ready(function() {
         window.location.href = "/onepickAdmin/audi/listSearch/"+type+"/"+searchWord+"/1/";
    });
 
+   $(document).on("click", ".listApplyView .icon", function (e){
+        e.preventDefault();
+        e.stopPropagation();
+
+       var num = $(this).attr("data-num");
+
+      window.open( "/proList/audi/1/"+num+"/all/" );
+   });
+
 });

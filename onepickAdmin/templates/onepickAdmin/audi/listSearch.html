@@ -37,6 +37,7 @@
             <div class="listDate">모집기간</div>
             <div class="listView">클릭수</div>
             <div class="listApply">지원자수</div>
+            <div class="listApplyView"></div>
        </div>
 
         <div class="contentBox">
@@ -48,6 +49,7 @@
                 <div class="listDate">{{ audition.4|date:"Y/m/d" }}~{{ audition.5|date:"Y/m/d" }}</div>
                 <div class="listView">{{ audition.6 }}</div>
                 <div class="listApply">{{ audition.7 }}</div>
+                <div class="listApplyView"><div class="icon" data-num="{{ audition.0 }}"></div> </div>
             </div>
             {% endfor %}
         </div>
