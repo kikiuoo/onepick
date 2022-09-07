@@ -19,7 +19,7 @@ urlpatterns = [
 
     path('findUser/', views.finduser, name='local-finduser'),
     path('findPW/', views.findPW, name='local-findPW'),
-    path('updatePW/', views.updatePW, name='local-updatePW'),
+    path('updatePW_local/', views.updatePW_local, name='local-updatePW_local'),
 
 
     path('join/<userID>/<type>/', views.join, name='joins'),
