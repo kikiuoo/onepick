@@ -47,14 +47,16 @@ def index(request):
 
         if user :
             query = "SELECT AI.num, AI.title, AI.endDate, AI.ordinary, UC.logoImage, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user +"' AND auditionNum = AI.num ) AS audiPick " \
-                    "FROM audition_info AS AI LEFT JOIN user_company AS UC ON AI.userID  = UC.userID " \
-                    "where AI.isDelete = '0' or AI.isDelete is null " \
-                    "order by AI.regTime desc LIMIT 8 "
+                    "FROM audition_recommend as ar left join audition_info AS AI ON ar.auditionNum = AI.num  " \
+                    "LEFT JOIN user_company AS UC ON AI.userID  = UC.userID " \
+                    "where (AI.isDelete = '0' or AI.isDelete is null ) and disType = 'main' " \
+                    "order by ar.disOrder asc "
         else :
             query = "SELECT AI.num, AI.title, AI.endDate, AI.ordinary, UC.logoImage, '0' AS audiPick " \
-                    "FROM audition_info AS AI LEFT JOIN user_company AS UC ON AI.userID  = UC.userID " \
-                    "where AI.isDelete = '0' or AI.isDelete is null " \
-                    "order by AI.regTime desc LIMIT 8 "
+                    "FROM audition_recommend as ar left join audition_info AS AI ON ar.auditionNum = AI.num  " \
+                    "LEFT JOIN user_company AS UC ON AI.userID  = UC.userID " \
+                    "where (AI.isDelete = '0' or AI.isDelete is null ) and disType = 'main' " \
+                    "order by ar.disOrder asc "
 
         result = cursor.execute(query)
         auditions = cursor.fetchall()

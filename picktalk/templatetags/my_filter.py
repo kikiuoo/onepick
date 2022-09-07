@@ -242,6 +242,9 @@ def parsingCareer(value) :
     returnData = ""
 
     #profileNum, title, ROLE, cm.cateName AS mainCate, cs.cateName AS subCate
+
+    print( value )
+
     count = 0;
     for values in value :
         saveData = values[5] + "$" + values[3] + "$" + values[6] + "$" +  values[4] + "$"  +  values[1] + "$" + values[2]

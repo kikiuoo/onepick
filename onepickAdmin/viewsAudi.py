@@ -25,7 +25,7 @@ def list(request, type,  page):
         if type == "all" :
             where = " "
         elif type == "ing":
-            where = " AND endDate >= NOW() "
+            where = " AND ( endDate >= NOW() or ordinary = '1' ) "
         else :
             where = " AND endDate < NOW() "
 
@@ -75,7 +75,7 @@ def listSearch(request, type, word, page):
         if type == "all" :
             where = " "
         elif type == "ing":
-            where = " AND endDate >= NOW() "
+            where = " AND ( endDate >= NOW() or ordinary = '1' ) "
         else :
             where = " AND endDate < NOW() "
 

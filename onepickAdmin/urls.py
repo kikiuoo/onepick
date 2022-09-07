@@ -46,6 +46,9 @@ urlpatterns = [
 
     # display url
     path('display/audi/', viewsDisplay.audiList, name='audiList'),
+    path('display/audi/findAudition/', viewsDisplay.findAudition, name='findAudition'),
+    path('display/audi/saveRecommend/', viewsDisplay.saveRecommend, name='saveRecommend'),
+    path('display/audi/updateOrder/', viewsDisplay.updateOrder, name='updateOrder'),
 
 
     path('cs/mail/', viewsCs.mailMain, name='mailMain'),
