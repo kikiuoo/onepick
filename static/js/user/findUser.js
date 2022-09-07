@@ -192,12 +192,15 @@ function chechUser_pw( userID, userName ){
 
 function update_pw( userID, password ){
    $.ajax({
-      url: "/users/updatePW/",
+      url: "/users/updatePW_local/",
       type: "GET",
       dataType: "json",
       data:{"userID" : userID, "password" : password},
 
       success: function(data){
+
+          alert( data );
+
           if( data.code == "0" ){
              alert("비밀번호가 변경되었습니다.");
              window.location.href = "/users/login/local/";

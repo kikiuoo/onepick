@@ -39,8 +39,9 @@ function savePW(nowPW, pw1){
       data:{"nowPW" : nowPW,"pw1" : pw1},
 
       success: function(data){
+
           if( data.code == "0" ){
-              alert("패스워드 변경이 완료되었습니다.")
+             alert("패스워드 변경이 완료되었습니다.")
              window.history.back();
           }else{
               alert( data.message );

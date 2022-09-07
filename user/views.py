@@ -372,10 +372,15 @@ def findPW (request) :
     else:
         return JsonResponse({"code": "1", "message": "잘못된 접근입니다."})
 
-def updatePW(request) :
+def updatePW_local(request) :
+
+    print("check")
+
     if request.method == "GET" :
         userID = request.GET['userID']
         password = request.GET['password']
+
+        print(userID)
 
         userIN = UserInfo.objects.get(userid=userID)
         userIN.password = md5_generator(password)
