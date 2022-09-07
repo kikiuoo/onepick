@@ -30,13 +30,24 @@ def audiList(request):
         result = cursor.execute(query)
         recommend = cursor.fetchall()
 
+        query = "SELECT ai.num, companyName, title, ai.regTime, " \
+                "       ( SELECT COUNT(*) FROM audition_recommend WHERE auditionNum = ai.num and disType = '" + audiType + "' ) AS recomm " \
+                "FROM audition_info AS ai LEFT JOIN user_company AS uc " \
+                "     ON ai.userID = uc.userID " \
+                "WHERE  isDelete = '0' " \
+                "ORDER BY ai.regTime DESC"
+
+        result = cursor.execute(query)
+        audition = cursor.fetchall()
+
         connection.commit()
         connection.close()
 
     except:
         connection.rollback()
 
-    return render( request, urlBase + "audiList.html", {'pageType': "display", "recommend" : recommend, "type" : audiType})
+    return render( request, urlBase + "audiList.html",
+                   {'pageType': "display", "recommend" : recommend, "type" : audiType, "audition": audition})
 
 
 def findAudition(request) :

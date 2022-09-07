@@ -23,13 +23,13 @@
         <input type="text" id="search" placeholder="검색어 입력( 글번호, 기업명, 제목 )">
 
         <div class="searchList">
-            {% for recom in recommend %}
+            {% for audi in audition %}
             <div class="contentList">
-                <div class="companyName">{{ recom.2 }}</div>
-                <div class="audiTitle">{{ recom.3 }}</div>
-                <div class="regDate">{{ recom.4|date:"Y/m/d" }}</div>
+                <div class="companyName">{{ audi.1 }}</div>
+                <div class="audiTitle">{{ audi.2 }}</div>
+                <div class="regDate">{{ audi.3|date:"Y/m/d" }}</div>
                 <div class="checkBox">
-                    <input type="checkbox" class="profileCheck" name="profile" value="{{ recom.0 }}" id="check_{{ forloop.counter0 }}" checked>
+                    <input type="checkbox" class="profileCheck" name="profile" value="{{ audi.0 }}" id="check_{{ forloop.counter0 }}" {% if audi.4 > 0 %} checked {% endif %}>
                     <label class="checkProfile" for="check_{{ forloop.counter0 }}"></label>
                 </div>
             </div>
