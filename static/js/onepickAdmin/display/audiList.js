@@ -14,7 +14,7 @@ $(document).ready(function() {
 
     });
 
-
+    /*
     $(document).on("click", ".sendBtn", function(){
 
         var audiList = [];
@@ -27,6 +27,18 @@ $(document).ready(function() {
         var audition = audiList.join(",");
 
         saveRecommend( audition );
+    });
+    */
+
+    $(document).on("click", "input:checkbox[name=profile]", function (){
+        var value = $(this).val();
+        var checked = $(this).is(":checked");
+
+        if( checked == true ){
+            saveRecommend(value, "add");
+        }else{
+            saveRecommend(value, "delete");
+        }
     });
 
     $(document).on("click", ".contentBox .contentList", function(){
@@ -69,15 +81,15 @@ function findAudition(word) {
     });
 }
 
-function saveRecommend(audition) {
+function saveRecommend(num, rType) {
     $.ajax({
         url: "/onepickAdmin/display/audi/saveRecommend/",
         type: "GET",
         dataType: "json",
-        data: {"audition": audition , "type" : viewType},
+        data: {"num": num ,"rType": rType , "type" : viewType},
         success: function (data) {
            if( data.code == "0" ){
-               alert("정상적으로 저장되었습니다.");
+               //alert("정상적으로 저장되었습니다.");
                window.location.reload();
            }
         },
@@ -95,7 +107,7 @@ function updateOrder( cType ){
         data: {"cType": cType , "type" : viewType , "active" : active , "order" : order},
         success: function (data) {
            if( data.code == "0" ){
-               alert("정상적으로 저장되었습니다.");
+               //alert("정상적으로 저장되었습니다.");
                window.location.reload();
            }
         },

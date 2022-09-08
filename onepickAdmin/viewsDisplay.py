@@ -76,17 +76,25 @@ def findAudition(request) :
 
 def saveRecommend(request) :
 
-    audition = request.GET.get("audition", "")
+    num = request.GET.get("num", "")
+    rType = request.GET.get("rType", "")
     type = request.GET.get("type", "")
 
-    AuditionRecommend.objects.filter(distype=type).delete() # 기존 데이터 삭제.
+    if rType == "add" :
+        # 추천 목록에 추가.
+        audiRecom = AuditionRecommend.objects.filter(distype=type)
+        AuditionRecommend.objects.create(distype=type, auditionnum=num, disorder=(audiRecom.count()+1))
 
-    audiList = audition.split(',')
+    elif rType == "delete" :
+        audiRecom = AuditionRecommend.objects.get(auditionnum=num)
 
-    disCount = 1;
-    for audi in audiList :
-        AuditionRecommend.objects.create(distype=type, auditionnum=audi, disorder=disCount)
-        disCount = disCount + 1
+        updateList = AuditionRecommend.objects.filter(distype=type, disorder__gte=audiRecom.disorder)
+
+        for update in updateList:
+            update.disorder = update.disorder - 1
+            update.save()
+
+        audiRecom.delete()
 
     return JsonResponse({"code": "0"})
 
