@@ -50,6 +50,10 @@ urlpatterns = [
     path('display/audi/saveRecommend/', viewsDisplay.saveRecommend, name='saveRecommend'),
     path('display/audi/updateOrder/', viewsDisplay.updateOrder, name='updateOrder'),
 
+    path('display/profile/', viewsDisplay.proList, name='proList'),
+    path('display/profile/findProfile/', viewsDisplay.findProfile, name='findProfile'),
+    path('display/profile/saveRecommend/', viewsDisplay.proSaveRecommend, name='proSaveRecommend'),
+
 
     path('cs/mail/', viewsCs.mailMain, name='mailMain'),
     path('cs/ajaxUserList/', viewsCs.ajaxUserList, name='ajaxUserList'),

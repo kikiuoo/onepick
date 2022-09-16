@@ -1,0 +1,189 @@
+.inBox {
+    font-size: 0px;
+}
+
+.inBox .viewBox{
+    width: calc( 50% - 10px );
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.inBox .viewBox:nth-child(2){
+    padding: 15px 0px;
+}
+
+.inBox .viewBox:nth-child(3){
+    margin-right: 0px;
+}
+
+.viewBox #search{
+    width: calc(100% - 30px );
+    margin-bottom: 20px;
+    margin-left: 15px;
+}
+
+.title #viewType{
+    margin-left: 10px;
+    width: 100px;
+    color: #1f1f1f;
+}
+
+.viewBox .contentBox{
+    height: calc(100% - 40px);
+    padding: 0px 15px;
+}
+
+.searchList{
+    padding : 0px 10px;
+    overflow-y : auto;
+    height: 560px;
+}
+
+.contentList{
+    border-top: 1px solid #c0c0c0;
+    padding : 20px 0px !important;
+}
+
+.contentBox .contentList.active{
+    background-color: #F6F6F6;
+}
+
+.viewBox .inTitle{
+    padding:  0px 15px;
+    color: #fff;
+}
+
+.profileView, .profileImage, .profileName, .profileAge, .profileBirth, .profileCate , .checkBox{
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: top;
+    text-align: center;
+    line-height: 46px;
+}
+
+.pOrder, .pName, .pAge, .pBrith, .pCate{
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: top;
+    text-align: center;
+    line-height: 40px;
+}
+
+.profileView{ width: 20%;}
+.profileImage{ width: 10%; position: relative}
+.profileName{ width: 10%;}
+.profileAge{ width: 10%;}
+.profileBirth{ width: 15%;}
+.profileCate, .pCate{ width: 30%; color: #ff8aae;}
+
+.inTitle .pCate{ color: #fff}
+
+.pOrder{ width: 15%;}
+.pName, .pAge, .pBrith{ width: 18%;}
+
+.profileView .btnProfile{
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #ff8aae;
+
+    color: #ff8aae;
+    line-height: 40px;
+    font-size: 13px;
+    text-align: center;
+}
+
+.profileImage .profileImage{
+    width: 40px;
+    height: 46px;
+
+    background-size: 100% auto;
+    background-color: #c0c0c0;
+    background-repeat: no-repeat;
+}
+
+.profileImage .profileImage:hover{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 150px;
+    height: 180px;
+
+    z-index: 100;
+}
+
+.order, .checkBox{
+    width: 5%;
+    height: 20px;
+    margin-top: 5px;
+}
+
+.checkBox .profileCheck{
+    display: none;
+}
+
+.checkBox .profileCheck+label{
+    display: inline-block;
+    cursor: pointer;
+
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.checkBox .profileCheck+label{
+    background-image: url("../../../image/web/check_off.png");
+}
+.checkBox .profileCheck:checked+label{
+    background-image: url("../../../image/web/check_on.png");
+}
+
+.btnBox, .btnBox2{
+    position: relative;
+    display: inline-block;
+    width: calc( 50% - 10px );
+    display: inline-block;
+    margin-right: 20px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.btnBox2{
+    margin-right: 0px;
+}
+
+
+.sendBtn{
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    margin-left: -75px;
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    margin-top: 15px;
+
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ff8aae;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.content{
+    border: 1px solid #c0c0c0;
+    width: 715px;
+    height: 540px;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+
+
+.info{
+    font-size: 12px;
+    color: #c0c0c0;
+}

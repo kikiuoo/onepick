@@ -148,3 +148,96 @@ def updateOrder(request) :
         updateList2.save()
 
     return JsonResponse({"code": "0"})
+
+
+
+
+
+
+
+# 프로필 진열관리
+def proList(request):
+
+    viewType = request.GET.get('viewType', "main")
+
+    try:
+        cursor = connection.cursor()
+
+        query = "SELECT PI.num, ui.name, ui.birth, PI.interCate, PI.interSubCate, PI.profileImage, PR.num, PR.disOrder, contentType " \
+                "FROM profile_recommend AS PR LEFT JOIN profile_info AS PI  ON PR.profileNum = PI.num " \
+                "     left join user_info as ui on PI.userID = ui.userID  " \
+                "WHERE disType = '"+viewType+"'  " \
+                "order by disOrder asc"
+
+        result = cursor.execute(query)
+        recommend = cursor.fetchall()
+
+        query = "SELECT PI.num, ui.name, ui.birth, PI.interCate, PI.interSubCate, PI.profileImage, " \
+                " ( SELECT COUNT(*) FROM profile_recommend WHERE profileNum = PI.num AND disType = 'main' ) AS recomm, contentType  " \
+                "FROM profile_info AS PI LEFT JOIN user_info AS ui " \
+                "     ON PI.userID = ui.userID " \
+                "WHERE public = '0' ORDER BY `upDate` DESC,RegDate DESC LIMIT 50"
+
+        result = cursor.execute(query)
+        profile = cursor.fetchall()
+
+        connection.commit()
+        connection.close()
+
+    except:
+        connection.rollback()
+
+    return render( request, urlBase + "proList.html",
+                   {'pageType': "display", "recommend" : recommend, "type" : viewType, "profile": profile})
+
+
+
+def findProfile(request) :
+
+    word = request.GET.get("word", "")
+    type = request.GET.get("type", "")
+
+    cursor = connection.cursor()
+
+    query = "SELECT PI.num, ui.name, ui.birth, PI.interCate, PI.interSubCate, PI.profileImage, " \
+            " ( SELECT COUNT(*) FROM profile_recommend WHERE profileNum = PI.num AND disType = 'main' ) AS recomm, contentType  " \
+            "FROM profile_info AS PI LEFT JOIN user_info AS ui " \
+            "     ON PI.userID = ui.userID " \
+            "WHERE public = '0'  and ( name LIKE '%"+word+"%' OR PI.num = '"+word+"' OR ui.birth LIKE '%"+word+"%' ) " \
+            " ORDER BY `upDate` DESC,RegDate DESC LIMIT 50"
+
+    result = cursor.execute(query)
+    profile = cursor.fetchall()
+
+    connection.commit()
+    connection.close()
+
+
+    return render( request, urlBase + "ajax_proList.html", {'pageType': "display", "profile" : profile})
+
+
+def proSaveRecommend(request) :
+
+    num = request.GET.get("num", "")
+    rType = request.GET.get("rType", "")
+    type = request.GET.get("type", "")
+
+    if rType == "add" :
+        print("add")
+        # 추천 목록에 추가.
+        proRecom = ProfileRecommend.objects.filter(distype=type)
+        ProfileRecommend.objects.create(distype=type, profilenum=num, disorder=(proRecom.count()+1))
+
+    elif rType == "delete" :
+        proRecom = ProfileRecommend.objects.get(profilenum=num)
+
+        updateList = ProfileRecommend.objects.filter(distype=type, disorder__gte=proRecom.disorder)
+
+        for update in updateList:
+            update.disorder = update.disorder - 1
+            update.save()
+
+        proRecom.delete()
+
+    return JsonResponse({"code": "0"})
+

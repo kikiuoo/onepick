@@ -9,6 +9,7 @@ from django.http import JsonResponse
 from email.mime.text import MIMEText
 import socket
 from requests import get
+import time
 
 from picktalk.models import *
 
@@ -20,13 +21,9 @@ from myonepick.common import *
 def index(request):
     user = request.session.get('id', '')
 
-    print(user)
-
     if user:
         # 메인 진입시 회원정보 누락시 회원가입 페이지 이동.
         isUser = UserInfo.objects.get(userid=user)
-
-        print(isUser)
 
         if (isUser.phone == None or isUser.email == None or isUser.name == None or isUser.usertype == "S-NORMAL"  \
             or isUser.phone == "" or isUser.email == "" or isUser.name == "") and (isUser.jointype == 'oldUser' or isUser.jointype == 'OLDUSER'):
@@ -61,35 +58,120 @@ def index(request):
         result = cursor.execute(query)
         auditions = cursor.fetchall()
 
-        # 프로필
+        # 프로필 최신
         if user:
-            query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user +"' AND profileNum = p.num ) AS proPick, viewCount, pickCount, cViewCount " \
+            query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.military, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user +"' AND profileNum = p.num ) AS proPick " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
                     "WHERE public = '0' and isDelete = '0' and ui.userID != '' " \
-                    "ORDER BY `upDate` Desc, regDate DESC  " \
-                    "LIMIT 6"
+                    "ORDER BY regDate DESC  " \
+                    "LIMIT 4"
         else:
-            query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, '0' AS proPick, viewCount, pickCount, cViewCount " \
+            query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.military, '0' AS proPick " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui " \
                     "     ON p.userID = ui.userID " \
                     "WHERE public = '0' and isDelete = '0' and ui.userID != '' " \
-                    "ORDER BY `upDate` Desc, regDate DESC   " \
-                    "LIMIT 6"
+                    "ORDER BY  regDate DESC   " \
+                    "LIMIT 4"
 
         result = cursor.execute(query)
-        profiles = cursor.fetchall()
+        newProfile = cursor.fetchall()
 
-        # 소베너 - 코드 변경 필요.
-        subBanner = EventBanner.objects.filter(position="mainSub")
+        # 프로필 추천
+        if user:
+            query = "SELECT PI.num, profileImage, ui.name, ui.birth, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = PI.num ) AS proPick, viewCount, pickCount, cViewCount " \
+                    "FROM profile_recommend AS PR LEFT JOIN profile_info AS PI ON PR.profileNum = PI.num " \
+                    "     LEFT JOIN user_info AS ui ON PI.userID = ui.userID " \
+                    "ORDER BY RAND() LIMIT 4"
+        else:
+            query = "SELECT PI.num, profileImage, ui.name, ui.birth, '0' AS proPick, viewCount, pickCount, cViewCount " \
+                    "FROM profile_recommend AS PR LEFT JOIN profile_info AS PI ON PR.profileNum = PI.num " \
+                    "     LEFT JOIN user_info AS ui ON PI.userID = ui.userID " \
+                    "ORDER BY RAND() LIMIT 4"
 
+        result = cursor.execute(query)
+        recomProfile = cursor.fetchall()
+
+
+
+        # 프로필 베스트
+        # 0,1,2,3,12,13,14,15  -- 주간베스트 ( 주 best 30명 랜덤 )
+        # 4,5,6,7,16,17,18,19  -- 월간베스트 ( 월 best 50명 랜덤 )
+        # 8,9,10,11,20,21,22,23  -- 전체 베스트 ( view 수 1000이 넘는 사람 랜덤 )
+        now = time
+        nowTimes = now.localtime().tm_hour
+
+        #주간 베스트
+        if nowTimes == 0 or  nowTimes == 1 or  nowTimes == 2 or  nowTimes == 3 or nowTimes == 12 or  nowTimes == 13 or  nowTimes == 14 or nowTimes == 15 :
+            if user:
+                query = "SELECT PI.num, profileImage, ui.name, ui.birth, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = PI.num ) AS proPick, viewCount, pickCount, cViewCount " \
+                        "FROM ( SELECT profileNum, COUNT(*) AS views " \
+                        "    	FROM profile_view " \
+                        "   	WHERE regTime BETWEEN DATE_ADD(NOW(),INTERVAL -1 WEEK ) AND NOW() " \
+                        "   	GROUP BY profileNum " \
+                        "   	ORDER BY views DESC LIMIT 30 ) A  LEFT JOIN profile_info AS PI ON A.profileNum = PI.num " \
+                        "     LEFT JOIN user_info AS ui ON PI.userID = ui.userID " \
+                        "ORDER BY RAND() LIMIT 4"
+
+            else:
+                query = "SELECT PI.num, profileImage, ui.name, ui.birth, '0' AS proPick, viewCount, pickCount, cViewCount " \
+                        "FROM ( SELECT profileNum, COUNT(*) AS views " \
+                        "    	FROM profile_view " \
+                        "   	WHERE regTime BETWEEN DATE_ADD(NOW(),INTERVAL -1 WEEK ) AND NOW() " \
+                        "   	GROUP BY profileNum " \
+                        "   	ORDER BY views DESC LIMIT 30 ) A  LEFT JOIN profile_info AS PI ON A.profileNum = PI.num " \
+                        "     LEFT JOIN user_info AS ui ON PI.userID = ui.userID " \
+                        "ORDER BY RAND() LIMIT 4"
+
+
+        # 월간 베스트 4,5,6,7,16,17,18,19
+        elif nowTimes == 4 or  nowTimes == 5 or  nowTimes == 6 or  nowTimes == 7 or nowTimes == 16 or  nowTimes == 17 or  nowTimes == 18 or nowTimes == 19 :
+            if user:
+                query = "SELECT PI.num, profileImage, ui.name, ui.birth, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = PI.num ) AS proPick, viewCount, pickCount, cViewCount " \
+                        "FROM ( SELECT profileNum, COUNT(*) AS views " \
+                        "    	FROM profile_view " \
+                        "   	WHERE regTime BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH ) AND NOW() " \
+                        "   	GROUP BY profileNum " \
+                        "   	ORDER BY views DESC LIMIT 50 ) A  LEFT JOIN profile_info AS PI ON A.profileNum = PI.num " \
+                        "     LEFT JOIN user_info AS ui ON PI.userID = ui.userID " \
+                        "ORDER BY RAND() LIMIT 4"
+
+            else:
+                query = "SELECT PI.num, profileImage, ui.name, ui.birth, '0' AS proPick, viewCount, pickCount, cViewCount " \
+                        "FROM ( SELECT profileNum, COUNT(*) AS views " \
+                        "    	FROM profile_view " \
+                        "   	WHERE regTime BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH ) AND NOW() " \
+                        "   	GROUP BY profileNum " \
+                        "   	ORDER BY views DESC LIMIT 50 ) A  LEFT JOIN profile_info AS PI ON A.profileNum = PI.num " \
+                        "     LEFT JOIN user_info AS ui ON PI.userID = ui.userID " \
+                        "ORDER BY RAND() LIMIT 4"
+
+        # 전체 베스트 8,9,10,11,20,21,22,23
+        elif nowTimes == 8 or nowTimes == 9 or nowTimes == 10 or nowTimes == 11 or nowTimes == 20 or nowTimes == 21 or nowTimes == 22 or nowTimes == 23:
+            if user:
+                query = "SELECT PI.num, profileImage, ui.name, ui.birth, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = PI.num ) AS proPick, viewCount, pickCount, cViewCount " \
+                        "FROM profile_info AS PI LEFT JOIN user_info AS ui  " \
+                        "     ON PI.userID = ui. userID " \
+                        "WHERE viewCount > 1000 " \
+                        "ORDER BY RAND() LIMIT 4"
+            else:
+                query = "SELECT PI.num, profileImage, ui.name, ui.birth, '0' AS proPick, viewCount, pickCount, cViewCount " \
+                        "FROM profile_info AS PI LEFT JOIN user_info AS ui  " \
+                        "     ON PI.userID = ui. userID " \
+                        "WHERE viewCount > 1000 " \
+                        "ORDER BY RAND() LIMIT 4"
+
+        result = cursor.execute(query)
+        bestProfile = cursor.fetchall()
         connection.commit()
         connection.close()
 
     except :
+        print("error!")
         connection.rollback()
 
     return render(request, 'picktalk/index.html',
-                  {'auditions': auditions, 'profiles': profiles , 'mainbanner' : mainbanner, 'subBanner' : subBanner })
+                  {'auditions': auditions, 'newProfile': newProfile , 'recomProfile' : recomProfile,
+                   'bestProfile' : bestProfile, 'mainbanner' : mainbanner })
 
 
 def downstime(request) :

@@ -373,6 +373,17 @@ class ProfilePick(models.Model):
         db_table = 'profile_pick'
 
 
+class ProfileRecommend(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    distype = models.CharField(db_column='disType', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    profilenum = models.CharField(db_column='profileNum', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    disorder = models.IntegerField(db_column='disOrder', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'profile_recommend'
+
+
 class ProfileShare(models.Model):
     num = models.BigIntegerField(primary_key=True)
     profilenum = models.PositiveBigIntegerField(db_column='profileNum')  # Field name made lowercase.

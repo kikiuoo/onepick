@@ -59,102 +59,12 @@
 
 <!-- 본문 내용 : 프로필 정보 -->
 <div class="mainTitle titleMargin">
-    추천 프로필
+    프로필 정보
     <span data-url="/profile/list/actor/1/">전체보기</span>
 </div>
 
 <div class="inBox">
-    {% for profile in recomProfile %}
-    <div class="profile" data-num="{{ profile.0 }}">
-        <div class="image"  style='background-image: url("/media/{{ profile.1 }}");'></div>
-        <div class="info">
-            {% if profile.2 != None %}
-            <div class="name">{{ profile.2|updateUserName }} ({{ profile.3|userAge }})</div>
-            {% else %}
-            <div class="name">*** ({{ profile.3|userAge }})</div>
-            {% endif %}
-
-
-            <div class="viewBox">
-                <div class="countBox">
-                    <span class="viewCount"></span>
-                    <p>{{ profile.5 }}</p>
-                </div>
-                <div class="countBox">
-                    <span class="pickCount"></span>
-                    <p>{{ profile.6 }}</p>
-                </div>
-                <div class="countBox">
-                    <span class="comViewCount"></span>
-                    <p>{{ profile.7 }}</p>
-                </div>
-            </div>
-
-            {% if profile.4 == 0 or profile.4 == "0" %}
-            <div class="pickBtn" data-nowType="off"></div>
-            {% else %}
-            <div class="pickBtn pickOn " data-nowType="on"></div>
-            {% endif %}
-        </div>
-    </div>
-    {% endfor %}
-
-    <div class="profileBlank"></div>
-</div>
-
-
-<div class="mainTitle titleMargin2">
-    베스트 프로필
-    <span data-url="/profile/list/actor/1/">전체보기</span>
-</div>
-
-<div class="inBox">
-    {% for profile in bestProfile %}
-    <div class="profile" data-num="{{ profile.0 }}">
-        <div class="image"  style='background-image: url("/media/{{ profile.1 }}");'></div>
-        <div class="info">
-            {% if profile.2 != None %}
-            <div class="name">{{ profile.2|updateUserName }} ({{ profile.3|userAge }})</div>
-            {% else %}
-            <div class="name">*** ({{ profile.3|userAge }})</div>
-            {% endif %}
-
-
-            <div class="viewBox">
-                <div class="countBox">
-                    <span class="viewCount"></span>
-                    <p>{{ profile.5 }}</p>
-                </div>
-                <div class="countBox">
-                    <span class="pickCount"></span>
-                    <p>{{ profile.6 }}</p>
-                </div>
-                <div class="countBox">
-                    <span class="comViewCount"></span>
-                    <p>{{ profile.7 }}</p>
-                </div>
-            </div>
-
-            {% if profile.4 == 0 or profile.4 == "0" %}
-            <div class="pickBtn" data-nowType="off"></div>
-            {% else %}
-            <div class="pickBtn pickOn " data-nowType="on"></div>
-            {% endif %}
-        </div>
-    </div>
-    {% endfor %}
-
-    <div class="profileBlank"></div>
-</div>
-
-
-<div class="mainTitle titleMargin2">
-    신규 프로필
-    <span data-url="/profile/list/actor/1/">전체보기</span>
-</div>
-
-<div class="inBox">
-    {% for profile in newProfile %}
+    {% for profile in profiles %}
     <div class="profile" data-num="{{ profile.0 }}">
         <div class="image"  style='background-image: url("/media/{{ profile.1 }}");'></div>
         <div class="info">
@@ -163,7 +73,6 @@
             {% else %}
             <div class="name">*** ({{ profile.5|userAge }})</div>
             {% endif %}
-
             <div class="infoDetail">
                 키 {{ profile.2|userHight }}cm | 몸무게 {{ profile.3|userHight }}kg<br>
                 {% if userInfo.8 != None %}
@@ -178,20 +87,41 @@
                 소속사 있음<br>
                 {% endif %}
             </div>
+            <div class="infoDetail">
+                {{ profile.9 }} {{ profile.10 }}<br>
+                {% if profile.11 != None %}
+                    특기 {{ profile.11|replace_2:"|, " }}
+                {% else %}
+                    특기 -
+                {% endif %}
+            </div>
 
-            {% if profile.8 == 0 or profile.8 == "0" %}
-            <div class="pickBtn" data-nowType="off"></div>
-            {% else %}
-            <div class="pickBtn pickOn " data-nowType="on"></div>
-            {% endif %}
+            <div class="viewBox">
+                <div class="countBox">
+                    <span class="viewCount"></span>
+                    <p>{{ profile.13 }}</p>
+                </div>
+                <div class="countBox">
+                    <span class="pickCount"></span>
+                    <p>{{ profile.14 }}</p>
+                </div>
+                <div class="countBox">
+                    <span class="comViewCount"></span>
+                    <p>{{ profile.15 }}</p>
+                </div>
+            </div>
         </div>
+
+        {% if profile.12 == 0 or profile.12 == "0" %}
+        <div class="pickBtn" data-nowType="off"></div>
+        {% else %}
+        <div class="pickBtn pickOn " data-nowType="on"></div>
+        {% endif %}
     </div>
     {% endfor %}
 
     <div class="profileBlank"></div>
 </div>
-
-
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
