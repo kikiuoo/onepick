@@ -597,7 +597,6 @@
 .blurInfo{
     filter: blur(5px);
     -webkit-filter: blur(5px);
-    border : 1px solid red;
 }
 
 
