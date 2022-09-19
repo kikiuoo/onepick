@@ -76,7 +76,7 @@ def listView(request, cate_type, page): # 오디션 Main
         elif order == "recommend":
             orderby = " order by pickCount desc "
         else:
-            orderby = " order by `upDate` Desc, regDate DESC "
+            orderby = " order by `regDate` Desc, `upDate` DESC "
 
         where = ""
         if nationality != "":

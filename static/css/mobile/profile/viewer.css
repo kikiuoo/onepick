@@ -594,8 +594,7 @@
 }
 
 
-.inBox .userInfo .info.blurInfo,
-.inBox .introduction .blurInfo{
+.blurInfo{
     filter: blur(5px);
     -webkit-filter: blur(5px);
 }
