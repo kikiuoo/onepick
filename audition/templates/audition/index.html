@@ -12,12 +12,12 @@
 <script src="{% static 'js/audi/index.js' %}"></script>
 
 <!-- 메인 베너  subBanner -->
-{% if subBanner.count > 0 %}
+{% if subBanner|getArrayCount > 0 %}
 <div class="mobileBanner">
     <div class="swiper mySwiper mainBanner">
         <div class="swiper-wrapper">
             {% for banner in subBanner %}
-            <div class="swiper-slide banner" data-url="{{ banner.url }}" style='background-image: url("/media/{{ banner.wimage }}")'></div>
+            <div class="swiper-slide banner" data-url="{{ banner.3 }}" style='background-image: url("/media/{{ banner.4 }}")'></div>
             {% endfor %}
         </div>
 
@@ -155,7 +155,7 @@
     var swiper = new Swiper(".mySwiper", {
         slidesPerView: 1,
         spaceBetween: 30,
-        {% if subBanner.count > 1 %}
+        {% if subBanner|getArrayCount > 1 %}
         autoplay: {
           delay: 2500,
           disableOnInteraction: false,

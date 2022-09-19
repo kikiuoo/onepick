@@ -99,6 +99,23 @@ class AuditionView(models.Model):
         db_table = 'audition_view'
 
 
+class BannerInfo(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    title = models.CharField(max_length=100, blank=True, null=True)
+    viewtype = models.CharField(db_column='viewType', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    url = models.CharField(max_length=200, blank=True, null=True)
+    image = models.CharField(max_length=200, blank=True, null=True)
+    nowview = models.CharField(db_column='nowView', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    viewcount = models.IntegerField(db_column='viewCount', blank=True, null=True)  # Field name made lowercase.
+    clickcount = models.IntegerField(db_column='clickCount', blank=True, null=True)  # Field name made lowercase.
+    starttime = models.DateTimeField(db_column='startTime', blank=True, null=True)  # Field name made lowercase.
+    endtime = models.DateTimeField(db_column='endTime', blank=True, null=True)  # Field name made lowercase.
+    regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'banner_info'
+
 class BoardMagazineComment(models.Model):
     num = models.BigAutoField(primary_key=True)
     mgnum = models.PositiveBigIntegerField(db_column='mgNum')  # Field name made lowercase.

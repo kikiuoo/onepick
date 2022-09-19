@@ -22,7 +22,9 @@ def audi_index(request, cate_type, page): # 오디션 Main
         cursor = connection.cursor()
 
         # 메인 베너
-        subBanner = EventBanner.objects.filter(position="audi", nowview="1")
+        query = "SELECT * FROM banner_info WHERE viewType = 'audi' and nowView = '1' AND startTime <= NOW() AND endTime >= NOW() "
+        result = cursor.execute(query)
+        subBanner = cursor.fetchall()
 
         user = request.session.get('id', '')
 

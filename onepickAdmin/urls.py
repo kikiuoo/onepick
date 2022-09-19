@@ -54,6 +54,13 @@ urlpatterns = [
     path('display/profile/findProfile/', viewsDisplay.findProfile, name='findProfile'),
     path('display/profile/saveRecommend/', viewsDisplay.proSaveRecommend, name='proSaveRecommend'),
 
+    path('display/banner/', viewsDisplay.bannerList, name='bannerList'),
+    path('display/banner/write/', viewsDisplay.bannerWrite, name='bannerWrite'),
+    path('display/banner/writeCallback/', viewsDisplay.writeCallback, name='writeCallback'),
+    path('display/banner/edit/<int:num>/', viewsDisplay.bannerEdit, name='bannerEdit'),
+    path('display/banner/editCallback/', viewsDisplay.editCallback, name='editCallback'),
+    path('display/banner/delete/<int:num>/', viewsDisplay.bannerDelete, name='bannerDelete'),
+
 
     path('cs/mail/', viewsCs.mailMain, name='mailMain'),
     path('cs/ajaxUserList/', viewsCs.ajaxUserList, name='ajaxUserList'),

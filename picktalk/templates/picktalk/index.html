@@ -13,12 +13,12 @@
 
 <!-- 본문 내용 -->
 <!-- 메인 베너 -->
-{% if mainbanner.count > 0 %}
+{% if mainbanner|getArrayCount > 0 %}
 <div class="mobilBanner">
     <div class="swiper mySwiper mainBanner">
         <div class="swiper-wrapper">
             {% for banner in mainbanner %}
-            <div class="swiper-slide banner" data-url="{{ banner.url }}" style='background-image: url("/media/{{ banner.wimage }}")'></div>
+            <div class="swiper-slide banner" data-url="{{ banner.3 }}" style='background-image: url("/media/{{ banner.4 }}")'></div>
             {% endfor %}
         </div>
 
@@ -68,29 +68,28 @@
     <div class="profile" data-num="{{ profile.0 }}">
         <div class="image"  style='background-image: url("/media/{{ profile.1 }}");'></div>
         <div class="info">
-            {% if profile.2 != None %}
-            <div class="name">{{ profile.2|updateUserName }} ({{ profile.3|userAge }})</div>
+            {% if profile.4 != None %}
+            <div class="name">{{ profile.4|updateUserName }} ({{ profile.5|userAge }})</div>
             {% else %}
-            <div class="name">*** ({{ profile.3|userAge }})</div>
+            <div class="name">*** ({{ profile.5|userAge }})</div>
             {% endif %}
 
+            <div class="infoDetail">
+                키 {{ profile.2|userHight }}cm | 몸무게 {{ profile.3|userHight }}kg<br>
+                {% if userInfo.8 != None %}
+                    {% if profile.7 == "man" %}
+                    {{ userInfo.8 }} |
+                    {% endif %}
+                {% endif %}
 
-            <div class="viewBox">
-                <div class="countBox">
-                    <span class="viewCount"></span>
-                    <p>{{ profile.5 }}</p>
-                </div>
-                <div class="countBox">
-                    <span class="pickCount"></span>
-                    <p>{{ profile.6 }}</p>
-                </div>
-                <div class="countBox">
-                    <span class="comViewCount"></span>
-                    <p>{{ profile.7 }}</p>
-                </div>
+                {% if profile.6|default:"" == "" %}
+                소속사 없음<br>
+                {% else %}
+                소속사 있음<br>
+                {% endif %}
             </div>
 
-            {% if profile.4 == 0 or profile.4 == "0" %}
+            {% if profile.8 == 0 or profile.8 == "0" %}
             <div class="pickBtn" data-nowType="off"></div>
             {% else %}
             <div class="pickBtn pickOn " data-nowType="on"></div>
@@ -113,29 +112,28 @@
     <div class="profile" data-num="{{ profile.0 }}">
         <div class="image"  style='background-image: url("/media/{{ profile.1 }}");'></div>
         <div class="info">
-            {% if profile.2 != None %}
-            <div class="name">{{ profile.2|updateUserName }} ({{ profile.3|userAge }})</div>
+            {% if profile.4 != None %}
+            <div class="name">{{ profile.4|updateUserName }} ({{ profile.5|userAge }})</div>
             {% else %}
-            <div class="name">*** ({{ profile.3|userAge }})</div>
+            <div class="name">*** ({{ profile.5|userAge }})</div>
             {% endif %}
 
+            <div class="infoDetail">
+                키 {{ profile.2|userHight }}cm | 몸무게 {{ profile.3|userHight }}kg<br>
+                {% if userInfo.8 != None %}
+                    {% if profile.7 == "man" %}
+                    {{ userInfo.8 }} |
+                    {% endif %}
+                {% endif %}
 
-            <div class="viewBox">
-                <div class="countBox">
-                    <span class="viewCount"></span>
-                    <p>{{ profile.5 }}</p>
-                </div>
-                <div class="countBox">
-                    <span class="pickCount"></span>
-                    <p>{{ profile.6 }}</p>
-                </div>
-                <div class="countBox">
-                    <span class="comViewCount"></span>
-                    <p>{{ profile.7 }}</p>
-                </div>
+                {% if profile.6|default:"" == "" %}
+                소속사 없음<br>
+                {% else %}
+                소속사 있음<br>
+                {% endif %}
             </div>
 
-            {% if profile.4 == 0 or profile.4 == "0" %}
+            {% if profile.8 == 0 or profile.8 == "0" %}
             <div class="pickBtn" data-nowType="off"></div>
             {% else %}
             <div class="pickBtn pickOn " data-nowType="on"></div>
@@ -202,7 +200,7 @@
     var swiper = new Swiper(".mySwiper", {
         slidesPerView: 1,
         spaceBetween: 30,
-        {% if mainbanner.count > 1 %}
+        {% if mainbanner|getArrayCount > 1 %}
         autoplay: {
           delay: 2500,
           disableOnInteraction: false,

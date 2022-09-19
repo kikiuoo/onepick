@@ -241,3 +241,119 @@ def proSaveRecommend(request) :
 
     return JsonResponse({"code": "0"})
 
+
+# 배너 진열관리
+def bannerList(request):
+
+    viewType = request.GET.get('viewType', "all")
+    page = request.GET.get('page', "1")
+
+    page = int(page)
+
+    block = 10
+    start = (page - 1) * block
+    end = page * block
+
+    if viewType == "all" :
+        bannerList = BannerInfo.objects.all().order_by("-num")
+    else :
+        bannerList = BannerInfo.objects.filter(viewtype=viewType).order_by("-num")
+
+    banner = bannerList[start:end]
+    allPage = int(len(bannerList) / block) + 1
+    paging = getPageList_v2(page, allPage)
+
+    return render( request, urlBase + "bannerList.html",
+                   {'pageType': "display", "bannerList": banner, "paging": paging, "page": page,
+                    "leftPage": page - 1, "rightPage": page + 1, "lastPage": allPage, "type": viewType})
+
+
+def bannerWrite(request):
+
+    return render( request, urlBase + "bannerWrite.html", {'pageType': "display"})
+
+
+def writeCallback(request):
+
+    title = request.POST['title']
+    viewType = request.POST['viewType']
+    link = request.POST['url']
+    userImage = request.FILES.getlist('userImage[]')
+    startDate = request.POST['startDate']
+    endDate = request.POST['endDate']
+
+    nowTime = timezone.now()
+
+    image_banner = ""
+    count = 0
+    for image in userImage:
+        count = count + 1
+        sub = image.name.split('.')[-1]
+        url = uploadFile(image, "photos/profiles/banner/", sub)
+
+        image_banner = url
+
+
+    saveBanner = BannerInfo.objects.create(title=title, viewtype=viewType, url=link, image=image_banner,
+                                           nowview='1', viewcount=0, clickcount=0,
+                                           starttime=startDate + " 00:00:00", endtime=endDate + " 23:59:59",
+                                           regtime=nowTime)
+
+    return redirect('/onepickAdmin/display/banner/')
+
+
+def bannerEdit(request, num):
+
+    banner = BannerInfo.objects.get(num=num)
+
+    return render( request, urlBase + "bannerEdit.html", {'pageType': "display", "banner": banner})
+
+
+def editCallback(request):
+
+    num  = request.POST['num']
+    title = request.POST['title']
+    viewType = request.POST['viewType']
+    link = request.POST['url']
+    userImage = request.FILES.getlist('userImage[]')
+    startDate = request.POST['startDate']
+    endDate = request.POST['endDate']
+
+    nowTime = timezone.now()
+
+    banner = BannerInfo.objects.get(num=num)
+
+    image_banner = banner.image
+    if userImage != "" :
+        # 기존 이미지 삭제
+        for rmImages in userImage:
+            if (rmImages == ""): continue
+            deleteFile(rmImages)
+
+        count = 0
+        for image in userImage:
+            count = count + 1
+            sub = image.name.split('.')[-1]
+            url = uploadFile(image, "photos/profiles/banner/", sub)
+
+            image_banner = url
+
+    banner.title = title
+    banner.viewtype = viewType
+    banner.url = link
+    banner.image = image_banner
+    banner.starttime = startDate
+    banner.endtime = endDate
+
+    banner.save()
+
+    return redirect('/onepickAdmin/display/banner/')
+
+
+def bannerDelete(request, num):
+
+    banner = BannerInfo.objects.get(num=num)
+    banner.delete()
+
+    return redirect('/onepickAdmin/display/banner/')
+

@@ -21,6 +21,7 @@ from myonepick.common import *
 def index(request):
     user = request.session.get('id', '')
 
+    nowTime = timezone.now()
     if user:
         # 메인 진입시 회원정보 누락시 회원가입 페이지 이동.
         isUser = UserInfo.objects.get(userid=user)
@@ -40,7 +41,9 @@ def index(request):
         cursor = connection.cursor()
 
         # 메인 베너
-        mainbanner = EventBanner.objects.filter(position="main", nowview="1")
+        query = "SELECT * FROM banner_info WHERE viewType = 'main' and nowView = '1' AND startTime <= NOW() AND endTime >= NOW() "
+        result = cursor.execute(query)
+        mainbanner = cursor.fetchall()
 
         if user :
             query = "SELECT AI.num, AI.title, AI.endDate, AI.ordinary, UC.logoImage, (SELECT COUNT(*) FROM audition_pick WHERE userID = '" + user +"' AND auditionNum = AI.num ) AS audiPick " \
@@ -78,12 +81,12 @@ def index(request):
 
         # 프로필 추천
         if user:
-            query = "SELECT PI.num, profileImage, ui.name, ui.birth, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = PI.num ) AS proPick, viewCount, pickCount, cViewCount " \
+            query = "SELECT PI.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.military, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user +"' AND profileNum = PI.num ) AS proPick " \
                     "FROM profile_recommend AS PR LEFT JOIN profile_info AS PI ON PR.profileNum = PI.num " \
                     "     LEFT JOIN user_info AS ui ON PI.userID = ui.userID " \
                     "ORDER BY RAND() LIMIT 4"
         else:
-            query = "SELECT PI.num, profileImage, ui.name, ui.birth, '0' AS proPick, viewCount, pickCount, cViewCount " \
+            query = "SELECT PI.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.military, '0' AS proPick " \
                     "FROM profile_recommend AS PR LEFT JOIN profile_info AS PI ON PR.profileNum = PI.num " \
                     "     LEFT JOIN user_info AS ui ON PI.userID = ui.userID " \
                     "ORDER BY RAND() LIMIT 4"
@@ -103,7 +106,7 @@ def index(request):
         #주간 베스트
         if nowTimes == 0 or  nowTimes == 1 or  nowTimes == 2 or  nowTimes == 3 or nowTimes == 12 or  nowTimes == 13 or  nowTimes == 14 or nowTimes == 15 :
             if user:
-                query = "SELECT PI.num, profileImage, ui.name, ui.birth, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = PI.num ) AS proPick, viewCount, pickCount, cViewCount " \
+                query = "SELECT PI.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.military, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user +"' AND profileNum = PI.num ) AS proPick " \
                         "FROM ( SELECT profileNum, COUNT(*) AS views " \
                         "    	FROM profile_view " \
                         "   	WHERE regTime BETWEEN DATE_ADD(NOW(),INTERVAL -1 WEEK ) AND NOW() " \
@@ -113,7 +116,7 @@ def index(request):
                         "ORDER BY RAND() LIMIT 4"
 
             else:
-                query = "SELECT PI.num, profileImage, ui.name, ui.birth, '0' AS proPick, viewCount, pickCount, cViewCount " \
+                query = "SELECT PI.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.military, '0' AS proPick " \
                         "FROM ( SELECT profileNum, COUNT(*) AS views " \
                         "    	FROM profile_view " \
                         "   	WHERE regTime BETWEEN DATE_ADD(NOW(),INTERVAL -1 WEEK ) AND NOW() " \
@@ -126,7 +129,7 @@ def index(request):
         # 월간 베스트 4,5,6,7,16,17,18,19
         elif nowTimes == 4 or  nowTimes == 5 or  nowTimes == 6 or  nowTimes == 7 or nowTimes == 16 or  nowTimes == 17 or  nowTimes == 18 or nowTimes == 19 :
             if user:
-                query = "SELECT PI.num, profileImage, ui.name, ui.birth, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = PI.num ) AS proPick, viewCount, pickCount, cViewCount " \
+                query = "SELECT PI.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.military, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user +"' AND profileNum = PI.num ) AS proPick " \
                         "FROM ( SELECT profileNum, COUNT(*) AS views " \
                         "    	FROM profile_view " \
                         "   	WHERE regTime BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH ) AND NOW() " \
@@ -136,7 +139,7 @@ def index(request):
                         "ORDER BY RAND() LIMIT 4"
 
             else:
-                query = "SELECT PI.num, profileImage, ui.name, ui.birth, '0' AS proPick, viewCount, pickCount, cViewCount " \
+                query = "SELECT PI.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.military, '0' AS proPick " \
                         "FROM ( SELECT profileNum, COUNT(*) AS views " \
                         "    	FROM profile_view " \
                         "   	WHERE regTime BETWEEN DATE_ADD(NOW(),INTERVAL -1 MONTH ) AND NOW() " \
@@ -148,13 +151,13 @@ def index(request):
         # 전체 베스트 8,9,10,11,20,21,22,23
         elif nowTimes == 8 or nowTimes == 9 or nowTimes == 10 or nowTimes == 11 or nowTimes == 20 or nowTimes == 21 or nowTimes == 22 or nowTimes == 23:
             if user:
-                query = "SELECT PI.num, profileImage, ui.name, ui.birth, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = PI.num ) AS proPick, viewCount, pickCount, cViewCount " \
+                query = "SELECT PI.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.military, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user +"' AND profileNum = PI.num ) AS proPick " \
                         "FROM profile_info AS PI LEFT JOIN user_info AS ui  " \
                         "     ON PI.userID = ui. userID " \
                         "WHERE viewCount > 1000 " \
                         "ORDER BY RAND() LIMIT 4"
             else:
-                query = "SELECT PI.num, profileImage, ui.name, ui.birth, '0' AS proPick, viewCount, pickCount, cViewCount " \
+                query = "SELECT PI.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.military, '0' AS proPick " \
                         "FROM profile_info AS PI LEFT JOIN user_info AS ui  " \
                         "     ON PI.userID = ui. userID " \
                         "WHERE viewCount > 1000 " \

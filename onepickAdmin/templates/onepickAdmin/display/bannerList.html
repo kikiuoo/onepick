@@ -1,0 +1,98 @@
+{% extends 'onepickAdmin/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+<link rel="stylesheet" href="{% static 'css/onepickAdmin/display/bannerList.css' %}"> <!-- pc 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/onepickAdmin/display/bannerList.js' %}"></script>
+
+<div class="inBox">
+    <div class="title">
+        배너 진열 관리
+
+        <select name="viewType" id="viewType">
+            <option value="all" {% if type == "all" %}selected{% endif %} >전체</option>
+            <option value="main" {% if type == "main" %}selected{% endif %} >홈(메인)</option>
+            <option value="audi" {% if type == "audi" %}selected{% endif %} >오디션</option>
+        </select>
+    </div>
+
+    <div class="viewBox">
+        <div class="inTitle">
+            <div class="orderView">진열위치</div>
+            <div class="banTitle">배너제목</div>
+            <div class="banImage"></div>
+            <div class="banClick">클릭수</div>
+            <div class="banReg">등록일</div>
+            <div class="banViewDay">마감일</div>
+            <div class="listEtc"></div>
+        </div>
+
+        <div class="in_line"></div>
+
+        <div class="contentBox">
+            {% for banner in bannerList %}
+            <div class="contentList" data-num="{{ banner.num }}" >
+                <div class="orderView">
+                    {% if banner.viewtype == "main" %}
+                        홈(메인)
+                    {% elif banner.viewtype == "audi" %}
+                        오디션
+                    {% endif %}
+                </div>
+                <div class="banTitle">{{ banner.title }}</div>
+                <div class="banImage">
+                    <div class="image" style='background-image: url("/media/{{ banner.image }}");'></div>
+                </div>
+                <div class="banClick">{{ banner.clickcount }}</div>
+                <div class="banReg">{{ banner.regtime|date:"Y/m/d" }}</div>
+                <div class="banViewDay">~ {{ banner.endtime|date:"Y/m/d" }}</div>
+                <div class="listEtc">
+                    <div class="editBtn" data-num="{{ banner.num }}"></div>
+                    <div class="delBtn" data-num="{{ banner.num }}"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="btnBox">
+       <div class="sendBtn">등록하기</div>
+    </div>
+
+    <div class="page">
+        {% if page != paging.0 and page != 1 %}
+            <div class="leftPage" data-page="{{ leftPage }}"></div>
+        {% endif %}
+
+        <div class="pageBox">
+        {% for pages in paging %}
+            <div class="pages {% if pages == page %} nowPage {% endif %}"  data-page="{{ pages }}">{{ pages }}</div>
+        {% endfor %}
+        </div>
+
+        {% if page != lastPage %}
+            <div class="rightPage" data-page="{{ rightPage }}"></div>
+        {% endif %}
+    </div>
+
+
+
+
+
+
+
+</div>
+
+<script>
+  $.ajaxSetup({
+    headers: { "X-CSRFToken": '{{csrf_token}}' }
+  });
+
+  var viewType =  "{{ type }}";
+</script>
+
+{% endblock %}
