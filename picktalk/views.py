@@ -65,14 +65,14 @@ def index(request):
         if user:
             query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.military, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user +"' AND profileNum = p.num ) AS proPick " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
-                    "WHERE public = '0' and isDelete = '0' and ui.userID != '' " \
+                    "WHERE public = '0' and isDelete = '0' and ui.userID != '' and ui.name is not null and ui.name != ''  " \
                     "ORDER BY regDate DESC  " \
                     "LIMIT 4"
         else:
             query = "SELECT p.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.military, '0' AS proPick " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui " \
                     "     ON p.userID = ui.userID " \
-                    "WHERE public = '0' and isDelete = '0' and ui.userID != '' " \
+                    "WHERE public = '0' and isDelete = '0' and ui.userID != '' and ui.name is not null and ui.name != ''  " \
                     "ORDER BY  regDate DESC   " \
                     "LIMIT 4"
 
@@ -84,11 +84,13 @@ def index(request):
             query = "SELECT PI.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.military, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user +"' AND profileNum = PI.num ) AS proPick " \
                     "FROM profile_recommend AS PR LEFT JOIN profile_info AS PI ON PR.profileNum = PI.num " \
                     "     LEFT JOIN user_info AS ui ON PI.userID = ui.userID " \
+                    "where ui.name is not null and ui.name != '' " \
                     "ORDER BY RAND() LIMIT 4"
         else:
             query = "SELECT PI.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.military, '0' AS proPick " \
                     "FROM profile_recommend AS PR LEFT JOIN profile_info AS PI ON PR.profileNum = PI.num " \
                     "     LEFT JOIN user_info AS ui ON PI.userID = ui.userID " \
+                    "where ui.name is not null and ui.name != '' " \
                     "ORDER BY RAND() LIMIT 4"
 
         result = cursor.execute(query)
@@ -113,6 +115,7 @@ def index(request):
                         "   	GROUP BY profileNum " \
                         "   	ORDER BY views DESC LIMIT 30 ) A  LEFT JOIN profile_info AS PI ON A.profileNum = PI.num " \
                         "     LEFT JOIN user_info AS ui ON PI.userID = ui.userID " \
+                        "where ui.name is not null and ui.name != '' " \
                         "ORDER BY RAND() LIMIT 4"
 
             else:
@@ -123,6 +126,7 @@ def index(request):
                         "   	GROUP BY profileNum " \
                         "   	ORDER BY views DESC LIMIT 30 ) A  LEFT JOIN profile_info AS PI ON A.profileNum = PI.num " \
                         "     LEFT JOIN user_info AS ui ON PI.userID = ui.userID " \
+                        "where ui.name is not null and ui.name != '' " \
                         "ORDER BY RAND() LIMIT 4"
 
 
@@ -136,6 +140,7 @@ def index(request):
                         "   	GROUP BY profileNum " \
                         "   	ORDER BY views DESC LIMIT 50 ) A  LEFT JOIN profile_info AS PI ON A.profileNum = PI.num " \
                         "     LEFT JOIN user_info AS ui ON PI.userID = ui.userID " \
+                        "where ui.name is not null and ui.name != '' " \
                         "ORDER BY RAND() LIMIT 4"
 
             else:
@@ -146,6 +151,7 @@ def index(request):
                         "   	GROUP BY profileNum " \
                         "   	ORDER BY views DESC LIMIT 50 ) A  LEFT JOIN profile_info AS PI ON A.profileNum = PI.num " \
                         "     LEFT JOIN user_info AS ui ON PI.userID = ui.userID " \
+                        "where ui.name is not null and ui.name != '' " \
                         "ORDER BY RAND() LIMIT 4"
 
         # 전체 베스트 8,9,10,11,20,21,22,23
@@ -154,13 +160,13 @@ def index(request):
                 query = "SELECT PI.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.military, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user +"' AND profileNum = PI.num ) AS proPick " \
                         "FROM profile_info AS PI LEFT JOIN user_info AS ui  " \
                         "     ON PI.userID = ui. userID " \
-                        "WHERE viewCount > 1000 " \
+                        "WHERE viewCount > 1000 and ui.name is not null and ui.name != '' " \
                         "ORDER BY RAND() LIMIT 4"
             else:
                 query = "SELECT PI.num, profileImage, height, weight, ui.name, ui.birth, ui.entertain, ui.military, '0' AS proPick " \
                         "FROM profile_info AS PI LEFT JOIN user_info AS ui  " \
                         "     ON PI.userID = ui. userID " \
-                        "WHERE viewCount > 1000 " \
+                        "WHERE viewCount > 1000 and ui.name is not null and ui.name != '' " \
                         "ORDER BY RAND() LIMIT 4"
 
         result = cursor.execute(query)
