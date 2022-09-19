@@ -220,7 +220,7 @@
         {% if request.session.userType == "NORMAL" and request.session.id != userInfo.userid %}
         <div class="blur">기업 회원만 열람 가능합니다.</div>
         {% endif %}
-        <span {% if request.session.userType == "NORMAL"  and request.session.id != userInfo.userid %}class="blurInfo"{% endif %}>
+        <span {% if request.session.userType == "NORMAL"  and request.session.id != userInfo.userid %} class="blurInfo" {% endif %}>
         {{ profiles.comment|linebreaks }}
         </span>
     </div>
