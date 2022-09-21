@@ -18,7 +18,7 @@
     <div class="swiper mySwiper mainBanner">
         <div class="swiper-wrapper">
             {% for banner in mainbanner %}
-            <div class="swiper-slide banner" data-url="{{ banner.3 }}" style='background-image: url("/media/{{ banner.4 }}")'></div>
+            <div class="swiper-slide banner" data-url="{{ banner.3 }}" data-num="{{ banner.0 }}" style='background-image: url("/media/{{ banner.4 }}")'></div>
             {% endfor %}
         </div>
 

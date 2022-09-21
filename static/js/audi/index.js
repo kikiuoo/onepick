@@ -61,6 +61,7 @@ $(document).ready(function(){
 
     $(document).on("click", ".banner", function (){
         var url = $(this).attr("data-url");
+        var num = $(this).attr("data-num");
 
         if( userID == ""){
            if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
@@ -70,6 +71,8 @@ $(document).ready(function(){
                 return;
            }
        }
+
+        updateCount(num);
 
         window.open(url);
     });
@@ -82,6 +85,23 @@ $(document).ready(function(){
     });
 
 });
+
+function updateCount(num){
+    $.ajax({
+      url: "/ajax/updateBannerCount/",
+      type: "GET",
+      dataType: "json",
+      data:{"num" : num},
+
+      success: function(data){
+
+      },
+      error: function (request, status, error){
+
+      }
+   });
+
+}
 
 function updatePick(tableName, nowType, num){
     $.ajax({

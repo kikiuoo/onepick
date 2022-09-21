@@ -615,3 +615,14 @@ def updateCounting(request) :
     counting = UserCount.objects.create(type=type, ukey=uKey, device=device, regdate=nowTime)
 
     return JsonResponse({"code": "0"})
+
+
+def updateBannerCount(request) :
+
+    num = request.GET["num"]
+
+    counting = BannerInfo.objects.get(num=num)
+    counting.clickcount = counting.clickcount + 1
+    counting.save()
+
+    return JsonResponse({"code": "0"})
