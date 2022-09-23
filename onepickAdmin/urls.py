@@ -62,6 +62,9 @@ urlpatterns = [
     path('display/banner/delete/<int:num>/', viewsDisplay.bannerDelete, name='bannerDelete'),
 
 
+
+    # cs url
+    path('cs/qanda/', viewsCs.qandaList, name='qandaList'),
     path('cs/mail/', viewsCs.mailMain, name='mailMain'),
     path('cs/ajaxUserList/', viewsCs.ajaxUserList, name='ajaxUserList'),
     path('cs/summerImageUpload/', viewsCs.summerImageUpload, name='summerImageUpload'),

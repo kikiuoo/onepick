@@ -464,3 +464,25 @@ def findUserType(values):
     userInfo = UserInfo.objects.get(userid=values)
 
     return userInfo.usertype
+
+
+@register.filter
+def checkApply(values):
+
+    try:
+        cursor = connection.cursor()
+
+        query = "SELECT * " \
+                "FROM qa_qanda_comment AS qqc LEFT JOIN user_info AS ui " \
+                "     ON qqc.userID = ui.userID " \
+                "WHERE qaNum = '"+str(values)+"' AND userType = 'admin'"
+
+        result = cursor.execute(query)
+        qanda = cursor.fetchall()
+        connection.commit()
+        connection.close()
+
+    except:
+        connection.rollback()
+
+    return len(qanda)

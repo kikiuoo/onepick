@@ -1,0 +1,41 @@
+.viewBox{
+    height: 680px;
+}
+.viewBox .inTitle{
+    font-size: 0px;
+    padding: 0px 30px;
+}
+.viewBox .contentBox .contentList{
+    font-size: 0px;
+}
+.viewBox .contentBox .contentList span{
+    font-size: 14px;
+    color: #1f1f1f;
+}
+
+.viewBox .mTitle{
+    display: inline-block;
+    width: 40%;
+    text-align: center;
+}
+
+.viewBox .group,
+.viewBox .writer,
+.viewBox .regDate,
+.viewBox .reply{
+    display: inline-block;
+    width: 15%;
+    text-align: center;
+}
+
+.contentList .group{
+    color: #ff8aae !important;
+}
+
+.pink{
+    color: #ff8aae !important;
+}
+
+.gray{
+    color: #c0c0c0 !important;
+}

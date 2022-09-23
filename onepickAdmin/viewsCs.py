@@ -14,6 +14,47 @@ from django.utils import timezone
 from myonepick.common import *
 
 
+urlBase = "onepickAdmin/cs/"
+
+
+def qandaList(request):
+
+    page = request.GET.get('page', "1")
+    page = int(page)
+
+    block = 10
+    start = (page - 1) * block
+    end = page * block
+
+    QandAList = QaQanda.objects.all().order_by("-regdate")
+
+    try:
+        cursor = connection.cursor()
+
+        query = "SELECT qq.num, title, ui.userType, `name`,qq.regDate " \
+                "FROM qa_qanda AS qq LEFT JOIN user_info AS ui " \
+                "     ON qq.userID = ui.userID " \
+                "ORDER BY qq.regDate DESC limit " + str(start) + ", " + str(block)
+
+        result = cursor.execute(query)
+        qanda = cursor.fetchall()
+
+        connection.commit()
+        connection.close()
+
+    except:
+        connection.rollback()
+
+    allPage = int(len(QandAList) / block) + 1
+
+    paging = getPageList_v2(page, allPage)
+
+    return render( request, urlBase + "qandaList.html",
+                   {'pageType': "cs", "qandaList":qanda, "paging":paging, "page" : page,
+                    "leftPage" : page-1, "rightPage" : page+1, "lastPage" : allPage })
+
+
+
 def mailMain(request):
 
     try:
