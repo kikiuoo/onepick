@@ -114,7 +114,7 @@
 .viewBox .contentList .listEtc .editBtn { background-image: url("../../../image/web/update.png")}
 .viewBox .contentList .listEtc .delBtn { background-image: url("../../../image/web/delete.png"); margin-right: 0px}
 
-.image{
+.contentList .image{
     width: 250px;
     height: 60px;
 
