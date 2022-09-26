@@ -60,21 +60,13 @@ def mailMain(request):
     try:
         cursor = connection.cursor()
 
-        query = "SELECT DISTINCT(email), num, NAME,  gender, birth, userType  " \
-                "FROM user_info " \
-                "WHERE ( agreeEmail = '1' or agreeEmail = 'Y' ) and email is not null and email != '' " \
-                "order by name "
-
-        result = cursor.execute(query)
-        userList = cursor.fetchall()
-
         connection.commit()
         connection.close()
 
     except:
         connection.rollback()
 
-    return render( request, "onepickAdmin/cs/mailing.html", {'pageType': "cs", "userList":userList })
+    return render( request, "onepickAdmin/cs/mailing.html", {'pageType': "cs" })
 
 
 def ajaxUserList(request):
