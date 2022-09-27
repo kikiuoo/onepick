@@ -48,9 +48,9 @@
             <option value="girl" {% if geneder == "girl" %} selected {% endif %}>여성</option>
         </select>
 
-        <input type="text" id="age2" value="{{ age2 }}" placeholder="나이">
+        <input type="number" id="age2" value="{{ age2 }}" placeholder="나이">
         <span>~</span>
-        <input type="text" id="age1" value="{{ age1 }}" placeholder="나이">
+        <input type="number" id="age1" value="{{ age1 }}" placeholder="나이">
 
         <select name="military" id="military" {% if military != "" %}style="color:#1f1f1f;"{% endif %}>
             <option value="" selected>병역 구분</option>
