@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('list/<cate_type>/<int:page>/', views.listView, name='listView'),
+    path('list/', views.listView, name='listView'),
     path('profileDetail/<cate_type>/<int:num>/', views.viewer, name='listView'),
     path('profileDetail_all/<cate_type>/<int:num>/', views.viewer_all, name='listView'),
 
@@ -21,6 +21,10 @@ urlpatterns = [
     path('ajax/reloadComment/', views.reloadComment, name="profile-reloadComment"),
     path('ajax/deleteComment/', views.deleteComment, name="profile-deleteComment"),
     path('ajax/profileSuggest/', views.profileSuggest, name="profile-profileSuggest"),
+    path('ajax/getSubSpecialty/', views.getSubSpecialty, name="profile-getSubSpecialty"),
+    path('ajax/getSubSpecialty2/', views.getSubSpecialty2, name="profile-getSubSpecialty2"),
+    path('ajax/checkSpecDB/', views.checkSpecDB, name="profile-checkSpecDB"),
+    path('ajax/checkTagDB/', views.checkTagDB, name="profile-checkTagDB"),
 
     path('print/<type>/<int:num>/', views.printProfile, name="profile-print"),
 ]

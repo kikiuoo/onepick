@@ -13,6 +13,9 @@
 <link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/audi/audi_base.css' %}"> <!-- pc 버전 -->
 <link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/audi/audi_base.css' %}" > <!-- 모바일 버전 -->
 
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/profile/filter.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/profile/filter.css' %}" > <!-- 모바일 버전 -->
+
 
 <!-- JS 파일 -->
 <script src="{% static 'js/search.js' %}"></script>
@@ -64,6 +67,10 @@
         {% endfor %}
     </div>
     {% else %}
+
+
+
+
     <div class="inBox">
         {% for profile in searching %}
         <div class="profile" data-num="{{ profile.0 }}">

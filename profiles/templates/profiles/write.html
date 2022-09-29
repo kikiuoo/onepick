@@ -351,10 +351,45 @@
                 <div class="specialtyList">
                     <textarea name="saveSpecialty" id="saveSpecialty"></textarea>
 
-                    <input type="text" name="specialty" id="specialty" value="" placeholder="특기를 입력해주세요">
+                    <select name="specialty" id="specialty">
+                        <option value="" selected disabled>특기 선택</option>
+                        {% for speci in specialty  %}
+                        <option value="{{ speci.1 }}">{{ speci.1 }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <select name="spec_sub" id="spec_sub">
+                        <option value="" selected disabled>특기 세부 선택</option>
+                    </select>
+
+                    <input name="spec_etc" id="spec_etc" readonly>
+
                     <div class="addBtn" id="specialtyAdd"></div>
                 </div>
 
+                <div class="specialtyBox"></div>
+            </div>
+
+
+            <div class="title f_etcInfo">태그</div>
+            <div class="inputBox f_etcInfo">
+                <div class="tagList">
+                    <textarea name="saveTag" id="saveTag"></textarea>
+
+                    <select name="tag" id="tag">
+                        <option value="" selected disabled>태그 선택</option>
+                        {% for tag in tagList  %}
+                        <option value="{{ tag.tag }}">{{ tag.tag }}</option>
+                        {% endfor %}
+                        <option value="etc">직접입력</option>
+                    </select>
+
+                    <input name="tag_etc" id="tag_etc" readonly>
+
+                    <div class="addBtn" id="tagAdd"></div>
+                </div>
+
+                <div class="tagBox"></div>
             </div>
         </div>
 

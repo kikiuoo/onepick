@@ -328,6 +328,7 @@ class ProfileInfo(models.Model):
     iscareer = models.CharField(db_column='isCareer', max_length=10, blank=True, null=True)  # Field name made lowercase.
     careeryear = models.CharField(db_column='careerYear', max_length=10, blank=True, null=True)  # Field name made lowercase.
     careermonth = models.CharField(db_column='careerMonth', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    tag = models.CharField(max_length=500, blank=True, null=True)
     regdate = models.DateTimeField(db_column='RegDate', blank=True, null=True)  # Field name made lowercase.
     update = models.DateTimeField(db_column='upDate', blank=True, null=True)  # Field name made lowercase.
     viewcount = models.IntegerField(db_column='viewCount', blank=True, null=True)  # Field name made lowercase.
@@ -412,6 +413,16 @@ class ProfileShare(models.Model):
         db_table = 'profile_share'
 
 
+class ProfileSpecialty(models.Model):
+    num = models.AutoField(primary_key=True)
+    class_field = models.CharField(db_column='class', max_length=100, blank=True, null=True)  # Field renamed because it was a Python reserved word.
+    subclass = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'profile_specialty'
+
+
 class ProfileSuggest(models.Model):
     num = models.BigAutoField(primary_key=True)
     userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
@@ -424,6 +435,15 @@ class ProfileSuggest(models.Model):
     class Meta:
         managed = False
         db_table = 'profile_suggest'
+
+
+class ProfileTag(models.Model):
+    num = models.AutoField(primary_key=True)
+    tag = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'profile_tag'
 
 
 class ProfileView(models.Model):

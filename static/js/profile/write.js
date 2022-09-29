@@ -229,12 +229,26 @@ $(document).ready(function (){
             $('#foreign').css("color", "#c0c0c0");
             $('#good').css("color", "#c0c0c0");
         }else if(id == "specialtyAdd"){
-            var specialty =  $("#specialty").val();
+            var specialty =  $("#spec_sub").find(":selected").val();
             var saveSpecialty = $("#saveSpecialty").val();
 
             if( specialty == "" ){
-                alert("특기를 입력해주세요.");
+                alert("특기를 선택해주세요.");
                 return;
+            }
+
+            // DB에 추가
+            if( specialty == "etc" ){
+                var specialty_main  =  $("#specialty").find(":selected").val();
+                var etcSpec = $("#spec_etc").val();
+
+                if( etcSpec == "" ){
+                    alert("특기를 입력해주세요.");
+                    return;
+                }
+
+                checkSpecDB(specialty_main, etcSpec);
+                specialty = etcSpec;
             }
 
             array = saveSpecialty.split('|');
@@ -248,29 +262,92 @@ $(document).ready(function (){
                 return;
             }
 
-            addBox = $("#specialty");
+            addBox = $(".specialtyBox");
             textArea = $("#saveSpecialty");
-            addHtml = '<div id="list_'+addListCount+'" style="display: inline-block"><input type="text" value="'+specialty+'" style="width: 226px; margin-right: 0px" disabled>';
+            addHtml = '<div id="list_'+addListCount+'" style="display: inline-block"><input type="text" value="'+specialty+'" style="width: 150px; margin-right: 0px" disabled>';
             addHtml = addHtml + '<div class="subBtn" id="specialtySub"  data-id="'+addListCount+'" data-value="'+saveData+'" style="margin-right: 10px;"></div></div>';
 
             // select 박스, input 박스 초기화
             $('#specialty').val('');
+            $('#spec_sub').val('');
+            $("#spec_etc").val('');
+            $("#spec_etc").attr("readonly",true);
+
+        }else if(id == "tagAdd"){
+
+            var tag =  $("#tag").find(":selected").val();
+            var saveTag = $("#saveTag").val();
+
+            if( tag == "" ){
+                alert("특기를 선택해주세요.");
+                return;
+            }
+
+            // DB에 추가
+            if( tag == "etc" ){
+                var etcTag = $("#tag_etc").val();
+
+                if( etcSpec == "" ){
+                    alert("특기를 입력해주세요.");
+                    return;
+                }
+
+                checkTagDB(etcTag);
+                tag = etcTag;
+            }
+
+            array = saveTag.split('|');
+
+            if( saveTag == "" ){ array = []; }
+
+            var saveData =  tag;
+
+            if( array.indexOf(saveData) != -1 ){
+                alert("이미 등록된 값입니다.");
+                return;
+            }
+
+            addBox = $(".tagBox");
+            textArea = $("#saveTag");
+            addHtml = '<div id="list_'+addListCount+'" style="display: inline-block"><input type="text" value="'+tag+'" style="width: 150px; margin-right: 0px" disabled>';
+            addHtml = addHtml + '<div class="subBtn" id="tagSub"  data-id="'+addListCount+'" data-value="'+saveData+'" style="margin-right: 10px;"></div></div>';
+
+            // select 박스, input 박스 초기화
+            $('#tag').val('');
+            $("#tag_etc").val('');
+            $("#tag_etc").attr("readonly",true);
         }
 
         array.push(saveData);
         var saveText = array.join('|');
 
         textArea.val(saveText);
-
-        if(id == "specialtyAdd") {
-            addBox.before(addHtml);
-        }else{
-            addBox.append(addHtml);
-        }
+        addBox.append(addHtml);
 
         addListCount++;
     });
 
+    $(document).on("change", "#spec_sub", function (){
+        var specSub = $("#spec_sub").find(":selected").val();
+
+        if( specSub == "etc" ){
+            $("#spec_etc").removeAttr("readonly");
+        }else{
+            $("#spec_etc").attr("readonly",true);
+        }
+
+    });
+
+    $(document).on("change", "#tag", function (){
+        var tag = $("#tag").find(":selected").val();
+
+        if( tag == "etc" ){
+            $("#tag_etc").removeAttr("readonly");
+        }else{
+            $("#tag_etc").attr("readonly",true);
+        }
+
+    });
 
     $(document).on("change", "#cate_m, #c_cateM, #ec_cateM", function (){
 
@@ -517,6 +594,8 @@ $(document).ready(function (){
             textArea = $("#saveForeign");
         }else if(id == "specialtySub"){
             textArea = $("#saveSpecialty");
+        }else if(id == "tagSub"){
+            textArea = $("#saveTag");
         }
 
         array = textArea.val().split("|");
@@ -574,6 +653,12 @@ $(document).ready(function (){
 
         delTextArea.val(delData);
 
+    });
+
+    $(document).on("change", "#specialty", function (){
+       var specialty = $("#specialty").find(":selected").val();
+
+       find_sub_specialty(specialty);
     });
 
 
@@ -697,6 +782,7 @@ $(document).ready(function (){
         getListData( $("#etcSaveCareer"), 'etcareer');
         getListData( $("#saveForeign"), 'foreign');
         getListData( $("#saveSpecialty"), 'specialty');
+        getListData( $("#saveTag"), 'tag');
 
         $("#saveProfileForm").submit();
     });
@@ -729,6 +815,56 @@ function getSubCate_etc(cate, objCate){
 
       success: function(data){
          objCate.empty().append(data);
+      },
+      error: function (request, status, error){
+
+      }
+   });
+}
+
+function find_sub_specialty(specialty){
+    $.ajax({
+      url: "/profile/ajax/getSubSpecialty/",
+      type: "GET",
+      dataType: "html",
+      data:{"specialty" : specialty},
+
+      success: function(data){
+         $("#spec_sub").empty().append(data);
+      },
+      error: function (request, status, error){
+
+      }
+   });
+}
+
+function checkSpecDB(specialty, etcSpec){
+    $.ajax({
+      url: "/profile/ajax/checkSpecDB/",
+      type: "GET",
+      dataType: "json",
+      async : false,
+      data:{"specialty": specialty, "etcSpec" : etcSpec },
+
+      success: function(data){
+         return data.code;
+      },
+      error: function (request, status, error){
+
+      }
+   });
+}
+
+function checkTagDB(etcTag){
+    $.ajax({
+      url: "/profile/ajax/checkTagDB/",
+      type: "GET",
+      dataType: "json",
+      async : false,
+      data:{"etcTag" : etcTag },
+
+      success: function(data){
+         return data.code;
       },
       error: function (request, status, error){
 
@@ -770,10 +906,16 @@ function getListData( saveText, saveType){
             $("#foreignAdd").trigger("click");
         }
     }else  if( saveType == "specialty"){
-        var specialty = $("#specialty").val();
+        var specialty = $("#specialty").find("option:selected").val();
 
         if( specialty != "" ){
             $("#specialtyAdd").trigger("click");
+        }
+    }else  if( saveType == "tag"){
+        var tag = $("#tag").find("option:selected").val();
+
+        if( tag != "" ){
+            $("#tagAdd").trigger("click");
         }
     }
 

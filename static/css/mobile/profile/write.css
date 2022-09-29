@@ -149,7 +149,9 @@
 #ec_cateM, #ec_cateS{ margin-right: 10px; margin-bottom: 10px }
 
 #good{width: 116px; margin-right: 10px;}
-#specialty{width: 226px; margin-right: 0px}
+#specialty{width: 100px; margin-right: 10px}
+#spec_sub{width: 120px; margin-right: 10px}
+#spec_etc{width: 120px; margin-right: 10px}
 #foreign{margin-right: 10px}
 
 .addBtn{
@@ -417,7 +419,7 @@
 }
 
 
-.upload-hidden, #saveCareer, #youSave, #saveSpecialty, #saveForeign, #etcSaveCareer{
+.upload-hidden, #saveCareer, #youSave, #saveSpecialty, #saveForeign, #etcSaveCareer, #saveTag{
     display: none;
 }
 

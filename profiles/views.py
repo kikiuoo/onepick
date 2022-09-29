@@ -1,3 +1,4 @@
+from django.db.models import QuerySet
 from django.shortcuts import render, redirect
 from picktalk.models import *
 import datetime
@@ -46,20 +47,35 @@ def getCateType(cate_type):
     return cate
 
 
-def listView(request, cate_type, page): # 오디션 Main
+def listView(request): # 오디션 Main
+
+    cate_type = request.GET.get('cate_type', "actor")
+    page = request.GET.get('page', "1")
+    print(page)
+    page = int(page)
 
     order = request.GET.get('order', "")
+
     nationality = request.GET.get('nationality', "")
     geneder = request.GET.get('geneder', "")
     military = request.GET.get('military', "")
-    foreign = request.GET.get('foreign', "")
-    good = request.GET.get('good', "")
+
+    ageRadio = request.GET.get('ageRadio', "")
     age1 = request.GET.get('age1', "")
     age2 = request.GET.get('age2', "")
-    school = request.GET.get('school', "")
+
+    heightRadio = request.GET.get('heightRadio', "")
     height1 = request.GET.get('height1', "")
     height2 = request.GET.get('height2', "")
+
+    careerRadio = request.GET.get('careerRadio', "")
     career1 = request.GET.get('career1', "")
+    career2 = request.GET.get('career2', "")
+
+    foreSpec = request.GET.get('foreSpec', "")
+    findSpec = request.GET.get('findSpec', "")
+    tagSpec = request.GET.get('tagSpec', "")
+    school = request.GET.get('school', "")
 
     try:
         cursor = connection.cursor()
@@ -88,29 +104,63 @@ def listView(request, cate_type, page): # 오디션 Main
         if geneder != "":
             where = where + " and gender='" + geneder + "'"
 
-        if foreign != "":
-            if good != "":
-                where = where + " and `foreign` like '%" + foreign + "$" + good + "%'"
-            else:
-                where = where + " and `foreign` like '%" + foreign + "%'"
 
-        if age1 != "" and age2 != "":
+        if ageRadio != "":
             nowTime = str(timezone.now())
             year = nowTime.split('-')
-
+            if ageRadio == "1" :
+                year10 = int(year[0]) - 9
+                where = where + " and birth >= '" + str(year10) + "-12-31' "
+            else :
+                yearsOver = int(year[0]) - int(ageRadio) + 1
+                where = where + " and birth <= '" + str(yearsOver) + "-12-31' "
+        elif age1 != "" or age2 != "" :
+            nowTime = str(timezone.now())
+            year = nowTime.split('-')
             age_1 = int(year[0]) - int(age1) + 1
             age_2 = int(year[0]) - int(age2) + 1
-
             where = where + " and birth >= '" + str(age_1) + "-01-01' and birth <= '" + str(age_2) + "-12-31' "
+
+
+        if heightRadio != "":
+            where = where + " and height >= '" +heightRadio + "' "
+        elif height1 != "" or height2 != "" :
+            where = where + " and height >= '" + str(height1) + "' and height <= '" + str(height2) + "' "
+
+
+        if careerRadio != "":
+            if careerRadio == "0" :
+                where = where + " and ( careerYear < '1' or careerYear is null ) "
+            else :
+                where = where + " and careerYear >= '" + str(careerRadio) + "' "
+        elif career1 != "" or career2 != "" :
+            where = where + " and careerYear >= '" + str(career1) + "' and careerYear <= '" + str(career2) + "'"
+
+        if foreSpec != "" :
+            foreign = foreSpec.split("|")
+            for fore in foreign :
+                where = where + " and `foreign` like '%"+fore+"%' "
+        else :
+            foreign = ""
+
+        if findSpec != "" :
+            specList = findSpec.split("|")
+            for spec in specList :
+                specDetail = spec.split("$")
+                where = where + " and talent like '%"+specDetail[1]+"%' "
+        else :
+            specList = ""
+
+
+        if tagSpec != "" :
+            tagSpecList = tagSpec.split("|")
+            for tag in tagSpecList :
+                where = where + " and tag like '%"+tag+"%' "
+        else :
+            tagSpecList = ""
 
         if school != "":
             where = where + " and school like '%" + school + "%'"
-
-        if height1 != "" and height2 != "":
-            where = where + " and height >= '" + height1 + "' and height <= '" + height2 + "' "
-
-        if career1 != "":
-            where = where + " and careerYear >= '" + career1 + "' "
 
         if cate_type == "actor":
             where = where + "and ( p.interCate = 'mainCate1' || p.interCate like '%배우%' ) "
@@ -122,6 +172,8 @@ def listView(request, cate_type, page): # 오디션 Main
         query = "SELECT * " \
                 "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
                 "WHERE public = '0' and isDelete = '0'  and ui.userID != '' " + where
+
+        print(query)
 
         result = cursor.execute(query)
         profileList = cursor.fetchall()
@@ -146,17 +198,26 @@ def listView(request, cate_type, page): # 오디션 Main
         allPage = int(len(profileList) / block) + 1
         paging = getPageList_v2(page, allPage)
 
+        query = "SELECT * FROM profile_specialty GROUP BY `class` ORDER BY num ASC"
+
+        result = cursor.execute(query)
+        specialty = cursor.fetchall()
+
         connection.commit()
         connection.close()
 
     except:
         connection.rollback()
 
+    tagList = ProfileTag.objects.all().order_by("tag")
+
     return render(request, 'profiles/list.html',
                   { 'profiles':profiles, "cateType" : cate_type, "paging":paging, "page" : page,
                     "leftPage" : page-1, "rightPage" : page+1, "lastPage" : allPage, "order":order
-                    , "nationality":nationality, "geneder":geneder, "military":military, "foreign":foreign
-                    , "good":good, "age1":age1, "age2":age2, "school":school, "height1":height1, "height2":height2, "career1":career1})
+                    , "nationality":nationality, "geneder":geneder, "military":military, "ageRadio":ageRadio
+                    ,"age1":age1, "age2":age2, "school":school, "heightRadio" : heightRadio, "height1":height1, "height2":height2
+                    , "careerRadio" : careerRadio ,  "career1":career1, "career2":career2, "foreSpec" : foreSpec,  "findSpec" : findSpec, "tagSpec" : tagSpec,
+                    "foreList": foreign, "spList":specList,  "tagSpecList" : tagSpecList ,"speList": specialty, "tagList" : tagList})
 
 
 
@@ -320,9 +381,26 @@ def pofile_write(request) :
     user = UserInfo.objects.get(userid=userID)
     cate = CateMain.objects.all()
 
+    try:
+        cursor = connection.cursor()
+
+        query = "SELECT * FROM profile_specialty GROUP BY `class` ORDER BY num ASC"
+
+        result = cursor.execute(query)
+        specialty = cursor.fetchall()
+
+        connection.commit()
+        connection.close()
+
+    except:
+        connection.rollback()
+
+    tagList = ProfileTag.objects.all().order_by("tag")
     checkProfile = ProfileInfo.objects.filter(userid=userID, isdelete=0)
 
-    return render(request, 'profiles/write.html', { 'user':user, 'cate' : cate, "checkProfile" : checkProfile })
+    return render(request, 'profiles/write.html',
+                  { 'user':user, 'cate' : cate, "checkProfile" : checkProfile,
+                    "specialty" : specialty, "tagList": tagList })
 
 @csrf_exempt
 def pofile_write_callback(request) :
@@ -382,6 +460,7 @@ def pofile_write_callback(request) :
     etcSaveCareer = request.POST.get('etcSaveCareer')
     saveForeign = request.POST['saveForeign']
     saveSpecialty = request.POST['saveSpecialty']
+    saveTag = request.POST['saveTag']
     introduction = request.POST['introduction']
     notView = request.POST.get('notView',"0")
 
@@ -443,7 +522,7 @@ def pofile_write_callback(request) :
                                              height=height, weight=weight, topsize=topSize, bottomsize=bottomSize, shoessize=shoesSize,
                                              skincolor=skinColor, haircolor=hairColor, foreign=saveForeign, mainyoutube=youtube_main,
                                              youtube=sYoutube, talent=saveSpecialty, comment=introduction, intercate=cate_m,
-                                             intersubcate=cate_s, iscareer=notCareer, careeryear=allCareer_y, careermonth=allCareer_m,
+                                             intersubcate=cate_s, iscareer=notCareer, careeryear=allCareer_y, careermonth=allCareer_m, tag = saveTag,
                                              regdate=nowTime, update=nowTime, viewcount=0, cviewcount=0, public=notView,isdelete=0, pickcount=0 )
 
     key = str(ProfileInfo.objects.latest('num').num)
@@ -513,12 +592,33 @@ def pofile_edit(request, num) :
     else :
         talent = ""
 
+    if profiles.tag != None:
+        tag = profiles.tag.split("|")
+    else:
+        tag = ""
+
+    try:
+        cursor = connection.cursor()
+
+        query = "SELECT * FROM profile_specialty GROUP BY `class` ORDER BY num ASC"
+
+        result = cursor.execute(query)
+        specialty = cursor.fetchall()
+
+        connection.commit()
+        connection.close()
+
+    except:
+        connection.rollback()
+
+    tagList = ProfileTag.objects.all().order_by("tag")
+
     careerEtc = ProfileEtccareer.objects.filter(profilenum=num).order_by("num")
 
     return render(request, 'profiles/edit.html', { 'user':user, 'cate' : cate, 'num' : num, 'profiles' : profiles,
                                                    'catesub':catesub, "careerList" : careerList, "profileImages" : profileImages,
                                                    "artImages":artImages, "youtubes":youtubes, "foreign": foreign, "talent": talent,
-                                                   "careerEtc":careerEtc})
+                                                   "careerEtc":careerEtc, "tag":tag, "specialty" : specialty, "tagList" : tagList })
 
 @csrf_exempt
 def pofile_edit_callback(request) :
@@ -587,12 +687,11 @@ def pofile_edit_callback(request) :
     etcSaveCareer = request.POST.get('etcSaveCareer')
     saveForeign = request.POST['saveForeign']
     saveSpecialty = request.POST['saveSpecialty']
+    saveTag = request.POST['saveTag']
     introduction = request.POST['introduction']
     notView = request.POST.get('notView', "0")
     delCareer = request.POST.get("delCareer", "")
     etcDelCareer = request.POST.get("etcDelCareer", "")
-
-    print(notView)
 
     profiles = ProfileInfo.objects.get(num=num)
 
@@ -698,6 +797,7 @@ def pofile_edit_callback(request) :
     profiles.mainyoutube=youtube_main
     profiles.youtube=sYoutube
     profiles.talent=saveSpecialty
+    profiles.tag=saveTag
     profiles.comment=introduction
     profiles.intercate=cate_m
     profiles.intersubcate=cate_s
@@ -1025,3 +1125,51 @@ def printProfile(request, type, num) :
     return render(request, 'profiles/profile_width.html', {'profile': profile, 'userInfo': userInfo, 'career':career,
                                                            'movieCareer':movieCareer, 'dramaCareer':dramaCareer, 'etcCareer':etcCareer,
                                                            'profileImages':profileImages })
+
+
+def getSubSpecialty(request) :
+    specialty = request.GET['specialty']
+
+    sub_specialty = ProfileSpecialty.objects.filter(class_field=specialty).order_by("-subclass")
+
+    return render(request, 'profiles/ajax_sub_specialty.html',
+                  {'sub_specialty': sub_specialty, "specialty" : specialty})
+
+def getSubSpecialty2(request) :
+    specialty = request.GET['specialty']
+
+    sub_specialty = ProfileSpecialty.objects.filter(class_field=specialty).order_by("-subclass")
+
+    return render(request, 'profiles/ajax_sub_specialty2.html',
+                  {'sub_specialty': sub_specialty, "specialty" : specialty})
+
+def checkSpecDB(request) :
+    specialty = request.GET['specialty']
+    etcSpec = request.GET['etcSpec']
+
+    sub_specialty = ProfileSpecialty.objects.filter(subclass=etcSpec)
+
+    if sub_specialty.count() > 0 :
+        return JsonResponse({"code": "1"})
+    else :
+
+        saveSubSpecialty = ProfileSpecialty.objects.create(class_field=specialty, subclass=etcSpec)
+
+        return JsonResponse({"code": "0"})
+
+
+
+def checkTagDB(request) :
+    etcTag = request.GET['etcTag']
+
+    tagList = ProfileTag.objects.filter(tag=etcTag)
+
+    if tagList.count() > 0 :
+        return JsonResponse({"code": "1"})
+    else :
+
+        saveTag = ProfileTag.objects.create(tag=etcTag)
+
+        return JsonResponse({"code": "0"})
+
+
