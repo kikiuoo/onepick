@@ -63,7 +63,7 @@
                         소속사 있음<br>
                         {% endif %}
                         {{ userInfo.school }} {{ userInfo.major }}<br>
-                        {% if data.talent != None %}
+                        {% if data.talent != None and data.talent != "None" %}
                         특기 {{ data.talent|replace_2:"|, " }}
                         {% endif %}
                    </div>
@@ -204,7 +204,10 @@
                         소속사 있음<br>
                         {% endif %}
                         {{ data.9 }} {{ data.10 }}<br>
+
+                        {% if data.11 != None and data.11 != "None" %}
                         특기 {{ data.11|replace_2:"|, " }}
+                        {% endif %}
                    </div>
                    <div class="comment mobileNone">{{ data.12|linebreaks }}</div>
                 </div>

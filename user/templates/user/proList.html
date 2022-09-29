@@ -226,7 +226,9 @@
                 소속사 있음<br>
                 {% endif %}
                 {{ data.9 }} {{ data.10 }}<br>
+                {% if data.11 != None %}
                 특기 {{ data.11|replace_2:"|, " }}
+                {% endif %}
            </div>
            <div class="comment mobileNone">{{ data.12|linebreaks }}</div>
         </div>
