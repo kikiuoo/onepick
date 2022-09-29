@@ -1147,7 +1147,10 @@ def profileSuggest(request) :
     writer = UserInfo.objects.get(userid=writeUID)
     sender = UserCompany.objects.get(userid=userID)
 
-    sendSMS(writer.phone, "오디션 제안", "[ONEPICK] " +sender.name + "에서 오디션 제안이 도착했습니다." )
+    if sender.companyname :
+        sendSMS(writer.phone, "오디션 제안", "[ONEPICK] " +sender.companyname + "에서 오디션 제안이 도착했습니다." )
+    else :
+        sendSMS(writer.phone, "오디션 제안", "[ONEPICK] 오디션 제안이 도착했습니다.")
 
     return JsonResponse({"code": "0"})
 
