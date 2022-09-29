@@ -81,7 +81,7 @@ CORS_ALLOWED_ORIGINS = [
 
 ROOT_URLCONF = 'myonepick.urls'
 
-CSRF_TRUSTED_ORIGINS = ['http://ksnpick.com','http://myonepick.com', "http://139.150.71.95",'https://myonepick.com']
+CSRF_TRUSTED_ORIGINS = ['http://*.ksnpick.com','http://*.myonepick.com', "http://*.139.150.71.95",'https://*.myonepick.com']
 
 TEMPLATES = [
     {
