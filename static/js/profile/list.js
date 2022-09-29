@@ -94,9 +94,11 @@ $(document).ready(function(){
         if( $(".filterBox").css("display") == "block" ){
             $(".filterBox").css("display", "none");
             $(".filterSave").css("display", "none");
+            $(".filterBtn span").css("transform", "rotate(0deg)");
         }else{
             $(".filterBox").css("display", "block");
             $(".filterSave").css("display", "inline-block");
+            $(".filterBtn span").css("transform", "rotate(180deg)");
         }
     });
 

@@ -71,6 +71,8 @@
             <div class="filterBlock">
                 <div class="filterTitle">나이</div>
                 <div class="filterContent">
+                    <input type="radio" name="ageRadio" class="ageRadio" value="" id="check_all" {% if ageRadio == "" %}checked{% endif %}>
+                    <label class="ageExpand" for="check_all">전체</label>
                     <input type="radio" name="ageRadio" class="ageRadio" value="1" id="check_1" {% if ageRadio == "1" %}checked{% endif %}>
                     <label class="ageExpand" for="check_1">10대 이하</label>
                     <input type="radio" name="ageRadio" class="ageRadio" value="10" id="check_10" {% if ageRadio == "10" %}checked{% endif %}>
@@ -97,6 +99,8 @@
             <div class="filterBlock">
                 <div class="filterTitle">키</div>
                 <div class="filterContent">
+                    <input type="radio" name="heightRadio" class="heightRadio" value="" id="height_all"  {% if heightRadio == "" %}checked{% endif %}>
+                    <label class="heightExpand" for="height_all">전체</label>
                     <input type="radio" name="heightRadio" class="heightRadio" value="110" id="height_110"  {% if heightRadio == "110" %}checked{% endif %}>
                     <label class="heightExpand" for="height_110">110cm 이상</label>
                     <input type="radio" name="heightRadio" class="heightRadio" value="130" id="height_130"  {% if heightRadio == "130" %}checked{% endif %}>
@@ -123,6 +127,8 @@
             <div class="filterBlock">
                 <div class="filterTitle">경력</div>
                 <div class="filterContent">
+                    <input type="radio" name="careerRadio" class="careerRadio" value="" id="career_all" {% if careerRadio == "" %}checked{% endif %}>
+                    <label class="careerExpand" for="career_all">전체</label>
                     <input type="radio" name="careerRadio" class="careerRadio" value="0" id="career_0" {% if careerRadio == "0" %}checked{% endif %}>
                     <label class="careerExpand" for="career_0">1년 미만</label>
                     <input type="radio" name="careerRadio" class="careerRadio" value="1" id="career_1" {% if careerRadio == "1" %}checked{% endif %}>

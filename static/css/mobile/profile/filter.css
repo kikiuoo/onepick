@@ -126,18 +126,6 @@
     cursor: pointer;
 }
 
-.filterBtn span{
-    position: absolute;
-    width: 14px;
-    height: 10px;
-    right: 12px;
-    top: 15px;
-
-    background:url('../../../image/web/arrow.png') no-repeat right center;
-    background-size: 100%;
-}
-
-
 .resetBox{
     position: absolute;
     right: 0px;

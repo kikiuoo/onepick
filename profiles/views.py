@@ -51,7 +51,6 @@ def listView(request): # 오디션 Main
 
     cate_type = request.GET.get('cate_type', "actor")
     page = request.GET.get('page', "1")
-    print(page)
     page = int(page)
 
     order = request.GET.get('order', "")
@@ -114,48 +113,83 @@ def listView(request): # 오디션 Main
             else :
                 yearsOver = int(year[0]) - int(ageRadio) + 1
                 where = where + " and birth <= '" + str(yearsOver) + "-12-31' "
-        elif age1 != "" or age2 != "" :
+        elif age1 != "" and age2 != "" :
             nowTime = str(timezone.now())
             year = nowTime.split('-')
             age_1 = int(year[0]) - int(age1) + 1
             age_2 = int(year[0]) - int(age2) + 1
             where = where + " and birth >= '" + str(age_1) + "-01-01' and birth <= '" + str(age_2) + "-12-31' "
-
+        elif age1 != "" or age2 != "":
+            age1 = ""
+            age2 = ""
 
         if heightRadio != "":
             where = where + " and height >= '" +heightRadio + "' "
-        elif height1 != "" or height2 != "" :
+        elif height1 != "" and height2 != "" :
             where = where + " and height >= '" + str(height1) + "' and height <= '" + str(height2) + "' "
-
+        elif height1 != "" or height2 != "":
+            height1 = ""
+            height2 = ""
 
         if careerRadio != "":
             if careerRadio == "0" :
                 where = where + " and ( careerYear < '1' or careerYear is null ) "
             else :
                 where = where + " and careerYear >= '" + str(careerRadio) + "' "
-        elif career1 != "" or career2 != "" :
+        elif career1 != "" and career2 != "" :
             where = where + " and careerYear >= '" + str(career1) + "' and careerYear <= '" + str(career2) + "'"
+        elif career1 != "" or career2 != "":
+            career1 = ""
+            career2 = ""
 
         if foreSpec != "" :
             foreign = foreSpec.split("|")
+
+            where = where + " and ( "
+            count = 0
             for fore in foreign :
-                where = where + " and `foreign` like '%"+fore+"%' "
+                count = count + 1
+                if count == 1 :
+                    where = where + " `foreign` like '%"+fore+"%' "
+                else :
+                    where = where + " or `foreign` like '%"+fore+"%' "
+
+            where = where + " ) "
+
         else :
             foreign = ""
 
         if findSpec != "" :
             specList = findSpec.split("|")
+
+            where = where + " and ( "
+            count = 0
             for spec in specList :
+                count = count + 1
                 specDetail = spec.split("$")
-                where = where + " and talent like '%"+specDetail[1]+"%' "
+                if count == 1:
+                    where = where + " talent like '%"+specDetail[1]+"%' "
+                else :
+                    where = where + " or talent like '%"+specDetail[1]+"%' "
+
+            where = where + " ) "
+
         else :
             specList = ""
 
 
         if tagSpec != "" :
             tagSpecList = tagSpec.split("|")
+
+            where = where + " and ( "
+            count = 0
             for tag in tagSpecList :
-                where = where + " and tag like '%"+tag+"%' "
+                count = count + 1
+                if count == 1:
+                    where = where + " tag like '%"+tag+"%' "
+                else:
+                    where = where + " or tag like '%" + tag + "%' "
+            where = where + " ) "
         else :
             tagSpecList = ""
 
