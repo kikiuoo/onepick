@@ -155,9 +155,20 @@
 
             {% if talent|getArrayCount > 0 and profiles.talent|default:"" != "" %}
             <div class="title">특기</div>
+            <div class="content">
                 {% for talents in talent %}
-                    <div class="content">{{ talents }}</div>
+                    {{ talents }}
                 {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if tag|getArrayCount > 0 and profiles.tag|default:"" != "" %}
+            <div class="title">태그</div>
+            <div class="content">
+                {% for tags in tag %}
+                    {{ tags }}
+                {% endfor %}
+            </div>
             {% endif %}
         </div>
     </div>

@@ -343,6 +343,12 @@ def viewer_all(request, cate_type, num):
     else:
         talent = ""
 
+
+    if (profiles.tag):
+        tag = profiles.tag.split("|")
+    else:
+        tag = ""
+
     # 세부 분야별 경력정보
     movieCareer = getCareerList(num, "movie")
     dramaCareer = getCareerList(num, "drama")
@@ -377,7 +383,7 @@ def viewer_all(request, cate_type, num):
                                                     "profileImages": profileImages, "artImages": artImages,
                                                     "youtubes": youtubes, "movieCareer": movieCareer,
                                                     "dramaCareer": dramaCareer,
-                                                    "etcCareer": etcCareer, "talent": talent, "audiList": audiList})
+                                                    "etcCareer": etcCareer, "talent": talent, "audiList": audiList, "tag" : tag})
 
 
 def pofile_write(request) :

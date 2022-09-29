@@ -262,14 +262,20 @@
             {% endif %}
         </div>
         <div class="contentBox">
-            {% if profile.7 != None %}
+            {% if request.session.userType == "admin"   %}
+            <div class="name">{{ profile.7 }} ({{ profile.8|userAge }})</div>
+            {% elif profile.7 != None %}
             <div class="name">{{ profile.7|updateUserName }} ({{ profile.8|userAge }})</div>
             {% else %}
             <div class="name">*** ({{ profile.8|userAge }})</div>
             {% endif %}
 
             <div class="detailInfo">
+                {% if request.session.userType == "admin"   %}
+                키 {{ profile.2 }} cm | 몸무게 {{ profile.3 }} kg<br>
+                {% else %}
                 키 {{ profile.2|userHight }} cm | 몸무게 {{ profile.3|userHight }} kg<br>
+                {% endif %}
                 {% if profile.10 == 'man' and profile.11 != None %}
                     {{ profile.11 }} |
                 {% endif %}
