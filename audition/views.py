@@ -10,6 +10,7 @@ from django.conf import settings
 from django.utils import timezone
 
 from myonepick.common import *
+from django.views.decorators.csrf import csrf_protect
 
 
 # 오디션 /audi ...
@@ -140,14 +141,14 @@ def audi_detail(request, cate_type, num) :
     return render(request, 'audition/viewer.html', {"audition": audition, "companyInfo" : companyInfo, "image" : images
                                                     ,"userInfo": userInfo,"pickCheck": pickCheck, "D_day" : d_day, "data1" : data1})
 
-
+@csrf_protect
 def audi_write(request) :
 
     cate = CateMain.objects.all().order_by('cateorder')
 
     return render(request, 'audition/write.html', {'cate':cate})
 
-
+@csrf_protect
 def audi_write_callback(request) :
 
     userID = request.POST['userID']
