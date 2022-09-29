@@ -261,6 +261,11 @@ def viewer(request, cate_type, num) :
     else :
         talent = ""
 
+    if (profiles.tag):
+        tag = profiles.tag.split("|")
+    else:
+        tag = ""
+
     # 세부 분야별 경력정보
     movieCareer = getCareerList(num, "movie")
     dramaCareer = getCareerList(num, "drama")
@@ -296,7 +301,7 @@ def viewer(request, cate_type, num) :
                                                      "careerEtc":careerEtc, "comment":comment, "pickCheck" : pickCheck,
                                                      "profileImages" : profileImages, "artImages" : artImages,
                                                      "youtubes" : youtubes, "movieCareer" : movieCareer, "dramaCareer" : dramaCareer,
-                                                     "etcCareer": etcCareer, "talent" : talent, "audiList" : audiList})
+                                                     "etcCareer": etcCareer, "talent" : talent, "audiList" : audiList, "tag" : tag })
 
 
 def viewer_all(request, cate_type, num):
