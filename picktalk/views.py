@@ -576,6 +576,200 @@ def proList2(request, type, page, num, filter) :
 
 
 
+def applyList(request, num) :
+
+    page = request.GET.get("page", "1")
+    page = int(page)
+
+    filter = request.GET.get("listView", "all")
+
+    nationality = request.GET.get('nationality', "")
+    geneder = request.GET.get('geneder', "")
+    military = request.GET.get('military', "")
+
+    ageRadio = request.GET.get('ageRadio', "")
+    age1 = request.GET.get('age1', "")
+    age2 = request.GET.get('age2', "")
+
+    heightRadio = request.GET.get('heightRadio', "")
+    height1 = request.GET.get('height1', "")
+    height2 = request.GET.get('height2', "")
+
+    careerRadio = request.GET.get('careerRadio', "")
+    career1 = request.GET.get('career1', "")
+    career2 = request.GET.get('career2', "")
+
+    foreSpec = request.GET.get('foreSpec', "")
+    findSpec = request.GET.get('findSpec', "")
+    tagSpec = request.GET.get('tagSpec', "")
+    school = request.GET.get('school', "")
+
+    block = 10
+    start = (page - 1) * block
+    end = page * block
+
+    cursor = connection.cursor()
+    user = request.session.get('id', '')
+
+
+    # 검색 조건
+
+    where = ""
+    if nationality != "":
+        where = where + " and nationality='" + nationality + "'"
+
+    if military != "":
+        where = where + " and military='" + military + "'"
+
+    if geneder != "":
+        where = where + " and gender='" + geneder + "'"
+
+    if ageRadio != "":
+        nowTime = str(timezone.now())
+        year = nowTime.split('-')
+        if ageRadio == "1":
+            year10 = int(year[0]) - 9
+            where = where + " and birth >= '" + str(year10) + "-12-31' "
+        else:
+            yearsOver = int(year[0]) - int(ageRadio) + 1
+            where = where + " and birth <= '" + str(yearsOver) + "-12-31' "
+    elif age1 != "" and age2 != "":
+        nowTime = str(timezone.now())
+        year = nowTime.split('-')
+        age_1 = int(year[0]) - int(age1) + 1
+        age_2 = int(year[0]) - int(age2) + 1
+        where = where + " and birth >= '" + str(age_1) + "-01-01' and birth <= '" + str(age_2) + "-12-31' "
+    elif age1 != "" or age2 != "":
+        age1 = ""
+        age2 = ""
+
+    if heightRadio != "":
+        where = where + " and height >= '" + heightRadio + "' "
+    elif height1 != "" and height2 != "":
+        where = where + " and height >= '" + str(height1) + "' and height <= '" + str(height2) + "' "
+    elif height1 != "" or height2 != "":
+        height1 = ""
+        height2 = ""
+
+    if careerRadio != "":
+        if careerRadio == "0":
+            where = where + " and ( careerYear < '1' or careerYear is null ) "
+        else:
+            where = where + " and careerYear >= '" + str(careerRadio) + "' "
+    elif career1 != "" and career2 != "":
+        where = where + " and careerYear >= '" + str(career1) + "' and careerYear <= '" + str(career2) + "'"
+    elif career1 != "" or career2 != "":
+        career1 = ""
+        career2 = ""
+
+    if foreSpec != "":
+        foreign = foreSpec.split("|")
+
+        where = where + " and ( "
+        count = 0
+        for fore in foreign:
+            count = count + 1
+            if count == 1:
+                where = where + " `foreign` like '%" + fore + "%' "
+            else:
+                where = where + " or `foreign` like '%" + fore + "%' "
+
+        where = where + " ) "
+
+    else:
+        foreign = ""
+
+    if findSpec != "":
+        specList = findSpec.split("|")
+
+        where = where + " and ( "
+        count = 0
+        for spec in specList:
+            count = count + 1
+            specDetail = spec.split("$")
+            if count == 1:
+                where = where + " talent like '%" + specDetail[1] + "%' "
+            else:
+                where = where + " or talent like '%" + specDetail[1] + "%' "
+
+        where = where + " ) "
+
+    else:
+        specList = ""
+
+    if tagSpec != "":
+        tagSpecList = tagSpec.split("|")
+
+        where = where + " and ( "
+        count = 0
+        for tag in tagSpecList:
+            count = count + 1
+            if count == 1:
+                where = where + " tag like '%" + tag + "%' "
+            else:
+                where = where + " or tag like '%" + tag + "%' "
+        where = where + " ) "
+    else:
+        tagSpecList = ""
+
+    if school != "":
+        where = where + " and school like '%" + school + "%'"
+
+    if filter == "pass":
+        where = where + " and pick = 'Y' "
+
+    query = "SELECT  *  " \
+            "FROM ( SELECT profileNum, COMMENT, pick,  regTime FROM audition_apply WHERE auditionNum = '" + num + "' GROUP BY profileNum ORDER BY regTime DESC ) AS audi " \
+            "LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
+            "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
+            "where 1 " + where + " " \
+            "order by audi.regTime desc "
+
+    result = cursor.execute(query)
+    allList = cursor.fetchall()
+
+    if user:
+        query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick, audi.COMMENT, audi.pick  " \
+                "FROM ( SELECT profileNum, COMMENT, pick,  regTime FROM audition_apply WHERE auditionNum = '" + num + "'  GROUP BY profileNum ORDER BY regTime DESC ) AS audi " \
+                "LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
+                "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
+                "where 1 " + where + " " \
+                "order by audi.regTime desc limit " + str(start) + ", " + str(block)
+
+    else:
+        query = "SELECT  p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, ui.gender, ui.military, ui.school, ui.major, talent, p.COMMENT, mainYoutube, isCaree, '0' AS proPickr, audi.COMMENT, audi.pick  " \
+                "FROM ( SELECT profileNum, COMMENT, pick,  regTime FROM audition_apply WHERE auditionNum = '" + num + "'  GROUP BY profileNum ORDER BY regTime DESC ) AS audi " \
+                "LEFT JOIN profile_info AS p ON audi.profileNum = p.num " \
+                "      LEFT JOIN user_info AS ui ON p.userID  = ui.userID " \
+                "where 1 " + where + " " \
+                "order by audi.regTime desc limit " + str(start) + ", " + str(block)
+
+    result = cursor.execute(query)
+    profile = cursor.fetchall()
+
+    allPage = int(len(allList) / block) + 1
+    paging = getPageList_v2(page, allPage)
+
+    query = "SELECT * FROM profile_specialty GROUP BY `class` ORDER BY num ASC"
+
+    result = cursor.execute(query)
+    specialty = cursor.fetchall()
+
+    tagList = ProfileTag.objects.all().order_by("tag")
+
+    connection.commit()
+    connection.close()
+
+    return render(request, 'user/proList_apply.html',
+                  {"profile": profile, "filter" : filter, "paging":paging, "page": page,
+                   "leftPage": page - 1, "rightPage": page + 1, "lastPage": allPage,"allCount" : cursor.rowcount, "allList" : len(allList), "num": num,
+                   "nationality":nationality, "geneder": geneder, "military": military, "ageRadio": ageRadio
+                  , "age1": age1, "age2": age2, "school": school, "heightRadio": heightRadio, "height1": height1, "height2": height2
+                  , "careerRadio": careerRadio, "career1": career1, "career2": career2, "foreSpec": foreSpec, "findSpec": findSpec, "tagSpec": tagSpec,
+                  "foreList": foreign, "spList": specList, "tagSpecList": tagSpecList, "speList": specialty, "tagList": tagList })
+
+
+
 def gsdv(request) :
 
     return render(request, 'picktalk/gsdv.txt')

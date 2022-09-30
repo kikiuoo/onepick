@@ -1,41 +1,22 @@
-$(document).ready(function(){
-      // 기본정보 선택시 글자 색상 변경
+$(document).ready(function (){
+
+     // 기본정보 선택시 글자 색상 변경
     $(document).on("change", "select", function(){
         $(this).css("color", "#1f1f1f");
     });
 
-    $(document).on("click", ".profile", function (){
-       var num = $(this).attr("data-num");
-
-       if( userID == ""){
-           if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
-               window.location.href = "/users/login/local/?reUrl=/profile/profileDetail/" + cateType + "/" + num + "/";
-               return;
-           } else {
-               return;
-           }
-       }
-
-       window.location.href =  "/profile/profileDetail/" + cateType + "/" + num + "/";
+    $(document).on("click", ".myProfile, .profile", function (){
+        var num = $(this).attr("data-num");
+        window.open("/profile/profileDetail_all/actor/" + num + "/") ;
     });
 
-    $(document).on("click", ".profile .pickBtn", function(e){
+    $(document).on("click", ".pickBtn", function(e){
         e.preventDefault();
         e.stopPropagation();
 
-         if( userID == ""){
-           if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
-               window.location.href = "/users/login/local/";
-               return;
-           } else {
-               return;
-           }
-       }
-
-         // 일반회원 픽기능 제한
-        if( userType == "NORMAL" ||  userType == "S-NORMAL" ){
-           alert("해당 기능의 권한이 없습니다.") ;
-           return;
+        if( userID == ""){
+            alert("로그인 후 이용가능합니다.")
+             return;
         }
 
         var nowType = $(this).attr("data-nowType");
@@ -52,17 +33,62 @@ $(document).ready(function(){
         }
     });
 
-    $(document).on("click", ".filterSave", function(){
-        $("#page").val("1");
+    $(document).on("click", ".passBtn", function (e){
+       e.preventDefault();
+       e.stopPropagation();
 
-        $("#sendForm").submit();
+       var num = $(this).attr("data-num");
+       var image = $(this).attr("data-image");
+       var comment = $(this).attr("data-comment");
+       var name = $(this).attr("data-name");
+       var isOn = $(this).attr("class");
+
+       if( isOn == "passBtn passOn"){
+            $(".checkView").addClass("on");
+       }else{
+            $(".checkView").removeClass("on");
+       }
+
+       $(".profileBox .image").css("background-image", "url('" + image + "')");
+       $(".profileBox .profileName").text(name);
+       $(".profileBox #comment").val(comment);
+       $(".profileBox #userNum").val(num);
+
+       $(".popupBack").css("display", "block");
     });
 
-    $(document).on("change", "#order", function(){
-        $("#page").val("1");
-
-        $("#sendForm").submit();
+    $(document).on("click", ".popupClose" ,function(){
+       $(".popupBack").css("display", "none");
     });
+
+    $(document).on("click", ".prePassBtn", function (){
+        var userNum = $("#userNum").val();
+        var comment = $("#comment").val();
+
+        updateApplyPick('Y', num, userNum, comment);
+    });
+
+
+    $(document).on("click", ".cancelPassBtn", function (){
+        var userNum = $("#userNum").val();
+        var comment = $("#comment").val();
+
+        updateApplyPick('N', num, userNum, comment);
+    });
+
+    $(document).on("click", ".filterBtn", function (){
+
+        if( $(".filterBox").css("display") == "block" ){
+            $(".filterBox").css("display", "none");
+            $(".filterSave").css("display", "none");
+            $(".filterBtn span").css("transform", "rotate(0deg)");
+        }else{
+            $(".filterBox").css("display", "block");
+            $(".filterSave").css("display", "inline-block");
+            $(".filterBtn span").css("transform", "rotate(180deg)");
+        }
+    });
+
 
     $(document).on("click", ".resetBox", function(){
 
@@ -95,21 +121,7 @@ $(document).ready(function(){
 
     });
 
-    $(document).on("click", ".filterBtn", function (){
-
-        if( $(".filterBox").css("display") == "block" ){
-            $(".filterBox").css("display", "none");
-            $(".filterSave").css("display", "none");
-            $(".filterBtn span").css("transform", "rotate(0deg)");
-        }else{
-            $(".filterBox").css("display", "block");
-            $(".filterSave").css("display", "inline-block");
-            $(".filterBtn span").css("transform", "rotate(180deg)");
-        }
-    });
-
-
-    $(document).on("click", ".ageRadio", function (){
+     $(document).on("click", ".ageRadio", function (){
         $("#age2").val('');
         $("#age1").val('');
     });
@@ -146,6 +158,7 @@ $(document).ready(function(){
     $(document).on("click", ".closeBtn", function (){
         $(".filterBox").css("display", "none");
     });
+
 
     var addListCount = 0;
     $(document).on("change", ".addCondition", function (){
@@ -281,14 +294,49 @@ $(document).ready(function(){
 
     });
 
+    $(document).on("click", ".filterSave", function(){
+        $("#page").val("1");
+
+        $("#sendForm").submit();
+    });
+
+    $(document).on("change", "#listView", function(){
+        $("#page").val("1");
+
+        $("#sendForm").submit();
+    });
+
 
     $(document).on("click", ".leftPage, .pages, .rightPage", function (){
         var pages = $(this).attr("data-page");
         $("#page").val(pages);
         $("#sendForm").submit();
     });
+
 });
 
+function updateApplyPick(pick, auditionNum, profileNum, comment){
+    $.ajax({
+      url: "/ajax/updateApplyPick/",
+      type: "GET",
+      dataType: "json",
+      data:{"pick":pick, "auditionNum" : auditionNum, "profileNum" : profileNum, "comment" : comment},
+
+      success: function(data){
+          if( pick == "Y"){
+              $("#pass_"+profileNum).addClass("passOn");
+          } else{
+              $("#pass_"+profileNum).removeClass("passOn");
+          }
+
+          $("#pass_"+profileNum).attr("data-comment", comment);
+          $(".popupBack").css("display", "none");
+      },
+      error: function (request, status, error){
+
+      }
+   });
+}
 
 function updatePick(tableName, nowType, num){
     $.ajax({

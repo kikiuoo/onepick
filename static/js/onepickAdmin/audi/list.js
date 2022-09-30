@@ -34,7 +34,7 @@ $(document).ready(function() {
 
        var num = $(this).attr("data-num");
 
-      window.open( "/proList/audi/1/"+num+"/all/" );
+      window.open( "/applyList/"+num+"/" );
    });
 
 });

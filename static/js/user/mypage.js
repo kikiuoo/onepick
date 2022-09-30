@@ -97,7 +97,7 @@ $(document).ready(function (){
         }else if( type == "suggest" ){
             window.location.href = "/proList/suggest/1/1/1/";
         }else if( type == "audiProfile" ){
-            window.location.href = "/proList/audi/1/"+num+"/all/";
+            window.location.href = "/applyList/"+num+"/";
         }else if( type == "qanda" ){
             window.location.href = "/qanda/list/1/";
         }
