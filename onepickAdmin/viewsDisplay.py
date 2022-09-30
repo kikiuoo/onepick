@@ -86,7 +86,8 @@ def saveRecommend(request) :
         AuditionRecommend.objects.create(distype=type, auditionnum=num, disorder=(audiRecom.count()+1))
 
     elif rType == "delete" :
-        audiRecom = AuditionRecommend.objects.get(auditionnum=num)
+        audiRecom = AuditionRecommend.objects.get(auditionnum=num, distype=type)
+        print(audiRecom)
 
         updateList = AuditionRecommend.objects.filter(distype=type, disorder__gte=audiRecom.disorder)
 
@@ -229,7 +230,7 @@ def proSaveRecommend(request) :
         ProfileRecommend.objects.create(distype=type, profilenum=num, disorder=(proRecom.count()+1))
 
     elif rType == "delete" :
-        proRecom = ProfileRecommend.objects.get(profilenum=num)
+        proRecom = ProfileRecommend.objects.get(distype=type, profilenum=num)
 
         updateList = ProfileRecommend.objects.filter(distype=type, disorder__gte=proRecom.disorder)
 
