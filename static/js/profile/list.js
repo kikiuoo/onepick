@@ -1,4 +1,11 @@
 $(document).ready(function(){
+
+    if( (page * 1) >= 2 ){
+        $(".filterBox").css("display", "none");
+        $(".filterSave").css("display", "none");
+        $(".filterBtn span").css("transform", "rotate(0deg)");
+    }
+
       // 기본정보 선택시 글자 색상 변경
     $(document).on("change", "select", function(){
         $(this).css("color", "#1f1f1f");
