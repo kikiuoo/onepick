@@ -27,7 +27,7 @@ def index(request):
         isUser = UserInfo.objects.get(userid=user)
 
         if (isUser.phone == None or isUser.email == None or isUser.name == None or isUser.usertype == "S-NORMAL"  \
-            or isUser.phone == "" or isUser.email == "" or isUser.name == "") and (isUser.jointype == 'oldUser' or isUser.jointype == 'OLDUSER'):
+            or isUser.phone == "" or isUser.email == "" or isUser.name == ""):
             returnUrl = "/users/join/" + str(user) + "/oldUser/"
 
             return redirect(returnUrl)
