@@ -165,6 +165,10 @@
     vertical-align: top;
 }
 
+.infoContent{
+    width: calc(100% - 200px);
+}
+
 .conditionBox .contentBox p{
     display: block;
     padding: 0px;
