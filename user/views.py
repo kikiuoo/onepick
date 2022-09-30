@@ -476,9 +476,12 @@ def updateUser(request) :
         userCompany = UserCompany.objects.get(userid=user)
 
     phone = ["","",""]
-    phone[0] = userInfo.phone[0:3]
-    phone[1] = userInfo.phone[3:7]
-    phone[2] = userInfo.phone[7:11]
+    if userInfo.phone :
+        phone[0] = userInfo.phone[0:3]
+        phone[1] = userInfo.phone[3:7]
+        phone[2] = userInfo.phone[7:11]
+    else:
+        phone = ["", "", ""]
 
     return render(request, 'user/userInfo.html', {"userInfo" : userInfo, "userCompany" : userCompany,
                                                   "email" : email, "birth":birth, "phone" : phone} )
