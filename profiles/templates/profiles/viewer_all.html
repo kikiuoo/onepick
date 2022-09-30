@@ -32,13 +32,13 @@
 
         <div class="info">
             {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
-            연락처 {{ userInfo.phone }}<br>
-            이메일 {{ userInfo.email }}<br>
+            연락처 {{ userInfo.phone|default:"" }}<br>
+            이메일 {{ userInfo.email|default:"" }}<br>
             {% else %}
-            연락처 {{ userInfo.phone|phoneReplace:"*" }}<br>
-            이메일 {{ userInfo.email|emailReplace:"*" }}<br>
+            연락처 {{ userInfo.phone|default:""|phoneReplace:"*" }}<br>
+            이메일 {{ userInfo.email|default:""|emailReplace:"*" }}<br>
             {% endif %}
-            주소 {{ userInfo.addr1|userAddr }}
+            주소 {{ userInfo.addr1|default:""|userAddr }}
         </div>
         <div class="info">
             {% if userInfo.nationality != None %}
