@@ -17,24 +17,3 @@
 }
 
 
-/* 검색결과 */
-.searchTitle{
-    padding-left: 10px;
-    font-size: 16px;
-    text-align: left;
-    color: #1f1f1f;
-    margin-bottom: 20px;
-}
-
-.searchTitle span{
-    color: #ff8aae;
-}
-
-.noneSearch{
-    text-align: center;
-    color: #999;
-    padding-top: 50px;
-    padding-bottom: 350px;
-    font-size: 20px;
-    font-weight: bold;
-}

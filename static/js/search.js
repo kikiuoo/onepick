@@ -19,6 +19,15 @@ $(document).ready(function(){
        window.location.href =  '/audi/audiDetail/all/' +num +"/";
     });
 
+    $(document).on("click", ".allView", function (){
+        var type = $(this).attr("data-type");
+
+        if( type == "audi" ){
+            window.location.href = "/search/"+ word +"/"+type+"/1/";
+        }else{
+            window.location.href = "/search/"+ word +"/"+type+"/";
+        }
+    });
 
     $(document).on("click", ".profile", function (){
        var num = $(this).attr("data-num");
@@ -60,7 +69,7 @@ $(document).ready(function(){
     $(document).on("click", ".leftPage, .pages, .rightPage", function (){
         var pages = $(this).attr("data-page");
 
-        window.location.href = "/search/"+cateType+"/"+word+"/"+pages+"/";
+        window.location.href = "/search/"+word+"/"+cateType+"/"+pages+"/";
     });
 
 });

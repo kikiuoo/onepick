@@ -299,13 +299,3 @@
 .swiper-button-prev{
     color: #c0c0c0 !important;
 }
-
-.searchTitle{
-    font-size: 12px;
-    font-weight: normal;
-    margin-bottom: 10px;
-}
-
-.searchTitle span{
-    color: #ff8aae;
-}

@@ -161,11 +161,11 @@ def audi_write_callback(request) :
     auditionDate = request.POST.get('auditionDate',"9999-12-01")
     auditionTime = request.POST.get('auditionTime',"00:00:00")
     each = request.POST.get('each', "0")
-    age = request.POST['age']
-    gender = request.POST['gender']
-    career = request.POST['career']
-    essential = request.POST['essential']
-    preparation = request.POST['preparation']
+    age = request.POST.get('age',"")
+    gender = request.POST.get('gender',"")
+    career = request.POST.get('career',"")
+    essential = request.POST.get('essential',"")
+    preparation = request.POST.get('preparation',"")
 
     catesub = "|".join(subCate) # subCate 문자열로 변환
 

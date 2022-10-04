@@ -1,6 +1,5 @@
-{% extends 'profiles/profile_base.html' %}
-
-{% block context_profile %}
+{% extends 'picktalk/base.html' %}
+{% block context %}
 
 <!-- Index CSS 파일 및 JS 파일 include -->
 {% load static %}
@@ -8,23 +7,29 @@
 <link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/profile/list.css' %}"> <!-- pc 버전 -->
 <link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/profile/list.css' %}" > <!-- 모바일 버전 -->
 
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/audi/audi_base.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/audi/audi_base.css' %}" > <!-- 모바일 버전 -->
+
 <link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/profile/filter.css' %}"> <!-- pc 버전 -->
 <link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/profile/filter.css' %}" > <!-- 모바일 버전 -->
 
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/search.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/search.css' %}" > <!-- 모바일 버전 -->
+
 
 <!-- JS 파일 -->
-<script src="{% static 'js/profile/list.js' %}"></script>
+<script src="{% static 'js/search_profile.js' %}"></script>
 
-<form action="/profile/list/" method="get" id="sendForm" enctype="multipart/form-data"  autocomplete="off">
+<!-- 분야 카테고리 -->
+<div class="subCate">
+    <div class="cate" data-url="/search/{{ search }}/audi/1/">오디션</div>
+    <div class="cate active" data-url="/search/{{ search }}/profile/">프로필</div>
+</div>
+
+<form action="/search/{{ search }}/profile/" method="get" id="sendForm" enctype="multipart/form-data"  autocomplete="off">
 
 <div class="filterBtnBox">
     <div class="btnList">
-        <select name="order" id="order">
-           <option value="newest" {% if order == "newest" %} selected {% endif %}>최신순</option>
-           <option value="popular" {% if order == "popular" %} selected {% endif %}>인기순</option>
-           <option value="recommend" {% if order == "recommend" %} selected {% endif %}>추천많은순</option>
-        </select>
-
         <div class="filterBtn">필터<span></span></div>
 
         <div class="resetBox">
@@ -32,7 +37,6 @@
         </div>
 
         <input type="hidden" value="" name="page" id="page">
-        <input type="hidden" value="{{ cateType }}" name="cate_type" id="cate">
     </div>
 </div>
 
@@ -254,87 +258,83 @@
 
 </form>
 
-<!-- 본문 내용 -->
-<div class="inBox">
-    {% for profile in profiles %}
-    <div class="profile" data-num="{{ profile.0 }}">
-        <div class="imageBox">
-            <div class="profileImage" style='background-image: url("/media/{{ profile.1 }}");'></div>
-            {% if profile.16 != "" %}
-            <div class="youtube">
-                <iframe width="560" height="315" src="{{ profile.16|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            {% endif %}
-        </div>
-        <div class="contentBox">
-            {% if request.session.userType == "admin"   %}
-            <div class="name">{{ profile.7 }} ({{ profile.8|userAge }})</div>
-            {% elif profile.7 != None %}
-            <div class="name">{{ profile.7|updateUserName }} ({{ profile.8|userAge }})</div>
-            {% else %}
-            <div class="name">*** ({{ profile.8|userAge }})</div>
-            {% endif %}
+<div class="searchTitle"><span>'{{ search }}'</span>에 대한 검색 결과 (총 <span>{{ allList }}</span>건)</div>
 
-            <div class="detailInfo">
-                {% if request.session.userType == "admin"   %}
-                키 {{ profile.2 }} cm | 몸무게 {{ profile.3 }} kg<br>
-                {% else %}
-                키 {{ profile.2|userHight }} cm | 몸무게 {{ profile.3|userHight }} kg<br>
+{% if searching|length > 0 %}
+    <div class="inBox">
+        {% for profile in searching %}
+        <div class="profile" data-num="{{ profile.0 }}">
+            <div class="imageBox">
+                <div class="profileImage"   style='background-image: url("/media/{{ profile.1 }}");'></div>
+                {% if profile.16 != "" %}
+                <div class="youtube">
+                    <iframe width="560" height="315" src="{{ profile.16|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
                 {% endif %}
-                {% if profile.10 == 'man' and profile.11 != None %}
+            </div>
+            <div class="contentBox">
+                {% if profile.7 != None %}
+                <div class="name">{{ profile.7|updateUserName }} ({{ profile.8|userAge }})</div>
+                {% else %}
+                <div class="name">*** ({{ profile.8|userAge }})</div>
+                {% endif %}
+
+                <div class="detailInfo">
+                    키 {{ profile.2|userHight }} cm | 몸무게 {{ profile.3|userHight }} kg<br>
+                    {% if profile.10 == 'man' and profile.11 != None %}
                     {{ profile.11 }} |
-                {% endif %}
-                {% if profile.9 == "" %}
-                    소속사 없음
+                    {% endif %}
+                    {% if profile.9 == "" %}
+                        소속사 없음
+                    {% else %}
+                        소속사 있음
+                    {% endif %} <br>
+                    {{ profile.12 }} {{ profile.13 }}
+                    {% if profile.14 != None %}
+                     <br>특기 {{ profile.14|getTalent }}
+                    {% endif %}
+                </div>
+
+                {% if profile.17 == '0' %}
+                <div class="career">
+                    <div class="careerTitle">영화</div>
+                    <div class="careerContent">{{ profile.0|getCareer:"movie" }}</div>
+                    <div class="careerTitle">TV드라마,웹드라마</div>
+                    <div class="careerContent">{{ profile.0|getCareer:"drama" }}</div>
+                    <div class="careerTitle">광고/기타</div>
+                    <div class="careerContent">{{ profile.0|getCareer:"etc" }}</div>
+                </div>
                 {% else %}
-                    소속사 있음
-                {% endif %} <br>
-                {{ profile.12 }} {{ profile.13 }}
-                {% if profile.14 != None %}
-                 <br>특기 {{ profile.14|getTalent }}
+                <div class="career">
+                    <div class="careerTitle">자기 소개</div>
+                    <div class="introduction">{{ profile.15 }}</div>
+                </div>
                 {% endif %}
+
+                <div class="viewBox">
+                    <div class="countBox">
+                        <span class="viewCount"></span>
+                        <p>{{ profile.4 }}</p>
+                    </div>
+                    <div class="countBox">
+                        <span class="pickCount"></span>
+                        <p>{{ profile.5 }}</p>
+                    </div>
+                    <div class="countBox">
+                        <span class="comViewCount"></span>
+                        <p>{{ profile.6 }}</p>
+                    </div>
+                </div>
             </div>
 
-            {% if profile.17 == '0' %}
-            <div class="career">
-                <div class="careerTitle">영화</div>
-                <div class="careerContent">{{ profile.0|getCareer:"movie" }}</div>
-                <div class="careerTitle">TV드라마,웹드라마</div>
-                <div class="careerContent">{{ profile.0|getCareer:"drama" }}</div>
-                <div class="careerTitle">광고/기타</div>
-                <div class="careerContent">{{ profile.0|getCareer:"etc" }}</div>
-            </div>
+            {% if profile.18 == 0 or profile.18 == "0" %}
+            <div class="pickBtn" data-nowType="off"></div>
             {% else %}
-            <div class="career">
-                <div class="careerTitle">자기 소개</div>
-                <div class="introduction">{{ profile.15 }}</div>
-            </div>
+            <div class="pickBtn pickOn " data-nowType="on"></div>
             {% endif %}
-
-            <div class="viewBox">
-                <div class="countBox">
-                    <span class="viewCount"></span>
-                    <p>{{ profile.4 }}</p>
-                </div>
-                <div class="countBox">
-                    <span class="pickCount"></span>
-                    <p>{{ profile.5 }}</p>
-                </div>
-                <div class="countBox">
-                    <span class="comViewCount"></span>
-                    <p>{{ profile.6 }}</p>
-                </div>
-            </div>
         </div>
-
-        {% if profile.18 == 0 or profile.18 == "0" %}
-        <div class="pickBtn" data-nowType="off"></div>
-        {% else %}
-        <div class="pickBtn pickOn " data-nowType="on"></div>
-        {% endif %}
+        {% endfor %}
     </div>
-    {% endfor %}
-
 
     <div class="page">
         {% if page != 1 %}
@@ -351,11 +351,15 @@
             <div class="rightPage" data-type="list" data-page="{{ rightPage }}"></div>
         {% endif %}
     </div>
-</div>
+{% else %}
+    <div class="noneSearch">검색결과가 없습니다.</div>
+{% endif %}
 
 <script>
-    var cateType = '{{ cateType }}';
+    var word = "{{ search }}";
     var page = "{{ page }}";
-    var filterOpen = "{{ filterOpen }}";
+    var cateType = "{{ cateType }}";
 </script>
+
+
 {% endblock %}

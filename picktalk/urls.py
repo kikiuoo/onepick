@@ -12,7 +12,9 @@ urlpatterns = [
     path("advertise/", views.advertise, name="advertisse"),
     path("advertise/callBack/", views.advertise_callBack, name="advertise-callback"),
 
-    path("search/<cateType>/<search>/<int:page>/", views.searchList, name="searchList"),
+    path("search/<search>/", views.searchList, name="searchList"),
+    path("search/<search>/audi/<int:page>/", views.searchDetail_audi, name="searchDetail_audi"),
+    path("search/<search>/profile/", views.searchDetail_pro, name="searchDetail_audi"),
     path("search/ajaxProfile/", views.getSearchProfile, name="getSearchProfile"),
 
     path("proList/<type>/<int:page>/<num>/<filter>/", views.proList, name="proList"),

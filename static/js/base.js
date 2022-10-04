@@ -15,11 +15,7 @@ $(document).ready(function () {
             return;
         }
 
-        if( cateType == "profile" ){
-            window.location.href = "/search/profile/"+search+"/1/";
-        }else{
-            window.location.href = "/search/audition/"+search+"/1/";
-        }
+        window.location.href = "/search/"+search+"/";
     });
 
     $(document).on("keyup", "#search", function(e){
