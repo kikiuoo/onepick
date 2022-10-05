@@ -32,7 +32,12 @@ $(document).ready(function(){
     $(document).on("click", ".profile", function (){
        var num = $(this).attr("data-num");
 
-       window.open( "/profile/profileDetail/" + cateType + "/" + num + "/" );
+       if( userID == ""){
+            alert("로그인 후 이용가능합니다.");
+            //return;
+       }
+
+       window.open( "/profile/profileDetail/actor/" + num + "/" );
     });
 
      // 프로필 픽 기능. ( 구현 필요 )
