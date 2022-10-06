@@ -332,6 +332,7 @@
 .auditionList .audiList .content .comment{
     font-size: 16px;
     color: #1f1f1f;
+    min-height: 50px;
 }
 
 .auditionList .audiList .audiBtn{

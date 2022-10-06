@@ -184,19 +184,13 @@ $(document).ready(function(){
 
     $(document).on("click", ".suggestBtn", function (){
         var audiNum = $("#audi").find("option:selected").val();
-        var comment = $("#sugComment").val();
 
         if( audiNum == "" ){
             alert("제안할 오디션을 선택해 주세요.");
             return;
         }
 
-        if( comment == "" ){
-            alert("제안할 내용을 입력해주세요.");
-            return;
-        }
-
-        saveSuggest(audiNum, comment, num, writeUID, userID);
+        saveSuggest(audiNum, "", num, writeUID, userID);
     });
 
     $(document).on("click", ".printBtn", function (){

@@ -486,8 +486,8 @@
     top: 50%;
     left: 2.5%;
     width: 95%;
-    height: 400px;
-    margin-top: -200px;
+    height: 350px;
+    margin-top: -175px;
     box-sizing: border-box;
 
     padding: 20px 8px 30px;
@@ -500,11 +500,11 @@
     font-weight: bold;
     text-align: center;
     color: #1f1f1f;
-    margin-bottom: 16px;
+    margin-bottom: 25px;
 }
 
 .suggestBack .pInBox{
-    height: 240px;
+    height: 186px;
     padding: 20px;
     border-radius: 20px;
     background-color: rgba(192, 192, 192, 0.15);
@@ -530,6 +530,12 @@
     font-family: 'Spoqa Han Sans' !important;
 }
 
+.audiInfo{
+    font-size: 10px;
+    font-weight:  normal;
+    text-align: center;
+    color: #999999;
+}
 
 .suggestBack .pInBox select{
     width: 100%;
@@ -548,6 +554,7 @@
     background-color: #fff;
     -webkit-appearance: none;
     -moz-appearance: none;
+    margin-top: 40px;
 }
 
 
