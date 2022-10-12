@@ -1016,7 +1016,7 @@ def gsdv(request) :
 
     return render(request, 'picktalk/gsdv.txt')
 
-def gsdv(request) :
+def sw(request) :
 
     return render(request, 'picktalk/sw.js')
 
