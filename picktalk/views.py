@@ -1018,7 +1018,7 @@ def gsdv(request) :
 
 def sw(request) :
 
-    return render(request, 'picktalk/sw.js')
+    return render(request, 'picktalk/sw.html')
 
 def updateApplyPick(request) :
 
