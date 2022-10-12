@@ -1016,6 +1016,10 @@ def gsdv(request) :
 
     return render(request, 'picktalk/gsdv.txt')
 
+def gsdv(request) :
+
+    return render(request, 'picktalk/sw.js')
+
 def updateApplyPick(request) :
 
     pick = request.GET["pick"]

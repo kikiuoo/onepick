@@ -22,5 +22,6 @@ urlpatterns = [
     path("applyList/<num>/", views.applyList, name="applyList"),
 
     path(".well-known/pki-validation/gsdv.txt", views.gsdv, name="gsdv"),
+    path("sw.js", views.sw, name="sw"),
 
 ]
