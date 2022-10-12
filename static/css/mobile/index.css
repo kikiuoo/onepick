@@ -27,6 +27,18 @@
     background-position: center;
 }
 
+.subBanner{
+    width: 100%;
+    padding-bottom: 6.6%;
+    margin-top: 20px;
+    margin-bottom: 30px;
+
+    background-image: url("../../image/small_banner.png");
+    background-position: center;
+    background-size: cover;
+    cursor: pointer;
+}
+
 /* Index 제목 */
 .mainTitle{
     position: relative;
