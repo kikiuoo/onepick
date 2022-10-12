@@ -1,1 +1,1 @@
-importScripts('https://cdn.flarelane.com/ServiceWorker.js');
+import ('https://cdn.flarelane.com/ServiceWorker.js');
