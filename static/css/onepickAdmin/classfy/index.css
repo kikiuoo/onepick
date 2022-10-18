@@ -29,32 +29,58 @@
     vertical-align: top;
     width: 70%;
     height: 700px;
-    border: 1px solid #959595;
-    box-sizing: border-box;
-    padding: 20px;
-    overflow-y: scroll;
-    background-color: #ffffff;
 }
 
-.paramExpand{
+.rightBox .subTitle{
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.rightBox .inputBox {
+    position: relative;
+    height: 80px;
+    border: 1px solid #959595;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    overflow-y: scroll;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.rightBox .inputBox2 {
+    position: relative;
+    height: 150px;
+    border: 1px solid #959595;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    overflow-y: scroll;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.imgExpand, .faceExpand, .bodyExpand, .jobExpand{
     display: inline-block;
     vertical-align: top;
-    margin-right: 40px;
-    margin-bottom: 30px;
+    margin-right: 10px;
+    margin-bottom: 10px;
     font-weight: normal;
 
     cursor: pointer;
-    font-size: 18px;
+    font-size: 14px;
     text-align: center;
     color:#959595;
 }
 
-.paramRadio:checked+label{
+.imgRadio:checked+label,
+.faceRadio:checked+label,
+.bodyRadio:checked+label,
+.jobRadio:checked+label{
     color:#ff8aae;
     font-weight: bold;
 }
 
-.paramRadio{
+.imgRadio, .faceRadio, .bodyRadio, .jobRadio{
     display: none;
 }
 

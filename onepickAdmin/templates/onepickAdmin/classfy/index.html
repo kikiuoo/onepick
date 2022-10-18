@@ -20,10 +20,40 @@
     </div>
 
     <div class="rightBox">
-        {% for imgcls in imgClass %}
-        <input type="checkbox" name="paramRadio" class="paramRadio" value="{{ imgcls.imgclass }}" id="check_{{ imgcls.num }}">
-        <label class="paramExpand" for="check_{{ imgcls.num }}">{{ imgcls.imgclass }}</label>
-        {% endfor %}
+        <div class="subTitle">얼굴형</div>
+        <div class="inputBox">
+            {% for faces in face %}
+            <input type="checkbox" name="faceRadio" class="faceRadio" value="{{ faces.imgclass }}" id="check_{{ faces.num }}">
+            <label class="faceExpand" for="check_{{ faces.num }}">{{ faces.imgclass }}</label>
+            {% endfor %}
+        </div>
+
+
+        <div class="subTitle">체형</div>
+        <div class="inputBox">
+            {% for bodys in body %}
+            <input type="checkbox" name="bodyRadio" class="bodyRadio" value="{{ bodys.imgclass }}" id="check_{{ bodys.num }}">
+            <label class="bodyExpand" for="check_{{ bodys.num }}">{{ bodys.imgclass }}</label>
+            {% endfor %}
+        </div>
+
+
+        <div class="subTitle">이미지</div>
+        <div class="inputBox2">
+            {% for imgs in img %}
+            <input type="checkbox" name="imgRadio" class="imgRadio" value="{{ imgs.imgclass }}" id="check_{{ imgs.num }}">
+            <label class="imgExpand" for="check_{{ imgs.num }}">{{ imgs.imgclass }}</label>
+            {% endfor %}
+        </div>
+
+
+        <div class="subTitle">직업</div>
+        <div class="inputBox2">
+            {% for jobs in job %}
+            <input type="checkbox" name="jobRadio" class="jobRadio" value="{{ jobs.imgclass }}" id="check_{{ jobs.num }}">
+            <label class="jobExpand" for="check_{{ jobs.num }}">{{ jobs.imgclass }}</label>
+            {% endfor %}
+        </div>
     </div>
 
 

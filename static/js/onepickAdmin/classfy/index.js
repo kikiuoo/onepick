@@ -2,32 +2,75 @@ $(document).ready(function() {
 
     $(document).on("click", ".sendBtn", function (){
         let chk_Val = [];
+        let chk_Val2 = [];
+        let chk_Val3 = [];
+        let chk_Val4 = [];
 
-       $('input:checkbox[name=paramRadio]').each(function (index) {
+       $('input:checkbox[name=faceRadio]').each(function (index) {
             if($(this).is(":checked")==true){
                 chk_Val.push($(this).val());
             }
         });
 
-        var saveChk = chk_Val.join(',');
+
+       $('input:checkbox[name=bodyRadio]').each(function (index) {
+            if($(this).is(":checked")==true){
+                chk_Val2.push($(this).val());
+            }
+        });
+
+
+       $('input:checkbox[name=imgRadio]').each(function (index) {
+            if($(this).is(":checked")==true){
+                chk_Val3.push($(this).val());
+            }
+        });
+
+
+       $('input:checkbox[name=jobRadio]').each(function (index) {
+            if($(this).is(":checked")==true){
+                chk_Val4.push($(this).val());
+            }
+        });
+
+        var saveChk_face = chk_Val.join(',');
+        var saveChk_body = chk_Val2.join(',');
+        var saveChk_img = chk_Val3.join(',');
+        var saveChk_job = chk_Val4.join(',');
         var profileNum = $("#profileNum").val();
 
-        if( saveChk == "" ){
+        if( saveChk_face == "" ){
+            alert("회원의 얼굴형을 선택해주세요.");
+            return;
+        }
+        
+        if( saveChk_body == "" ){
+            alert("회원의 체형을 선택해주세요.");
+            return;
+        }       
+        
+        if( saveChk_img == "" ){
             alert("회원의 이미지를 선택해주세요.");
+            return;
+        }        
+        
+        if( saveChk_job == "" ){
+            alert("회원의 직업을 선택해주세요.");
             return;
         }
 
-        saveClassfy(saveChk, profileNum)
+        saveClassfy(saveChk_face, saveChk_body, saveChk_img, saveChk_job, profileNum)
     });
 
 });
 
-function saveClassfy(saveChk, profileNum) {
+function saveClassfy(saveChk_face, saveChk_body, saveChk_img, saveChk_job,  profileNum) {
     $.ajax({
         url: "/onepickAdmin/classfy/saveClassfy/",
         type: "GET",
         dataType: "json",
-        data: {"saveChk": saveChk , "profileNum" : profileNum},
+        data: {"saveChk_face": saveChk_face ,"saveChk_body": saveChk_body
+               ,"saveChk_img": saveChk_img ,"saveChk_job": saveChk_job , "profileNum" : profileNum},
         success: function (data) {
             window.location.reload();
         },
