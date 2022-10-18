@@ -305,6 +305,15 @@ class ProfileEtccareer(models.Model):
         db_table = 'profile_etccareer'
 
 
+class ProfileImgclass(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    imgclass = models.CharField(db_column='imgClass', max_length=100, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'profile_imgClass'
+
+
 class ProfileInfo(models.Model):
     num = models.BigAutoField(primary_key=True)
     userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
@@ -329,6 +338,8 @@ class ProfileInfo(models.Model):
     careeryear = models.CharField(db_column='careerYear', max_length=10, blank=True, null=True)  # Field name made lowercase.
     careermonth = models.CharField(db_column='careerMonth', max_length=10, blank=True, null=True)  # Field name made lowercase.
     tag = models.CharField(max_length=500, blank=True, null=True)
+    classtag = models.TextField(db_column='classTag', blank=True, null=True)  # Field name made lowercase.
+    clsscount = models.IntegerField(db_column='clssCount', blank=True, null=True)  # Field name made lowercase.
     regdate = models.DateTimeField(db_column='RegDate', blank=True, null=True)  # Field name made lowercase.
     update = models.DateTimeField(db_column='upDate', blank=True, null=True)  # Field name made lowercase.
     viewcount = models.IntegerField(db_column='viewCount', blank=True, null=True)  # Field name made lowercase.

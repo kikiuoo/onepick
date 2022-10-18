@@ -8,6 +8,7 @@ from . import viewsUser
 from . import viewsProfile
 from . import viewsAudi
 from . import viewsDisplay
+from . import viewsClass
 
 urlpatterns = [
     path('', views.adminCheck, name='adminLoginCheck'),
@@ -61,8 +62,6 @@ urlpatterns = [
     path('display/banner/editCallback/', viewsDisplay.editCallback, name='editCallback'),
     path('display/banner/delete/<int:num>/', viewsDisplay.bannerDelete, name='bannerDelete'),
 
-
-
     # cs url
     path('cs/qanda/', viewsCs.qandaList, name='qandaList'),
     path('cs/mail/', viewsCs.mailMain, name='mailMain'),
@@ -73,5 +72,9 @@ urlpatterns = [
     path('cs/mailDetail/<int:num>/', viewsCs.mailDetail, name='mailDetail'),
     path('cs/youtube/', viewsCs.youtube, name='youtube'),
     path('cs/checkYoutube/', viewsCs.checkYoutube, name='checkYoutube'),
+
+    # classfy url
+    path('classfy/', viewsClass.classfy, name='classfy'),
+    path('classfy/saveClassfy/', viewsClass.saveClassfy, name='saveClassfy'),
 
 ]

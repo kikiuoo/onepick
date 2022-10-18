@@ -1,0 +1,79 @@
+.inBox{
+    font-size: 0px;
+}
+
+.leftBox{
+    display: inline-block;
+    position: relative;
+    width: 30%;
+    height: 700px;
+    box-sizing: border-box;
+}
+
+.leftBox .profileImage{
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    margin-left: -175px;
+    width: 350px;
+
+}
+
+.profileImage img{
+    width: 100%;
+}
+
+.rightBox{
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    width: 70%;
+    height: 700px;
+    border: 1px solid #959595;
+    box-sizing: border-box;
+    padding: 20px;
+    overflow-y: scroll;
+    background-color: #ffffff;
+}
+
+.paramExpand{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 40px;
+    margin-bottom: 30px;
+    font-weight: normal;
+
+    cursor: pointer;
+    font-size: 18px;
+    text-align: center;
+    color:#959595;
+}
+
+.paramRadio:checked+label{
+    color:#ff8aae;
+    font-weight: bold;
+}
+
+.paramRadio{
+    display: none;
+}
+
+.btnBox {
+    width: 100%;
+    text-align: right;
+    margin-top: 20px;
+}
+
+.btnBox .sendBtn{
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #ff8aae;
+    border-radius: 10px;
+    cursor: pointer;
+}

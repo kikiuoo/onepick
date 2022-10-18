@@ -1,0 +1,40 @@
+{% extends 'onepickAdmin/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+<link rel="stylesheet" href="{% static 'css/onepickAdmin/classfy/index.css' %}">
+
+    <!-- JS 파일 -->
+<script src="{% static 'js/onepickAdmin/classfy/index.js' %}"></script>
+
+<div class="inBox">
+    <div class="leftBox">
+        {% for profile in profileInfo %}
+        <div class="profileImage" >
+            <img src="/media/{{ profile.profileimage }}">
+            <input type="hidden" id="profileNum" value="{{ profile.num }}">
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="rightBox">
+        {% for imgcls in imgClass %}
+        <input type="checkbox" name="paramRadio" class="paramRadio" value="{{ imgcls.imgclass }}" id="check_{{ imgcls.num }}">
+        <label class="paramExpand" for="check_{{ imgcls.num }}">{{ imgcls.imgclass }}</label>
+        {% endfor %}
+    </div>
+
+
+    <div class="btnBox">
+        <div class="sendBtn">저장하기</div>
+    </div>
+</div>
+
+<script>
+    var type = "{{ type }}";
+    var word = "|";
+</script>
+
+{% endblock %}
