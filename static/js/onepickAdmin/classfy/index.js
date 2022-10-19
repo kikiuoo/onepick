@@ -80,6 +80,10 @@ $(document).ready(function() {
         window.open(b_rul);
     });
 
+
+    $(document).on("click", ".resetBox", function (){
+       window.location.reload();
+    });
 });
 
 function saveClassfy(saveChk_face, saveChk_body, saveChk_img, saveChk_job,  profileNum) {
