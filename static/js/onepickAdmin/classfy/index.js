@@ -62,6 +62,24 @@ $(document).ready(function() {
         saveClassfy(saveChk_face, saveChk_body, saveChk_img, saveChk_job, profileNum)
     });
 
+
+    $(document).on("click", ".instagram, .youtube", function (){
+        var b_rul = $(this).attr("data-url");
+
+        var Url = /(http|https):\/\/((\w+)[.])+(asia|biz|cc|cn|com|de|eu|in|info|jobs|jp|kr|mobi|mx|name|net|nz|org|travel|tv|tw|uk|us)(\/(\w*))*$/i;
+        var urlTest = Url.test(b_rul);
+
+        var Url2 = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+        var urlTest2 = Url2.test(b_rul);
+
+        if(!urlTest && !urlTest2){
+            alert("올바른 url이 아닙니다.");
+            return false;
+        }
+
+        window.open(b_rul);
+    });
+
 });
 
 function saveClassfy(saveChk_face, saveChk_body, saveChk_img, saveChk_job,  profileNum) {

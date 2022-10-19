@@ -5,41 +5,85 @@
 .leftBox{
     display: inline-block;
     position: relative;
-    width: 30%;
-    height: 700px;
+    width: 60%;
+    height: 320px;
     box-sizing: border-box;
+    overflow-x: scroll;
+    white-space: nowrap;
+    margin-bottom: 20px;
+    margin-right: 20px;
 }
 
-.leftBox .profileImage{
-    position: absolute;
-    top: 50px;
-    left: 50%;
-    margin-left: -175px;
-    width: 350px;
 
+.rightBox2{
+    display: inline-block;
+    position: relative;
+    width: calc(40% - 20px);
+    height: 320px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
 }
+
+.youtubeLik{
+    position: relative;
+    width: 100%;
+    height: 280px;
+    box-sizing: border-box;
+    overflow-x: scroll;
+    white-space: nowrap;
+    margin-bottom: 20px;
+}
+
+
+
 
 .profileImage img{
-    width: 100%;
+    height: 300px;
+    margin-right: 20px;
 }
 
 .rightBox{
     display: inline-block;
     position: relative;
     vertical-align: top;
-    width: 70%;
-    height: 700px;
+    width: 100%;
 }
 
-.rightBox .subTitle{
+.subTitle{
+    position: relative;
     font-size: 15px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
+
+.rightBox .snsBox{
+    position: absolute;
+    width: 90px;
+    height: 30px;
+    left: 42px;
+    top: -5px;
+}
+
+.rightBox .snsBox div{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.rightBox .snsBox div.instagram{ background-image: url("../../../image/web/instagram.png")}
+.rightBox .snsBox div.youtube{ background-image: url("../../../image/web/youtube.png")}
+
+
 .rightBox .inputBox {
     position: relative;
-    height: 80px;
+    height: 34px;
     border: 1px solid #959595;
     box-sizing: border-box;
     padding: 5px 10px;
@@ -50,7 +94,7 @@
 
 .rightBox .inputBox2 {
     position: relative;
-    height: 150px;
+    height: 68px;
     border: 1px solid #959595;
     box-sizing: border-box;
     padding: 5px 10px;
@@ -58,7 +102,6 @@
     background-color: #ffffff;
     margin-bottom: 20px;
 }
-
 .imgExpand, .faceExpand, .bodyExpand, .jobExpand{
     display: inline-block;
     vertical-align: top;

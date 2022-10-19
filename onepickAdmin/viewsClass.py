@@ -22,9 +22,21 @@ def classfy(request):
     img = ProfileImgclass.objects.filter(subcate='이미지').order_by("imgclass")
     job = ProfileImgclass.objects.filter(subcate='직업').order_by("imgclass")
 
+    for profile in profileInfo :
+        print(profile.detailimage)
+        if (profile.detailimage):
+            profileImages = profile.detailimage.split("|")
+        else:
+            profileImages = ""
+
+        userInfo = UserInfo.objects.get(userid=profile.userid)
+
+        youtubes = profile.youtube.split("|")
+
     return render( request, urlBase + "index.html",
                    { 'pageType': "classfy", "profileInfo" : profileInfo, "face": face,
-                     "body": body, "img": img, "job": job })
+                     "body": body, "img": img, "job": job, "profileImages" : profileImages,
+                     "userInfo":userInfo, "youtubes" : youtubes })
 
 
 

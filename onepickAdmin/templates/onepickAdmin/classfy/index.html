@@ -11,15 +11,46 @@
 
 <div class="inBox">
     <div class="leftBox">
-        {% for profile in profileInfo %}
         <div class="profileImage" >
+        {% for profile in profileInfo %}
             <img src="/media/{{ profile.profileimage }}">
             <input type="hidden" id="profileNum" value="{{ profile.num }}">
-        </div>
         {% endfor %}
+        {% if profileImages|getArrayCount > 0  %}
+            {% for imgs in profileImages %}
+                <img src="/media/{{ imgs }}">
+            {% endfor %}
+        {% endif %}
+        </div>
+    </div>
+
+    <div class="rightBox2">
+        <div class="subTitle">유튜브 영상</div>
+        <div class="youtubeLik">
+             {% for youtube in youtubes %}
+            <iframe width="480" height="250" src="{{ youtube|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            {% endfor %}
+        </div>
     </div>
 
     <div class="rightBox">
+        <div class="subTitle">SNS
+            <div class="snsBox">
+                {% if userInfo.instargram|default:"" != "" %}
+                    <div class="instagram" data-url="{{ userInfo.instargram }}"></div>
+                {% endif %}
+
+                {% if userInfo.youtube|default:"" != "" %}
+                    <div class="youtube" data-url="{{ userInfo.instargram }}"></div>
+                {% endif %}
+            </div>
+        </div>
+
+
+
+
+
+
         <div class="subTitle">얼굴형</div>
         <div class="inputBox">
             {% for faces in face %}
