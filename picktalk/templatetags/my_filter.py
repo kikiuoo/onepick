@@ -19,10 +19,9 @@ def findArrayData(values, list):
 def updateUserName(values):
     count = len(values)
 
-    returnValue = values[0:1]
+    returnValue = values[:-1]
 
-    for i in range(count-1) :
-        returnValue = returnValue + "*"
+    returnValue = returnValue + "*"
 
     return returnValue
 
