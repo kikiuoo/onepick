@@ -5,7 +5,7 @@ $(document).ready(function(){
     var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1);
     var day = (now.getDate()) > 9 ? ''+(now.getDate()) : '0'+(now.getDate());
     //년도 selectbox만들기
-    for(var i = 1960 ; i <= year ; i++) {
+    for(var i = 1930 ; i <= year ; i++) {
         if( brith1 == i ){
             $('#brith1').append('<option value="' + i + '" selected>' + i + '년</option>');
         }else{
