@@ -421,6 +421,9 @@ def splits(values, splitKey) :
 
 @register.filter
 def userAddr(values) :
+    if values == "" or values == None :
+        return ""
+
     addr = values.replace(")", " ")
     addr = addr.replace("(", "")
     addr = addr.replace("  ", " ")
