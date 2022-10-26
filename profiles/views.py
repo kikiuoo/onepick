@@ -9,6 +9,7 @@ from audition.views import md5_generator
 from django.http import HttpResponse, JsonResponse
 from django.db import connection
 from myonepick.common import *
+from cryptography.fernet import Fernet # symmetric encryption
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -257,6 +258,10 @@ def listView(request): # 오디션 Main
 
 def viewer(request, cate_type, num) :
 
+    simpleEnDecrypt = SimpleEnDecrypt()
+    encrypt_text = simpleEnDecrypt.encrypt(str(num))
+    print(encrypt_text)
+
     #프로필 정보.
     profiles = ProfileInfo.objects.get(num=num)
     writeUser = profiles.userid
@@ -335,7 +340,8 @@ def viewer(request, cate_type, num) :
                                                      "careerEtc":careerEtc, "comment":comment, "pickCheck" : pickCheck,
                                                      "profileImages" : profileImages, "artImages" : artImages,
                                                      "youtubes" : youtubes, "movieCareer" : movieCareer, "dramaCareer" : dramaCareer,
-                                                     "etcCareer": etcCareer, "talent" : talent, "audiList" : audiList, "tag" : tag })
+                                                     "etcCareer": etcCareer, "talent" : talent, "audiList" : audiList, "tag" : tag,
+                                                     "shareLink" : encrypt_text, "key" : simpleEnDecrypt.key.decode('utf-8') })
 
 
 def viewer_all(request, cate_type, num):
@@ -418,6 +424,102 @@ def viewer_all(request, cate_type, num):
                                                     "youtubes": youtubes, "movieCareer": movieCareer,
                                                     "dramaCareer": dramaCareer,
                                                     "etcCareer": etcCareer, "talent": talent, "audiList": audiList, "tag" : tag})
+
+
+def profileShare(request) :
+
+    encrypt_text = request.GET.get("num", "")
+    key = request.GET.get("key", "")
+
+    try :
+        simpleEnDecrypt = SimpleEnDecrypt(key)
+        num = simpleEnDecrypt.decrypt(encrypt_text)
+
+        # 프로필 정보.
+        profiles = ProfileInfo.objects.get(num=num)
+        writeUser = profiles.userid
+
+    except:
+        return HttpResponse( "<script>alert('올바르지 않은 접근입니다.'); window.location.href = '/' </script>")
+
+
+    #프로필 등록자 정보
+    userInfo = UserInfo.objects.get(userid=writeUser)
+    careerEtc = ProfileEtccareer.objects.filter(profilenum=num).order_by("num")
+    comment = ProfileComment.objects.filter(profilenum=num).order_by("-num")
+
+    user = request.session.get('id', '')
+    if user :
+        pick = ProfilePick.objects.filter(userid=user, profilenum=num)
+        if pick.count() == 0 :
+            pickCheck = "0"
+        else :
+            pickCheck = "1"
+
+    else :
+        pickCheck = "0"
+
+    if (profiles.detailimage):
+        profileImages = profiles.detailimage.split("|")
+    else:
+        profileImages = ""
+
+    if(  profiles.artimage ) :
+        artImages = profiles.artimage.split("|")
+    else :
+        artImages = ""
+
+    youtubes = profiles.youtube.split("|")
+    foreign = profiles.foreign.split("|")
+
+    if (profiles.talent):
+        talent = profiles.talent.split("|")
+    else :
+        talent = ""
+
+    if (profiles.tag):
+        tag = profiles.tag.split("|")
+    else:
+        tag = ""
+
+    # 세부 분야별 경력정보
+    movieCareer = getCareerList(num, "movie")
+    dramaCareer = getCareerList(num, "drama")
+    etcCareer = getCareerList(num, "etc")
+
+    userType = request.session.get('userType', '')
+
+    nowTime = timezone.now()
+
+    if userType == "COMPANY" or userType == "S-COMPANY" :
+        userID = request.session.get('id', '')
+        profiles.cviewcount = profiles.cviewcount + 1
+        profiles.save()
+        viewAdd = ProfileViewCompany.objects.create(profilenum=num, userid=user, regtime=nowTime)
+
+        audiList = AuditionInfo.objects.filter(userid=userID, isdelete="0")
+
+    else :
+        profiles.viewcount = profiles.viewcount +1
+        profiles.save()
+        viewAdd = ProfileView.objects.create(profilenum=num, userid=user, regtime=nowTime)
+        audiList = ""
+
+
+    userType = request.session.get('userType', '')
+    if userType == "admin":
+        nowTime = str(timezone.now())
+        user = request.session.get('id', '')
+        adminLog = AdminLog.objects.create(userid=user, viewtype="profile_view", content=num, regdate=nowTime)
+
+
+    return render(request, 'profiles/viewer_share.html', { 'profiles':profiles, "userInfo":userInfo, "foreign" : foreign,
+                                                     "careerEtc":careerEtc, "comment":comment, "pickCheck" : pickCheck,
+                                                     "profileImages" : profileImages, "artImages" : artImages,
+                                                     "youtubes" : youtubes, "movieCareer" : movieCareer, "dramaCareer" : dramaCareer,
+                                                     "etcCareer": etcCareer, "talent" : talent, "audiList" : audiList, "tag" : tag,
+                                                     "shareLink" : encrypt_text })
+
 
 
 def pofile_write(request) :
@@ -1164,6 +1266,9 @@ def profileSuggest(request) :
 
 def printProfile(request, type, num) :
 
+    shareCode = request.GET.get("shareCode", "")
+    key = request.GET.get("key", "")
+
     profile = ProfileInfo.objects.get(num=num)
     userInfo = UserInfo.objects.get(userid=profile.userid)
 
@@ -1179,7 +1284,7 @@ def printProfile(request, type, num) :
 
     return render(request, 'profiles/profile_width.html', {'profile': profile, 'userInfo': userInfo, 'career':career,
                                                            'movieCareer':movieCareer, 'dramaCareer':dramaCareer, 'etcCareer':etcCareer,
-                                                           'profileImages':profileImages })
+                                                           'profileImages':profileImages, "shareCode" : shareCode, "key":key })
 
 
 def getSubSpecialty(request) :

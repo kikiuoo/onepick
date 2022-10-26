@@ -488,3 +488,10 @@ def checkApply(values):
         connection.rollback()
 
     return len(qanda)
+
+@register.filter
+def modData(values) :
+
+    nowData = int(values) % 2
+
+    return nowData

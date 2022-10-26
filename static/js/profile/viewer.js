@@ -28,11 +28,11 @@ $(document).ready(function(){
     });
 
     $(document).on("click", ".shareBtn", function (){
-
-        var url = '';
+        var shareCode = $(this).attr("data-share");
+        var key = $(this).attr("data-key");
+        var url = "https://myonepick.com/profile/profileShare/?num=" +  shareCode + "&key=" + key;
         var textarea = document.createElement("textarea");
         document.body.appendChild(textarea);
-        url = window.document.location.href;
         textarea.value = url;
         textarea.select();
         document.execCommand("copy");
@@ -209,12 +209,14 @@ $(document).ready(function(){
         e.stopPropagation();
 
         var type = $(this).attr("data-type");
+        var shareCode = $(this).attr("data-share");
+        var key = $(this).attr("data-key");
 
         if( type == "column" ){
             alert("서비스 준비중입니다.");
             return;
         }
-        window.open("/profile/print/"+type+"/"+num+"/");
+        window.open("/profile/print/"+type+"/"+num+"/?share=" + shareCode + "&key=" + key);
     });
 
 });

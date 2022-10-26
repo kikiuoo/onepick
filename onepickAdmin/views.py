@@ -102,7 +102,7 @@ def adminLogin(request) :
         request.session['id'] = userIN.userid
         request.session['userType'] = userIN.usertype
 
-        request.session.set_expiry(0)
+        request.session.set_expiry(3600)
 
         return JsonResponse({"code": "0"})
     else:

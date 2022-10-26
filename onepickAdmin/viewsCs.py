@@ -19,6 +19,11 @@ urlBase = "onepickAdmin/cs/"
 
 def qandaList(request):
 
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
+
     page = request.GET.get('page', "1")
     page = int(page)
 
@@ -56,6 +61,11 @@ def qandaList(request):
 
 
 def mailMain(request):
+
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
 
     try:
         cursor = connection.cursor()
@@ -157,6 +167,11 @@ def sendMail(request) :
 
 def mailList(request, page):
 
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
+
     block = 10
     start = (page - 1) * block
 
@@ -185,6 +200,10 @@ def mailList(request, page):
                     "leftPage" : page-1, "rightPage" : page+1, "lastPage" : allPage })
 
 def mailDetail(request, num):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
 
     mailList = MailList.objects.get(num=num)
 
@@ -210,12 +229,17 @@ def mailDetail(request, num):
 
 
 def youtube(request):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
 
     userError = UserError.objects.all()
 
     return render( request, "onepickAdmin/cs/youtube.html", {'pageType': "cs", "userError" : userError })
 
 def checkYoutube(request) :
+
     # UserError 테이블 비우기
     UserError.objects.all().delete()
 

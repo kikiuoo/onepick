@@ -14,6 +14,10 @@ from myonepick.common import *
 urlBase = "onepickAdmin/display/"
 
 def audiList(request):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
 
     audiType = request.GET.get('audiType', "main")
 
@@ -158,6 +162,10 @@ def updateOrder(request) :
 
 # 프로필 진열관리
 def proList(request):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
 
     viewType = request.GET.get('viewType', "main")
 
@@ -245,6 +253,10 @@ def proSaveRecommend(request) :
 
 # 배너 진열관리
 def bannerList(request):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
 
     viewType = request.GET.get('viewType', "all")
     page = request.GET.get('page', "1")
@@ -270,6 +282,10 @@ def bannerList(request):
 
 
 def bannerWrite(request):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
 
     return render( request, urlBase + "bannerWrite.html", {'pageType': "display"})
 
@@ -304,6 +320,10 @@ def writeCallback(request):
 
 
 def bannerEdit(request, num):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
 
     banner = BannerInfo.objects.get(num=num)
 

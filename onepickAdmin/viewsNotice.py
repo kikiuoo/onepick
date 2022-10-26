@@ -14,6 +14,11 @@ from myonepick.common import *
 urlBase = "onepickAdmin/notice/"
 
 def list(request, type, page):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
+
 
     block = 10
     start = (page - 1) * block
@@ -35,6 +40,10 @@ def list(request, type, page):
 
 
 def write(request):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
 
     return render( request, urlBase + "write.html", {'pageType': "notice" })
 
@@ -61,11 +70,21 @@ def summerImageUpload(request) :
 
 
 def viewer(request, num):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
+
     notice = QaNotice.objects.get(num=num)
     return render( request, urlBase + "viewer.html", {'pageType': "notice", "notice" : notice })
 
 
 def edit(request, num):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
+
     notice = QaNotice.objects.get(num=num)
     return render( request, urlBase + "edit.html", {'pageType': "notice", "notice" : notice })
 

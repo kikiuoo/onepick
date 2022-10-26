@@ -12,7 +12,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/favicon.ico' %}">
 
 
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static 'js/profile/qrcode.js' %}"></script>
+    <script src="{% static 'js/profile/profile_width.js' %}"></script>
 </head>
 <body>
 
@@ -192,171 +194,73 @@
         </div>
 
         <div class="subProfile">
-            {% if profileImages|getArrayCount >= 6 %}
             <div class="profileImage" style='background-image: url("/media/{{ profileImages.2 }}");'></div>
-            <div class="profileImage" style='background-image: url("/media/{{ profileImages.3 }}");'></div>
-            <div class="profileImage" style='background-image: url("/media/{{ profileImages.4 }}");'></div>
-            <div class="profileImage" style='background-image: url("/media/{{ profileImages.5 }}");'></div>
-            {% elif profileImages|getArrayCount >= 5 %}
-            <div class="profileImage" style='background-image: url("/media/{{ profileImages.2 }}");'></div>
-            <div class="profileImage" style='background-image: url("/media/{{ profileImages.3 }}");'></div>
-            <div class="profileImage" style='background-image: url("/media/{{ profileImages.4 }}");'></div>
-            {% elif profileImages|getArrayCount >= 4 %}
-            <div class="profileImage" style='background-image: url("/media/{{ profileImages.2 }}");'></div>
-            <div class="profileImage" style='background-image: url("/media/{{ profileImages.3 }}");'></div>
-            {% elif profileImages|getArrayCount >= 3 %}
-            <div class="profileImage" style='background-image: url("/media/{{ profileImages.2 }}");'></div>
-            {% endif %}
         </div>
     </div>
 </div>
 
-{% if profileImages|getArrayCount >= 7 %}
-<div class="page">
-    <div class="inbox">
-        {% if profileImages|getArrayCount >= 10 %}
-            <div class="imageBox_4">
-                <div class="image" style='background-image: url("/media/{{ profileImages.6 }}");'></div>
-            </div>
-            <div class="imageBox_4">
-                <div class="image" style='background-image: url("/media/{{ profileImages.7 }}");'></div>
-            </div>
-            <div class="imageBox_4">
-                <div class="image" style='background-image: url("/media/{{ profileImages.8 }}");'></div>
-            </div>
-            <div class="imageBox_4">
-                <div class="image" style='background-image: url("/media/{{ profileImages.9 }}");'></div>
-            </div>
-        {% elif profileImages|getArrayCount >= 9 %}
-            <div class="imageBox_3">
-                <div class="image" style='background-image: url("/media/{{ profileImages.6 }}");'></div>
-            </div>
-            <div class="imageBox_3">
-                <div class="image" style='background-image: url("/media/{{ profileImages.7 }}");'></div>
-            </div>
-            <div class="imageBox_3">
-                <div class="image" style='background-image: url("/media/{{ profileImages.8 }}");'></div>
-            </div>
-        {% elif profileImages|getArrayCount >= 8 %}
-            <div class="imageBox_2">
-                <div class="image" style='background-image: url("/media/{{ profileImages.6 }}");'></div>
-            </div>
-            <div class="imageBox_2">
-                <div class="image" style='background-image: url("/media/{{ profileImages.7 }}");'></div>
-            </div>
-        {% elif profileImages|getArrayCount >= 7 %}
-            <div class="imageBox_1">
-                <div class="image" style='background-image: url("/media/{{ profileImages.6 }}");'></div>
-            </div>
-        {% endif %}
-    </div>
-</div>
-{% endif %}
+    {% if profileImages|getArrayCount >= 7 %}
+        {% for profile in profileImages %}
+            {% if forloop.counter0 == 0 or forloop.counter0 == 1 or forloop.counter0 == 2  %}
+
+            {% elif profileImages|getArrayCount == forloop.counter and forloop.counter0|modData == 1  %}
+                <div class="page">
+                    <div class="inbox">
+                        <div class="imageBox_2">
+                            <div class="image" style='background-image: url("/media/{{ profile }}");'></div>
+                        </div>
+                    </div>
+                </div>
+            {% elif forloop.counter0|modData == 1 %}
+                <div class="page">
+                    <div class="inbox">
+                        <div class="imageBox_2">
+                            <div class="image" style='background-image: url("/media/{{ profile }}");'></div>
+                        </div>
+            {% elif forloop.counter0|modData == 0 %}
+                        <div class="imageBox_2">
+                            <div class="image" style='background-image: url("/media/{{ profile }}");'></div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 
 
 {% elif profileImages|getArrayCount > 0 and career.count < 15 %}
-<div class="page">
-    <div class="inbox">
-        {% if profileImages|getArrayCount >= 10 %}
-            <div class="inBox_10">
-                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.0 }}");'></div>
-                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.1 }}");'></div>
-                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.2 }}");'></div>
-                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.3 }}");'></div>
-                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.4 }}");'></div>
-                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.5 }}");'></div>
-                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.6 }}");'></div>
-                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.7 }}");'></div>
-                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.8 }}");'></div>
-                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.9 }}");'></div>
+{% for profile in profileImages %}
+    {% if profileImages|getArrayCount == forloop.counter and forloop.counter0|modData == 0  %}
+        <div class="page">
+            <div class="inbox">
+                <div class="imageBox_2">
+                    <div class="image" style='background-image: url("/media/{{ profile }}");'></div>
+                </div>
             </div>
-        {% elif profileImages|getArrayCount >= 9 %}
-            <div class="inBox_9">
-                <div class="imageBox_8" style='background-image: url("/media/{{ profileImages.0 }}");'></div>
-                <div class="imageBox_8" style='background-image: url("/media/{{ profileImages.1 }}");'></div>
-                <div class="imageBox_8" style='background-image: url("/media/{{ profileImages.2 }}");'></div>
-                <div class="imageBox_8" style='background-image: url("/media/{{ profileImages.3 }}");'></div>
-                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.4 }}"); margin-right: 10px'></div>
-                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.5 }}");'></div>
-                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.6 }}");'></div>
-                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.7 }}");'></div>
-                <div class="imageBox_10" style='background-image: url("/media/{{ profileImages.8 }}"); margin-right: 0px'></div>
+        </div>
+    {% elif forloop.counter0|modData == 0  %}
+        <div class="page">
+            <div class="inbox">
+                <div class="imageBox_2">
+                    <div class="image" style='background-image: url("/media/{{ profile }}");'></div>
+                </div>
+    {% elif forloop.counter0|modData == 1 %}
+                <div class="imageBox_2">
+                    <div class="image" style='background-image: url("/media/{{ profile }}");'></div>
+                </div>
             </div>
-        {% elif profileImages|getArrayCount >= 8 %}
-            {% for profile in profileImages %}
-            <div class="imageBox_8" style='background-image: url("/media/{{ profile }}");'></div>
-            {% endfor %}
-        {% elif profileImages|getArrayCount >= 7 %}
-
-            <div class="imageBox_6">
-                <div class="image" style='background-image: url("/media/{{ profileImages.0 }}");'></div>
-            </div>
-            <div class="imageBox_6">
-                <div class="image" style='background-image: url("/media/{{ profileImages.1 }}");'></div>
-            </div>
-            <div class="imageBox_6">
-                <div class="image" style='background-image: url("/media/{{ profileImages.2 }}");'></div>
-            </div>
-
-            <div class="imageBox_8" style='background-image: url("/media/{{ profileImages.3 }}"); margin-right: 10px'></div>
-            <div class="imageBox_8" style='background-image: url("/media/{{ profileImages.4 }}");'></div>
-            <div class="imageBox_8" style='background-image: url("/media/{{ profileImages.5 }}");'></div>
-            <div class="imageBox_8" style='background-image: url("/media/{{ profileImages.6 }}");margin-right: 0px'></div>
-        {% elif profileImages|getArrayCount >= 6 %}
-            {% for profile in profileImages %}
-            <div class="imageBox_6">
-                <div class="image" style='background-image: url("/media/{{ profile }}");'></div>
-            </div>
-            {% endfor %}
-        {% elif profileImages|getArrayCount >= 5 %}
-            <div class="imageBox_5">
-                <div class="image" style='background-image: url("/media/{{ profileImages.0 }}");'></div>
-            </div>
-            <div class="imageBox_5">
-                <div class="image" style='background-image: url("/media/{{ profileImages.1 }}");'></div>
-            </div>
-
-            <div class="imageBox_6">
-                <div class="image" style='background-image: url("/media/{{ profileImages.2 }}");'></div>
-            </div>
-            <div class="imageBox_6">
-                <div class="image" style='background-image: url("/media/{{ profileImages.3 }}");'></div>
-            </div>
-            <div class="imageBox_6">
-                <div class="image" style='background-image: url("/media/{{ profileImages.4 }}");'></div>
-            </div>
-        {% elif profileImages|getArrayCount >= 4 %}
-            {% for profile in profileImages %}
-            <div class="imageBox_4">
-                <div class="image" style='background-image: url("/media/{{ profile }}");'></div>
-            </div>
-            {% endfor %}
-        {% elif profileImages|getArrayCount >= 3 %}
-            {% for profile in profileImages %}
-            <div class="imageBox_3">
-                <div class="image" style='background-image: url("/media/{{ profile }}");'></div>
-            </div>
-            {% endfor %}
-        {% elif profileImages|getArrayCount >= 2 %}
-            {% for profile in profileImages %}
-            <div class="imageBox_2">
-                <div class="image" style='background-image: url("/media/{{ profile }}");'></div>
-            </div>
-            {% endfor %}
-        {% elif profileImages|getArrayCount >= 1 %}
-            {% for profile in profileImages %}
-            <div class="imageBox_1">
-                <div class="image" style='background-image: url("/media/{{ profile }}");'></div>
-            </div>
-            {% endfor %}
-        {% endif %}
-    </div>
-</div>
+        </div>
+    {% endif %}
+{% endfor %}
 {% endif %}
+
+<div class="btnBox">
+    <div class="printBtn">프린트/PDF 저장</div>
+</div>
 
 <script type="text/javascript">
 var qrcode = new QRCode(document.getElementById("qrcode"), {
-	text: "https://myonepick.com/profile/profileDetail/actor/{{ profile.num }}/",
+	text: "https://myonepick.com/profile/profileShare/?num={{ shareCode }}&key={{ key }}",
 	width: 68,
 	height: 68,
 	colorDark : "#000000",

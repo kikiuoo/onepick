@@ -14,6 +14,10 @@ from myonepick.common import *
 urlBase = "onepickAdmin/profile/"
 
 def list(request, type,  page):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
 
     try:
         cursor = connection.cursor()
@@ -62,6 +66,10 @@ def list(request, type,  page):
                                                     "type": type})
 
 def listSearch(request, type, word, page):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
 
     try:
         cursor = connection.cursor()

@@ -29,6 +29,7 @@ body {
     margin: 0;
 }
 @media print {
+    h1, h2, h3, h4, h5, dl, dt, dd, ul, li, ol, th, td, p, blockquote, form, fieldset, legend, div,body { -webkit-print-color-adjust:exact; }
     html, body{
         margin :0px;
         padding :0px;
@@ -45,6 +46,10 @@ body {
         box-shadow: initial;
         page-break-after: always;
         box-sizing: border-box;
+    }
+
+    .btnBox{
+        display: none;
     }
 }
 
@@ -83,6 +88,7 @@ body {
     position: relative;
     display: inline-block;
     height: 730px;
+    width: calc(100% - 606px);
     padding-left: 27px;
     padding-top: 12px;
     overflow: hidden;
@@ -197,18 +203,14 @@ body {
 
 .subProfile .profileImage{
     display: inline-block;
-    width: 263px;
-    height: 355px;
+    width: 100%;
+    height: 100%;
     margin-right: 10px;
     margin-bottom: 10px;
 
     background-position: top center;
     background-repeat: no-repeat;
     background-size: 100% auto;
-}
-
-.subProfile .profileImage:nth-child(2n){
-    margin-right: 0px;
 }
 
 .inBox_10{
@@ -363,4 +365,24 @@ body {
 .imageBox_2:nth-child(2),
 .imageBox_5:nth-child(2){
     margin-right: 0px;
+}
+
+.btnBox{
+    width: 100%;
+    height: 80px;
+    text-align: center;
+}
+
+.printBtn{
+    display: inline-block;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    color: #fff;
+    text-align: center;
+    background-color: #ff8aae;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
 }

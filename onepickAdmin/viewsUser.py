@@ -15,6 +15,10 @@ from myonepick.common import *
 urlBase = "onepickAdmin/user/"
 
 def list(request, type, page):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
 
     block = 10
     start = (page - 1) * block
@@ -34,6 +38,10 @@ def list(request, type, page):
 
 
 def listSearch(request, type, word, page):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
 
     block = 10
     start = (page - 1) * block
@@ -70,6 +78,10 @@ def listSearch(request, type, word, page):
                     "leftPage" : page-1, "rightPage" : page+1, "lastPage" : allPage, "type":type, "word" : word })
 
 def edit(request, num) :
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
 
     userInfo = UserInfo.objects.get(num=num)
 
@@ -289,6 +301,10 @@ def excel (request, type, word) :
 
 
 def logList(request, page):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
 
     block = 10
     start = (page - 1) * block

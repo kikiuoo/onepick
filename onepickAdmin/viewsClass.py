@@ -15,6 +15,11 @@ urlBase = "onepickAdmin/classfy/"
 
 def classfy(request):
 
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
+
     profileInfo = ProfileInfo.objects.filter(clsscount=0).order_by('?')[:1]
 
     face = ProfileImgclass.objects.filter(subcate='얼굴형').order_by("imgclass")

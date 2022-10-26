@@ -19,13 +19,13 @@
         <div class="delBtn" data-num="{{ auditions.0 }}"></div>
         <div class="printBtn" data-num="{{ auditions.0 }}">
             <div class="vector">
-                <span data-type="width">가로형</span>
+                <span data-type="width" data-share="{{ shareLink }}" data-key="{{ key }}">가로형</span>
                 <p>|</p>
                 <span data-type="column">세로형</span>
             </div>
         </div>
+        <div class="shareBtn" data-share="{{ shareLink }}"  data-key="{{ key }}"></div>
         {% endif %}
-        <div class="shareBtn"></div>
     </div>
 
     <div class="mainImage"  style='background-image: url("/media/{{ profiles.profileimage }}");' id="image_1"  data-id="1"   data-image="/media/{{ profiles.profileimage }}"></div>
@@ -54,8 +54,8 @@
                 {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
                 <div class="editBtn" data-num="{{ auditions.0 }}"></div>
                 <div class="delBtn" data-num="{{ auditions.0 }}"></div>
+                <div class="shareBtn" data-share="{{ shareLink }}" data-key="{{ key }}"></div>
                 {% endif %}
-                <div class="shareBtn"></div>
             </div>
          </div>
 

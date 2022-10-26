@@ -5,6 +5,7 @@ urlpatterns = [
     path('list/', views.listView, name='listView'),
     path('profileDetail/<cate_type>/<int:num>/', views.viewer, name='listView'),
     path('profileDetail_all/<cate_type>/<int:num>/', views.viewer_all, name='listView'),
+    path('profileShare/', views.profileShare, name='profileShare'),
 
     path('write/', views.pofile_write, name="profile-write"),
     path('write/callback/', views.pofile_write_callback, name="profile-writeCallback"),
