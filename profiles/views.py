@@ -1265,10 +1265,11 @@ def printProfile(request, type, num) :
     else :
         talent = ""
 
-    return render(request, 'profiles/profile_width.html',
-                  {'profile': profile, 'userInfo': userInfo, 'career':career, 'talent' : talent,
-                   'movieCareer':movieCareer, 'dramaCareer':dramaCareer, 'etcCareer':etcCareer,
-                   'profileImages':profileImages, "shareCode" : shareCode, "key":key })
+    return render(request, 'profiles/profile_'+type+'.html',
+                  {'profile': profile, 'userInfo': userInfo, 'career': career, 'talent': talent,
+                   'movieCareer': movieCareer, 'dramaCareer': dramaCareer, 'etcCareer': etcCareer,
+                   'profileImages': profileImages, "shareCode": shareCode, "key": key})
+
 
 
 def getSubSpecialty(request) :

@@ -212,10 +212,6 @@ $(document).ready(function(){
         var shareCode = $(this).attr("data-share");
         var key = $(this).attr("data-key");
 
-        if( type == "column" ){
-            alert("서비스 준비중입니다.");
-            return;
-        }
         window.open("/profile/print/"+type+"/"+num+"/?share=" + shareCode + "&key=" + key);
     });
 

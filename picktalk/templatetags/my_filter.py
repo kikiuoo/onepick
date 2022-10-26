@@ -495,3 +495,11 @@ def modData(values) :
     nowData = int(values) % 2
 
     return nowData
+
+
+@register.filter
+def modData2(values) :
+
+    nowData = int(values) % 4
+
+    return nowData
