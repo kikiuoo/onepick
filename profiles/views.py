@@ -491,33 +491,11 @@ def profileShare(request) :
 
     nowTime = timezone.now()
 
-    if userType == "COMPANY" or userType == "S-COMPANY" :
-        userID = request.session.get('id', '')
-        profiles.cviewcount = profiles.cviewcount + 1
-        profiles.save()
-        viewAdd = ProfileViewCompany.objects.create(profilenum=num, userid=user, regtime=nowTime)
-
-        audiList = AuditionInfo.objects.filter(userid=userID, isdelete="0")
-
-    else :
-        profiles.viewcount = profiles.viewcount +1
-        profiles.save()
-        viewAdd = ProfileView.objects.create(profilenum=num, userid=user, regtime=nowTime)
-        audiList = ""
-
-
-    userType = request.session.get('userType', '')
-    if userType == "admin":
-        nowTime = str(timezone.now())
-        user = request.session.get('id', '')
-        adminLog = AdminLog.objects.create(userid=user, viewtype="profile_view", content=num, regdate=nowTime)
-
-
     return render(request, 'profiles/viewer_share.html', { 'profiles':profiles, "userInfo":userInfo, "foreign" : foreign,
                                                      "careerEtc":careerEtc, "comment":comment, "pickCheck" : pickCheck,
                                                      "profileImages" : profileImages, "artImages" : artImages,
                                                      "youtubes" : youtubes, "movieCareer" : movieCareer, "dramaCareer" : dramaCareer,
-                                                     "etcCareer": etcCareer, "talent" : talent, "audiList" : audiList, "tag" : tag,
+                                                     "etcCareer": etcCareer, "talent" : talent, "tag" : tag,
                                                      "shareLink" : encrypt_text })
 
 
@@ -1266,7 +1244,7 @@ def profileSuggest(request) :
 
 def printProfile(request, type, num) :
 
-    shareCode = request.GET.get("shareCode", "")
+    shareCode = request.GET.get("share", "")
     key = request.GET.get("key", "")
 
     profile = ProfileInfo.objects.get(num=num)
@@ -1282,9 +1260,15 @@ def printProfile(request, type, num) :
     else:
         profileImages = ""
 
-    return render(request, 'profiles/profile_width.html', {'profile': profile, 'userInfo': userInfo, 'career':career,
-                                                           'movieCareer':movieCareer, 'dramaCareer':dramaCareer, 'etcCareer':etcCareer,
-                                                           'profileImages':profileImages, "shareCode" : shareCode, "key":key })
+    if (profile.talent):
+        talent = profile.talent.split("|")
+    else :
+        talent = ""
+
+    return render(request, 'profiles/profile_width.html',
+                  {'profile': profile, 'userInfo': userInfo, 'career':career, 'talent' : talent,
+                   'movieCareer':movieCareer, 'dramaCareer':dramaCareer, 'etcCareer':etcCareer,
+                   'profileImages':profileImages, "shareCode" : shareCode, "key":key })
 
 
 def getSubSpecialty(request) :

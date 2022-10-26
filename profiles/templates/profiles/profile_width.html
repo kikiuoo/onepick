@@ -18,13 +18,12 @@
 </head>
 <body>
 
-
-
-
 <div class="page">
     <div class="inbox">
-        <div class="imageBox" style='background-image: url("/media/{{ profile.profileimage }}");'></div>
-        <div class="logoImage"></div>
+        <div class="imageBox" style='background-image: url("/media/{{ profile.profileimage }}");'>
+            <div class="logoImage"></div>
+        </div>
+        <div id="qrcode"></div>
 
         <div class="InfoBox">
             <div class="name">{{ userInfo.name }}</div>
@@ -46,9 +45,17 @@
                 {% endif %}
             </div>
             <div class="userInfo">{{ userInfo.school }} {{ userInfo.major }}</div>
-            <div class="userInfo">특기 요리 노래부르기 기타연주</div>
+            <div class="userInfo">
+                {% if talent|getArrayCount > 0 %}
+                특기
+                    {% for talents in talent %}
+                        {{ talents }}
+                    {% endfor %}
+                {% endif %}
+            </div>
 
-            <div id="qrcode"></div>
+            <div class="blank"></div>
+
 
             {% if career.count >= 15 %}
             <div class="manyCareer">
@@ -259,13 +266,17 @@
 </div>
 
 <script type="text/javascript">
+
+var qrCodeText =  "https://myonepick.com/profile/profileShare/?num={{ shareCode }}&key={{ key }}";
+    qrCodeText = qrCodeText.padEnd(220);
+
 var qrcode = new QRCode(document.getElementById("qrcode"), {
-	text: "https://myonepick.com/profile/profileShare/?num={{ shareCode }}&key={{ key }}",
-	width: 68,
-	height: 68,
+	text: qrCodeText,
+	width: 120,
+	height: 120,
 	colorDark : "#000000",
 	colorLight : "#ffffff",
-	correctLevel : QRCode.CorrectLevel.H
+    correctLevel : QRCode.CorrectLevel.H
 });
 </script>
 

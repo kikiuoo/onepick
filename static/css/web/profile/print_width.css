@@ -63,8 +63,8 @@ body {
     position: absolute;
     width: 34px;
     height: 34px;
-    right: 0px;
-    top: 0px;
+    left: 20px;
+    top: 20px;
 
     background-image: url("../../../image/web/profile_icon_logo.png");
     background-position: top center;
@@ -73,6 +73,7 @@ body {
 }
 
 .imageBox{
+    position: relative;
     display: inline-block;
     width: 606px;
     height: 730px;
@@ -105,6 +106,7 @@ body {
     font-size:  14px;
     color: #000;
     line-height: 1.5em;
+    min-height: 21px;
 }
 
 .InfoBox .userInfo_B{
@@ -115,9 +117,14 @@ body {
     margin-bottom: 18px;
 }
 
-.InfoBox #qrcode{
-    margin-top: 12px;
-    margin-bottom: 52px;
+.blank{
+    height: 55px;
+}
+
+#qrcode{
+    position: absolute;
+    right: 0px;
+    top: 0px;
 }
 
 .InfoBox .careerBox{
