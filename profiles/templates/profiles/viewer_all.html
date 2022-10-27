@@ -59,11 +59,7 @@
 
 
         <div class="info">
-            {% if request.session.userType == "admin" or request.session.id == userInfo.userid  %}
             키 {{ profiles.height }} cm | 몸무게 {{ profiles.weight }} kg<br>
-            {% else %}
-            키 {{ profiles.height|userHight }} cm | 몸무게 {{ profiles.weight|userHight }} kg<br>
-            {% endif %}
             {% if profiles.contenttype != "old" %}
                 상의 {{ profiles.topsize }} | 하의 {{ profiles.bottomsize }} | 신발 {{ profiles.shoessize }} |
                 피부 {{ profiles.skincolor }}호 | 머리색 {{ profiles.haircolor }}
