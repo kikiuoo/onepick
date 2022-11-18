@@ -131,7 +131,41 @@ $(document).ready(function (){
         window.open(url);
     });
 
+
+    $(document).on("click", ".exitBtn", function (){
+        var num = $(this).attr("data-num");
+
+        $("#popup_"+num).css("display", "none");
+    });
+
+    $(document).on("click", ".nonBtn", function (){
+        var num = $(this).attr("data-num");
+        var cookieName = "popupCookie_" + num;
+
+        if($.cookie(cookieName) == undefined){
+            //쿠키가 없는 경우 testCookie 쿠키를 추가
+            $.cookie(cookieName, 'Y', { expires: 1, path: '/' });
+        }
+
+        $("#popup_"+num).css("display", "none");
+    });
+
+    $(document).on("click", ".popup .image", function (){
+        var url = $(this).attr("data-url");
+
+        window.open(url);
+    });
+
+    if(!$.cookie('popupCookie_1')){
+        $("#popup_1").css("display", "block");
+    }
+
+    if(!$.cookie('popupCookie_2')){
+        $("#popup_2").css("display", "block");
+    }
+
 });
+
 
 function updateCount(num){
     $.ajax({

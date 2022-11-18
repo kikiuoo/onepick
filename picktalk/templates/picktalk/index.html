@@ -10,6 +10,8 @@
 
 <!-- JS 파일 -->
 <script src="{% static 'js/index.js' %}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
 
 <!-- 본문 내용 -->
 <!-- 메인 베너 -->
@@ -209,6 +211,25 @@
     <div class="profileBlank"></div>
 </div>
 
+
+<div class="popupBox">
+    <div class="popup" id="popup_1">
+        <div class="image" style='background-image: url("/static/image/web/popup_1.png");' data-url="https://pickstudio.net"></div>
+        <div class="btnBox">
+            <div class="nonBtn" data-num="1" data-type="1">오늘하루 그만보기</div>
+            <div class="exitBtn" data-num="1">닫기</div>
+        </div>
+    </div>
+
+
+    <div class="popup" id="popup_2">
+        <div class="image" style='background-image: url("/static/image/web/popup_2.png");' data-url="https://pickstudio.net"></div>
+        <div class="btnBox">
+            <div class="nonBtn" data-num="2" data-type="1">오늘하루 그만보기</div>
+            <div class="exitBtn" data-num="2">닫기</div>
+        </div>
+    </div>
+</div>
 
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>

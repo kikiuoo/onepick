@@ -286,3 +286,68 @@
 .profile .pickBtn.pickOn{
     background-image: url("../../image/web/pick_on.png");
 }
+
+
+.popupBox{
+    z-index: 1000;
+    position: fixed;
+    width: 100%;
+    top: 120px;
+    left: 0px;
+}
+
+.popupBox .popup{
+    display: none;
+    position: absolute;
+    left: 80px;
+    top: 0px;
+    width: 80%;
+    background-color: #fff;
+}
+
+.popupBox .popup:nth-child(2){
+    left: auto;
+    top: 80px;
+    right: 80px;
+}
+
+.popupBox .popup .image{
+    width: 100%;
+    padding-bottom: 100%;
+    cursor: pointer;
+    background-position: center;
+    background-size: cover;
+}
+.popupBox .popup .btnBox{
+    border: 1px solid #d7d7d7;
+    height: 30px;
+    font-size: 0px;
+}
+
+
+.nonBtn{
+    display: inline-block;
+    width: 50%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+    border-right: 1px solid #d7d7d7;
+    cursor: pointer;
+    color: #1f1f1f;
+    vertical-align: top;
+}
+
+.exitBtn {
+    display: inline-block;
+    width: calc(50% - 1px);
+    height: 40px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #959595;
+    vertical-align: top;
+}

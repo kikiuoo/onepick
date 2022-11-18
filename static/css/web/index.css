@@ -258,3 +258,65 @@
     color: #1f1f1f;
     margin-top: 9px;
 }
+
+
+
+.popupBox{
+    z-index: 1000;
+    position: fixed;
+    width: 1920px;
+    top: 120px;
+    left: 0px;
+}
+
+.popupBox .popup{
+    position: absolute;
+    left: 80px;
+    top: 0px;
+    width: 600px;
+    height: 640px;
+    background-color: #fff;
+    display: none;
+}
+
+.popupBox .popup:nth-child(2){
+    left: auto;
+    right: 80px;
+}
+
+.popupBox .popup .image{
+    width: 600px;
+    height: 600px;
+    cursor: pointer;
+}
+.popupBox .popup .btnBox{
+    border: 1px solid #d7d7d7;
+    height: 40px;
+    font-size: 0px;
+}
+
+
+.nonBtn{
+    display: inline-block;
+    width: 299px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    border-right: 1px solid #d7d7d7;
+    cursor: pointer;
+    color: #1f1f1f;
+}
+
+.exitBtn {
+    display: inline-block;
+    width: 298px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #959595;
+}
