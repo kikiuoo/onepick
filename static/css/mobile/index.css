@@ -31,13 +31,26 @@
     width: 100%;
     padding-bottom: 29.4%;
     margin-top: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 
     background-image: url("../../image/small_banner_1.jpg");
     background-position: center;
     background-size: cover;
     cursor: pointer;
 }
+
+.sub2{
+    width: 100%;
+    padding-bottom: 29.4%;
+    margin-top: 0px;
+    margin-bottom: 30px;
+
+    background-image: url("../../image/small_banner_2.jpg");
+    background-position: center;
+    background-size: cover;
+    cursor: pointer;
+}
+
 
 /* Index 제목 */
 .mainTitle{
