@@ -18,7 +18,7 @@
     width: 1220px;
     height: 120px;
     margin-top: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 
     background-image: url("../../image/small_banner_m_1.jpg");
     cursor: pointer;
@@ -26,11 +26,11 @@
 
 .sub2{
     width: 1220px;
-    height: 120px;
+    height: 80px;
     margin-top: 0px;
     margin-bottom: 50px;
 
-    background-image: url("../../image/small_banner_m_2.jpg");
+    background-image: url("../../image/small_banner_m_3.jpg");
     cursor: pointer;
 }
 
