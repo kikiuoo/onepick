@@ -45,12 +45,14 @@ class AuditionInfo(models.Model):
     ordinary = models.CharField(max_length=100, blank=True, null=True)
     auditiondate = models.DateField(db_column='auditionDate', blank=True, null=True)  # Field name made lowercase.
     auditiontime = models.TimeField(db_column='auditionTime', blank=True, null=True)  # Field name made lowercase.
+    audiunsetted = models.CharField(db_column='audiUnsetted', max_length=10, blank=True, null=True)  # Field name made lowercase.
     each = models.CharField(max_length=10, blank=True, null=True)
     age = models.CharField(max_length=50, blank=True, null=True)
     gender = models.CharField(max_length=50, blank=True, null=True)
     career = models.CharField(max_length=50, blank=True, null=True)
     education = models.CharField(max_length=50, blank=True, null=True)
     image = models.CharField(max_length=1000, blank=True, null=True)
+    logo_image = models.CharField(max_length=100, blank=True, null=True)
     essential = models.CharField(max_length=500, blank=True, null=True)
     preparation = models.TextField(blank=True, null=True)
     regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
@@ -261,6 +263,105 @@ class MailList(models.Model):
         db_table = 'mail_list'
 
 
+class ParttimeApply(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    auditionnum = models.PositiveBigIntegerField(db_column='auditionNum')  # Field name made lowercase.
+    profilenum = models.PositiveBigIntegerField(db_column='profileNum')  # Field name made lowercase.
+    comment = models.CharField(max_length=100, blank=True, null=True)
+    pick = models.CharField(max_length=10, blank=True, null=True)
+    regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
+    cancel = models.CharField(max_length=10, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'parttime_apply'
+
+
+class ParttimeInfo(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    title = models.CharField(max_length=100, blank=True, null=True)
+    cate = models.CharField(max_length=50, blank=True, null=True)
+    startdate = models.DateTimeField(db_column='startDate', blank=True, null=True)  # Field name made lowercase.
+    enddate = models.DateTimeField(db_column='endDate', blank=True, null=True)  # Field name made lowercase.
+    ordinary = models.CharField(max_length=100, blank=True, null=True)
+    auditiondate = models.DateField(db_column='auditionDate', blank=True, null=True)  # Field name made lowercase.
+    auditiontime = models.TimeField(db_column='auditionTime', blank=True, null=True)  # Field name made lowercase.
+    audiunsetted = models.CharField(db_column='audiUnsetted', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    each = models.CharField(max_length=10, blank=True, null=True)
+    age = models.CharField(max_length=50, blank=True, null=True)
+    gender = models.CharField(max_length=50, blank=True, null=True)
+    career = models.CharField(max_length=50, blank=True, null=True)
+    fee = models.CharField(max_length=50, blank=True, null=True)
+    feeunsetted = models.CharField(db_column='feeUnsetted', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    image = models.CharField(max_length=1000, blank=True, null=True)
+    logo_image = models.CharField(max_length=100, blank=True, null=True)
+    content = models.TextField(blank=True, null=True)
+    regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
+    updtime = models.DateTimeField(db_column='updTime', blank=True, null=True)  # Field name made lowercase.
+    viewcount = models.IntegerField(db_column='viewCount', blank=True, null=True)  # Field name made lowercase.
+    recommend = models.CharField(max_length=10, blank=True, null=True)
+    recorder = models.PositiveIntegerField(db_column='recOrder', blank=True, null=True)  # Field name made lowercase.
+    isdelete = models.CharField(db_column='isDelete', max_length=10, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'parttime_info'
+
+
+class ParttimePick(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    auditionnum = models.PositiveBigIntegerField(db_column='auditionNum')  # Field name made lowercase.
+    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'parttime_pick'
+
+
+class ParttimeRecommend(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    distype = models.CharField(db_column='disType', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    auditionnum = models.CharField(db_column='auditionNum', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    disorder = models.IntegerField(db_column='disOrder', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'parttime_recommend'
+
+
+class ParttimeView(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    auditionnum = models.PositiveBigIntegerField(db_column='auditionNum')  # Field name made lowercase.
+    userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
+    regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'parttime_view'
+
+
+
+
+class PopupInfo(models.Model):
+    num = models.BigAutoField(primary_key=True)
+    title = models.CharField(max_length=100, blank=True, null=True)
+    url = models.CharField(max_length=200, blank=True, null=True)
+    image = models.CharField(max_length=200, blank=True, null=True)
+    nviweterm = models.IntegerField(db_column='nViweTerm', blank=True, null=True)  # Field name made lowercase.
+    nowview = models.CharField(db_column='nowView', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    clickcount = models.IntegerField(db_column='clickCount', blank=True, null=True)  # Field name made lowercase.
+    starttime = models.DateTimeField(db_column='startTime', blank=True, null=True)  # Field name made lowercase.
+    endtime = models.DateTimeField(db_column='endTime', blank=True, null=True)  # Field name made lowercase.
+    regtime = models.DateTimeField(db_column='regTime', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'popup_info'
+
+
+
 class ProfileCareer(models.Model):
     num = models.BigAutoField(primary_key=True)
     userid = models.CharField(db_column='userID', max_length=100)  # Field name made lowercase.
@@ -344,6 +445,7 @@ class ProfileInfo(models.Model):
     classimg = models.TextField(db_column='classImg', blank=True, null=True)  # Field name made lowercase.
     classjob = models.TextField(db_column='classJob', blank=True, null=True)  # Field name made lowercase.
     clsscount = models.IntegerField(db_column='classCount', blank=True, null=True)  # Field name made lowercase.
+    mbti = models.CharField(max_length=10, blank=True, null=True)
     regdate = models.DateTimeField(db_column='RegDate', blank=True, null=True)  # Field name made lowercase.
     update = models.DateTimeField(db_column='upDate', blank=True, null=True)  # Field name made lowercase.
     viewcount = models.IntegerField(db_column='viewCount', blank=True, null=True)  # Field name made lowercase.

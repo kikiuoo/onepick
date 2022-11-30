@@ -550,6 +550,29 @@
                     {% endif %}
                 </div>
             </div>
+
+            <div class="title f_etcInfo">MBTI</div>
+            <div class="inputBox f_etcInfo">
+                <select name="mbti" id="mbti" style="color: #1f1f1f">
+                    <option value="" {% if profiles.mbti == "" %}selected{% endif %}>선택 안함</option>
+                    <option value="ISTJ" {% if profiles.mbti == "ISTJ" %}selected{% endif %}>ISTJ</option>
+                    <option value="ISFJ" {% if profiles.mbti == "ISFJ" %}selected{% endif %}>ISFJ</option>
+                    <option value="INFJ" {% if profiles.mbti == "INFJ" %}selected{% endif %}>INFJ</option>
+                    <option value="INTJ" {% if profiles.mbti == "INTJ" %}selected{% endif %}>INTJ</option>
+                    <option value="ISTP" {% if profiles.mbti == "ISTP" %}selected{% endif %}>ISTP</option>
+                    <option value="ISFP" {% if profiles.mbti == "ISFP" %}selected{% endif %}>ISFP</option>
+                    <option value="INFP" {% if profiles.mbti == "INFP" %}selected{% endif %}>INFP</option>
+                    <option value="INTP" {% if profiles.mbti == "INTP" %}selected{% endif %}>INTP</option>
+                    <option value="ESTP" {% if profiles.mbti == "ESTP" %}selected{% endif %}>ESTP</option>
+                    <option value="ESFP" {% if profiles.mbti == "ESFP" %}selected{% endif %}>ESFP</option>
+                    <option value="ENFP" {% if profiles.mbti == "ENFP" %}selected{% endif %}>ENFP</option>
+                    <option value="ENTP" {% if profiles.mbti == "ENTP" %}selected{% endif %}>ENTP</option>
+                    <option value="ESTJ" {% if profiles.mbti == "ESTJ" %}selected{% endif %}>ESTJ</option>
+                    <option value="ESFJ" {% if profiles.mbti == "ESFJ" %}selected{% endif %}>ESFJ</option>
+                    <option value="ENFJ" {% if profiles.mbti == "ENFJ" %}selected{% endif %}>ENFJ</option>
+                    <option value="ENTJ" {% if profiles.mbti == "ENTJ" %}selected{% endif %}>ENTJ</option>
+                </select>
+            </div>
         </div>
 
         <div class="winBox">

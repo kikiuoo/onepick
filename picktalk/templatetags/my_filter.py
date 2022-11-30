@@ -107,6 +107,8 @@ def getCareer(num, type) :
 
 @register.filter
 def replace(value, keys):
+    if value == None :
+        return ""
     key = keys.split("|")
     returnValue = value.replace(key[0], key[1])
     return returnValue
@@ -170,6 +172,9 @@ def emailReplace(value, key):
 @register.filter
 def getMainCate(value):
 
+    if value == None :
+        return ""
+
     cate = CateMain.objects.get(catecode=value)
 
     return cate.catename
@@ -177,6 +182,9 @@ def getMainCate(value):
 
 @register.filter
 def getSubCate(value):
+
+    if value == None :
+        return ""
 
     cate = CateSub.objects.get(subcate=value)
 
@@ -503,3 +511,10 @@ def modData2(values) :
     nowData = int(values) % 4
 
     return nowData
+
+@register.filter
+def getFirstImage(values) :
+
+    audiImage = values.split("|")
+
+    return audiImage[0]

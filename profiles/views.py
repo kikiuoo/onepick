@@ -586,6 +586,7 @@ def pofile_write_callback(request) :
     saveForeign = request.POST['saveForeign']
     saveSpecialty = request.POST['saveSpecialty']
     saveTag = request.POST['saveTag']
+    mbti = request.POST.get('mbti',"")
     introduction = request.POST['introduction']
     notView = request.POST.get('notView',"0")
 
@@ -647,7 +648,7 @@ def pofile_write_callback(request) :
                                              height=height, weight=weight, topsize=topSize, bottomsize=bottomSize, shoessize=shoesSize,
                                              skincolor=skinColor, haircolor=hairColor, foreign=saveForeign, mainyoutube=youtube_main,
                                              youtube=sYoutube, talent=saveSpecialty, comment=introduction, intercate=cate_m,
-                                             intersubcate=cate_s, iscareer=notCareer, careeryear=allCareer_y, careermonth=allCareer_m, tag = saveTag,
+                                             intersubcate=cate_s, iscareer=notCareer, careeryear=allCareer_y, careermonth=allCareer_m, tag = saveTag, mbti=mbti,
                                              regdate=nowTime, update=nowTime, viewcount=0, cviewcount=0, public=notView,isdelete=0, pickcount=0, clsscount=0 )
 
     key = str(ProfileInfo.objects.latest('num').num)
@@ -817,6 +818,7 @@ def pofile_edit_callback(request) :
     notView = request.POST.get('notView', "0")
     delCareer = request.POST.get("delCareer", "")
     etcDelCareer = request.POST.get("etcDelCareer", "")
+    mbti = request.POST.get('mbti',"")
 
     profiles = ProfileInfo.objects.get(num=num)
 
@@ -923,6 +925,7 @@ def pofile_edit_callback(request) :
     profiles.youtube=sYoutube
     profiles.talent=saveSpecialty
     profiles.tag=saveTag
+    profiles.mbti=mbti
     profiles.comment=introduction
     profiles.intercate=cate_m
     profiles.intersubcate=cate_s
