@@ -220,6 +220,12 @@
                 {% endfor %}
             </div>
             {% endif %}
+
+
+            {% if profiles.mbti != "" and profiles.mbti != None  %}
+            <div class="title">MBTI</div>
+            <div class="content"> {{ profiles.mbti }}</div>
+            {% endif %}
         </div>
     </div>
 
