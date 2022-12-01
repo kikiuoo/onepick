@@ -319,6 +319,7 @@ def joinUpdate(request):
 
         count = 0
         # 로고
+        logoImage = ""
         for image in logo:
             count = count + 1
             sub = image.name.split('.')[-1]
@@ -326,6 +327,7 @@ def joinUpdate(request):
             logoImage = url
 
         count = 0
+        licenseImages = ""
         for image in licenseImage:
             count = count + 1
             sub = image.name.split('.')[-1]
@@ -333,6 +335,7 @@ def joinUpdate(request):
             licenseImages = url
 
         count = 0
+        artLicenses = ""
         for image in artLicense:
             count = count + 1
             sub = image.name.split('.')[-1]
