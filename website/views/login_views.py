@@ -104,9 +104,8 @@ def googleLoginCallback(request):
 
     sub = profile_json.get("sub")
     email = profile_json.get("email")
-    print(" " + email)
     print(sub + " " )
-    returnUrl = userLogin(request, "google_"+sub, email, "", "", "", "GOOGLE")
+    returnUrl = userLogin(request, "google_"+sub, "", "", "", "", "GOOGLE")
 
     return redirect(returnUrl)
 
