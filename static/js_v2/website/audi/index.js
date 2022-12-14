@@ -56,7 +56,7 @@ $(document).ready(function(){
         }
 
         var nowType = $(this).attr("data-nowType");
-        var num = $(this).parent().attr("data-num");
+        var num = $(this).attr("data-num");
 
         updatePick("audition", nowType, num );
 

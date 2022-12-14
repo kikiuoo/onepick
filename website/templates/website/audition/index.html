@@ -56,9 +56,9 @@
                         {% endif %}
 
                         {% if auditions.9 == 0 or auditions.9 == "0" %}
-                        <div class="pickBtn" data-nowType="off"></div>
+                        <div class="pickBtn" data-nowType="off"  data-num="{{ auditions.0 }}"></div>
                         {% else %}
-                        <div class="pickBtn pickOn " data-nowType="on"></div>
+                        <div class="pickBtn pickOn " data-nowType="on"  data-num="{{ auditions.0 }}"></div>
                         {% endif %}
                     </div>
 

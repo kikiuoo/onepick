@@ -68,7 +68,7 @@ def googleLogin(request):
     scope = "https://www.googleapis.com/auth/userinfo.email " + \
             "https://www.googleapis.com/auth/userinfo.profile"
 
-    redirect_uri = loginUrl + "/login/google/callback/"
+    redirect_uri = loginUrl + "login/google/callback/"
     google_auth_api = "https://accounts.google.com/o/oauth2/v2/auth"
 
     response = redirect(
