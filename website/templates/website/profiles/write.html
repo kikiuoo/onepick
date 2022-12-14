@@ -1,0 +1,456 @@
+{% extends 'website/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css_v2/web/profile/write.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css_v2/mobile/profile/write.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js_v2/website/profile/write.js' %}"></script>
+
+<div class="container">
+    <div class="body">
+        <div class="mainTitle">
+            프로필 등록
+        </div>
+        <form action="/profile/write/callback/" method="post" id="saveProfileForm" enctype="multipart/form-data"  autocomplete="off">
+            {% csrf_token %}
+            <input type="hidden" value="{{ request.session.id }}" id="userID" name="userID"/>
+
+            <div class="winBox">
+                <div class="title"  data-id="userInfo">
+                    회원 정보<span>회원 정보는 마이페이지에서 수정 가능합니다.</span>
+                    <div class="foldIcon pcNone"></div>
+                </div>
+                <div class="inputBox f_userInfo">
+                    <input type="text" id="name" value="{{ user.name|default:"" }}" disabled>
+                    <input type="text" id="birth" value="{{ user.birth|default:"" }}" disabled>
+                    {% if user.gender == "man" %}
+                    <input type="text" id="gender" value="남성" disabled>
+                    {% else %}
+                    <input type="text" id="gender" value="여성" disabled>
+                    {% endif %}
+                    <input type="text" id="phone" value="{{ user.phone|default:"" }}" disabled>
+                    <input type="text" id="email" value="{{ user.email|default:""}}" disabled>
+                    <input type="text" id="addr" value="{{ user.addr1|default:"" }} {{ user.addr2|default:"" }}" disabled>
+                </div>
+            </div>
+
+            <div class="winBox">
+                <div class="title" data-id="staticInfo">
+                    기본 정보
+                    <div class="foldIcon pcNone"></div>
+                </div>
+                <div class="inputBox f_staticInfo">
+                    <select name="nationality" id="nationality" {% if user.nationality|default:"" != '' %} style="color: #1f1f1f;" {% endif %}>
+                        <option value="" disabled selected>국적</option>
+                        <option value="내국인" {% if user.nationality == '내국인' %}selected{% endif %}>내국인</option>
+                        <option value="외국인" {% if user.nationality == '외국인' %}selected{% endif %}>외국인</option>
+                    </select>
+
+                    {% if user.gender == "man" %}
+                    <select name="military" id="military" {% if user.military|default:"" != '' %} style="color: #1f1f1f;" {% endif %}>
+                        <option value="" disabled selected>병역 구분</option>
+                        <option value="해당없음">해당없음</option>
+                        <option value="미필" {% if user.military == '미필' %}selected{% endif %}>미필</option>
+                        <option value="군필" {% if user.military == '군필' %}selected{% endif %}>군필</option>
+                    </select>
+                    {% else %}
+                    <select name="military" id="military" style="color: #1f1f1f;" {% if user.military|default:"" != '' %} style="color: #1f1f1f;" {% endif %}>
+                        <option value="" disabled>병역 구분</option>
+                        <option value="해당없음" selected>해당없음</option>
+                        <option value="미필">미필</option>
+                        <option value="군필">군필</option>
+                    </select>
+                    {% endif %}
+
+                    <input type="text" name="entertain" id="entertain" value="{{ user.entertain|default:"" }}" placeholder="소속사가 있을경우, 소속사를 입력해주세요.">
+                    <input type="text" name="academy" id="academy" value="{{ user.academy|default:"" }}" placeholder="학원 소속일 경우, 학원명을 입력해주세요.">
+
+                    <select name="finalSchool" id="finalSchool" {% if user.finalschool|default:"" != '' %} style="color: #1f1f1f;" {% endif %}>
+                        <option value="" disabled selected>최종 학력 선택</option>
+                        <option value="중학교졸업" {% if user.finalschool == '중학교졸업' %}selected{% endif %}>중학교졸업</option>
+                        <option value="고등학교졸업예정" {% if user.finalschool == '고등학교졸업예정' %}selected{% endif %}>고등학교졸업예정</option>
+                        <option value="고등학교졸업" {% if user.finalschool == '고등학교졸업' %}selected{% endif %}>고등학교졸업</option>
+                        <option value="대학교졸업예정(2,3년제)" {% if user.finalschool == '대학교졸업예정(2,3년제)' %}selected{% endif %}>대학교졸업예정(2,3년제)</option>
+                        <option value="대학교졸업(2,3년제)" {% if user.finalschool == '대학교졸업(2,3년제)' %}selected{% endif %}>대학교졸업(2,3년제)</option>
+                        <option value="대학교졸업예정(4년제)" {% if user.finalschool == '대학교졸업예정(4년제)' %}selected{% endif %}>대학교졸업예정(4년제)</option>
+                        <option value="대학교졸업(4년제)" {% if user.finalschool == '대학교졸업(4년제)' %}selected{% endif %}>대학교졸업(4년제)</option>
+                        <option value="대학교중퇴" {% if user.finalschool == '대학교중퇴' %}selected{% endif %}>대학교중퇴</option>
+                        <option value="대학원졸업예정" {% if user.finalschool == '대학원졸업예정' %}selected{% endif %}>대학원졸업예정</option>
+                        <option value="대학원졸업" {% if user.finalschool == '대학원졸업' %}selected{% endif %}>대학원졸업</option>
+                    </select>
+
+                    <input type="text" name="school" id="school" value="{{ user.school|default:"" }}" placeholder="학교명">
+
+                    <input type="text" name="major" id="major" value="{{ user.major|default:"" }}" placeholder="학과명">
+
+                    <div class="inText">
+                        <input type="text" name="instagram" id="instagram" value="{{ user.instargram|default:"" }}" placeholder="주소를 입력해주세요">
+                        <span class="left">인스타그램</span>
+                    </div>
+
+                    <div class="inText">
+                        <input type="text" name="youtube" id="youtube" value="{{ user.youtube|default:"" }}" placeholder="주소를 입력해주세요">
+                        <span class="left">유튜브</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="winBox">
+                <div class="title" data-id="bodyInfo">
+                    신체 정보
+                    <div class="foldIcon pcNone"></div>
+                </div>
+                <div class="inputBox f_bodyInfo">
+                    <div class="inText mini">
+                        <input type="number" name="height" id="height" value="" placeholder="키" onKeyup="this.value=this.value.replace(/(\.\d+)+/,'');">
+                        <span>cm</span>
+                    </div>
+
+                    <div class="inText mini">
+                        <input type="number" name="weight" id="weight" value="" placeholder="몸무게" onKeyup="this.value=this.value.replace(/(\.\d+)+/,'');">
+                        <span>kg</span>
+                    </div>
+                    <br>
+                    <select name="topSize" id="topSize">
+                        <option value="" disabled selected>상의 사이즈</option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="2XL">2XL</option>
+                    </select>
+
+                    <select name="bottomSize" id="bottomSize">
+                        <option value="" disabled selected>하의 사이즈</option>
+                        <option value="24~26">24~26</option>
+                        <option value="26~28">26~28</option>
+                        <option value="28~30">28~30</option>
+                        <option value="30~32">30~32</option>
+                        <option value="32~34">32~34</option>
+                        <option value="34~36">34~36</option>
+                        <option value="36~38">36~38</option>
+                        <option value="38~40">38~40</option>
+                    </select>
+
+                    <select name="shoesSize" id="shoesSize">
+                        <option value="" disabled selected>발 사이즈</option>
+                        <option value="220">220</option>
+                        <option value="230">230</option>
+                        <option value="240">240</option>
+                        <option value="250">250</option>
+                        <option value="260">260</option>
+                        <option value="270">270</option>
+                        <option value="280">280</option>
+                        <option value="290">290</option>
+                        <option value="300">300</option>
+                    </select>
+
+                    <select name="skinColor" id="skinColor">
+                        <option value="" disabled selected>피부색</option>
+                        <option value="17">17호(밝음)</option>
+                        <option value="19">19호</option>
+                        <option value="21">21호</option>
+                        <option value="23">23호</option>
+                        <option value="25">25호(어두움)</option>
+                    </select>
+
+
+                    <select name="hairColor" id="hairColor">
+                        <option value="" disabled selected>머리색</option>
+                        <option value="검정">검정</option>
+                        <option value="갈색">갈색</option>
+                        <option value="밝은 갈색">밝은 갈색</option>
+                        <option value="금발">금발</option>
+                        <option value="그외">그외</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="winBox">
+                <div class="title" data-id="areaInfo">
+                    지원분야
+                    <div class="foldIcon pcNone"></div>
+                </div>
+                <div class="inputBox f_areaInfo">
+                    <select name="cate_m" id="cate_m">
+                        <option value="" disabled selected>선택</option>
+                        {% for cates in cate %}
+                        <option value="{{ cates.catecode }}">{{ cates.catename }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <select name="cate_s" id="cate_s">
+                        <option value="" disabled selected>세부 분야</option>
+                    </select>
+                </div>
+                <div class="title f_areaInfo">경력 <label class="textCheck"><input type="checkbox" name="notCareer" id="notCareer"> 경력없음 <div class="check"></div>  </label></div>
+                <div class="inputBox f_areaInfo">
+                    <div class="careerList">
+                        <textarea name="saveCareer" id="saveCareer"></textarea>
+                    </div>
+
+                    <select name="c_cateM" id="c_cateM">
+                        <option value="" disabled selected>선택</option>
+                        {% for cates in cate %}
+                        <option value="{{ cates.catecode }}" data-name="{{ cates.catename }}">{{ cates.catename }}</option>
+                        {% endfor %}
+                    </select>
+                    <select name="c_cateS" id="c_cateS">
+                        <option value="" disabled selected>세부 분야</option>
+                    </select>
+                    <input type="text" name="c_title" id="c_title" value="" placeholder="제목">
+                    <input type="text" name="c_role" id="c_role" value="" placeholder="역할">
+
+                    <div class="addBtn" id="careerAdd"></div>
+                </div>
+
+                <div class="leftInputBox f_areaInfo">
+                    <select name="allCareer_y" id="allCareer_y">
+                        <option value="" disabled selected>총 경력 년수</option>
+                        <option value="1">1년</option>
+                        <option value="2">2년</option>
+                        <option value="3">3년</option>
+                        <option value="4">4년</option>
+                        <option value="5">5년</option>
+                        <option value="6">6년</option>
+                        <option value="7">7년</option>
+                        <option value="8">8년</option>
+                        <option value="9">9년</option>
+                        <option value="10">10년</option>
+                        <option value="11">10년이상</option>
+                    </select>
+
+                    <select name="allCareer_m" id="allCareer_m">
+                        <option value="" disabled selected>개월</option>
+                        <option value="1개월">1개월</option>
+                        <option value="2개월">2개월</option>
+                        <option value="3개월">3개월</option>
+                        <option value="4개월">4개월</option>
+                        <option value="5개월">5개월</option>
+                        <option value="6개월">6개월</option>
+                        <option value="7개월">7개월</option>
+                        <option value="8개월">8개월</option>
+                        <option value="9개월">9개월</option>
+                        <option value="10개월">10개월</option>
+                        <option value="11개월">11개월</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="winBox">
+                <div class="title" data-id="imageInfo">
+                    프로필 사진
+                    <div class="foldIcon pcNone"></div>
+                </div>
+                <div class="info f_imageInfo" style="margin-bottom: 0px">
+                    대표 이미지는 프로필 상세페이지에 들어가기 전, 프로필 리스트에서 보이게 되는 썸네일 이미지 입니다. 대표이미지는 필수 등록입니다.<br>
+                    프로필 이미지는 최대 10장의 사진 업로드가 가능합니다. 프로필 대표 이미지는 상반신 위주의 사진으로 등록해주세요.<br>
+                    대표 썸네일은 이미지 클릭 후 파일 업로드시 대표 썸네일이 변경됩니다.<br>
+                    이미지 1회 업로드시 총 30MB까지만 업로드 가능합니다.
+                </div>
+
+                <div class="profile_imageBox mainImageBox f_imageInfo">
+                    <label id="mainImage" for="input-mainImage"> <div class="addImage"></div> 대표 이미지 등록</label>
+                    <input type="file" name="mainImage[]" id="input-mainImage" class="upload-hidden input-file" data-type="mainImage">
+                    <input type="hidden" name="mainImg" id="mainImg" value="">
+
+                    <input type="file" name="profileImage[]" id="input-file" class="upload-hidden input-file" data-type="profileImage">
+                    <div class="imageBox"></div>
+                    <label id="fileLabel" for="input-file"> <div class="addImage"></div> 이미지 등록</label>
+                </div>
+
+                <div class="title f_imageInfo">작품 사진</div>
+                <div class="info f_imageInfo">
+                    활동했던 작품의 캡쳐 이미지를 등록할 수 있습니다.<br>
+                    작품 이미지는 최대 10장의 사진 업로드가 가능합니다.
+                </div>
+
+                <div class="profile_imageBox userImageBox f_imageInfo">
+                    <input type="file" name="userImage[]" id="input-piece" class="upload-hidden input-file" data-type="userImage">
+                    <div class="imageBox"></div>
+                    <label id="pieceLabel" for="input-piece"> <div class="addImage"></div> 이미지 등록</label>
+                </div>
+
+                <div class="title f_imageInfo">프로필 영상</div>
+                <div class="info f_imageInfo">
+                    프로필 영상은 유투브에 업로드 된 영상의 '공유' 버튼을 누르면 나오는 링크를 입력해 주세요.<br>
+                    영상이 여러개 일 경우, 메인으로 보여질 영상은 아래 리스트에서 설정 가능합니다.
+                </div>
+
+                <div class="profile_imageBox f_imageInfo">
+                    <div class="youtubeList">
+                        <textarea name="youSave" id="youSave"></textarea>
+                    </div>
+
+                    <label class="textCheck mainYoutube viewChecked"><input type="radio" value="1" id="mainYoutube" name="mainYoutube"> 메인 영상으로 설정 <div class="check"></div>  </label>
+                    <input type="text" name="y_link" id="y_link" class="y_link" value="" placeholder="공유 링크를 입력해주세요." style="margin-bottom: 0px">
+                    <div class="addBtn" id="linkAdd"></div>
+                </div>
+            </div>
+
+            <div class="winBox">
+                <div class="title" data-id="etcInfo">
+                    기타 경력
+                    <div class="foldIcon pcNone"></div>
+                </div>
+                <div class="inputBox f_etcInfo">
+
+                    <div class="etcCareerList">
+                        <textarea name="etcSaveCareer" id="etcSaveCareer"></textarea>
+                    </div>
+
+                    <select name="ec_cateM" id="ec_cateM">
+                        <option value="" disabled selected>선택</option>
+                        <option value="partTime" data-name="아르바이트">아르바이트</option>
+                        <option value="job" data-name="취업">취업</option>
+                    </select>
+
+                    <select name="ec_cateS" id="ec_cateS">
+                        <option value="" disabled selected>세부 분야</option>
+                    </select>
+
+                    <input type="text" name="ec_title" id="ec_title" value="" placeholder="상호명">
+
+                    <input type="text" name="ec_role" id="ec_role" value="" placeholder="역할">
+
+                    <div class="addBtn" id="eCareerAdd"></div>
+                </div>
+
+                <div class="title f_etcInfo">외국어 능력</div>
+                <div class="inputBox f_etcInfo">
+                    <div class="foreignList">
+                        <textarea name="saveForeign" id="saveForeign"></textarea>
+                    </div>
+
+                    <select name="foreign" id="foreign">
+                        <option value="" disabled selected>언어</option>
+                        <option value="영어">영어</option>
+                        <option value="일어">일어</option>
+                        <option value="중국어">중국어</option>
+                        <option value="독일어">독일어</option>
+                        <option value="프랑스어">프랑스어</option>
+                        <option value="러시아어">러시아어</option>
+                        <option value="베트남어">베트남어</option>
+                    </select>
+
+                    <select name="good" id="good">
+                        <option value="" disabled selected>수준</option>
+                        <option value="상">상</option>
+                        <option value="중">중</option>
+                        <option value="하">하</option>
+                    </select>
+
+                    <div class="addBtn" id="foreignAdd"></div>
+                </div>
+
+                <div class="title f_etcInfo">특기</div>
+                <div class="inputBox f_etcInfo">
+                    <div class="specialtyList">
+                        <textarea name="saveSpecialty" id="saveSpecialty"></textarea>
+
+                        <select name="specialty" id="specialty">
+                            <option value="" selected disabled>특기 선택</option>
+                            {% for speci in specialty  %}
+                            <option value="{{ speci.1 }}">{{ speci.1 }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <select name="spec_sub" id="spec_sub">
+                            <option value="" selected disabled>특기 세부 선택</option>
+                        </select>
+
+                        <input name="spec_etc" id="spec_etc" readonly>
+
+                        <div class="addBtn" id="specialtyAdd"></div>
+                    </div>
+
+                    <div class="specialtyBox"></div>
+                </div>
+
+
+                <div class="title f_etcInfo">태그</div>
+                <div class="inputBox f_etcInfo">
+                    <div class="tagList">
+                        <textarea name="saveTag" id="saveTag"></textarea>
+
+                        <select name="tag" id="tag">
+                            <option value="" selected disabled>태그 선택</option>
+                            {% for tag in tagList  %}
+                            <option value="{{ tag.tag }}">{{ tag.tag }}</option>
+                            {% endfor %}
+                            <option value="etc">직접입력</option>
+                        </select>
+
+                        <input name="tag_etc" id="tag_etc" readonly>
+
+                        <div class="addBtn" id="tagAdd"></div>
+                    </div>
+
+                    <div class="tagBox"></div>
+                </div>
+
+
+                <div class="title f_etcInfo">MBTI</div>
+                <div class="inputBox f_etcInfo">
+                    <select name="mbti" id="mbti" style="color: #1f1f1f">
+                        <option value="">선택 안함</option>
+                        <option value="ISTJ">ISTJ</option>
+                        <option value="ISFJ">ISFJ</option>
+                        <option value="INFJ">INFJ</option>
+                        <option value="INTJ">INTJ</option>
+                        <option value="ISTP">ISTP</option>
+                        <option value="ISFP">ISFP</option>
+                        <option value="INFP">INFP</option>
+                        <option value="INTP">INTP</option>
+                        <option value="ESTP">ESTP</option>
+                        <option value="ESFP">ESFP</option>
+                        <option value="ENFP">ENFP</option>
+                        <option value="ENTP">ENTP</option>
+                        <option value="ESTJ">ESTJ</option>
+                        <option value="ESFJ">ESFJ</option>
+                        <option value="ENFJ">ENFJ</option>
+                        <option value="ENTJ">ENTJ</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="winBox">
+                <div class="title" data-id="introInfo">
+                    자기소개 <span style="font-size: 14px;">(<span class="text" style="font-size: 14px;margin:0;">0</span> / 1000자)</span>
+                    <div class="foldIcon pcNone"></div>
+                </div>
+                <div class="info f_introInfo">
+                    경력 사항이 없는 경우 자기소개를 100자 이상 필수로 작성해주세요.
+                </div>
+                <div class="inputBox f_introInfo">
+                    <textarea name="introduction" id="introduction" placeholder="자기소개를 입력해주세요."></textarea>
+                </div>
+            </div>
+
+            <div class="checkView">
+                <div class="info">
+                   작성한 프로필은 공개/비공개 설정할 수 있습니다.<br>
+                   비공개를 원하시면 우측에 '프로필 비공개 설정'을 체크하여 등록해주세요.
+                </div>
+                <div class="mMargin pcNone"></div>
+                <label class="textCheck"><input type="checkbox" name="notView" id="notView" value="1"> 프로필 비공개 설정 <div class="check"></div>  </label>
+            </div>
+        </form>
+
+        <div class="btnBox">
+            <!--<div class="preSaveBtn">임시 저장</div>
+            <div class="preViewBtn">미리보기</div>-->
+            <div class="sendBtn">프로필 등록하기</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var checkProfile = {{ checkProfile.count }};
+</script>
+{% endblock %}

@@ -46,13 +46,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django_user_agents',
 
     'picktalk.apps.PicktalkConfig',
-    'user',
-    'audition',
-    'profiles',
     'onepickAdmin',
-    'lounge',
+    'website',
     #'corsheaders',
 ]
 
@@ -65,7 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -119,8 +117,8 @@ DATABASES = {
         'NAME' : 'onepick',
         'USER' : 'onepick',
         'PASSWORD' : 'onepick@)@@',
-        'HOST' : '127.0.0.1',
-        #'HOST' : 'myonepick.com',
+        #'HOST' : '127.0.0.1',
+        'HOST' : 'myonepick.com',
         'PORT' : '3306',
     }
 }

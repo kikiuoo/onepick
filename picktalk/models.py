@@ -59,6 +59,7 @@ class AuditionInfo(models.Model):
     updtime = models.DateTimeField(db_column='updTime', blank=True, null=True)  # Field name made lowercase.
     viewcount = models.IntegerField(db_column='viewCount', blank=True, null=True)  # Field name made lowercase.
     recommend = models.CharField(max_length=10, blank=True, null=True)
+    recommend2 = models.CharField(max_length=10, blank=True, null=True)
     recorder = models.PositiveIntegerField(db_column='recOrder', blank=True, null=True)  # Field name made lowercase.
     isdelete = models.CharField(db_column='isDelete', max_length=10, blank=True, null=True)  # Field name made lowercase.
     contenttype = models.CharField(db_column='contentType', max_length=10, blank=True, null=True)  # Field name made lowercase.
@@ -444,8 +445,9 @@ class ProfileInfo(models.Model):
     classbody = models.TextField(db_column='classBody', blank=True, null=True)  # Field name made lowercase.
     classimg = models.TextField(db_column='classImg', blank=True, null=True)  # Field name made lowercase.
     classjob = models.TextField(db_column='classJob', blank=True, null=True)  # Field name made lowercase.
-    clsscount = models.IntegerField(db_column='classCount', blank=True, null=True)  # Field name made lowercase.
+    classcount = models.IntegerField(db_column='classCount', blank=True, null=True)  # Field name made lowercase.
     mbti = models.CharField(max_length=10, blank=True, null=True)
+    recommend = models.CharField(max_length=10, blank=True, null=True)
     regdate = models.DateTimeField(db_column='RegDate', blank=True, null=True)  # Field name made lowercase.
     update = models.DateTimeField(db_column='upDate', blank=True, null=True)  # Field name made lowercase.
     viewcount = models.IntegerField(db_column='viewCount', blank=True, null=True)  # Field name made lowercase.

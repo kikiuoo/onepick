@@ -378,3 +378,127 @@ def bannerDelete(request, num):
 
     return redirect('/onepickAdmin/display/banner/')
 
+
+
+# 팝업 진열관리
+def popupList(request):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
+
+    page = request.GET.get('page', "1")
+
+    page = int(page)
+
+    block = 10
+    start = (page - 1) * block
+    end = page * block
+
+    popupList = PopupInfo.objects.all().order_by("-num")
+
+    popup = popupList[start:end]
+    allPage = int(len(popupList) / block) + 1
+    paging = getPageList_v2(page, allPage)
+
+    return render( request, urlBase + "popupList.html",
+                   {'pageType': "display", "popupList": popup, "paging": paging, "page": page,
+                    "leftPage": page - 1, "rightPage": page + 1, "lastPage": allPage })
+
+
+def popupWrite(request):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
+
+    return render( request, urlBase + "popupWrite.html", {'pageType': "display"})
+
+
+def popupWriteCallback(request):
+
+    title = request.POST['title']
+    link = request.POST['url']
+    userImage = request.FILES.getlist('userImage[]')
+    startDate = request.POST['startDate']
+    endDate = request.POST['endDate']
+    nViewTerm = request.POST['nViewTerm']
+
+    nowTime = timezone.now()
+
+    image_banner = ""
+    count = 0
+    for image in userImage:
+        count = count + 1
+        sub = image.name.split('.')[-1]
+        url = uploadFile(image, "photos/profiles/banner/", sub)
+
+        image_banner = url
+
+
+    savePopup = PopupInfo.objects.create(title=title, url=link, image=image_banner, nowview='1', clickcount=0,
+                                         starttime=startDate + " 00:00:00", endtime=endDate + " 23:59:59",
+                                         nviweterm=nViewTerm,  regtime=nowTime)
+
+    return redirect('/onepickAdmin/display/popup/')
+
+
+def popupEdit(request, num):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
+
+    popup = PopupInfo.objects.get(num=num)
+
+    return render( request, urlBase + "popupEdit.html", {'pageType': "display", "popup": popup})
+
+
+def popupEditCallback(request):
+
+    num  = request.POST['num']
+    title = request.POST['title']
+    link = request.POST['url']
+    userImage = request.FILES.getlist('userImage[]')
+    startDate = request.POST['startDate']
+    endDate = request.POST['endDate']
+    nViewTerm = request.POST['nViewTerm']
+
+    nowTime = timezone.now()
+
+    popup = PopupInfo.objects.get(num=num)
+
+    image_banner = popup.image
+    if userImage != "" :
+        # 기존 이미지 삭제
+        for rmImages in userImage:
+            if (rmImages == ""): continue
+            deleteFile(rmImages)
+
+        count = 0
+        for image in userImage:
+            count = count + 1
+            sub = image.name.split('.')[-1]
+            url = uploadFile(image, "photos/profiles/banner/", sub)
+
+            image_banner = url
+
+    popup.title = title
+    popup.nviweterm = nViewTerm
+    popup.url = link
+    popup.image = image_banner
+    popup.starttime = startDate
+    popup.endtime = endDate
+
+    popup.save()
+
+    return redirect('/onepickAdmin/display/popup/')
+
+
+def popupDelete(request, num):
+
+    popup = PopupInfo.objects.get(num=num)
+    popup.delete()
+
+    return redirect('/onepickAdmin/display/popup/')
+

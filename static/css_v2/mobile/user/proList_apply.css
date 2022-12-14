@@ -1,0 +1,980 @@
+.mTtitle{
+    position: relative;
+    font-size: 15px;
+    font-weight: bold;
+    color: #454545;
+    margin-bottom: 10px;
+}
+
+.mTtitle span{
+    width: 67px;
+    height: 14px;
+
+    font-size: 10px;
+    color: #959595;
+    cursor: pointer;
+    text-align: right;
+}
+
+.userInfo{
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+
+    padding: 15px 18px;
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    box-sizing: border-box;
+}
+
+.userInfo .userName{
+    font-size: 14px;
+    font-weight: bold;
+    font-stretch: normal;
+    color: #1f1f1f;
+    margin-bottom: 10px;
+}
+
+.userInfo .userName span{
+    color: #ff8aae;
+    margin-left: 10px;
+}
+
+.userInfo .uInfo{
+    margin-top: 10px;
+    font-size: 13px;
+    text-align: left;
+}
+
+.userInfo .editBtn{
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 12px;
+    right: 12px ;
+    cursor: pointer;
+    margin-right: 0px !important;
+
+    background-image: url("../../../image/web/update.png");
+    background-position: center;
+    background-repeat:  no-repeat;
+    background-size: cover;
+}
+
+.myProfile{
+    position: relative;
+    display:  inline-block;
+    width: 100%;
+    padding-bottom: 55%;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    background-color: #fff;
+    border: solid 1px #c0c0c0;
+    overflow: hidden;
+    cursor: pointer;
+    min-height: 186px;
+    box-sizing: border-box;
+}
+
+.btnBox{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.editBtn{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    margin-right: 10px;
+    cursor: pointer;
+    z-index: 10;
+
+    background-image: url("../../../image/web/update.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.delBtn{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/delete.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+}
+
+
+.myProfile .userImage{
+    position: absolute;
+    width: 44%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: top center;
+}
+
+.myProfile .userInfoBox{
+    position: absolute;
+    width: 56%;
+    height: 100%;
+    box-sizing: border-box;
+
+    top: 0px;
+    right: 0px;
+    padding: 14px 10px;
+}
+
+.myProfile .userInfoBox .userName{
+    font-size: 14px;
+    font-weight: bold;
+    color: #454545;
+    margin-bottom: 12px;
+}
+
+.myProfile .userInfoBox .userName span{
+    width: 18px;
+    height: 22px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 2px;
+    margin-left: 5px;
+
+    background-repeat:  no-repeat;
+    background-position: center;
+    background-image: url("../../../image/web/lock.png");
+    background-size: cover;
+}
+
+.myProfile .userInfoBox .pUInfo{
+    font-size: 12px;
+    line-height: 1.8;
+    color: #4d4d4d;
+}
+
+.myProfile .userInfoBox .progre{
+    position: absolute;
+    left: 10px;
+    bottom: 12px;
+}
+
+
+.myProfile .userInfoBox .proComplete{
+    font-size: 9px;
+    font-weight: bold;
+    color: #ff8aae;
+    margin-bottom: 4px;
+}
+
+.myProfile .userInfoBox .proProgressBox{
+    width: 108px;
+    height: 11px;
+    border-radius: 20px;
+    background-color: #f5f5f5;
+    overflow: hidden;
+}
+
+.myProfile .userInfoBox .proProgressBox .progressBar{
+    width: 70%;
+    height: 11px;
+    border-radius: 20px;
+    background-color: #ff8aae;
+}
+
+.myProfile .comment{
+    font-size: 18px;
+    color: #1f1f1f;
+}
+
+.viewBox{
+    position: absolute;
+    bottom: 12px;
+    left: 120px;
+    width: 90px;
+    font-size: 0px;
+}
+
+.contentBox .viewBox{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 90px;
+    font-size: 0px;
+}
+
+.viewBox .countBox{
+    display: inline-block;
+    height: 43px;
+    width: 24px;
+    margin-right: 3px;
+}
+
+.viewBox .countBox:nth-child(3){
+    margin-right: 0px;
+}
+
+.viewBox .countBox span{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.viewBox .countBox span.viewCount{ background-image: url("../../../image/web/viewCount.png")}
+.viewBox .countBox span.pickCount{ background-image: url("../../../image/web/pickCount.png")}
+.viewBox .countBox span.comViewCount{ background-image: url("../../../image/web/companyView.png")}
+
+.viewBox .countBox p{
+    margin: 0px;
+    padding: 0px;
+
+    font-size: 12px;
+    text-align: center;
+    color: #ff8aae;
+}
+
+.nonProfile{
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 15px;
+    color: #c0c0c0;
+}
+
+.auditionList .audiList{
+    position: relative;
+    width: 100%;
+    padding:20px;
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.auditionList .audiList .logo{
+    position: absolute;
+    width: 150px;
+    height: 54px;
+    left: 20px;
+    top: 20px;
+    background-color: #aaaaaa;
+
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.auditionList .audiList .content{
+    padding-top: 90px;
+}
+
+.auditionList .audiList .content .audiTitle{
+    font-size: 12px;
+    color: #454545;
+    margin-bottom: 10px;
+}
+
+.auditionList .audiList .content .comment{
+    font-size: 11px;
+    color: #1f1f1f;
+}
+
+.auditionList .audiList .audiBtn{
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    width: 130px;
+    height: 40px;
+    border-radius: 10px;
+    border: solid 1px #ff8aae;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+
+
+
+.inBox{
+    position: relative;
+    font-size: 0px;
+}
+
+.inBox .audition{
+    position: relative;
+    display:  inline-block;
+    width: calc(50% - 5.5px);
+    padding-bottom: calc(50% - 5.5px);
+    margin-right: 11px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+}
+
+.inBox .audition:nth-child(2n){
+    margin-right: 0px;
+}
+
+.inBox .audition .audiLogo{
+    position: absolute;
+    top: 12px;
+    left: 6px;
+    width: calc(100% - 12px);
+    padding-bottom: 36%;
+    background-color: #fff;
+
+    background-position: left center;
+    background-repeat:  no-repeat;
+    background-size: 100% 100%;
+}
+
+.inBox .audition .audiTitle{
+    position: absolute;
+    width: calc(100% - 12px);
+    height: 38px;
+    top: calc(36% + 20px);
+    left: 6px;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #454545;
+    box-sizing: border-box;
+
+    /* 2줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    display : -webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+}
+.inBox .audition .audiTerm{
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    padding-left : 4px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #1f1f1f;
+}
+
+
+.audition .pickBtn{
+    position: absolute;
+    bottom: 20px;
+    right: 18px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/pick_off.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.audition .pickBtn.pickOn{
+    background-image: url("../../../image/web/pick_on.png");
+}
+
+
+/* 공지사항 */
+.notiBox{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0px 10px;
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+    font-size: 0px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.notiBox .notiList{
+    position: relative;
+    padding : 20px 7px 10px;
+    border-top: 1px solid #c0c0c0;
+}
+
+.notiBox .notiList:first-child{
+    border: 0px;
+}
+
+.notiBox .notiList .title{
+    display: inline-block;
+    width: 100%;
+    margin-right: 60px;
+    box-sizing: border-box;
+
+    font-size: 14px;
+    font-weight: normal;
+    color: #1f1f1f;
+}
+
+.notiBox .notiList .title span{
+    color: #ff8aae;
+}
+
+.notiBox .notiList .date{
+    display: inline-block;
+    width: 100%;
+    height: 18px;
+
+    font-size: 14px;
+    font-weight: normal;
+    text-align: right;
+    color: #1f1f1f;
+    padding-right: 18px;
+}
+
+
+
+
+
+/* 기업회원 */
+.regAudi{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.regAudi:nth-child(2n){
+    margin-right: 0px;
+}
+
+.regAudi .audiTitle{
+    font-size: 14px;
+    font-weight: bold;
+    color: #454545;
+}
+
+.regAudi .audiTerm{
+    font-size: 14px;
+    color: #1f1f1f;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.regAudi .cate .cTitle{
+    display: inline-block;
+    width: 55px;
+    height: 18px;
+
+    font-size: 14px;
+    font-weight: bold;
+    color: #959595;
+    vertical-align: top;
+    margin-right: 10px;
+}
+
+.regAudi .cate .cContent{
+    width: 150px;
+    vertical-align: top;
+    display: inline-block;
+    font-size: 16px;
+    text-align: left;
+    color: #1f1f1f;
+    margin-bottom: 62px;
+}
+
+.regAudi .audiVolunteer{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 130px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 10px;
+    border: solid 1px #ff8aae;
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: #ff8aae;
+}
+
+.regAudi .volunteer{
+    position: absolute;
+    right: 154px;
+    bottom: 22px;
+
+    font-size: 13px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+
+/* ------------- 프로필 리스트 ---------------- */
+
+.inBox .profile{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+    box-sizing: border-box;
+    cursor: pointer;
+    padding-bottom: 80px;
+}
+
+.inBox .profile .imageBox{
+    position: absolute;
+    display: inline-block;
+    width: 100px;
+    margin-right: 20px;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.inBox .profile .imageBox .profileImage{
+    width: 100px;
+    height: 140px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+
+    background-size: 120% auto;
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+
+.inBox .profile .imageBox .youtube{
+    width: 100px;
+    height: 60px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.inBox .profile .imageBox .youtube iframe{
+    width: 100%;
+    height: 100%;
+}
+
+.inBox .profile .contentBox{
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    vertical-align: top;
+    text-align: left;
+    padding-left: 110px;
+    padding-top: 5px;
+}
+
+.inBox .profile .contentBox .name{
+    font-size: 14px;
+    font-weight: bold;
+    color: #454545;
+    margin-bottom: 10px;
+}
+
+.inBox .profile .contentBox .detailInfo{
+    height: 82px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #1f1f1f;
+
+    /* 4줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    -webkit-line-clamp:4;
+    -webkit-box-orient:vertical;
+    margin-bottom: 10px;
+}
+.inBox .profile .contentBox .career .careerTitle,
+.inBox .profile .contentBox .career .careerContent{
+    font-size: 12px;
+    font-weight: bold;
+    color: #4d4d4d;
+}
+
+.inBox .profile .contentBox .career .careerTitle{
+    color: #ff8aae;
+}
+
+.inBox .profile .contentBox .career .introduction{
+    height: 71px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #4d4d4d;
+    word-break:break-all;
+
+    /* 4줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    display : -webkit-box;
+    -webkit-line-clamp:4;
+    -webkit-box-orient:vertical;
+}
+
+.inBox .profile .comment {
+    font-size: 11px;
+    text-align: left;
+    padding-top: 10px;
+    padding-left: 10px
+}
+.inBox .blank{
+    height: 55px;
+}
+
+.inBox .profile .pickBtn{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/pick_off.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.inBox .profile .pickBtn.pickOn{
+    background-image: url("../../../image/web/pick_on.png");
+}
+
+.page{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 0px;
+    text-align: center;
+}
+
+.pageBox{
+    display: inline-block;
+}
+
+.pages{
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #959595;
+    margin-left: 10px;
+    cursor: pointer;
+    height: 25px;
+    line-height: 25px;
+    vertical-align: top;
+}
+
+.pages.nowPage{
+    color: #ff8aae;
+}
+
+.pages:nth-child(1){
+    margin-left: 0px;
+}
+
+.leftPage, .rightPage{
+    display: inline-block;
+    border: 1px solid #c0c0c0;
+    border-radius: 50px;
+    vertical-align: top;
+    width: 25px;
+    height: 25px;
+    background-color: #fff;
+
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.leftPage{
+    margin-right: 15px;
+    background-image: url("../../../image/web/left_off.png");
+}
+
+.rightPage{
+    margin-left: 15px;
+    background-image: url("../../../image/web/right_off.png");
+}
+
+.addQandA{
+    margin: 0 auto;
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 10px;
+    background-color: #ff8aae;
+    margin-top: 30px;
+
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}
+
+.apply {
+    width: 100px !important;
+}
+
+.apply p{
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+}
+
+
+.passBtn{
+    z-index: 5;
+    position: absolute;
+    border: 1px solid #e1e1e1;
+    right: 8px;
+    top: 8px;
+    width: 80px;
+    height: 30px;
+    border-radius: 20px;
+    line-height: 28px;
+    cursor: pointer;
+
+    font-size: 10px;
+    font-weight: bold;
+    color: #e1e1e1;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+.passBtn span{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 5px;
+    right: 5px;
+
+    background-image: url("../../../image/web/check_off.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+}
+
+.passBtn.passOn{
+    border: 1px solid #ff8aae;
+    color: #ff8aae;
+}
+
+.passBtn.passOn span{
+    background-image: url("../../../image/web/check_on.png");
+}
+
+
+#listView{
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    padding:0px 12px;
+    box-sizing: border-box;
+    border: 1px solid #c0c0c0;
+
+    font-size: 13px;
+    color: #1f1f1f;
+    background:url('../../../image/web/arrow.png') no-repeat right 16px center;
+    background-color: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+
+select:focus{
+    outline: none;
+}
+
+.popupBack{
+    z-index: 10;
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.popupBack .popupBox{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -175px;
+    margin-left: -160px;
+    padding:  20px 8px 14px;
+    box-sizing: border-box;
+
+    width: 350px;
+    height: 320px;
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+.popupBack .popupBox .popupTitle{
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    color:  #1f1f1f;
+    margin-bottom: 25px;
+}
+
+.popupBack .popupBox .popupClose{
+    position: absolute;
+    right: 27px;
+    top: 20px;
+
+    width: 18px;
+    height:18px;
+
+    background-position: center;
+    background-image: url("../../../image/web/closeIcon.png");
+    background-repeat: no-repeat;
+    background-size: 90%;
+    cursor: pointer;
+}
+
+.popupBack .popupBox .profileBox{
+    position: relative;
+    width: 335px;
+    height: 186px;
+    border-radius: 20px;
+
+    padding-left: 155px;
+    border: 1px solid #c0c0c0;
+    box-sizing: border-box;
+}
+.popupBack .popupBox .profileBox .image{
+    position: absolute;
+    left: -1px;
+    top: -1px;
+
+    width: 151px;
+    height: 187px;
+    border-radius: 20px 0px 0px 20px;
+
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.popupBack .popupBox .profileBox .profileName{
+    margin-top: 14px;
+    margin-bottom: 14px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #454545;
+}
+
+.popupBack .popupBox .profileBox #comment{
+    font-size: 15px;
+    border-radius: 11px;
+    background-color: #fff;
+    border: 1px solid #c0c0c0;
+    box-sizing: border-box;
+    color: #1f1f1f;
+
+    padding: 20px;
+    line-height: 1.5em;
+    width: 170px;
+    height: 130px;
+    outline: none;
+
+    resize: none;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.popupBack .popupBox .profileBox .checkView{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    right: 10px;
+
+    background-image: url("../../../image/web/check_off.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+}
+
+.popupBack .popupBox .profileBox .checkView.on{
+    background-image: url("../../../image/web/check_on.png");
+}
+
+.popupBack .popupBox .popupBtnBox{
+    text-align: center;
+    font-size: 0px;
+    margin-top: 10px;
+}
+
+.popupBack .popupBox .popupBtnBox div{
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.popupBack .popupBox .popupBtnBox div.prePassBtn{
+    background-color: #ff8aae;
+}
+.popupBack .popupBox .popupBtnBox div.cancelPassBtn{
+    background-color: #c0c0c0;
+    margin-left: 14px;
+}
+
+.textCheck{
+    position: relative;
+    font-size: 13px;
+    font-weight: bold;
+    color: #c0c0c0;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.textCheck input{
+    display: none;
+}
+
+.textCheck .check{
+    position: absolute;
+    top: 50%;
+    margin-top: -11.5px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+
+    background-position: center;
+    background-image: url("../../../image/web/textCheck_off.png");
+    background-repeat: no-repeat;
+}
+.textCheck .check.on{
+    background-image: url("../../../image/web/textCheck_on.png");
+}

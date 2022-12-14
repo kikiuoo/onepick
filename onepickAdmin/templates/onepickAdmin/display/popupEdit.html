@@ -1,0 +1,71 @@
+{% extends 'onepickAdmin/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+<link rel="stylesheet" href="{% static 'css/onepickAdmin/display/write.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" href="{% static 'css/datepicker.min.css' %}">
+
+<!-- JS 파일 -->
+<script src="{% static 'js/datepicker.min.js' %}"></script>
+<script src="{% static 'js/onepickAdmin/display/popupWrite.js' %}"></script>
+
+<div class="inBox">
+    <div class="title">배너 수정</div>
+
+    <form action="/onepickAdmin/display/popup/editCallback/" method="post" id="saveUserForm" enctype="multipart/form-data"  autocomplete="off">
+    {% csrf_token %}
+    <div class="viewBox">
+        <div class="joinInfo">
+            <div class="infoTitle">제목</div>
+            <div class="content">
+                <input type="hidden" value="{{ popup.num }}" id="num" name="num" />
+                <input type="text" value="{{ popup.title }}" id="title" name="title" placeholder="제목 입력" />
+            </div>
+        </div>
+
+        <div class="joinInfo">
+            <div class="infoTitle">url</div>
+            <div class="content">
+                <input type="text" value="{{ popup.url }}" id="url" name="url" placeholder="url 입력"/>
+            </div>
+        </div>
+
+        <div class="joinInfo">
+            <div class="infoTitle">이미지 등록</div>
+            <div class="content">
+                <div class="image2" style='background-image: url("/media/{{ popup.image }}");'></div>
+                <input type="file" name="userImage[]" id="input-piece" class="upload-hidden input-file" data-type="userImage">
+            </div>
+        </div>
+
+        <div class="joinInfo nonCompany">
+            <div class="infoTitle">표출일자</div>
+            <div class="content">
+                <input type="text" value="{{ popup.starttime|date:"Y-m-d" }}" id="startDate" name="startDate" placeholder="시작일" data-toggle="datepicker" readonly/> ~
+                <input type="text" value="{{ popup.endtime|date:"Y-m-d" }}" id="endDate" name="endDate" placeholder="종료일" data-toggle="datepicker" readonly/>
+            </div>
+        </div>
+
+        <div class="joinInfo">
+            <div class="infoTitle">다시 표시일자</div>
+            <div class="content">
+                <label><input type="radio" name="nViewTerm" class="nViewTerm" value="-99" {% if popup.nviweterm == -99 %}checked{% endif %}> 다시 보지 않기 </label>
+                <label><input type="radio" name="nViewTerm" class="nViewTerm" value="1" {% if popup.nviweterm == 1 %}checked{% endif %}> 오늘 보지 않기 </label>
+                <label><input type="radio" name="nViewTerm" class="nViewTerm" value="3" {% if popup.nviweterm == 3 %}checked{% endif %}> 3일 보지 않기 </label>
+                <label><input type="radio" name="nViewTerm" class="nViewTerm" value="7" {% if popup.nviweterm == 7 %}checked{% endif %}> 7일 보지 않기 </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="btnBox">
+        <div class="sendBtn2">수정하기</div>
+    </div>
+    </form>
+</div>
+
+<script>
+</script>
+
+{% endblock %}

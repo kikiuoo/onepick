@@ -1,0 +1,519 @@
+.content{
+    position: relative;
+    width: calc( 100% - 20px );
+    padding: 20px 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.btnBox div.shareBtn{ background-image: url("../../../image/web/share.png"); }
+
+.content .title{
+    position: relative;
+    font-size:  12px;
+    font-weight: bold;
+    color: #1f1f1f;
+    padding-bottom: 45px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #d7d7d7;
+}
+
+.content .title .shareBtn{
+    position: absolute;
+    bottom: 13px;
+    right: 8px;
+    width: 22px;
+    height: 22px;
+
+    background-image: url("../../../image/web_v2/Share.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.content .title .pickBtn{
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    bottom: 13px;
+    right: 50px;
+    cursor: pointer;
+
+    background-image: url("../../../image/web_v2/heart_off.png");
+    background-position: center;
+    background-size: cover;
+}
+
+.content .title .pickBtn.pickOn{
+    background-image: url("../../../image/web_v2/heart_on.png");
+}
+
+.content .conditionBox .condiList{
+    margin-bottom: 10px;
+}
+
+
+.content .conditionBox .condiList .condiTitle{
+    vertical-align: top;
+    font-size: 12px;
+    color: #959595;
+    margin-bottom: 4px;
+}
+
+.content .conditionBox .condiList .condiContent{
+    font-size: 12px;
+    color: #1f1f1f;
+}
+
+.content .conditionBox .condiList .condiContent span{
+    display: inline-block;
+    font-weight: bold;
+    color: #FF709C;
+    margin-left: 5px;
+}
+
+.content .conditionBox .condiList .condiContent span.nonBold{
+    font-weight: normal !important;
+}
+
+.content .imageBox{
+    text-align: center;
+    padding: 10px 0px 0px;
+}
+
+.btnBox{
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.supportBtn, .supportBtn_end{
+    display: inline-block;
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    margin-top: 32px;
+    margin-bottom: 10px;
+    line-height: 50px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.supportBtn{
+    color: #fff;
+    background-color: #ff8aae;
+}
+
+
+.supportBtn_end{
+    color: #fff;
+    background-color: #959595;
+}
+
+
+.audiApplyBack{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background-color: rgba(84, 84, 84, 0.7);
+    display: none;
+
+}
+
+.audiApplyBack .audiApplyPopup{
+    position: absolute;
+    width: 800px;
+    height: 520px;
+    padding: 40px 90px;
+    border-radius: 20px;
+    background-color: #fff;
+    box-sizing: border-box;
+    top: 50%;
+    left: 50%;
+    box-sizing: border-box;
+    margin-top: -260px;
+    margin-left: -400px;
+}
+
+.aTitle{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #1f1f1f;
+    margin-bottom: 35px;
+}
+
+.profileList{
+    overflow: hidden;
+    height: 270px;
+    overflow-y: auto;
+    margin-bottom: 50px;
+}
+
+.aBtnBox{
+    text-align: center;
+}
+
+.sendProfile{
+    display: inline-block;
+    width: 240px;
+    height: 60px;
+    border-radius: 20px;
+    line-height: 60px;
+    background-color: #ff8aae;
+    cursor: pointer;
+
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}
+
+
+
+.myProfile{
+    position : relative;
+    display : inline-block;
+    width: 590px;
+    height: 270px;
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 10px;
+
+    cursor:pointer;
+}
+
+.myProfile .btnBox{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 10;
+}
+
+.myProfile .btnBox  input[type=radio]{
+    display: none;
+}
+
+.myProfile .btnBox  input[type=radio]+label{
+    display: inline-block;
+    cursor: pointer;
+
+    width: 28px;
+    height: 28px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.myProfile .btnBox  input[type=radio]+label{
+    background-image: url("../../../image/web/check_off.png");
+}
+.myProfile .btnBox  input[type=radio]:checked+label{
+    background-image: url("../../../image/web/check_on.png");
+}
+
+
+.myProfile .userImage{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: inline-block;
+    width: 240px;
+    height: 100%;
+
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 120%;
+}
+
+.myProfile .userInfoBox{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding-left: 260px;
+    box-sizing: border-box;
+}
+
+.myProfile .userInfoBox .userName{
+    padding-top: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #454545;
+    margin-bottom: 18px;
+}
+
+.myProfile .userInfoBox .userName span{
+    width: 22px;
+    height: 23px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 2px;
+
+    background-repeat:  no-repeat;
+    background-position: center;
+    background-image: url("../../../image/web/lock.png");
+    background-size: 80%;
+}
+
+.myProfile .userInfoBox .pUInfo{
+    font-size: 16px;
+    line-height: 1.5;
+    color: #1f1f1f;
+    margin-bottom: 10px;
+}
+
+.myProfile .userInfoBox .proComplete{
+    font-size: 15px;
+    font-weight: bold;
+    color: #ff8aae;
+    margin-bottom: 6px;
+}
+
+.myProfile .userInfoBox .progress{
+    position: absolute;
+    width: 200px;
+    bottom: 20px;
+    right: 20px;
+}
+
+.myProfile .userInfoBox .proProgressBox{
+    width: 200px;
+    height: 22px;
+    border-radius: 20px;
+    background-color: #f5f5f5;
+    overflow: hidden;
+}
+
+.myProfile .userInfoBox .proProgressBox .progressBar{
+    width: 70%;
+    height: 22px;
+    border-radius: 20px;
+    background-color: #ff8aae;
+}
+
+.myProfile .comment{
+    font-size: 18px;
+    color: #1f1f1f;
+}
+
+.viewBox{
+    position: absolute;
+    bottom: 20px;
+    left: 260px;
+    width: 90px;
+    font-size: 0px;
+}
+
+.contentBox .viewBox{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 90px;
+    font-size: 0px;
+}
+
+.viewBox .countBox{
+    display: inline-block;
+    height: 43px;
+    width: 28px;
+    margin-right: 3px;
+}
+
+.viewBox .countBox:nth-child(3){
+    margin-right: 0px;
+}
+
+.viewBox .countBox span{
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.viewBox .countBox span.viewCount{ background-image: url("../../../image/web/viewCount.png")}
+.viewBox .countBox span.pickCount{ background-image: url("../../../image/web/pickCount.png")}
+.viewBox .countBox span.comViewCount{ background-image: url("../../../image/web/companyView.png")}
+
+.viewBox .countBox p{
+    margin: 0px;
+    padding: 0px;
+
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    color: #ff8aae;
+}
+
+.closeSPopup{
+    position: absolute;
+    right: 40px;
+    top: 40px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/closeIcon.png");
+}
+
+
+.btnBox2{
+    font-size: 0px;
+    text-align: right;
+    margin-bottom: 63px;
+    padding-right: 20px;
+}
+
+.btnBox2 .editBtn{
+    display: inline-block;
+    width: 120px;
+    height: 50px;
+    border : 1px solid #ff8aae;
+    background-color: #fff;
+    line-height: 50px;
+    border-radius: 10px;
+
+    text-align: center;
+    font-size: 12px;
+    color: #ff8aae;
+    cursor: pointer;
+}
+
+.btnBox2 .editBtn span{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-bottom: 4px;
+    margin-right: 2px;
+
+    background-position: center;
+    background-image: url("../../../image/web_v2/edit.png");
+    background-size: cover;
+}
+
+
+.btnBox2 .delBtn{
+    display: inline-block;
+    width: 80px;
+    height: 50px;
+    border : 1px solid #d7d7d7;
+    background-color: #fff;
+    line-height: 50px;
+    border-radius: 10px;
+    margin-left: 10px;
+
+    text-align: center;
+    font-size: 12px;
+    color: #595959;
+    cursor: pointer;
+}
+
+.btnBox2 .delBtn span{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-bottom: 4px;
+    margin-right: 2px;
+
+    background-position: center;
+    background-image: url("../../../image/web_v2/trash.png");
+    background-size: cover;
+}
+
+.mTitle{
+    font-size: 14px;
+    color: #1f1f1f;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.content2{
+    position: relative;
+    background-color: #fff;
+    padding : 20px;
+    margin-bottom: 110px;
+    border-radius: 10px;
+    width: calc(100% - 20px);
+    box-sizing: border-box;
+}
+
+.content2 .logo{
+    width: 164px;
+    height: 62px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.content2 .companyName{
+    padding-top: 13px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #1f1f1f;
+    height: 20px;
+    line-height: 20px;
+}
+
+.content2 .companyName span{
+    display: inline-block;
+    width: 130px;
+    height: 15px;
+    line-height: 15px;
+    text-align: center;
+
+    font-size: 8px;
+    color: #4e7eff;
+    font-weight: bold;
+    border-radius: 50px;
+    background-color: #e9efff;
+    margin-left: 10px;
+}
+
+.content2 .companyUrl{
+    font-size: 12px;
+    color: #1f1f1f;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+
+.writeBtn{
+    position: fixed;
+    bottom: 25px;
+    right: 10px;
+    width: 60px;
+    height: 60px;
+    background-color: #fff;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    padding-top: 36px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #FF709C;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+}
+
+.writeBtn .icon {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    top: 12px;
+    left: 19px;
+
+    background-image: url("../../../image/web_v2/edit.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}

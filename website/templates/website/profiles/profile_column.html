@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>원픽|나만의 ONEPICK</title>
+    <!-- Index CSS 파일 및 JS 파일 include -->
+    {% load static %}
+    {% load my_filter %}
+    <link rel="stylesheet" href="{% static 'css_v2/web/profile/print_column.css' %}"> <!-- pc 버전 -->
+
+    <link rel="icon" type="image/x-icon" href="{% static 'image/favicon.ico' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/favicon.ico' %}">
+
+
+    <script src="{% static 'js_v2/website/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js_v2/website/profile/qrcode.js' %}"></script>
+    <script src="{% static 'js_v2/website/profile/profile_width.js' %}"></script>
+</head>
+<body>
+
+<div class="page">
+    <div class="inbox">
+        <div class="imageBox" style='background-image: url("/media/{{ profile.profileimage }}");'>
+            <div class="logoImage"></div>
+
+            <div class="InfoBox">
+                <div class="name">{{ userInfo.name }}</div>
+                <div class="userInfo">{{ userInfo.birth|replace:"-|/" }} ({{ userInfo.birth|userAge }}세)</div>
+
+                <div class="userInfo_B">키 {{ profile.height|splits:"0|." }}cm / 몸무게 {{ profile.weight|splits:"0|." }} kg</div>
+
+                <div class="userInfo">
+                    {% if userInfo.military != None %}
+                        {% if userInfo.gender == "man" %}
+                        {{ userInfo.military }} |
+                        {% endif %}
+                    {% endif %}
+
+                    {% if userInfo.entertain|default:"" == "" %}
+                    소속사 없음<br>
+                    {% else %}
+                    소속사 있음<br>
+                    {% endif %}
+                </div>
+                <div class="userInfo">{{ userInfo.school }} {{ userInfo.major }}</div>
+                <div class="userInfo">
+                    {% if talent|getArrayCount > 0 %}
+                    특기
+                        {% for talents in talent %}
+                            {{ talents }}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div id="qrcode"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page">
+    <div class="inbox">
+        <div class="InfoBox2">
+            <div class="careerBox">
+                <div class="logo"><span></span>영화</div>
+                <div class="content">
+                    {% if movieCareer|getArrayCount > 0 %}
+                        {% for movieCareers in movieCareer %}
+                            {{ movieCareers.3 }} | {{ movieCareers.4 }} | {{ movieCareers.1 }} | {{ movieCareers.2 }}<br>
+                        {% endfor %}
+                    {% else %}
+                        경력없음
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="careerBox">
+                <div class="logo"><span></span>TV드라마<br>웹드라마</div>
+                <div class="content">
+                    {% if dramaCareer|getArrayCount > 0 %}
+                        {% for dramas in dramaCareer %}
+                            {{ dramas.3 }} | {{ dramas.4 }} | {{ dramas.1 }} | {{ dramas.2 }}<br>
+                        {% endfor %}
+                    {% else %}
+                        경력없음
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="careerBox">
+                <div class="logo"><span></span>광고,기타</div>
+                <div class="content">
+                    {% if etcCareer|getArrayCount > 0 %}
+                        {% for etcs in etcCareer %}
+                            {{ etcs.3 }} | {{ etcs.4 }} | {{ etcs.1 }} | {{ etcs.2 }}<br>
+                        {% endfor %}
+                    {% else %}
+                        경력없음
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="careerBox smallMargin">
+                <div class="logo"><span></span>자기소개</div>
+                <div class="content">
+                    {{ profile.comment|linebreaks }}
+                </div>
+            </div>
+        </div>
+
+        {% if profileImages|getArrayCount > 0 %}
+        <div class="subProfile">
+            <div class="profileImage" style='background-image: url("/media/{{ profileImages.0 }}");'></div>
+            {% if profileImages|getArrayCount >= 2 %}
+            <div class="profileImage" style='background-image: url("/media/{{ profileImages.1 }}");'></div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% if profileImages|getArrayCount >= 3 %}
+    {% for profile in profileImages %}
+        {% if forloop.counter0 == 0 or forloop.counter0 == 1  %}
+
+        {% elif forloop.counter0|modData2 == 2 %}
+            <div class="page">
+                <div class="inbox">
+                    <div class="imageBox_2">
+                        <div class="image" style='background-image: url("/media/{{ profile }}");'></div>
+                    </div>
+        {% elif forloop.counter0|modData2 == 3 or forloop.counter0|modData == 0 %}
+                    <div class="imageBox_2">
+                        <div class="image" style='background-image: url("/media/{{ profile }}");'></div>
+                    </div>
+        {% elif forloop.counter0|modData2 == 1 %}
+                    <div class="imageBox_2">
+                        <div class="image" style='background-image: url("/media/{{ profile }}");'></div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if profileImages|getArrayCount == forloop.counter %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<div class="btnBox">
+    <div class="printBtn">프린트/PDF 저장</div>
+</div>
+
+<script type="text/javascript">
+
+var qrCodeText =  "https://myonepick.com/profile/profileShare/?num={{ shareCode }}&key={{ key }}";
+    qrCodeText = qrCodeText.padEnd(220);
+
+var qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: qrCodeText,
+	width: 120,
+	height: 120,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H
+});
+</script>
+
+</body>
+</html>

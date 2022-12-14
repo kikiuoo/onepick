@@ -1,0 +1,216 @@
+.mainTitle{
+    position: relative;
+    font-size: 24px;
+    font-weight: bold;
+    color: #1f1f1f;
+    margin-bottom: 17px;
+}
+
+.body{
+    width: 1200px;
+    padding: 30px 350px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 60px;
+}
+
+.winBox{
+    width: 500px;
+}
+
+.winBox .inTitle{
+    font-size: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #d7d7d7;
+    margin-bottom: 6px;
+}
+
+.winBox .joinInfo{
+    font-size: 0px;
+}
+
+.winBox .joinInfo .title{
+    position: relative;
+    font-size: 12px;
+    color: #595959;
+    vertical-align: top;
+    margin-top: 14px;
+    margin-bottom: 10px;
+}
+
+.winBox .joinInfo .content{
+    display: inline-block;
+    width: 500px;
+}
+
+.winBox .joinInfo .content input{
+    width: 500px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 15px;
+    border-radius: 10px;
+    border: 0px;
+    padding: 0px 20px;
+    box-sizing: border-box;
+    color: #1f1f1f;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f8f8f8;
+}
+
+.winBox .joinInfo .content textarea{
+    width: 500px;
+    height:480px;
+    font-size: 15px;
+    border-radius: 11px;
+    border: 0px;
+    box-sizing: border-box;
+    color: #1f1f1f;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f8f8f8;
+
+    padding: 20px;
+    line-height: 1.5em;
+
+    resize: none;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+
+.winBox .joinInfo .content input::placeholder,
+.winBox .joinInfo .content textarea::placeholder{
+    color: #959595;
+}
+.winBox .joinInfo .content input:focus,
+.winBox .joinInfo .content textarea:focus{
+    outline: none;
+    border: 1px solid #1f1f1f;
+    background-color: #fff;
+}
+
+.btnBox{
+    width: 100%;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.btnBox .sendBtn,
+.btnBox .sendBtn2{
+    display: inline-block;
+    width: 500px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 10px;
+    background-color: #ff8aae;
+    cursor: pointer;
+    margin-bottom: 10px;
+
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}
+
+.imageBox{
+    display: inline-block;
+}
+
+#fileLabel{
+    display: inline-block;
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    background-color: #fff;
+    line-height: 180px;
+
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #afafaf;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+#fileLabel .addImage{
+    height: 28px;
+    width: 28px;
+    position: absolute;
+
+    top: 38px;
+    left: 56px;
+
+    background-image: url("../../../image/web/addImgBtn.png");
+}
+
+.upload-hidden{
+    display: none;
+}
+
+.upload-display{
+    position: relative;
+    display: inline-block;
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    background-color: #fff;
+    line-height: 180px;
+    margin-right: 20px;
+
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% auto;
+    vertical-align: top;
+}
+
+.upload-display .upload-sub,
+.upload-display .upload-sub2{
+    position: absolute;
+    right: -10px;
+    top : -10px;
+    width: 30px;
+    height: 30px;
+    background-color: #ff8aae;
+    border-radius:50%;
+    cursor: pointer;
+
+
+    background-image: url("../../../image/web/subImgBtn.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.textRight{
+    text-align: right;
+}
+
+.textCheck{
+    position: relative;
+    font-size: 16px;
+    font-weight: bold;
+    color: #c0c0c0;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.textCheck input{
+    display: none;
+}
+
+.textCheck .check{
+    position: absolute;
+    top: 50%;
+    margin-top: -11.5px;
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    margin-left: 5px;
+
+    background-position: center;
+    background-image: url("../../../image/web/textCheck_off.png");
+    background-repeat: no-repeat;
+}
+.textCheck .check.on{
+    background-image: url("../../../image/web/textCheck_on.png");
+}

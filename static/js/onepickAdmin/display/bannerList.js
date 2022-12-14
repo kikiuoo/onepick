@@ -24,4 +24,11 @@ $(document).ready(function() {
         }
     });
 
+    $(document).on("click", ".leftPage, .pages, .rightPage", function (){
+       var page = $(this).attr("data-page");
+       var listType = $(this).attr("data-type");
+
+       window.location.href = "/onepickAdmin/display/banner/?page="+page;
+   });
+
 });

@@ -78,3 +78,19 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.content .image2{
+    width: 150px;
+    height: 150px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.nViewTerm{
+    display: inline-block;
+    width: 15px !important;
+    height: 15px;
+    margin-top: 14px;
+}

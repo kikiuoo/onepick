@@ -1,0 +1,619 @@
+{% extends 'website/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css_v2/web/profile/write.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css_v2/mobile/profile/write.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js_v2/website/profile/write.js' %}"></script>
+
+<div class="container">
+    <div class="body">
+        <div class="mainTitle">
+            프로필 등록
+        </div>
+        <form action="/profile/edit/callback/" method="post" id="saveProfileForm" enctype="multipart/form-data"  autocomplete="off">
+            {% csrf_token %}
+            <input type="hidden" value="{{ request.session.id }}" id="userID" name="userID"/>
+            <input type="hidden" value="{{ num }}" id="num" name="num"/>
+
+            <div class="winBox">
+                <div class="title"  data-id="userInfo">
+                    회원 정보<span>회원 정보는 마이페이지에서 수정 가능합니다.</span>
+                    <div class="foldIcon pcNone"></div>
+                </div>
+                <div class="inputBox f_userInfo">
+                    <input type="text" id="name" value="{{ user.name|default:"" }}" disabled>
+                    <input type="text" id="birth" value="{{ user.birth|default:"" }}" disabled>
+                    {% if user.gender == "man" %}
+                    <input type="text" id="gender" value="남성" disabled>
+                    {% else %}
+                    <input type="text" id="gender" value="여성" disabled>
+                    {% endif %}
+                    <input type="text" id="phone" value="{{ user.phone|default:"" }}" disabled>
+                    <input type="text" id="email" value="{{ user.email|default:""}}" disabled>
+                    <input type="text" id="addr" value="{{ user.addr1|default:"" }} {{ user.addr2|default:"" }}" disabled>
+                </div>
+            </div>
+
+            <div class="winBox">
+                <div class="title" data-id="staticInfo">
+                    기본 정보
+                    <div class="foldIcon pcNone"></div>
+                </div>
+                <div class="inputBox f_staticInfo">
+                    <select name="nationality" id="nationality" {% if user.nationality|default:"" != '' %} style="color: #1f1f1f;" {% endif %}>
+                        <option value="" disabled selected>국적</option>
+                        <option value="내국인" {% if user.nationality == '내국인' %}selected{% endif %}>내국인</option>
+                        <option value="외국인" {% if user.nationality == '외국인' %}selected{% endif %}>외국인</option>
+                    </select>
+
+                    {% if user.gender == "man" %}
+                    <select name="military" id="military" {% if user.military|default:"" != '' %} style="color: #1f1f1f;" {% endif %}>
+                        <option value="" disabled selected>병역 구분</option>
+                        <option value="해당없음">해당없음</option>
+                        <option value="미필" {% if user.military == '미필' %}selected{% endif %}>미필</option>
+                        <option value="군필" {% if user.military == '군필' %}selected{% endif %}>군필</option>
+                    </select>
+                    {% else %}
+                    <select name="military" id="military" style="color: #1f1f1f;" {% if user.military|default:"" != '' %} style="color: #1f1f1f;" {% endif %}>
+                        <option value="" disabled>병역 구분</option>
+                        <option value="해당없음" selected>해당없음</option>
+                        <option value="미필">미필</option>
+                        <option value="군필">군필</option>
+                    </select>
+                    {% endif %}
+
+                    <input type="text" name="entertain" id="entertain" value="{{ user.entertain|default:"" }}" placeholder="소속사가 있을경우, 소속사를 입력해주세요.">
+                    <input type="text" name="academy" id="academy" value="{{ user.academy|default:"" }}" placeholder="학원 소속일 경우, 학원명을 입력해주세요.">
+
+                    <select name="finalSchool" id="finalSchool" {% if user.finalschool|default:"" != '' %} style="color: #1f1f1f;" {% endif %}>
+                        <option value="" disabled selected>최종 학력 선택</option>
+                        <option value="중학교졸업" {% if user.finalschool == '중학교졸업' %}selected{% endif %}>중학교졸업</option>
+                        <option value="고등학교졸업예정" {% if user.finalschool == '고등학교졸업예정' %}selected{% endif %}>고등학교졸업예정</option>
+                        <option value="고등학교졸업" {% if user.finalschool == '고등학교졸업' %}selected{% endif %}>고등학교졸업</option>
+                        <option value="대학교졸업예정(2,3년제)" {% if user.finalschool == '대학교졸업예정(2,3년제)' %}selected{% endif %}>대학교졸업예정(2,3년제)</option>
+                        <option value="대학교졸업(2,3년제)" {% if user.finalschool == '대학교졸업(2,3년제)' %}selected{% endif %}>대학교졸업(2,3년제)</option>
+                        <option value="대학교졸업예정(4년제)" {% if user.finalschool == '대학교졸업예정(4년제)' %}selected{% endif %}>대학교졸업예정(4년제)</option>
+                        <option value="대학교졸업(4년제)" {% if user.finalschool == '대학교졸업(4년제)' %}selected{% endif %}>대학교졸업(4년제)</option>
+                        <option value="대학교중퇴" {% if user.finalschool == '대학교중퇴' %}selected{% endif %}>대학교중퇴</option>
+                        <option value="대학원졸업예정" {% if user.finalschool == '대학원졸업예정' %}selected{% endif %}>대학원졸업예정</option>
+                        <option value="대학원졸업" {% if user.finalschool == '대학원졸업' %}selected{% endif %}>대학원졸업</option>
+                    </select>
+
+                    <input type="text" name="school" id="school" value="{{ user.school|default:"" }}" placeholder="학교명">
+
+                    <input type="text" name="major" id="major" value="{{ user.major|default:"" }}" placeholder="학과명">
+
+                    <div class="inText">
+                        <input type="text" name="instagram" id="instagram" value="{{ user.instargram|default:"" }}" placeholder="주소를 입력해주세요">
+                        <span class="left">인스타그램</span>
+                    </div>
+
+                    <div class="inText">
+                        <input type="text" name="youtube" id="youtube" value="{{ user.youtube|default:"" }}" placeholder="주소를 입력해주세요">
+                        <span class="left">유튜브</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="winBox">
+                <div class="title" data-id="bodyInfo">
+                    신체 정보
+                    <div class="foldIcon pcNone"></div>
+                </div>
+                <div class="inputBox f_bodyInfo">
+                    <div class="inText">
+                        <input type="number" name="height" id="height" value="{{ profiles.height }}" placeholder="키"  onKeyup="this.value=this.value.replace(/(\.\d+)+/,'');">
+                        <span>cm</span>
+                    </div>
+
+                    <div class="inText">
+                        <input type="number" name="weight" id="weight" value="{{ profiles.weight }}" placeholder="몸무게"  onKeyup="this.value=this.value.replace(/(\.\d+)+/,'');">
+                        <span>kg</span>
+                    </div>
+                    <br>
+                    <select name="topSize" id="topSize" {% if profiles.topsize != None %} style="color: #1f1f1f;" {% endif %}>
+                        <option value="" disabled selected>상의 사이즈</option>
+                        <option value="XS" {% if profiles.topsize == "XS" %} selected {% endif %}>XS</option>
+                        <option value="S" {% if profiles.topsize == "S" %} selected {% endif %}>S</option>
+                        <option value="M" {% if profiles.topsize == "M" %} selected {% endif %}>M</option>
+                        <option value="L" {% if profiles.topsize == "L" %} selected {% endif %}>L</option>
+                        <option value="XL" {% if profiles.topsize == "XL" %} selected {% endif %}>XL</option>
+                        <option value="2XL" {% if profiles.topsize == "2XL" %} selected {% endif %}>2XL</option>
+                    </select>
+
+                    <select name="bottomSize" id="bottomSize" {% if profiles.bottomsize != None %} style="color: #1f1f1f;" {% endif %}>
+                        <option value="" disabled selected>하의 사이즈</option>
+                        <option value="24~26" {% if profiles.bottomsize == "24~26" %} selected {% endif %}>24~26</option>
+                        <option value="26~28" {% if profiles.bottomsize == "26~28" %} selected {% endif %}>26~28</option>
+                        <option value="30~32" {% if profiles.bottomsize == "28~30" %} selected {% endif %}>28~30</option>
+                        <option value="30~32" {% if profiles.bottomsize == "30~32" %} selected {% endif %}>30~32</option>
+                        <option value="32~34" {% if profiles.bottomsize == "32~34" %} selected {% endif %}>32~34</option>
+                        <option value="34~36" {% if profiles.bottomsize == "34~36" %} selected {% endif %}>34~36</option>
+                        <option value="36~38" {% if profiles.bottomsize == "36~38" %} selected {% endif %}>36~38</option>
+                        <option value="38~40" {% if profiles.bottomsize == "38~40" %} selected {% endif %}>38~40</option>
+                    </select>
+
+                    <select name="shoesSize" id="shoesSize" {% if profiles.shoessize != None %} style="color: #1f1f1f;" {% endif %}>
+                        <option value="" disabled selected>발 사이즈</option>
+                        <option value="220" {% if profiles.shoessize == 220 %} selected {% endif %}>220</option>
+                        <option value="230" {% if profiles.shoessize == 230 %} selected {% endif %}>230</option>
+                        <option value="240" {% if profiles.shoessize == 240 %} selected {% endif %}>240</option>
+                        <option value="250" {% if profiles.shoessize == 250 %} selected {% endif %}>250</option>
+                        <option value="260" {% if profiles.shoessize == 260 %} selected {% endif %}>260</option>
+                        <option value="270" {% if profiles.shoessize == 270 %} selected {% endif %}>270</option>
+                        <option value="280" {% if profiles.shoessize == 280 %} selected {% endif %}>280</option>
+                        <option value="290" {% if profiles.shoessize == 290 %} selected {% endif %}>290</option>
+                        <option value="300" {% if profiles.shoessize == 300 %} selected {% endif %}>300</option>
+                    </select>
+
+                    <select name="skinColor" id="skinColor" {% if profiles.skincolor != None %} style="color: #1f1f1f;" {% endif %}>
+                        <option value="" disabled selected>피부색</option>
+                        <option value="17" {% if profiles.skincolor == "17" %} selected {% endif %}>17호(밝음)</option>
+                        <option value="19" {% if profiles.skincolor == "19" %} selected {% endif %}>19호</option>
+                        <option value="21" {% if profiles.skincolor == "21" %} selected {% endif %}>21호</option>
+                        <option value="23" {% if profiles.skincolor == "23" %} selected {% endif %}>23호</option>
+                        <option value="25" {% if profiles.skincolor == "25" %} selected {% endif %}>25호(어두움)</option>
+                    </select>
+
+
+                    <select name="hairColor" id="hairColor" {% if profiles.haircolor != None %} style="color: #1f1f1f;" {% endif %}>
+                        <option value="" disabled selected>머리색</option>
+                        <option value="검정" {% if profiles.haircolor == "검정" %} selected {% endif %}>검정</option>
+                        <option value="갈색" {% if profiles.haircolor == "갈색" %} selected {% endif %}>갈색</option>
+                        <option value="밝은 갈색" {% if profiles.haircolor == "밝은 갈색" %} selected {% endif %}>밝은 갈색</option>
+                        <option value="금발" {% if profiles.haircolor == "금발" %} selected {% endif %}>금발</option>
+                        <option value="그외" {% if profiles.haircolor == "그외" %} selected {% endif %}>그외</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="winBox">
+                <div class="title" data-id="areaInfo">
+                    지원분야
+                    <div class="foldIcon pcNone"></div>
+                </div>
+                <div class="inputBox f_areaInfo">
+                    <select name="cate_m" id="cate_m"  style="color: #1f1f1f;">
+                        <option value="" disabled selected>선택</option>
+                        {% for cates in cate %}
+                        <option value="{{ cates.catecode }}" {% if cates.catecode == profiles.intercate %} selected {% endif %}>{{ cates.catename }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <select name="cate_s" id="cate_s" style="color: #1f1f1f;">
+                        <option value="" disabled selected>세부 분야</option>
+
+                        {% for catesubs in catesub %}
+                        <option value="{{ catesubs.subcate }}" {% if catesubs.subcate == profiles.intersubcate %} selected {% endif %}>{{ catesubs.catename }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                {% if profiles.iscareer == "0" %}
+                <div class="title f_areaInfo">경력
+                    <label class="textCheck"><input type="checkbox" name="notCareer" id="notCareer"> 경력없음 <div class="check"></div></label>
+                </div>
+                <div class="inputBox f_areaInfo">
+                    <div class="careerList">
+                        <textarea name="saveCareer" id="saveCareer">{{ careerList|parsingCareer }}</textarea>
+                        <textarea name="delCareer" id="delCareer" style="display: none"></textarea>
+
+                        {% for career in careerList %}
+                            <div id="list_S{{ career.0 }}">
+                                <input type="text" value="{{ career.3 }}" style="width: 196px; margin-right: 10px" disabled>
+                                <input type="text" value="{{ career.4 }}" style="width: 196px; margin-right: 10px" disabled>
+                                <input type="text" value="{{ career.1 }}" style="width: 288px; margin-right: 10px" disabled>
+                                <input type="text" value="{{ career.2 }}" style="width: 358px; margin-right: 10px" disabled>
+                                <div class="subBtn2" id="carSub" data-id="S{{ career.0 }}" data-value="{{ career.5 }}${{ career.3}}${{ career.6 }}${{ career.4}}${{ career.1 }}${{ career.2 }}"></div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+
+                    <select name="c_cateM" id="c_cateM">
+                        <option value="" disabled selected>선택</option>
+                        {% for cates in cate %}
+                        <option value="{{ cates.catecode }}" data-name="{{ cates.catename }}">{{ cates.catename }}</option>
+                        {% endfor %}
+                    </select>
+                    <select name="c_cateS" id="c_cateS">
+                        <option value="" disabled selected>세부 분야</option>
+                    </select>
+                    <input type="text" name="c_title" id="c_title" value="" placeholder="제목">
+                    <input type="text" name="c_role" id="c_role" value="" placeholder="역할">
+
+                    <div class="addBtn" id="careerAdd"></div>
+                </div>
+
+                <div class="leftInputBox f_areaInfo">
+                    <select name="allCareer_y" id="allCareer_y" style="color: #1f1f1f">
+                        <option value="" disabled selected>총 경력 년수</option>
+                        <option value="1" {% if profiles.careeryear == "1" %} selected {% endif %}>1년</option>
+                        <option value="2" {% if profiles.careeryear == "2" %} selected {% endif %}>2년</option>
+                        <option value="3" {% if profiles.careeryear == "3" %} selected {% endif %}>3년</option>
+                        <option value="4" {% if profiles.careeryear == "4" %} selected {% endif %}>4년</option>
+                        <option value="5" {% if profiles.careeryear == "5" %} selected {% endif %}>5년</option>
+                        <option value="6" {% if profiles.careeryear == "6" %} selected {% endif %}>6년</option>
+                        <option value="7" {% if profiles.careeryear == "7" %} selected {% endif %}>7년</option>
+                        <option value="8" {% if profiles.careeryear == "8" %} selected {% endif %}>8년</option>
+                        <option value="9" {% if profiles.careeryear == "9" %} selected {% endif %}>9년</option>
+                        <option value="10" {% if profiles.careeryear == "10" %} selected {% endif %}>10년</option>
+                        <option value="11" {% if profiles.careeryear == "11" %} selected {% endif %}>10년이상</option>
+                    </select>
+
+                    <select name="allCareer_m" id="allCareer_m" style="color: #1f1f1f">
+                        <option value="" disabled selected>개월</option>
+                        <option value="1개월" {% if profiles.careermonth == "1개월" %} selected {% endif %}>1개월</option>
+                        <option value="2개월" {% if profiles.careermonth == "2개월" %} selected {% endif %}>2개월</option>
+                        <option value="3개월" {% if profiles.careermonth == "3개월" %} selected {% endif %}>3개월</option>
+                        <option value="4개월" {% if profiles.careermonth == "4개월" %} selected {% endif %}>4개월</option>
+                        <option value="5개월" {% if profiles.careermonth == "5개월" %} selected {% endif %}>5개월</option>
+                        <option value="6개월" {% if profiles.careermonth == "6개월" %} selected {% endif %}>6개월</option>
+                        <option value="7개월" {% if profiles.careermonth == "7개월" %} selected {% endif %}>7개월</option>
+                        <option value="8개월" {% if profiles.careermonth == "8개월" %} selected {% endif %}>8개월</option>
+                        <option value="9개월" {% if profiles.careermonth == "9개월" %} selected {% endif %}>9개월</option>
+                        <option value="10개월" {% if profiles.careermonth == "10개월" %} selected {% endif %}>10개월</option>
+                        <option value="11개월" {% if profiles.careermonth == "11개월" %} selected {% endif %}>11개월</option>
+                    </select>
+                </div>
+
+            {% else %}
+                <div class="title f_areaInfo">경력
+                    <label class="textCheck" style="color: #ff8aae;"><input type="checkbox" name="notCareer" id="notCareer" checked> 경력없음 <div class="check on"></div></label>
+                </div>
+                <div class="inputBox f_areaInfo">
+                    <div class="careerList">
+                        <textarea name="saveCareer" id="saveCareer"></textarea>
+                    </div>
+
+                    <select name="c_cateM" id="c_cateM" disabled>
+                        <option value="" disabled selected>선택</option>
+                        {% for cates in cate %}
+                        <option value="{{ cates.catecode }}" data-name="{{ cates.catename }}">{{ cates.catename }}</option>
+                        {% endfor %}
+                    </select>
+                    <select name="c_cateS" id="c_cateS" disabled>
+                        <option value="" disabled selected>세부 분야</option>
+                    </select>
+                    <input type="text" name="c_title" id="c_title" value="" placeholder="제목" disabled>
+                    <input type="text" name="c_role" id="c_role" value="" placeholder="역할" disabled>
+
+                    <div class="addBtn" id="careerAdd" disabled></div>
+                </div>
+
+                <div class="leftInputBox f_areaInfo">
+                    <select name="allCareer_y" id="allCareer_y" disabled>
+                        <option value="" disabled selected>총 경력 년수</option>
+                        <option value="1">1년</option>
+                        <option value="2">2년</option>
+                        <option value="3">3년</option>
+                        <option value="4">4년</option>
+                        <option value="5">5년</option>
+                        <option value="6">6년</option>
+                        <option value="7">7년</option>
+                        <option value="8">8년</option>
+                        <option value="9">9년</option>
+                        <option value="10">10년</option>
+                        <option value="11">10년이상</option>
+                    </select>
+
+                    <select name="allCareer_m" id="allCareer_m" disabled>
+                        <option value="" disabled selected>개월</option>
+                        <option value="1개월">1개월</option>
+                        <option value="2개월">2개월</option>
+                        <option value="3개월">3개월</option>
+                        <option value="4개월">4개월</option>
+                        <option value="5개월">5개월</option>
+                        <option value="6개월">6개월</option>
+                        <option value="7개월">7개월</option>
+                        <option value="8개월">8개월</option>
+                        <option value="9개월">9개월</option>
+                        <option value="10개월">10개월</option>
+                        <option value="11개월">11개월</option>
+                    </select>
+                </div>
+            {% endif %}
+
+            </div>
+            <div class="winBox">
+                <div class="title" data-id="imageInfo">
+                    프로필 사진
+                    <div class="foldIcon pcNone"></div>
+                </div>
+                <div class="info f_imageInfo" style="margin-bottom: 0px">
+                    대표 이미지는 프로필 상세페이지에 들어가기 전, 프로필 리스트에서 보이게 되는 썸네일 이미지 입니다. 대표이미지는 필수 등록입니다.<br>
+                    프로필 이미지는 최대 10장의 사진 업로드가 가능합니다. 프로필 대표 이미지는 상반신 위주의 사진으로 등록해주세요.<br>
+                    대표 썸네일은 이미지 클릭 후 파일 업로드시 대표 썸네일이 변경됩니다.<br>
+                    이미지 1회 업로드시 총 30MB까지만 업로드 가능합니다.
+                </div>
+
+                <div class="profile_imageBox mainImageBox f_imageInfo">
+
+                    <label id="mainImage" for="input-mainImage" style="background-image: url('/media/{{ profiles.profileimage }}')"></label>
+                    <input type="file" name="mainImage[]" id="input-mainImage" class="upload-hidden input-file" data-type="mainImage">
+                    <input type="hidden" name="mainImg" id="mainImg" value="{{ profiles.profileimage }}">
+
+                    <input type="file" name="profileImage[]" id="input-file" class="upload-hidden input-file" data-type="profileImage">
+
+                    <div class="imageBox">
+                        {% if profiles.detailimage|default:"" != "" %}
+                            {% for images in profileImages %}
+                            <div class="upload-display" style="background-image: url('/media/{{ images }}')">
+                                <div class="upload-sub2" id="profiles" data-image="{{ images }}"></div>
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <label id="fileLabel" for="input-file"> <div class="addImage"></div> 이미지 등록</label>
+
+                    <textarea name="removeImage_detail" id="removeImage_detail" style="display: none"></textarea>
+                </div>
+
+                <div class="title f_imageInfo">작품 사진</div>
+                <div class="info f_imageInfo">
+                    활동했던 작품의 캡쳐 이미지를 등록할 수 있습니다.<br>
+                    작품 이미지는 최대 10장의 사진 업로드가 가능합니다.
+                </div>
+
+                <div class="profile_imageBox userImageBox f_imageInfo">
+                    <input type="file" name="userImage[]" id="input-piece" class="upload-hidden input-file" data-type="userImage">
+                    <div class="imageBox">
+                        {% if profiles.artimage|default:"" != "" %}
+                            {% for images in artImages %}
+                            <div class="upload-display" style="background-image: url('/media/{{ images }}')">
+                                <div class="upload-sub2"  id="acts" data-image="{{ images }}"></div>
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <label id="pieceLabel" for="input-piece"> <div class="addImage"></div> 이미지 등록</label>
+
+                    <textarea name="removeImage_art" id="removeImage_art" style="display: none"></textarea>
+                </div>
+
+                <div class="title f_imageInfo">프로필 영상</div>
+                <div class="info f_imageInfo">
+                    프로필 영상은 유투브에 업로드 된 영상의 '공유' 버튼을 누르면 나오는 링크를 입력해 주세요.<br>
+                    영상이 여러개 일 경우, 메인으로 보여질 영상은 아래 리스트에서 설정 가능합니다.
+                </div>
+
+                <div class="profile_imageBox f_imageInfo">
+                    <div class="youtubeList">
+                        <textarea name="youSave" id="youSave">{{ youtubes|parsingYoutube }}</textarea>
+                        {% if profiles.mainyoutube != "" %}
+                        {% for youtube in youtubes %}
+                            <div id="list_y{{ forloop.counter0 }}">
+                                {% if youtube == profiles.mainyoutube %}
+                                <label class="textCheck mainYoutube" style="color: #ff8aae"><input type="radio" value="s{{ forloop.counter0 }}" id="mainYoutube" name="mainYoutube" checked> 메인 영상으로 설정 <div class="check on"></div></label>
+                                {% else %}
+                                <label class="textCheck mainYoutube"><input type="radio" value="s{{ forloop.counter0 }}" id="mainYoutube" name="mainYoutube"> 메인 영상으로 설정 <div class="check"></div></label>
+                                {% endif %}
+                                <input type="text" value="{{ youtube }}"  class="y_link" style="width: 868px; margin-right: 10px" disabled>
+                                <div class="subBtn" id="linkSub" data-id="y{{ forloop.counter0 }}" data-value="s{{ forloop.counter0 }}${{ youtube }}"></div>
+                            </div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <label class="textCheck mainYoutube viewChecked"><input type="radio" value="1" id="mainYoutube" name="mainYoutube"> 메인 영상으로 설정 <div class="check"></div>  </label>
+                    <input type="text" name="y_link" id="y_link" class="y_link" value="" placeholder="공유 링크를 입력해주세요.">
+                    <div class="addBtn" id="linkAdd"></div>
+                </div>
+
+
+            </div>
+
+            <div class="winBox">
+                <div class="title" data-id="etcInfo">
+                    기타 경력
+                    <div class="foldIcon pcNone"></div>
+                </div>
+                <div class="inputBox f_etcInfo">
+
+                    <div class="etcCareerList">
+                        <textarea name="etcSaveCareer" id="etcSaveCareer">{{ careerEtc|parsingETCCareer }}</textarea>
+                        <textarea name="etcDelCareer" id="etcDelCareer" style="display: none"></textarea>
+
+                        {% for careerEtcs in careerEtc %}
+                            <div id="list_e{{ forloop.counter0 }}">
+                                <input type="text" value="{{ careerEtcs.catetype }}" style="width: 196px; margin-right: 10px" disabled>
+                                <input type="text" value="{{ careerEtcs.subcatetype }}" style="width: 196px; margin-right: 10px" disabled>
+                                <input type="text" value="{{ careerEtcs.title }}" style="width: 288px; margin-right: 10px" disabled>
+                                <input type="text" value="{{ careerEtcs.role }}" style="width: 358px; margin-right: 10px" disabled>
+                                <div class="subBtn2" id="eCarSub" data-id="e{{ forloop.counter0 }}" data-value="{{ careerEtcs.catetype }}${{ careerEtcs.subcatetype }}${{ careerEtcs.title }}${{ careerEtcs.role }}"></div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <select name="ec_cateM" id="ec_cateM">
+                        <option value="" disabled selected>선택</option>
+                        <option value="partTime" data-name="아르바이트">아르바이트</option>
+                        <option value="job" data-name="취업">취업</option>
+                    </select>
+
+                    <select name="ec_cateS" id="ec_cateS">
+                        <option value="" disabled selected>세부 분야</option>
+                    </select>
+
+                    <input type="text" name="ec_title" id="ec_title" value="" placeholder="상호명">
+
+                    <input type="text" name="ec_role" id="ec_role" value="" placeholder="역할">
+
+                    <div class="addBtn" id="eCareerAdd"></div>
+                </div>
+
+                <div class="title f_etcInfo">외국어 능력</div>
+                <div class="inputBox f_etcInfo">
+                    <div class="foreignList">
+                        <textarea name="saveForeign" id="saveForeign">{{ profiles.foreign }}</textarea>
+
+                        {% if profiles.foreign|default:"" != "" %}
+                        {% for foreigns in foreign %}
+                             <div id="list_f{{ forloop.counter0 }}">
+                                <input type="text" value="{{ foreigns|getData:0 }}" style="width: 196px; margin-right: 10px" disabled>
+                                <input type="text" value="{{ foreigns|getData:1 }}" style="width: 116px; margin-right: 10px" disabled>
+                                <div class="subBtn" id="foreignSub" data-id="f{{ forloop.counter0 }}" data-value="{{ foreigns }}"></div>
+                             </div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <select name="foreign" id="foreign">
+                        <option value="" disabled selected>언어</option>
+                        <option value="영어">영어</option>
+                        <option value="일어">일어</option>
+                        <option value="중국어">중국어</option>
+                        <option value="독일어">독일어</option>
+                        <option value="프랑스어">프랑스어</option>
+                        <option value="러시아어">러시아어</option>
+                        <option value="베트남어">베트남어</option>
+                    </select>
+
+                    <select name="good" id="good">
+                        <option value="" disabled selected>수준</option>
+                        <option value="상">상</option>
+                        <option value="중">중</option>
+                        <option value="하">하</option>
+                    </select>
+
+                    <div class="addBtn" id="foreignAdd"></div>
+                </div>
+
+                <div class="title f_etcInfo">특기</div>
+                <div class="inputBox f_etcInfo">
+                    <div class="specialtyList">
+                        <textarea name="saveSpecialty" id="saveSpecialty">{{ profiles.talent|default:"" }}</textarea>
+
+
+                        <select name="specialty" id="specialty">
+                            <option value="" selected disabled>특기 선택</option>
+                            {% for speci in specialty  %}
+                            <option value="{{ speci.1 }}">{{ speci.1 }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <select name="spec_sub" id="spec_sub">
+                            <option value="" selected disabled>특기 세부 선택</option>
+                        </select>
+
+                        <input name="spec_etc" id="spec_etc" readonly>
+
+                        <div class="addBtn" id="specialtyAdd"></div>
+
+
+                        <div class="specialtyBox">
+                            {% if profiles.talent|default:"" != "" %}
+                            {% for talents in talent %}
+                                <div id="list_t{{ forloop.counter0 }}" style="display: inline-block">
+                                    <input type="text" value="{{ talents }}" style="width: 150px; margin-right: 0px" disabled>
+                                    <div class="subBtn" id="specialtySub"  data-id="t{{ forloop.counter0 }}" data-value="{{ talents }}" style="margin-right: 10px;"></div>
+                                </div>
+
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="title f_etcInfo">태그</div>
+                <div class="inputBox f_etcInfo">
+                    <div class="tagList">
+                        <textarea name="saveTag" id="saveTag">{{ profiles.tag|default:"" }}</textarea>
+
+                        <select name="tag" id="tag">
+                            <option value="" selected disabled>태그 선택</option>
+                            {% for tag in tagList  %}
+                            <option value="{{ tag.tag }}">{{ tag.tag }}</option>
+                            {% endfor %}
+                            <option value="etc">직접입력</option>
+                        </select>
+
+                        <input name="tag_etc" id="tag_etc" readonly>
+
+                        <div class="addBtn" id="tagAdd"></div>
+                    </div>
+
+                    <div class="tagBox">
+                        {% if profiles.tag|default:"" != "" %}
+                        {% for tags in tag %}
+                            <div id="list_ta{{ forloop.counter0 }}" style="display: inline-block">
+                                <input type="text" value="{{ tags }}" style="width: 150px; margin-right: 0px" disabled>
+                                <div class="subBtn" id="tagSub"  data-id="ta{{ forloop.counter0 }}" data-value="{{ tags }}" style="margin-right: 10px;"></div>
+                            </div>
+
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="title f_etcInfo">MBTI</div>
+                <div class="inputBox f_etcInfo">
+                    <select name="mbti" id="mbti" style="color: #1f1f1f">
+                        <option value="" {% if profiles.mbti == "" %}selected{% endif %}>선택 안함</option>
+                        <option value="ISTJ" {% if profiles.mbti == "ISTJ" %}selected{% endif %}>ISTJ</option>
+                        <option value="ISFJ" {% if profiles.mbti == "ISFJ" %}selected{% endif %}>ISFJ</option>
+                        <option value="INFJ" {% if profiles.mbti == "INFJ" %}selected{% endif %}>INFJ</option>
+                        <option value="INTJ" {% if profiles.mbti == "INTJ" %}selected{% endif %}>INTJ</option>
+                        <option value="ISTP" {% if profiles.mbti == "ISTP" %}selected{% endif %}>ISTP</option>
+                        <option value="ISFP" {% if profiles.mbti == "ISFP" %}selected{% endif %}>ISFP</option>
+                        <option value="INFP" {% if profiles.mbti == "INFP" %}selected{% endif %}>INFP</option>
+                        <option value="INTP" {% if profiles.mbti == "INTP" %}selected{% endif %}>INTP</option>
+                        <option value="ESTP" {% if profiles.mbti == "ESTP" %}selected{% endif %}>ESTP</option>
+                        <option value="ESFP" {% if profiles.mbti == "ESFP" %}selected{% endif %}>ESFP</option>
+                        <option value="ENFP" {% if profiles.mbti == "ENFP" %}selected{% endif %}>ENFP</option>
+                        <option value="ENTP" {% if profiles.mbti == "ENTP" %}selected{% endif %}>ENTP</option>
+                        <option value="ESTJ" {% if profiles.mbti == "ESTJ" %}selected{% endif %}>ESTJ</option>
+                        <option value="ESFJ" {% if profiles.mbti == "ESFJ" %}selected{% endif %}>ESFJ</option>
+                        <option value="ENFJ" {% if profiles.mbti == "ENFJ" %}selected{% endif %}>ENFJ</option>
+                        <option value="ENTJ" {% if profiles.mbti == "ENTJ" %}selected{% endif %}>ENTJ</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="winBox">
+                <div class="title" data-id="introInfo">
+                    자기소개 <span style="font-size: 18px;">(<span class="text" style="font-size: 18px;">{{ profiles.comment|length }}</span> / 1000자)</span>
+                    <div class="foldIcon pcNone"></div>
+                </div>
+                <div class="info f_introInfo">
+                    경력 사항이 없는 경우 자기소개를 100자 이상 필수로 작성해주세요.
+                </div>
+                <div class="inputBox f_introInfo">
+                    <textarea name="introduction" id="introduction">{{ profiles.comment }}</textarea>
+                </div>
+            </div>
+
+            <div class="checkView">
+                <div class="info">
+                   작성한 프로필은 공개/비공개 설정할 수 있습니다.<br>
+                   비공개를 원하시면 우측에 '프로필 비공개 설정'을 체크하여 등록해주세요.
+                </div>
+
+                <div class="mMargin pcNone"></div>
+                {% if profiles.public == "0" %}
+                <label class="textCheck"><input type="checkbox" name="notView" id="notView" value="1"> 프로필 비공개 설정 <div class="check"></div>  </label>
+                {% else  %}
+                <label class="textCheck" style="color: #ff8aae;"><input type="checkbox" name="notView" id="notView" value="1" checked> 프로필 비공개 설정 <div class="check on"></div>  </label>
+                {% endif %}
+            </div>
+        </form>
+
+        <div class="btnBox">
+            <<!--<div class="preSaveBtn">임시 저장</div>
+            <div class="preViewBtn">미리보기</div>-->
+            <div class="sendBtn">프로필 수정하기</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var checkProfile = 0;
+</script>
+
+{% endblock %}

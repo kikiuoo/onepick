@@ -1,0 +1,973 @@
+/* Index 제목 */
+.mainTitle{
+    position : relative;
+    font-size: 24px;
+    font-weight: bold;
+    color: #1f1f1f;
+    margin-bottom: 17px;
+}
+
+.mainTitle span{
+    position : absolute;
+    right : 10px;
+    bottom: 1px;
+    height : 36px;
+    line-height : 36px;
+    margin-top : -18px;
+    font-size: 16px;
+    color: #959595;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+/* 오디션 */
+.auditionBox{
+    width: 100%;
+    margin-bottom: 50px;
+    font-size: 0px;
+}
+
+.auditionBox .banner{
+    margin-bottom: 20px;
+}
+
+.auditionBox .banner .mainBanner{
+    display: inline-block;
+    width: 390px;
+    height: 390px;
+    border-radius: 10px;
+    background-color: #fff;
+    cursor: pointer;
+    margin-right: 15px;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.auditionBox .banner .mainBanner:nth-child(3){
+    margin-right: 0px;
+}
+
+.auditionBox .audiList .audition{
+    position : relative;
+    display : inline-block;
+    width: 290px;
+    height: 230px;
+    border-radius: 10px;
+    background-color: #fff;
+    margin-right: 13px;
+    box-sizing: border-box;
+    padding: 10px;
+    cursor:pointer;
+}
+
+.auditionBox .audiList .audition:nth-child(2){
+    margin-right: 14px;
+}
+
+.auditionBox .audiList .audition:nth-child(4n){
+    margin-right: 0px;
+}
+
+.auditionBox .audiList .audition .audiLogo{
+    position: relative;
+    background-color : #fff;
+    width : 265px;
+    height :100px;
+    margin-bottom: 20px;
+
+    background-position: center;
+    background-repeat:  no-repeat;
+    background-size: 100% 100%;
+}
+
+.auditionBox .audiList .audition .audiLogo .recom_1,
+.auditionBox .audiList .audition .audiLogo .recom_3{
+    position: absolute;
+    left: -15px;
+    top: -15px;
+    width: 70px;
+    height: 70px;
+
+    background-size: cover;
+    background-position: center;
+    background-image: url("../../image/web_v2/castRecom_1.png");
+}
+
+.auditionBox .audiList .audition .audiLogo .recom_3{
+    left: -3px;
+    top: 0px;
+}
+
+.auditionBox .audiList .audition .audiLogo .recom_2,
+.auditionBox .audiList .audition .audiLogo .recom_4{
+    position: absolute;
+    left: -15px;
+    top: -15px;
+    width: 70px;
+    height: 70px;
+
+    background-size: cover;
+    background-position: center;
+    background-image: url("../../image/web_v2/castRecom_2.png");
+}
+
+.auditionBox .audiList .audition .audiLogo .recom_4{
+    left: -3px;
+    top: 0px;
+}
+
+.auditionBox .audiList .audition .audiLogo .endDateLabel{
+    position: absolute;
+    left: -23px;
+    top: -20px;
+    width: 95px;
+    height: 95px;
+    z-index: 10;
+
+    background-size: cover;
+    background-position: center;
+    background-image: url("../../image/web_v2/endAudi.png");
+}
+
+.auditionBox .audiList .audition .audiTitle{
+    display : inline-block;
+    height : 44px;
+
+    font-size: 16px;
+    line-height: 1.5em;
+    color: #1f1f1f;
+    font-weight: bold;
+    margin-bottom: 16px;
+
+    /* 2줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    display : -webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+}
+
+.auditionBox .audiList .audition .audiTerm{
+    height : 20px;
+    font-size: 15px;
+    color: #959595;
+}
+
+.auditionBox .audiList .audition .pickBtn{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+
+    background-image: url("../../image/web_v2/heart_off.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.auditionBox .audiList .audition .pickBtn.pickOn{
+    background-image: url("../../image/web_v2/heart_on.png");
+}
+
+
+
+/* 오디션 */
+.albaBox{
+    width: 100%;
+    margin-bottom: 50px;
+    font-size: 0px;
+}
+
+.albaBox .alba{
+    position : relative;
+    display : inline-block;
+    width: 290px;
+    height: 110px;
+    border-radius: 10px;
+    background-color: #fff;
+    margin-right: 13px;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 10px;
+    cursor:pointer;
+}
+
+.albaBox .alba:nth-child(2){
+    margin-right: 14px;
+}
+
+.albaBox .alba:nth-child(4n){
+    margin-right: 0px;
+}
+.albaBox .alba .albaTitle{
+    display : inline-block;
+    height : 44px;
+
+    font-size: 16px;
+    line-height: 1.5em;
+    color: #1f1f1f;
+    font-weight: bold;
+    margin-bottom: 16px;
+
+    /* 2줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    display : -webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+}
+
+.albaBox .alba .albaiTerm{
+    height : 20px;
+    font-size: 15px;
+    color: #959595;
+}
+
+.albaBox .alba .pickBtn{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+
+    background-image: url("../../image/web_v2/heart_off.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.albaBox .alba .pickBtn.pickOn{
+    background-image: url("../../image/web_v2/heart_on.png");
+}
+
+
+/* 띠베너 */
+.mainBanner{
+    width: 1200px;
+    height: 80px;
+    border-radius: 10px;
+    background-color: #fff;
+    margin-bottom : 50px;
+    cursor: pointer;
+}
+
+.subBanner{
+    width: 1200px;
+    height: 80px;
+    border-radius: 10px;
+
+    background-image: url("../../image/web_v2/small_banner_m_1.jpg");
+    cursor: pointer;
+}
+
+.sub2{
+    background-image: url("../../image/small_banner_m_3.jpg");
+    cursor: pointer;
+}
+
+
+/* Picks of Onepick */
+.picksBox{
+    width: 100%;
+    margin-bottom: 50px;
+    font-size: 0px;
+}
+
+.picksBox .reComProfile{
+    position: relative;
+    display : inline-block;
+    font-size: 0px;
+    width: 590px;
+    height: 300px;
+    border-radius: 10px;
+    background-color: #fff;
+    margin-right : 20px;
+    cursor:  pointer;
+    box-sizing: border-box;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.picksBox .reComProfile:nth-child(2){
+    margin-right: 0px;
+}
+
+.picksBox .reComProfile .image{
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    display : inline-block;
+    width: 300px;
+    height: 300px;
+    box-sizing: border-box;
+    vertical-align: top;
+
+    border-radius:  10px 0px 0px 10px;
+
+    background-color: #fff;
+    background-size: 100% auto;
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+
+.picksBox .reComProfile .image .recom{
+    position: absolute;
+    width: 84px;
+    height: 66px;
+    left: -10px;
+    top: -10px;
+
+    background-position: center;
+    background-size: cover;
+    background-image: url("../../image/web_v2/castRecom_3.png");
+}
+
+.picksBox .reComProfile .info{
+    position: relative;
+    display : inline-block;
+
+    margin-left: 300px;
+    width: 290px;
+    height: 300px;
+    padding: 20px;
+    vertical-align: top;
+
+    box-sizing: border-box;
+}
+
+.picksBox .reComProfile .info .name{
+    font-size: 16px;
+    font-weight: bold;
+    color: #1f1f1f;
+    margin-bottom: 8px;
+}
+
+.picksBox .reComProfile .info .cate{
+    font-size: 15px;
+    color: #1f1f1f;
+    margin-bottom: 8px;
+}
+
+.picksBox .reComProfile .info .youtube{
+    height: 140px;
+    width: 250px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.picksBox .reComProfile .info .viewBox{
+    position: absolute;
+    bottom: 13px;
+    left: 35px;
+    width: 220px;
+    font-size: 0px;
+}
+
+.picksBox .reComProfile .info .viewBox .countBox{
+    display: inline-block;
+    height: 57px;
+    width: 40px;
+    margin-right: 50px;
+    box-sizing: border-box;
+}
+
+.picksBox .reComProfile .info .viewBox .countBox:nth-child(3){
+    margin-right: 0px;
+}
+
+.picksBox .reComProfile .info .viewBox .countBox span{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: 9px;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.picksBox .reComProfile .info .viewBox .countBox span.viewCount{ background-image: url("../../image/web_v2/eye.png")}
+.picksBox .reComProfile .info .viewBox .countBox span.pickCount{ background-image: url("../../image/web_v2/heart.png")}
+.picksBox .reComProfile .info .viewBox .countBox span.comViewCount{ background-image: url("../../image/web_v2/buliding.png")}
+
+.picksBox .reComProfile .info .viewBox .countBox .viewName{
+    margin: 0px;
+    padding: 0px;
+
+    font-size: 12px;
+    text-align: center;
+    color: #959595;
+}
+
+.picksBox .reComProfile .info .viewBox .countBox p{
+    margin: 0px;
+    padding: 0px;
+
+    font-size: 12px;
+    text-align: center;
+    color: #959595;
+}
+
+.picksBox .reComProfile .info .pickBtn{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+
+    background-image: url("../../image/web_v2/heart_off.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.picksBox .reComProfile .info  .pickBtn.pickOn{
+    background-image: url("../../image/web_v2/heart_on.png");
+}
+
+
+/* 기업이 많이 본 프로필 */
+.comViewBox{
+    width: 100%;
+    margin-bottom: 50px;
+    font-size: 0px;
+    padding-top: 5px;
+}
+
+.comViewBox .comViewProfile{
+    position: relative;
+    display : inline-block;
+    font-size: 0px;
+    width: 290px;
+    height: 670px;
+    border-radius: 10px;
+    background-color: #fff;
+    margin-right : 13px;
+    cursor:  pointer;
+    box-sizing: border-box;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.comViewBox .comViewProfile:nth-child(2){
+    margin-right: 14px;
+}
+
+.comViewBox .comViewProfile:nth-child(4){
+    margin-right: 0px;
+}
+
+.comViewBox .comViewProfile .info{
+    position: relative;
+    display : inline-block;
+
+    width: 100%;
+    height: 85px;
+    padding: 20px 20px 15px 60px;
+    vertical-align: top;
+
+    box-sizing: border-box;
+}
+
+.comViewBox .comViewProfile .info .number{
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 62px;
+    height: 72px;
+
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+
+.comViewBox .comViewProfile .info .number#n_1{width: 48px; background-image: url("../../image/web_v2/1.png")}
+.comViewBox .comViewProfile .info .number#n_2{width: 60px; background-image: url("../../image/web_v2/2.png")}
+.comViewBox .comViewProfile .info .number#n_3{width: 59px; background-image: url("../../image/web_v2/3.png")}
+.comViewBox .comViewProfile .info .number#n_4{width: 62px; background-image: url("../../image/web_v2/4.png")}
+
+.comViewBox .comViewProfile .info .name{
+    font-size: 16px;
+    font-weight: bold;
+    color: #1f1f1f;
+    margin-bottom: 8px;
+}
+
+.comViewBox .comViewProfile .info .cate{
+    font-size: 15px;
+    color: #1f1f1f;
+    margin-bottom: 8px;
+}
+
+.comViewBox .comViewProfile .info .pickBtn{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+
+    background-image: url("../../image/web_v2/heart_off.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.comViewBox .comViewProfile .info  .pickBtn.pickOn{
+    background-image: url("../../image/web_v2/heart_on.png");
+}
+
+.comViewBox .comViewProfile .image{
+    position: relative;
+    display : inline-block;
+    width: 290px;
+    height: 330px;
+    box-sizing: border-box;
+    vertical-align: top;
+
+    background-color: #fff;
+    background-size: 100% auto;
+    background-position: top center;
+    background-repeat: no-repeat;
+    margin-bottom: 5px;
+}
+
+.comViewBox .comViewProfile .image .recom{
+    position: absolute;
+    width: 84px;
+    height: 66px;
+    left: -10px;
+    top: -10px;
+
+    background-position: center;
+    background-size: cover;
+    background-image: url("../../image/web_v2/castRecom_3.png");
+}
+
+.comViewBox .comViewProfile .youtube{
+    height: 170px;
+    width: 290px;
+    box-sizing: border-box;
+}
+
+.comViewBox .comViewProfile .viewBox{
+    position: absolute;
+    bottom: 13px;
+    left: 35px;
+    width: 290px;
+    font-size: 0px;
+    margin-top: 10px;
+}
+
+.comViewBox .comViewProfile .viewBox .countBox{
+    display: inline-block;
+    height: 57px;
+    width: 40px;
+    margin-right: 50px;
+    box-sizing: border-box;
+}
+
+.comViewBox .comViewProfile .viewBox .countBox:nth-child(3){
+    margin-right: 0px;
+}
+
+.comViewBox .comViewProfile .viewBox .countBox span{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: 9px;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.comViewBox .comViewProfile .viewBox .countBox span.viewCount{ background-image: url("../../image/web_v2/eye.png")}
+.comViewBox .comViewProfile .viewBox .countBox span.pickCount{ background-image: url("../../image/web_v2/heart.png")}
+.comViewBox .comViewProfile .viewBox .countBox span.comViewCount{ background-image: url("../../image/web_v2/buliding.png")}
+
+.comViewBox .comViewProfile .viewBox .countBox .viewName{
+    margin: 0px;
+    padding: 0px;
+
+    font-size: 12px;
+    text-align: center;
+    color: #959595;
+}
+
+.comViewBox .comViewProfile .viewBox .countBox p{
+    margin: 0px;
+    padding: 0px;
+
+    font-size: 12px;
+    text-align: center;
+    color: #959595;
+}
+
+/* 커뮤니티  */
+.leftBox, .rightBox{
+    display: inline-block;
+    width: 590px;
+    height: 350px;
+    margin-right: 16px;
+    vertical-align: top;
+    margin-bottom: 50px;
+}
+
+.rightBox{margin-right: 0px}
+
+.leftBox .castReviewBox{
+    width: 590px;
+    height: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0px;
+    cursor: pointer;
+}
+
+.leftBox .castReviewBox .image{
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    box-sizing: border-box;
+    vertical-align: top;
+
+    background-color: #fff;
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    margin-bottom: 5px;
+}
+
+
+.leftBox .castReviewBox .info{
+    display: inline-block;
+    width: 290px;
+    height: 300px;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.leftBox .castReviewBox .info .name{
+    font-size: 16px;
+    font-weight: bold;
+    color: #1f1f1f;
+    margin-bottom: 18px;
+}
+
+.leftBox .castReviewBox .info .content{
+    height: 216px;
+    font-size: 15px;
+    line-height: 1.3em;
+    color: #1f1f1f;
+
+    /* 2줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    display : -webkit-box;
+    -webkit-line-clamp:11;
+    -webkit-box-orient:vertical;
+    overflow: hidden;
+}
+
+.rightBox .loungeBox{
+    width: 590px;
+    height: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0px;
+    padding: 0px 20px;
+    box-sizing: border-box;
+}
+
+.rightBox .loungeBox .loungeList{
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #eee;
+    font-size: 0px;
+    cursor:pointer;
+}
+
+.rightBox .loungeBox .loungeList:last-child{
+    border-bottom: 0px;
+}
+
+.rightBox .loungeBox .loungeList .cate{
+    display: inline-block;
+    width: 83px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 15px;
+    color: #ff8aae;
+    vertical-align: top;
+    margin-right: 10px;
+}
+
+.rightBox .loungeBox .loungeList .title{
+    display: inline-block;
+    width: 330px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 15px;
+    color: #1f1f1f;
+    font-weight: bold;
+    vertical-align: top;
+    margin-right: 28px;
+
+    /* 2줄 이상일 경우 ... 처리 */
+    white-space : nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.rightBox .loungeBox .loungeList .regDate{
+    display: inline-block;
+    width: 79px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 15px;
+    color: #959595;
+    vertical-align: top;
+}
+
+/* 미니 프로필 */
+.miniBox{
+    font-size: 0px;
+    width: 100%;
+    margin-bottom: 50px;
+    font-size: 0px;
+    padding-top: 5px;
+}
+
+.miniBox .miniProfile{
+    position: relative;
+    display : inline-block;
+    font-size: 0px;
+    width: 188px;
+    height: 370px;
+    border-radius: 10px 10px 0px 0px;
+    background-color: #fff;
+    margin-right : 14px;
+    cursor:  pointer;
+    box-sizing: border-box;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.miniBox .miniProfile:nth-child(1),
+.miniBox .miniProfile:nth-child(6){
+    margin-right: 15px;
+}
+
+.miniBox .miniProfile:nth-child(6){
+    margin-right: 0px;
+}
+
+.miniBox .miniProfile .info{
+    position: relative;
+    display : inline-block;
+
+    width: 100%;
+    height: 40px;
+    padding: 9px 10px;
+    vertical-align: top;
+
+    box-sizing: border-box;
+}
+
+.miniBox .miniProfile .info .name{
+    font-size: 16px;
+    font-weight: bold;
+    color: #1f1f1f;
+    margin-bottom: 8px;
+}
+
+.miniBox .miniProfile .info .pickBtn{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+
+    background-image: url("../../image/web_v2/heart_off.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.miniBox .miniProfile .info  .pickBtn.pickOn{
+    background-image: url("../../image/web_v2/heart_on.png");
+}
+
+.miniBox .miniProfile .image{
+    position: relative;
+    display : inline-block;
+    width: 188px;
+    height: 214px;
+    box-sizing: border-box;
+    vertical-align: top;
+
+    background-color: #fff;
+    background-size: 100% auto;
+    background-position: top center;
+    background-repeat: no-repeat;
+    margin-bottom: 5px;
+}
+
+.miniBox .miniProfile .image .recom{
+    position: absolute;
+    width: 84px;
+    height: 66px;
+    left: -10px;
+    top: -10px;
+
+    background-position: center;
+    background-size: cover;
+    background-image: url("../../image/web_v2/castRecom_3.png");
+}
+
+.miniBox .miniProfile .youtube{
+    height: 188px;
+    width: 116px;
+    box-sizing: border-box;
+}
+
+.container_2{
+    position: relative;
+}
+
+.popupBox{
+    position: fixed;
+    width: 1920px;
+    top: 120px;
+    left: 0px;
+}
+
+.popupBox .popup{
+    position: absolute;
+    left: 80px;
+    top: 0px;
+    width: 600px;
+    height: 640px;
+    background-color: #fff;
+    display: none;
+}
+
+.popupBox .popup:nth-child(2){
+    left: auto;
+    right: 80px;
+}
+
+.popupBox .popup .image{
+    width: 600px;
+    height: 600px;
+    cursor: pointer;
+}
+.popupBox .popup .btnBox{
+    border: 1px solid #d7d7d7;
+    height: 40px;
+    font-size: 0px;
+}
+
+.nonBtn{
+    display: inline-block;
+    width: 299px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    border-right: 1px solid #d7d7d7;
+    cursor: pointer;
+    color: #1f1f1f;
+}
+
+.exitBtn{
+    display: inline-block;
+    width: 298px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #959595;
+}
+
+.swiper-button-next,
+.swiper-button-prev{
+    color: #c0c0c0 !important;
+}
+
+
+
+.writeBtn{
+    z-index: 100;
+    position: fixed;
+    bottom: 250px;
+    right: 130px;
+    width: 90px;
+    height: 90px;
+    background-color: #fff;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    padding-top: 54px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #FF709C;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+}
+
+.writeBtn .icon{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 20px;
+    left: 30px;
+
+    background-image: url("../../image/web_v2/edit.png");
+}
+
+.topBtn{
+    z-index: 100;
+    position: fixed;
+    bottom: 80px;
+    right: 130px;
+    width: 90px;
+    height: 90px;
+    background-color: #eee;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    padding-top: 54px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #959595;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+}
+
+.topBtn .icon{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 20px;
+    left: 30px;
+
+    background-image: url("../../image/web_v2/arrow-up.png");
+}

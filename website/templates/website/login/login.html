@@ -1,0 +1,49 @@
+{% extends 'website/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css_v2/web/login/login.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css_v2/mobile/login/login.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js_v2/website/login/login.js' %}"></script>
+
+<div class="container_2">
+    <div class="mainTitle">로그인</div>
+
+    <div class="inBox">
+        <div class="loginBox">
+            <div class="inputBox">
+                <input type="text" name="userID" id="userID" placeholder="아이디 입력">
+                <input type="password" name="userPW" id="userPW" placeholder="패스워드 입력">
+                <input type="hidden" name="reUrl" id="reUrl" value="{{ reUrl }}">
+            </div>
+            <div class="searchInfo">아이디 | 비밀번호 찾기</div>
+            <div class="button loginBtn">로그인</div>
+        </div>
+
+        <div class="socialBox">
+            <div class="socialBtn" id="gogleLogin">
+                <div class="logo"></div>
+                <span>구글 로그인</span>
+            </div>
+            <div class="socialBtn" id="naverLogin">
+                <div class="logo"></div>
+                <span>네이버 로그인</span>
+            </div>
+            <div class="socialBtn" id="kakaoLogin">
+                <div class="logo"></div>
+                <span>카카오 로그인</span>
+            </div>
+        </div>
+
+        <div class="joinInfo">
+            더 많은 정보를 얻고 싶다면? <span>회원가입하기</span>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

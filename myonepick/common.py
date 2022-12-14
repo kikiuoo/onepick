@@ -9,6 +9,17 @@ import smtplib
 from email.mime.text import MIMEText
 from cryptography.fernet import Fernet # symmetric encryption
 
+
+def nowDevice( request ):
+
+    if request.user_agent.is_mobile :
+        url = "website"
+    else :
+        url = "website"
+
+    return url ;
+
+
 def getPageList ( nowPage, allPage) :
 
     sPage = nowPage - 2

@@ -20,12 +20,19 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
-    path('', include('picktalk.urls')),
-    path('audi/', include('audition.urls')),
-    path('profile/', include('profiles.urls')),
-    path('users/', include('user.urls')),
+    #path('', include('picktalk.urls')),
+    path('', include('website.urls.urls')),
+    path('profile/', include('website.urls.profile_urls')),
+    path('audi/', include('website.urls.audition_urls')),
+    path('lounge/', include('website.urls.lounge_urls')),
+    path('users/', include('website.urls.user_urls')),
+    path('ajax/', include('website.urls.ajax_urls')),
+    path('search/', include('website.urls.search_urls')),
+    path('common/', include('website.urls.common_urls')),
+    path('login/', include('website.urls.login_urls')),
+
     path('onepickAdmin/', include('onepickAdmin.urls')),
-    path('lounge/', include('lounge.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()

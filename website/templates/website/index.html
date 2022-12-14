@@ -1,0 +1,621 @@
+{% extends 'website/base.html' %}
+{% block context %} <!-- base.html 본문 내용 부분 시작 -->
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %} <!-- /picktalk/templatetags/myfilter.py -->
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css_v2/web/index.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css_v2/mobile/index.css' %}" > <!-- 모바일 버전 -->
+
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+<!-- JS 파일 -->
+<script src="{% static 'js_v2/website/index.js' %}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+
+<!-- 본문 내용 -->
+<div class="container_2">
+
+    <div class="mainTitle">
+        오디션
+        <span data-url="audi/list/">더보기</span>
+    </div>
+
+    <div class="auditionBox">
+        <div class="bannerBox">
+            <div class="banner">
+                {% for banner in mainbanner %}
+                <div class="mainBanner" style="background-image: url('/media/{{ banner.image }}')" data-num="{{ banner.num }}" data-url="{{ banner.url }}"></div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="audiListBox">
+            <div class="audiList">
+               {% for audition in auditions %}
+                <div class="audition" data-num="{{ audition.0 }}">
+                    <div class="audiLogo" style='background-image: url("/media/{{ audition.4 }}");'>
+                        {% if audition.8 > 0 and audition.8 <= 7  %}
+                            <!-- 마감임박인 경우 -->
+                            <div class="endDateLabel"></div>
+                            {% if audition.6 == 1 %}
+                                <div class="recom_3"></div><!-- 추천1 -->
+                            {% endif %}
+
+                            {% if audition.7 == 1 %}
+                                 <div class="recom_4"></div><!-- 추천2 -->
+                            {% endif %}
+                        {% else %}
+                            {% if audition.6 == 1 %}
+                                <div class="recom_1"></div><!-- 추천1 -->
+                            {% endif %}
+
+                            {% if audition.7 == 1 %}
+                                 <div class="recom_2"></div><!-- 추천2 -->
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="audiTitle">{{ audition.1 }}</div>
+                    <div class="audiTerm">
+                        {% if audition.3 == "1" %}
+                            상시모집
+                        {% else %}
+                            {{ audition.2|date:'Y-m-d' }} 마감
+                        {% endif %}
+                    </div>
+                    {% if audition.5 == 0 or audition.5 == "0" %}
+                    <div class="pickBtn" data-nowType="off"></div>
+                    {% else %}
+                    <div class="pickBtn pickOn " data-nowType="on"></div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!--
+    <div class="mainTitle">
+        아르바이트
+        <span data-url="audi/main/all/1/">더보기</span>
+    </div>
+
+    <div class="albaBox">
+        {% for audition in auditions %}
+        <div class="alba" data-num="{{ audition.0 }}">
+            <div class="albaTitle">{{ audition.1 }}</div>
+            <div class="albaiTerm">
+                {% if audition.3 == "1" %}
+                    상시모집
+                {% else %}
+                    {{ audition.2|date:'Y-m-d' }} 마감
+                {% endif %}
+            </div>
+            {% if audition.5 == 0 or audition.5 == "0" %}
+            <div class="pickBtn" data-nowType="off"></div>
+            {% else %}
+            <div class="pickBtn pickOn " data-nowType="on"></div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    -->
+    <div class="mobilBanner">
+        <div class="swiper mySwiper mainBanner">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide subBanner" data-url = 'http://pf.kakao.com/_RczSxb/chat'></div>
+                <div class="swiper-slide subBanner sub2" data-url = 'https://pickstudio.net'></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mainTitle">
+        Picks of ONEPICK
+        <span data-url="profile/list/">더보기</span>
+    </div>
+
+    <div class="picksBox">
+        {% for profile in picksofOnepick %}
+        <div class="reComProfile" data-num="{{ profile.0 }}">
+            <div class="image"  style='background-image: url("/media/{{ profile.1 }}");'>
+                {% if profile.12 == 1 %}
+                <div class="recom"></div>
+                {% endif %}
+            </div>
+            <div class="info">
+                {% if request.session.userType == "admin"   %}
+                <div class="name">{{ profile.2 }} ({{ profile.3|userAge }})</div>
+                {% elif profile.4 != None %}
+                <div class="name">{{ profile.2|updateUserName }} ({{ profile.3|userAge }})</div>
+                {% else %}
+                <div class="name">*** ({{ profile.3|userAge }})</div>
+                {% endif %}
+
+                {% if profile.11 == "old" %}
+                {% else %}
+                <div class="cate">{{ profile.4|getMainCate }} {{ profile.5|getSubCate }}</div>
+                {% endif %}
+
+                <div class="youtube">
+                    <iframe width="250" height="140" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                <div class="viewBox mobileNone">
+                    <div class="countBox">
+                        <span class="viewCount"></span>
+                        <div class="viewName">전체 뷰</div>
+                        <p>{{ profile.7 }}</p>
+                    </div>
+                    <div class="countBox">
+                        <span class="comViewCount"></span>
+                        <div class="viewName">기업 뷰</div>
+                        <p>{{ profile.8 }}</p>
+                    </div>
+                    <div class="countBox">
+                        <span class="pickCount"></span>
+                        <div class="viewName">픽</div>
+                        <p>{{ profile.9 }}</p>
+                    </div>
+                </div>
+
+                <div class="viewBox pcNone">
+                    <div class="countBox">
+                        <span class="viewCount"></span>
+                        <div class="viewName">전체 뷰</div>
+                        <p>{{ profile.7 }}</p>
+                    </div>
+                    <div class="countBox">
+                        <span class="comViewCount"></span>
+                        <div class="viewName">기업 뷰</div>
+                        <p>{{ profile.8 }}</p>
+                    </div>
+                    <div class="countBox">
+                        <span class="pickCount"></span>
+                        <div class="viewName">픽</div>
+                        <p>{{ profile.9 }}</p>
+                    </div>
+                </div>
+
+                {% if profile.10 == 0 or profile.10 == "0" %}
+                <div class="pickBtn" data-nowType="off"></div>
+                {% else %}
+                <div class="pickBtn pickOn " data-nowType="on"></div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <div class="mainTitle">
+        기업이 많이 본 프로필
+        <span data-url="profile/list/">더보기</span>
+    </div>
+
+    <div class="comViewBox">
+        <div class="comViwListBox">
+            {% for profile in companyManyView %}
+            <div class="comViewProfile" data-num="{{ profile.0 }}">
+                <div class="info">
+                    <div class="number" id="n_{{ forloop.counter }}"></div>
+                    {% if request.session.userType == "admin"   %}
+                    <div class="name">{{ profile.2 }} ({{ profile.3|userAge }})</div>
+                    {% elif profile.4 != None %}
+                    <div class="name">{{ profile.2|updateUserName }} ({{ profile.3|userAge }})</div>
+                    {% else %}
+                    <div class="name">*** ({{ profile.3|userAge }})</div>
+                    {% endif %}
+
+                    {% if profile.11 == "old" %}
+                    {% else %}
+                    <div class="cate">{{ profile.4|getMainCate }} {{ profile.5|getSubCate }}</div>
+                    {% endif %}
+
+                    {% if profile.10 == 0 or profile.10 == "0" %}
+                    <div class="pickBtn" data-nowType="off"></div>
+                    {% else %}
+                    <div class="pickBtn pickOn " data-nowType="on"></div>
+                    {% endif %}
+                </div>
+
+                <div class="image"  style='background-image: url("/media/{{ profile.1 }}");'>
+                    {% if profile.12 == 1 %}
+                        <div class="recom"></div>
+                    {% endif %}
+                </div>
+
+                <div class="youtube">
+                    <iframe width="290" height="170" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                <div class="viewBox">
+                    <div class="countBox">
+                        <span class="viewCount"></span>
+                        <div class="viewName">전체 뷰</div>
+                        <p>{{ profile.7 }}</p>
+                    </div>
+                    <div class="countBox">
+                        <span class="comViewCount"></span>
+                        <div class="viewName">기업 뷰</div>
+                        <p>{{ profile.8 }}</p>
+                    </div>
+                    <div class="countBox">
+                        <span class="pickCount"></span>
+                        <div class="viewName">픽</div>
+                        <p>{{ profile.9 }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="leftBox">
+        <div class="mainTitle">
+            캐스팅 후기
+            <!--<span data-url="audi/main/all/1/">더보기</span>-->
+        </div>
+
+        <div class="castReviewBox" data-num="116">
+            <div class="image"  style='background-image: url("/media/photos/profile/additional/0b7ec47bd979c63f8d8dfb0b8a24301e.jpeg");'></div>
+            <div class="info">
+                <div class="name">남가예 (여)</div>
+                <div class="content">
+                    캐스팅 진행 과정 <br>
+                    : 캐스팅 진행은 우선 원픽 페이지에 프로필을 올리고 , 그이후에 캐스팅 담당자님들께서 제 프로필을 보시고 연락주세요. 시간대가 촬영시간과 맞을시에 위치, 필요한 준비사항, 촬영 내용등 캐디님께 상세히 전달을 받고 진행을 이어 갑니다 <br>
+                    촬영장 현장 후기 <br>
+                    : 저같은 경우에는 드라마 ‘연예인 매니저로 살아남기’ 첫 촬영때 와 마지막화 촬영 둘다 임했는데요. 너무나 감사하게도 첫촬영때 재미있고 즐겁게 촬영했던 기억이 있었는데, 마지막화 촬영때도 역시나 너무 즐거운 분위기속에서 촬영을 임했고 감독님과 다른 스텝분들이 기억해 주셔서 첫 촬영때 얘기도 하고, 급 대사를 주셔서 카메라앞에서 가까이 찍힌 좋은 경험까지 하게 되어 너무 뜻 깊은 시간들이었습니다.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rightBox">
+        <div class="mainTitle">
+            커뮤니티
+            <span data-url="lounge/">더보기</span>
+        </div>
+
+        <div class="loungeBox">
+            {% for commu in community %}
+            <div class="loungeList" data-num="{{ commu.0 }}" data-type="{{ commu.3 }}">
+                <div class="cate">
+                    {% if commu.3 == "bull" %}[자유게시판]
+                    {% elif commu.3 == "magazine" %}[매거진]
+                    {% elif commu.3 == "notice" %}[공지사항]
+                    {% endif %}
+                </div>
+                <div class="title">{{ commu.1 }}</div>
+                <div class="regDate">{{ commu.2|date:"Y-m-d" }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="mainTitle">
+        인기 프로필
+        <span data-url="profile/list/">더보기</span>
+    </div>
+
+    <div class="miniBox">
+        <div class="miniListBox">
+            {% for profile in bestProfile %}
+            <div class="miniProfile" data-num="{{ profile.0 }}">
+                <div class="info">
+                    <div class="number" id="n_{{ forloop.counter }}"></div>
+                    {% if request.session.userType == "admin"   %}
+                    <div class="name">{{ profile.2 }} ({{ profile.3|userAge }})</div>
+                    {% elif profile.4 != None %}
+                    <div class="name">{{ profile.2|updateUserName }} ({{ profile.3|userAge }})</div>
+                    {% else %}
+                    <div class="name">*** ({{ profile.3|userAge }})</div>
+                    {% endif %}
+
+                    {% if profile.10 == 0 or profile.10 == "0" %}
+                    <div class="pickBtn" data-nowType="off"></div>
+                    {% else %}
+                    <div class="pickBtn pickOn " data-nowType="on"></div>
+                    {% endif %}
+                </div>
+
+                <div class="image"  style='background-image: url("/media/{{ profile.1 }}");'>
+                    {% if profile.12 == 1 %}
+                        <div class="recom"></div>
+                    {% endif %}
+                </div>
+
+                <div class="youtube">
+                    <iframe width="188" height="116" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <div class="mainTitle">
+        추천 프로필
+        <span data-url="profile/list/">더보기</span>
+    </div>
+
+    <div class="miniBox">
+        <div class="miniListBox">
+            {% for profile in recomProfile %}
+            <div class="miniProfile" data-num="{{ profile.0 }}">
+                <div class="info">
+                    <div class="number" id="n_{{ forloop.counter }}"></div>
+                    {% if request.session.userType == "admin"   %}
+                    <div class="name">{{ profile.2 }} ({{ profile.3|userAge }})</div>
+                    {% elif profile.4 != None %}
+                    <div class="name">{{ profile.2|updateUserName }} ({{ profile.3|userAge }})</div>
+                    {% else %}
+                    <div class="name">*** ({{ profile.3|userAge }})</div>
+                    {% endif %}
+
+                    {% if profile.10 == 0 or profile.10 == "0" %}
+                    <div class="pickBtn" data-nowType="off"></div>
+                    {% else %}
+                    <div class="pickBtn pickOn " data-nowType="on"></div>
+                    {% endif %}
+                </div>
+
+                <div class="image"  style='background-image: url("/media/{{ profile.1 }}");'>
+                    {% if profile.12 == 1 %}
+                        <div class="recom"></div>
+                    {% endif %}
+                </div>
+
+                <div class="youtube">
+                    <iframe width="188" height="116" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <div class="mainTitle">
+        신규 프로필
+        <span data-url="profile/list/">더보기</span>
+    </div>
+
+    <div class="miniBox">
+        <div class="miniListBox">
+            {% for profile in newProfile %}
+            <div class="miniProfile" data-num="{{ profile.0 }}">
+                <div class="info">
+                    <div class="number" id="n_{{ forloop.counter }}"></div>
+                    {% if request.session.userType == "admin"   %}
+                    <div class="name">{{ profile.2 }} ({{ profile.3|userAge }})</div>
+                    {% elif profile.4 != None %}
+                    <div class="name">{{ profile.2|updateUserName }} ({{ profile.3|userAge }})</div>
+                    {% else %}
+                    <div class="name">*** ({{ profile.3|userAge }})</div>
+                    {% endif %}
+
+                    {% if profile.10 == 0 or profile.10 == "0" %}
+                    <div class="pickBtn" data-nowType="off"></div>
+                    {% else %}
+                    <div class="pickBtn pickOn " data-nowType="on"></div>
+                    {% endif %}
+                </div>
+
+                <div class="image"  style='background-image: url("/media/{{ profile.1 }}");'>
+                    {% if profile.12 == 1 %}
+                        <div class="recom"></div>
+                    {% endif %}
+                </div>
+
+                <div class="youtube">
+                    <iframe width="188" height="116" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <div class="mainTitle">
+        댄스가 특기인 프로필
+        <span data-url="profile/list/">더보기</span>
+    </div>
+
+    <div class="miniBox">
+        <div class="miniListBox">
+            {% for profile in danceProfile %}
+            <div class="miniProfile" data-num="{{ profile.0 }}">
+                <div class="info">
+                    <div class="number" id="n_{{ forloop.counter }}"></div>
+                    {% if request.session.userType == "admin"   %}
+                    <div class="name">{{ profile.2 }} ({{ profile.3|userAge }})</div>
+                    {% elif profile.4 != None %}
+                    <div class="name">{{ profile.2|updateUserName }} ({{ profile.3|userAge }})</div>
+                    {% else %}
+                    <div class="name">*** ({{ profile.3|userAge }})</div>
+                    {% endif %}
+
+                    {% if profile.10 == 0 or profile.10 == "0" %}
+                    <div class="pickBtn" data-nowType="off"></div>
+                    {% else %}
+                    <div class="pickBtn pickOn " data-nowType="on"></div>
+                    {% endif %}
+                </div>
+
+                <div class="image"  style='background-image: url("/media/{{ profile.1 }}");'>
+                    {% if profile.12 == 1 %}
+                        <div class="recom"></div>
+                    {% endif %}
+                </div>
+
+                <div class="youtube">
+                    <iframe width="188" height="116" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="mainTitle">
+        키가 큰 프로필
+        <span data-url="profile/list/">더보기</span>
+    </div>
+
+    <div class="miniBox">
+        <div class="miniListBox">
+            {% for profile in tallProfile %}
+            <div class="miniProfile" data-num="{{ profile.0 }}">
+                <div class="info">
+                    <div class="number" id="n_{{ forloop.counter }}"></div>
+                    {% if request.session.userType == "admin"   %}
+                    <div class="name">{{ profile.2 }} ({{ profile.3|userAge }})</div>
+                    {% elif profile.4 != None %}
+                    <div class="name">{{ profile.2|updateUserName }} ({{ profile.3|userAge }})</div>
+                    {% else %}
+                    <div class="name">*** ({{ profile.3|userAge }})</div>
+                    {% endif %}
+
+                    {% if profile.10 == 0 or profile.10 == "0" %}
+                    <div class="pickBtn" data-nowType="off"></div>
+                    {% else %}
+                    <div class="pickBtn pickOn " data-nowType="on"></div>
+                    {% endif %}
+                </div>
+
+                <div class="image"  style='background-image: url("/media/{{ profile.1 }}");'>
+                    {% if profile.12 == 1 %}
+                        <div class="recom"></div>
+                    {% endif %}
+                </div>
+
+                <div class="youtube">
+                    <iframe width="188" height="116" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="mainTitle">
+        {{ addr }}지역 프로필
+        <span data-url="profile/list/">더보기</span>
+    </div>
+
+    <div class="miniBox">
+        <div class="miniListBox">
+            {% for profile in addrProfile %}
+            <div class="miniProfile" data-num="{{ profile.0 }}">
+                <div class="info">
+                    <div class="number" id="n_{{ forloop.counter }}"></div>
+                    {% if request.session.userType == "admin"   %}
+                    <div class="name">{{ profile.2 }} ({{ profile.3|userAge }})</div>
+                    {% elif profile.4 != None %}
+                    <div class="name">{{ profile.2|updateUserName }} ({{ profile.3|userAge }})</div>
+                    {% else %}
+                    <div class="name">*** ({{ profile.3|userAge }})</div>
+                    {% endif %}
+
+                    {% if profile.10 == 0 or profile.10 == "0" %}
+                    <div class="pickBtn" data-nowType="off"></div>
+                    {% else %}
+                    <div class="pickBtn pickOn " data-nowType="on"></div>
+                    {% endif %}
+                </div>
+
+                <div class="image"  style='background-image: url("/media/{{ profile.1 }}");'>
+                    {% if profile.12 == 1 %}
+                        <div class="recom"></div>
+                    {% endif %}
+                </div>
+
+                <div class="youtube">
+                    <iframe width="188" height="116" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="popupBox">
+        {% for popup in popupList %}
+        <div class="popup" id="popup_{{ popup.num }}">
+            <div class="image" style='background-image: url("/media/{{ popup.image }}");' data-url="{{ popup.url }}"></div>
+            <div class="btnBox">
+                <div class="nonBtn" data-num="{{ popup.num }}" data-type="{{ popup.nviweterm }}">
+                    {% if popup.nviweterm == 1 %} 오늘 하루 보지 않기
+                    {% elif popup.nviweterm == 3 %} 3일 보지 않기
+                    {% elif popup.nviweterm == 7 %} 7일 보지 않기
+                    {% elif popup.nviweterm == -99 %} 다시 보지 않기
+                    {% endif %}
+                </div>
+                <div class="exitBtn" data-num="{{ popup.num }}">닫기</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="writeBtn" data-userType="{{ request.session.userType }}"><div class="icon"></div>등록</div>
+
+    <div class="topBtn"><div class="icon"></div>위로</div>
+
+
+</div>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script type="text/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    var cateType = '{{ cateType }}';
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+    });
+
+
+    {% for popup in popupList %}
+    if(!$.cookie('popupCookie_{{ popup.num }}')){
+        $("#popup_{{ popup.num }}").css("display", "block");
+    }
+    {% endfor %}
+
+
+    var ht = null;
+    (function(id, scriptSrc, callback) {
+        var d = document,
+            tagName = 'script',
+            $script = d.createElement(tagName),
+            $element = d.getElementsByTagName(tagName)[0];
+
+        $script.id = id;
+        $script.async = true;
+        $script.src = scriptSrc;
+
+        if (callback) { $script.addEventListener('load', function (e) { callback(null, e); }, false); }
+        $element.parentNode.insertBefore($script, $element);
+    })('happytalkSDK', 'https://design.happytalkio.com/sdk/happytalk.chat.v2.min.js', function() {
+        ht = new Happytalk({
+          siteId: '4000002454',
+          siteName: '케이에스앤픽',
+          categoryId: '151949',
+          divisionId: '151950'
+      });
+    });
+</script>
+
+<script src="https://cdn.flarelane.com/WebSDK.js" charset="UTF-8"></script>
+<script>
+    //FlareLane.initialize({ projectId: "1fd48a3e-8028-4108-b55d-56d10ee513ab" });
+</script>
+
+{% endblock %}
+

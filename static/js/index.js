@@ -1,6 +1,5 @@
 $(document).ready(function (){
-
-      // Title 전체보기 클릭 이벤트 (Web 만 사용)
+    // Title 전체보기 클릭 이벤트 (Web 만 사용)
     $(document).on("click", ".mainTitle span", function(){
         var url = $(this).attr("data-url");
 

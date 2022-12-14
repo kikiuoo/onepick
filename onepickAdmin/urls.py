@@ -62,6 +62,13 @@ urlpatterns = [
     path('display/banner/editCallback/', viewsDisplay.editCallback, name='editCallback'),
     path('display/banner/delete/<int:num>/', viewsDisplay.bannerDelete, name='bannerDelete'),
 
+    path('display/popup/', viewsDisplay.popupList, name='popupList'),
+    path('display/popup/write/', viewsDisplay.popupWrite, name='popupWrite'),
+    path('display/popup/writeCallback/', viewsDisplay.popupWriteCallback, name='popupWriteCallback'),
+    path('display/popup/edit/<int:num>/', viewsDisplay.popupEdit, name='popupEdit'),
+    path('display/popup/editCallback/', viewsDisplay.popupEditCallback, name='popupEditCallback'),
+    path('display/popup/delete/<int:num>/', viewsDisplay.popupDelete, name='popupDelete'),
+
     # cs url
     path('cs/qanda/', viewsCs.qandaList, name='qandaList'),
     path('cs/mail/', viewsCs.mailMain, name='mailMain'),
