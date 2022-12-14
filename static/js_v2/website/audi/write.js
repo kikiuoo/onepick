@@ -270,9 +270,9 @@ $(document).ready(function(){
         var auditionDate = $("#auditionDate").val();
 
 
-        var age = $("#age").find("option:selected");
-        var gender = $("#gender").find("option:selected");
-        var career = $("#career").find("option:selected");
+        var age = $("#age").find("option:selected").val();
+        var gender = $("#gender").find("option:selected").val();
+        var career = $("#career").find("option:selected").val();
 
         if( title == "" ){
             alert("오디션 공고 제목을 입력해주세요.");

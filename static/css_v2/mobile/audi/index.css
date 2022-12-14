@@ -150,10 +150,12 @@
 .page .rightPage,
 .page .lastPage{
     display: inline-block;
-    width: 18px;
-    height: 18px;
+    width: 12px;
+    height: 12px;
     vertical-align: top;
     cursor: pointer;
+    background-size: cover;
+    margin-top: 2px;
 }
 
 .page .firstPage,
@@ -164,24 +166,28 @@
 .page .firstPage { background-image: url("../../../image/web_v2/arrow-left2.png")}
 .page .leftPage { background-image: url("../../../image/web_v2/arrow-left.png")}
 .page .rightPage { background-image: url("../../../image/web_v2/arrow-right.png")}
-.page .lastPage { background-image: url("../../../image/web_v2/arrow-right2.png")}
+.page .lastPage { background-image: url("../../../image/web_v2/arrow-right2.png"); margin-right: 20px}
 
 .page .pageBox{
     display: inline-block;
     vertical-align: top;
     height: 18px;
-    margin-left: 30px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .page .pageBox .pages{
     display: inline-block;
     height: 18px;
     line-height: 18px;
-    font-size: 15px;
+    font-size: 10px;
     color: #959595;
-    margin-right: 20px;
+    margin-right: 15px;
     cursor: pointer;
+}
+
+.page .pageBox .pages:last-child{
+    margin-right: 0px;
 }
 
 .page .pageBox .pages.nowPage{

@@ -17,7 +17,7 @@ from django.views.decorators.csrf import requires_csrf_token
 def audi_index(request): # 오디션 Main3
     nUrl = nowDevice(request)
 
-    cate_type = request.GET.get("cate_type", "recomend")
+    cate_type = request.GET.get("cate_type", "new")
     page = int( request.GET.get("page", "1") )
     searchWord = request.GET.get("search", "")
 

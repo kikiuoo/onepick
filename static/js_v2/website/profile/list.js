@@ -312,7 +312,7 @@ $(document).ready(function(){
 
 function updatePick(tableName, nowType, num){
     $.ajax({
-      url: baseUrl + "ajax/updatePick/",
+      url: baseUrl + "common/updatePick/",
       type: "GET",
       dataType: "json",
       data:{"userID":userID, "tableName" : tableName, "nowType" : nowType, "num" : num},

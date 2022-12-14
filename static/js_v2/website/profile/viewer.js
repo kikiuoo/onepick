@@ -253,7 +253,7 @@ function viewImage(viewImageCount) {
 
 function updatePick(tableName, nowType){
     $.ajax({
-      url: baseUrl + "ajax/updatePick/",
+      url: baseUrl + "common/updatePick/",
       type: "GET",
       dataType: "json",
       data:{"userID":userID, "tableName" : tableName, "nowType" : nowType, "num" : num},

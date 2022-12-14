@@ -69,7 +69,7 @@ $(document).ready(function(){
         }
     });
 
-    $(document).on("click", ".leftPage, .pages, .rightPage", function(){
+    $(document).on("click", ".leftPage, .pages, .rightPage, .pages, .firstPage, .pages, .lastPage", function(){
         var pages = $(this).attr("data-page");
 
         window.location.href = "/audi/list/?cate_type=" + cateType + "&page="+pages+"&search="+search;
