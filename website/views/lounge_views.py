@@ -131,7 +131,7 @@ def qandaMyList(request, page) :
     allPage = int(len(qandaList) / block) + 1
     paging = getPageList_v2(page, allPage)
 
-    return render(request, 'lounge/qandaList.html',
+    return render(request, nUrl + '/lounge/qandaList.html',
                   {"qandaList": qandaList, "paging" : paging, "page":page,"type": "myList",
                    "leftPage": page - 1, "rightPage": page + 1, "lastPage": allPage })
 
