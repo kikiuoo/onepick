@@ -1,6 +1,6 @@
 .inBox{
     position: relative;
-    width: 100%;
+    width: calc(100% - 20px);
     padding: 0px 10px 12px;
     border-radius: 20px;
     border: solid 1px #c0c0c0;
