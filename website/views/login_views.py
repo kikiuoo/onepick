@@ -87,7 +87,7 @@ def googleLoginCallback(request):
     client_secret = "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"
     #AIzaSyDK6_FmteverNdo8r3womycHKb8MbboFbo
 
-    redirection_uri = loginUrl + "/login/google/callback/"
+    redirection_uri = loginUrl + "login/google/callback/"
     grant_type = 'authorization_code'
     state = "random_string"
 
@@ -104,8 +104,9 @@ def googleLoginCallback(request):
 
     sub = profile_json.get("sub")
     email = profile_json.get("email")
-    print(sub + " " )
-    returnUrl = userLogin(request, "google_"+sub, "", "", "", "", "GOOGLE")
+    print(sub + " " + email)
+
+    returnUrl = userLogin(request, "google_"+sub, email, "", "", "", "GOOGLE")
 
     return redirect(returnUrl)
 
