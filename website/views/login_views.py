@@ -10,8 +10,8 @@ from django.views.decorators.csrf import csrf_exempt
 from picktalk.models import *
 from myonepick.common import *
 
-#loginUrl = "https://myonepick.com/"
-loginUrl = "http://localhost:8000/"
+loginUrl = "https://myonepick.com/"
+#loginUrl = "http://localhost:8000/"
 
 
 def md5_generator(str):

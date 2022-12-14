@@ -11,10 +11,16 @@ $(document).ready(function () {
     // 메뉴 버튼 이벤트 (공통)
     $(document).on("click", ".header .menu, .menuCate", function(){
        var url = $(this).attr("data-url");
+       var type = $(this).attr("data-type");
 
        if(url == "#") { alert("서비스 준비중입니다."); return; }
 
-       window.location.href = baseUrl +  url;
+       if( type == "open" ){
+           window.open( url );
+       }else{
+           window.location.href = baseUrl +  url;
+       }
+
     });
 
     /* Header 버튼 Web 이벤트 */

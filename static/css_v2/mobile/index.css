@@ -924,3 +924,7 @@
     background-repeat: no-repeat;
     background-position: center;
 }
+
+.swiper{
+    margin: 0px !important;
+}

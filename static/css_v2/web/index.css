@@ -28,7 +28,7 @@
 }
 
 .auditionBox .banner{
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .auditionBox .banner .mainBanner{
@@ -39,6 +39,7 @@
     background-color: #fff;
     cursor: pointer;
     margin-right: 15px;
+    margin-bottom: 0px;
 
     background-size: cover;
     background-repeat: no-repeat;
