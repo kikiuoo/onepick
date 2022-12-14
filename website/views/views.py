@@ -15,7 +15,6 @@ def index(request):
     nUrl = nowDevice(request)
     user = request.session.get('id', '')
 
-
     try :
         cursor = connection.cursor()
 

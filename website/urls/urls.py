@@ -2,9 +2,9 @@ from django.urls import path
 from website.views import views
 
 urlpatterns = [
-    #path('', views.index, name='main'),
-    path('', views.downstime, name='downstime'),
-    path('index/', views.index, name='main'),
+    path('', views.index, name='main'),
+    #path('', views.downstime, name='downstime'),
+    #path('index/', views.index, name='main'),
 
     path("advertise/", views.advertise, name="advertisse"),
     path("advertise/callBack/", views.advertise_callBack, name="advertise-callback"),
