@@ -555,7 +555,7 @@
                 <div class="title f_etcInfo">MBTI</div>
                 <div class="inputBox f_etcInfo">
                     <select name="mbti" id="mbti" style="color: #1f1f1f">
-                        <option value="" {% if profiles.mbti == "" %}selected{% endif %}>선택 안함</option>
+                        <option value="" {% if profiles.mbti == "" %}selected{% endif %} disabled selected>mbti 선택</option>
                         <option value="ISTJ" {% if profiles.mbti == "ISTJ" %}selected{% endif %}>ISTJ</option>
                         <option value="ISFJ" {% if profiles.mbti == "ISFJ" %}selected{% endif %}>ISFJ</option>
                         <option value="INFJ" {% if profiles.mbti == "INFJ" %}selected{% endif %}>INFJ</option>

@@ -780,8 +780,13 @@ $(document).ready(function (){
             alert("메인 프로필 사진을 등록해주세요.");
             return;
         }
-
+        var mbti = $("#mbti").find("option:selected").val();
         var introduction = $("#introduction").val();
+
+        if( mbti == "" ){
+            alert("mbti를 선택해주세요.");
+            return;
+        }
 
         if( notCareer == true ){
             if( introduction == "" || introduction.length < 100 ){
