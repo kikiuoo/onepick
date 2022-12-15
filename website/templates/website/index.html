@@ -36,7 +36,7 @@
                {% for audition in auditions %}
                 <div class="audition" data-num="{{ audition.0 }}">
                     <div class="audiLogo" style='background-image: url("/media/{{ audition.4 }}");'>
-                        {% if audition.8 > 0 and audition.8 <= 7  %}
+                        {% if audition.8 <= 0 and audition.8 >= -7  %}
                             <!-- 마감임박인 경우 -->
                             <div class="endDateLabel"></div>
                             {% if audition.6 == 1 %}

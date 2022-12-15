@@ -52,6 +52,7 @@
     margin-bottom: 30px;
     font-size: 0px;
     overflow-x : scroll;
+    padding-top: 10px;
 }
 
 .audiListBox .audiList{
@@ -68,7 +69,6 @@
     background-color: #fff;
     margin-right: 10px;
     box-sizing: border-box;
-    overflow: hidden;
     padding: 10px;
     cursor:pointer;
 }
@@ -86,6 +86,39 @@
     background-position: center;
     background-repeat:  no-repeat;
     background-size: 100% 100%;
+}
+
+.auditionBox .audiList .audition .audiLogo .recom_1,
+.auditionBox .audiList .audition .audiLogo .recom_3,
+.auditionBox .audiList .audition .audiLogo .recom_2,
+.auditionBox .audiList .audition .audiLogo .recom_4{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+
+    background-size: cover;
+    background-position: center;
+    background-image: url("../../image/web_v2/castRecom_2.png");
+}
+
+.auditionBox .audiList .audition .audiLogo .recom_4{
+    left: -3px;
+    top: 0px;
+}
+
+.auditionBox .audiList .audition .audiLogo .endDateLabel{
+    position: absolute;
+    left: -9px;
+    top: -9px;
+    width: 62px;
+    height: 62px;
+    z-index: 10;
+
+    background-size: cover;
+    background-position: center;
+    background-image: url("../../image/web_v2/endAudi.png");
 }
 
 .auditionBox .audiList .audition .audiTitle{
@@ -498,6 +531,7 @@
 }
 
 .comViewBox .comViewProfile .image{
+    position: relative;
     display : inline-block;
     width: 220px;
     height: 250px;
@@ -596,6 +630,7 @@
 }
 
 .leftBox .castReviewBox .image{
+    position: relative;
     display: inline-block;
     width: 170px;
     height: 170px;
@@ -772,6 +807,7 @@
 }
 
 .miniBox .miniProfile .image{
+    position: relative;
     display : inline-block;
     width: 150px;
     height: 170px;
@@ -935,4 +971,16 @@
 
 .mobileBox{
     padding-right: 20px;
+}
+
+.recom{
+    position: absolute;
+    width: 40px;
+    height: 31px;
+    left: 5px;
+    top: 5px;
+
+    background-position: center;
+    background-size: cover;
+    background-image: url("../../image/web_v2/castRecom_3.png");
 }

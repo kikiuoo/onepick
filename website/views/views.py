@@ -39,6 +39,8 @@ def index(request):
         result = cursor.execute(query)
         auditions = cursor.fetchall()
 
+        print( auditions )
+
         # 프로필 Picks Of Onepick
         if user:
             query = "SELECT PI.num, profileImage, ui.name, ui.birth, interCate, interSubCate, mainYoutube, viewCount, cViewCount, pickCount, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = PI.num ) AS proPick, contentType, recommend " \
@@ -646,6 +648,7 @@ def applyList(request, num) :
                 "where 1 " + where + " " \
                 "order by audi.regTime desc limit " + str(start) + ", " + str(block)
 
+    print(query)
     result = cursor.execute(query)
     profile = cursor.fetchall()
 
@@ -662,7 +665,7 @@ def applyList(request, num) :
     connection.commit()
     connection.close()
 
-    return render(request, nUrl + 'user/proList_apply.html',
+    return render(request, nUrl + '/user/proList_apply.html',
                   {"profile": profile, "filter" : filter, "paging":paging, "page": page,
                    "leftPage": page - 1, "rightPage": page + 1, "lastPage": allPage,"allCount" : cursor.rowcount, "allList" : len(allList), "num": num,
                    "nationality":nationality, "geneder": geneder, "military": military, "ageRadio": ageRadio
