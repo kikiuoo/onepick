@@ -3,7 +3,8 @@
 
 <!-- Index CSS 파일 및 JS 파일 include -->
 {% load static %}
-<link rel="stylesheet" href="{% static 'css_v2/web/login/agreementC.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css_v2/web/login/agreementC.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css_v2/mobile/login/agreementC.css' %}" > <!-- 모바일 버전 -->
 
 <!-- JS 파일 -->
 <script src="{% static 'js_v2/website/login/agreementC.js' %}"></script>
