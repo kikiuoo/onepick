@@ -170,7 +170,7 @@ def editCallback(request) :
 
     nowTime = str(timezone.now())
     user = request.session.get('adminID', '')
-    adminLog = AdminLog.objects.create(userid=user, viewtype="user_update", content=num, regdate=nowTime)
+    adminLog = AdminLog.objects.create(userid=user, viewtype="user_update", content=userInfo.num, regdate=nowTime)
 
     return redirect(url)
 
