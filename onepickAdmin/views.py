@@ -27,7 +27,7 @@ def adminCheck(request):
                     "FROM( " \
                     "	SELECT DATE_FORMAT(regTime,'%m/%d') AS C " \
                     "	FROM user_info " \
-                    "	WHERE regTime >= '2022-07-29' and phone != '' " \
+                    "	WHERE regTime >= '2022-07-29' " \
                     "	ORDER BY regTime " \
                     ")AS a " \
                     "GROUP BY C ORDER BY C DESC LIMIT 14 "
