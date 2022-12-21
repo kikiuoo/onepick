@@ -76,7 +76,7 @@ def saveClassfy(request):
     else :
         profileInfo.classjob = profileInfo.classjob + "," + saveChk_job
 
-    profileInfo.clsscount = profileInfo.clsscount + 1
+    profileInfo.classcount = profileInfo.classcount + 1
 
     profileInfo.save()
 
