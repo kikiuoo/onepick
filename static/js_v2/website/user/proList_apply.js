@@ -317,7 +317,7 @@ $(document).ready(function (){
 
 function updateApplyPick(pick, auditionNum, profileNum, comment){
     $.ajax({
-      url:  baseUrl + "ajax/updateApplyPick/",
+      url:  baseUrl + "common/updateApplyPick/",
       type: "GET",
       dataType: "json",
       data:{"pick":pick, "auditionNum" : auditionNum, "profileNum" : profileNum, "comment" : comment},
@@ -340,7 +340,7 @@ function updateApplyPick(pick, auditionNum, profileNum, comment){
 
 function updatePick(tableName, nowType, num){
     $.ajax({
-      url:  baseUrl + "ajax/updatePick/",
+      url:  baseUrl + "common/updatePick/",
       type: "GET",
       dataType: "json",
       data:{"userID":userID, "tableName" : tableName, "nowType" : nowType, "num" : num},

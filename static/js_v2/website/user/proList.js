@@ -131,21 +131,3 @@ function updatePick(tableName, nowType, num){
    });
 }
 
-function getProfileList( page ){
-    $.ajax({
-      url:  baseUrl + "proList2/"+type+"/"+page+"/"+num+"/"+filter+"/",
-      type: "GET",
-      dataType: "html",
-      success: function(data){
-          if( page == 1 ) {
-              $(".inBox").empty().append(data);
-          }else{
-              $(".inBox").append(data);
-          }
-      },
-      error: function (request, status, error){
-          alert(error);
-      }
-   });
-}
-
