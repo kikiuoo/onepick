@@ -312,7 +312,7 @@ def viewer(request, cate_type, num) :
 
     nowTime = timezone.now()
 
-    if userType == "COMPANY" or userType == "S-COMPANY" :
+    if userType == "COMPANY" or userType == "S-COMPANY" or userType == "admin" :
         userID = request.session.get('id', '')
         profiles.cviewcount = profiles.cviewcount + 1
         profiles.save()
@@ -399,7 +399,7 @@ def viewer_all(request, cate_type, num):
 
     nowTime = timezone.now()
 
-    if userType == "COMPANY" or userType == "S-COMPANY":
+    if userType == "COMPANY" or userType == "S-COMPANY"  or userType == "admin" :
         userID = request.session.get('id', '')
         profiles.cviewcount = profiles.cviewcount + 1
         profiles.save()
