@@ -218,7 +218,8 @@ def audi_write_callback(request) :
                                                startdate=startDate, enddate=endDate, ordinary=ordinary,
                                                auditiondate=auditionDate, audiunsetted=notAudi, each=each, logo_image=logoUrl,
                                                age=age, gender=gender, career=career, image=imageURL, essential=essential,
-                                               preparation=preparation, regtime=nowTime, viewcount=0, recorder=0, isdelete=0)
+                                               preparation=preparation, regtime=nowTime, viewcount=0, recorder=0, isdelete=0,
+                                               recommend="0", recommend2="0")
 
     key = str(AuditionInfo.objects.latest('num').num)
 
