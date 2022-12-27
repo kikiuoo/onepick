@@ -23,6 +23,42 @@ $(document).ready(function () {
 
     });
 
+    $(document).on("click", ".search", function (){
+
+        var search = $("#search").val();
+
+        if( search == "" ){
+            alert("검색할 내용을 입력해주세요.");
+            return;
+        }
+
+        window.location.href = "/search/"+search+"/";
+    });
+
+    $(document).on("keyup", ".searchBox #search", function(e){
+       if( e.keyCode == 13 ){
+           $(".search").trigger("click");
+       }
+    });
+
+    $(document).on("click", ".search2", function (){
+
+        var search = $("#search2").val();
+
+        if( search == "" ){
+            alert("검색할 내용을 입력해주세요.");
+            return;
+        }
+
+        window.location.href = "/search/"+search+"/";
+    });
+
+    $(document).on("keyup", ".searchBox2 #search2", function(e){
+       if( e.keyCode == 13 ){
+           $(".search").trigger("click");
+       }
+    });
+
     /* Header 버튼 Web 이벤트 */
     $(document).on("click",".login", function(){
         window.location.href =  baseUrl +  "login/local/";

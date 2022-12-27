@@ -70,6 +70,57 @@ body{
     cursor:pointer;
 }
 
+.header .searchBox2{
+    position: absolute;
+    right: 120px;
+    top: 10px;
+    height: 26px;
+    width: 170px;
+    border-radius: 33px;
+    border: solid 1px #ff8aae;
+    background-color: #fff;
+    z-index: 1;
+}
+.header .searchBox2 #search2{
+    display:  inline-block;
+    border : 0px solid blue !important;
+    background-color: transparent !important;
+    width: 85%;
+    height: 100%;
+    box-sizing:border-box;
+    vertical-align: top;
+
+    font-size: 10px;
+    padding-left: 5px;
+    line-height: 25px;
+    font-weight: bold;
+    color: #ff8aae;
+    font-family: 'Noto Sans KR', sans-serif
+}
+.header .searchBox2 #search2::placeholder{
+    font-size: 10px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+.header .searchBox2 #search2:focus{
+    outline: none;
+}
+.header .searchBox2 .search2{
+    display:  inline-block;
+    width: 14px;
+    height: 15px;
+    box-sizing:border-box;
+    vertical-align: top;
+    cursor: pointer;
+    margin-top: 4px;
+    margin-right: 5px;
+
+    background-image : url('../../image/mobile/searchBtn.png');
+    background-size : 100%;
+    background-repeat : no-repeat;
+    background-position : center;
+}
+
 .header .menu{
     display :inline-block;
     width: 20%;

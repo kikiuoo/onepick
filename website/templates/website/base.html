@@ -41,6 +41,11 @@
         <div class="container_header">
             <div class="logo"></div>
 
+            <div class="searchBox">
+                <input type="text" name="search" id="search" placeholder="오디션,인물 검색"/>
+                <div class="search"></div>
+            </div>
+
             <div class="menu" data-url="audi/list/" data-type="normal">오디션</div>
             <div class="menu" data-url="profile/list/" data-type="normal">프로필</div>
             <div class="menu" data-url="#" data-type="normal">아르바이트</div>
@@ -61,6 +66,11 @@
     <div class="header pcNone">
         <div class="container_header">
             <div class="logo"></div>
+
+            <div class="searchBox2">
+                <input type="text" name="search" id="search2" placeholder="오디션,인물 검색"/>
+                <div class="search2"></div>
+            </div>
 
             {% if request.session.id == "" or request.session.id == null %}
             <div class="login">로그인</div>

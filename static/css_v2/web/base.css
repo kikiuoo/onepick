@@ -70,6 +70,61 @@ body{
     background-position: left center;
 }
 
+/* serach 버튼 클릭시 변경된 디자인 */
+.header .searchBox{
+    position: absolute;
+    left: 170px;
+    top: 20px;
+    display: inline-block;
+    width: 300px;
+    height: 48px;
+    border-radius: 30px;
+    border: solid 2px #ff8aae;
+    background-color: #fff;
+    box-sizing: border-box;
+
+    font-weight: bold;
+    text-align: left;
+    color: #ff8aae;
+    font-size: 0px;
+}
+.header .searchBox #search{
+    font-family: 'Noto Sans KR', sans-serif;
+    display:  inline-block;
+    border : 0px solid blue !important;
+    background-color: transparent !important;
+    width: 84%;
+    height: 100%;
+    box-sizing:border-box;
+    vertical-align: top;
+    padding-left: 16px;
+
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+.header .searchBox #search::placeholder{
+    font-size: 16px;
+    color: #ff8aae;
+}
+.header .searchBox #search:focus{
+    outline: none !important;
+}
+.header .searchBox .search{
+    display:  inline-block;
+    width: 16%;
+    height: 100%;
+    box-sizing:border-box;
+    vertical-align: top;
+    cursor: pointer;
+
+    background-image : url('../../image/web/searchBtn.png');
+    background-size : 40%;
+    background-repeat : no-repeat;
+    background-position : center;
+}
+/* serach 버튼 클릭시 변경된 디자인 */
+
 .header .menu{
     display :inline-block;
     height: 90px;
