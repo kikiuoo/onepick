@@ -33,7 +33,7 @@ def list(request, type,  page):
         else :
             where = " AND endDate < NOW() "
 
-        query = "SELECT ai.num, uc.companyName, ai.title, ai.regTime, ai.startDate, ai.endDate, ai.viewCount, " \
+        query = "SELECT ai.num, uc.companyName, ai.title, ai.regTime, ai.startDate, ai.endDate, ai.viewCount,ai.recommend,ai.recommend2, " \
                 "	(SELECT COUNT(*) FROM audition_apply WHERE auditionNum = ai.num) AS applyCount " \
                 "FROM audition_info AS ai LEFT JOIN user_company AS uc ON ai.userID = uc.userID " \
                 "WHERE isDelete = '0' " + where + "  " \
@@ -42,7 +42,7 @@ def list(request, type,  page):
         result = cursor.execute(query)
         auditionAll = cursor.fetchall()
 
-        query = "SELECT ai.num, uc.companyName, ai.title, ai.regTime, ai.startDate, ai.endDate, ai.viewCount, " \
+        query = "SELECT ai.num, uc.companyName, ai.title, ai.regTime, ai.startDate, ai.endDate, ai.viewCount,ai.recommend,ai.recommend2, " \
                 "	(SELECT COUNT(*) FROM audition_apply WHERE auditionNum = ai.num) AS applyCount " \
                 "FROM audition_info AS ai LEFT JOIN user_company AS uc ON ai.userID = uc.userID " \
                 "WHERE isDelete = '0' " + where + " " \
@@ -89,7 +89,7 @@ def listSearch(request, type, word, page):
         else :
             where = " AND endDate < NOW() "
 
-        query = "SELECT ai.num, uc.companyName, ai.title, ai.regTime, ai.startDate, ai.endDate, ai.viewCount, " \
+        query = "SELECT ai.num, uc.companyName, ai.title, ai.regTime, ai.startDate, ai.endDate, ai.viewCount,ai.recommend,ai.recommend2, " \
                 "	(SELECT COUNT(*) FROM audition_apply WHERE auditionNum = ai.num) AS applyCount " \
                 "FROM audition_info AS ai LEFT JOIN user_company AS uc ON ai.userID = uc.userID " \
                 "WHERE isDelete = '0' " + where + " and ( uc.companyName like '%"+word+"%' or ai.title like '%"+word+"%' ) " \
@@ -98,7 +98,7 @@ def listSearch(request, type, word, page):
         result = cursor.execute(query)
         audiAll = cursor.fetchall()
 
-        query = "SELECT ai.num, uc.companyName, ai.title, ai.regTime, ai.startDate, ai.endDate, ai.viewCount, " \
+        query = "SELECT ai.num, uc.companyName, ai.title, ai.regTime, ai.startDate, ai.endDate, ai.viewCount,ai.recommend,ai.recommend2, " \
                 "	(SELECT COUNT(*) FROM audition_apply WHERE auditionNum = ai.num) AS applyCount " \
                 "FROM audition_info AS ai LEFT JOIN user_company AS uc ON ai.userID = uc.userID " \
                 "WHERE isDelete = '0' " + where + "  and ( uc.companyName like '%"+word+"%' or ai.title like '%"+word+"%' ) " \
