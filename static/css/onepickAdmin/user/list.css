@@ -85,8 +85,21 @@
 
 .btnBox{
     position: absolute;
-    left: -5px;
+    right: -5px;
     bottom: -70px;
+}
+.btnBox .addBtn{
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #ff8aae;
+    border-radius: 10px;
+    cursor: pointer;
+
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
 }
 
 .btnBox .excelBtn{
@@ -103,7 +116,6 @@
     font-size: 16px;
     color: #ff8aae;
 }
-
 
 .title{
     position: relative;
