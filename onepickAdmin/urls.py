@@ -34,16 +34,19 @@ urlpatterns = [
     path('user/edit/<int:num>/', viewsUser.edit, name='edit'),
     path('user/editCallback/', viewsUser.editCallback, name='editCallback'),
     path('user/updateComany/', viewsUser.updateComany, name='updateComany'),
+    path('user/addCompany/', viewsUser.addCompany, name='addCompany'),
     path('user/excel/<type>/<word>/', viewsUser.excel, name='excel'),
     path('user/logList/<int:page>/', viewsUser.logList, name='logList'),
 
     # Profile url
     path('profile/list/<type>/<int:page>/', viewsProfile.list, name='list'),
     path('profile/listSearch/<type>/<word>/<int:page>/', viewsProfile.listSearch, name='listSearch'),
+    path('profile/saveRecommendProfile/', viewsProfile.saveRecommendProfile, name='saveRecommendProfile'),
 
     # audition url
     path('audi/list/<type>/<int:page>/', viewsAudi.list, name='list'),
     path('audi/listSearch/<type>/<word>/<int:page>/', viewsAudi.listSearch, name='listSearch'),
+    path('audi/saveRecommendAudi/', viewsAudi.saveRecommendAudi, name='saveRecommendAudi'),
 
     # display url
     path('display/audi/', viewsDisplay.audiList, name='audiList'),

@@ -331,12 +331,13 @@ def joinCompanyCallback(request):
         licenseImages = url
 
     count = 0
+    artLicenses = ""
     for image in artLicense:
         count = count + 1
         sub = image.name.split('.')[-1]
         url = uploadFile(image, "photos/company/", sub)
+        print("url", url)
         artLicenses = url
-
 
     userCompany = UserCompany.objects.create(userid=userID, logoimage=logoImage, licenseimage=licenseImages, artlicenseimage=artLicenses,
                                              license=license,companyname=companyName, addr1=companyAddr1, addr2=companyAddr2, website=webSite,

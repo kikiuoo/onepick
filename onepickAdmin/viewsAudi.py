@@ -2,7 +2,7 @@ import datetime
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
-from django.template import  loader
+from django.template import loader
 from django.db import connection
 
 from picktalk.models import *
@@ -118,7 +118,72 @@ def listSearch(request, type, word, page):
     except:
         connection.rollback()
 
+    return render(request, urlBase + "listSearch.html",
+                  {'pageType': "audi", "auditionList": audition, "paging": paging, "page": page,
+                   "leftPage": page - 1, "rightPage": page + 1, "lastPage": allPage, "cateList": cateList,
+                   "type": type, "word": word})
 
-    return render( request, urlBase + "listSearch.html", {'pageType': "audi", "auditionList":audition, "paging":paging, "page" : page,
-                                                    "leftPage" : page-1, "rightPage" : page+1, "lastPage" : allPage, "cateList" : cateList,
-                                                    "type": type, "word":word})
+## saveRecommendAudi 추가
+def saveRecommendAudi(request):
+    num = request.GET.get("num", "")
+    rType = request.GET.get("rType", "")
+    type = request.GET.get("type", "")
+    checkedImage = request.GET.get("checkedImage", "")
+
+    if rType == "add":
+        auditionInfo = AuditionInfo.objects.get(num=num)
+
+        if checkedImage == "recommendAudiImageEmpty":
+            auditionInfo.recommend = "1"
+            auditionInfo.recommend2 = "0"
+            auditionInfo.save()
+
+        elif checkedImage == "recommendAudiImageFull":
+            auditionInfo.recommend = "0"
+            auditionInfo.recommend2 = "1"
+            auditionInfo.save()
+
+        # 추천 목록에 현재 오디션 num이 있다면 distype, disorder update.
+        try:
+            exists_status = AuditionRecommend.objects.get(auditionnum=num)
+            exists_status.distype = checkedImage
+            audiRecom = AuditionRecommend.objects.filter(distype=checkedImage)
+
+            exists_status.disorder = (audiRecom.count() + 1)
+            exists_status.save()
+
+            return JsonResponse({"code": "update"})
+
+        # 추천 목록에 현재 오디션 num이 없다면 distype, disorder add
+        except AuditionRecommend.DoesNotExist:
+            exists_status = None
+
+            audiRecom = AuditionRecommend.objects.filter(distype=checkedImage)
+            AuditionRecommend.objects.create(distype=checkedImage, auditionnum=num, disorder=(audiRecom.count() + 1))
+
+            print("ghgh", exists_status)
+            return JsonResponse({"code": "add"})
+
+    elif rType == "delete":
+        # 추천 목록에 삭제
+
+        auditionInfo = AuditionInfo.objects.get(num=num)
+        auditionInfo.recommend = "0"
+        auditionInfo.recommend2 = "0"
+        auditionInfo.save()
+
+        audiRecom = AuditionRecommend.objects.get(distype=checkedImage, auditionnum=num)
+        print("audiRecom", audiRecom)
+        print("audiRecom", audiRecom.disorder)
+
+        updateList = AuditionRecommend.objects.filter(distype=checkedImage, disorder__gte=audiRecom.disorder)
+        print("updateList", updateList)
+
+        for update in updateList:
+            update.disorder = update.disorder - 1
+            update.save()
+
+        AuditionRecommend.objects.filter(auditionnum=num).delete()
+        return JsonResponse({"code": "delete"})
+
+    return JsonResponse({"code": "0000"})

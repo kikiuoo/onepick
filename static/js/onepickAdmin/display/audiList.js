@@ -2,6 +2,7 @@ $(document).ready(function() {
 
     $(document).on("change", "#viewType", function(){
        var values = $("#viewType").find("option:selected").val();
+       console.error("viewType" , viewType)
 
        window.location.href = "/onepickAdmin/display/audi/?audiType="+values;
     });

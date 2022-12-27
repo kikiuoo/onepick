@@ -189,7 +189,16 @@ def updateComany (request) :
 
     return JsonResponse({"code": "0"} )
 
-def excel (request, type, word) :
+def addCompany(request):
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
+
+    return render(request, urlBase + "addCompany.html", {'pageType': "notice"})
+
+
+def excel(request, type, word):
     response = HttpResponse(content_type="application/vnd.ms-excel")
     response["Content-Disposition"] = 'attachment;filename*=UTF-8\'\'user_info.xls'
     wb = xlwt.Workbook(encoding='ansi')  # encoding은 ansi로 해준다.

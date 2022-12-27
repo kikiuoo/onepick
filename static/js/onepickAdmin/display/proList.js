@@ -1,5 +1,8 @@
 $(document).ready(function() {
 
+    // 문서에서 viewType이 변경되면, 이벤트 바인드( : on)
+    // viewType의 하위요소에서 select  box 선택값 가져오기
+
     $(document).on("change", "#viewType", function(){
        var values = $("#viewType").find("option:selected").val();
 
@@ -17,6 +20,10 @@ $(document).ready(function() {
     $(document).on("click", "input:checkbox[name=profile]", function (){
         var value = $(this).val();
         var checked = $(this).is(":checked");
+      console.error("눌림" , viewType)
+
+       console.log('value : ' +value);
+       console.log('checked : ' +checked);
 
         if( checked == true ){
             saveRecommend(value, "add");
@@ -43,7 +50,9 @@ function findAudition(word) {
     });
 }
 
+// 체크 선택하면
 function saveRecommend(num, rType) {
+
     $.ajax({
         url: "/onepickAdmin/display/profile/saveRecommend/",
         type: "GET",
@@ -51,7 +60,7 @@ function saveRecommend(num, rType) {
         data: {"num": num ,"rType": rType , "type" : viewType},
         success: function (data) {
            if( data.code == "0" ){
-               //alert("정상적으로 저장되었습니다.");
+               // alert("정상적으로 저장되었습니다.");
                window.location.reload();
            }
         },

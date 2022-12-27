@@ -149,7 +149,7 @@ body{
     height: calc( 100% - 40px);
     box-sizing: border-box;
     overflow-y: auto;
-
+    overflow-x: auto;
     padding : 0px 25px
 }
 

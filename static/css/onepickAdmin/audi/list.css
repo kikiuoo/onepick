@@ -18,14 +18,19 @@
 
 .viewBox .listCompany{ width: 15%; }
 .viewBox .listTitle{ width: 38%; }
-.viewBox .listRegDate{ width: 8%; }
-.viewBox .listDate{ width: 17%; }
-.viewBox .listView{ width: 9%; }
-.viewBox .listApply{ width: 8%; }
+.viewBox .listRegDate{ width: 7%; }
+.viewBox .listDate{ width: 15%; }
+.viewBox .listView{ width: 5%; }
+.viewBox .listApply{ width: 5%; }
 .viewBox .listApplyView{ width: 3%; }
+.viewBox .recommendAudi{ width: 3%; }
+.viewBox .checkBox{ width: 3%; }
 
 .viewBox .listWish span{ font-weight: bold; color: #ff8aae; }
 
+.checkBoxList div{
+    display: inline-block;
+}
 .viewBox .contentList div{
     display: inline-block;
     vertical-align: top;
@@ -170,4 +175,48 @@
     background-image : url('../../../image/onepickAdmin/viewApply.png');
     background-repeat: no-repeat;
     background-position: center;
+}
+.checkBox{
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: top;
+    text-align: center;
+}
+.checkBox .recommendAudi1{
+    display: none;
+}.checkBox .recommendAudi2{
+    display: none;
+}
+
+.checkBox .recommendAudi1+label{
+
+    display: inline-block;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.checkBox .recommendAudi1+label{
+    background-image: url("../../../image/web/check_off.png");
+}
+.checkBox .recommendAudi1:checked+label{
+    background-image: url("../../../image/web/check_on.png");
+}
+
+.checkBox .recommendAudi2+label{
+    display: inline-block;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.checkBox .recommendAudi2+label{
+    background-image: url("../../../image/web/check_off.png");
+}
+.checkBox .recommendAudi2:checked+label{
+    background-image: url("../../../image/web/check_on.png");
 }

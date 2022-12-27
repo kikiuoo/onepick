@@ -182,7 +182,7 @@ def proList(request):
         recommend = cursor.fetchall()
 
         query = "SELECT PI.num, ui.name, ui.birth, PI.interCate, PI.interSubCate, PI.profileImage, " \
-                " ( SELECT COUNT(*) FROM profile_recommend WHERE profileNum = PI.num AND disType = 'main' ) AS recomm, contentType  " \
+                " ( SELECT COUNT(*) FROM profile_recommend WHERE profileNum = PI.num AND disType = '"+viewType+"' ) AS recomm, contentType  " \
                 "FROM profile_info AS PI LEFT JOIN user_info AS ui " \
                 "     ON PI.userID = ui.userID " \
                 "WHERE public = '0' ORDER BY `upDate` DESC,RegDate DESC LIMIT 50"

@@ -17,22 +17,47 @@
 }
 
 .viewBox .listWish{ width: 15%; }
-.viewBox .listName{ width: 15%; }
-.viewBox .listAge{ width: 15%; }
+.viewBox .listName{ width: 10%; }
+.viewBox .listProfileImage{ width: 60px; height: 46px; position: relative }
+.viewBox .listAge{ width: 10%; }
 .viewBox .listPhone{ width: 15%; }
-.viewBox .listGender{ width: 9%; }
-.viewBox .listView{ width: 15%; }
+.viewBox .listGender{ width: 10%; }
+.viewBox .listView{ width: 5%; }
 .viewBox .listRegDate{ width: 14%; }
+.viewBox .listApplyView{ width: 5%; }
+.viewBox .recommendAudi{ width: 5%; }
+.viewBox .checkBox{ width: 5%; }
 
 .viewBox .listWish span{ font-weight: bold; color: #ff8aae; }
-
-.viewBox .contentList div{
+.viewBox.contentBox {
+    display: inline-block;
+}
+.viewBox .contentList div {
     display: inline-block;
     vertical-align: top;
     text-align: center;
 
     font-size: 14px;
     color: #1f1f1f;
+}
+
+.listProfileImage .listProfileImage2{
+    width: 40px;
+    height: 46px;
+
+    background-size: 100% auto;
+    background-color: #c0c0c0;
+    background-repeat: no-repeat;
+}
+
+.listProfileImage .listProfileImage2:hover{
+    position: absolute;
+    top: 0px;
+    left:0px;
+    width: 150px;
+    height: 180px;
+
+    z-index: 100;
 }
 
 .viewBox .inTitle div:last-child{ margin-right: 0px}
@@ -60,7 +85,7 @@
     margin-right: 0px;
     margin-right: 10px;
 
-    background-size: auto 100%;
+    background-size: auto 80%;
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -68,7 +93,25 @@
 .viewBox .contentList .listEtc .editBtn { background-image: url("../../../image/web/update.png")}
 .viewBox .contentList .listEtc .delBtn { background-image: url("../../../image/web/delete.png"); margin-right: 0px}
 
+.checkBox{
+    width: 5%;
+    height: 20px;
+    margin-top: 5px;
+}
 
+.checkBox .profileCheck{
+    display: none;
+}
+.checkBox .profileCheck+label{
+    display: inline-block;
+    cursor: pointer;
+
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
 .filterBox{
     position: absolute;
     right: -5px;
@@ -163,3 +206,29 @@
     background-repeat : no-repeat;
     background-position : center;
 }
+
+.checkBox{
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: top;
+}
+.checkBox .profile{
+    display: none;
+}
+
+.checkBox .profile+label{
+    display: inline-block;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
+}
+.checkBox .profile+label{
+    background-image: url("../../../image/web/check_off.png");
+}
+.checkBox .profile:checked+label{
+    background-image: url("../../../image/web/check_on.png");
+}
+

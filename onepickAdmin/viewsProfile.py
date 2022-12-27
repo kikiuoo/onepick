@@ -13,7 +13,10 @@ from myonepick.common import *
 
 urlBase = "onepickAdmin/profile/"
 
-def list(request, type,  page):
+
+# 프로필 리스트 가져오기
+# 로그인 하지 않았으면 로그인 후 이용가능하다고 alert
+def list(request, type, page):
     user = request.session.get('adminID', '')
     if user == "" or user == None:
         message = '로그인 후 이용가능합니다..'
@@ -31,7 +34,8 @@ def list(request, type,  page):
         else :
             where = " and interCate = '"+type+"' "
 
-        query = "SELECT pi.num, cm.cateName, cs.cateName, ui.name, ui.birth, ui.phone, ui.gender, pi.public, pi.regDate " \
+        # num~ regDate 가져오기. profile_info 에서 user_info의 userID 가 같은 거
+        query = "SELECT pi.num, cm.cateName, cs.cateName, ui.name, ui.birth, ui.phone, ui.gender, pi.public, pi.regDate, pi.profileImage, pi.recommend " \
                 "FROM profile_info AS pi LEFT JOIN user_info ui ON pi.userID = ui.userID " \
                 "     LEFT JOIN cate_main cm ON pi.interCate = cm.cateCode " \
                 "     LEFT JOIN cate_sub cs ON pi.interSubCate = cs.subCate " \
@@ -112,8 +116,63 @@ def listSearch(request, type, word, page):
     except:
         connection.rollback()
 
+    return render(request, urlBase + "listSearch.html",
+                  {'pageType': "profile", "profileList": profile, "paging": paging, "page": page,
+                   "leftPage": page - 1, "rightPage": page + 1, "lastPage": allPage, "cateList": cateList,
+                   "type": type, "word": word})
 
-    return render( request, urlBase + "listSearch.html", {'pageType': "profile", "profileList":profile, "paging":paging, "page" : page,
-                                                    "leftPage" : page-1, "rightPage" : page+1, "lastPage" : allPage, "cateList" : cateList,
-                                                    "type": type, "word":word})
+
+def saveRecommendProfile(request):
+    num = request.GET.get("num", "")
+    rType = request.GET.get("rType", "")
+    type = request.GET.get("type", "")
+    checkedImage = request.GET.get("checkedImage", "")
+    print(num, rType, type, checkedImage)
+
+    if rType == "add":
+        profileInfo = ProfileInfo.objects.get(num=num)
+        print("profileInfo : ", profileInfo)
+
+        profileInfo.recommend = "1"
+        profileInfo.save()
+        print("추가추가 : ", profileInfo)
+
+
+        try:
+            exists_status = ProfileRecommend.objects.get(profilenum=num)
+            print("추천된 동일한 프로필 있음 : ", exists_status)
+
+
+        # 추천 목록에 현재 프로필 num이 없다면 distype, disorder add
+        except ProfileRecommend.DoesNotExist:
+            exists_status = None
+
+            audiRecom = ProfileRecommend.objects.filter(distype=checkedImage)
+            ProfileRecommend.objects.create(distype=checkedImage, profilenum=num, disorder=(audiRecom.count() + 1))
+
+            print("같은거 없음", exists_status)
+            return JsonResponse({"code": "add"})
+
+    elif rType == "delete":
+        # 추천 목록에 삭제
+
+        profileInfo = ProfileInfo.objects.get(num=num)
+        profileInfo.recommend = "0"
+        profileInfo.save()
+
+        proRecom = ProfileRecommend.objects.get(distype=checkedImage, profilenum=num)
+        print("proRecom", proRecom)
+        print("proRecom", proRecom.disorder)
+
+        updateList = ProfileRecommend.objects.filter(distype=checkedImage, disorder__gte=proRecom.disorder)
+        print("updateList", updateList)
+
+        for update in updateList:
+            update.disorder = update.disorder - 1
+            update.save()
+            
+        ProfileRecommend.objects.filter(profilenum=num).delete()
+        return JsonResponse({"code": "delete"})
+
+    return JsonResponse({"code": "0000"})
 

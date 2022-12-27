@@ -1,7 +1,6 @@
 $(document).ready(function() {
    $(document).on("change", "#viewType", function (){
        var viewType = $(this).find("option:selected").val();
-
        window.location.href = "/onepickAdmin/profile/list/"+viewType+"/1/";
    });
 
@@ -28,4 +27,57 @@ $(document).ready(function() {
         window.location.href = "/onepickAdmin/profile/listSearch/"+type+"/"+searchWord+"/1/";
    });
 
+    $(document).on("click", "input:checkbox[name=profileRecoImage]", function (e) {
+        var value = $(this).val();
+        var checked = $(this).is(":checked");
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (checked === true) {
+            saveRecommendProfile(value, "add", "profile");
+        } else if (checked === false) {
+            saveRecommendProfile(value, "delete", "profile");
+        }
+    });
+
+    $(document).on("click", ".profile", function (e) {
+        // e.preventDefault();
+        e.stopPropagation();
+    });
+
 });
+
+function saveRecommendProfile(proNum, rType, checkedImage) {
+    console.error("saveRecommendProfile 들어옴 : ", "rType-", rType, ", type - ", type, ", checkedImage - ", checkedImage)
+    $.ajax({
+        url: "/onepickAdmin/profile/saveRecommendProfile/",
+        type: "GET",
+        dataType: "json",
+        data: {"num": proNum, "rType": rType, "type": type, "checkedImage": checkedImage},
+        success: function (data) {
+            console.error("data.code : ", data.code)
+            switch (data.code) {
+
+                case "add" : {
+                    // alert("캐스팅 디렉터 추천 이미지가 등록되었습니다.")
+                    return window.location.reload();
+                }
+                case "update" : {
+                    // alert("캐스팅 디렉터 추천 이미지가 수정되었습니다.")
+                    return window.location.reload();
+                }
+                case "delete" : {
+                    alert("캐스팅 디렉터 추천 이미지가 삭제되었습니다.")
+                    return window.location.reload();
+                }
+            }
+        },
+        error: function (request, status, error) {
+            alert(error);
+            window.location.reload();
+        }
+    });
+
+
+}
