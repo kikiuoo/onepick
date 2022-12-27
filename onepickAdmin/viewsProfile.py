@@ -138,20 +138,7 @@ def saveRecommendProfile(request):
         print("추가추가 : ", profileInfo)
 
 
-        try:
-            exists_status = ProfileRecommend.objects.get(profilenum=num)
-            print("추천된 동일한 프로필 있음 : ", exists_status)
-
-
-        # 추천 목록에 현재 프로필 num이 없다면 distype, disorder add
-        except ProfileRecommend.DoesNotExist:
-            exists_status = None
-
-            audiRecom = ProfileRecommend.objects.filter(distype=checkedImage)
-            ProfileRecommend.objects.create(distype=checkedImage, profilenum=num, disorder=(audiRecom.count() + 1))
-
-            print("같은거 없음", exists_status)
-            return JsonResponse({"code": "add"})
+        return JsonResponse({"code": "add"})
 
     elif rType == "delete":
         # 추천 목록에 삭제
@@ -160,18 +147,6 @@ def saveRecommendProfile(request):
         profileInfo.recommend = "0"
         profileInfo.save()
 
-        proRecom = ProfileRecommend.objects.get(distype=checkedImage, profilenum=num)
-        print("proRecom", proRecom)
-        print("proRecom", proRecom.disorder)
-
-        updateList = ProfileRecommend.objects.filter(distype=checkedImage, disorder__gte=proRecom.disorder)
-        print("updateList", updateList)
-
-        for update in updateList:
-            update.disorder = update.disorder - 1
-            update.save()
-            
-        ProfileRecommend.objects.filter(profilenum=num).delete()
         return JsonResponse({"code": "delete"})
 
     return JsonResponse({"code": "0000"})

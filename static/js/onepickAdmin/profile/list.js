@@ -49,7 +49,7 @@ $(document).ready(function() {
 });
 
 function saveRecommendProfile(proNum, rType, checkedImage) {
-    console.error("saveRecommendProfile µé¾î¿È : ", "rType-", rType, ", type - ", type, ", checkedImage - ", checkedImage)
+    console.error("saveRecommendProfile ï¿½ï¿½ï¿½ï¿½ : ", "rType-", rType, ", type - ", type, ", checkedImage - ", checkedImage)
     $.ajax({
         url: "/onepickAdmin/profile/saveRecommendProfile/",
         type: "GET",
@@ -60,15 +60,15 @@ function saveRecommendProfile(proNum, rType, checkedImage) {
             switch (data.code) {
 
                 case "add" : {
-                    // alert("Ä³½ºÆÃ µð·ºÅÍ ÃßÃµ ÀÌ¹ÌÁö°¡ µî·ÏµÇ¾ú½À´Ï´Ù.")
+                    // alert("Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ãµ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ÏµÇ¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.")
                     return window.location.reload();
                 }
                 case "update" : {
-                    // alert("Ä³½ºÆÃ µð·ºÅÍ ÃßÃµ ÀÌ¹ÌÁö°¡ ¼öÁ¤µÇ¾ú½À´Ï´Ù.")
+                    // alert("Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ãµ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.")
                     return window.location.reload();
                 }
                 case "delete" : {
-                    alert("Ä³½ºÆÃ µð·ºÅÍ ÃßÃµ ÀÌ¹ÌÁö°¡ »èÁ¦µÇ¾ú½À´Ï´Ù.")
+                    //alert("Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ãµ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.")
                     return window.location.reload();
                 }
             }

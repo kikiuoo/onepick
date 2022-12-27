@@ -22,7 +22,7 @@ $(document).ready(function() {
          e.stopPropagation();
 
 
-        console.error("´­¸² => ", checked, type, value, "recommendAudiImageEmpty")
+        console.error("ï¿½ï¿½ï¿½ï¿½ => ", checked, type, value, "recommendAudiImageEmpty")
         console.error("checkIndex => ", checkIndex)
 
         if (checked === true) {
@@ -87,7 +87,7 @@ $(document).ready(function() {
 });
 
 function saveRecommendAudi(audiNum, rType, checkedImage, checkIndex) {
-    console.error("saveRecommendAudi µé¾î¿È : ", "rType-", rType, ", type - ", type, ", checkedImage - ", checkedImage, ", checkIndex - ", checkIndex)
+    console.error("saveRecommendAudi ï¿½ï¿½ï¿½ï¿½ : ", "rType-", rType, ", type - ", type, ", checkedImage - ", checkedImage, ", checkIndex - ", checkIndex)
     $.ajax({
         url: "/onepickAdmin/audi/saveRecommendAudi/",
         type: "GET",
@@ -101,15 +101,15 @@ function saveRecommendAudi(audiNum, rType, checkedImage, checkIndex) {
                     return window.location.reload();
                 }*/
                 case "add" : {
-                    // alert("Ä³½ºÆÃ µð·ºÅÍ ÃßÃµ ÀÌ¹ÌÁö°¡ µî·ÏµÇ¾ú½À´Ï´Ù.")
+                    // alert("Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ãµ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ÏµÇ¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.")
                     return window.location.reload();
                 }
                 case "update" : {
-                    // alert("Ä³½ºÆÃ µð·ºÅÍ ÃßÃµ ÀÌ¹ÌÁö°¡ ¼öÁ¤µÇ¾ú½À´Ï´Ù.")
+                    // alert("Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ãµ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.")
                     return window.location.reload();
                 }
                 case "delete" : {
-                    // alert("Ä³½ºÆÃ µð·ºÅÍ ÃßÃµ ÀÌ¹ÌÁö°¡ »èÁ¦µÇ¾ú½À´Ï´Ù.")
+                    // alert("Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ãµ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.")
                     return window.location.reload();
                 }
             }
