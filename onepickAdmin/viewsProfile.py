@@ -44,7 +44,7 @@ def list(request, type, page):
         result = cursor.execute(query)
         profileAll = cursor.fetchall()
 
-        query = "SELECT pi.num, cm.cateName, cs.cateName, ui.name, ui.birth, ui.phone, ui.gender, pi.public, pi.regDate " \
+        query = "SELECT pi.num, cm.cateName, cs.cateName, ui.name, ui.birth, ui.phone, ui.gender, pi.public, pi.regDate, pi.profileImage, pi.recommend " \
                 "FROM profile_info AS pi LEFT JOIN user_info ui ON pi.userID = ui.userID " \
                 "     LEFT JOIN cate_main cm ON pi.interCate = cm.cateCode " \
                 "     LEFT JOIN cate_sub cs ON pi.interSubCate = cs.subCate " \
@@ -87,7 +87,7 @@ def listSearch(request, type, word, page):
         else :
             where = " and interCate = '"+type+"' "
 
-        query = "SELECT pi.num, cm.cateName, cs.cateName, ui.name, ui.birth, ui.phone, ui.gender, pi.public, pi.regDate " \
+        query = "SELECT pi.num, cm.cateName, cs.cateName, ui.name, ui.birth, ui.phone, ui.gender, pi.public, pi.regDate, pi.profileImage, pi.recommend " \
                 "FROM profile_info AS pi LEFT JOIN user_info ui ON pi.userID = ui.userID " \
                 "     LEFT JOIN cate_main cm ON pi.interCate = cm.cateCode " \
                 "     LEFT JOIN cate_sub cs ON pi.interSubCate = cs.subCate " \
@@ -96,7 +96,7 @@ def listSearch(request, type, word, page):
         result = cursor.execute(query)
         profileAll = cursor.fetchall()
 
-        query = "SELECT pi.num, cm.cateName, cs.cateName, ui.name, ui.birth, ui.phone, ui.gender, pi.public, pi.regDate " \
+        query = "SELECT pi.num, cm.cateName, cs.cateName, ui.name, ui.birth, ui.phone, ui.gender, pi.public, pi.regDate, pi.profileImage, pi.recommend " \
                 "FROM profile_info AS pi LEFT JOIN user_info ui ON pi.userID = ui.userID " \
                 "     LEFT JOIN cate_main cm ON pi.interCate = cm.cateCode " \
                 "     LEFT JOIN cate_sub cs ON pi.interSubCate = cs.subCate " \
