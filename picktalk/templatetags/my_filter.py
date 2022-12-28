@@ -239,6 +239,20 @@ def getUserName(valuse):
 
     return returnValue
 
+@register.filter
+def getUserFullName(valuse):
+
+    user = UserInfo.objects.filter(userid=valuse)
+
+    userName = ""
+    if user.count() > 0 :
+        for row in user :
+            userName = row.name
+
+    else :
+        userName = '***'
+
+    return userName
 
 @register.filter
 def addNum(value, addValue) :

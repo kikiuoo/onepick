@@ -26,10 +26,19 @@
             {% else %}
             <div class="title"><span>[{{ cate.catename }}]</span> {{ qanda.title }}</div>
             {% endif %}
-            {% if user.count > 0 %}
-            <div class="userInfo">{{ user.0.userid|getUserName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ qanda.regdate|date:"Y/m/d" }}</div>
+
+            {% if request.session.userType == "admin"  %}
+                {% if user.count > 0 %}
+                <div class="userInfo">조회수 {{ qanda.viewcount }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.0.userid|getUserFullName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ qanda.regdate|date:"Y/m/d" }}</div>
+                {% else %}
+                <div class="userInfo">조회수 {{ qanda.viewcount }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ qanda.regdate|date:"Y/m/d" }}</div>
+                {% endif %}
             {% else %}
-            <div class="userInfo">{{ qanda.regdate|date:"Y/m/d" }}</div>
+                {% if user.count > 0 %}
+                <div class="userInfo">{{ user.0.userid|getUserName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ qanda.regdate|date:"Y/m/d" }}</div>
+                {% else %}
+                <div class="userInfo">{{ qanda.regdate|date:"Y/m/d" }}</div>
+                {% endif %}
             {% endif %}
         </div>
 

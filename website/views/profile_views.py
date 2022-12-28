@@ -87,6 +87,8 @@ def listView(request): # 오디션 Main
             orderby = " order by viewCount desc "
         elif order == "recommend":
             orderby = " order by pickCount desc "
+        elif order == "cView":
+            orderby = " order by cViewCount desc, `regDate` Desc, `upDate` DESC "
         else:
             orderby = " order by `regDate` Desc, `upDate` DESC "
 
@@ -200,34 +202,69 @@ def listView(request): # 오디션 Main
         elif cate_type == "singer":
             where = where + "and ( p.interCate = 'mainCate3' || p.interCate like '%가수%' ) "
 
-        query = "SELECT * " \
-                "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
-                "WHERE public = '0' and isDelete = '0'  and ui.userID != '' " + where
+        if order == "picks" :
+            query = "SELECT * " \
+                    "FROM profile_recommend AS pr LEFT JOIN profile_info AS p ON pr.profileNum = p.num " \
+                    "     left join user_info AS ui  ON p.userID = ui.userID " \
+                    "WHERE public = '0' and isDelete = '0'  and ui.userID != '' AND pr.disType = 'picks' " + where
 
-        print(query)
+            result = cursor.execute(query)
+            profileList = cursor.fetchall()
 
-        result = cursor.execute(query)
-        profileList = cursor.fetchall()
+            # 프로필
+            if user:
+                query = "SELECT p.num , profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, " \
+                        "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick " \
+                        "FROM profile_recommend AS pr LEFT JOIN profile_info AS p ON pr.profileNum = p.num " \
+                        "     left join user_info AS ui  ON p.userID = ui.userID " \
+                        "WHERE public = '0' and isDelete = '0'  and ui.userID != '' AND pr.disType = 'picks' " + where + " " \
+                        "order by pr.disOrder desc " \
+                        " LIMIT " + str(start) + ", " + str(block)
 
-        # 프로필
-        if user:
-            query = "SELECT p.num , profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, " \
-                    "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick " \
+            else:
+                query = "SELECT p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain," \
+                        "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, '0' AS proPick " \
+                        "FROM profile_recommend AS pr LEFT JOIN profile_info AS p ON pr.profileNum = p.num " \
+                        "     left join user_info AS ui  ON p.userID = ui.userID " \
+                        "WHERE public = '0' and isDelete = '0'  and ui.userID != ''  AND pr.disType = 'picks' " + where +  " " \
+                        "order by pr.disOrder desc " \
+                        " LIMIT " + str(start) + ", " + str(block)
+
+            result = cursor.execute(query)
+            profiles = cursor.fetchall()
+
+            allPage = int(len(profileList) / block) + 1
+            paging = getPageList_v2(page, allPage)
+
+        else :
+            query = "SELECT * " \
                     "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
-                    "WHERE public = '0' and isDelete = '0'  and ui.userID != '' " + where + orderby + " LIMIT " + str(start) + ", " + str(block)
+                    "WHERE public = '0' and isDelete = '0'  and ui.userID != '' " + where
 
-        else:
-            query = "SELECT p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain," \
-                    "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, '0' AS proPick " \
-                    "FROM profile_info AS p LEFT JOIN user_info AS ui " \
-                    "     ON p.userID = ui.userID " \
-                    "WHERE public = '0' and isDelete = '0'  and ui.userID != '' " + where + orderby + " LIMIT " + str(start) + ", " + str(block)
+            print(query)
 
-        result = cursor.execute(query)
-        profiles = cursor.fetchall()
+            result = cursor.execute(query)
+            profileList = cursor.fetchall()
 
-        allPage = int(len(profileList) / block) + 1
-        paging = getPageList_v2(page, allPage)
+            # 프로필
+            if user:
+                query = "SELECT p.num , profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain, " \
+                        "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, (SELECT COUNT(*) FROM profile_pick WHERE userID = '" + user + "' AND profileNum = p.num ) AS proPick " \
+                        "FROM profile_info AS p LEFT JOIN user_info AS ui  ON p.userID = ui.userID " \
+                        "WHERE public = '0' and isDelete = '0'  and ui.userID != '' " + where + orderby + " LIMIT " + str(start) + ", " + str(block)
+
+            else:
+                query = "SELECT p.num, profileImage, height, weight, viewCount, pickCount, cViewCount, ui.name, ui.birth, ui.entertain," \
+                        "       ui.gender, ui.military, ui.school, ui.major, talent, comment, mainYoutube, isCareer, '0' AS proPick " \
+                        "FROM profile_info AS p LEFT JOIN user_info AS ui " \
+                        "     ON p.userID = ui.userID " \
+                        "WHERE public = '0' and isDelete = '0'  and ui.userID != '' " + where + orderby + " LIMIT " + str(start) + ", " + str(block)
+
+            result = cursor.execute(query)
+            profiles = cursor.fetchall()
+
+            allPage = int(len(profileList) / block) + 1
+            paging = getPageList_v2(page, allPage)
 
         query = "SELECT * FROM profile_specialty GROUP BY `class` ORDER BY num ASC"
 

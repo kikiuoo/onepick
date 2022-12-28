@@ -23,8 +23,11 @@
 
         <div class="titleBox">
             <div class="title">{{ magazine.title }}</div>
-
+            {% if request.session.userType == "admin"  %}
+            <div class="userInfo">조회수 {{ magazine.viewcount }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ magazine.regdate|date:"Y/m/d" }}</div>
+            {% else %}
             <div class="userInfo">원픽관리자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ magazine.regdate|date:"Y/m/d" }}</div>
+            {% endif %}
         </div>
 
         <div class="content">

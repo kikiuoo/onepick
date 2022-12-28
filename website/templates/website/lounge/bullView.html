@@ -22,10 +22,18 @@
 
         <div class="titleBox">
             <div class="title">{{ bull.title }}</div>
-            {% if user.count > 0 %}
-            <div class="userInfo">{{ user.0.userid|getUserName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ bull.regdate|date:"Y/m/d" }}</div>
+            {% if request.session.userType == "admin"  %}
+                {% if user.count > 0 %}
+                <div class="userInfo">조회수 {{ bull.viewcount }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.0.userid|getUserFullName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ bull.regdate|date:"Y/m/d" }}</div>
+                {% else %}
+                <div class="userInfo">조회수 {{ bull.viewcount }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ bull.regdate|date:"Y/m/d" }}</div>
+                {% endif %}
             {% else %}
-            <div class="userInfo">{{ bull.regdate|date:"Y/m/d" }}</div>
+                {% if user.count > 0 %}
+                <div class="userInfo">{{ user.0.userid|getUserName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ bull.regdate|date:"Y/m/d" }}</div>
+                {% else %}
+                <div class="userInfo">{{ bull.regdate|date:"Y/m/d" }}</div>
+                {% endif %}
             {% endif %}
         </div>
 

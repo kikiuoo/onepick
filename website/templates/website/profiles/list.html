@@ -22,7 +22,9 @@
         <select name="order" id="order">
            <option value="newest" {% if order == "newest" %} selected {% endif %}>최신순</option>
            <option value="popular" {% if order == "popular" %} selected {% endif %}>인기순</option>
-           <option value="recommend" {% if order == "recommend" %} selected {% endif %}>추천많은순</option>
+           <option value="recommend" {% if order == "recommend" %} selected {% endif %}>추천순</option>
+           <option value="picks" {% if order == "picks" %} selected {% endif %}>picks</option>
+           <option value="cView" {% if order == "cView" %} selected {% endif %}>기업뷰순</option>
         </select>
 
         <div class="filterBtn">필터<span></span></div>

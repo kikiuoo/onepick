@@ -21,7 +21,11 @@
     <div class="inBox">
         <div class="titleBox">
             <div class="title">{{ notice.title }}</div>
+            {% if request.session.userType == "admin"  %}
+            <div class="userInfo">조회수 {{ notice.viewcount }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ notice.regdate|date:"Y/m/d" }}</div>
+            {% else %}
             <div class="userInfo">{{ notice.regdate|date:"Y/m/d" }}</div>
+            {% endif %}
         </div>
 
         <div class="content notice">
