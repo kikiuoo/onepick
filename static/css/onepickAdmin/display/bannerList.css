@@ -39,7 +39,8 @@
     font-size: 14px;
     vertical-align: top;
     text-align: center;
-    line-height: 60px;
+    line-height: 80px;
+    height: 80px;
 }
 
 .orderView{ width: 10%;}
@@ -115,8 +116,9 @@
 .viewBox .contentList .listEtc .delBtn { background-image: url("../../../image/web/delete.png"); margin-right: 0px}
 
 .contentList .image{
-    width: 250px;
-    height: 60px;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
 
     background-position: center;
     background-repeat: no-repeat;

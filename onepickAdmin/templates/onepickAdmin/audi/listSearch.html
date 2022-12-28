@@ -37,7 +37,9 @@
             <div class="listDate">모집기간</div>
             <div class="listView">클릭수</div>
             <div class="listApply">지원자수</div>
-            <div class="listApplyView"></div>
+           <div class="listApplyView">현황</div>
+           <div class="listApplyView">추천1</div>
+           <div class="listApplyView">추천2</div>
        </div>
 
         <div class="contentBox">
@@ -50,6 +52,14 @@
                 <div class="listView">{{ audition.6 }}</div>
                 <div class="listApply">{{ audition.7 }}</div>
                 <div class="listApplyView"><div class="icon" data-num="{{ audition.0 }}"></div> </div>
+                <div class="checkBox">
+                    <input type="checkbox" class="recommendAudi1" name="recommendAudiImageEmpty" value="{{ audition.0 }}" id="check1_{{ forloop.counter0 }}" {% if audition.7 == "1" %} checked {% endif %} >
+                    <label class="recommendAudi1" for="check1_{{ forloop.counter0 }}"></label>
+                </div>
+                <div class="checkBox">
+                    <input type="checkbox" class="recommendAudi2" name="recommendAudiImageFull" value="{{ audition.0 }}" id="check2_{{ forloop.counter0 }}" {% if audition.8 == "1" %} checked {% endif %}>
+                    <label class="recommendAudi2" for="check2_{{ forloop.counter0 }}"></label>
+                </div>
             </div>
             {% endfor %}
         </div>
@@ -57,7 +67,7 @@
 
 
     <div class="page">
-        {% if page != paging.0 and page != 1 %}
+        {% if page != paging.0 or page != 1 %}
             <div class="leftPage" data-type="search" data-page="{{ leftPage }}"></div>
         {% endif %}
 

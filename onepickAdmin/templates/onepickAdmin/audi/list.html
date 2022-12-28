@@ -55,26 +55,22 @@
                     <div class="listApplyView">
                         <div class="icon" data-num="{{ audition.0 }}"></div>
                     </div>
-
                     <div class="checkBox">
-                        <input type="checkbox" class="recommendAudi1" name="recommendAudiImageEmpty" value="{{ audition.0 }}"
-                               id="check1_{{ forloop.counter0 }}" {% if audition.7 == "1" %} checked {% endif %} >
+                        <input type="checkbox" class="recommendAudi1" name="recommendAudiImageEmpty" value="{{ audition.0 }}" id="check1_{{ forloop.counter0 }}" {% if audition.7 == "1" %} checked {% endif %} >
                         <label class="recommendAudi1" for="check1_{{ forloop.counter0 }}"></label>
                     </div>
                     <div class="checkBox">
-                        <input type="checkbox" class="recommendAudi2" name="recommendAudiImageFull" value="{{ audition.0 }}"
-                               id="check2_{{ forloop.counter0 }}" {% if audition.8 == "1" %} checked {% endif %}>
+                        <input type="checkbox" class="recommendAudi2" name="recommendAudiImageFull" value="{{ audition.0 }}" id="check2_{{ forloop.counter0 }}" {% if audition.8 == "1" %} checked {% endif %}>
                         <label class="recommendAudi2" for="check2_{{ forloop.counter0 }}"></label>
                     </div>
-                    </div>
-
+                </div>
             {% endfor %}
         </div>
     </div>
 
 
     <div class="page">
-        {% if page != paging.0 and page != 1 %}
+        {% if page != paging.0 or page != 1 %}
             <div class="leftPage" data-type="list" data-page="{{ leftPage }}"></div>
         {% endif %}
 

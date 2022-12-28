@@ -16,7 +16,6 @@
         <select name="viewType" id="viewType">
             <option value="all" {% if type == "all" %}selected{% endif %} >전체</option>
             <option value="main" {% if type == "main" %}selected{% endif %} >홈(메인)</option>
-            <option value="audi" {% if type == "audi" %}selected{% endif %} >오디션</option>
         </select>
     </div>
 
@@ -64,7 +63,7 @@
     </div>
 
     <div class="page">
-        {% if page != paging.0 and page != 1 %}
+        {% if page != paging.0 or page != 1 %}
             <div class="leftPage" data-page="{{ leftPage }}"></div>
         {% endif %}
 

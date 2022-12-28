@@ -23,11 +23,11 @@
     <div class="viewBox">
 
        <div class="inTitle">
+            <div class="listJoin">아이디</div>
             <div class="listName">이름</div>
             <div class="listGroup">회원 그룹</div>
             <div class="listPhone">연락처</div>
             <div class="listRegDate">가입일</div>
-            <div class="listJoin">가입경로</div>
             <div class="listLastLogin">마지막 로그인 시간</div>
             <div class="listEtc"></div>
        </div>
@@ -35,6 +35,7 @@
         <div class="contentBox">
             {% for user in userList %}
              <div class="contentList" data-num="{{ user.0 }}">
+                <div class="listJoin">{{ user.1 }}</div>
                 <div class="listName">{{ user.4 }}</div>
                 <div class="listGroup">
                     <span>
@@ -48,15 +49,6 @@
                 </div>
                 <div class="listPhone">{{ user.5|default:"" }}</div>
                 <div class="listRegDate">{{ user.27|date:"Y/m/d" }}</div>
-                <div class="listJoin">
-                    {% if user.26 == "NAVER" %} 네이버
-                    {% elif user.26 == "KAKAO" %} 카카오
-                    {% elif user.26 == "GOOGLE" %} 구글
-                    {% elif user.26 == "FACEBOOK" %} 페이스북
-                    {% elif user.26 == "TWITTER" %} 트위터
-                    {% elif user.26 == "oldUser" or user.26 == "OLDUSER" %} 기존회원
-                    {% endif %}
-                </div>
                 <div class="listLastLogin">{{ user.28|date:"Y/m/d H:i:s" }}</div>
                 <div class="listEtc">
                     <div class="editBtn" data-num="{{ user.num }}"></div>
@@ -70,7 +62,7 @@
 
 
     <div class="page">
-        {% if page != paging.0 and page != 1 %}
+        {% if page != paging.0 or page != 1 %}
             <div class="leftPage" data-type="search" data-page="{{ leftPage }}"></div>
         {% endif %}
 

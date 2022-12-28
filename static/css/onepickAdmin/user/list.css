@@ -20,7 +20,7 @@
 .viewBox .listGroup{ width: 205px; }
 .viewBox .listPhone{ width: 180px; }
 .viewBox .listRegDate{ width: 252px; }
-.viewBox .listJoin{ width: 212px; }
+.viewBox .listJoin{ width: 212px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .viewBox .listLastLogin{ width: 224px; }
 .viewBox .listEtc{ width: 60px; }
 .viewBox .listInfo{ width: calc(25% - 5px); }

@@ -34,11 +34,13 @@
        <div class="inTitle">
             <div class="listWish">분야</div>
             <div class="listName">이름</div>
+            <div class="listProfileImage">프로필</div>
             <div class="listAge">나이</div>
             <div class="listPhone">연락처</div>
             <div class="listGender">성별</div>
             <div class="listView">공개여부</div>
             <div class="listRegDate">등록일</div>
+            <div class="listApplyView">추천</div>
        </div>
 
         <div class="contentBox">
@@ -46,6 +48,9 @@
              <div class="contentList" data-num="{{ profile.0 }}">
                 <div class="listWish"><span>{{ profile.1 }} {{ profile.2 }}</span></div>
                 <div class="listName">{{ profile.3 }}</div>
+                <div class="listProfileImage">
+                    <div class="listProfileImage2" style='background-image: url("/media/{{ profile.9 }}");'></div>
+                </div>
                 <div class="listAge">{{ profile.4|userAge }}</div>
                 <div class="listPhone">{{ profile.5 }}</div>
                 <div class="listGender">
@@ -59,6 +64,12 @@
                     {% endif %}
                 </div>
                 <div class="listRegDate">{{ profile.8|date:"Y/m/d H:i" }}</div>
+
+                <div class="checkBox" >
+                    <input type="checkbox" class="profile" name="profileRecoImage" value="{{ profile.0 }}"
+                           id="check1_{{ forloop.counter0 }}" {% if profile.10 == "1" %} checked {% endif %} >
+                    <label class="profile" for="check1_{{ forloop.counter0 }}"></label>
+                </div>
             </div>
             {% endfor %}
         </div>
@@ -72,7 +83,7 @@
 
 
     <div class="page">
-        {% if page != paging.0 and page != 1 %}
+        {% if page != paging.0 or page != 1 %}
             <div class="leftPage" data-type="search" data-page="{{ leftPage }}"></div>
         {% endif %}
 

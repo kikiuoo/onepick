@@ -25,9 +25,9 @@ def list(request, type, page):
     end = page * block
 
     if type == "normal" :
-        userList = UserInfo.objects.filter(usertype__contains="NORMAL", phone__isnull=False).order_by("-regtime")
+        userList = UserInfo.objects.filter(usertype__contains="NORMAL").order_by("-regtime")
     elif type == "company" :
-        userList = UserInfo.objects.filter(usertype__contains="COMPANY", phone__isnull=False).order_by("-regtime")
+        userList = UserInfo.objects.filter(usertype__contains="COMPANY").order_by("-regtime")
 
     user = userList[start:end]
     allPage = int(len(userList) / block) + 1
@@ -96,11 +96,11 @@ def edit(request, num) :
         email = ["", ""]
 
     birth = ""
-    if userInfo.usertype == "NORMAL" or  userInfo.usertype == "S-NORMAL" :
+    if (userInfo.usertype == "NORMAL" or  userInfo.usertype == "S-NORMAL") and userInfo.birth :
         birth = userInfo.birth.split('-')
 
     phone = ["","",""]
-    if userInfo.phone:
+    if userInfo.phone :
         phone[0] = userInfo.phone[0:3]
         phone[1] = userInfo.phone[3:7]
         phone[2] = userInfo.phone[7:11]

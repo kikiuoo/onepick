@@ -34,7 +34,11 @@ def classfy(request):
         else:
             profileImages = ""
 
-        userInfo = UserInfo.objects.get(userid=profile.userid)
+        user = UserInfo.objects.filter(userid=profile.userid)
+        if len(user) > 0 :
+            userInfo = user[0]
+        else :
+            userInfo = []
 
         youtubes = profile.youtube.split("|")
 

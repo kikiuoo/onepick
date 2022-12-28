@@ -84,7 +84,7 @@
 
 
     <div class="page">
-        {% if page != paging.0 and page != 1 %}
+        {% if page != paging.0 or page != 1 %}
             <div class="leftPage" data-type="list" data-page="{{ leftPage }}"></div>
         {% endif %}
 
