@@ -557,11 +557,11 @@ def applyList(request, num) :
 
     if careerRadio != "":
         if careerRadio == "0":
-            where = where + " and ( careerYear < '1' or careerYear is null ) "
+            where = where + " and isCareer = '0' and ( careerYear < '1' or careerYear is null ) "
         else:
-            where = where + " and careerYear >= '" + str(careerRadio) + "' "
+            where = where + " and isCareer = '0' and careerYear >= " + str(careerRadio) + " "
     elif career1 != "" and career2 != "":
-        where = where + " and careerYear >= '" + str(career1) + "' and careerYear <= '" + str(career2) + "'"
+        where = where + " and isCareer = '0' and careerYear >= '" + str(career1) + "' and careerYear <= '" + str(career2) + "'"
     elif career1 != "" or career2 != "":
         career1 = ""
         career2 = ""
