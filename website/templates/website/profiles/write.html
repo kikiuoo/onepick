@@ -105,12 +105,12 @@
                 </div>
                 <div class="inputBox f_bodyInfo">
                     <div class="inText mini">
-                        <input type="number" name="height" id="height" value="" placeholder="키" onKeyup="this.value=this.value.replace(/(\.\d+)+/,'');">
+                        <input type="number" name="height" id="height" value="" placeholder="키" onKeyup="this.value=this.value.replace(/(\.\d+)+/,'');" maxlength="3" oninput="maxLengthCheck(this)"/>
                         <span>cm</span>
                     </div>
 
                     <div class="inText mini">
-                        <input type="number" name="weight" id="weight" value="" placeholder="몸무게" onKeyup="this.value=this.value.replace(/(\.\d+)+/,'');">
+                        <input type="number" name="weight" id="weight" value="" placeholder="몸무게" onKeyup="this.value=this.value.replace(/(\.\d+)+/,'');"  maxlength="3" oninput="maxLengthCheck(this)"/>
                         <span>kg</span>
                     </div>
                     <br>
@@ -261,6 +261,8 @@
                     <input type="file" name="profileImage[]" id="input-file" class="upload-hidden input-file" data-type="profileImage">
                     <div class="imageBox"></div>
                     <label id="fileLabel" for="input-file"> <div class="addImage"></div> 이미지 등록</label>
+
+                    <textarea name="removeImage_detail" id="removeImage_detail" style="display: none"></textarea>
                 </div>
 
                 <div class="title f_imageInfo">작품 사진</div>
@@ -273,6 +275,8 @@
                     <input type="file" name="userImage[]" id="input-piece" class="upload-hidden input-file" data-type="userImage">
                     <div class="imageBox"></div>
                     <label id="pieceLabel" for="input-piece"> <div class="addImage"></div> 이미지 등록</label>
+
+                    <textarea name="removeImage_art" id="removeImage_art" style="display: none"></textarea>
                 </div>
 
                 <div class="title f_imageInfo">프로필 영상</div>
