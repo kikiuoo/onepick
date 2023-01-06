@@ -13,6 +13,7 @@ from myonepick.common import *
 
 
 def adminCheck(request):
+    print("adminCheck 메소드 : onepickAdmin/views.py ")
 
     user = request.session.get('adminID', '')
 
@@ -25,9 +26,9 @@ def adminCheck(request):
             cursor = connection.cursor()
             query = "SELECT C, COUNT(*) AS counting " \
                     "FROM( " \
-                    "	SELECT DATE_FORMAT(regTime,'%m/%d') AS C " \
+                    "	SELECT DATE_FORMAT(regTime,'%y/%m/%d') AS C " \
                     "	FROM user_info " \
-                    "	WHERE regTime >= '2022-07-29' " \
+                    "	WHERE  regTime >= '2021-12-01' " \
                     "	ORDER BY regTime " \
                     ")AS a " \
                     "GROUP BY C ORDER BY C DESC LIMIT 14 "
@@ -43,7 +44,7 @@ def adminCheck(request):
             cursor = connection.cursor()
             query = "SELECT C , COUNT(*) AS counting " \
                     "FROM( " \
-                    "	SELECT DATE_FORMAT(viewDay,'%m/%d') AS C   " \
+                    "	SELECT DATE_FORMAT(viewDay,'%y/%m/%d') AS C   " \
                     "	FROM view_count " \
                     ")AS a " \
                     "GROUP BY C  ORDER BY C DESC LIMIT 14"
@@ -60,9 +61,9 @@ def adminCheck(request):
             cursor = connection.cursor()
             query = "SELECT C, COUNT(*) AS counting " \
                     "FROM( " \
-                    "	SELECT DATE_FORMAT(accessTime,'%m/%d') AS C " \
+                    "	SELECT DATE_FORMAT(accessTime,'%y/%m/%d') AS C " \
                     "	FROM user_login " \
-                    "	WHERE accessTime >= '2022-07-29' " \
+                    "	WHERE accessTime >= '2021-01-01' " \
                     "	ORDER BY accessTime " \
                     ")AS a " \
                     "GROUP BY C ORDER BY C DESC LIMIT 14 "
@@ -86,7 +87,6 @@ def adminCheck(request):
         returnURL = "onepickAdmin/login/login.html"
         return render( request, returnURL, {'pageType': "home" })
 
-
 def adminLogin(request) :
     username = request.GET['username']
     password = request.GET['password']
@@ -108,29 +108,34 @@ def adminLogin(request) :
     else:
         return JsonResponse({"code": "1", 'message': "아이디 혹은 비밀번호가 일치 하지 않습니다."})
 
-
-
 def adminLogout (request) :
     del request.session['adminID']
     #del request.session['adminName']
 
     return JsonResponse({"code": "0"} )
 
-
 def ajaxGetGraph(request) :
+    print("ajaxGetGraph 메소드 : onepickAdmin/views.py ")
+
     dataType = request.GET['dataType']
     type = request.GET['type']
+    print("dataType : ",dataType)
+    print("type : ",type)
 
     try:
         cursor = connection.cursor()
 
+        # 회원가입 수
         if dataType == "user" :
             if type == "day" :
+
+                print ("일별누름")
+
                 query = "SELECT C, COUNT(*) AS counting " \
                         "FROM( " \
-                        "	SELECT DATE_FORMAT(regTime,'%m/%d') AS C " \
+                        "	SELECT DATE_FORMAT(regTime,'%y/%m/%d') AS C " \
                         "	FROM user_info " \
-                        "	WHERE regTime >= '2022-07-29' and phone != '' " \
+                        "	WHERE regTime >= '2022-12-01' " \
                         "	ORDER BY regTime " \
                         ")AS a " \
                         "GROUP BY C ORDER BY C DESC LIMIT 14 "
@@ -151,13 +156,14 @@ def ajaxGetGraph(request) :
                         "   where phone != ''" \
                         "	ORDER BY regTime " \
                         ")AS a " \
-                        "GROUP BY C ORDER BY C DESC LIMIT 12 "
+                        "GROUP BY C ORDER BY C DESC LIMIT 14 "
 
+        # 접속자 수
         elif dataType == "connect":
             if type == "day":
                 query = "SELECT C , COUNT(*) AS counting " \
                         "FROM( " \
-                        "	SELECT DATE_FORMAT(viewDay,'%m/%d') AS C   " \
+                        "	SELECT DATE_FORMAT(viewDay,'%y/%m/%d') AS C   " \
                         "	FROM view_count " \
                         ")AS a " \
                         "GROUP BY C  ORDER BY C DESC LIMIT 14"
@@ -175,15 +181,15 @@ def ajaxGetGraph(request) :
                         "	SELECT DATE_FORMAT(viewDay,'%Y/%m') AS C  " \
                         "	FROM view_count " \
                         ")AS a " \
-                        "GROUP BY C ORDER BY C DESC LIMIT 12 "
+                        "GROUP BY C ORDER BY C DESC LIMIT 14 "
 
         elif dataType == "login":
             if type == "day":
                 query = "SELECT C, COUNT(*) AS counting " \
                         "FROM( " \
-                        "	SELECT DATE_FORMAT(accessTime,'%m/%d') AS C " \
+                        "	SELECT DATE_FORMAT(accessTime,'%y/%m/%d') AS C " \
                         "	FROM user_login " \
-                        "	WHERE accessTime >= '2022-07-29' " \
+                        "	WHERE accessTime >= '2022-12-01' " \
                         "	ORDER BY accessTime " \
                         ")AS a " \
                         "GROUP BY C ORDER BY C DESC LIMIT 14 "
@@ -224,7 +230,6 @@ def getLabel(maxCount) :
         labelList.append(maxCount - (labelSub * num))
 
     return labelList
-
 
 def getBar(barList, maxCount) :
 
