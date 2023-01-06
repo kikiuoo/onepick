@@ -239,7 +239,7 @@ def qaReloadComment(request) :
 
     comment = QaQandaComment.objects.filter(qanum=num).order_by("-num")
 
-    return render(request, nUrl + '/picktalk/ajax_comment.html', {'comment': comment})
+    return render(request, nUrl + '/ajax/ajax_comment.html', {'comment': comment})
 
 def qaDeleteComment(request) :
     nUrl = nowDevice(request)

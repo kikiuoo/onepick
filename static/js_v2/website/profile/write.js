@@ -767,9 +767,11 @@ $(document).ready(function (){
         var allCareer_y = $("#allCareer_y").find("option:selected").val();
         var allCareer_m = $("#allCareer_m").find("option:selected").val();
         
-        if( notCareer == false && ( allCareer_y == "" || allCareer_m == "" )){
-            alert("총 경력을 선택해주세요.");
-            return;
+        if( notCareer == false ){
+            if( ( allCareer_y == "" || (allCareer_y != "11" && allCareer_m == "") )) {
+                alert("총 경력을 선택해주세요.");
+                return;
+            }
         }
 
         //이미지.
@@ -939,4 +941,10 @@ function getListData( saveText, saveType){
     var saveContent = saveText.val();
 
     return saveContent;
+}
+
+function maxLengthCheck(object){
+    if (object.value.length > object.maxLength){
+      object.value = object.value.slice(0, object.maxLength);
+    }
 }
