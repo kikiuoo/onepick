@@ -37,6 +37,7 @@ urlpatterns = [
     path('user/addCompany/', viewsUser.addCompany, name='addCompany'),
     path('user/excel/<type>/<word>/', viewsUser.excel, name='excel'),
     path('user/logList/<int:page>/', viewsUser.logList, name='logList'),
+    path('user/delete/<int:num>/', viewsUser.deleteuser, name='deleteuser'),
 
     # Profile url
     path('profile/list/<type>/<int:page>/', viewsProfile.list, name='list'),

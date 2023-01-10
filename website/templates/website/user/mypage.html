@@ -53,7 +53,7 @@
                     <div class="userImage" style='background-image: url("/media/{{ data.profileimage }}");'></div>
                     <div class="userInfoBox">
                         <div class="userName">{{ userInfo.name }} ({{ userInfo.birth|userAge }})
-                            {% if data.public == "on" %}
+                            {% if data.public == "1" %}
                                 <span></span>
                             {% endif %}
                         </div>

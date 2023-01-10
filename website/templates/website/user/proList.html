@@ -10,6 +10,7 @@
 <!-- JS 파일 -->
 <script src="{% static 'js_v2/website/user/proList.js' %}"></script>
 
+<div class="container">
     <div class="mTtitle">
         {% if type == "audi" %}
             오디션 지원자 보기 <span class="apply">총 지원자 <p>{{ allList }}</p>명 </span>
@@ -254,6 +255,7 @@
             <div class="rightPage" data-type="list" data-page="{{ rightPage }}"></div>
         {% endif %}
     </div>
+</div>
 
 <script>
     var type = "{{ type }}";

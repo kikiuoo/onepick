@@ -327,3 +327,93 @@ def logList(request, page):
 
     return render( request, urlBase + "logList.html", {'pageType': "user", "logList":log, "paging":paging, "page" : page,
                                                     "leftPage" : page-1, "rightPage" : page+1, "lastPage" : allPage })
+
+
+def deleteuser(request, num) :
+    user = request.session.get('adminID', '')
+    if user == "" or user == None:
+        message = '로그인 후 이용가능합니다..'
+        return HttpResponse("<script>alert('" + message + "'); window.location.href = '/onepickAdmin'; </script>")
+
+
+    quit = "관리자 페이지에서 탈퇴"
+
+    nowTime = str(timezone.now())
+
+    userInfo = UserInfo.objects.get(num=num)
+    profiles = ProfileInfo.objects.filter(userid=userInfo.userid)
+
+    for profile in profiles:
+        saveDelete = ProfileInfoDelete.objects.create(
+            num=profile.num,
+            userid=profile.userid,
+            profileimage=profile.profileimage,
+            detailimage=profile.detailimage,
+            artimage=profile.artimage,
+            height=profile.height,
+            weight=profile.weight,
+            topsize=profile.topsize,
+            bottomsize=profile.bottomsize,
+            shoessize=profile.shoessize,
+            skincolor=profile.skincolor,
+            haircolor=profile.haircolor,
+            foreign=profile.foreign,
+            mainyoutube=profile.mainyoutube,
+            youtube=profile.youtube,
+            talent=profile.talent,
+            comment=profile.comment,
+            intercate=profile.intercate,
+            intersubcate=profile.intersubcate,
+            iscareer=profile.iscareer,
+            careeryear=profile.careeryear,
+            careermonth=profile.careermonth,
+            regdate=profile.regdate,
+            update=profile.update,
+            viewcount=profile.viewcount,
+            cviewcount=profile.cviewcount,
+            pickcount=profile.pickcount,
+            public=profile.public,
+            contenttype=profile.contenttype
+        )
+
+        profile.delete()
+
+    userDelSave = UserInfoQuit.objects.create(
+        num=userInfo.num,
+        userid=userInfo.userid,
+        password=userInfo.password,
+        nickname=userInfo.nickname,
+        name=userInfo.name,
+        phone=userInfo.phone,
+        email=userInfo.email,
+        birth=userInfo.birth,
+        birthtype=userInfo.birthtype,
+        gender=userInfo.gender,
+        nationality=userInfo.nationality,
+        finalschool=userInfo.finalschool,
+        school=userInfo.school,
+        major=userInfo.major,
+        entertain=userInfo.entertain,
+        military=userInfo.military,
+        zipcode=userInfo.zipcode,
+        addr1=userInfo.addr1,
+        addr2=userInfo.addr2,
+        instargram=userInfo.instargram,
+        youtube=userInfo.youtube,
+        agreeusage=userInfo.agreeusage,
+        agreeprivacy=userInfo.agreeprivacy,
+        agreeemail=userInfo.agreeemail,
+        agreemarketing=userInfo.agreemarketing,
+        agreesms=userInfo.agreesms,
+        jointype=userInfo.jointype,
+        regtime=userInfo.regtime,
+        lastlogin=userInfo.lastlogin,
+        logincount=userInfo.logincount,
+        usertype=userInfo.usertype,
+        quitreason=quit,
+        quitdate=nowTime
+    )
+
+    userInfo.delete()
+
+    return redirect("/onepickAdmin/user/list/normal/1/")

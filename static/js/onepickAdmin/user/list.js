@@ -33,7 +33,7 @@ $(document).ready(function () {
         var num = $(this).attr("data-num");
 
         if (confirm("해당 회원을 탈퇴처리하겠습니까?") == true) {
-            //window.location.href = "/onepickAdmin/user/delete/"+num+"/";
+            window.location.href = "/onepickAdmin/user/delete/"+num+"/";
         }
     });
 

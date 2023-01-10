@@ -397,7 +397,7 @@ def proList(request, type, page, num, filter) :
     connection.commit()
     connection.close()
 
-    return render(request,  nUrl + 'user/proList.html',
+    return render(request,  nUrl + '/user/proList.html',
                   {"type": type, "profile": profile, "filter" : filter, "paging":paging, "page": page,
                    "leftPage": page - 1, "rightPage": page + 1, "lastPage": allPage,
                    "allCount" : cursor.rowcount, "allList" : len(allList), "num": num })
