@@ -96,7 +96,87 @@ $(document).ready(function (){
     });
 
     // 프로필 픽 기능. ( 구현 필요 )
-    $(document).on("click", ".reComProfile .pickBtn, .comViewProfile .pickBtn, .miniProfile .pickBtn", function(e){
+    $(document).on("click", ".reComProfile .pickBtn", function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        if( userID == ""){
+           if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
+               window.location.href = "/login/local/";
+               return;
+           } else {
+                return;
+           }
+       }
+
+        // 일반회원 픽기능 제한
+        if( userType == "NORMAL" ||  userType == "S-NORMAL" ){
+           alert("해당 기능의 권한이 없습니다.") ;
+           return;
+        }
+
+        var nowType = $(this).attr("data-nowType");
+        var num = $(this).parent().parent().attr("data-num");
+        var count = $(".pcNone .pickCounts_"+num).text();
+        count *= 1;
+
+        console.log(count);
+
+        updatePick("profile", nowType, num );
+
+         if( nowType == "off" ){
+            $(this).attr("data-nowType", "on");
+            $(this).addClass("pickOn");
+
+            $(".pickCounts_"+num).empty().text(count + 1);
+        }else{
+            $(this).attr("data-nowType", "off");
+            $(this).removeClass("pickOn");
+
+            $(".pickCounts_"+num).empty().text(count - 1);
+        }
+    });
+
+    $(document).on("click", ".comViewProfile .pickBtn", function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        if( userID == ""){
+           if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
+               window.location.href = "/login/local/";
+               return;
+           } else {
+                return;
+           }
+       }
+
+        // 일반회원 픽기능 제한
+        if( userType == "NORMAL" ||  userType == "S-NORMAL" ){
+           alert("해당 기능의 권한이 없습니다.") ;
+           return;
+        }
+
+        var nowType = $(this).attr("data-nowType");
+        var num = $(this).parent().parent().attr("data-num");
+        var count = $(".pickCounts_"+num).text();
+        count *= 1;
+
+        updatePick("profile", nowType, num );
+
+         if( nowType == "off" ){
+            $(this).attr("data-nowType", "on");
+            $(this).addClass("pickOn");
+
+            $(".pickCounts_"+num).empty().text(count + 1);
+        }else{
+            $(this).attr("data-nowType", "off");
+            $(this).removeClass("pickOn");
+
+            $(".pickCounts_"+num).empty().text(count - 1);
+        }
+    });
+
+    $(document).on("click", ".miniProfile .pickBtn", function(e){
         e.preventDefault();
         e.stopPropagation();
 
@@ -120,7 +200,7 @@ $(document).ready(function (){
 
         updatePick("profile", nowType, num );
 
-        if( nowType == "off" ){
+         if( nowType == "off" ){
             $(this).attr("data-nowType", "on");
             $(this).addClass("pickOn");
         }else{

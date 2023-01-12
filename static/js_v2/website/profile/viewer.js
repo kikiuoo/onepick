@@ -82,15 +82,21 @@ $(document).ready(function(){
 
         var nowType = $(this).attr("data-nowType");
         var num = $(this).attr("data-num");
+        var count = $(".pickCounts").text();
+        count *= 1;
 
-        updatePick("profile", nowType );
+        updatePick("profile", nowType, num );
 
-        if( nowType == "off" ){
+         if( nowType == "off" ){
             $(this).attr("data-nowType", "on");
             $(this).addClass("pickOn");
+
+            $(".pickCounts").empty().text(count + 1);
         }else{
             $(this).attr("data-nowType", "off");
             $(this).removeClass("pickOn");
+
+            $(".pickCounts").empty().text(count - 1);
         }
     });
 

@@ -21,15 +21,21 @@ $(document).ready(function (){
 
         var nowType = $(this).attr("data-nowType");
         var num = $(this).parent().attr("data-num");
+        var count = $(".pickCounts_"+num).text();
+        count *= 1;
 
         updatePick("profile", nowType, num );
 
-        if( nowType == "off" ){
+         if( nowType == "off" ){
             $(this).attr("data-nowType", "on");
             $(this).addClass("pickOn");
+
+            $(".pickCounts_"+num).empty().text(count + 1);
         }else{
             $(this).attr("data-nowType", "off");
             $(this).removeClass("pickOn");
+
+            $(".pickCounts_"+num).empty().text(count - 1);
         }
     });
 
