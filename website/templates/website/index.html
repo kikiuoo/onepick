@@ -137,9 +137,16 @@
                 <div class="cate">{{ profile.4|getMainCate }} {{ profile.5|getSubCate }}</div>
                 {% endif %}
 
-                <div class="youtube">
-                    <iframe width="250" height="140" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
+                {% if profile.6 != "" %}
+                    <div class="youtube">
+                        <iframe width="250" height="140" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                {% else %}
+                    <div class="youtube">
+                        <img src="static/image/web_v2/noYoutube01.png" width="250" height="140">
+                    </div>
+                {% endif %}
+
 
                 <div class="viewBox mobileNone">
                     <div class="countBox">
@@ -225,9 +232,16 @@
                     {% endif %}
                 </div>
 
-                <div class="youtube">
-                    <iframe width="290" height="170" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
+
+                {% if profile.6 != "" %}
+                    <div class="youtube">
+                        <iframe width="290" height="170" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                {% else %}
+                    <div class="youtube">
+                        <img src="static/image/web_v2/noYoutube02.png" width="290" height="170">
+                    </div>
+                {% endif %}
 
                 <div class="viewBox">
                     <div class="countBox">
@@ -384,9 +398,15 @@
                     {% endif %}
                 </div>
 
+               {% if profile.6 != "" %}
                 <div class="youtube">
                     <iframe width="188" height="116" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
+                 {% else %}
+                    <div class="youtube">
+                        <img src="static/image/web_v2/noYoutube03.png" width="188" height="116">
+                    </div>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
@@ -425,9 +445,15 @@
                     {% endif %}
                 </div>
 
+                {% if profile.6 != "" %}
                 <div class="youtube">
                     <iframe width="188" height="116" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
+                 {% else %}
+                    <div class="youtube">
+                        <img src="static/image/web_v2/noYoutube03.png" width="188" height="116">
+                    </div>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
@@ -466,9 +492,16 @@
                     {% endif %}
                 </div>
 
+
+                {% if profile.6 != "" %}
                 <div class="youtube">
                     <iframe width="188" height="116" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
+                 {% else %}
+                    <div class="youtube">
+                        <img src="static/image/web_v2/noYoutube03.png" width="188" height="116">
+                    </div>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
@@ -507,9 +540,16 @@
                     {% endif %}
                 </div>
 
+
+                {% if profile.6 != "" %}
                 <div class="youtube">
                     <iframe width="188" height="116" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
+                 {% else %}
+                    <div class="youtube">
+                        <img src="static/image/web_v2/noYoutube03.png" width="188" height="116">
+                    </div>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
@@ -547,9 +587,16 @@
                     {% endif %}
                 </div>
 
+
+                {% if profile.6 != "" %}
                 <div class="youtube">
                     <iframe width="188" height="116" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
+                 {% else %}
+                    <div class="youtube">
+                        <img src="static/image/web_v2/noYoutube03.png" width="188" height="116">
+                    </div>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
@@ -587,9 +634,16 @@
                     {% endif %}
                 </div>
 
+
+                {% if profile.6 != "" %}
                 <div class="youtube">
                     <iframe width="188" height="116" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
+                 {% else %}
+                    <div class="youtube">
+                        <img src="static/image/web_v2/noYoutube03.png" width="188" height="116">
+                    </div>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
