@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>원픽ㅣ나만의 ONEPICK</title>
+
+    <meta name="viewport" content="width=device-width">
+
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/base.css' %}"> <!-- PC 버전 -->
+    <link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/base.css' %}" > <!-- 모바일 버전 -->
+
+    <link rel="icon" type="image/x-icon" href="{% static 'image/favicon.ico' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/favicon.ico' %}">
+
+    <!-- JS 파일 -->
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/base.js' %}"></script>
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0WGRWN44B0"></script>
+    <script>
+        // Post 형태 ajax 통신시 필요.
+        $.ajaxSetup({
+            headers: { "X-CSRFToken": '{{csrf_token}}' }
+        });
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+         gtag('config', 'G-0WGRWN44B0');
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- header -->
+        <div class="header">
+            <div class="logo"></div>
+
+            <div class="menu mobileNone" data-url="/audi/main/all/1/">오디션</div>
+            <div class="menu mobileNone" data-url="/profile/list/">프로필</div>
+            <div class="menu mobileNone" data-url="/lounge/">라운지</div>
+
+            <div class="searchBox">
+                <input type="text" name="search" id="search" placeholder="오디션,인물 검색"/>
+                <div class="search"></div>
+            </div>
+            <div class="menuBtn pcNone"></div>
+
+            {% if request.session.userType == "COMPANY" and request.session.id != null %}
+            <div class="audiRegBtn">
+                <div class="icon"></div>
+                <div class="name">오디션 등록</div>
+            </div>
+            {% elif request.session.userType == "NORMAL" and request.session.id != null %}
+            <div class="profileRegBtn">
+                <div class="icon"></div>
+                <div class="name">프로필 등록</div>
+            </div>
+            {% elif request.session.userType == "admin" and request.session.id != null %}
+            <div class="profileRegBtn" style="margin-right: 130px">
+                <div class="icon"></div>
+                <div class="name">프로필 등록</div>
+            </div>
+
+            <div class="audiRegBtn">
+                <div class="icon"></div>
+                <div class="name">오디션 등록</div>
+            </div>
+            {% endif %}
+
+            {% if request.session.id == "" or request.session.id == null %}
+            <div class="login mobileNone">로그인</div>
+            <div class="join mobileNone">회원가입</div>
+            {% else %}
+            <div class="mypage mobileNone">마이페이지</div>
+            <div class="logout mobileNone">로그아웃</div>
+            {% endif %}
+        </div>
+        <!-- header -->
+
+        {% block context %}
+        {% endblock %}
+    </div>
+
+    <!-- footer - 배경 색상 전체 와이드로 표시하기 위해서 container 밖에 표현함. -->
+    <div class="footer">
+        <div class="footerContext">
+            <span class="company">(주)케이에스앤픽</span>
+            <div class="companyLink">
+                <span data-url="/users/agreement/1/">이용약관</span>
+                <span data-url="/users/agreement/2/">개인정보보호정책</span>
+                <span data-url="/advertise/">광고문의</span>
+            </div>
+            <span class="info addr">서울 강남구 압구정로54길 19 3층</span>
+            <span class="info email">이메일 onepick@myonepick.com</span>
+        </div>
+    </div>
+    <!-- footer -->
+
+    <!-- mobile Menu Popup -->
+    <div class="menuPopup pcNone">
+        <div class="sideMenu">
+            <div class="m_loginBox">
+                <div class="infoBox" id="login">
+                {% if request.session.id == "" or request.session.id == null %}
+                    <div class="infoIcon"></div>
+                    <span class="login">로그인</span>
+                    <div class="join">회원가입</div>
+                {% else %}
+                    <div class="infoIcon"></div>
+                    <span class="mypage">마이페이지</span>
+                    <div class="logout">로그아웃</div>
+                {% endif %}
+                </div>
+            </div>
+
+            <div class="m_inbox">
+                <div class="menuCate" id="audition" data-url="/audi/main/all/1/">
+                    <p>오디션</p>
+                </div>
+                <div class="menuCate" id="profile" data-url="/profile/list/">
+                    <p>프로필</p>
+                </div>
+                <div class="menuCate" id="lounge" data-url="/lounge/">
+                    <p>라운지</p>
+                </div>
+            </div>
+
+            {% if request.session.id != null %}
+            <div class="m_inbox">
+                {% if request.session.userType == "COMPANY" and request.session.id != null %}
+                <div class="infoBox" id="auditonReg">
+                    <div class="infoIcon"></div>
+                    <p>오디션 등록</p>
+                </div>
+                {% elif request.session.userType == "NORMAL" and request.session.id != null %}
+                <div class="infoBox" id="profileReg">
+                    <div class="infoIcon"></div>
+                    <p>프로필 등록</p>
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- mobile Menu Popup -->
+
+
+    <script>
+        var userType = "{{ request.session.userType }}";
+        var userID = "{{ request.session.id }}";
+        var cateType = "{{ cateType }}";
+    </script>
+</body>
+</html>

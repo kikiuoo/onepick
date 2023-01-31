@@ -1,0 +1,163 @@
+.inBox{
+    font-size: 0px;
+}
+
+.leftBox{
+    display: inline-block;
+    position: relative;
+    width: 60%;
+    height: 320px;
+    box-sizing: border-box;
+    overflow-x: scroll;
+    white-space: nowrap;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+
+.rightBox2{
+    display: inline-block;
+    position: relative;
+    width: calc(40% - 20px);
+    height: 320px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.youtubeLik{
+    position: relative;
+    width: 100%;
+    height: 280px;
+    box-sizing: border-box;
+    overflow-x: scroll;
+    white-space: nowrap;
+    margin-bottom: 20px;
+}
+
+
+
+
+.profileImage img{
+    height: 300px;
+    margin-right: 20px;
+}
+
+.rightBox{
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    width: 100%;
+}
+
+.subTitle{
+    position: relative;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+.rightBox .snsBox{
+    position: absolute;
+    width: 90px;
+    height: 30px;
+    left: 42px;
+    top: -5px;
+}
+
+.rightBox .snsBox div{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.rightBox .snsBox div.instagram{ background-image: url("../../../image/web/instagram.png")}
+.rightBox .snsBox div.youtube{ background-image: url("../../../image/web/youtube.png")}
+
+
+.rightBox .inputBox {
+    position: relative;
+    height: 34px;
+    border: 1px solid #959595;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    overflow-y: scroll;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.rightBox .inputBox2 {
+    position: relative;
+    height: 68px;
+    border: 1px solid #959595;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    overflow-y: scroll;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+}
+.imgExpand, .faceExpand, .bodyExpand, .jobExpand{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-weight: normal;
+
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    color:#959595;
+}
+
+.imgRadio:checked+label,
+.faceRadio:checked+label,
+.bodyRadio:checked+label,
+.jobRadio:checked+label{
+    color:#ff8aae;
+    font-weight: bold;
+}
+
+.imgRadio, .faceRadio, .bodyRadio, .jobRadio{
+    display: none;
+}
+
+.btnBox {
+    width: 100%;
+    text-align: right;
+    margin-top: 20px;
+}
+
+.btnBox .sendBtn{
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #ff8aae;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btnBox .resetBox{
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+    background-color: #c0c0c0;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 20px;
+}

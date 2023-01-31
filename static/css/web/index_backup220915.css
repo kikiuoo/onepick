@@ -1,0 +1,246 @@
+/* Index Main Banner */
+.mainBanner{
+    width: 1220px;
+    height: 450px;
+    border-radius: 20px;
+    background-color: #fff;
+    margin-bottom : 50px;
+    cursor: pointer;
+}
+
+.mainBanner .banner{
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+}
+
+/* Index 제목 */
+.mainTitle{
+    position : relative;
+    font-size: 24px;
+    font-weight: bold;
+    color: #282828;
+    padding: 0px 10px;
+}
+
+.mainTitle span{
+    position : absolute;
+    right : 10px;
+    bottom: 0px;
+    height : 36px;
+    line-height : 36px;
+    margin-top : -18px;
+    font-size: 16px;
+    color: #959595;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+/* 내부 Box 간격 조정 */
+.inBox{
+    padding : 0px 10px;
+    font-size : 0px;
+}
+
+.titleMargin{
+    margin-top : 50px;
+    margin-bottom: 10px;
+}
+
+.noneMargin{
+    margin : 0px !important;
+}
+
+/* Index 오디션 정보 */
+.audition{
+    position : relative;
+    display : inline-block;
+    width: 285px;
+    height: 235px;
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+    margin-top: 10px;
+    margin-right: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 10px;
+
+    cursor:pointer;
+}
+
+.audition:nth-child(4n){
+    margin-right: 0px;
+}
+
+.audition .audiLogo{
+    background-color : #fff;
+    width : 265px;
+    height :100px;
+    margin-bottom: 30px;
+
+    background-position: center;
+    background-repeat:  no-repeat;
+    background-size: 100% 100%;
+}
+
+.audition .audiTitle{
+    display : block;
+    height : 45px;
+
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #1f1f1f;
+
+    /* 2줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    display : -webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+}
+
+.audition .audiTerm{
+    padding-left: 10px;
+    height : 19px;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: normal;
+    color: #454545;
+}
+
+.pickBtn{
+    position: absolute;
+    bottom: 20px;
+    right: 18px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+
+    background-image: url("../../image/web/pick_off.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.pickBtn.pickOn{
+    background-image: url("../../image/web/pick_on.png");
+}
+
+
+/* Index 프로필 정보 */
+.profile{
+    position: relative;
+    font-size: 0px;
+    width: 590px;
+    height: 270px;
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+    display : inline-block;
+    margin-right : 20px;
+    cursor:  pointer;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    overflow: hidden;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.profile:nth-child(2n){
+    margin-right: 0px;
+}
+
+.profile .image{
+    display : inline-block;
+    width: 240px;
+    height: 270px;
+    box-sizing: border-box;
+    vertical-align: top;
+
+    background-size: 100% auto;
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+
+.profile .info{
+    position: relative;
+    display : inline-block;
+    width: 320px;
+    height: 270px;
+    padding: 30px 20px;
+    vertical-align: top;
+
+    box-sizing: border-box;
+}
+
+.profile .info .name{
+    font-size: 18px;
+    font-weight: bold;
+    color: #454545;
+}
+
+.profile .info .infoDetail{
+    margin-top: 18px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #1f1f1f;
+    margin-bottom: 10px;
+
+    /* 2줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    display : -webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+}
+
+.viewBox{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 90px;
+    font-size: 0px;
+}
+
+.viewBox .countBox{
+    display: inline-block;
+    height: 43px;
+    width: 28px;
+    margin-right: 3px;
+}
+
+.viewBox .countBox:nth-child(3){
+    margin-right: 0px;
+}
+
+.viewBox .countBox span{
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.viewBox .countBox span.viewCount{ background-image: url("../../image/web/viewCount.png")}
+.viewBox .countBox span.pickCount{ background-image: url("../../image/web/pickCount.png")}
+.viewBox .countBox span.comViewCount{ background-image: url("../../image/web/companyView.png")}
+
+.viewBox .countBox p{
+    margin: 0px;
+    padding: 0px;
+
+    font-size: 12px;
+    text-align: center;
+    color: #ff8aae;
+}
+
+.swiper-button-next,
+.swiper-button-prev{
+    color: #c0c0c0 !important;
+}

@@ -1,0 +1,21 @@
+{% load my_filter %}
+{% for pro in profile %}
+<div class="contentList">
+    <div class="profileView"><div class="btnProfile">프로필 보기</div></div>
+    <div class="profileImage"><div class="profileImage" style='background-image: url("/media/{{ pro.5 }}");'></div> </div>
+    <div class="profileName">{{ pro.1 }}</div>
+    <div class="profileAge">{{ pro.2|userAge }}</div>
+    <div class="profileBirth">{{ pro.2|replace:"-|/" }}</div>
+
+    <div class="profileCate">
+        {% if pro.7 != "old" %}
+        {{ pro.3|getMainCate }} {{ pro.4|getSubCate }}
+        {% endif %}
+    </div>
+
+    <div class="checkBox">
+        <input type="checkbox" class="profileCheck" name="profile" value="{{ pro.0 }}" id="check_{{ forloop.counter0 }}" {% if pro.6 > 0 %} checked {% endif %}>
+        <label class="checkProfile" for="check_{{ forloop.counter0 }}"></label>
+    </div>
+</div>
+{% endfor %}

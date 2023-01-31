@@ -1,0 +1,25 @@
+{% extends 'website/base.html' %}
+
+{% block context %}
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<!-- 오디션 Base와 Css, Js 내용이 동일하기 때문에 같이 사용. -->
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css_v2/web/audi/audi_base.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css_v2/mobile/audi/audi_base.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js_v2/website/profile/audi_base.js' %}"></script>
+
+<div class="container">
+
+    <!-- 분야 카테고리 -->
+    <div class="subCate">
+        <div class="cate {% if cateType == 'actor'  %} active {% endif %}" data-url="actor">배우</div>
+        <div class="cate {% if cateType == 'model'  %} active {% endif %}" data-url="model">모델</div>
+        <div class="cate {% if cateType == 'singer'  %} active {% endif %}" data-url="singer">가수</div>
+    </div>
+
+    {% block context_profile %}
+    {% endblock %}
+</div>
+{% endblock %}

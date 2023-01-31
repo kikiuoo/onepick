@@ -1,0 +1,16 @@
+{% extends 'picktalk/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/user/agreement.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/user/agreement.css' %}" > <!-- 모바일 버전 -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+<!-- JS 파일 -->
+<div class="inBox">
+    <div class="title">{{ agree.title }}</div>
+    <div class="content">{{ agree.content|linebreaks }}</div>
+</div>
+
+{% endblock %}

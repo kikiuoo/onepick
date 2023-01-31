@@ -1,0 +1,41 @@
+{% extends 'website/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css_v2/web/login/joinView.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css_v2/mobile/login/joinView.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js_v2/website/login/joinView.js' %}"></script>
+
+<div class="container_2">
+    <div class="mainTitle">회원가입</div>
+
+    <div class="inBox">
+        <div class="textInfo" >
+            SNS 간편 가입으로 10초 만에 가입 완료!
+        </div>
+
+        <div class="socialBox">
+            <div class="socialBtn" id="gogleLogin">
+                <div class="logo"></div>
+                <span>구글 계정으로 가입하기</span>
+            </div>
+            <div class="socialBtn" id="naverLogin">
+                <div class="logo"></div>
+                <span>네이버 계정으로 가입하기</span>
+            </div>
+            <div class="socialBtn" id="kakaoLogin">
+                <div class="logo"></div>
+                <span>카카오 계정으로 가입하기</span>
+            </div>
+        </div>
+
+        <div class="joinInfo">
+            오디션을 등록하고 인재를 찾고 싶다면? <span>기업 회원 가입하기</span>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

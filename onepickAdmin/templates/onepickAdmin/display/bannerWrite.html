@@ -1,0 +1,70 @@
+{% extends 'onepickAdmin/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+<link rel="stylesheet" href="{% static 'css/onepickAdmin/display/write.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" href="{% static 'css/datepicker.min.css' %}">
+
+<!-- JS 파일 -->
+<script src="{% static 'js/datepicker.min.js' %}"></script>
+<script src="{% static 'js/onepickAdmin/display/write.js' %}"></script>
+
+<div class="inBox">
+    <div class="title">배너 등록</div>
+
+    <form action="/onepickAdmin/display/banner/writeCallback/" method="post" id="saveUserForm" enctype="multipart/form-data"  autocomplete="off">
+    {% csrf_token %}
+    <div class="viewBox">
+        <div class="joinInfo">
+            <div class="infoTitle">제목</div>
+            <div class="content">
+                <input type="text" value="" id="title" name="title" placeholder="제목 입력" />
+            </div>
+        </div>
+
+        <div class="joinInfo">
+            <div class="infoTitle">표출위치</div>
+            <div class="content">
+                <select name="viewType" id="viewType" >
+                    <option value="">선택</option>
+                    <option value="main">홈(메인)</option>
+                    <!--<option value="audi">오디션</option>-->
+                </select>
+            </div>
+        </div>
+
+        <div class="joinInfo">
+            <div class="infoTitle">url</div>
+            <div class="content">
+                <input type="text" value="" id="url" name="url" placeholder="url 입력"/>
+            </div>
+        </div>
+
+        <div class="joinInfo">
+            <div class="infoTitle">이미지 등록</div>
+            <div class="content">
+                <input type="file" name="userImage[]" id="input-piece" class="upload-hidden input-file" data-type="userImage">
+            </div>
+        </div>
+
+        <div class="joinInfo nonCompany">
+            <div class="infoTitle">표출일자</div>
+            <div class="content">
+                <input type="text" value="" id="startDate" name="startDate" placeholder="시작일" data-toggle="datepicker" readonly/> ~
+                <input type="text" value="" id="endDate" name="endDate" placeholder="종료일" data-toggle="datepicker" readonly/>
+            </div>
+        </div>
+    </div>
+
+    <div class="btnBox">
+        <div class="sendBtn">등록하기</div>
+    </div>
+    </form>
+</div>
+
+<script>
+</script>
+
+{% endblock %}

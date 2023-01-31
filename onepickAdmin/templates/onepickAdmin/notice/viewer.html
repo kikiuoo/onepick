@@ -1,0 +1,32 @@
+{% extends 'onepickAdmin/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+<link rel="stylesheet" href="{% static 'css/onepickAdmin/notice/viewer.css' %}"> <!-- pc 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/onepickAdmin/notice/viewer.js' %}"></script>
+
+<div class="inBox">
+    <div class="title">{{ notice.title }}</div>
+
+    <div class="viewBox">
+       {% autoescape off %}
+        {{ notice.content }}
+       {% endautoescape %}
+    </div>
+
+    <div class="btnBox">
+        <div class="editBtn">수정</div>
+        <div class="delBtn">삭제</div>
+    </div>
+
+</div>
+
+<script>
+    var num = "{{ notice.num }}";
+</script>
+
+{% endblock %}

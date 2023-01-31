@@ -1,0 +1,259 @@
+{% extends 'picktalk/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/user/join.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/user/join.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/user/userInfo.js' %}"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<div class="body">
+    <form action="/users/info/updateCallback/" method="post" id="saveUserForm" enctype="multipart/form-data"  autocomplete="off">
+    {% csrf_token %}
+
+        <div class="mainTitle">회원 정보</div>
+        <div class="winBox">
+            <div class="joinInfo">
+                <div class="title">회원 종류</div>
+                <div class="content type">
+                    {% if userInfo.usertype == "NORMAL" or userInfo.usertype == "S-NORMAL" %}
+                        일반회원
+                    {% else %}
+                        기업회원
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="joinInfo">
+                <div class="title">ID</div>
+                <div class="content">
+                    <input type="text" value="{{ userInfo.userid }}" id="userID" name="user_id" readonly />
+                </div>
+            </div>
+
+            {% if userInfo.jointype == "OLDUSER" or userInfo.jointype == "oldUser"  %}
+            <div class="joinInfo">
+                <div class="title">비밀번호</div>
+                <div class="content">
+                    <div class="pwBtn">비밀번호 변경</div>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="joinInfo">
+                <div class="title cName">
+                    {% if userInfo.usertype == "NORMAL" or userInfo.usertype == "S-NORMAL" %}
+                        이름
+                    {% else %}
+                        담당자 이름
+                    {% endif %}
+                </div>
+                <div class="content"><input type="text" value="{{ userInfo.name|default:"" }}" id="name" name="name" maxlength="5" placeholder="이름을 입력해주세요"/> </div>
+            </div>
+
+            <div class="joinInfo">
+                <div class="title">e-mail</div>
+                <div class="content">
+                    <input type="text" value="{{ email.0|default:"" }}" id="email1" name="email1" placeholder="이메일"/>
+                    <input type="text" value="{{ email.1|default:"" }}" id="email2" name="email2" placeholder="이메일 주소"/>
+                    <select name="email_select" id="email_select">
+                        <option value="">직접입력</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="nate.com">nate.com</option>
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="yahoo.com">yahoo.com</option>
+                        <option value="hanmail.net">hanmail.net</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="joinInfo">
+                <div class="title cPhone">
+                    {% if userInfo.usertype == "NORMAL" or userInfo.usertype == "S-NORMAL" %}
+                        전화번호
+                    {% else %}
+                        담당자 연락처
+                    {% endif %}
+                </div>
+                <div class="content">
+                    <select name="phone1" id="phone1" style="color: #1f1f1f" >
+                        <option value="">선택</option>
+                        <option value="010" {% if phone.0 == "010" %} selected {% endif %}>010</option>
+                        <option value="011" {% if phone.0 == "011" %} selected {% endif %}>011</option>
+                        <option value="016" {% if phone.0 == "016" %} selected {% endif %}>016</option>
+                        <option value="017" {% if phone.0 == "017" %} selected {% endif %}>017</option>
+                        <option value="019" {% if phone.0 == "019" %} selected {% endif %}>019</option>
+                    </select>
+                    <input type="text" value="{{ phone.1|default:"" }}" id="phone2" name="phone2" maxlength="4" placeholder="입력"/>
+                    <input type="text" value="{{ phone.2|default:"" }}" id="phone3" name="phone3" maxlength="4" placeholder="입력"/>
+
+                    <div class="confirmPhone">인증하기</div>
+
+                    <input type="text" value="" id="confirm" name="confirm" maxlength="4" placeholder="인증번호 입력"/>
+                    <div class="findConfirm">인증완료</div>
+                    <input type="checkbox" name="confirmCheck" id="confirmCheck" style="display: none">
+                </div>
+            </div>
+
+
+            {% if userInfo.usertype == "NORMAL" or userInfo.usertype == "S-NORMAL" %}
+            <div class="joinInfo nonCompany">
+                <div class="title">생년월일,성별</div>
+                <div class="content">
+                    <select name="brith1" id="brith1" style="color: #1f1f1f">
+                        <option value="" disabled selected>연도</option>
+                    </select>
+
+                    <select name="brith2" id="brith2" style="color: #1f1f1f">
+                        <option value="" disabled selected>월</option>
+                    </select>
+
+                    <select name="brith3" id="brith3" style="color: #1f1f1f">
+                        <option value="" disabled selected>일</option>
+                    </select>
+
+                    <select name="gender" id="gender" style="color: #1f1f1f">
+                        <option value="" disabled selected>성별</option>
+                        <option value="man" {% if userInfo.gender == "man" %}selected{% endif %}>남성</option>
+                        <option value="girl" {% if userInfo.gender == "girl" %}selected{% endif %}>여성</option>
+                    </select>
+                </div>
+            </div>
+            <div class="joinInfo nonCompany">
+                <div class="title">주소</div>
+                <div class="content">
+                    <input type="text" value="{{ userInfo.addr1|default:"" }}" id="addr1" name="addr1" placeholder="주소 검색" readonly/>
+                    <div class="findAddr" data-type="normal">우편번호 검색</div>
+                    <input type="text" value="{{ userInfo.addr2|default:"" }}" id="addr2" name="addr2" placeholder="상세 주소 검색"/>
+                </div>
+            </div>
+
+            {% endif %}
+
+
+            <div class="joinInfo">
+                <div class="title">광고 수신 동의</div>
+                <div class="content" style="padding-top: 13px">
+                    {% if userInfo.agreeemail == "Y" or userInfo.agreeemail == "1"  %}
+                    <label class="textCheck emailCheck"><input type="checkbox" name="emailCheck" id="emailCheck" value="1" checked> 이메일 <div class="check  on"></div>  </label>
+                    {% else %}
+                    <label class="textCheck emailCheck" style="color: #c0c0c0"><input type="checkbox" name="emailCheck" id="emailCheck" value="1"> 이메일 <div class="check "></div>  </label>
+                    {% endif %}
+
+
+                    {% if userInfo.agreesms == "Y" or userInfo.agreesms == "1"  %}
+                    <label class="textCheck phoneCheck"><input type="checkbox" name="phoneCheck" id="phoneCheck" value="1" checked> SMS <div class="check on"></div>  </label>
+                    {% else %}
+                    <label class="textCheck phoneCheck" style="color: #c0c0c0"><input type="checkbox" name="phoneCheck" id="phoneCheck" value="1"> SMS <div class="check"></div>  </label>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        {% if userInfo.usertype == "COMPANY" or userInfo.usertype == "S-COMPANY" %}
+        <div class="mainTitle">
+            기업 정보
+            <p>기업 정보는 추후에 마이페이지에서도 등록 가능합니다.</p>
+        </div>
+        <div class="winBox">
+            <div class="joinInfo">
+                <div class="title2">사업자명</div>
+                <div class="content2"><input type="text" value="{{ userCompany.name|default:"" }}" id="companyName" name="companyName" placeholder="사업자명을 입력해주세요."/></div>
+            </div>
+
+            <div class="joinInfo">
+                <div class="title2">사업자 등록번호</div>
+                <div class="content2"><input type="text" value="{{ userCompany.license|default:"" }}" id="license" name="license" placeholder="사업자 등록 번호를 입력해주세요."/> </div>
+            </div>
+
+            <div class="joinInfo">
+                <div class="title2">사업장 주소</div>
+                <div class="content2">
+                    <input type="text" value="{{ userCompany.addr1|default:"" }}" id="companyAddr1" name="companyAddr1" placeholder="주소 검색" readonly/>
+                    <div class="findAddr2" data-type="company">우편번호 검색</div>
+                    <input type="text" value="{{ userCompany.addr2|default:"" }}" id="companyAddr2" name="companyAddr2" placeholder="상세 주소 검색"/>>
+                </div>
+            </div>
+
+            <div class="joinInfo">
+                <div class="title2">웹사이트</div>
+                <div class="content2">
+                    <input type="text" value="{{ userCompany.website|default:"" }}" id="webSite" name="webSite" placeholder="웹사이트 주소를 입력해주세요."/>
+                </div>
+            </div>
+
+            <div class="joinInfo">
+                <div class="title2">파일</div>
+                <div class="content2">
+                    {% if userCompany.logoimage %}
+                        <label class="imageSelect" id="logo" for="input-logo" style='background-image: url("/media/{{ userCompany.logoimage }}");'></label>
+                    {% else %}
+                        <label class="imageSelect" id="logo" for="input-logo"> <div class="addImage"></div>로고 이미지<br>등록</label>
+                    {% endif %}
+
+
+                    {% if userCompany.licenseimage %}
+                        <label class="imageSelect" id="licenseImage" for="input-license" style='background-image: url("/media/{{ userCompany.licenseimage }}");'></label>
+                    {% else %}
+                        <label class="imageSelect" id="licenseImage" for="input-license"> <div class="addImage"></div>사업자 등록증<br>이미지 등록</label>
+                    {% endif %}
+
+                    {% if userCompany.artlicenseimage %}
+                    <label class="imageSelect" id="artLicense" for="input-artLicense" style='background-image: url("/media/{{ userCompany.artlicenseimage }}");'></label>
+                    {% else %}
+                        <label class="imageSelect" id="artLicense" for="input-artLicense"> <div class="addImage"></div>대중 문화 예술<br>기획업 등록증 등록</label>
+                    {% endif %}
+
+                    <input type="file" name="logo[]" id="input-logo" class="upload-hidden input-file" data-type="logo" value="{{ userCompany.logoimage }}">
+                    <input type="file" name="licenseImage[]" id="input-license" class="upload-hidden input-file" data-type="license" value="{{ userCompany.licenseimage }}">
+                    <input type="file" name="artLicense[]" id="input-artLicense" class="upload-hidden input-file" data-type="artLicense" value="{{ userCompany.artlicenseimage }}">
+
+                    <input type="hidden" name="logoImg" id="logoImg" value="{{ userCompany.logoimage }}">
+                    <input type="hidden" name="licenseImg" id="licenseImg" value="{{ userCompany.licenseimage }}">
+                    <input type="hidden" name="artLicenseImg" id="artLicenseImg" value="{{ userCompany.artlicenseimage }}">
+                </div>
+            </div>
+         </div>
+         {% endif %}
+
+    </form>
+    <!--<div class="info_pink">확인 버튼을 누르시면, 원픽의 이용약관 및 개인 정보 취급 방침에 동의하시는 것으로 간주됩니다.</div>-->
+    <div class="btnBox">
+        <div class="sendBtn">확인</div>
+
+        <div class="quitBtn">회원탈퇴</div>
+    </div>
+</div>
+
+<div class="popupBack">
+    <div class="popupBox">
+        <div class="pTitle">회원탈퇴</div>
+        <div class="closeSPopup"></div>
+
+        <div class="pInfo">
+            원픽을 이용하는데 불편함이 있었나요?<br>
+            불편 사항이 있었다면, 고객센터로 문의해주세요.
+        </div>
+
+        <div class="pBInfo">그대로 탈퇴를 진행하시겠습니까?</div>
+        <div class="btnBox">
+            <div class="quitContiBtn">탈퇴 진행하기</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var joinType = "{{ type }}";
+    var brith1 = "{{ birth.0 }}";
+    var brith2 = "{{ birth.1 }}";
+    var brith3 = "{{ birth.2 }}";
+
+    var phone = "{{ userInfo.phone }}";
+    var userType = "{{ userInfo.usertype }}"
+</script>
+
+{% endblock %}

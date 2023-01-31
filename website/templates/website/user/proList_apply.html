@@ -1,0 +1,392 @@
+{% extends 'website/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css_v2/web/profile/filter.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css_v2/mobile/profile/filter.css' %}" > <!-- 모바일 버전 -->
+
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css_v2/web/user/proList_apply.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css_v2/mobile/user/proList_apply.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js_v2/website/user/proList_apply.js' %}"></script>
+
+<div class="mTtitle">
+     오디션 지원자 보기 <span class="apply">총 지원자 <p>{{ allList }}</p>명 </span>
+</div>
+
+<form action="/applyList/{{ num }}/" method="get" id="sendForm" enctype="multipart/form-data"  autocomplete="off">
+
+<div class="container">
+    <div class="filterBtnBox">
+        <div class="btnList">
+            <select name="listView" id="listView">
+                <option value="all" {% if filter == "all" %}selected{% endif %}>전체</option>
+                <option value="pass" {% if filter == "pass" %}selected{% endif %}>예비합격자</option>
+            </select>
+
+            <div class="filterBtn">필터<span></span></div>
+
+            <div class="resetBox">
+                <div class="icon"></div> 필터 초기화
+            </div>
+
+            <input type="hidden" value="" name="page" id="page">
+        </div>
+    </div>
+
+
+    <div class="filterBox">
+        <div class="filterInBox">
+            <div class="fTitle pcNone">검색 필터</div>
+            <div class="closeBtn pcNone"></div>
+
+            <div class="filterInner">
+                <div class="filterBlock">
+                    <div class="filterTitle">기본 정보</div>
+                    <div class="filterContent">
+                        <select name="nationality" id="nationality" {% if nationality != "" %}style="color:#1f1f1f;"{% endif %}>
+                            <option value="" selected>국적</option>
+                            <option value="내국인" {% if nationality == "내국인" %} selected {% endif %}>내국인</option>
+                            <option value="외국인" {% if nationality == "외국인" %} selected {% endif %}>외국인</option>
+                        </select>
+
+                        <select name="geneder" id="geneder" {% if geneder != "" %}style="color:#1f1f1f;"{% endif %}>
+                            <option value="" selected>성별</option>
+                            <option value="man" {% if geneder == "man" %} selected {% endif %}>남성</option>
+                            <option value="girl" {% if geneder == "girl" %} selected {% endif %}>여성</option>
+                        </select>
+
+                        <select name="military" id="military" {% if military != "" %}style="color:#1f1f1f;"{% endif %}>
+                            <option value="" selected>병역 구분</option>
+                            <option value="해당없음" {% if military == "해당없음" %} selected {% endif %}>해당없음</option>
+                            <option value="미필" {% if military == "미필" %} selected {% endif %}>미필</option>
+                            <option value="군필" {% if military == "군필" %} selected {% endif %}>군필</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="filterBlock">
+                    <div class="filterTitle">나이</div>
+                    <div class="filterContent">
+                        <input type="radio" name="ageRadio" class="ageRadio" value="" id="check_all" {% if ageRadio == "" %}checked{% endif %}>
+                        <label class="ageExpand" for="check_all">전체</label>
+                        <input type="radio" name="ageRadio" class="ageRadio" value="1" id="check_1" {% if ageRadio == "1" %}checked{% endif %}>
+                        <label class="ageExpand" for="check_1">10대 이하</label>
+                        <input type="radio" name="ageRadio" class="ageRadio" value="10" id="check_10" {% if ageRadio == "10" %}checked{% endif %}>
+                        <label class="ageExpand" for="check_10">10대 이상</label>
+                        <input type="radio" name="ageRadio" class="ageRadio" value="20" id="check_20" {% if ageRadio == "20" %}checked{% endif %}>
+                        <label class="ageExpand" for="check_20">20대 이상</label>
+                        <input type="radio" name="ageRadio" class="ageRadio" value="30" id="check_30" {% if ageRadio == "30" %}checked{% endif %}>
+                        <label class="ageExpand" for="check_30">30대 이상</label>
+                        <input type="radio" name="ageRadio" class="ageRadio" value="40" id="check_40" {% if ageRadio == "40" %}checked{% endif %}>
+                        <label class="ageExpand" for="check_40">40대 이상</label>
+                        <input type="radio" name="ageRadio" class="ageRadio" value="50" id="check_50" {% if ageRadio == "50" %}checked{% endif %}>
+                        <label class="ageExpand" for="check_50">50대 이상</label>
+
+                        <div class="userInsert">
+                            <div class="filterTitle">직접입력</div>
+
+                            <input type="number" name="age2" id="age2" value="{{ age2 }}" placeholder="최소">
+                            <span>~</span>
+                            <input type="number" name="age1" id="age1" value="{{ age1 }}" placeholder="최대">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filterBlock">
+                    <div class="filterTitle">키</div>
+                    <div class="filterContent">
+                        <input type="radio" name="heightRadio" class="heightRadio" value="" id="height_all"  {% if heightRadio == "" %}checked{% endif %}>
+                        <label class="heightExpand" for="height_all">전체</label>
+                        <input type="radio" name="heightRadio" class="heightRadio" value="110" id="height_110"  {% if heightRadio == "110" %}checked{% endif %}>
+                        <label class="heightExpand" for="height_110">110cm 이상</label>
+                        <input type="radio" name="heightRadio" class="heightRadio" value="130" id="height_130"  {% if heightRadio == "130" %}checked{% endif %}>
+                        <label class="heightExpand" for="height_130">130cm 이상</label>
+                        <input type="radio" name="heightRadio" class="heightRadio" value="150" id="height_150"  {% if heightRadio == "150" %}checked{% endif %}>
+                        <label class="heightExpand" for="height_150">150cm 이상</label>
+                        <input type="radio" name="heightRadio" class="heightRadio" value="160" id="height_160"  {% if heightRadio == "160" %}checked{% endif %}>
+                        <label class="heightExpand" for="height_160">160cm 이상</label>
+                        <input type="radio" name="heightRadio" class="heightRadio" value="170" id="height_170"  {% if heightRadio == "170" %}checked{% endif %}>
+                        <label class="heightExpand" for="height_170">170cm 이상</label>
+                        <input type="radio" name="heightRadio" class="heightRadio" value="180" id="height_180"  {% if heightRadio == "180" %}checked{% endif %}>
+                        <label class="heightExpand" for="height_180">180cm 이상</label>
+
+                        <div class="userInsert">
+                            <div class="filterTitle">직접입력</div>
+
+                            <input type="text" id="height1" name="height1" value="{{ height1 }}" placeholder="최소">
+                            <span>~</span>
+                            <input type="text" id="height2" name="height2" value="{{ height2 }}" placeholder="최대">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filterBlock">
+                    <div class="filterTitle">경력</div>
+                    <div class="filterContent">
+                        <input type="radio" name="careerRadio" class="careerRadio" value="" id="career_all" {% if careerRadio == "" %}checked{% endif %}>
+                        <label class="careerExpand" for="career_all">전체</label>
+                        <input type="radio" name="careerRadio" class="careerRadio" value="0" id="career_0" {% if careerRadio == "0" %}checked{% endif %}>
+                        <label class="careerExpand" for="career_0">1년 미만</label>
+                        <input type="radio" name="careerRadio" class="careerRadio" value="1" id="career_1" {% if careerRadio == "1" %}checked{% endif %}>
+                        <label class="careerExpand" for="career_1">1년 이상</label>
+                        <input type="radio" name="careerRadio" class="careerRadio" value="2" id="career_2" {% if careerRadio == "2" %}checked{% endif %}>
+                        <label class="careerExpand" for="career_2">2년 이상</label>
+                        <input type="radio" name="careerRadio" class="careerRadio" value="3" id="career_3" {% if careerRadio == "3" %}checked{% endif %}>
+                        <label class="careerExpand" for="career_3">3년 이상</label>
+                        <input type="radio" name="careerRadio" class="careerRadio" value="5" id="career_5" {% if careerRadio == "5" %}checked{% endif %}>
+                        <label class="careerExpand" for="career_5">5년 이상</label>
+                        <input type="radio" name="careerRadio" class="careerRadio" value="8" id="career_8" {% if careerRadio == "8" %}checked{% endif %}>
+                        <label class="careerExpand" for="career_8">8년 이상</label>
+                        <input type="radio" name="careerRadio" class="careerRadio" value="10" id="career_10" {% if careerRadio == "10" %}checked{% endif %}>
+                        <label class="careerExpand" for="career_10">10년 이상</label>
+
+                        <div class="userInsert">
+                            <div class="filterTitle">직접입력</div>
+
+                            <input type="text" name="career1" id="career1" value="{{ career1 }}" placeholder="최소">
+                            <span>~</span>
+                            <input type="text" name="career2" id="career2" value="{{ career2 }}" placeholder="최대">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filterBlock">
+                    <div class="filterTitle">외국어</div>
+                    <div class="filterContent">
+                        <select name="foreign" id="foreign">
+                            <option value="" selected>외국어 선택</option>
+                            <option value="영어" {% if foreign == "영어" %} selected {% endif %}>영어</option>
+                            <option value="일어" {% if foreign == "일어" %} selected {% endif %}>일어</option>
+                            <option value="중국어" {% if foreign == "중국어" %} selected {% endif %}>중국어</option>
+                            <option value="독일어" {% if foreign == "독일어" %} selected {% endif %}>독일어</option>
+                            <option value="프랑스어" {% if foreign == "프랑스어" %} selected {% endif %}>프랑스어</option>
+                            <option value="러시아어" {% if foreign == "러시아어" %} selected {% endif %}>러시아어</option>
+                            <option value="베트남어" {% if foreign == "베트남어" %} selected {% endif %}>베트남어</option>
+                        </select>
+
+                        <select name="good" id="good" class="addCondition">
+                            <option value="" selected>수준</option>
+                            <option value="상" {% if good == "상" %} selected {% endif %}>상</option>
+                            <option value="중" {% if good == "중" %} selected {% endif %}>중</option>
+                            <option value="하" {% if good == "하" %} selected {% endif %}>하</option>
+                        </select>
+
+
+                        <div class="foreFindList">
+                            {% if foreSpec != "" %}
+                                {% for foregin in foreList %}
+                                    <div class="foreFind" id="list_f{{ forloop.counter0 }}">{{ foregin|replace:"$| > "  }}<span class="subBtn" id="foreSub" data-val="{{ foregin }}" data-id="f{{ forloop.counter0 }}"></span></div>
+                                {% endfor %}
+                            {% endif %}
+                            <textarea name="foreSpec" id="foreSpec">{{ foreSpec }}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filterBlock">
+                    <div class="filterTitle">특기</div>
+                    <div class="filterContent">
+                        <select name="specialty" id="specialty">
+                            <option value="" selected>특기 선택</option>
+                            {% for speci in speList  %}
+                            <option value="{{ speci.1 }}">{{ speci.1 }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <select name="spec_sub" id="spec_sub" class="addCondition">
+                            <option value="" selected>특기 세부 선택</option>
+                        </select>
+
+                        <div class="specFindList">
+                            {% if findSpec != "" %}
+                                {% for spec in spList %}
+                                    <div class="specFind" id="list_s{{ forloop.counter0 }}">{{ spec|replace:"$| > "  }}<span class="subBtn" id="specSub" data-val="{{ spec }}" data-id="s{{ forloop.counter0 }}"></span></div>
+                                {% endfor %}
+                            {% endif %}
+                            <textarea name="findSpec" id="findSpec">{{ findSpec }}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filterBlock">
+                    <div class="filterTitle">태그</div>
+                    <div class="filterContent">
+                        <select name="tag" id="tag" class="addCondition">
+                            <option value="" selected>태그 선택</option>
+                            {% for tag in tagList  %}
+                            <option value="{{ tag.tag }}">{{ tag.tag }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <div class="tagFindList">
+                            {% if tagSpec != "" %}
+                                {% for tag in tagSpecList %}
+                                    <div class="tagFind" id="list_t{{ forloop.counter0 }}">{{ tag }}<span class="subBtn" id="tagSub" data-val="{{ tag }}" data-id="t{{ forloop.counter0 }}"></span></div>
+                                {% endfor %}
+                            {% endif %}
+                            <textarea name="tagSpec" id="tagSpec">{{ tagSpec }}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filterBlock">
+                    <div class="filterTitle">학교</div>
+                    <div class="filterContent">
+                        <input type="text" id="school" name="school" value="{{ school }}" placeholder="학교명">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="btnBox pcNone">
+                <div class="filterSave">필터 적용</div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="btnBox mobileNone">
+        <div class="filterSave">필터 적용</div>
+    </div>
+
+    </form>
+
+
+    <div class="inBox">
+
+        <div class="itemBox">
+
+            {% for data in profile %}
+            <div class="profile" data-num="{{ data.0 }}">
+                <div class="passBtn {% if data.20 == "Y" %}passOn{% endif %}"
+                    data-comment="{{ data.19|default:"" }}"
+                    data-num="{{ data.0 }}" data-image="/media/{{ data.1 }}"
+                    data-name="{{ data.7 }} ({{ data.8|userAge }})" id="pass_{{ data.0 }}"
+                >
+                    예비합격 <span></span>
+                </div>
+
+                <div class="imageBox">
+                    <div class="profileImage"   style='background-image: url("/media/{{ data.1 }}");'></div>
+                    {% if profile.16 != "" %}
+                    <div class="youtube">
+                        <iframe width="560" height="315" src="{{ data.16|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="contentBox">
+                    <div class="name">{{ data.7 }} ({{ data.8|userAge }})</div>
+                    <div class="detailInfo">
+                        키 {{ data.2 }} cm | 몸무게 {{ data.3 }} kg<br>
+                        {% if data.10 == 'man' and data.11 != None %}
+                            {{ data.11 }} |
+                        {% endif %}
+                        {% if data.9 == "" %}
+                            소속사 없음
+                        {% else %}
+                            소속사 있음
+                        {% endif %} <br>
+                        {{ data.12 }} {{ data.13 }}
+
+                        {% if data.14 != None %}
+                         <br>특기 {{ data.14|getTalent }}
+                        {% endif %}
+                    </div>
+
+                    {% if profile.17 == '0' %}
+                    <div class="career">
+                        <div class="careerTitle">영화</div>
+                        <div class="careerContent">{{ data.0|getCareer:"movie" }}</div>
+                        <div class="careerTitle">TV드라마,웹드라마</div>
+                        <div class="careerContent">{{ data.0|getCareer:"drama" }}</div>
+                        <div class="careerTitle">광고/기타</div>
+                        <div class="careerContent">{{ data.0|getCareer:"etc" }}</div>
+                    </div>
+                    {% else %}
+                    <div class="career">
+                        <div class="careerTitle">자기 소개</div>
+                        <div class="introduction">{{ data.15 }}</div>
+                    </div>
+                    {% endif %}
+
+                </div>
+
+
+                <div class="viewBox">
+                    <div class="countBox">
+                        <span class="viewCount"></span>
+                        <p>{{ data.4 }}</p>
+                    </div>
+                    <div class="countBox">
+                        <span class="pickCount"></span>
+                        <p class="pickCounts_{{ data.0 }}">{{ data.5 }}</p>
+                    </div>
+                    <div class="countBox">
+                        <span class="comViewCount"></span>
+                        <p>{{ data.6 }}</p>
+                    </div>
+                </div>
+
+                {% if data.18 == 0 or data.18 == "0" %}
+                <div class="pickBtn" data-nowType="off"></div>
+                {% else %}
+                <div class="pickBtn pickOn " data-nowType="on"></div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+
+    <div class="popupBack">
+        <div class="popupBox">
+
+            <div class="popupTitle">예비 합격</div>
+            <div class="popupClose"></div>
+
+            <div class="profileBox">
+                <div class="image"></div>
+                <div class="profileName">이**(25)</div>
+                <div class="checkView"></div>
+
+                <textarea name="comment" id="comment"></textarea>
+                <input name="userNum" id="userNum" type="hidden">
+            </div>
+
+            <div class="popupBtnBox">
+                <div class="prePassBtn">예비 합격</div>
+                <div class="cancelPassBtn">예비 합격 취소</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page">
+        {% if page != 1 %}
+            <div class="leftPage" data-type="list" data-page="{{ leftPage }}"></div>
+        {% endif %}
+
+        <div class="pageBox">
+        {% for pages in paging %}
+            <div class="pages {% if pages == page %} nowPage {% endif %}"  data-type="list" data-page="{{ pages }}">{{ pages }}</div>
+        {% endfor %}
+        </div>
+
+        {% if page != lastPage %}
+            <div class="rightPage" data-type="list" data-page="{{ rightPage }}"></div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    var page = "{{ page }}";
+    var num = "{{ num }}";
+    var filter = "{{ filter }}";
+</script>
+
+{% endblock %}

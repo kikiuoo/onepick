@@ -1,0 +1,101 @@
+.viewBox{
+    position: relative;
+    height: 712px;
+    overflow: visible;
+}
+.viewBox .inTitle {
+    padding : 0px 40px;
+}
+.viewBox .inTitle div{
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    margin-right: 85px;
+
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.viewBox .listTitle{ width: 825px; }
+.viewBox .listRegDate{ width: 78px; }
+.viewBox .listView{ width: 55px; }
+.viewBox .listEtc{ width: 46px; }
+
+
+.viewBox .contentList div{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 85px;
+    text-align: center;
+
+    font-size: 14px;
+    color: #1f1f1f;
+}
+
+.viewBox .inTitle div:last-child{ margin-right: 0px}
+
+.viewBox .contentList div.listTitle{text-align: left}
+
+.viewBox .contentList div.listView .pink{
+    font-weight: bold;
+    color: #ff8aae;
+}
+
+.viewBox .contentList div.listView .gray{
+    font-weight: bold;
+    color: #c0c0c0;
+}
+.viewBox .contentList div.listEtc{
+    margin-right: 0px;
+    font-size: 0px;
+}
+.viewBox .contentList div.listEtc div{
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-right: 0px;
+    margin-right: 10px;
+
+    background-size: auto 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.viewBox .contentList .listEtc .editBtn { background-image: url("../../../image/web/update.png")}
+.viewBox .contentList .listEtc .delBtn { background-image: url("../../../image/web/delete.png"); margin-right: 0px}
+
+
+.filterBox{
+    position: absolute;
+    right: -5px;
+    top: -40px;
+}
+
+.filterBox #viewType{
+    line-height: 30px;
+    height: 30px;
+    font-size: 13px;
+    color: #1f1f1f;
+}
+
+.btnBox{
+    position: absolute;
+    right: -5px;
+    bottom: -70px;
+}
+
+.btnBox .addBtn{
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #ff8aae;
+    border-radius: 10px;
+    cursor: pointer;
+
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+}

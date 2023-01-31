@@ -1,0 +1,17 @@
+django
+pymysql
+mysqlclient
+pillow
+mandrill
+coolsms_python_sdk
+djangorestframework
+simplejson
+djangorestframework-jwt
+python-dateutil
+uwsgi
+django-multiselectfield
+boto3
+django-storages
+requests
+drf-yasg
+jwt

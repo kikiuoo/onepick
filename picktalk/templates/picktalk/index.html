@@ -1,0 +1,294 @@
+{% extends 'picktalk/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/index.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/index.css' %}" > <!-- 모바일 버전 -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+<!-- JS 파일 -->
+<script src="{% static 'js/index.js' %}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+
+<!-- 본문 내용 -->
+<!-- 메인 베너 -->
+{% if mainbanner|getArrayCount > 0 %}
+<div class="mobilBanner">
+    <div class="swiper mySwiper mainBanner">
+        <div class="swiper-wrapper">
+            {% for banner in mainbanner %}
+            <div class="swiper-slide banner" data-url="{{ banner.3 }}" data-num="{{ banner.0 }}" style='background-image: url("/media/{{ banner.4 }}")'></div>
+            {% endfor %}
+        </div>
+
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+</div>
+{% endif %}
+
+<div class="subBanner" data-url = 'http://pf.kakao.com/_RczSxb/chat'></div>
+
+<div class="subBanner sub2" data-url = 'https://pickstudio.net'></div>
+
+<!-- 본문 내용 : 오디션 정보 -->
+<div class="mainTitle">
+    오디션 정보
+    <span data-url="/audi/main/all/1/">전체보기</span>
+</div>
+
+<div class="inBox">
+    {% for audition in auditions %}
+    <div class="audition" data-num="{{ audition.0 }}">
+        <div class="audiLogo" style='background-image: url("/media/{{ audition.4 }}");'></div>
+        <div class="audiTitle">{{ audition.1 }}</div>
+        <div class="audiTerm">
+            {% if audition.3 == "1" %}
+                상시모집
+            {% else %}
+                ~ {{ audition.2|date:'Y-m-d' }}
+            {% endif %}
+        </div>
+        {% if audition.5 == 0 or audition.5 == "0" %}
+        <div class="pickBtn" data-nowType="off"></div>
+        {% else %}
+        <div class="pickBtn pickOn " data-nowType="on"></div>
+        {% endif %}
+    </div>
+     {% endfor %}
+</div>
+
+
+
+<!-- 본문 내용 : 프로필 정보 -->
+<div class="mainTitle titleMargin">
+    추천 프로필
+    <span data-url="/profile/list/">전체보기</span>
+</div>
+
+<div class="inBox">
+    {% for profile in recomProfile %}
+    <div class="profile" data-num="{{ profile.0 }}">
+        <div class="image"  style='background-image: url("/media/{{ profile.1 }}");'></div>
+        <div class="info">
+            {% if request.session.userType == "admin"   %}
+            <div class="name">{{ profile.4 }} ({{ profile.5|userAge }})</div>
+            {% elif profile.4 != None %}
+            <div class="name">{{ profile.4|updateUserName }} ({{ profile.5|userAge }})</div>
+            {% else %}
+            <div class="name">*** ({{ profile.5|userAge }})</div>
+            {% endif %}
+
+            <div class="infoDetail">
+                {% if request.session.userType == "admin"   %}
+                키 {{ profile.2 }}cm | 몸무게 {{ profile.3 }}kg<br>
+                {% else %}
+                키 {{ profile.2|userHight }}cm | 몸무게 {{ profile.3|userHight }}kg<br>
+                {% endif %}
+                {% if userInfo.8 != None %}
+                    {% if profile.7 == "man" %}
+                    {{ userInfo.8 }} |
+                    {% endif %}
+                {% endif %}
+
+                {% if profile.6|default:"" == "" %}
+                소속사 없음<br>
+                {% else %}
+                소속사 있음<br>
+                {% endif %}
+            </div>
+
+            {% if profile.8 == 0 or profile.8 == "0" %}
+            <div class="pickBtn" data-nowType="off"></div>
+            {% else %}
+            <div class="pickBtn pickOn " data-nowType="on"></div>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="profileBlank"></div>
+</div>
+
+
+<div class="mainTitle titleMargin2">
+    베스트 프로필
+    <span data-url="/profile/list/">전체보기</span>
+</div>
+
+<div class="inBox">
+    {% for profile in bestProfile %}
+    <div class="profile" data-num="{{ profile.0 }}">
+        <div class="image"  style='background-image: url("/media/{{ profile.1 }}");'></div>
+        <div class="info">
+            {% if request.session.userType == "admin"   %}
+            <div class="name">{{ profile.4 }} ({{ profile.5|userAge }})</div>
+            {% elif profile.4 != None %}
+            <div class="name">{{ profile.4|updateUserName }} ({{ profile.5|userAge }})</div>
+            {% else %}
+            <div class="name">*** ({{ profile.5|userAge }})</div>
+            {% endif %}
+
+            <div class="infoDetail">
+                {% if request.session.userType == "admin"   %}
+                키 {{ profile.2 }}cm | 몸무게 {{ profile.3 }}kg<br>
+                {% else %}
+                키 {{ profile.2|userHight }}cm | 몸무게 {{ profile.3|userHight }}kg<br>
+                {% endif %}
+                {% if userInfo.8 != None %}
+                    {% if profile.7 == "man" %}
+                    {{ userInfo.8 }} |
+                    {% endif %}
+                {% endif %}
+
+                {% if profile.6|default:"" == "" %}
+                소속사 없음<br>
+                {% else %}
+                소속사 있음<br>
+                {% endif %}
+            </div>
+
+            {% if profile.8 == 0 or profile.8 == "0" %}
+            <div class="pickBtn" data-nowType="off"></div>
+            {% else %}
+            <div class="pickBtn pickOn " data-nowType="on"></div>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="profileBlank"></div>
+</div>
+
+
+<div class="mainTitle titleMargin2">
+    신규 프로필
+    <span data-url="/profile/list/">전체보기</span>
+</div>
+
+<div class="inBox">
+    {% for profile in newProfile %}
+    <div class="profile" data-num="{{ profile.0 }}">
+        <div class="image"  style='background-image: url("/media/{{ profile.1 }}");'></div>
+        <div class="info">
+            {% if request.session.userType == "admin"   %}
+            <div class="name">{{ profile.4 }} ({{ profile.5|userAge }})</div>
+            {% elif profile.4 != None %}
+            <div class="name">{{ profile.4|updateUserName }} ({{ profile.5|userAge }})</div>
+            {% else %}
+            <div class="name">*** ({{ profile.5|userAge }})</div>
+            {% endif %}
+
+            <div class="infoDetail">
+                {% if request.session.userType == "admin"   %}
+                키 {{ profile.2 }}cm | 몸무게 {{ profile.3 }}kg<br>
+                {% else %}
+                키 {{ profile.2|userHight }}cm | 몸무게 {{ profile.3|userHight }}kg<br>
+                {% endif %}
+                {% if userInfo.8 != None %}
+                    {% if profile.7 == "man" %}
+                    {{ userInfo.8 }} |
+                    {% endif %}
+                {% endif %}
+
+                {% if profile.6|default:"" == "" %}
+                소속사 없음<br>
+                {% else %}
+                소속사 있음<br>
+                {% endif %}
+            </div>
+
+            {% if profile.8 == 0 or profile.8 == "0" %}
+            <div class="pickBtn" data-nowType="off"></div>
+            {% else %}
+            <div class="pickBtn pickOn " data-nowType="on"></div>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="profileBlank"></div>
+</div>
+
+<!--
+<div class="popupBox">
+    <div class="popup" id="popup_1">
+        <div class="image" style='background-image: url("/static/image/web/popup_3.jpg");' data-url="https://pickstudio.net"></div>
+        <div class="btnBox">
+            <div class="nonBtn" data-num="1" data-type="1">오늘하루 그만보기</div>
+            <div class="exitBtn" data-num="1">닫기</div>
+        </div>
+    </div>
+
+
+    <div class="popup" id="popup_2">
+        <div class="image" style='background-image: url("/static/image/web/popup_2.png");' data-url="https://pickstudio.net"></div>
+        <div class="btnBox">
+            <div class="nonBtn" data-num="2" data-type="1">오늘하루 그만보기</div>
+            <div class="exitBtn" data-num="2">닫기</div>
+        </div>
+    </div>
+</div>
+-->
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script type="text/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    var cateType = '{{ cateType }}';
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        {% if mainbanner|getArrayCount > 1 %}
+        autoplay: {
+          delay: 2500,
+          disableOnInteraction: false,
+        },
+        {% endif %}
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+         navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+    });
+</script>
+
+<script>
+    var ht = null;
+    (function(id, scriptSrc, callback) {
+        var d = document,
+            tagName = 'script',
+            $script = d.createElement(tagName),
+            $element = d.getElementsByTagName(tagName)[0];
+
+        $script.id = id;
+        $script.async = true;
+        $script.src = scriptSrc;
+
+        if (callback) { $script.addEventListener('load', function (e) { callback(null, e); }, false); }
+        $element.parentNode.insertBefore($script, $element);
+    })('happytalkSDK', 'https://design.happytalkio.com/sdk/happytalk.chat.v2.min.js', function() {
+        ht = new Happytalk({
+          siteId: '4000002454',
+          siteName: '케이에스앤픽',
+          categoryId: '151949',
+          divisionId: '151950'
+      });
+    });
+</script>
+
+<script src="https://cdn.flarelane.com/WebSDK.js" charset="UTF-8"></script>
+<script>
+    //FlareLane.initialize({ projectId: "1fd48a3e-8028-4108-b55d-56d10ee513ab" });
+</script>
+
+{% endblock %}
+

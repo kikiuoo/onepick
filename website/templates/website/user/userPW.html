@@ -1,0 +1,49 @@
+{% extends 'website/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css_v2/web/user/join.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css_v2/mobile/user/join.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js_v2/website/user/userPW.js' %}"></script>
+
+<div class="container">
+    <div class="body">
+        <form action="/users/updatePWCallback/" method="post" id="saveUserForm" enctype="multipart/form-data"  autocomplete="off">
+        {% csrf_token %}
+
+            <div class="mainTitle">패스워드 변경</div>
+            <div class="winBox">
+                <div class="joinInfo">
+                    <div class="title">기존 패스워드</div>
+                    <div class="content">
+                        <input type="password" value="" id="nowPW" name="nowPW" />
+                    </div>
+                </div>
+
+
+                <div class="joinInfo">
+                    <div class="title">패스워드</div>
+                    <div class="content">
+                        <input type="password" value="" id="pw1" name="pw1" />
+                    </div>
+                </div>
+
+                <div class="joinInfo">
+                    <div class="title">패스워드 확인</div>
+                    <div class="content">
+                        <input type="password" value="" id="pw2" name="pw2" />
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+        <div class="btnBox">
+            <div class="sendBtn">확인</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,150 @@
+{% extends 'onepickAdmin/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+<link rel="stylesheet" href="{% static 'css/onepickAdmin/main.css' %}">
+
+    <!-- JS 파일 -->
+<script src="{% static 'js/onepickAdmin/main.js' %}"></script>
+
+<div class="inBox">
+    <div class="title">공지사항</div>
+
+    <div class="viewBox">
+       <div class="inTitle">
+            <div class="listTitle">제목</div>
+            <div class="listRegDate">등록일</div>
+            <div class="listView">노출 여부</div>
+            <div class="listEtc"></div>
+       </div>
+
+        <div class="contentBox">
+            {% for notice in noticeList %}
+             <div class="contentList">
+                <div class="listTitle">{{ notice.title }}</div>
+                <div class="listRegDate">{{ notice.regdate|date:"Y/m/d" }}</div>
+                <div class="listView">
+                    {% if notice.viewtype == "Y" %}
+                        <span class="pink">노출</span>
+                    {% else %}
+                        <span class="gray">미노출</span>
+                    {% endif %}
+                </div>
+                <div class="listEtc">
+                    <div class="editBtn" data-num="{{ notice.num }}"></div>
+                    <div class="delBtn" data-num="{{ notice.num }}"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+    <div class="title">회원 가입 수</div>
+
+    <div class="viewBox graph">
+        <div class="inBtnBox">
+            <div class="typeBtn selected" data-type="day">일별</div>
+            <div class="typeBtn" data-type="week">주별</div>
+            <div class="typeBtn" data-type="month">월별</div>
+        </div>
+        <div class="graphBox" id="userBox">
+            {% for label in userLabel %}
+            <div class="line">
+                <div class="label">{{ label }}</div>
+            </div>
+            {% endfor %}
+
+            <div class="line">
+                <div class="label">0</div>
+            </div>
+
+            <div class="barBox">
+                {% for print in printUser.0 %}
+                <div class="barArea14">
+                    <div class="xLabel">{{ print }}</div>
+                    <div class="bar" style="height: {{ printUser.2|nowData:forloop.counter0 }}%;">
+                        <span>{{ printUser.1|nowData:forloop.counter0 }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+    <div class="title">접속자 수</div>
+
+    <div class="viewBox graph">
+
+        <div class="inBtnBox">
+            <div class="typeBtn2 selected" data-type="day">일별</div>
+            <div class="typeBtn2" data-type="week">주별</div>
+            <div class="typeBtn2" data-type="month">월별</div>
+        </div>
+
+        <div class="graphBox" id="connectBox">
+            {% for label in connLabel %}
+            <div class="line">
+                <div class="label">{{ label }}</div>
+            </div>
+            {% endfor %}
+
+            <div class="line">
+                <div class="label">0</div>
+            </div>
+
+            <div class="barBox">
+                {% for print in printConn.0 %}
+                <div class="barArea14">
+                    <div class="xLabel">{{ print }}</div>
+                    <div class="bar" style="height: {{ printConn.2|nowData:forloop.counter0 }}%;">
+                        <span>{{ printConn.1|nowData:forloop.counter0 }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+    <div class="title">로그인 수</div>
+
+    <div class="viewBox graph">
+
+        <div class="inBtnBox">
+            <div class="typeBtn3 selected" data-type="day">일별</div>
+            <div class="typeBtn3" data-type="week">주별</div>
+            <div class="typeBtn3" data-type="month">월별</div>
+        </div>
+
+        <div class="graphBox" id="loginBox">
+            {% for label in loginLabel %}
+            <div class="line">
+                <div class="label">{{ label }}</div>
+            </div>
+            {% endfor %}
+
+            <div class="line">
+                <div class="label">0</div>
+            </div>
+
+            <div class="barBox">
+                {% for print in printLogin.0 %}
+                <div class="barArea14">
+                    <div class="xLabel">{{ print }}</div>
+                    <div class="bar" style="height: {{ printLogin.2|nowData:forloop.counter0 }}%;">
+                        <span>{{ printLogin.1|nowData:forloop.counter0 }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

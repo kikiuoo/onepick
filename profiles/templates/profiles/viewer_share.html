@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>원픽ㅣ나만의 ONEPICK</title>
+
+    <meta name="viewport" content="width=device-width">
+
+    {% load static %}
+    {% load my_filter %}
+    <link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/base.css' %}"> <!-- PC 버전 -->
+    <link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/base.css' %}" > <!-- 모바일 버전 -->
+
+    <link rel="icon" type="image/x-icon" href="{% static 'image/favicon.ico' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/favicon.ico' %}">
+
+    <!-- JS 파일 -->
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/profile/viewer_share.js' %}"></script>
+    <link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/profile/viewer.css' %}"> <!-- pc 버전 -->
+    <link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/profile/viewer.css' %}" > <!-- 모바일 버전 -->
+    <link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/audi/audi_base.css' %}"> <!-- pc 버전 -->
+    <link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/audi/audi_base.css' %}" > <!-- 모바일 버전 -->
+</head>
+<body>
+    <div class="container">
+        <div class="inBox">
+            <div class="mainImage"  style='background-image: url("/media/{{ profiles.profileimage }}");' id="image_1"  data-id="1"   data-image="/media/{{ profiles.profileimage }}"></div>
+            <div class="blankBox pcNone"></div>
+            <div class="userInfo">
+                 <div class="userName">
+                     {{ userInfo.name }},{{ userInfo.birth|userAge }}세({{ userInfo.birth|replace:"-|/" }})
+                 </div>
+
+                <div class="info">
+                    {% if userInfo.nationality != None %}
+                        {{ userInfo.nationality }} |
+                    {% endif %}
+
+                    {% if userInfo.military != None %}
+                        {% if userInfo.gender == "man" %}
+                        {{ userInfo.military }} |
+                        {% endif %}
+                    {% endif %}
+
+                    {% if userInfo.entertain|default:"" == "" %}
+                    소속사 없음<br>
+                    {% else %}
+                    소속사 있음<br>
+                    {% endif %}
+
+                    {{ userInfo.school }} {{ userInfo.major }}
+                </div>
+
+                <div class="info">
+                    키 {{ profiles.height }} cm | 몸무게 {{ profiles.weight }} kg<br>
+
+                    {% if profiles.contenttype != "old" %}
+                        상의 {{ profiles.topsize }} | 하의 {{ profiles.bottomsize }} | 신발 {{ profiles.shoessize }} |
+                        피부 {{ profiles.skincolor }}호 | 머리색 {{ profiles.haircolor }}
+                    {% endif %}
+                </div>
+
+                {% if profiles.iscareer == "0" %}
+                    {% if profiles.careeryear == "11" %}
+                    <div class="allCareer mobileNone">총 경력 10년이상</div>
+                    {% else %}
+                    <div class="allCareer mobileNone">총 경력 {{ profiles.careeryear }}년 {{ profiles.careermonth  }}</div>
+                    {% endif %}
+                {% endif %}
+
+            </div>
+
+            {% if profiles.iscareer == "0" %}
+                {% if profiles.careeryear == "11" %}
+                <div class="allCareer pcNone">총 경력 10년이상</div>
+                {% else %}
+                <div class="allCareer pcNone">총 경력 {{ profiles.careeryear }}년 {{ profiles.careermonth  }}</div>
+                {% endif %}
+            {% endif %}
+
+            <div class="careerBox">
+                <div class="leftBox">
+                    <div class="title">지원분야</div>
+                    {% if profiles.contenttype == "old" %}
+                        <div class="content">{{ profiles.intercate }}<br>{{ profiles.intersubcate }}</div>
+                    {% else %}
+                        <div class="content">{{ profiles.intercate|getMainCate }} {{ profiles.intersubcate|getSubCate }}</div>
+                    {% endif %}
+                    <div class="title">영화</div>
+                    {% if movieCareer|getArrayCount > 0 %}
+                        {% for movieCareers in movieCareer %}
+                            <div class="content">{{ movieCareers.3 }} | {{ movieCareers.4 }} | {{ movieCareers.1 }} | {{ movieCareers.2 }} </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="content">경력없음</div>
+                    {% endif %}
+                    <div class="title">TV드라마,웹드라마</div>
+                     {% if dramaCareer|getArrayCount > 0 %}
+                        {% for dramaCareers in dramaCareer %}
+                            <div class="content">{{ dramaCareers.3 }} | {{ dramaCareers.4 }} | {{ dramaCareers.1 }} | {{ dramaCareers.2 }} </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="content">경력없음</div>
+                    {% endif %}
+                    <div class="title">광고/기타</div>
+                     {% if etcCareer|getArrayCount > 0 %}
+                        {% for etcCareers in etcCareer %}
+                            <div class="content">{{ etcCareers.3 }} | {{ etcCareers.4 }} | {{ etcCareers.1 }} | {{ etcCareers.2 }} </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="content">경력없음</div>
+                    {% endif %}
+                </div>
+
+                <div class="rightBox">
+                    {% if careerEtc|getArrayCount > 0 %}
+                    <div class="title">기타 경력</div>
+                        {% for careerEtcs in careerEtc %}
+                            <div class="content">{{ careerEtcs.catetype }} | {{ careerEtcs.subcatetype }} | {{ careerEtcs.title }} | {{ careerEtcs.role }} </div>
+                        {% endfor %}
+                    {% endif %}
+
+
+                    {% if foreign|getArrayCount > 0 and profiles.foreign|default:"" != ""  %}
+                    <div class="title">외국어 능력</div>
+                        {% for foreigns in foreign %}
+                            <div class="content">{{ foreigns|replace:"$| " }}</div>
+                        {% endfor %}
+                    {% endif %}
+
+
+                    {% if talent|getArrayCount > 0 and profiles.talent|default:"" != "" %}
+                    <div class="title">특기</div>
+                    <div class="content">
+                        {% for talents in talent %}
+                            {{ talents }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    {% if tag|getArrayCount > 0 and profiles.tag|default:"" != "" %}
+                    <div class="title">태그</div>
+                    <div class="content">
+                        {% for tags in tag %}
+                            {{ tags }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+
+                    {% if profiles.mbti != "" and profiles.mbti != None  %}
+                    <div class="title">MBTI</div>
+                    <div class="content"> {{ profiles.mbti }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="line"></div>
+
+            {% if profiles.comment != "" and profiles.comment != None %}
+            <div class="introduction">
+                {{ profiles.comment|linebreaks }}
+            </div>
+            {% endif %}
+
+            <div class="viewDetail">
+                {% if profiles.detailimage|default:"" != "" %}
+                <div class="title">프로필 사진</div>
+                <div class="imageBox" id="profile">
+                    <div class="blank"></div>
+
+                    {% for profileImage in profileImages %}
+                    <img src="/media/{{ profileImage }}" data-id="{{ forloop.counter|addNum:1 }}" id="image_{{ forloop.counter|addNum:1 }}"  data-image="/media/{{ profileImage }}" height="440px">
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {% if profiles.artimage|default:"" != "" %}
+                <div class="title">작품 사진</div>
+                <div class="imageBox" id="actImage">
+                    <div class="blank"></div>
+                    {% with imageCount=profileImages|getArrayCount  %}
+                    {% for artImage in artImages %}
+                    <img src="/media/{{ artImage }}" data-id="{{ forloop.counter|addNum:imageCount|addNum:1 }}" id="image_{{ forloop.counter|addNum:imageCount|addNum:1 }}"  data-image="/media/{{ artImage }}" height="440px">
+                    {% endfor %}
+                    {% endwith %}
+                </div>
+                {% endif %}
+
+
+                {% if profiles.youtube|default:"" != "" %}
+                <div class="title">프로필 영상</div>
+                <div class="imageBox" id="profileMovie">
+                    <div class="blank"></div>
+
+                    {% for youtube in youtubes %}
+                    <iframe width="560" height="315" src="{{ youtube|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="popupBack">
+            <div class="closePopup"></div>
+            <div class="leftBtn"></div>
+
+            <img src="/media/{{ profiles.profileimage }}"  class="viewImage">
+
+            <div class="rightBtn"></div>
+
+            <div class="viewImageCount"><span class="nowImage">1</span> / <span class="allImage"></span></div>
+        </div>
+
+        <script>
+            var writeUID = "{{ profiles.userid }}";
+            var num = '{{ profiles.num }}';
+            var isDelete = "{{ profiles.isdelete }}";
+            var imageCount = ('{{ artImages|getArrayCount }}' * 1 ) + ('{{ profileImages|getArrayCount }}' * 1) + 1;
+        </script>
+    </div>
+</body>
+</html>

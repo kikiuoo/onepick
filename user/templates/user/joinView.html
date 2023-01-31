@@ -1,0 +1,32 @@
+{% extends 'picktalk/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/user/login.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/user/login.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/user/login.js' %}"></script>
+
+<div class="mainTitle">회원가입</div>
+
+<div class="inBox2">
+    <div class="logoBox">
+        <div class="logo"></div>
+    </div>
+
+    <div class="textInfo" >
+        원픽과 함께 당신의 꿈을 PICK 하러 가보실까요?
+    </div>
+
+    <div class="socialBox">
+        <div class="socialBtn" id="kakaoLogin"></div>
+        <div class="socialBtn" id="gogleLogin"></div>
+        <div class="socialBtn" id="naverLogin"></div>
+        <!--<div class="socialBtn" id="appleid-signin"  data-mode="logo-only" data-color="black" data-border-radius="50" data-size="85"></div>-->
+    </div>
+</div>
+
+
+{% endblock %}

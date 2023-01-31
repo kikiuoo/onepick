@@ -1,0 +1,73 @@
+{% load my_filter %}
+{% for profile in profiles %}
+<div class="profile" data-num="{{ profile.0 }}">
+    <div class="imageBox">
+        <div class="profileImage"   style='background-image: url("/media/{{ profile.1 }}");'></div>
+        {% if profile.16 != "" %}
+        <div class="youtube">
+            <iframe width="560" height="315" src="{{ profile.16|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        {% endif %}
+    </div>
+    <div class="contentBox">
+        {% if profile.7 != None %}
+        <div class="name">{{ profile.7|updateUserName }} ({{ profile.8|userAge }})</div>
+        {% else %}
+        <div class="name">*** ({{ profile.8|userAge }})</div>
+        {% endif %}
+
+        <div class="detailInfo">
+            키 {{ profile.2|userHight }} cm | 몸무게 {{ profile.3|userHight }} kg<br>
+            {% if profile.10 == 'man' and profile.11 != None %}
+            {{ profile.11 }} |
+            {% endif %}
+            {% if profile.9 == "" %}
+                소속사 없음
+            {% else %}
+                소속사 있음
+            {% endif %} <br>
+            {{ profile.12 }} {{ profile.13 }}
+            {% if profile.14 != None %}
+             <br>특기 {{ profile.14|getTalent }}
+            {% endif %}
+        </div>
+
+        {% if profile.17 == '0' %}
+        <div class="career">
+            <div class="careerTitle">영화</div>
+            <div class="careerContent">{{ profile.0|getCareer:"movie" }}</div>
+            <div class="careerTitle">TV드라마,웹드라마</div>
+            <div class="careerContent">{{ profile.0|getCareer:"drama" }}</div>
+            <div class="careerTitle">광고/기타</div>
+            <div class="careerContent">{{ profile.0|getCareer:"etc" }}</div>
+        </div>
+        {% else %}
+        <div class="career">
+            <div class="careerTitle">자기 소개</div>
+            <div class="introduction">{{ profile.15 }}</div>
+        </div>
+        {% endif %}
+
+        <div class="viewBox">
+            <div class="countBox">
+                <span class="viewCount"></span>
+                <p>{{ profile.4 }}</p>
+            </div>
+            <div class="countBox">
+                <span class="pickCount"></span>
+                <p>{{ profile.5 }}</p>
+            </div>
+            <div class="countBox">
+                <span class="comViewCount"></span>
+                <p>{{ profile.6 }}</p>
+            </div>
+        </div>
+    </div>
+
+    {% if profile.18 == 0 or profile.18 == "0" %}
+    <div class="pickBtn" data-nowType="off"></div>
+    {% else %}
+    <div class="pickBtn pickOn " data-nowType="on"></div>
+    {% endif %}
+</div>
+{% endfor %}

@@ -1,0 +1,102 @@
+{% extends 'website/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css_v2/web/lounge/notice.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css_v2/mobile/lounge/notice.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js_v2/website/lounge/notice.js' %}"></script>
+
+<div class="container">
+    <div class="inBox">
+
+        <div class="btnBox">
+            {% if request.session.userType == "admin" or request.session.id == qanda.userid  %}
+            <div class="editBtn" data-num="{{ qanda.num }}"></div>
+            <div class="delBtn" data-num="{{ qanda.num }}"></div>
+            {% endif %}
+        </div>
+
+        <div class="titleBox">
+            {% if qanda.secret == "Y" and qanda.userid != request.session.id and request.session.userType != 'admin' %}
+                <div class="title">비밀글입니다.</div>
+            {% else %}
+            <div class="title"><span>[{{ cate.catename }}]</span> {{ qanda.title }}</div>
+            {% endif %}
+
+            {% if request.session.userType == "admin"  %}
+                {% if user.count > 0 %}
+                <div class="userInfo">조회수 {{ qanda.viewcount }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.0.userid|getUserFullName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ qanda.regdate|date:"Y/m/d" }}</div>
+                {% else %}
+                <div class="userInfo">조회수 {{ qanda.viewcount }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ qanda.regdate|date:"Y/m/d" }}</div>
+                {% endif %}
+            {% else %}
+                {% if user.count > 0 %}
+                <div class="userInfo">{{ user.0.userid|getUserName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ qanda.regdate|date:"Y/m/d" }}</div>
+                {% else %}
+                <div class="userInfo">{{ qanda.regdate|date:"Y/m/d" }}</div>
+                {% endif %}
+            {% endif %}
+        </div>
+
+        <div class="content">
+            {% if qanda.secret == "Y" and qanda.userid != request.session.id and request.session.userType != 'admin'   %}
+                비밀글입니다.
+            {% else %}
+                {% if qanda.contenttype == "old" %}
+                   {% autoescape off %}
+                    {{ qanda.content }}
+                   {% endautoescape %}
+               {% else %}
+                    {{ qanda.content|linebreaks }}
+               {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
+    {% if qanda.secret == "Y" and qanda.userid != request.session.id and request.session.userType != 'admin'   %}
+    {% else %}
+    <div class="inBox">
+        <div class="inputBox">
+            <input type="text" name="comment" id="comment" placeholder="댓글을 작성할 수 있습니다.">
+            <div class="saveComment">댓글 쓰기</div>
+        </div>
+
+        <div class="commentList">
+            {% if comment|getArrayCount > 0 %}
+                {% for comments in comment %}
+                <div class="comments">
+                    {% if comments.userid|findUserType == "admin" %}
+                    <div class="name">원픽관리자</div>
+                    {% else %}
+                    <div class="name">{{ comments.userid|getUserName }}</div>
+                    {% endif %}
+                    <div class="comContent">{{ comments.content }}</div>
+                    {% if request.session.userType == "admin" or request.session.id == comments.userid  %}
+                    <div class="commentDelete" data-num="{{ comments.num }}"></div>
+                    {% else %}
+                    <div class="nonDelete"></div>
+                    {% endif %}
+                    <div class="date">{{ comments.regtime|date:"Y-m-d" }}</div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="comments">
+                    <div class="nonComments">댓글이 없습니다.</div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+
+<script>
+    var num = '{{ qanda.num }}';
+</script>
+
+{% endblock %}

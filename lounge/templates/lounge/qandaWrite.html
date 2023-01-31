@@ -1,0 +1,52 @@
+{% extends 'picktalk/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/user/advertise.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/user/advertise.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/user/advertise.js' %}"></script>
+
+<div class="body">
+    <div class="mainTitle">문의하기</div>
+
+    <div class="winBox">
+    <form action="/lounge/qanda/writeCallBack/" method="post" id="saveQanda" autocomplete="off">
+        {% csrf_token %}
+        <div class="joinInfo">
+            <div class="title">카테고리</div>
+            <div class="content">
+                <select name="cate" id="cate">
+                    <option value="" selected disabled>카테고리 선택</option>
+                    {% for cate in cates %}
+                    <option value="{{ cate.catecode }}">{{ cate.catename }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="joinInfo">
+            <div class="title">제목</div>
+            <div class="content"><input type="text" value="" id="title" name="title" placeholder="제목을 입력해주세요"/></div>
+        </div>
+
+
+        <div class="joinInfo">
+            <div class="title">내용</div>
+            <div class="content"><textarea id="content" name="content" placeholder="내용을 입력해주세요"></textarea> </div>
+        </div>
+
+        <div class="textRight">
+            <label class="textCheck"><input type="checkbox" name="secret" id="secret" value="Y"> 비공개 설정 <div class="check"></div>  </label>
+        </div>
+    </form>
+    </div>
+
+    <div class="btnBox">
+        <div class="sendBtn2">문의하기</div>
+    </div>
+</div>
+
+{% endblock %}

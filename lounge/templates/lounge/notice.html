@@ -1,0 +1,46 @@
+{% extends 'picktalk/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/lounge/notice.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/lounge/notice.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/lounge/notice.js' %}"></script>
+
+<style>
+    .notice p{
+        display: block;
+        margin: 0px;
+        padding: 0px;
+    }
+</style>
+
+<div class="inBox">
+    <div class="titleBox">
+        <div class="title">{{ notice.title }}</div>
+        <div class="userInfo">{{ notice.regdate|date:"Y/m/d" }}</div>
+    </div>
+
+    <div class="content notice">
+        {% if notice.contenttype == "old" %}
+           {% autoescape off %}
+            {{ notice.content }}
+           {% endautoescape %}
+       {% else %}
+            {{ notice.content|linebreaks }}
+       {% endif %}
+        
+        {% if image != "" %}
+            <div class="imgBox">
+                {% for img in image %}
+                <img src="/media/{{ img }}" width="800">
+                {% endfor %}
+            </div>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

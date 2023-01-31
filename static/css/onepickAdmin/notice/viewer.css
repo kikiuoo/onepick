@@ -1,0 +1,59 @@
+.inBox {
+    font-size: 0px;
+}
+
+
+.viewBox {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 12px;
+}
+
+.viewBox #title{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+.btnBox{
+    margin-top: 20px;
+    padding-bottom: 20px;
+    height:  50px;
+    position: relative;
+    text-align: center;
+}
+
+
+.editBtn{
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ff8aae;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+
+.delBtn{
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #c0c0c0;
+    border-radius: 10px;
+    cursor: pointer;
+}

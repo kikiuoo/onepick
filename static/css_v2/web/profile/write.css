@@ -1,0 +1,446 @@
+.body{
+    display: inline-block;
+    width: 100%;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+.body .mainTitle{
+    position: relative;
+    font-size: 24px;
+    font-weight: bold;
+    color: #454545;
+}
+
+.winBox{
+    width: 1200px;
+    padding: 20px 30px 20px 20px;
+    border-radius: 20px;
+    background-color: rgba(192, 192, 192, 0.15);
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.winBox .title{
+    position: relative;
+    height: 23px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #1f1f1f;
+    margin-bottom: 17px;
+    line-height: 23px;
+}
+
+.winBox .title span{
+    display: inline-block;
+    height: 25px;
+    margin-left: 10px;
+    line-height: 25px;
+
+    font-size: 12px;
+    font-weight: bold;
+    color: #c0c0c0;
+    vertical-align: top;
+}
+
+.winBox .inputBox{
+    padding: 0px 0px 0px 10px;
+    font-size: 0px;
+}
+
+.winBox .inputBox input,
+.winBox .inputBox textarea,
+.profile_imageBox input{
+    width: 140px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-sizing: border-box;
+    outline: none;
+    border: 0px;
+    padding: 0px 20px;
+    margin-bottom: 10px;
+    resize: none;
+
+    font-size: 15px;
+    color: #1f1f1f;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.winBox .inputBox textarea{
+    width: 1160px;
+    height: 200px;
+    margin-left: -10px;
+    margin-bottom: 0px;
+    padding: 25px 20px;
+    line-height: 1.5em;
+}
+
+.winBox .inputBox select{
+    width: 196px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-sizing: border-box;
+    outline: none;
+    border: 0px;
+    margin-right: 20px;
+    padding: 0px 18px;
+    margin-bottom: 20px;
+
+    font-size: 15px;
+    color: #c0c0c0;
+    background:url('../../../image/web/arrow.png') no-repeat right 16px center;
+    background-color: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+
+.winBox .inputBox input::placeholder,
+.winBox .inputBox textarea::placeholder,
+#y_link::placeholder{
+    font-size: 15px;
+    color: #c0c0c0;
+}
+.winBox .inputBox input:focus,
+.winBox .inputBox textarea:focus,
+.winBox .inputBox select:focus{
+    outline: none;
+}
+
+#gender{ width: 70px; padding: 0px 18px; }
+#phone{ width: 250px; }
+#email{ width: 500px; margin:0px }
+#addr{ width: 1140px; margin:0px }
+
+#nationality{width: 150px;}
+#entertain{ width: 366px; margin-right: 22px; }
+#academy{ width: 366px; margin-right: 0px; }
+#finalSchool{ width: 250px; }
+#school{ width: 330px; margin-right: 20px; }
+#major{ width: 530px; margin:0px }
+#finalSchool, #snsType{ width: 236px; }
+#youtube{ width: 576px; padding-left: 70px; margin-right: 0px }
+#instagram{ width: 550px; padding-left: 100px; }
+
+
+#height, #weight{ width: 220px;margin-right: 20px; margin-bottom: 20px; }
+#topSize, #bottomSize, #shoesSize, #skinColor, #hairColor{ width: 200px;}
+#hairColor{width: 256px; margin:0px }
+
+#cate_m{ width: 200px; margin-right: 20px; margin-bottom: 35px; }
+#cate_s{ width: 200px; margin-right: 20px; margin-bottom: 35px; }
+#c_cateM, #c_cateS, #c_title, #c_role,#ec_cateM, #ec_cateS{ margin-right: 10px; margin-bottom: 10px }
+#allCareer_y{margin-right: 10px; width: 156px;}
+#allCareer_m{margin-right: 70px; width: 116px;}
+
+#snsUrl{ width: 808px; }
+#c_title{ width: 288px; }
+#c_role{ width: 358px; margin-right: 10px; }
+#y_link, .y_link{ width: 868px !important; }
+#ec_title{ width: 288px; margin-right: 10px; }
+#ec_role{ width: 358px; }
+#good{width: 116px; margin-right: 10px}
+#specialty{width: 140px; margin-right: 10px}
+#spec_sub{width: 150px; margin-right: 10px}
+#foreign{margin-right: 10px}
+
+.addBtn{
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/addBtn.png");
+}
+
+.subBtn, .subBtn2{
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/subBtn.png");
+    background-position: center;
+}
+
+.inText{
+    position: relative;
+    display: inline-block;
+}
+
+.inText span{
+    position: absolute;
+    right: 36px;
+    top : 15px;
+
+    font-size: 15px;
+    color: #1f1f1f;
+}
+
+.inText span.left{
+    right: auto;
+    left: 18px;
+}
+
+.textCheck{
+    position: relative;
+    font-size: 16px;
+    font-weight: bold;
+    color: #c0c0c0;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.textCheck input{
+    display: none;
+}
+
+.textCheck .check{
+    position: absolute;
+    top: 50%;
+    margin-top: -11.5px;
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    margin-left: 5px;
+
+    background-position: center;
+    background-image: url("../../../image/web/textCheck_off.png");
+    background-repeat: no-repeat;
+}
+.textCheck .check.on{
+    background-image: url("../../../image/web/textCheck_on.png");
+}
+
+.leftInputBox{
+    text-align: right;
+    margin-top: 10px;
+}
+
+.winBox .leftInputBox select{
+    width: 196px;
+    height: 56px;
+    border-radius: 11px;
+    background-color: #fff;
+    box-sizing: border-box;
+    outline: none;
+    border: 0px;
+    margin-right: 20px;
+    padding: 0px 18px;
+
+    font-size: 15px;
+    text-align: left;
+    color: #c0c0c0;
+    background:url('../../../image/web/arrow.png') no-repeat right 16px center;
+    background-color: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.info{
+    font-size: 14px;
+    color: #959595;
+    margin-bottom: 24px;
+}
+.profile_imageBox {
+    margin-bottom: 30px;
+}
+.profile_imageBox .textCheck{
+    margin-right: 50px;
+}
+
+.checkView{
+    margin-top: 30px;
+    position: relative;
+}
+
+.checkView .textCheck{
+    position: absolute;
+    right: 47px;
+    top:50%;
+    margin-top: -19px;
+}
+
+.btnBox{
+    margin-top: 59px;
+    text-align: center;
+    font-size: 0px;
+}
+
+.btnBox .preSaveBtn,
+.btnBox .preViewBtn{
+    display: inline-block;
+    width: 200px;
+    height: 82px;
+    line-height: 82px;
+    border-radius: 22px;
+    border: solid 1px #959595;
+    background-color: #fff;
+    margin-right: 20px;
+    cursor: pointer;
+
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #959595;
+}
+
+.btnBox .sendBtn{
+    display: inline-block;
+    width: 180px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 20px;
+    background-color: #ff8aae;
+    cursor: pointer;
+
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}
+
+#mainImage, #fileLabel, #pieceLabel{
+    display: inline-block;
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    background-color: #fff;
+    line-height: 180px;
+    margin-right: 20px;
+
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #afafaf;
+    vertical-align: top;
+    cursor: pointer;
+    overflow: hidden;
+
+}
+
+#mainImage{
+    margin-right: 30px;
+}
+
+#mainImage .addImage,
+#fileLabel .addImage,
+#pieceLabel .addImage{
+    height: 28px;
+    width: 28px;
+    position: absolute;
+
+    top: 38px;
+    left: 56px;
+
+    background-image: url("../../../image/web/addImgBtn.png");
+}
+
+.mainImageBox{
+    overflow: hidden;
+
+     /* 가로 스크롤 */
+    overflow: auto;
+    white-space: nowrap;
+    padding-top: 25px;
+    padding-bottom: 5px;
+}
+
+.mainImageBox::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+}
+.mainImageBox::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+.mainImageBox::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+.mainImageBox .blank{
+    width: 50px;
+    display: inline-block;
+}
+
+.mainImageBox:hover::-webkit-scrollbar-thumb {
+    background-color: #D6D6D6;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+.mainImageBox:hover::-webkit-scrollbar-track {
+    background-color: #F6F6F6;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+
+
+.upload-hidden, #saveCareer, #youSave, #saveSpecialty, #saveForeign, #etcSaveCareer, #saveTag{
+    display: none;
+}
+
+.imageBox{
+    display: inline-block;
+}
+
+#mainImage{
+    background-position: top center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.upload-display{
+    position: relative;
+    display: inline-block;
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    background-color: #fff;
+    line-height: 180px;
+    margin-right: 20px;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    vertical-align: top;
+}
+
+.upload-display .upload-sub,
+.upload-display .upload-sub2{
+    position: absolute;
+    right: -10px;
+    top : -10px;
+    width: 30px;
+    height: 30px;
+    background-color: #ff8aae;
+    border-radius:50%;
+    cursor: pointer;
+
+
+    background-image: url("../../../image/web/subImgBtn.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.specialtyList{
+    display: inline-block;
+}

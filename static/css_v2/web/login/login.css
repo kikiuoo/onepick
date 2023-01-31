@@ -1,0 +1,127 @@
+.mainTitle{
+    font-size: 24px;
+    font-weight: bold;
+    color: #1f1f1f;
+    margin-bottom: 17px;
+}
+
+
+.inBox{
+    display: inline-block;
+    width: 1200px;
+    height: 550px;
+    padding: 50px 350px;
+    margin-bottom: 60px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+input{
+    width: 500px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #f8f8f8;
+    box-sizing: border-box;
+    outline: none;
+    border: 0px;
+    margin-bottom: 10px;
+    padding: 0px 20px;
+    resize: none;
+
+    font-size: 15px;
+    color: #1f1f1f;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+input::placeholder{
+    font-size: 15px;
+    color: #c0c0c0;
+}
+input:focus{
+    outline: none;
+    background-color: #fff;
+    border: 1px solid #1f1f1f;
+}
+
+.loginBox .button{
+    vertical-align: top;
+    display: inline-block;
+    width: 500px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 10px;
+    background-color: #ff8aae;
+    cursor: pointer;
+
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 34px;
+    color: #fff;
+}
+
+.findUser, .findBtn, .reInputBtn{
+    margin-left: 40px;
+}
+
+.loginBox .searchInfo{
+    font-size: 12px;
+    color: #595959;
+    cursor: pointer;
+    text-align: right;
+}
+
+.inBox .socialBox{
+    text-align: center;
+    font-size: 0px;
+    margin-top: 50px;
+    padding-bottom: 44px;
+    border-bottom: 1px solid #d7d7d7;
+    margin-left: -150px;
+    width: 800px;
+}
+
+.inBox .socialBox .socialBtn{
+    display: inline-block;
+    width: 70px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+.inBox .socialBox .socialBtn:first-child{
+    margin-left: 0px;
+}
+
+.inBox .socialBox .socialBtn .logo{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+}
+
+.inBox .socialBox .socialBtn span{
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.inBox .socialBox .socialBtn#kakaoLogin .logo{background-image: url("../../../image/web_v2/kakao.png")}
+.inBox .socialBox .socialBtn#gogleLogin .logo{background-image: url("../../../image/web_v2/Google.png")}
+.inBox .socialBox .socialBtn#naverLogin .logo{background-image: url("../../../image/web_v2/naver.png")}
+
+.inBox .joinInfo{
+    width: 100%;
+    text-align: center;
+    padding-top: 30px;
+    color: #1f1f1f;
+    font-size: 15px;
+}
+
+.inBox .joinInfo span{
+    display: inline-block;
+    margin-left: 10px;
+    font-weight: bold;
+    color: #ff8aae;
+    cursor: pointer;
+}

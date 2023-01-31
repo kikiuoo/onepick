@@ -1,0 +1,405 @@
+/* PC Base CSS */
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #FAFAFA;
+    font-family: 'Noto Sans KR', sans-serif !important;
+}
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.page{
+    height: 297mm;
+    width: 210mm;
+    margin: 10mm auto;
+    padding: 26px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    font-size: 0px;
+}
+
+@page {
+    size: A4;
+    margin: 0;
+}
+@media print {
+    h1, h2, h3, h4, h5, dl, dt, dd, ul, li, ol, th, td, p, blockquote, form, fieldset, legend, div,body { -webkit-print-color-adjust:exact; }
+    html, body{
+        margin :0px;
+        padding :0px;
+        height: calc(297mm - 5px);
+        width: calc(210mm - 5px);
+    }
+    .page {
+        height: calc(297mm - 5px);
+        width: calc(210mm - 5px);
+        margin: 0;
+        border: initial;
+        border-radius: initial;
+        min-height: initial;
+        box-shadow: initial;
+        page-break-after: always;
+        box-sizing: border-box;
+    }
+
+    .btnBox{
+        display: none;
+    }
+}
+
+.inbox{
+    position: relative;
+    height: 100%;
+}
+
+.imageBox{
+    position: relative;
+    display: inline-block;
+    width: 742px;
+    height: 1070px;
+    vertical-align: top;
+    box-sizing: border-box;
+
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+
+.logoImage{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 20px;
+    top: 20px;
+
+    background-image: url("../../../image/web/profile_icon_logo.png");
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.imageBox .InfoBox{
+    position: absolute;
+    display: inline-block;
+    height: 321px;
+    width: 100%;
+    bottom: 0px;
+    left: 0px;
+    padding: 20px;
+    overflow: hidden;
+    background-color: rgba(255,255,255,0.5);
+    overflow: hidden;
+}
+
+.InfoBox .name{
+    font-size: 50px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.InfoBox .userInfo{
+    font-size:  16px;
+    color: #000;
+    line-height: 1.5em;
+    min-height: 21px;
+}
+
+.InfoBox .userInfo_B{
+    font-size: 16px;
+    color: #000;
+    font-weight: bold;
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
+
+#qrcode{
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+}
+
+.InfoBox2{
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+}
+
+.InfoBox2 .careerBox{
+    width: 410px;
+    margin-bottom: 35px;
+}
+
+.InfoBox2 .careerBox.smallMargin{
+    margin-bottom: 22px;
+}
+
+.InfoBox2 .careerBox .logo{
+    position: relative;
+    display: inline-block;
+    width: 70px;
+    font-size: 10px;
+    color: #ff8aae;
+    padding-left: 19px;
+    vertical-align: top;
+}
+
+.InfoBox2 .careerBox .logo span{
+    position: absolute;
+    left: 0px;
+    top: 1px;
+    width: 13px;
+    height: 13px;
+
+    background-image: url("../../../image/web/profile_icon_dia.png");
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+}
+
+.InfoBox2 .careerBox .content{
+    display: inline-block;
+    width: calc(100% - 90px);
+    vertical-align: top;
+    margin-left: 20px;
+
+    font-size: 10px;
+    line-height: 1.55em;
+    color: #000;
+}
+
+.InfoBox2 .careerBox .content p{
+    margin: 0px;
+}
+
+.InfoBox2 .manyCareer{
+    position: absolute;
+    width: 426px;
+    height: 274px;
+    left: 25px;
+    bottom: 0px;
+}
+
+.InfoBox2 .manyCareer .images{
+    display: inline-block;
+    width: calc(50% - 7px);
+    height: 100%;
+    margin-right: 14px;
+
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+.InfoBox2 .manyCareer .images:last-child{
+    margin-right: 0px;
+}
+
+.subProfile{
+    display: inline-block;
+    right: 46px;
+    top: 0px;
+    vertical-align: top;
+
+    width: 100%;
+    height: calc(50% - 23px);
+    margin-top: 23px;
+}
+
+.subProfile .profileImage{
+    display: inline-block;
+    width: calc(50% - 12px);
+    height: 100%;
+    margin-right: 24px;
+    margin-bottom: 10px;
+
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.subProfile .profileImage:last-child{
+    margin-right: 0px;
+}
+
+.inBox_10{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 50px 0px;
+}
+
+.inBox_9{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 35px 0px;
+}
+
+.imageBox_10{
+    display: inline-block;
+    width: calc(20% - 8px);
+    height: calc(50% - 5px);
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.imageBox_8{
+    display: inline-block;
+    width: calc(25% - 7.5px);
+    height: calc(50% - 5px);
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+
+.imageBox_6{
+    display: inline-block;
+    width: calc(33.3% - 6.7px);
+    height: calc(50% - 5px);
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.imageBox_6 .image{
+    margin: 0 auto;
+    width: 70%;
+    height: 100%;
+
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.imageBox_5{
+    display: inline-block;
+    width: calc(50% - 5px);
+    height: calc(50% - 5px);
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.imageBox_5 .image{
+    margin: 0 auto;
+    width: 45%;
+    height: 100%;
+
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.imageBox_4{
+    display: inline-block;
+    width: calc(50% - 5px);
+    height: calc(50% - 5px);
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.imageBox_4 .image{
+    margin: 0 auto;
+    width: 47%;
+    height: 100%;
+
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.imageBox_3{
+    display: inline-block;
+    width: calc(33.3% - 6.7px);
+    height: 100%;
+    margin-right: 10px;
+}
+
+.imageBox_3 .image{
+    margin: 0 auto;
+    width: 95%;
+    height: 100%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+
+.imageBox_2{
+    display: inline-block;
+    width: calc(50% - 20px);
+    height: calc(50% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.imageBox_2 .image{
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.imageBox_1{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.imageBox_1 .image{
+    margin: 0 auto;
+    width: 45%;
+    height: 100%;
+
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.imageBox_10:nth-child(5n),
+.imageBox_8:nth-child(4n),
+.imageBox_6:nth-child(3n),
+.imageBox_4:nth-child(2n),
+.imageBox_3:nth-child(3),
+.imageBox_2:nth-child(2),
+.imageBox_5:nth-child(2){
+    margin-right: 0px;
+}
+
+.btnBox{
+    width: 100%;
+    height: 80px;
+    text-align: center;
+}
+
+.printBtn{
+    display: inline-block;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    color: #fff;
+    text-align: center;
+    background-color: #ff8aae;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}

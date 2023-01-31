@@ -1,0 +1,26 @@
+.viewBox .inTitle{
+    font-size: 0px;
+    padding: 0px 30px;
+}
+.viewBox .contentBox .contentList{
+    font-size: 0px;
+}
+.viewBox .contentBox .contentList span{
+    font-size: 14px;
+    color: #1f1f1f;
+}
+
+.viewBox .mTitle{
+    display: inline-block;
+    width: 60%;
+    text-align: center;
+}
+
+.viewBox .send,
+.viewBox .success,
+.viewBox .fail,
+.viewBox .date{
+    display: inline-block;
+    width: 10%;
+    text-align: center;
+}

@@ -1,0 +1,102 @@
+{% extends 'onepickAdmin/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+<link rel="stylesheet" href="{% static 'css/onepickAdmin/display/proList.css' %}"> <!-- pc 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/onepickAdmin/display/proList.js' %}"></script>
+
+<div class="inBox">
+    <div class="title">
+        프로필 진열 관리
+
+        <select name="viewType" id="viewType">
+            <option value="main" {% if type == "main" %}selected{% endif %} >홈(메인)</option>
+            <option value="picks" {% if type == "picks" %}selected{% endif %} >Picks of ONEPICK</option>
+        </select>
+    </div>
+
+    <div class="viewBox">
+        <input type="text" id="search" placeholder="검색어 입력( 글번호, 이름, 생년월일 )">
+
+        <div class="searchList">
+            {% for pro in profile %}
+            <div class="contentList">
+                <div class="profileView"><div class="btnProfile">프로필 보기</div></div>
+                <div class="profileImage"><div class="profileImage" style='background-image: url("/media/{{ pro.5 }}");'></div> </div>
+                <div class="profileName">{{ pro.1 }}</div>
+                <div class="profileAge">{{ pro.2|userAge }}</div>
+                <div class="profileBirth">{{ pro.2|replace:"-|/" }}</div>
+                <div class="profileCate">
+                    {% if pro.7 != "old" %}
+                    {{ pro.3|getMainCate }} {{ pro.4|getSubCate }}
+                    {% endif %}
+                </div>
+                <div class="checkBox">
+                    <input type="checkbox" class="profileCheck" name="profile" value="{{ pro.0 }}" id="check_{{ forloop.counter0 }}" {% if pro.6 > 0 %} checked {% endif %}>
+                    <label class="checkProfile" for="check_{{ forloop.counter0 }}"></label>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="viewBox">
+        <div class="inTitle">
+            <div class="pOrder">순서</div>
+            <div class="pName">이름</div>
+            <div class="pAge">나이</div>
+            <div class="pBrith">생년월일</div>
+            <div class="pCate">분야</div>
+        </div>
+
+        <div class="in_line"></div>
+
+        <div class="contentBox">
+            {% for recom in recommend %}
+            <div class="contentList" data-num="{{ recom.6 }}" data-order="{{ recom.7 }}">
+                <div class="pOrder">{{ recom.7 }}</div>
+                <div class="pName">{{ recom.1 }}</div>
+                <div class="pAge">{{ recom.2|userAge }}</div>
+                <div class="pBrith">{{ recom.2|replace:"-|/" }}</div>
+                <div class="pCate">
+                    {% if recom.8 != "old" %}
+                    {{ recom.3|getMainCate }} {{ recom.4|getSubCate }}
+                    {% endif %}
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="btnBox">
+        <!--<div class="sendBtn">적용하기</div>-->
+        <div class="info">※ 미검색시 최신 업데이트된 순 50개 프로필이 표시됩니다.</div>
+    </div>
+
+    <div class="btnBox2">
+        <div class="info">※ 프로필 정보 추천은 랜덤으로 표시됩니다.</div>
+        <!--
+        <div class="allDown circleBtn" data-type="allDown"></div>
+        <div class="down circleBtn" data-type="down"></div>
+        <div class="up circleBtn" data-type="up"></div>
+        <div class="allUp circleBtn" data-type="allUp"></div>
+        -->
+    </div>
+</div>
+
+<script>
+  $.ajaxSetup({
+    headers: { "X-CSRFToken": '{{csrf_token}}' }
+  });
+
+  var viewType =  "{{ type }}";
+  var active = "";
+  var order = "";
+</script>
+
+{% endblock %}

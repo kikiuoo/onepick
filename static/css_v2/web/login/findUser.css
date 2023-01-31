@@ -1,0 +1,136 @@
+.container_2{
+    font-size: 0px;
+}
+
+.leftBox{
+    display: inline-block;
+    width: 590px;
+    margin-right: 20px;
+    vertical-align: top;
+}
+
+
+.rightBox{
+    display: inline-block;
+    width: 590px;
+    vertical-align: top;
+}
+
+.mainTitle{
+    font-size: 24px;
+    font-weight: bold;
+    color: #1f1f1f;
+    margin-bottom: 17px;
+}
+
+.inBox{
+    width: 590px;
+    height: 360px;
+    padding: 50px 45px;
+    box-sizing: border-box;
+    background-color: #fff;
+    margin-bottom: 50px;
+    border-radius: 10px;
+}
+
+.inBox input{
+    width: 500px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 15px;
+    border-radius: 10px;
+    border: 0px;
+    padding: 0px 20px;
+    box-sizing: border-box;
+    color: #1f1f1f;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f8f8f8;
+    margin-bottom: 10px;
+}
+
+
+.inBox input::placeholder{
+    color: #959595;
+}
+.inBox input:focus{
+    outline: none;
+    border: 1px solid #1f1f1f;
+    background-color: #fff;
+}
+
+.inBox .overBtnBox{
+    position: relative;
+}
+
+.inBox .overBtnBox .overBtn{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 100px;
+    height: 40px;
+    box-sizing: border-box;
+    line-height: 40px;
+    border-radius: 10px;
+
+    text-align: center;
+    color: #ff8aae;
+    border: 1px solid #ff8aae;
+    font-size: 12px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.inBox .overBtnBox .overBtn.disabled{
+    background-color: #d7d7d7;
+    color: #959595;
+    border: 0px;
+    cursor: default;
+}
+
+.inBox .button{
+    margin-top: 20px;
+    width: 500px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+    background-color: #ff8aae;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+.fInfo{
+    font-size: 12px;
+    line-height: 1.2em;
+    color: #595959;
+    text-align: center;
+    cursor: default;
+    margin-bottom: 168px;
+}
+
+
+.resetPWBox, .userInfo{
+    display: none;
+}
+
+.resetPWBox{
+    margin-top: 35px;
+}
+
+.userInfo .info{
+    margin-top: 50px;
+    font-size: 15px;
+    color: #959595;
+    text-align: center;
+}
+
+.uID{
+    margin-top: 20px;
+    margin-bottom: 85px;
+    font-size: 16px;
+    color: #1f1f1f;
+    font-weight: bold;
+    text-align: center;
+}

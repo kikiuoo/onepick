@@ -1,0 +1,12 @@
+{% for recom in recommend %}
+<div class="contentList">
+    <div class="companyName">{{ recom.1 }}</div>
+    <div class="audiTitle">{{ recom.2 }}</div>
+    <div class="regDate">{{ recom.3|date:"Y/m/d" }}</div>
+    <div class="checkBox">
+        <input type="checkbox" class="profileCheck" name="profile" value="{{ recom.0 }}" id="check_{{ forloop.counter0 }}"
+         {% if recom.4 > 0 %} checked {% endif %}>
+        <label class="checkProfile" for="check_{{ forloop.counter0 }}"></label>
+    </div>
+</div>
+{% endfor %}
