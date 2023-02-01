@@ -1,0 +1,6 @@
+<option value="" selected disabled>특기 세부 선택</option>
+{% for speci in sub_specialty  %}
+<option value="{{ speci.subclass }}">{{ speci.subclass }}</option>
+{% endfor %}
+
+<option value="etc">직접입력</option>

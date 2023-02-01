@@ -1,0 +1,114 @@
+.mainTitle{
+    font-size: 14px;
+    font-weight: bold;
+    color: #1f1f1f;
+    margin-bottom: 6px;
+}
+
+
+.inBox{
+    display: inline-block;
+    width: calc( 100% - 20px );
+    padding: 20px 10px 35px;
+    margin-bottom: 65px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.inBox .inContainer .inTitle{
+    position: relative;
+    height: 16px;
+    line-height: 16px;
+    margin-bottom: 9px;
+
+    font-size: 12px;
+    color: #595959;
+    text-align: left;
+}
+
+.inBox .inContainer .textCheck,
+.inBox .inContainer .allCheck{
+    position: absolute;
+    right: 0px;
+    font-size: 12px;
+    color: #595959;
+    font-weight: normal;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.inBox .inContainer .textCheck input,
+.inBox .inContainer .allCheck input{
+    display: none;
+}
+
+.inBox .inContainer .textCheck .check,
+.inBox .inContainer .allCheck .check{
+    position: absolute;
+    top: 0px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 2px;
+
+    background-position: center;
+    background-image: url("../../../image/web_v2/tick-square_off.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.inBox .inContainer textarea{
+    width: 100%;
+    height: 150px;
+    padding: 11px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    resize: none;
+    line-height: 1.2em;
+    font-size: 10px;
+}
+
+.inBox .inContainer textarea:focus{
+    outline: none;
+}
+
+.inBox .inContainer .allTitle{
+    width: 100%;
+    position: relative;
+    margin-top: 10px;
+    height: 16px;
+    line-height: 16px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 39px;
+}
+
+.inBox .inContainer .joinBtn,
+.inBox .inContainer .joinBtn2{
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background-color: #ff8aae;
+    border-radius: 5px;
+
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.inBox .inContainer textarea::-webkit-scrollbar {
+    width: 0px;
+}
+.inBox .inContainer textarea::-webkit-scrollbar-thumb {
+    background-color: #3D4451;
+    border-radius: 10px;
+}
+.inBox .inContainer textarea::-webkit-scrollbar-track {
+    background-color: #1C2232;
+    border-radius: 10px;
+}

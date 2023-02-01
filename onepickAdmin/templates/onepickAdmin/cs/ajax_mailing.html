@@ -1,0 +1,27 @@
+{% load my_filter %}
+{% for user in userList %}
+<div class="contentList">
+    <div class="name">{{ user.2 }}</div>
+    <div class="userType">
+        {% if user.5 == "NORMAL" or user.5 == "S-NORMAL"  %} 일반
+        {% elif  user.5 == "COMPANY" or user.5 == "S-COMPANY" %} 기업
+        {% elif  user.5 == "admin" %} 관리자 {% endif %}
+    </div>
+    <div class="email">{{ user.0 }}</div>
+    <div class="gender">
+        {% if user.3 == "man" %} 남성
+        {% else %} 여성 {% endif %}
+    </div>
+    {% if user.4|userAge > 99  %}
+    <div class="age">00</div>
+    {% else %}
+    <div class="age">{{ user.4|userAge }}</div>
+    {% endif %}
+    <div class="checkBox">
+        <input type="checkbox" class="profileCheck" name="profile" value="{{ user.1 }}" id="check_{{ forloop.counter0 }}">
+        <label class="checkProfile" for="check_{{ forloop.counter0 }}"></label>
+    </div>
+</div>
+
+<div id="userCount" style="display: none">{{ userList|getArrayCount }}</div>
+{% endfor %}

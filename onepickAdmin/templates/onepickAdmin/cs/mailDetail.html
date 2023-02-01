@@ -1,0 +1,57 @@
+{% extends 'onepickAdmin/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/onepickAdmin/cs/mailing.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/summernote-lite.css' %}"> <!-- pc 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/onepickAdmin/cs/mailing.js' %}"></script>
+<script src="{% static 'js/summernote/summernote-lite.min.js' %}"></script>
+<script src="{% static 'js/summernote/summernote-ko-KR.min.js' %}"></script>
+
+<div class="inBox">
+    <div class="title">메일 전송 상세 내역</div>
+
+    <div class="viewBox">
+        <input type="text" id="title" placeholder="제목을 입력해주세요." value="{{ mailList.title }}" readonly>
+
+        <div class="content">
+            {% autoescape off %}
+            {{ mailList.content }}
+           {% endautoescape %}
+        </div>
+    </div>
+
+    <div class="viewBox">
+        <div class="inTitle">
+            <span>수신자 목록</span>
+        </div>
+
+        <div class="contentBox">
+            {% for user in sendList %}
+            <div class="contentList">
+                <div class="name">{{ user.0 }}</div>
+                <div class="userType">
+                    {% if user.1 == "NORMAL" or user.1 == "S-NORMAL"  %} 일반
+                    {% elif  user.1 == "COMPANY" or user.1 == "S-COMPANY" %} 기업
+                    {% elif  user.1 == "admin" %} 관리자 {% endif %}
+                </div>
+                <div class="email">{{ user.2 }}</div>
+                <div class="age">{{ user.3 }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+<script>
+  $.ajaxSetup({
+    headers: { "X-CSRFToken": '{{csrf_token}}' }
+  });
+</script>
+
+{% endblock %}

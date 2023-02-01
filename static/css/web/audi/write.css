@@ -1,0 +1,335 @@
+.body{
+    display: inline-block;
+    width: 100%;
+    padding: 0px 10px;
+}
+
+.body .mainTitle{
+    position: relative;
+    font-size: 24px;
+    font-weight: bold;
+    color: #454545;
+}
+
+.body .mainTitle p{
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+
+    position: absolute;
+    right: 30px;
+    bottom: 0px;
+
+    font-size: 12px;
+    font-weight: bold;
+    color: #c0c0c0;
+}
+
+.body .mainTitle p .pink,
+.winBox .joinInfo .title .pink{
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: #ff8aae;
+    border-radius: 50%;
+
+    top: 50%;
+    margin-top: -3px;
+    left: -10px;
+}
+
+
+.winBox{
+    width: 1200px;
+    padding: 20px 50px 20px 30px;
+    border-radius: 20px;
+    background-color: rgba(192, 192, 192, 0.15);
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.winBox .joinInfo{
+    font-size: 0px;
+    margin-bottom: 30px;
+}
+
+.winBox .joinInfo .title{
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 50px;
+
+    line-height: 50px;
+    font-size: 15px;
+    color: #1f1f1f;
+    vertical-align: top;
+}
+
+.winBox .joinInfo .content{
+    display: inline-block;
+    width: 1000px;
+}
+
+.winBox .joinInfo .content input{
+    font-size: 15px;
+    border-radius: 10px;
+    background-color: #fff;
+    border: 0px;
+    padding: 0px 20px;
+    box-sizing: border-box;
+    color: #1f1f1f;
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 50px;
+    height: 50px;
+}
+
+.winBox .joinInfo .content textarea{
+    font-size: 15px;
+    border-radius: 11px;
+    background-color: #fff;
+    border: 0px;
+    box-sizing: border-box;
+    color: #1f1f1f;
+
+    padding: 15px 20px;
+    line-height: 1.5em;
+
+    resize: none;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+
+.winBox .joinInfo .content input::placeholder,
+.winBox .joinInfo .content textarea::placeholder{
+    font-size: 15px;
+    color: #c0c0c0;
+}
+.winBox .joinInfo .content input:focus,
+.winBox .joinInfo .content textarea:focus{
+    outline: none;
+}
+
+.winBox .joinInfo .content #title{ width: 1000px; }
+
+.winBox .joinInfo .content select{
+    width: 150px;
+    height: 50px;
+    border-radius: 10px;
+    padding:0px 20px;
+    box-sizing: border-box;
+    border: 0px;
+
+    font-size: 15px;
+    color: #c0c0c0;
+    background:url('../../../image/web/arrow.png') no-repeat right 16px center;
+    background-color: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin-right: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.winBox .joinInfo .content select:focus{
+    outline: none;
+}
+
+.winBox .joinInfo .content .cateExpand{
+    display: inline-block;
+    width: 110px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #fff;
+    vertical-align: top;
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    cursor: pointer;
+    font-size: 15px;
+    text-align: center;
+    line-height: 50px;
+    color:#c0c0c0;
+}
+
+.winBox .joinInfo .content .cateExpand input{
+    display: none;
+}
+
+#startDate, #endDate, #auditionDate, #auditionTime{
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+#startDate{
+    margin-right: 0px;
+}
+
+.content span{
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    color: #c0c0c0;
+    text-align: center;
+    font-size: 15px;
+    margin: 0px 10px;
+}
+
+#essential{
+    width: 1000px;
+    height: 112px;
+}
+
+#preparation{
+    width: 1000px;
+    height: 224px;
+}
+
+.imageBox{
+    display: inline-block;
+}
+
+#fileLabel{
+    display: inline-block;
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    background-color: #fff;
+    line-height: 180px;
+
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #afafaf;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+#fileLabel .addImage{
+    height: 28px;
+    width: 28px;
+    position: absolute;
+
+    top: 38px;
+    left: 56px;
+
+    background-image: url("../../../image/web/addImgBtn.png");
+}
+
+.upload-hidden{
+    display: none;
+}
+
+.upload-display{
+    position: relative;
+    display: inline-block;
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    background-color: #fff;
+    line-height: 180px;
+    margin-right: 20px;
+
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% auto;
+    vertical-align: top;
+}
+
+.upload-display .upload-sub,
+.upload-display .upload-sub2{
+    position: absolute;
+    right: -10px;
+    top : -10px;
+    width: 30px;
+    height: 30px;
+    background-color: #ff8aae;
+    border-radius:50%;
+    cursor: pointer;
+
+
+    background-image: url("../../../image/web/subImgBtn.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.btnBox{
+    display: block;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btnBox .sendBtn{
+    display: inline-block;
+    width: 180px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 20px;
+    background-color: #ff8aae;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+}
+
+.textCheck{
+    position: relative;
+    font-size: 16px;
+    font-weight: bold;
+    color: #c0c0c0;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.textCheck input{
+    display: none;
+}
+
+.textCheck .check{
+    position: absolute;
+    top: 50%;
+    margin-top: -11.5px;
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    margin-left: 5px;
+
+    background-position: center;
+    background-image: url("../../../image/web/textCheck_off.png");
+    background-repeat: no-repeat;
+}
+.textCheck .check.on{
+    background-image: url("../../../image/web/textCheck_on.png");
+}
+
+
+.mobileBox{
+    display: inline-block;
+}
+
+.datepicker-top-left, .datepicker-top-right {
+    border-top-color: #ff8aae !important;
+}
+
+.datepicker-top-left:before, .datepicker-top-right:before {
+    border-bottom-color: #ff8aae !important;
+}
+
+.highlighted {
+    background-color: #fff!important;
+    color: #ff8aae !important;
+}
+
+.datepicker-panel>ul>li:hover {
+    background-color: rgba(255, 138, 174, 0.2) !important;
+}
+
+.datepicker-panel>ul>li.picked, .datepicker-panel>ul>li.picked:hover {
+    background-color: rgba(255, 138, 174,1) !important;
+    color: #fff !important;
+    border-radius: 50%;
+}

@@ -1,0 +1,1 @@
+import ('https://cdn.flarelane.com/ServiceWorker.js');

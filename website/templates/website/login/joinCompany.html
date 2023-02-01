@@ -1,0 +1,143 @@
+{% extends 'website/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css_v2/web/login/joinCompany.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css_v2/mobile/login/joinCompany.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js_v2/website/login/joinCompany.js' %}"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<!-- 본문 내용 -->
+<div class="container_2">
+
+    <div class="mainTitle">기업 회원 가입</div>
+
+    <div class="body">
+
+        <form action="/login/joinCompanyCallback/" method="post" id="saveUserForm" enctype="multipart/form-data"  autocomplete="off">
+        {% csrf_token %}
+
+            <div class="inTitle">필수정보</div>
+
+            <div class="winBox">
+
+                <div class="joinInfo">
+                    <div class="title">아이디</div>
+                    <div class="content">
+                        <div class="overBtnBox">
+                            <input type="text" value="" id="userID" name="user_id"  placeholder="아이디를 입력해주세요."/>
+                            <div class="overBtn overlapCheck">중복확인</div>
+                        </div>
+                        <input type="checkbox" id="overlap" value="" style="display: none">
+                    </div>
+                </div>
+
+                <div class="joinInfo">
+                    <div class="title">비밀번호</div>
+                    <div class="content">
+                        <input type="password" value="" id="pw1" name="pw1" style="margin-bottom: 10px" placeholder="비밀번호를 입력해주세요."/>
+                        <input type="password" value="" id="pw2" name="pw2" placeholder="비밀번호 확인"/>
+                    </div>
+                </div>
+
+                <div class="joinInfo">
+                    <div class="title cName">담당자 이름</div>
+                    <div class="content"><input type="text" value="" id="name" name="name" maxlength="5" placeholder="이름을 입력해주세요"/> </div>
+                </div>
+
+                <div class="joinInfo">
+                    <div class="title">담당자 이메일</div>
+                    <div class="content">
+                        <input type="text" value="" id="email" name="email" placeholder="이메일 주소를 입력해주세요.(ex.hello@onepick.com)"/>
+                    </div>
+                </div>
+
+                <div class="joinInfo">
+                    <div class="title cPhone">담당자 연락처</div>
+                    <div class="content">
+                        <div class="overBtnBox" style="margin-bottom: 10px">
+                            <input type="text" value="" id="phone" name="phone" maxlength="11" placeholder="연락처를 '-' 없이 입력해주세요. (ex.01012345678)"/>
+                            <div class="overBtn confirmPhone">인증하기</div>
+                        </div>
+
+                        <div class="overBtnBox" style="margin-bottom: 12px">
+                            <input type="text" value="" id="confirm" name="confirm" maxlength="4" placeholder="인증번호 입력"/>
+                            <div class="overBtn disabled findConfirm">인증완료</div>
+                        </div>
+                        <input type="checkbox" name="confirmCheck" id="confirmCheck" style="display: none">
+                    </div>
+                </div>
+
+                <div class="joinInfo">
+                    <div class="title">
+                        광고 수신 동의
+                        <label class="textCheck emailCheck"><input type="checkbox" name="emailCheck" id="emailCheck" value="1" checked> 이메일 <div class="check  on"></div>  </label>
+                        <label class="textCheck phoneCheck"><input type="checkbox" name="phoneCheck" id="phoneCheck" value="1" checked> SMS <div class="check  on"></div>  </label>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="inTitle" style="margin-top: 32px">기업정보 <p>* 기업 정보는 추후에 마이페이지에서도 등록 가능합니다.</p></div>
+
+            <div class="winBox">
+                <div class="joinInfo">
+                    <div class="title">사업자명</div>
+                    <div class="content"><input type="text" value="" id="companyName" name="companyName" placeholder="사업자명을 입력해주세요."/></div>
+                </div>
+
+                <div class="joinInfo">
+                    <div class="title">사업자 등록번호</div>
+                    <div class="content"><input type="text" value="" id="license" name="license" placeholder="사업자 등록 번호를 입력해주세요."/> </div>
+                </div>
+
+                <div class="joinInfo">
+                    <div class="title">사업장 주소</div>
+                    <div class="content">
+                        <div class="overBtnBox" style="margin-bottom: 10px">
+                            <input type="text" value="" id="companyAddr1" name="companyAddr1" placeholder="주소 검색" readonly/>
+                            <div class="overBtn findAddr2" data-type="company">우편번호 검색</div>
+                        </div>
+                        <input type="text" value="" id="companyAddr2" name="companyAddr2" placeholder="상세 주소 검색"/>>
+                    </div>
+                </div>
+
+                <div class="joinInfo">
+                    <div class="title">웹사이트</div>
+                    <div class="content">
+                        <input type="text" value="" id="webSite" name="webSite" placeholder="웹사이트 주소를 입력해주세요."/>
+                    </div>
+                </div>
+
+                <div class="joinInfo">
+                    <div class="title">파일 첨부</div>
+                    <div class="content2">
+                        <label class="imageSelect" id="licenseImage" for="input-license"> <div class="addImage"></div><div class="imageInfo">사업자 등록증을 첨부하세요.</div><div class="delBtn" data-id="license"></div></label>
+                        <label class="imageSelect" id="artLicense" for="input-artLicense"> <div class="addImage"></div><div class="imageInfo">대중 문화 예술 기획업 등록증을 첨부하세요.</div><div class="delBtn" data-id="artLicense"></div></label>
+                        <input type="file" name="licenseImage[]" id="input-license" class="upload-hidden input-file" data-type="license">
+                        <input type="file" name="artLicense[]" id="input-artLicense" class="upload-hidden input-file" data-type="artLicense">
+                    </div>
+                </div>
+
+                <div class="joinInfo">
+                    <div class="title">로고 이미지</div>
+                    <div class="content2">
+                        <label class="imageSelect" id="logo" for="input-logo"> <div class="addImage"></div><div class="imageInfo">이미지를 첨부하세요.</div><div class="delBtn" data-id="logo"></div></label>
+                        <input type="file" name="logo[]" id="input-logo" class="upload-hidden input-file" data-type="logo">
+                    </div>
+                </div>
+             </div>
+
+        </form>
+
+        <div class="btnBox">
+            <div class="sendBtn">가입하기</div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

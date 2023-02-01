@@ -1,0 +1,281 @@
+
+.subCate{
+    padding-left: 10px;
+    font-size: 0px;
+    margin-bottom: 20px;
+}
+.subCate .cate{
+    display: inline-block;
+    font-size: 24px;
+    font-weight: bold;
+    color: #c0c0c0;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.subCate .cate.active{
+    color: #282828;
+}
+
+.btnBox{
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* ------------- 프로필 리스트 ---------------- */
+.inBox{
+    position: relative;
+    font-size: 0px;
+    padding-left: 10px;
+}
+.inBox .profile{
+    position: relative;
+    display: inline-block;
+    width: 590px;
+    height: 480px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.inBox .profile:nth-child(2n){
+    margin-right: 0px;
+}
+
+.inBox .profile .imageBox{
+    display: inline-block;
+    height: 100%;
+    width: 220px;
+    margin-right: 20px;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.inBox .profile .imageBox .profileImage{
+    width: 220px;
+    height: 300px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+
+    background-size: 120% auto;
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+
+.inBox .profile .imageBox .youtube{
+    width: 220px;
+    height: 130px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.inBox .profile .imageBox .youtube iframe{
+    width: 100%;
+    height: 100%;
+}
+
+.inBox .profile .contentBox{
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    width: calc(100% - 242px);
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.inBox .profile .contentBox .name{
+    font-size: 18px;
+    font-weight: bold;
+    color: #454545;
+    margin-top: 10px;
+    margin-bottom: 18px;
+}
+
+.inBox .profile .contentBox .detailInfo{
+    height: 106px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #1f1f1f;
+
+    /* 4줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    -webkit-line-clamp:4;
+    -webkit-box-orient:vertical;
+    margin-bottom: 20px;
+}
+.inBox .profile .contentBox .career .careerTitle,
+.inBox .profile .contentBox .career .careerContent{
+    font-size: 16px;
+    font-weight: bold;
+    color: #4d4d4d;
+}
+
+.inBox .profile .contentBox .career .careerTitle{
+    color: #ff8aae;
+}
+
+.inBox .profile .contentBox .career .introduction{
+    height: 100px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #4d4d4d;
+    word-break:break-all;
+
+    /* 4줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    display : -webkit-box;
+    -webkit-line-clamp:4;
+    -webkit-box-orient:vertical;
+}
+
+
+.viewBox{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 90px;
+    font-size: 0px;
+}
+
+.viewBox .countBox{
+    display: inline-block;
+    height: 43px;
+    width: 28px;
+    margin-right: 3px;
+}
+
+.viewBox .countBox:nth-child(3){
+    margin-right: 0px;
+}
+
+.viewBox .countBox span{
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.viewBox .countBox span.viewCount{ background-image: url("../../../image/web/viewCount.png")}
+.viewBox .countBox span.pickCount{ background-image: url("../../../image/web/pickCount.png")}
+.viewBox .countBox span.comViewCount{ background-image: url("../../../image/web/companyView.png")}
+
+.viewBox .countBox p{
+    margin: 0px;
+    padding: 0px;
+
+    font-size: 12px;
+    text-align: center;
+    color: #ff8aae;
+}
+
+.pickBtn{
+    position: absolute;
+    bottom: 28px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/pick_off.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.pickBtn.pickOn{
+    background-image: url("../../../image/web/pick_on.png");
+}
+
+
+.page{
+    margin-top: 30px;
+    font-size: 0px;
+    text-align: center;
+}
+
+.pageBox{
+    display: inline-block;
+}
+
+.pages{
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    color: #959595;
+    margin-left: 20px;
+    cursor: pointer;
+    height: 32px;
+    line-height: 32px;
+    vertical-align: top;
+}
+
+.pages.nowPage{
+    color: #ff8aae;
+}
+
+.pages:nth-child(1){
+    margin-left: 0px;
+}
+
+.leftPage, .rightPage{
+    display: inline-block;
+    border: 1px solid #c0c0c0;
+    border-radius: 50px;
+    vertical-align: top;
+    width: 32px;
+    height: 32px;
+    background-color: #fff;
+
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.leftPage{
+    margin-right: 30px;
+    background-image: url("../../../image/web/left_off.png");
+}
+
+.rightPage{
+    margin-left: 30px;
+    background-image: url("../../../image/web/right_off.png");
+}
+
+.writeBtn{
+    position: fixed;
+    bottom: 80px;
+    right: 130px;
+    width: 90px;
+    height: 90px;
+    background-color: #fff;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    padding-top: 54px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #FF709C;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+}
+
+.writeBtn .icon{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 20px;
+    left: 30px;
+
+    background-image: url("../../../image/web_v2/edit.png");
+}

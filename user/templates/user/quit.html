@@ -1,0 +1,58 @@
+{% extends 'picktalk/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/user/join.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/user/join.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/user/quit.js' %}"></script>
+
+<div class="body">
+    <form action="/users/quitCallback/" method="post" id="saveUserForm" enctype="multipart/form-data"  autocomplete="off">
+    {% csrf_token %}
+
+        <div class="mainTitle">회원 탈퇴</div>
+        <div class="winBox">
+            <div class="joinInfo">
+                <div class="title">탈퇴 사유</div>
+                <div class="content inputBox2 quitBox">
+                    {% if userInfo.usertype == "NORMAL" or userInfo.usertype == "S-NORMAL" %}
+                    <label><input type="radio" name="quitCause" class="quitCause" value="원하는 오디션 정보가 없음" checked><span> 원하는 오디션 정보가 없음</span> </label><br>
+                    <label><input type="radio" name="quitCause" class="quitCause" value="오디션 질이 안 좋음"><span> 오디션 질이 안 좋음</span> </label><br>
+                    <label><input type="radio" name="quitCause" class="quitCause" value="오디션의 구체적인 정보가 부족함"><span> 오디션의 구체적인 정보가 부족함</span> </label><br>
+                    {% else %}
+                    <label><input type="radio" name="quitCause" class="quitCause" value="원하는 프로필 정보가 없음" checked><span> 원하는 프로필 정보가 없음</span> </label><br>
+                    <label><input type="radio" name="quitCause" class="quitCause" value="프로필 질이 안 좋음"><span> 프로필 질이 안 좋음</span> </label><br>
+                    <label><input type="radio" name="quitCause" class="quitCause" value="프로필의 구체적인 정보가 부족함"><span> 프로필의 구체적인 정보가 부족함</span> </label><br>
+                    {% endif %}
+                    <label><input type="radio" name="quitCause" class="quitCause" value="서비스 이용이 불편함"><span> 서비스 이용이 불편함</span> </label><br>
+                    <label><input type="radio" name="quitCause" class="quitCause" value="서비스 이용의 필요성이 없어짐"><span> 서비스 이용의 필요성이 없어짐</span> </label><br>
+                    <label><input type="radio" name="quitCause" class="quitCause" value="오류나 장애가 자주 발생함"><span> 오류나 장애가 자주 발생함</span> </label><br>
+                    <label><input type="radio" name="quitCause" class="quitCause" value="etc"><span> 기타</span> </label>
+
+                    <textarea name="quitEtcCause" id="quitEtcCause" placeholder="회원님의 소중한 의견은 원픽 서비스 개선에 큰 도움이 됩니다."></textarea>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <div class="infoBox">
+        ㆍ서비스 이용 목적으로 작성된 <strong>개인정보 및 프로필정보, 채팅 이력 등은 모두 소멸되고 복구가 불가능</strong>합니다.<br>
+         &nbsp;&nbsp;&nbsp;단, [개인정보보호법, 전자상거래법]등 기타 법령에서 요구하는 정보는 해당 법령에서 요구하는 기간 동안 보존합니다. <br><br>
+        ㆍ탈퇴 후 원픽에 입력하신 게시글 문의 및 댓글은 삭제되지 않으며, 회원정보 삭제로 인해 작성자 본인을 확인할 수 없어 편집 및 삭제 처리가 원천적으로 불가능합니다.<br>
+          &nbsp;&nbsp;&nbsp;문의 및 댓글 삭제를 원하시는 경우에는 먼저 해당 게시물을 삭제하신 후 탈퇴를 신청해 주시길 바랍니다<br><br>
+       ㆍ연동된 SNS 계정이 있는 경우 함께 탈퇴됩니다.
+
+        <label class="textCheck" style="color: #c0c0c0"><input type="checkbox" name="notView" id="notView" value="1"> (필수) 위 내용을 확인했습니다.<div class="check"></div>  </label>
+    </div>
+
+    <div class="btnBox">
+        <div class="sendBtn">탈퇴하기</div>
+    </div>
+</div>
+
+
+{% endblock %}

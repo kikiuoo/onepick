@@ -1,0 +1,197 @@
+{% extends 'website/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css_v2/web/audi/write.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css_v2/mobile/audi/write.css' %}" > <!-- 모바일 버전 -->
+<link rel="stylesheet" href="{% static 'css_v2/datepicker.min.css' %}">
+
+<!-- JS 파일 -->
+<script src="{% static 'js_v2/website/audi/write.js' %}"></script>
+<script src="{% static 'js_v2/website/jquery/datepicker.min.js' %}"></script>
+
+
+<div class="container_2">
+    <div class="mainTitle">오디션 수정</div>
+
+    <div class="body">
+
+        <div class="winBox">
+
+            <div class="inTitle">필수정보</div>
+
+            <form action="/audi/editCallback/" method="post" id="saveAudiForm" enctype="multipart/form-data"  autocomplete="off">
+                {% csrf_token %}
+                {% load my_filter %}
+                <input type="hidden" value="{{ audition.num }}" id="num" name="num"/>
+                <input type="hidden" value="{{ request.session.id }}" id="userID" name="userID"/>
+
+                <div class="joinInfo">
+                    <div class="title">제목 <span class="pink"></span></div>
+                    <div class="content"><input type="text" value="{{ audition.title }}" id="title" name="title" placeholder="오디션 공고 제목을 입력해주세요." style="border:1px solid #1f1f1f; color: #1f1f1f; background-color: #ffffff " /> </div>
+                </div>
+
+
+                <div class="joinInfo">
+                    <div class="title">카테고리 <span class="pink"></span></div>
+                    <div class="content">
+                        <select name="cateMain" id="cateMain">
+                            <option value="" disabled selected>모집 분야</option>
+                            {% for cates in cate %}
+                            <option value="{{ cates.catecode }}" {% if cates.catecode == audition.cate %} selected {% endif %}>{{ cates.catename }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="joinInfo">
+                    <div class="title">세부 분야 <span class="pink"></span></div>
+                    <div class="content subCateBox">
+                        {% for subCates in audiCate %}
+                            <label class="cateExpand" {% if subCates.subcate|findArrayData:audisubCate == "1" %} style="border:1px solid #ff8aae; color: #ff8aae; background-color: #ffffff " {% endif %}>
+                                <input type="checkbox" name="subCate" class="subCate" value="{{ subCates.subcate }}" {% if subCates.subcate|findArrayData:audisubCate == "1" %} checked {% endif %}>{{ subCates.catename }}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="joinInfo">
+                    <div class="title">모집 기간 <span class="pink"></span></div>
+                    <div class="content">
+                        {% if audition.ordinary == "1" %}
+                        <input type="text" value="선택불가" name="startDate" id="startDate" placeholder="2022-05-11"  data-toggle="datepicker" disabled style="border:1px solid #1f1f1f; color: #1f1f1f; background-color: #ffffff "> <span>~</span>
+                        <input type="text" value="선택불가" name="endDate" id="endDate" placeholder="2022-05-11"  data-toggle="datepicker" disabled style="border:1px solid #1f1f1f; color: #1f1f1f; background-color: #ffffff ">
+                        <label class="textCheck ordinary" style="color: #ff8aae"><input type="checkbox" value="1" name="ordinary" id="ordinary" checked> 상시모집 <div class="check on"></div> </label>
+                        {% else %}
+                        <input type="text" value="{{ audition.startdate|date:'Y-m-d' }}" name="startDate" id="startDate" placeholder="2022-05-11"  data-toggle="datepicker" style="border:1px solid #1f1f1f; color: #1f1f1f; background-color: #ffffff "> <span>~</span>
+                        <input type="text" value="{{ audition.enddate|date:'Y-m-d' }}" name="endDate" id="endDate" placeholder="2022-05-11"  data-toggle="datepicker" style="border:1px solid #1f1f1f; color: #1f1f1f; background-color: #ffffff ">
+                        <label class="textCheck ordinary"><input type="checkbox" value="1" name="ordinary" id="ordinary"> 상시모집 <div class="check"></div> </label>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="joinInfo">
+                    <div class="title">오디션 <span class="pink"></span></div>
+                    <div class="content">
+                        {% if audition.audiunsetted == "1" %}
+                        <input type="text" value="선택불가" id="auditionDate" name="auditionDate" placeholder="2022-05-11" data-toggle="datepicker"  disabled style="border:1px solid #1f1f1f; color: #1f1f1f; background-color: #ffffff ">
+                        <label class="textCheck notAudi" style="color: #ff8aae"><input type="checkbox" value="1" name="notAudi" id="notAudi" checked > 오디션 날짜 미정 <div class="check on"></div></label>
+                        {% else %}
+                        <input type="text" value="{{ audition.auditiondate|date:'Y-m-d' }}"  id="auditionDate" name="auditionDate" placeholder="2022-05-11" data-toggle="datepicker" style="border:1px solid #1f1f1f; color: #1f1f1f; background-color: #ffffff "/>
+                        <label class="textCheck notAudi"><input type="checkbox" value="1" name="notAudi" id="notAudi"> 오디션 날짜 미정 <div class="check"></div></label>
+                        {% endif %}
+                        <label class="textCheck each"><input type="checkbox" value="1" name="each" id="each"> 합격자 개별연락 <div class="check"></div></label>
+                    </div>
+                </div>
+
+                <div class="joinInfo">
+                    <div class="title">모집 조건 <span class="pink"></span></div>
+                    <div class="content">
+                        <select name="age" id="age" style="border:1px solid #1f1f1f; color: #1f1f1f; background-color: #ffffff ">
+                            <option disabled selected>나이</option>
+                            <option value="10대이하" {% if audition.age == "10대이하" %}selected{% endif %}>10대이하</option>
+                            <option value="10대" {% if audition.age == "10대" %}selected{% endif %}>10대</option>
+                            <option value="20대" {% if audition.age == "20대" %}selected{% endif %}>20대</option>
+                            <option value="30대" {% if audition.age == "30대" %}selected{% endif %}>30대</option>
+                            <option value="40대" {% if audition.age == "40대" %}selected{% endif %}>40대</option>
+                            <option value="50대이상" {% if audition.age == "50대이상" %}selected{% endif %}>50대</option>
+                            <option value="무관" {% if audition.age == "무관" %}selected{% endif %}>무관</option>
+                        </select>
+
+
+                        <select name="gender" id="gender" style="border:1px solid #1f1f1f; color: #1f1f1f; background-color: #ffffff ">
+                            <option disabled selected>성별</option>
+                            <option value="남성" {% if audition.gender == "남성" %}selected{% endif %}>남성</option>
+                            <option value="여성" {% if audition.gender == "여성" %}selected{% endif %}>여성</option>
+                            <option value="무관" {% if audition.gender == "무관" %}selected{% endif %}>무관</option>
+                        </select>
+
+                        <select name="career" id="career"  style="border:1px solid #1f1f1f; color: #1f1f1f; background-color: #ffffff ">
+                            <option disabled selected>경력</option>
+                            <option value="1년이하" {% if audition.career == "1년이하" %}selected{% endif %}>1년이하</option>
+                            <option value="1년이상" {% if audition.career == "1년이상" %}selected{% endif %}>1년이상</option>
+                            <option value="2년이상" {% if audition.career == "2년이상" %}selected{% endif %}>2년이상</option>
+                            <option value="3년이상" {% if audition.career == "3년이상" %}selected{% endif %}>3년이상</option>
+                            <option value="무관" {% if audition.career == "무관" %}selected{% endif %}>무관</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="inTitle">추가 정보</div>
+
+                <div class="joinInfo">
+                    <div class="title">필수 사항</div>
+                    <div class="content">
+                        <textarea name="essential" id="essential" placeholder="ex) 춤, 노래, 연기영상 등록" {% if audition.essential %} style="border:1px solid #1f1f1f; color: #1f1f1f; background-color: #ffffff " {% endif %}>{{ audition.essential }}</textarea>
+                    </div>
+                </div>
+
+                <div class="joinInfo">
+                    <div class="title">상세 내용</div>
+                    <div class="content">
+                        <textarea name="preparation" id="preparation" placeholder="상세 내용을 입력해주세요." {% if audition.preparation %} style="border:1px solid #1f1f1f; color: #1f1f1f; background-color: #ffffff " {% endif %}>{{ audition.preparation }}</textarea>
+                    </div>
+                </div>
+
+                <div class="joinInfo">
+
+                    <div class="title">이미지 첨부</div>
+                    <div class="content">
+                        {% if image|getArrayCount > 0 %}
+                        {% for images in image %}
+                        <div class="imageList">
+                            <div class="upload-display" style="background-image: url('{% get_media_prefix %}{{ images }}')"></div>
+                            <div class="imageInfo">이미지 {{ forloop.counter }}</div>
+                            <div class="upload-sub2" data-image="{{ images }}"></div>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+
+                        <input type="file" name="userImage[]" id="input-file" class="upload-hidden input-file upload-add">
+
+                        <div class="imageBox"></div>
+
+                        <label id="fileLabel" class="fileLabel" for="input-file"> <div class="addImage"></div> <div class="imageInfo">이미지를 첨부해주세요.</div></label>
+
+
+                        <textarea name="removeImage" id="removeImage" style="display: none"></textarea>
+                    </div>
+                </div>
+
+
+
+                <div class="joinInfo">
+
+                    <div class="title">로고 이미지</div>
+                    <div class="content">
+
+                        {% if audition.logo_image %}
+                        <input type="file" name="logoImage[]" id="logoLabel-file" class="upload-hidden input-file">
+                        <label id="logoLabel" class="logoLabel" for="logoLabel-file">
+                            <div class="addImage" style="background-size: 100% auto; background-image: url('{% get_media_prefix %}{{ audition.logo_image }}')"></div>
+                            <div class="imageInfo" style="color: #1f1f1f">로고이미지</div>
+                            <div class="delBtn" style="display: inline-block"></div>
+                        </label>
+                        {% else %}
+                        <input type="file" name="logoImage[]" id="logoLabel-file" class="upload-hidden input-file">
+                        <label id="logoLabel" class="logoLabel" for="logoLabel-file"> <div class="addImage"></div> <div class="imageInfo">이미지를 첨부해주세요.</div><div class="delBtn"></div> </label>
+                        {% endif %}
+
+                        <div class="cInfo">* 회원 가입 시 등록한 로고 이미지가 아닌 다른 로고 이미지를 사용하시려면, 이미지를 첨부해주세요.</div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="btnBox">
+            <div class="sendBtn">오디션 수정하기</div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

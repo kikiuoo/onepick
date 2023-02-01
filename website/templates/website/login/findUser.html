@@ -1,0 +1,82 @@
+{% extends 'website/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css_v2/web/login/findUser.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css_v2/mobile/login/findUser.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js_v2/website/login/findUser.js' %}"></script>
+<!-- 본문 내용 -->
+<div class="container_2">
+
+    <div class="leftBox">
+        <div class="mainTitle">아이디 찾기</div>
+
+        <div class="inBox">
+            <div class="loginBox">
+                <div class="inputBox">
+                    <input type="text" name="userName" id="userName" placeholder="이름 입력">
+                    <div class="overBtnBox">
+                        <input type="text" value="" id="phone" name="phone" maxlength="11" placeholder="연락처를 '-' 없이 입력해주세요. (ex.01012345678)"/>
+                        <div class="overBtn confirmPhone">인증하기</div>
+                    </div>
+
+                    <div class="overBtnBox">
+                        <input type="text" value="" id="confirm" name="confirm" maxlength="4" placeholder="인증번호 입력"/>
+                        <div class="overBtn disabled findConfirm">인증완료</div>
+                    </div>
+                    <input type="checkbox" name="confirmCheck" id="confirmCheck" style="display: none">
+                </div>
+                <div class="button idFindBtn">아이디 찾기</div>
+            </div>
+
+            <div class="userInfo">
+                <div class="info">회원님의 아이디입니다.</div>
+                <div class="uID"></div>
+
+                <div class="button loginBtn">로그인</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rightBox">
+        <div class="mainTitle">비밀번호 찾기</div>
+        <div class="inBox">
+            <div class="pwFindBox">
+                <input type="text" name="userID_pw" id="userID_pw" placeholder="아이디 입력">
+
+                <div class="overBtnBox">
+                    <input type="text" value="" id="phone_pw" name="phone_pw" maxlength="11" placeholder="연락처를 '-' 없이 입력해주세요. (ex.01012345678)"/>
+                    <div class="overBtn confirmPhone_pw">인증하기</div>
+                </div>
+
+                <div class="overBtnBox">
+                    <input type="text" value="" id="confirm_pw" name="confirm_pw" maxlength="4" placeholder="인증번호 입력"/>
+                    <div class="overBtn disabled findConfirm_pw">인증완료</div>
+                </div>
+                <input type="checkbox" name="confirmCheck_pw" id="confirmCheck_pw" style="display: none">
+
+                <div class="button pwFindBtn">비밀번호 찾기</div>
+            </div>
+
+
+            <div class="resetPWBox">
+                <input type="password" value="" id="pw1" name="pw1" placeholder="비밀번호를 입력해주세요."/>
+                <input type="password" value="" id="pw2" name="pw2" placeholder="비밀번호 확인"/>
+
+                <div class="button savePWBtn">비밀번호 변경</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fInfo">
+        회원 정보의 등록된 개인정보를 정확히 입력해주세요.<br>
+회원님 본인의 정보를 모르실 때는 관리자(onepick@myonepick.com)에게 이메일 또는 메인화면 오른쪽 하단 [문의하기]로 문의해 주시기 바랍니다.
+    </div>
+
+</div>
+
+
+{% endblock %}

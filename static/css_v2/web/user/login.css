@@ -1,0 +1,351 @@
+.mainTitle{
+    font-size: 24px;
+    font-weight: bold;
+    color: #454545;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+
+.inBox{
+    display: inline-block;
+    width: 590px;
+    height: 440px;
+    padding: 50px 95px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 30px;
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.inBox:last-child{
+    padding: 50px 45px;
+    margin-right: 0px;
+}
+
+.loginBox .inputBox_find{
+    padding: 0px 40px;
+    margin-top: 40px;
+}
+
+.loginBox .inputBox input,
+.loginBox .inputBox_find input{
+    width: 400px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #f6f6f6;
+    box-sizing: border-box;
+    outline: none;
+    border: 0px;
+    margin-bottom: 10px;
+    padding: 0px 20px;
+    resize: none;
+
+    font-size: 15px;
+    color: #1f1f1f;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.loginBox .inputBox input::placeholder,
+.loginBox .inputBox_find input::placeholder{
+    font-size: 15px;
+    color: #c0c0c0;
+}
+.loginBox .inputBox input:focus,
+.loginBox .inputBox_find input:focus{
+    outline: none;
+}
+
+.loginBox .button{
+    vertical-align: top;
+    display: inline-block;
+    width: 400px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 10px;
+    background-color: #ff8aae;
+    cursor: pointer;
+
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    color: #fff;
+}
+
+.findUser, .findBtn, .reInputBtn{
+    margin-left: 40px;
+}
+
+.loginBox .searchInfo{
+    padding-top: 10px;
+
+    font-size: 13px;
+    font-weight: bold;
+    color: #959595;
+    cursor: pointer;
+    text-align: right;
+}
+
+.inBox .socialBox{
+    text-align: center;
+    font-size: 0px;
+    margin-top: 40px;
+    padding-bottom: 9px;
+}
+
+.inBox .socialBox .socialBtn{
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.inBox .socialBox .socialBtn:first-child{
+    margin-left: 0px;
+}
+
+.inBox .socialBox .socialBtn#kakaoLogin{background-image: url("../../../image/web/kakaoIcon.png")}
+.inBox .socialBox .socialBtn#gogleLogin{background-image: url("../../../image/web/gogleIcon.png")}
+.inBox .socialBox .socialBtn#appleLogin{background-image: url("../../../image/web/appleIcon.png")}
+.inBox .socialBox .socialBtn#naverLogin{background-image: url("../../../image/web/naverIcon.png")}
+
+.textInfo{
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.33;
+    text-align: center;
+    color: #ff8aae;
+}
+
+.loginBox2, .loginBox3{
+    display: none;
+}
+
+.subTitle{
+    height: 50px;
+
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #ff8aae;
+    border-bottom: 1px solid #c0c0c0c0;
+}
+
+
+.inputBox2{
+    font-size: 0px;
+    width: 100%;
+    margin: 0 auto;
+
+    height: 200px;
+    overflow: auto;
+    padding-top: 40px;
+    box-sizing: border-box;
+}
+.inputBox2 label{
+    display: block;
+    height: 30px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.inputBox2 label span{
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    color: #1f1f1f;
+    vertical-align: top;
+}
+.inputBox2 .s_userID{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 0px;
+    margin-right: 15px;
+    box-sizing: border-box;
+    vertical-align: top;
+    outline: none;
+    border-radius:50%;
+
+    border: solid 1px #c0c0c0;
+    background-color: #f6f6f6;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+
+.inputBox2 .s_userID:checked{
+    border: solid 1px #c0c0c0;
+    background-color: #f6f6f6;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border-radius: 100%;
+}
+
+.inputBox2 .s_userID:checked:before {
+    content:'';
+    display:block;
+    width:60%;
+    height:60%;
+    margin: 20% auto;
+    border-radius:50%;
+  	background:#ff8aae;
+}
+
+.nonInfo{
+    margin-top: 40px;
+    margin-bottom: 54px;
+
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.33;
+    text-align: center;
+    color: #454545;
+    display: none;
+
+}
+
+.title{
+    padding-left: 10px;
+    margin-top: 22px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #1f1f1f;
+}
+
+.fInfo{
+    display: inline-block;
+    font-size: 14px;
+    color: #959595;
+    margin-top: -10px;
+    margin-bottom: 150px;
+    padding-left: 20px;
+}
+
+.findPw{
+    display: none;
+}
+
+.findPw .title{
+    margin-top: 0px;
+}
+
+.findPw .inBox2{
+    height: auto;
+}
+
+
+/* -------------------------------------------------- */
+
+.inBox2{
+    display: inline-block;
+    width: 1200px;
+    height: 400px;
+    padding: 58px 50px;
+    margin-left: 10px;
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+    box-sizing: border-box;
+    vertical-align: top;
+    margin-bottom: 130px;
+}
+
+.inBox2 .logoBox{
+    text-align: center;
+    height: 74px;
+    border-bottom: 1px solid #c0c0c0;
+    margin-bottom: 30px;
+    padding-bottom: 38px;
+}
+
+.inBox2 .logoBox .logo{
+    display: inline-block;
+    height: 74px;
+    width: 252px;
+
+    background-image: url("../../../image/web/login_logo.png");
+    background-size: 100%;
+    background-position: center;
+    background-repeat:  no-repeat;
+}
+
+
+.inBox2 .textInfo{
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    color: #454545;
+}
+
+.inBox2 .socialBox{
+    text-align: center;
+    font-size: 0px;
+    margin-top: 42px;
+    padding-bottom: 9px;
+}
+
+.inBox2 .socialBox .socialBtn{
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.inBox2 .socialBox .socialBtn:first-child{
+    margin-left: 0px;
+}
+
+.inBox2 .socialBox .socialBtn#kakaoLogin{background-image: url("../../../image/web/kakaoIcon.png")}
+.inBox2 .socialBox .socialBtn#gogleLogin{background-image: url("../../../image/web/gogleIcon.png")}
+.inBox2 .socialBox .socialBtn#appleLogin{background-image: url("../../../image/web/appleIcon.png")}
+.inBox2 .socialBox .socialBtn#naverLogin{background-image: url("../../../image/web/naverIcon.png")}
+
+
+.loginBox2 .findBtn{
+    margin-left: 0px;
+}
+
+.marginLeft30{
+    margin-left: 50px !important;
+}
+
+.footerContext{
+    padding-left: 102px !important;
+}
+
+.container{
+    padding-left: 102px !important;
+}
+
+.checkUser { display: none; }
+
+.checkUser #phone{
+    width: 70%;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.button2{
+    vertical-align: top;
+    display: inline-block;
+    width: 25%;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 10px;
+    background-color: #ff8aae;
+    cursor: pointer;
+
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}

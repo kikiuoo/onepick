@@ -1,0 +1,254 @@
+.inBox{
+    position: relative;
+    width: 100%;
+    padding: 20px 10px;
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+    box-sizing: border-box;
+    font-size: 0px;
+    margin-bottom:30px;
+}
+
+.btnBox{
+    position: absolute;
+    z-index: 10;
+    right: 20px;
+    top: 25px;
+    font-size: 0px;
+}
+
+.btnBox div{
+    position: relative;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    vertical-align: top;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.btnBox div.editBtn{ background-image: url("../../../image/web/update.png"); }
+.btnBox div.delBtn{ background-image: url("../../../image/web/delete.png"); background-size: 80%; }
+.btnBox div.shareBtn{ background-image: url("../../../image/web/share.png"); }
+.btnBox div.printBtn{ background-image: url("../../../image/web/print.png"); }
+
+
+.titleBox {
+    border-bottom: 1px solid #c0c0c0;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.titleBox .title{
+    font-size: 14px;
+    line-height: 1.57;
+    padding-right: 80px;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.titleBox .userInfo{
+    font-size: 14px;
+    color: #959595;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.content{
+    padding: 0px 10px ;
+    font-size: 13px;
+    line-height: 1.83;
+    color: #1f1f1f;
+}
+.imgBox{
+    text-align: center;
+}
+.content img{
+    display: inline-block;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.notice p{
+    display: none;
+}
+
+.title span{
+    color: #ff8aae;
+}
+
+
+
+.inBox .inputBox{
+    padding : 20px 7px 0px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.inBox .commentList{
+    padding : 10px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.inBox .inputBox #comment{
+    width: calc(100% - 95px);
+    height: 40px;
+    padding: 0px 10px;
+    border-radius: 10px;
+    background-color: #f6f6f6;
+    box-sizing: border-box;
+    outline: none;
+    border: 0px;
+
+    font-size: 13px;
+    margin-right: 10px;
+}
+.inBox .inputBox #comment::placeholder{
+    font-size: 13px;
+    color: #c0c0c0;
+}
+
+.inBox .inputBox .saveComment{
+    display: inline-block;
+    width: 85px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #ff8aae;
+
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+}
+
+.comments{
+    position: relative;
+    padding: 10px;
+    border-top: 1px solid #c0c0c0;
+}
+
+.comments:first-child{
+    border: 0px;
+}
+
+.comments .name{
+    display: inline-block;
+    font-size: 12px;
+    color: #1f1f1f;
+    margin-bottom: 10px;
+}
+
+.comments .comContent{
+    display: inline-block;
+    width: 100%;
+    font-size: 12px;
+    color: #1f1f1f;
+}
+
+.comments .commentDelete{
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    right: 15px;
+    top: 10px;
+    vertical-align: middle;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/closeIcon.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.comments .date{
+    display: inline-block;
+    width: 100%;
+    font-size: 12px;
+    color: #1f1f1f;
+    text-align: right;
+}
+
+.comments .nonComments{
+    font-size: 16px;
+    color: #959595;
+    text-align: center;
+}
+
+.imageBox{
+    display: inline-block;
+}
+
+#fileLabel{
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    background-color: #fff;
+    line-height: 100px;
+
+    font-size: 8px;
+    font-weight: bold;
+    text-align: center;
+    color: #afafaf;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+#fileLabel .addImage{
+    height: 16px;
+    width: 16px;
+    position: absolute;
+
+    top: 21px;
+    left: 32px;
+
+    background-image: url("../../../image/mobile/addImgBtn.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.upload-hidden{
+    display: none;
+}
+
+.upload-display{
+    position: relative;
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    background-color: #fff;
+    margin-right: 20px;
+
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% auto;
+    vertical-align: top;
+}
+
+.upload-display .upload-sub,
+.upload-display .upload-sub2{
+    position: absolute;
+    right: -8px;
+    top : -8px;
+    width: 16px;
+    height: 16px;
+    background-color: #ff8aae;
+    border-radius:50%;
+    cursor: pointer;
+
+
+    background-image: url("../../../image/mobile/subImgBtn.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}

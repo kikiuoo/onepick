@@ -1,0 +1,4 @@
+<option value="" disabled selected>선택</option>
+{% for subCates in catesub %}
+<option value="{{ subCates.subcate }}" data-name="{{ subCates.catename }}">{{ subCates.catename }}</option>
+{% endfor %}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>원픽ㅣ나만의 ONEPICK</title>
+
+    <meta name="viewport" content="width=device-width">
+
+    {% load static %}
+    <!-- css 파일을 /static/ 폴더 아래에 있습니다. -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css_v2/web/base.css' %}"> <!-- PC 버전 -->
+    <link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css_v2/mobile/base.css' %}" > <!-- 모바일 버전 -->
+
+    <link rel="icon" type="image/x-icon" href="{% static 'image/favicon.ico' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/favicon.ico' %}">
+
+    <!-- JS 파일 -->
+    <!-- Js 파일을 /static/ 폴더 아래에 있습니다. -->
+    <script src="{% static 'js_v2/website/jquery/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js_v2/website/base.js' %}"></script>
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0WGRWN44B0"></script>
+    <script>
+        $.ajaxSetup({
+            headers: { "X-CSRFToken": '{{csrf_token}}' }
+        });
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-0WGRWN44B0');
+    </script>
+</head>
+<body>
+    <!-- header -->
+    <div class="header mobileNone">
+        <div class="container_header">
+            <div class="logo"></div>
+
+            <div class="searchBox">
+                <input type="text" name="search" id="search" placeholder="오디션,인물 검색"/>
+                <div class="search"></div>
+            </div>
+
+            <div class="menu" data-url="audi/list/" data-type="normal">오디션</div>
+            <div class="menu" data-url="profile/list/" data-type="normal">프로필</div>
+            <div class="menu" data-url="#" data-type="normal">아르바이트</div>
+            <div class="menu" data-url="lounge/" data-type="normal">커뮤니티</div>
+            <div class="menu" data-url="https://www.youtube.com/channel/UCmp0hqqMCgmnf2N_yCHcXZA" data-type="open">원픽TV</div>
+
+            {% if request.session.id == "" or request.session.id == null %}
+            <div class="login">로그인</div>
+            <div class="join">회원가입</div>
+            {% else %}
+            <div class="mypage">마이페이지</div>
+            <div class="logout">로그아웃</div>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <div class="header pcNone">
+        <div class="container_header">
+            <div class="logo"></div>
+
+            <div class="searchBox2">
+                <input type="text" name="search" id="search2" placeholder="오디션,인물 검색"/>
+                <div class="search2"></div>
+            </div>
+
+            {% if request.session.id == "" or request.session.id == null %}
+            <div class="login">로그인</div>
+            <div class="join">회원가입</div>
+            {% else %}
+            <div class="mypage">마이페이지</div>
+            <div class="logout">로그아웃</div>
+            {% endif %}
+
+            <div class="menuBox_header">
+            <div class="menu" data-url="audi/list/" data-type="normal">오디션</div>
+            <div class="menu" data-url="profile/list/" data-type="normal">프로필</div>
+            <div class="menu" data-url="#" data-type="normal">아르바이트</div>
+            <div class="menu" data-url="lounge/" data-type="normal">커뮤니티</div>
+            <div class="menu" data-url="https://www.youtube.com/channel/UCmp0hqqMCgmnf2N_yCHcXZA" data-type="open">원픽TV</div>
+            </div>
+        </div>
+    </div>
+    <!-- header -->
+
+    <!-- 본문 내용 -->
+    {% block context %}
+    {% endblock %}
+    <!-- 본문 내용 -->
+
+    <!-- footer -->
+    <div class="footer">
+        <div class="footerContext">
+            <span class="company">(주)케이에스앤픽</span>
+            <span class="info">주소 | 서울 강남구 압구정로54길 19 3층</span>
+            <span class="info">전화 | 02-3442-4440</span>
+            <span class="info">메일 | onepick@myonepick.com</span>
+
+            <div class="linkBtnBox">
+                <div class="link_sns kakao" data-url="http://pf.kakao.com/_RczSxb/chat"></div>
+                <div class="link_sns instagram" data-url="https://www.instagram.com/onepick_korea/"></div>
+                <div class="link_sns youtube" data-url="https://www.youtube.com/@onepickcontents1721"></div>
+            </div>
+
+            <div class="companyLink">
+                <span data-url="/users/agreement/1/">이용약관</span>
+                <span data-url="/users/agreement/2/">개인정보보호정책</span>
+                <span data-url="/advertise/">광고문의</span>
+                <span data-url="https://ksnpick.com">회사소개</span>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+
+    <script>
+        // usertype : admin(관리자), COMPANY(기업회원), S-COMPANY(미승인 기업회원), NORMAL(일반회원), S-NORMAL(미이전 일반회원)
+        // 1차 리뉴얼전 사이트 DB에서 pw 암호와 방식을 확인할 수 없어서 재가입이 필요해서 normal, s-normal 등급으로 구분했습니다.
+        var userType = "{{ request.session.userType }}";
+        var userID = "{{ request.session.id }}";
+        var cateType = "{{ cateType }}";
+    </script>
+</body>
+</html>

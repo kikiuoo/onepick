@@ -1,0 +1,501 @@
+/* PC Base CSS */
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+
+/* PC Base CSS */
+body{
+    position:  relative;
+    padding : 0px;
+    margin : 0px;
+    font-family: 'Noto Sans KR', sans-serif !important;
+}
+
+.container{
+    width : 1440px;
+    padding : 70px 110px 65px 110px;
+    margin : 0 auto;
+    box-sizing: border-box;
+}
+
+.pcNone{
+    display: none !important;
+}
+
+/* PC Base Header CSS */
+.header{
+    position : relative;
+    font-size: 0px;
+    margin-bottom: 36px;
+    height:64px;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
+.header .logo{
+    display :inline-block;
+    width: 64px;
+    height: 64px;
+    background-image : url('../../image/web/logo.png');
+
+    vertical-align : top;
+    cursor:pointer;
+
+    background-size : auto;
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+/* serach 버튼 클릭시 변경된 디자인 */
+.header .searchBox{
+    display: inline-block;
+    width: 300px;
+    height: 48px;
+    border-radius: 30px;
+    border: solid 2px #ff8aae;
+    background-color: #fff;
+    box-sizing: border-box;
+
+    font-weight: bold;
+    text-align: left;
+    color: #ff8aae;
+    font-size: 0px;
+    margin-top: 8px;
+    margin-left: 30px;
+}
+.header .searchBox #search{
+    font-family: 'Noto Sans KR', sans-serif;
+    display:  inline-block;
+    border : 0px solid blue;
+    background-color: transparent;
+    width: 84%;
+    height: 100%;
+    box-sizing:border-box;
+    vertical-align: top;
+    padding-left: 16px;
+
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+.header .searchBox #search::placeholder{
+    font-size: 16px;
+    color: #ff8aae;
+}
+.header .searchBox #search:focus{
+    outline: none;
+}
+.header .searchBox .search{
+    display:  inline-block;
+    width: 16%;
+    height: 100%;
+    box-sizing:border-box;
+    vertical-align: top;
+    cursor: pointer;
+
+    background-image : url('../../image/web/searchBtn.png');
+    background-size : 40%;
+    background-repeat : no-repeat;
+    background-position : center;
+}
+/* serach 버튼 클릭시 변경된 디자인 */
+
+.header .audiRegBtn,
+.header .profileRegBtn{
+    position: absolute;
+    right: 200px;
+    top: 16px;
+    display: inline-block;
+    font-size: 0px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.header .audiRegBtn .icon,
+.header .profileRegBtn .icon{
+    display:  inline-block;
+    width: 30px;
+    height: 30px;
+    border: 1px saddlebrown;
+    margin-top: 2.5px;
+    margin-right: 8px;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.header .audiRegBtn .icon{
+    background-image: url("../../image/web/auditionIcon.png");
+}
+.header .profileRegBtn .icon{
+    background-image: url("../../image/web/profileIcon.png");
+}
+
+.header .audiRegBtn .name,
+.header .profileRegBtn .name{
+    display:  inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    color: #454545;
+    height: 35px;
+    line-height: 35px;
+    vertical-align: top;
+}
+.header .audiRegBtn .name {
+    color: #ff8aae;
+}
+.header .profileRegBtn .name {
+    color: #7f84ea;
+}
+
+.header .line{
+    display:  inline-block;
+    vertical-align: top;
+    width: 2px;
+    height: 18px;
+    margin-top: 10px;
+    background-color: #c4c4c4;
+}
+
+
+.header .menu{
+    display :inline-block;
+    height: 64px;
+    vertical-align : top;
+    margin-left : 30px;
+    cursor:pointer;
+    line-height: 64px;
+
+    font-size: 16px;
+    font-weight: bold;
+    color: #282828;
+}
+
+.header .login, .header .mypage{
+    position: absolute;
+    right: 92px;
+    top :12px;
+    display :inline-block;
+    width: 82px;
+    height: 40px;
+    flex-grow: 0;;
+    border-radius: 20px;
+    border: solid 1px #ff8aae;
+    text-align:  center;
+    vertical-align: top;
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 40px;
+    color: #ff8aae;
+    margin-left: 41px;
+}
+
+.header .join, .header .logout{
+    position: absolute;
+    display :inline-block;
+    right: 0px;
+    top :12px;
+    width: 82px;
+    height: 40px;
+    line-height: 40px;
+
+    border-radius: 20px;
+    border: solid 1px #959595;
+    background-color: #fff;
+
+    font-size: 14px;
+    font-weight: 700;
+    color: #959595;
+    text-align:  center;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+/* PC Base Footer CSS */
+.footer{
+    background-color : #f8f8f8;
+}
+.footer .footerContext {
+    padding : 20px 0px 20px 110px;
+    font-size : 0px;
+    margin : 0 auto;
+    box-sizing: border-box;
+    width : 1440px;
+}
+.footer .footerContext .company{
+    display : block;
+    font-size: 12px;
+    color: #454545;
+    margin-bottom : 10px;
+}
+
+.footer .footerContext .companyLink{
+    margin-bottom : 10px;
+}
+
+.footer .footerContext .companyLink span{
+    display : inline-block;
+    font-size: 12px;
+    color: #6f6f6f;
+    cursor: pointer;
+    margin-right : 33px;
+}
+
+.footer .footerContext .info{
+    display : block;
+    font-size: 12px;
+    color: #6f6f6f;
+}
+
+
+/* PC Base Login Popup CSS */
+.loginPopup{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color:  rgb(0,0,0,0.4);
+    z-index: 10;
+    display: none;
+}
+
+.loginPopup .loginBox{
+    position:  absolute;
+    left: 50%;
+    top: 50%;
+    width: 585px;
+    height: 820px;
+    padding: 88px 77px;
+    border-radius: 33px;
+    background-color: #fff;
+    margin-left: -292.5px;
+    margin-top: -410px;
+    box-sizing:  border-box;
+}
+
+.loginBox .loginClose,
+.regCompanyPopup .regCompanyBox .closeBtn{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    right: 52px;
+    top: 52px;
+
+    background-image: url("../../image/web/closeIcon.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.loginBox .loginLogo{
+    padding-top: 78px;
+    text-align: center;
+}
+.loginBox .loginLogo span{
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-align: center;
+    color: #ff8aae;
+}
+.loginBox .loginLogo .Logo{
+    height: 40px;
+    width: 252px;
+    margin: 27px auto 0px;
+
+    background-image : url('../../image/web/logo.png');
+    background-size : cover;
+    background-repeat:  no-repeat;
+    background-position: center;
+}
+
+.loginBox .socialLogin .title{
+    margin-top: 72px;
+
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 1.39;
+    text-align: center;
+    color: #454545;
+    cursor: default;
+}
+
+.loginBox .socialLogin .socialBox{
+    margin-top: 59px;
+    text-align: center;
+    font-size: 0px;
+}
+
+.loginBox .socialLogin .socialBox .socialBtn{
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    margin-left: 12px;
+    cursor: pointer;
+}
+
+.loginBox .socialLogin .socialBox .socialBtn:first-child{
+    margin: 0px;
+}
+
+.loginBox .socialLogin .socialBox .socialBtn#kakaoLogin{background-image: url("../../image/web/kakaoIcon.png");}
+.loginBox .socialLogin .socialBox .socialBtn#gogleLogin{background-image: url("../../image/web/gogleIcon.png");}
+.loginBox .socialLogin .socialBox .socialBtn#appleLogin{background-image: url("../../image/web/appleIcon.png");}
+.loginBox .socialLogin .socialBox .socialBtn#facebookLogin{background-image: url("../../image/web/facebookIcon.png");}
+
+.loginBox .socialLogin .sendOneLogin{
+    margin-top: 96px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #454545;
+    cursor: pointer;
+}
+
+.loginBox .onepickLogin{
+    margin-top: 38px;
+    display: none;
+}
+
+.loginBox .onepickLogin .loginInfo{
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.67;
+    text-align: center;
+    color: #878787;
+    margin-bottom: 28px;
+}
+
+.loginBox .onepickLogin input{
+    height: 74.6px;
+    width: 100%;
+    padding: 26px 33px 22px;
+    border-radius: 11px;
+    background-color: #f5f5f5;
+    box-sizing: border-box;
+    border: 0px;
+    margin-bottom: 17px;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: #aaa;
+}
+
+.loginBox .onepickLogin input::placeholder{
+    font-size: 18px;
+    font-weight: bold;
+    color: #aaa;
+}
+.loginBox .onepickLogin input:focus{
+    outline: none;
+}
+
+.loginBox .onepickLogin .loginBtn{
+    margin-top: 11px;
+    height: 66px;
+    line-height: 66px;
+    border-radius: 11px;
+    background-color: #ff8aae;
+
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+}
+
+.loginBox .onepickLogin .idSearchBox{
+    margin-top: 37px;
+    font-size: 0px;
+    text-align: center;
+}
+
+.loginBox .onepickLogin .idSearchBox span{
+    display: inline-block;
+
+    font-size: 18px;
+    font-weight:  bold;
+    color: #afafaf;
+    margin-left: 32px;
+    cursor: pointer;
+}
+
+.loginBox .onepickLogin .idSearchBox span:first-child{
+    margin: 0px;
+}
+
+
+/*  기업회원 등록 페이지.  */
+
+.regCompanyPopup{
+    display: none;
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(84, 84, 84, 0.7);
+    top: 0px;
+    left: 0px;
+}
+
+.regCompanyPopup .regCompanyBox{
+    position: absolute;
+    width: 585px;
+    height: 820px;
+
+    top: 50%;
+    left: 50%;
+    margin-left: -292.5px;
+    margin-top: -410px;
+
+
+    padding: 190px 57px 166px 77px;
+    border-radius: 33px;
+    background-color: #fff;
+
+    box-sizing: border-box;
+}
+
+.regCompanyPopup .regCompanyBox .title{
+    font-size: 33px;
+    font-weight: bold;
+    line-height: 1.42;
+    color: #1f1f1f;
+    margin-bottom: 30px;
+}
+
+.regCompanyPopup .regCompanyBox .regInfo{
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.59;
+    color: #878787;
+    margin-bottom: 30px;
+}
+
+.regCompanyPopup .regCompanyBox .regCompanyBtn{
+    display: inline-block;
+    padding: 32px 36px;
+    border-radius: 22px;
+    background-color: #ff8aae;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.regCompanyPopup .regCompanyBox .close{
+    display: inline-block;
+    margin-top: 24px;
+    margin-left: 33px;
+    cursor: pointer;
+
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #b1b1b1;
+}

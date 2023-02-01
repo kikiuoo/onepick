@@ -1,0 +1,124 @@
+.inBox {
+    font-size: 0px;
+}
+
+.inBox .viewBox{
+    width: 100%;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.title #viewType{
+    margin-left: 10px;
+    width: 100px;
+    color: #1f1f1f;
+}
+
+.viewBox .contentBox{
+    height: calc(100% - 40px);
+    padding: 0px 15px;
+}
+
+
+.contentList{
+    border-top: 1px solid #c0c0c0;
+    padding : 20px 0px !important;
+}
+
+.contentBox .contentList.active{
+    background-color: #F6F6F6;
+}
+
+.viewBox .inTitle{
+    padding:  0px 15px;
+    color: #fff;
+}
+
+.orderView, .banTitle, .banImage, .banClick, .banReg, .banViewDay , .listEtc{
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: top;
+    text-align: center;
+    line-height: 60px;
+}
+
+.banTitle{ width: 25%; position: relative}
+.banImage{ width: 20%; text-align: center;}
+.banClick{ width: 10%;}
+.banReg{ width: 10%;}
+.banViewDay{ width: 25%; }
+.listEtc{ width: 10%;}
+
+.viewBox .inTitle div{
+    line-height: 40px;
+}
+
+.btnBox{
+    position: absolute;
+    top: 800px;
+    width: 1360px;
+    display: inline-block;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.sendBtn{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ff8aae;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.content{
+    border: 1px solid #c0c0c0;
+    width: 715px;
+    height: 540px;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+
+
+.info{
+    font-size: 12px;
+    color: #c0c0c0;
+}
+
+.viewBox .contentList div.listEtc{
+    margin-right: 0px;
+    font-size: 0px;
+}
+.viewBox .contentList div.listEtc div{
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-top: 25px;
+    margin-right: 10px;
+
+    background-size: auto 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.viewBox .contentList .listEtc .editBtn { background-image: url("../../../image/web/update.png")}
+.viewBox .contentList .listEtc .delBtn { background-image: url("../../../image/web/delete.png"); margin-right: 0px}
+
+.contentList .image{
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

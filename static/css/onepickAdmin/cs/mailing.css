@@ -1,0 +1,212 @@
+.inBox {
+    font-size: 0px;
+}
+
+.inBox .viewBox{
+    width: calc( 50% - 10px );
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.viewBox:nth-child(2) {
+    width: 755px;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 12px;
+}
+
+.inBox .viewBox:nth-child(3){
+    margin-right: 0px;
+    width: 585px;
+}
+
+.viewBox #title{
+    width: 715px;
+    margin-bottom: 10px;
+}
+
+.summernote{
+    height: 500px;
+}
+
+.viewBox .filterBox{
+    padding: 20px 21px;
+}
+
+.viewBox .filterBox span{
+    height: 40px;
+    line-height: 40px;
+    font-size: 13px;
+    margin-right: 8px;
+    color: #c0c0c0;
+}
+
+.viewBox .filterBox #name{
+    width: 140px;
+}
+
+.viewBox .in_line{
+    border-bottom: 1px solid #c0c0c0;
+    box-sizing: border-box;
+    width:535px;
+    margin: 0 auto;
+}
+
+.viewBox .contentBox{
+    height: calc(100% - 121px);
+}
+
+.name, .userType, .email, .gender, .age, .checkBox{
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: top;
+    font-weight: bold;
+}
+
+.name{
+    width: 40px;
+    height: 20px;
+    line-height: 20px;
+    margin-right: 20px;
+
+
+    /* 4줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    -webkit-line-clamp:1;
+    -webkit-box-orient:vertical;
+}
+
+.userType{
+    width: 42px;
+    height: 20px;
+    line-height: 20px;
+    margin-right: 20px;
+    color: #ff8aae;
+}
+
+.email{
+    width: 230px;
+    height: 20px;
+    line-height: 20px;
+    margin-right: 20px;
+    text-align: center;
+
+    /* 4줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    -webkit-line-clamp:1;
+    -webkit-box-orient:vertical;
+}
+
+.gender{
+    height: 20px;
+    line-height: 20px;
+    margin-right: 20px;
+}
+
+
+.age{
+    height: 20px;
+    width: 26px;
+    line-height: 20px;
+    margin-right: 15px;
+}
+
+.checkBox{
+    width: 20px;
+    height: 20px;
+}
+
+.checkBox .profileCheck{
+    display: none;
+}
+
+.checkBox .profileCheck+label{
+    display: inline-block;
+    cursor: pointer;
+
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.checkBox .profileCheck+label{
+    background-image: url("../../../image/web/check_off.png");
+}
+.checkBox .profileCheck:checked+label{
+    background-image: url("../../../image/web/check_on.png");
+}
+
+.btnBox{
+    margin-top: 20px;
+    position: relative;
+}
+
+.textCheck{
+    position: absolute;
+    right: 32px;
+    top: -5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #c0c0c0;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.textCheck input{
+    display: none;
+}
+
+.textCheck .check{
+    position: absolute;
+    top: 50%;
+    margin-top: -11.5px;
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    margin-left: 5px;
+
+    background-position: center;
+    background-image: url("../../../image/web/textCheck_off.png");
+    background-repeat: no-repeat;
+}
+.textCheck .check.on{
+    background-image: url("../../../image/web/textCheck_on.png");
+}
+
+.sendBtn{
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    margin-left: -75px;
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ff8aae;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.selectUser{
+    position: absolute;
+    top: -5px;
+    right: 120px;
+    font-size: 16px;
+    text-align: right;
+    color: #1f1f1f;
+}
+
+.content{
+    border: 1px solid #c0c0c0;
+    width: 715px;
+    height: 540px;
+    border-radius: 10px;
+    overflow-y: auto;
+}

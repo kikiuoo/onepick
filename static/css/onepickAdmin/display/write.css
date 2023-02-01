@@ -1,0 +1,96 @@
+.inBox {
+    font-size: 0px;
+}
+
+.viewBox {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 12px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.joinInfo{
+    font-size: 0px;
+    margin-bottom: 10px;
+}
+
+.infoTitle{
+    display: inline-block;
+    width: 10%;
+    font-size: 14px;
+    color: #1f1f1f;
+    vertical-align: top;
+    line-height: 40px;
+}
+
+.content{
+    display: inline-block;
+    font-size: 14px;
+    width: 90%;
+}
+
+.content input{
+    width: 400px;
+}
+
+#viewType, #startDate, #endDate{
+    width: 150px;
+}
+
+.viewBox #title, #url{
+    width: 100%;
+}
+
+#input-piece{
+    line-height: 40px;
+    border: 0px;
+    padding: 0px;
+}
+
+.btnBox{
+    margin-top: 20px;
+    position: relative;
+    text-align: center;
+}
+
+.sendBtn, .sendBtn2{
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ff8aae;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.content .image{
+    width: 250px;
+    height: 60px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.content .image2{
+    width: 150px;
+    height: 150px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.nViewTerm{
+    display: inline-block;
+    width: 15px !important;
+    height: 15px;
+    margin-top: 14px;
+}

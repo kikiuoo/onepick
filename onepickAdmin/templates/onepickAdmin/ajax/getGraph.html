@@ -1,0 +1,21 @@
+{% load my_filter %}
+{% for label in printLabel %}
+<div class="line">
+    <div class="label">{{ label }}</div>
+</div>
+{% endfor %}
+
+<div class="line">
+    <div class="label">0</div>
+</div>
+
+<div class="barBox">
+    {% for print in printList.0 %}
+    <div class="barArea14">
+        <div class="xLabel">{{ print }}</div>
+        <div class="bar" style="height: {{ printList.2|nowData:forloop.counter0 }}%;">
+            <span>{{ printList.1|nowData:forloop.counter0 }}</span>
+        </div>
+    </div>
+    {% endfor %}
+</div>

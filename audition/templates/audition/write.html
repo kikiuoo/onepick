@@ -1,0 +1,151 @@
+{% extends 'picktalk/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/audi/write.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/audi/write.css' %}" > <!-- 모바일 버전 -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<link rel="stylesheet" href="{% static 'css/datepicker.min.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.3/jquery.timepicker.min.css">
+
+<!-- JS 파일 -->
+<script src="{% static 'js/audi/write.js' %}"></script>
+<script src="{% static 'js/datepicker.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.3/jquery.timepicker.min.js"></script>
+
+<div class="body">
+    <div class="mainTitle">
+        오디션 등록
+        <p><span class="pink"></span>는 필수 입력사항입니다. </p>
+    </div>
+
+    <div class="winBox">
+
+        <form action="/audi/write/callback/" method="post" id="saveAudiForm" enctype="multipart/form-data"  autocomplete="off">
+            {% csrf_token %}
+            <input type="hidden" value="" id="num" name="num"/>
+            <input type="hidden" value="{{ request.session.id }}" id="userID" name="userID"/>
+
+            <div class="joinInfo">
+                <div class="title">제목 <span class="pink"></span></div>
+                <div class="content"><input type="text" value="" id="title" name="title" placeholder="오디션 공고 제목을 입력해주세요."/> </div>
+            </div>
+
+
+            <div class="joinInfo" style="margin-bottom: 12px">
+                <div class="title">카테고리 <span class="pink"></span></div>
+                <div class="content">
+                    <select name="cateMain" id="cateMain">
+                        <option value="" disabled selected>모집 분야</option>
+                        {% for cates in cate %}
+                        <option value="{{ cates.catecode }}">{{ cates.catename }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="joinInfo" style="margin-bottom: 20px">
+                <div class="title">세부 분야 <span class="pink"></span></div>
+                <div class="content subCateBox"></div>
+            </div>
+
+            <div class="joinInfo">
+                <div class="title">모집 기간 <span class="pink"></span></div>
+                <div class="content">
+                    <input type="text" value="" name="startDate" id="startDate" placeholder="2022-05-11" data-toggle="datepicker"><span>~</span>
+                    <input type="text" value="" name="endDate" id="endDate" placeholder="2022-05-11" data-toggle="datepicker">
+
+
+                    <div class="mobileBox">
+                        <label class="textCheck ordinary"><input type="checkbox" value="1" name="ordinary" id="ordinary"> 상시모집 <div class="check"></div> </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="joinInfo">
+                <div class="title">오디션 <span class="pink"></span></div>
+                <div class="content">
+                    <input type="text" value="" id="auditionDate" name="auditionDate" placeholder="2022-05-11" data-toggle="datepicker"/>
+                    <input type="text" value="" id="auditionTime" name="auditionTime" placeholder="11:10:00"/>
+
+                    <div class="mobileBox">
+                        <label class="textCheck each"><input type="checkbox" value="1" name="each" id="each"> 합격자 개별연락 <div class="check"></div></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="joinInfo">
+                <div class="title">모집 조건 <span class="pink"></span></div>
+                <div class="content">
+                    <select name="age" id="age">
+                        <option disabled selected>나이</option>
+                        <option value="10대이하">10대이하</option>
+                        <option value="10대">10대</option>
+                        <option value="20대">20대</option>
+                        <option value="30대">30대</option>
+                        <option value="40대">40대</option>
+                        <option value="50대이상">50대</option>
+                        <option value="무관">무관</option>
+                    </select>
+
+
+                    <select name="gender" id="gender">
+                        <option disabled selected>성별</option>
+                        <option value="남성">남성</option>
+                        <option value="여성">여성</option>
+                        <option value="무관">무관</option>
+                    </select>
+
+                    <select name="career" id="career">
+                        <option disabled selected>경력</option>
+                        <option value="1년이하">1년이하</option>
+                        <option value="1년이상">1년이상</option>
+                        <option value="2년이상">2년이상</option>
+                        <option value="3년이상">3년이상</option>
+                        <option value="무관">무관</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="joinInfo">
+                <div class="title">필수 사항</div>
+                <div class="content">
+                    <textarea name="essential" id="essential" placeholder="ex) 춤, 노래, 연기영상 등록"></textarea>
+                </div>
+            </div>
+
+            <div class="joinInfo">
+                <div class="title">상세 내용</div>
+                <div class="content">
+                    <textarea name="preparation" id="preparation"></textarea>
+                </div>
+            </div>
+
+
+
+            <div class="joinInfo" style="margin-bottom: 0px">
+
+                <div class="title">파일</div>
+                <div class="content">
+
+                    <input type="file" name="userImage[]" id="input-file" class="upload-hidden input-file">
+
+                    <div class="imageBox"></div>
+
+                    <label id="fileLabel" for="input-file"> <div class="addImage"></div> 이미지 등록</label>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <div class="btnBox">
+        <div class="sendBtn">오디션 등록하기</div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,630 @@
+.inBox{
+    position: relative;
+    width: calc(100% - 20px);
+    padding: 0px 10px 12px;
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+    box-sizing: border-box;
+    font-size: 0px;
+    margin-bottom:30px;
+}
+
+.inBox .mainImage{
+    position: absolute;
+    width: calc(100% + 2px);
+    padding-bottom:  140%;
+    top: -1px;
+    left: -1px;
+    border-radius: 20px 20px 0px 0px;
+
+    background-position: top center;
+    background-size: 120%;
+    background-repeat: no-repeat;
+}
+
+.blankBox{
+    width: calc(100% + 2px);
+    padding-bottom:  147%;
+}
+
+.inBox .userInfo{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    padding: 20px 10px 10px;
+    border-bottom: 1px solid #c0c0c0;
+    vertical-align: top;
+    padding: 30px 0px 35px 10px;
+    box-sizing: border-box;
+}
+
+.btnBox{
+    position: absolute;
+    z-index: 10;
+    right: 10px;
+    top: 5px;
+    font-size: 0px;
+}
+
+.btnBox div{
+    position: relative;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+    cursor: pointer;
+    vertical-align: top;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.btnBox div.editBtn{ background-image: url("../../../image/web/update.png"); }
+.btnBox div.delBtn{ background-image: url("../../../image/web/delete.png"); }
+.btnBox div.shareBtn{ background-image: url("../../../image/web/share.png"); }
+.btnBox div.printBtn{ background-image: url("../../../image/web/print.png"); }
+
+.inBox .userInfo .userName{
+    position: relative;
+    font-size: 16px;
+    font-weight: bold;
+    color: #454545;
+}
+
+.inBox .userInfo .info{
+    margin-bottom: 10px;
+    font-size: 13px;
+    line-height: 1.69;
+    color: #1f1f1f;
+}
+.blankBox2{
+    height: 19px;
+}
+
+.inBox .userInfo .snsBox{
+    margin-top: 10px;
+    margin-bottom: 8px;
+}
+
+.inBox .userInfo .snsBox div{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 20px;
+    cursor: pointer;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.inBox .userInfo .snsBox div.instagram{ background-image: url("../../../image/web/instagram.png")}
+.inBox .userInfo .snsBox div.youtube{ background-image: url("../../../image/web/youtube.png")}
+
+.allCareer{
+    padding-left: 10px;
+    padding-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+
+
+.viewBox{
+    position: absolute;
+    bottom: 13px;
+    left: 10px;
+    width: 90px;
+    font-size: 0px;
+}
+
+.viewBox .countBox{
+    display: inline-block;
+    height: 43px;
+    width: 24px;
+    margin-right: 3px;
+}
+
+.viewBox .countBox:nth-child(3){
+    margin-right: 0px;
+}
+
+.viewBox .countBox span{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.viewBox .countBox span.viewCount{ background-image: url("../../../image/web/viewCount.png")}
+.viewBox .countBox span.pickCount{ background-image: url("../../../image/web/pickCount.png")}
+.viewBox .countBox span.comViewCount{ background-image: url("../../../image/web/companyView.png")}
+
+.viewBox .countBox p{
+    margin: 0px;
+    padding: 0px;
+
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    color: #ff8aae;
+}
+
+.pickBtn{
+    position: absolute;
+    bottom: 18px;
+    right: 148px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/pick_off.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.pickBtn.pickOn{
+    background-image: url("../../../image/web/pick_on.png");
+}
+
+.inBox .userInfo .auditionBtn{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 118px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #ff8aae;
+    line-height: 40px;
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}
+
+
+
+.careerBox{
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.title{
+    font-size: 13px;
+    font-weight: bold;
+    color: #ff8aae;
+    margin-bottom: 8px;
+}
+
+.careerBox .content{
+    font-size: 13px;
+    font-weight: bold;
+    color: #454545;
+    margin-bottom: 8px;
+}
+
+.line{
+    width: 100%;
+    height: 1px;
+    background-color: #c0c0c0;
+}
+
+.introduction{
+    position: relative;
+    padding: 13px;
+    box-sizing: border-box;
+    font-size: 15px;
+    line-height: 1.69;
+    color: #1f1f1f;
+    word-break: break-all;
+    min-height: 100px;
+}
+
+.introduction p{
+    margin: 0px;
+}
+
+.viewDetail .title{
+    padding-left: 10px;
+    margin-top: 20px;
+}
+
+.imageBox{
+    overflow: hidden;
+
+     /* 가로 스크롤 */
+    overflow: auto;
+    white-space: nowrap;
+    padding-bottom: 5px;
+    width: 100%;
+    margin-left: 10px;
+}
+
+.imageBox#profile img{
+    height: 292px;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+.imageBox#actImage img{
+    height: 202px;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+.imageBox#profileMovie iframe{
+    width: 300px;
+    height: 202px;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+.imageBox::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+}
+.imageBox::-webkit-scrollbar-thumb {
+    background-color: #fff;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+.imageBox::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+
+.imageBox:hover::-webkit-scrollbar-thumb {
+    background-color: #D6D6D6;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+.imageBox:hover::-webkit-scrollbar-track {
+    background-color: #F6F6F6;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+
+.inBox .inputBox{
+    padding : 20px 7px 0px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.inBox .commentList{
+    padding : 10px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.inBox .inputBox #comment{
+    width: calc(100% - 95px);
+    height: 40px;
+    padding: 0px 10px;
+    border-radius: 10px;
+    background-color: #f6f6f6;
+    box-sizing: border-box;
+    outline: none;
+    border: 0px;
+
+    font-size: 13px;
+    margin-right: 10px;
+}
+.inBox .inputBox #comment::placeholder{
+    font-size: 13px;
+    color: #c0c0c0;
+}
+
+.inBox .inputBox .saveComment{
+    display: inline-block;
+    width: 85px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #ff8aae;
+
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+}
+
+.comments{
+    position: relative;
+    padding: 10px;
+    border-top: 1px solid #c0c0c0;
+}
+
+.comments:first-child{
+    border: 0px;
+}
+
+.comments .name{
+    display: inline-block;
+    font-size: 12px;
+    color: #1f1f1f;
+    margin-bottom: 10px;
+}
+
+.comments .comContent{
+    display: inline-block;
+    width: 100%;
+    font-size: 12px;
+    color: #1f1f1f;
+}
+
+.comments .commentDelete{
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    right: 15px;
+    top: 10px;
+    vertical-align: middle;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/closeIcon.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.comments .date{
+    display: inline-block;
+    width: 100%;
+    font-size: 12px;
+    color: #1f1f1f;
+    text-align: right;
+}
+
+.comments .nonComments{
+    font-size: 16px;
+    color: #959595;
+    text-align: center;
+}
+
+.popupBack{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0,0,0,0.4);
+
+    z-index: 20;
+    display: none;
+}
+
+.popupBack .closePopup{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/bigClose.png");
+    background-position: center;
+    background-repeat:  no-repeat;
+    background-size: cover;
+}
+
+.popupBack .viewImage{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -25%;
+    margin-top: -25%;
+    max-width: 90%;
+}
+
+.popupBack .viewImageCount{
+    position: absolute;
+    left: 50%;
+    bottom : 10px;
+    height: 50px;
+    line-height: 50px;
+    width: 100px;
+    margin-left: -50px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.popupBack .leftBtn,
+.popupBack .rightBtn
+{
+    position: absolute;
+    width: 25px;
+    height: 50px;
+    cursor: pointer;
+    top: 50%;
+    margin-top:-25px;
+    cursor: pointer;
+
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: center;
+    z-index: 10;
+}
+
+.popupBack .leftBtn{ left: 10px; background-image: url("../../../image/web/left_off.png"); }
+.popupBack .rightBtn{ right: 10px; background-image: url("../../../image/web/right_on.png"); }
+
+.leftOn{ background-image: url("../../../image/web/left_on.png") !important;  }
+.leftOff{ background-image: url("../../../image/web/left_off.png") !important; }
+.rightOn{ background-image: url("../../../image/web/right_on.png") !important; }
+.rightOff{ background-image: url("../../../image/web/right_off.png") !important;  }
+
+
+.suggestBack{
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+    background-color: rgba(84, 84, 84, 0.7);
+}
+
+.suggestBack .suggestPopup{
+    position: fixed;
+    top: 50%;
+    left: 2.5%;
+    width: 95%;
+    height: 350px;
+    margin-top: -175px;
+    box-sizing: border-box;
+
+    padding: 20px 8px 30px;
+    border-radius: 20px;
+    background-color: #fff;
+}
+
+.suggestBack .popTitle{
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    color: #1f1f1f;
+    margin-bottom: 25px;
+}
+
+.suggestBack .pInBox{
+    height: 186px;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: rgba(192, 192, 192, 0.15);
+    box-sizing: border-box;
+    margin-bottom: 26px;
+}
+
+.suggestBack .pInBox textarea{
+    width: 100%;
+    height: 150px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-sizing: border-box;
+    outline: none;
+    border: 0px;
+    resize: none;
+
+    margin-bottom: 0px;
+    padding: 13px 10px;
+    line-height: 1.5em;
+    font-size: 13px;
+    color: #1f1f1f;
+    font-family: 'Spoqa Han Sans' !important;
+}
+
+.audiInfo{
+    font-size: 10px;
+    font-weight:  normal;
+    text-align: center;
+    color: #999999;
+}
+
+.suggestBack .pInBox select{
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-sizing: border-box;
+    outline: none;
+    border: 0px;
+    padding: 0px 10px;
+    margin-bottom: 10px;
+
+    font-size: 13px;
+    color: #c0c0c0;
+    background:url('../../../image/web/arrow.png') no-repeat right 16px center;
+    background-color: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin-top: 40px;
+}
+
+
+.suggestBack .pInBox textarea::placeholder{
+    font-size: 13px;
+    color: #c0c0c0;
+}
+
+.suggestBack .pInBox textarea:focus,
+.suggestBack .pInBox select:focus{
+    outline: none;
+}
+
+.btnBox2{
+    text-align: center;
+}
+
+.suggestBtn{
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #ff8aae;
+    line-height: 50px;
+
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+}
+
+.closeSPopup{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/closeIcon.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+
+.blurInfo{
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+}
+
+
+.blur{
+    position: absolute;
+    height: 220px;
+    top: 80px;
+    left: 0px;
+    width: 100%;
+
+    font-size: 14px;
+    line-height: 220px;
+    text-align: center;
+    color: #ff8aae;
+    font-weight: bold;
+}
+
+
+.updateDate{
+    text-align: right;
+    font-size: 8px;
+    color: #c0c0c0;
+    margin-top: 8px;
+}

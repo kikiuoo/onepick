@@ -1,0 +1,25 @@
+.menu{
+    display: none !important; /* ui상 모바일의 경우 메인 munu를 표시하지 않음 */
+}
+
+.subCate{
+    font-size: 0px;
+    padding: 0px 2px;
+    margin-bottom: 10px;
+}
+
+.subCate .cate{
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #c0c0c0;
+    margin-right: 10px;
+}
+
+.subCate .cate:first-child{
+    margin-left: 0px;
+}
+
+.subCate .cate.active{
+    color: #282828;
+}

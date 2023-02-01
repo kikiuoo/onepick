@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>원픽 Admin</title>
+
+    <meta name="viewport" content="width=device-width">
+
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/onepickAdmin/base.css' %}"> <!-- PC 버전 -->
+
+    <link rel="icon" type="image/x-icon" href="{% static 'image/favicon.ico' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/favicon.ico' %}">
+
+    <!-- JS 파일 -->
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/onepickAdmin/base.js' %}"></script>
+
+</head>
+<body>
+ <!-- header -->
+    <div class="header">
+        <div class="container">
+            <div class="logo"></div>
+
+            <div class="line"></div>
+
+            <div class="menu wMargin {% if pageType == "home" %}active{% endif %}" data-url="/onepickAdmin/">
+                홈<span></span>
+            </div>
+            <div class="menu {% if pageType == "notice" %}active{% endif %}" data-url="/onepickAdmin/notice/list/all/1/">
+                공지사항<span></span>
+            </div>
+            <div class="menu dropMenu {% if pageType == "user" %}active{% endif %}" data-url="/onepickAdmin/user/list/normal/1/">
+                회원 관리<span></span>
+
+                <ul>
+                    <li data-url="/onepickAdmin/user/list/normal/1/">일반 회원 <div></div></li>
+                    <li data-url="/onepickAdmin/user/list/company/1/">기업 회원 <div></div></li>
+                    {% if request.session.id == "onepick" %}
+                    <li data-url="/onepickAdmin/user/logList/1/">관리 로그<div></div></li>
+                    {% endif %}
+                </ul>
+                <div class="image"></div>
+            </div>
+            <div class="menu {% if pageType == "profile" %}active{% endif %}" data-url="/onepickAdmin/profile/list/all/1/">프로필 관리<span></span></div>
+            <div class="menu {% if pageType == "audi" %}active{% endif %}" data-url="/onepickAdmin/audi/list/all/1/">오디션 관리<span></span></div>
+            <div class="menu dropMenu {% if pageType == "display" %}active{% endif %}" data-url="/onepickAdmin/display/audi/">
+                진열 관리<span></span>
+
+                <ul>
+                    <li data-url="/onepickAdmin/display/audi/">오디션 <div></div></li>
+                    <li data-url="/onepickAdmin/display/profile/">프로필 <div></div></li>
+                    <li data-url="/onepickAdmin/display/banner/">베너 <div></div></li>
+                    <li data-url="/onepickAdmin/display/popup/">팝업 <div></div></li>
+                </ul>
+                <div class="image"></div>
+            </div>
+            <div class="menu dropMenu {% if pageType == "cs" %}active{% endif %}" data-url="/onepickAdmin/cs/qanda/">
+                CS 관리<span></span>
+
+                <ul>
+                    <li data-url="/onepickAdmin/cs/qanda/">질문게시판 <div></div></li>
+                    <!--<li data-url="/onepickAdmin/cs/mail/">메일전송 <div></div></li>
+                    <li data-url="/onepickAdmin/cs/mailList/1/">메일내역 <div></div></li>-->
+                    <li data-url="/onepickAdmin/cs/youtube/">유튜브링크 <div></div></li>
+                </ul>
+                <div class="image"></div>
+            </div>
+            <div class="menu {% if pageType == "classfy" %}active{% endif %}" data-url="/onepickAdmin/classfy/">회원 분류<span></span></div>
+
+            <div class="nickname">{{ request.session.adminName }} ({{ request.session.adminID }})</div>
+            <div class="logout">로그아웃</div>
+        </div>
+    </div>
+    <!-- header -->
+
+    {% block context %}
+    {% endblock %}
+</body>
+</html>

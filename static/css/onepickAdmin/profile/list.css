@@ -1,0 +1,234 @@
+.viewBox{
+    position: relative;
+    height: auto;
+    overflow: visible;
+}
+.viewBox .inTitle {
+    padding : 0px 40px;
+}
+.viewBox .inTitle div{
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.viewBox .listWish{ width: 15%; }
+.viewBox .listName{ width: 10%; }
+.viewBox .listProfileImage{ width: 60px; height: 46px; position: relative }
+.viewBox .listAge{ width: 10%; }
+.viewBox .listPhone{ width: 15%; }
+.viewBox .listGender{ width: 10%; }
+.viewBox .listView{ width: 5%; }
+.viewBox .listRegDate{ width: 14%; }
+.viewBox .listApplyView{ width: 5%; }
+.viewBox .recommendAudi{ width: 5%; }
+.viewBox .checkBox{ width: 5%; }
+
+.viewBox .listWish span{ font-weight: bold; color: #ff8aae; }
+.viewBox.contentBox {
+    display: inline-block;
+}
+.viewBox .contentList div {
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+
+    font-size: 14px;
+    color: #1f1f1f;
+}
+
+.listProfileImage .listProfileImage2{
+    width: 40px;
+    height: 46px;
+
+    background-size: 100% auto;
+    background-color: #c0c0c0;
+    background-repeat: no-repeat;
+}
+
+.listProfileImage .listProfileImage2:hover{
+    position: absolute;
+    top: 0px;
+    left:0px;
+    width: 150px;
+    height: 180px;
+
+    z-index: 100;
+}
+
+.viewBox .inTitle div:last-child{ margin-right: 0px}
+
+.viewBox .contentList div.listTitle{text-align: left}
+
+.viewBox .contentList div.listView .pink{
+    font-weight: bold;
+    color: #ff8aae;
+}
+
+.viewBox .contentList div.listView .gray{
+    font-weight: bold;
+    color: #c0c0c0;
+}
+.viewBox .contentList div.listEtc{
+    margin-right: 0px;
+    font-size: 0px;
+}
+.viewBox .contentList div.listEtc div{
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-right: 0px;
+    margin-right: 10px;
+
+    background-size: auto 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.viewBox .contentList .listEtc .editBtn { background-image: url("../../../image/web/update.png")}
+.viewBox .contentList .listEtc .delBtn { background-image: url("../../../image/web/delete.png"); margin-right: 0px}
+
+.checkBox{
+    width: 5%;
+    height: 20px;
+    margin-top: 5px;
+}
+
+.checkBox .profileCheck{
+    display: none;
+}
+.checkBox .profileCheck+label{
+    display: inline-block;
+    cursor: pointer;
+
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.filterBox{
+    position: absolute;
+    right: -5px;
+    top: -40px;
+}
+
+.filterBox #viewType{
+    line-height: 30px;
+    height: 30px;
+    font-size: 13px;
+    color: #1f1f1f;
+}
+
+.btnBox{
+    position: absolute;
+    left: -5px;
+    bottom: -70px;
+}
+
+.btnBox .excelBtn{
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ff8aae;
+    border-radius: 10px;
+    cursor: pointer;
+
+    font-weight: bold;
+    font-size: 16px;
+    color: #ff8aae;
+}
+
+
+.title{
+    position: relative;
+}
+
+.searchBox{
+    position: absolute;
+    top:0px;
+    left: 110px;
+
+    display: inline-block;
+    width: 170px;
+    height: 26px;
+    border-radius: 20px;
+    border: solid 1px #ff8aae;
+    background-color: #fff;
+    box-sizing: border-box;
+
+    font-weight: bold;
+    text-align: left;
+    color: #ff8aae;
+    font-size: 0px;
+    vertical-align: top;
+}
+.searchBox #search{
+    font-family: 'Noto Sans KR', sans-serif;
+    display:  inline-block;
+    border : 0px solid blue;
+    background-color: transparent;
+    width: 84%;
+    height: 100%;
+    box-sizing:border-box;
+    vertical-align: top;
+    padding: 0px 10px;
+
+    font-size: 10px;
+    font-weight: bold;
+    color: #ff8aae;
+    margin-right: 0px;
+}
+.searchBox #search::placeholder{
+    font-size: 10px;
+    color: #ff8aae;
+}
+.searchBox #search:focus{
+    outline: none;
+}
+.searchBox .search{
+    display:  inline-block;
+    width: 16%;
+    height: 100%;
+    box-sizing:border-box;
+    vertical-align: top;
+    cursor: pointer;
+
+    background-image : url('../../../image/web/searchBtn.png');
+    background-size : 40%;
+    background-repeat : no-repeat;
+    background-position : center;
+}
+
+.checkBox{
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: top;
+}
+.checkBox .profile{
+    display: none;
+}
+
+.checkBox .profile+label{
+    display: inline-block;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
+}
+.checkBox .profile+label{
+    background-image: url("../../../image/web/check_off.png");
+}
+.checkBox .profile:checked+label{
+    background-image: url("../../../image/web/check_on.png");
+}
+

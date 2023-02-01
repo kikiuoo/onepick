@@ -1,0 +1,47 @@
+{% if type == "youtube" %}
+{% if data != '' %}
+<div class="iframeBox" >
+    <iframe src="{{ data }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+{% endif %}
+{% elif type == "image" %}
+
+<div class="imageBox">
+    {% for datas in data %}
+    <img src="/media/{{ datas.image }}">
+    {% endfor %}
+</div>
+
+{% elif type == "career" %}
+
+<div class="infoTitle">주요 경력사항</div>
+{% for datas in data %}
+<div class="careerBox">
+    <div class="careerTitle"><span>{{ datas.name }}</span></div>
+    <div class="careerContent">
+        {{ datas.applysubtype__career__contents }}
+    </div>
+</div>
+{% endfor %}
+<!--
+<div class="infoTitle">기타 경력사항</div>
+<div class="careerBox">
+    <div class="careerTitle"><span>아르바이트</span></div>
+    <div class="careerContent">
+        2021"공조2"-클럽남역
+    </div>
+</div>
+<div class="careerBox">
+    <div class="careerTitle"><span>취업</span></div>
+    <div class="careerContent">
+        2021 "일단 숨어" - 준성 역 (고등학생 남자친구 역)
+    </div>
+</div>
+<div class="careerBox">
+    <div class="careerTitle"><span>면허/자격증</span></div>
+    <div class="careerContent">
+        2021 "무빙" 일진남 패거리 (일진 역)
+    </div>
+</div>
+-->
+{% endif %}

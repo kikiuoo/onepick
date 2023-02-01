@@ -1,0 +1,102 @@
+{% extends 'onepickAdmin/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+<link rel="stylesheet" href="{% static 'css/onepickAdmin/classfy/index.css' %}">
+
+    <!-- JS 파일 -->
+<script src="{% static 'js/onepickAdmin/classfy/index.js' %}"></script>
+
+<div class="inBox">
+    <div class="leftBox">
+        <div class="profileImage" >
+        {% for profile in profileInfo %}
+            <img src="/media/{{ profile.profileimage }}">
+            <input type="hidden" id="profileNum" value="{{ profile.num }}">
+        {% endfor %}
+        {% if profileImages|getArrayCount > 0  %}
+            {% for imgs in profileImages %}
+                <img src="/media/{{ imgs }}">
+            {% endfor %}
+        {% endif %}
+        </div>
+    </div>
+
+    <div class="rightBox2">
+        <div class="subTitle">유튜브 영상</div>
+        <div class="youtubeLik">
+             {% for youtube in youtubes %}
+            <iframe width="480" height="250" src="{{ youtube|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="rightBox">
+        <div class="subTitle">SNS
+            <div class="snsBox">
+                {% if userInfo.instargram|default:"" != "" %}
+                    <div class="instagram" data-url="{{ userInfo.instargram }}"></div>
+                {% endif %}
+
+                {% if userInfo.youtube|default:"" != "" %}
+                    <div class="youtube" data-url="{{ userInfo.instargram }}"></div>
+                {% endif %}
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="subTitle">얼굴형</div>
+        <div class="inputBox">
+            {% for faces in face %}
+            <input type="checkbox" name="faceRadio" class="faceRadio" value="{{ faces.imgclass }}" id="check_{{ faces.num }}">
+            <label class="faceExpand" for="check_{{ faces.num }}">{{ faces.imgclass }}</label>
+            {% endfor %}
+        </div>
+
+
+        <div class="subTitle">체형</div>
+        <div class="inputBox">
+            {% for bodys in body %}
+            <input type="checkbox" name="bodyRadio" class="bodyRadio" value="{{ bodys.imgclass }}" id="check_{{ bodys.num }}">
+            <label class="bodyExpand" for="check_{{ bodys.num }}">{{ bodys.imgclass }}</label>
+            {% endfor %}
+        </div>
+
+
+        <div class="subTitle">이미지</div>
+        <div class="inputBox2">
+            {% for imgs in img %}
+            <input type="checkbox" name="imgRadio" class="imgRadio" value="{{ imgs.imgclass }}" id="check_{{ imgs.num }}">
+            <label class="imgExpand" for="check_{{ imgs.num }}">{{ imgs.imgclass }}</label>
+            {% endfor %}
+        </div>
+
+
+        <div class="subTitle">직업</div>
+        <div class="inputBox2">
+            {% for jobs in job %}
+            <input type="checkbox" name="jobRadio" class="jobRadio" value="{{ jobs.imgclass }}" id="check_{{ jobs.num }}">
+            <label class="jobExpand" for="check_{{ jobs.num }}">{{ jobs.imgclass }}</label>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <div class="btnBox">
+        <div class="resetBox">다른 회원보기</div>
+        <div class="sendBtn">저장하기</div>
+    </div>
+</div>
+
+<script>
+    var type = "{{ type }}";
+    var word = "|";
+</script>
+
+{% endblock %}

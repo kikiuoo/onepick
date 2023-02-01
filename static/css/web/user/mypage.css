@@ -1,0 +1,1041 @@
+.mTtitle{
+    position: relative;
+    font-size: 24px;
+    font-weight: bold;
+    color: #454545;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.mTtitle span{
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    margin-top: -10px;
+    width: 67px;
+    height: 20px;
+
+    font-size: 16px;
+    font-weight: normal;
+    color: #959595;
+    cursor: pointer;
+}
+
+
+.mTtitle .apply{
+    position: relative;
+    display: inline-block;
+    right: auto;
+    left: auto;
+    margin-top: 0px;
+    width: 200px;
+    height: 33px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #ff8aae;
+    vertical-align: middle;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+.mTtitle .apply p{
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+}
+
+.userInfo{
+    position: relative;
+    width: 1200px;
+    margin-left: 10px;
+    margin-bottom: 30px;
+
+    padding: 30px;
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    box-sizing: border-box;
+}
+
+.userInfo .userName{
+    font-size: 18px;
+    font-weight: bold;
+    font-stretch: normal;
+    color: #454545;
+    margin-bottom: 15px;
+}
+
+.userInfo .userName span{
+    color: #ff8aae;
+    margin-left: 10px;
+}
+
+.userInfo .uInfo{
+    margin-top: 10px;
+    font-size: 16px;
+    text-align: left;
+}
+
+.userInfo .editBtn{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 23px;
+    right: 30px ;
+    cursor: pointer;
+    margin-right: 0px !important;
+
+    background-image: url("../../../image/web/update.png");
+    background-position: center;
+    background-repeat:  no-repeat;
+    background-size: cover;
+}
+
+.myProfile{
+    display: inline-block;
+    position: relative;
+    font-size: 0px;
+    width: 590px;
+    height: 270px;
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+    box-sizing: border-box;
+    margin-right: 10px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    vertical-align: top;
+}
+
+.btnBox{
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    z-index: 10;
+}
+
+.editBtn{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-right: 10px;
+    cursor: pointer;
+    z-index: 10;
+
+    background-image: url("../../../image/web/update.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.delBtn{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/delete.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+}
+
+
+.myProfile .userImage{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: inline-block;
+    width: 240px;
+    height: 270px;
+    border-radius: 20px 0px 0px 20px;
+    background-color: #aaaaaa;
+
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 120%;
+}
+
+.myProfile .userInfoBox{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 270px;
+    box-sizing: border-box;
+    padding-left: 260px;
+    padding-top: 30px;
+}
+
+.myProfile .userInfoBox .userName{
+    padding-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #454545;
+    margin-bottom: 18px;
+}
+
+.myProfile .userInfoBox .userName span{
+    width: 22px;
+    height: 26px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 2px;
+    margin-left: 10px;
+
+    background-repeat:  no-repeat;
+    background-position: center;
+    background-image: url("../../../image/web/lock.png");
+}
+
+.myProfile .userInfoBox .pUInfo{
+    font-size: 16px;
+    line-height: 1.5;
+    color: #4d4d4d;
+}
+
+.myProfile .userInfoBox .progre{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
+
+.myProfile .userInfoBox .proComplete{
+    font-size: 14px;
+    font-weight: bold;
+    color: #ff8aae;
+    margin-bottom: 4px;
+}
+
+.myProfile .userInfoBox .proProgressBox{
+    width: 200px;
+    height: 22px;
+    border-radius: 20px;
+    background-color: #f5f5f5;
+    overflow: hidden;
+}
+
+.myProfile .userInfoBox .proProgressBox .progressBar{
+    width: 70%;
+    height: 22px;
+    border-radius: 20px;
+    background-color: #ff8aae;
+}
+
+.myProfile .comment{
+    font-size: 18px;
+    color: #1f1f1f;
+}
+
+.viewBox{
+    position: absolute;
+    bottom: 20px;
+    left: 263px;
+    width: 90px;
+    font-size: 0px;
+}
+
+.contentBox .viewBox{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 90px;
+    font-size: 0px;
+}
+
+.viewBox .countBox{
+    display: inline-block;
+    height: 43px;
+    width: 20px;
+    margin-right: 3px;
+}
+
+.viewBox .countBox:nth-child(3){
+    margin-right: 0px;
+}
+
+.viewBox .countBox span{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.viewBox .countBox span.viewCount{ background-image: url("../../../image/web/viewCount.png")}
+.viewBox .countBox span.pickCount{ background-image: url("../../../image/web/pickCount.png")}
+.viewBox .countBox span.comViewCount{ background-image: url("../../../image/web/companyView.png")}
+
+.viewBox .countBox p{
+    margin: 0px;
+    padding: 0px;
+
+    font-size: 12px;
+    text-align: center;
+    color: #ff8aae;
+}
+
+.nonProfile{
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 18px;
+    color: #c0c0c0;
+}
+
+
+.auditionList{
+    width: 1200px;
+    padding: 00px 50px;
+    border-radius: 33px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.auditionList .audiList{
+    position: relative;
+    padding: 20px 0px 10px;
+    border-top: solid 1px #c0c0c0;
+}
+
+.auditionList .audiList:first-child{
+    border: 0px;
+}
+.auditionList .audiList .logo{
+    position: absolute;
+    width: 183px;
+    height: 87px;
+    left: 41px;
+    top: 10px;
+    background-color: #aaaaaa;
+
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.auditionList .audiList .content{
+    padding-left: 285px;
+    padding-right: 195px;
+}
+
+.auditionList .audiList .content .audiTitle{
+    font-size: 16px;
+    font-weight: bold;
+    color: #454545;
+    margin-bottom: 10px;
+}
+
+.auditionList .audiList .content .comment{
+    font-size: 16px;
+    color: #1f1f1f;
+    min-height: 50px;
+}
+
+.auditionList .audiList .audiBtn{
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    margin-top: -30px;
+    width: 180px;
+    height: 60px;
+    border-radius: 20px;
+    border: solid 1px #ff8aae;
+    line-height: 60px;
+    text-align: center;
+    cursor: pointer;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+
+
+
+.inBox{
+    font-size: 0px;
+    padding-left: 10px;
+}
+
+.inBox .audition{
+    position : relative;
+    display : inline-block;
+    width: 285px;
+    height: 235px;
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+
+    margin-top: 10px;
+    margin-right: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 0px 10px;
+
+    cursor:pointer;
+}
+
+.inBox .audition:nth-child(4n){
+    margin-right: 0px;
+}
+
+.inBox .audition .audiLogo{
+    background-color : #fff;
+    width : 265px;
+    height :100px;
+    margin-bottom: 30px;
+
+    background-position: center;
+    background-repeat:  no-repeat;
+    background-size: 100% 100%;
+}
+
+.inBox .audition .audiTitle{
+    display : block;
+    height : 45px;
+
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #1f1f1f;
+
+    /* 2줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    display : -webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+}
+
+.inBox .audition .audiTerm{
+    padding-left: 10px;
+    height : 19px;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: normal;
+    color: #454545;
+}
+
+.audition .pickBtn{
+    position: absolute;
+    bottom: 20px;
+    right: 18px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/pick_off.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.audition .pickBtn.pickOn{
+    background-image: url("../../../image/web/pick_on.png");
+}
+
+
+/* 공지사항 */
+.notiBox{
+    position: relative;
+    box-sizing: border-box;
+    width: 1200px;
+    padding: 0px 50px;
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+    font-size: 0px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.notiBox .notiList{
+    position: relative;
+    padding : 30px 0px;
+    border-top: 1px solid #c0c0c0;
+}
+
+.notiBox .notiList:first-child{
+    border: 0px;
+}
+
+.notiBox .notiList .title{
+    display: inline-block;
+    width: 100%;
+    height: 26px;
+    margin-right: 60px;
+    padding-right: 150px;
+    box-sizing: border-box;
+
+    font-size: 16px;
+    font-weight: normal;
+    color: #1f1f1f;
+
+    /* 2줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    -webkit-line-clamp:1;
+    -webkit-box-orient:vertical;
+}
+
+.notiBox .notiList .title span{
+      color: #ff8aae;
+}
+
+.notiBox .notiList .title p{
+    margin: 0px;
+    padding: 0px;
+    display: inline-block;
+}
+
+.notiBox .notiList .date{
+    position: absolute;
+    display: inline-block;
+    width: 100px;
+    height: 26px;
+    right: 10px;
+    top: 30px;
+
+    font-size: 16px;
+    color: #959595;
+}
+
+
+
+
+
+/* 기업회원 */
+.regAudi{
+    display: inline-block;
+    position: relative;
+    width: 590px;
+    height: 250px;
+    margin-right: 20px;
+    padding: 30px;
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.regAudi:nth-child(2n){
+    margin-right: 0px;
+}
+
+.regAudi .audiTitle{
+    font-size: 16px;
+    font-weight: bold;
+    color: #454545;
+}
+
+.regAudi .audiTerm{
+    font-size: 16px;
+    font-weight: bold;
+    color: #1f1f1f;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.regAudi .cate .cTitle{
+    display: inline-block;
+    width: 63px;
+    height: 20px;
+
+    font-size: 16px;
+    font-weight: bold;
+    color: #959595;
+    vertical-align: top;
+    margin-right: 10px;
+}
+
+.regAudi .cate .cContent{
+    width: 300px;
+    vertical-align: top;
+    display: inline-block;
+    font-size: 16px;
+    text-align: left;
+    color: #1f1f1f;
+}
+
+.regAudi .audiVolunteer{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    width: 180px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 20px;
+    border: solid 1px #ff8aae;
+    cursor: pointer;
+
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #ff8aae;
+}
+
+.regAudi .volunteer{
+    position: absolute;
+    right: 210px;
+    bottom: 40px;
+
+    font-size: 15px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+
+/* ------------- 프로필 리스트 ---------------- */
+.inBox{
+    position: relative;
+    font-size: 0px;
+    padding-left: 10px;
+}
+.inBox .profile{
+    position: relative;
+    display: inline-block;
+    width: 590px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 20px;
+    border: solid 1px #c0c0c0;
+    background-color: #fff;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.inBox .profile:nth-child(2n){
+    margin-right: 0px;
+}
+
+.inBox .profile .imageBox{
+    display: inline-block;
+    height: 100%;
+    width: 220px;
+    margin-right: 20px;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.inBox .profile .imageBox .profileImage{
+    width: 220px;
+    height: 300px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+
+    background-size: 120% auto;
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+
+.inBox .profile .imageBox .youtube{
+    width: 220px;
+    height: 130px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.inBox .profile .imageBox .youtube iframe{
+    width: 100%;
+    height: 100%;
+}
+
+.inBox .profile .contentBox{
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    width: calc(100% - 242px);
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.inBox .profile .contentBox .name{
+    font-size: 18px;
+    font-weight: bold;
+    color: #454545;
+    margin-bottom: 18px;
+}
+
+.inBox .profile .contentBox .detailInfo{
+    height: 106px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #1f1f1f;
+
+    /* 4줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    -webkit-line-clamp:4;
+    -webkit-box-orient:vertical;
+    margin-bottom: 23px;
+}
+
+
+.inBox .profile .contentBox .comment{
+    font-size: 16px;
+    color: #1f1f1f;
+}
+
+.inBox .profile .contentBox .career .careerTitle,
+.inBox .profile .contentBox .career .careerContent{
+    font-size: 16px;
+    font-weight: bold;
+    color: #4d4d4d;
+}
+
+.inBox .profile .contentBox .career .careerTitle{
+    color: #ff8aae;
+}
+
+.inBox .profile .contentBox .career .introduction{
+    height: 100px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #4d4d4d;
+    word-break:break-all;
+
+    /* 4줄 이상일 경우 ... 처리 */
+    white-space : normal;
+    overflow: hidden;
+    display : -webkit-box;
+    -webkit-line-clamp:4;
+    -webkit-box-orient:vertical;
+}
+
+
+.inBox .profile .pickBtn{
+    position: absolute;
+    bottom: 28px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+
+    background-image: url("../../../image/web/pick_off.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.inBox .profile .pickBtn.pickOn{
+    background-image: url("../../../image/web/pick_on.png");
+}
+
+
+.page{
+    margin-top: 30px;
+    font-size: 0px;
+    text-align: center;
+}
+
+.pageBox{
+    display: inline-block;
+}
+
+.pages{
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    color: #959595;
+    margin-left: 20px;
+    cursor: pointer;
+    height: 32px;
+    line-height: 32px;
+    vertical-align: top;
+}
+
+.pages.nowPage{
+    color: #ff8aae;
+}
+
+.pages:nth-child(1){
+    margin-left: 0px;
+}
+
+.leftPage, .rightPage{
+    display: inline-block;
+    border: 1px solid #c0c0c0;
+    border-radius: 50px;
+    vertical-align: top;
+    width: 32px;
+    height: 32px;
+    background-color: #fff;
+
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.leftPage{
+    margin-right: 30px;
+    background-image: url("../../../image/web/left_off.png");
+}
+
+.rightPage{
+    margin-left: 30px;
+    background-image: url("../../../image/web/right_off.png");
+}
+
+.notiBox .addQandA{
+    position: absolute;
+    bottom: -80px;
+    right: 0px;
+    width: 180px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 20px;
+    background-color: #ff8aae;
+
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+}
+
+.passBtn{
+    z-index: 5;
+    position: absolute;
+    border: 1px solid #e1e1e1;
+    right: 15px;
+    top: 15px;
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    line-height: 38px;
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: bold;
+    color: #e1e1e1;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+.passBtn span{
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    top: 5px;
+    right: 5px;
+
+    background-image: url("../../../image/web/check_off.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+}
+
+.passBtn.passOn{
+    border: 1px solid #ff8aae;
+    color: #ff8aae;
+}
+
+.passBtn.passOn span{
+    background-image: url("../../../image/web/check_on.png");
+}
+
+.filterBox{
+    position: absolute;
+    right: 10px;
+    top:  -50px;
+}
+
+.filterBox #listView{
+    width: 140px;
+    height: 40px;
+    border-radius: 10px;
+    padding:0px 12px;
+    box-sizing: border-box;
+    border: 1px solid #c0c0c0;
+
+    font-size: 15px;
+    color: #1f1f1f;
+    background:url('../../../image/web/arrow.png') no-repeat right 16px center;
+    background-color: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+
+select:focus{
+    outline: none;
+}
+
+.popupBack{
+    z-index: 10;
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.popupBack .popupBox{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -260px;
+    margin-left: -400px;
+    padding:  40px 105px;
+    box-sizing: border-box;
+
+    width: 800px;
+    height: 520px;
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+.popupBack .popupBox .popupTitle{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color:  #1f1f1f;
+    margin-bottom: 35px;
+}
+
+.popupBack .popupBox .popupClose{
+    position: absolute;
+    right: 40px;
+    top: 40px;
+
+    width: 22px;
+    height: 22px;
+
+    background-position: center;
+    background-image: url("../../../image/web/closeIcon.png");
+    background-repeat: no-repeat;
+    background-size: 90%;
+    cursor: pointer;
+}
+
+.popupBack .popupBox .profileBox{
+    position: relative;
+    width: 590px;
+    height: 270px;
+    border-radius: 20px;
+
+    padding-left: 260px;
+    border: 1px solid #c0c0c0;
+    box-sizing: border-box;
+}
+.popupBack .popupBox .profileBox .image{
+    position: absolute;
+    left: -1px;
+    top: -1px;
+
+    width: 241px;
+    height: 271px;
+    border-radius: 20px 0px 0px 20px;
+
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.popupBack .popupBox .profileBox .profileName{
+    margin-top: 25px;
+    margin-bottom: 22px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #454545;
+}
+
+.popupBack .popupBox .profileBox #comment{
+    font-size: 15px;
+    border-radius: 11px;
+    background-color: #fff;
+    border: 1px solid #c0c0c0;
+    box-sizing: border-box;
+    color: #1f1f1f;
+
+    padding: 20px;
+    line-height: 1.5em;
+    width: 310px;
+    height: 180px;
+    outline: none;
+
+    resize: none;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.popupBack .popupBox .profileBox .checkView{
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    top: 20px;
+    right: 20px;
+
+    background-image: url("../../../image/web/check_off.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+}
+
+.popupBack .popupBox .profileBox .checkView.on{
+    background-image: url("../../../image/web/check_on.png");
+}
+
+.popupBack .popupBox .popupBtnBox{
+    text-align: center;
+    font-size: 0px;
+    margin-top: 50px;
+}
+
+.popupBack .popupBox .popupBtnBox div{
+    display: inline-block;
+    width: 200px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.popupBack .popupBox .popupBtnBox div.prePassBtn{
+    background-color: #ff8aae;
+}
+.popupBack .popupBox .popupBtnBox div.cancelPassBtn{
+    background-color: #c0c0c0;
+    margin-left: 20px;
+}
+
+.textCheck{
+    position: relative;
+    font-size: 16px;
+    font-weight: bold;
+    color: #c0c0c0;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.textCheck input{
+    display: none;
+}
+
+.textCheck .check{
+    position: absolute;
+    top: 50%;
+    margin-top: -11.5px;
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    margin-left: 5px;
+
+    background-position: center;
+    background-image: url("../../../image/web/textCheck_off.png");
+    background-repeat: no-repeat;
+}
+.textCheck .check.on{
+    background-image: url("../../../image/web/textCheck_on.png");
+}

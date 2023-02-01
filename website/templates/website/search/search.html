@@ -1,0 +1,166 @@
+{% extends 'website/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/audi/index.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/audi/index.css' %}" > <!-- 모바일 버전 -->
+
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css_v2/web/profile/list.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css_v2/mobile/profile/list.css' %}" > <!-- 모바일 버전 -->
+
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/audi/audi_base.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/audi/audi_base.css' %}" > <!-- 모바일 버전 -->
+
+
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css_v2/web/search/search.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css_v2/mobile/search/search.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js_v2/website/search/search.js' %}"></script>
+
+<div class="container">
+    <div class="mainTitle">통합검색 결과</div>
+
+    <div class="searchTitle">
+        <span>'{{ search }}'</span>에 대한 오디션 검색 결과 (총 <span>{{ all_audi }}</span>건)
+        <div class="allView" data-type="audi">전체보기</div>
+    </div>
+
+
+    {% if search_audi|length > 0 %}
+    <div class="audiList">
+        {% for auditions in search_audi %}
+        <div class="audiListBox" data-num="{{ auditions.0 }}">
+            <div class="audiLogo" style='background-image: url("/media/{{ auditions.8 }}");'></div>
+            <div class="sContent">
+                <div class="lTitle">{{ auditions.1 }}</div>
+                <div class="lAppel">
+                    <span>모집분야</span>
+                    <p>{{ auditions.2 }}</p>
+                    <span>경력</span>
+                    <p>{{ auditions.3 }}</p>
+                    <span>나이</span>
+                    <p>{{ auditions.4 }}</p>
+                </div>
+            </div>
+            <div class="date">
+                {% if auditions.7 == '1' %}
+                <div class="endDate">상시모집</div>
+                {% elif auditions.7 == '0' %}
+                <div class="endDate">~ {{ auditions.5|date:'Y/m/d' }}</div>
+                {% endif %}
+                {% if auditions.9 == 0 %}
+                <div class="regDate">오늘 등록</div>
+                {% else %}
+                <div class="regDate">{{ auditions.9 }}일 전 등록</div>
+                {% endif %}
+            </div>
+
+            {% if auditions.10 == 0 or auditions.10 == "0" %}
+            <div class="pickBtn" data-nowType="off"></div>
+            {% else %}
+            <div class="pickBtn pickOn " data-nowType="on"></div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="noneSearch">검색결과가 없습니다.</div>
+    {% endif %}
+
+
+    <div class="searchTitle">
+        <span>'{{ search }}'</span>에 대한 프로필 검색 결과 (총 <span>{{ all_profile }}</span>건)
+        <div class="allView" data-type="profile">전체보기</div>
+    </div>
+
+    {% if search_pro|length > 0 %}
+        <div class="inBox">
+            {% for profile in search_pro %}
+            <div class="profile" data-num="{{ profile.0 }}">
+                <div class="imageBox">
+                    <div class="profileImage"   style='background-image: url("/media/{{ profile.1 }}");'></div>
+                    {% if profile.16 != "" %}
+                    <div class="youtube">
+                        <iframe width="560" height="315" src="{{ profile.16|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="contentBox">
+                    {% if profile.7 != None %}
+                    <div class="name">{{ profile.7|updateUserName }} ({{ profile.8|userAge }})</div>
+                    {% else %}
+                    <div class="name">*** ({{ profile.8|userAge }})</div>
+                    {% endif %}
+
+                    <div class="detailInfo">
+                        키 {{ profile.2|userHight }} cm | 몸무게 {{ profile.3|userHight }} kg<br>
+                        {% if profile.10 == 'man' and profile.11 != None %}
+                        {{ profile.11 }} |
+                        {% endif %}
+                        {% if profile.9 == "" %}
+                            소속사 없음
+                        {% else %}
+                            소속사 있음
+                        {% endif %} <br>
+                        {{ profile.12 }} {{ profile.13 }}
+                        {% if profile.14 != None %}
+                         <br>특기 {{ profile.14|getTalent }}
+                        {% endif %}
+                    </div>
+
+                    {% if profile.17 == '0' %}
+                    <div class="career">
+                        <div class="careerTitle">영화</div>
+                        <div class="careerContent">{{ profile.0|getCareer:"movie" }}</div>
+                        <div class="careerTitle">TV드라마,웹드라마</div>
+                        <div class="careerContent">{{ profile.0|getCareer:"drama" }}</div>
+                        <div class="careerTitle">광고/기타</div>
+                        <div class="careerContent">{{ profile.0|getCareer:"etc" }}</div>
+                    </div>
+                    {% else %}
+                    <div class="career">
+                        <div class="careerTitle">자기 소개</div>
+                        <div class="introduction">{{ profile.15 }}</div>
+                    </div>
+                    {% endif %}
+
+                    <div class="viewBox">
+                        <div class="countBox">
+                            <span class="viewCount"></span>
+                            <p>{{ profile.4 }}</p>
+                        </div>
+                        <div class="countBox">
+                            <span class="pickCount"></span>
+                            <p class="pickCounts_{{ profile.0 }}">{{ profile.5 }}</p>
+                        </div>
+                        <div class="countBox">
+                            <span class="comViewCount"></span>
+                            <p>{{ profile.6 }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                {% if profile.18 == 0 or profile.18 == "0" %}
+                <div class="pickBtn" data-nowType="off"></div>
+                {% else %}
+                <div class="pickBtn pickOn " data-nowType="on"></div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="noneSearch">검색결과가 없습니다.</div>
+    {% endif %}
+</div>
+
+<script>
+    var word = "{{ search }}";
+    var page = "{{ page }}";
+    var cateType = "{{ cateType }}";
+</script>
+
+
+{% endblock %}

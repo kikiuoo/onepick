@@ -1,0 +1,83 @@
+.mainTitle{
+    font-size: 14px;
+    font-weight: bold;
+    color: #1f1f1f;
+    margin-bottom: 6px;
+}
+
+
+.inBox{
+    display: inline-block;
+    width: calc(100% - 20px);
+    padding: 30px 15px;
+    margin-bottom: 60px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.inBox .textInfo{
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 36px;
+}
+
+.inBox .socialBox{
+    text-align: center;
+    font-size: 0px;
+    padding-bottom: 45px;
+    border-bottom: 1px solid #d7d7d7;
+}
+
+.inBox .socialBox .socialBtn{
+    display: inline-block;
+    margin-left: 30px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.inBox .socialBox .socialBtn .logo{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    vertical-align: top;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.inBox .socialBox .socialBtn span{
+    display: inline-block;
+    font-size: 12px;
+    height: 40px;
+    line-height: 40px;
+    width: 170px;
+    vertical-align: top;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.inBox .socialBox .socialBtn#kakaoLogin .logo{background-image: url("../../../image/web_v2/kakao.png")}
+.inBox .socialBox .socialBtn#gogleLogin .logo{background-image: url("../../../image/web_v2/Google.png")}
+.inBox .socialBox .socialBtn#naverLogin .logo{background-image: url("../../../image/web_v2/naver.png")}
+
+.inBox .joinInfo{
+    width: 100%;
+    text-align: center;
+    padding-top: 30px;
+    color: #1f1f1f;
+    font-size: 12px;
+}
+
+.inBox .joinInfo span{
+    display: block;
+    margin-top: 5px;
+    font-weight: bold;
+    color: #ff8aae;
+    cursor: pointer;
+}

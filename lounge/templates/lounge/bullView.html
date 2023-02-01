@@ -1,0 +1,82 @@
+{% extends 'picktalk/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/lounge/notice.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/lounge/notice.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/lounge/bullView.js' %}"></script>
+
+
+<div class="inBox">
+
+    <div class="btnBox">
+        {% if request.session.userType == "admin" or request.session.id == bull.userid  %}
+        <div class="editBtn" data-num="{{ bull.num }}"></div>
+        <div class="delBtn" data-num="{{ bull.num }}"></div>
+        {% endif %}
+    </div>
+
+    <div class="titleBox">
+        <div class="title">{{ bull.title }}</div>
+        {% if user.count > 0 %}
+        <div class="userInfo">{{ user.0.userid|getUserName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ bull.regdate|date:"Y/m/d" }}</div>
+        {% else %}
+        <div class="userInfo">{{ bull.regdate|date:"Y/m/d" }}</div>
+        {% endif %}
+    </div>
+
+    <div class="content">
+        {% if bull.contenttype == "old" %}
+           {% autoescape off %}
+            {{ bull.content }}
+           {% endautoescape %}
+       {% else %}
+            {{ bull.content|linebreaks }}
+       {% endif %}
+    </div>
+</div>
+
+<div class="inBox">
+    <div class="inputBox">
+        <input type="text" name="comment" id="comment" placeholder="댓글을 작성할 수 있습니다.">
+        <div class="saveComment">댓글 쓰기</div>
+    </div>
+
+    <div class="commentList">
+
+        {% if comment|getArrayCount > 0 %}
+            {% for comments in comment %}
+            <div class="comments">
+                {% if comments.userid|findUserType == "admin" %}
+                <div class="name">원픽관리자</div>
+                {% else %}
+                <div class="name">{{ comments.userid|getUserName }}</div>
+                {% endif %}
+                <div class="comContent">{{ comments.content }}</div>
+                {% if request.session.userType == "admin" or request.session.id == comments.userid  %}
+                <div class="commentDelete" data-num="{{ comments.num }}"></div>
+                {% else %}
+                <div class="nonDelete"></div>
+                {% endif %}
+                <div class="date">{{ comments.regtime|date:"Y-m-d" }}</div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="comments">
+                <div class="nonComments">댓글이 없습니다.</div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+
+
+<script>
+    var num = '{{ bull.num }}';
+</script>
+
+{% endblock %}

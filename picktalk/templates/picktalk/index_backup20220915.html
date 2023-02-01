@@ -1,0 +1,153 @@
+{% extends 'picktalk/base.html' %}
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/index.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/index.css' %}" > <!-- 모바일 버전 -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+<!-- JS 파일 -->
+<script src="{% static 'js/index.js' %}"></script>
+
+<!-- 본문 내용 -->
+<!-- 메인 베너 -->
+{% if mainbanner.count > 0 %}
+<div class="mobilBanner">
+    <div class="swiper mySwiper mainBanner">
+        <div class="swiper-wrapper">
+            {% for banner in mainbanner %}
+            <div class="swiper-slide banner" data-url="{{ banner.url }}" style='background-image: url("/media/{{ banner.wimage }}")'></div>
+            {% endfor %}
+        </div>
+
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+</div>
+{% endif %}
+
+<!-- 본문 내용 : 오디션 정보 -->
+<div class="mainTitle">
+    오디션 정보
+    <span data-url="/audi/main/all/1/">전체보기</span>
+</div>
+
+<div class="inBox">
+    {% for audition in auditions %}
+    <div class="audition" data-num="{{ audition.0 }}">
+        <div class="audiLogo" style='background-image: url("/media/{{ audition.4 }}");'></div>
+        <div class="audiTitle">{{ audition.1 }}</div>
+        <div class="audiTerm">
+            {% if audition.3 == "1" %}
+                상시모집
+            {% else %}
+                ~ {{ audition.2|date:'Y-m-d' }}
+            {% endif %}
+        </div>
+        {% if audition.5 == 0 or audition.5 == "0" %}
+        <div class="pickBtn" data-nowType="off"></div>
+        {% else %}
+        <div class="pickBtn pickOn " data-nowType="on"></div>
+        {% endif %}
+    </div>
+     {% endfor %}
+</div>
+
+
+
+<!-- 본문 내용 : 프로필 정보 -->
+<div class="mainTitle titleMargin">
+    프로필 정보
+    <span data-url="/profile/list/actor/1/">전체보기</span>
+</div>
+
+<div class="inBox">
+    {% for profile in profiles %}
+    <div class="profile" data-num="{{ profile.0 }}">
+        <div class="image"  style='background-image: url("/media/{{ profile.1 }}");'></div>
+        <div class="info">
+            {% if profile.4 != None %}
+            <div class="name">{{ profile.4|updateUserName }} ({{ profile.5|userAge }})</div>
+            {% else %}
+            <div class="name">*** ({{ profile.5|userAge }})</div>
+            {% endif %}
+            <div class="infoDetail">
+                키 {{ profile.2|userHight }}cm | 몸무게 {{ profile.3|userHight }}kg<br>
+                {% if userInfo.8 != None %}
+                    {% if profile.7 == "man" %}
+                    {{ userInfo.8 }} |
+                    {% endif %}
+                {% endif %}
+
+                {% if profile.6|default:"" == "" %}
+                소속사 없음<br>
+                {% else %}
+                소속사 있음<br>
+                {% endif %}
+            </div>
+            <div class="infoDetail">
+                {{ profile.9 }} {{ profile.10 }}<br>
+                {% if profile.11 != None %}
+                    특기 {{ profile.11|replace_2:"|, " }}
+                {% else %}
+                    특기 -
+                {% endif %}
+            </div>
+
+            <div class="viewBox">
+                <div class="countBox">
+                    <span class="viewCount"></span>
+                    <p>{{ profile.13 }}</p>
+                </div>
+                <div class="countBox">
+                    <span class="pickCount"></span>
+                    <p>{{ profile.14 }}</p>
+                </div>
+                <div class="countBox">
+                    <span class="comViewCount"></span>
+                    <p>{{ profile.15 }}</p>
+                </div>
+            </div>
+        </div>
+
+        {% if profile.12 == 0 or profile.12 == "0" %}
+        <div class="pickBtn" data-nowType="off"></div>
+        {% else %}
+        <div class="pickBtn pickOn " data-nowType="on"></div>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <div class="profileBlank"></div>
+</div>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script type="text/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    var cateType = '{{ cateType }}';
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        {% if mainbanner.count > 1 %}
+        autoplay: {
+          delay: 2500,
+          disableOnInteraction: false,
+        },
+        {% endif %}
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+         navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+    });
+</script>
+
+{% endblock %}

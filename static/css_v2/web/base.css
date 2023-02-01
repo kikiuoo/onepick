@@ -1,0 +1,236 @@
+/* PC Base CSS */
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+
+.pcNone{
+    display: none !important;
+}
+
+/* PC Base CSS */
+body{
+    position:  relative;
+    padding : 0px;
+    margin : 0px;
+    font-family: 'Noto Sans KR', sans-serif !important;
+    background-color: #f8f8f8;
+    color: #1f1f1f;
+}
+.container{
+    width :  1440px;
+    padding : 110px 110px 65px 110px;
+    margin : 0 auto;
+    box-sizing: border-box;
+}
+
+.container_2{
+    position: relative;
+    width :  1200px;
+    margin : 0 auto;
+    box-sizing: border-box;
+    padding-top: 120px;
+}
+
+.container_header{
+    position: relative;
+    width :  1200px;
+    height: 90px;
+    margin : 0 auto;
+    box-sizing: border-box;
+}
+
+/* PC Base Header CSS */
+.header{
+    position : fixed;
+    width: 100%;
+    height:90px;
+    top: 0px;
+    left: 0px;
+
+    font-size: 0px;
+    box-sizing: border-box;
+    background-color: #fff;
+    z-index: 100;
+    text-align: right;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header .logo{
+    position: absolute;
+    display :inline-block;
+    width: 150px;
+    height: 24px;
+    top: 33px;
+    left: 0px;
+    background-image : url('../../image/web_v2/logo.png');
+
+    vertical-align : top;
+    cursor:pointer;
+
+    background-size : auto;
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+/* serach 버튼 클릭시 변경된 디자인 */
+.header .searchBox{
+    position: absolute;
+    left: 170px;
+    top: 20px;
+    display: inline-block;
+    width: 300px;
+    height: 48px;
+    border-radius: 30px;
+    border: solid 2px #ff8aae;
+    background-color: #fff;
+    box-sizing: border-box;
+
+    font-weight: bold;
+    text-align: left;
+    color: #ff8aae;
+    font-size: 0px;
+}
+.header .searchBox #search{
+    font-family: 'Noto Sans KR', sans-serif;
+    display:  inline-block;
+    border : 0px solid blue !important;
+    background-color: transparent !important;
+    width: 84%;
+    height: 100%;
+    box-sizing:border-box;
+    vertical-align: top;
+    padding-left: 16px;
+
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+.header .searchBox #search::placeholder{
+    font-size: 16px;
+    color: #ff8aae;
+}
+.header .searchBox #search:focus{
+    outline: none !important;
+}
+.header .searchBox .search{
+    display:  inline-block;
+    width: 16%;
+    height: 100%;
+    box-sizing:border-box;
+    vertical-align: top;
+    cursor: pointer;
+
+    background-image : url('../../image/web/searchBtn.png');
+    background-size : 40%;
+    background-repeat : no-repeat;
+    background-position : center;
+}
+/* serach 버튼 클릭시 변경된 디자인 */
+
+.header .menu{
+    display :inline-block;
+    height: 90px;
+    vertical-align : top;
+    margin-right : 30px;
+    cursor:pointer;
+    line-height: 90px;
+
+    font-size: 16px;
+    font-weight: bold;
+    color: #1f1f1f;
+}
+
+.header .login, .header .mypage{
+    display :inline-block;
+    height: 90px;
+    text-align:  center;
+    vertical-align: top;
+    cursor: pointer;
+
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 90px;
+    color: #ff8aae;
+    margin-right: 22px;
+    margin-left: 10px;
+}
+
+.header .join, .header .logout{
+    display :inline-block;
+    height: 90px;
+    line-height: 90px;
+    margin-right: 10px;
+
+    font-size: 13px;
+    font-weight: 700;
+    color: #959595;
+    text-align:  center;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+/* PC Base Footer CSS */
+.footer{
+    background-color : #000000;
+}
+.footer .footerContext {
+    position: relative;
+    padding : 50px 0px 70px;
+    font-size : 0px;
+    margin : 0 auto;
+    box-sizing: border-box;
+    width : 1200px;
+}
+.footer .footerContext .company{
+    display : block;
+    font-size: 12px;
+    color: #fff;
+    margin-bottom : 20px;
+    font-weight: bold;
+}
+
+.footer .footerContext .companyLink{
+    margin-top: 76px;
+}
+
+.footer .footerContext .companyLink span{
+    display : inline-block;
+    font-size: 12px;
+    color: #959595;
+    cursor: pointer;
+    margin-right : 30px;
+}
+
+.footer .footerContext .companyLink span:nth-child(3){
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.footer .footerContext .companyLink span:nth-child(4){
+    color: #FF8AAE;
+    font-weight: bold;
+}
+
+.footer .footerContext .info{
+    display : block;
+    font-size: 12px;
+    color: #fff;
+    font-weight: normal;
+    margin-bottom: 5px;
+}
+
+.footer .linkBtnBox{
+    position: absolute;
+    right: 0px;
+    bottom: 70px;
+}
+
+.footer .linkBtnBox .link_sns{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.footer .linkBtnBox .link_sns.kakao{ background-image: url("../../image/web_v2/kakao_ch.png")}
+.footer .linkBtnBox .link_sns.instagram{ background-image: url("../../image/web_v2/Instagram.png")}
+.footer .linkBtnBox .link_sns.youtube{ background-image: url("../../image/web_v2/YouTube.png")}

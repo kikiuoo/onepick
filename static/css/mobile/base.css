@@ -1,0 +1,272 @@
+/* Mobile Base CSS */
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+
+/* Mobile Base CSS */
+body{
+    padding : 0px;
+    margin : 0px;
+    position: relative;
+    background-color: #fff;
+    font-family: 'Noto Sans KR', sans-serif !important;
+}
+
+.container{
+    padding : 20px 18px;
+    margin : 0 auto;
+    box-sizing: border-box;
+}
+
+.mobileNone{
+    display: none !important;
+}
+
+/* Mobile Header Css */
+.header{
+    position: relative;
+    font-size: 0px;
+    margin-bottom: 20px;
+    padding: 0px 2px;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1px solid #fff;
+}
+
+.header .logo{
+    width: 30px;
+    height: 30px;
+
+    background-image: url("../../image/mobile/logo.png");
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.header .searchBox{
+    position: absolute;
+    right: 36px;
+    top: -2px;
+    height: 26px;
+    width: 170px;
+    border-radius: 33px;
+    border: solid 1px #ff8aae;
+    background-color: #fff;
+    z-index: 1;
+}
+.header .searchBox #search{
+    display:  inline-block;
+    border : 0px solid blue;
+    background-color: transparent;
+    width: 85%;
+    height: 100%;
+    box-sizing:border-box;
+    vertical-align: top;
+    padding-left: 9px;
+
+    font-size: 10px;
+    line-height: 28px;
+    font-weight: bold;
+    color: #ff8aae;
+    font-family: 'Noto Sans KR', sans-serif
+}
+.header .searchBox #search::placeholder{
+    font-size: 10px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+.header .searchBox #search:focus{
+    outline: none;
+}
+.header .searchBox .search{
+    display:  inline-block;
+    width: 14px;
+    height: 15px;
+    box-sizing:border-box;
+    vertical-align: top;
+    cursor: pointer;
+    margin-top: 4px;
+
+    background-image : url('../../image/mobile/searchBtn.png');
+    background-size : 100%;
+    background-repeat : no-repeat;
+    background-position : center;
+}
+
+
+.header .menuBtn{
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    vertical-align: top;
+
+    background-image: url("../../image/mobile/menu.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+/* menu 버튼 클릭시 변경된 디자인 */
+.menuPopup{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    cursor: pointer;
+    z-index: 10;
+    display: none;
+}
+
+.menuPopup .sideMenu{
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    width: 262px;
+    box-sizing: border-box;
+    background-color: #fff;
+    padding : 50px 34px 50px 40px;
+}
+
+.menuPopup .sideMenu .infoBox{
+    position: relative;
+    margin-bottom: 11.5px;
+
+}
+
+.menuPopup .sideMenu .infoBox .infoIcon{
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 0px;
+    left: -2px;
+    box-sizing: border-box;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.menuPopup .sideMenu .m_loginBox .login,
+.menuPopup .sideMenu .m_loginBox .mypage{
+    width: 56px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #ff8aae;
+    padding-left: 27px;
+    cursor: pointer;
+}
+
+.menuPopup .sideMenu .infoBox .join,
+.menuPopup .sideMenu .infoBox .logout{
+    position: absolute;
+    right: 1px;
+    height: 23px;
+    line-height: 23px;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    color: #bbb;
+    text-align: right;
+    cursor: pointer;
+}
+
+
+.menuPopup .sideMenu .infoBox p{
+    height: 23px;
+    line-height: 23px;
+    padding: 0px 0px 0px 33px;
+    margin-top: 0px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #1f1f1f;
+}
+
+.menuPopup .sideMenu .menuCate p{
+    margin: 0px;
+    height: 16px;
+    line-height: 16px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #1f1f1f;
+    margin-top: 20px;
+}
+.menuPopup .sideMenu .menuCate:first-child p{
+    margin-top: 0px;
+}
+
+.menuPopup .sideMenu .m_inbox{
+    border-top: 1px solid #dfdfdf;
+    padding-top: 17.5px;
+    padding-bottom: 19.5px;
+    padding-left: 7.5px;
+}
+.menuPopup .sideMenu .infoBox#login .infoIcon{ background-image: url("../../image/mobile/mypageIcon.png"); }
+.menuPopup .sideMenu .infoBox#mypick .infoIcon{ background-image: url("../../image/mobile/myPick.png"); }
+.menuPopup .sideMenu .infoBox#auditonReg .infoIcon{ background-image: url("../../image/mobile/auditionIcon.png"); }
+.menuPopup .sideMenu .infoBox#profileReg .infoIcon{ background-image: url("../../image/mobile/profileIcon.png"); }
+.menuPopup .sideMenu .infoBox#parttimeReg .infoIcon{ background-image: url("../../image/mobile/parttimeIcon.png"); }
+.menuPopup .sideMenu .infoBox#advice .infoIcon{ background-image: url("../../image/mobile/adviceIcon.png"); }
+.menuPopup .sideMenu .infoBox#choice .infoIcon{ background-image: url("../../image/mobile/pickChoiceIcon.png"); }
+.menuPopup .sideMenu .infoBox#setting .infoIcon{ background-image: url("../../image/mobile/settingIcon.png"); }
+
+.menuPopup .sideMenu .infoBox#profileReg p{
+    font-size: 13px;
+    font-weight: bold;
+    color: #7f84ea;
+}
+
+.menuPopup .sideMenu .infoBox#auditonReg p{
+    font-size: 13px;
+    font-weight: bold;
+    color: #ff8aae;
+}
+
+/* menu 버튼 클릭시 변경된 디자인 */
+
+/* Mobile Base Footer CSS */
+.footer{
+    background-color: #f8f8f8;
+    padding: 14px 20px;
+}
+
+.footer .company{
+    display: inline-block;
+    font-size: 10px;
+    color: #454545;
+    margin-bottom: 10px;
+}
+
+.footer .companyLink{
+    font-size: 0px;
+    margin-bottom: 10px;
+}
+
+.footer .companyLink span{
+    display: inline-block;
+    font-size: 10px;
+    color: #6f6f6f;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.footer .info{
+    display: inline-block;
+    font-size: 10px;
+    color: #1f1f1f;
+}
+
+/* 로그인 Popup 디자인 추가되면 구현 예정 */
+.loginPopup {
+    display: none;
+}
+
+.regCompanyPopup{
+    display: none;
+}

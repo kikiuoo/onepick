@@ -1,0 +1,211 @@
+{% extends 'audition/audi_base.html' %}
+
+{% block context %}
+
+<!-- Index CSS 파일 및 JS 파일 include -->
+{% load static %}
+{% load my_filter %}
+<link rel="stylesheet" media="all and (min-width:768px)" href="{% static 'css/web/audi/viewer.css' %}"> <!-- pc 버전 -->
+<link rel="stylesheet" media="all and (max-width:767px)" href="{% static 'css/mobile/audi/viewer.css' %}" > <!-- 모바일 버전 -->
+
+<!-- JS 파일 -->
+<script src="{% static 'js/audi/viewer.js' %}"></script>
+
+<!-- 본문 내용 -->
+<div class="content">
+    <div class="btnBox">
+        {% if  request.session.userType == "admin" or  request.session.id == audition.userid %}
+        {% if audition.contenttype != "old" %}
+        <div class="editBtn" data-num="{{ audition.num }}"></div>
+        {% endif %}
+        <div class="delBtn" data-num="{{ audition.num }}"></div>
+        {% endif %}
+        <!--<div class="printBtn"></div>-->
+        <div class="shareBtn"></div>
+    </div>
+
+    <div class="companyLogo" style='background-image: url("/media/{{ companyInfo.logoimage }}")'></div>
+    <div class="companySite" data-url="{{ companyInfo.website }}">{{ companyInfo.website|default:"" }}</div>
+    <div class="title">{{ audition.title }}</div>
+
+    <div class="line">
+        {% if pickCheck == 0 or pickCheck == "0" %}
+        <div class="pickBtn" data-nowType="off"  data-num="{{ audition.num }}"></div>
+        {% else %}
+        <div class="pickBtn pickOn " data-nowType="on" data-num="{{ audition.num }}"></div>
+        {% endif %}
+        {% if audition.ordinary == '0' %}
+            {% if D_day > 0 %}
+            <div class="supportBtn">오디션 지원</div>
+            <div class="deadline">마감 {{ D_day }}일 전</div>
+            {% elif D_day == 0 %}
+            <div class="supportBtn">오디션 지원</div>
+            <div class="deadline">오늘 마감</div>
+            {% else %}
+            <div class="supportBtn_end">오디션 마감</div>
+            <div class="deadline">마감된 오디션</div>
+            {% endif %}
+        {% else %}
+            <div class="supportBtn">오디션 지원</div>
+        {% endif %}
+    </div>
+
+    <div class="conditionBox">
+        <div class="condLeft">
+            <span>모집 분야</span>
+            {% if audition.contenttype == "old" %}
+            <div class="contentBox">
+                <p class="mWidth">{{ audition.cate }}</p>
+                <p>{{ audition.subcate }}</p>
+            </div>
+            {% else %}
+            <div class="contentBox">
+                <p>{{ audition.cate|getMainCate }}</p>
+                <p>{{ audition.subcate|getSubCates }}</p>
+            </div>
+            {% endif %}
+
+            <span>모집 조건</span>
+            <div class="contentBox">
+                {% if audition.contenttype == "old" %}
+                    <p>나이
+                        {% if audition.age == "0" %}
+                            무관
+                        {% else %}
+                            {{ audition.age }} ~
+                        {% endif %}
+                    </p>
+                {% else %}
+                    <p>나이 {{ audition.age }}</p>
+                {% endif %}
+                <p>경력 {{ audition.career }}</p>
+                <p>성별 {{ audition.gender }}</p>
+            </div>
+        </div>
+        <div class="condRight">
+            <span>모집기간</span>
+            <div class="contentBox">
+                {% if audition.ordinary == '0' %}
+                <p>{{ audition.startdate|date:'Y/m/d' }} ~ {{ audition.enddate|date:'Y/m/d' }}</p>
+                {% else %}
+                <p>상시모집</p>
+                {% endif %}
+            </div>
+            <span>오디션</span>
+            <div class="contentBox">
+                {% if audition.ordinary == '0' %}
+                <p>{{ audition.auditiondate|date:'Y/m/d' }} {{ audition.auditiontime|date:' H시 i분' }}<span class="important">합격자 개별연락</span> </p>
+                {% elif audition.ordinary == '1' %}
+                <p><span class="important" style="margin:0px">합격자 개별연락</span></p>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if audition.essential %}
+        <div class="infoBox">
+            <div class="infoTitle">필수 사항</div>
+            <div class="infoContent">{{ audition.essential|linebreaks }}</div>
+        </div>
+        {% endif %}
+
+        {% if audition.preparation %}
+        <div class="infoBox" style="margin-top: 30px">
+           <div class="infoTitle">상세 내용</div>
+           {% if audition.contenttype == "old" %}
+               {% autoescape off %}
+                <div class="infoContent">{{ audition.preparation }}</div>
+               {% endautoescape %}
+           {% else %}
+           <div class="infoContent">{{ audition.preparation|linebreaks }}</div>
+           {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+    {% if audition.image%}
+    <div class="line"></div>
+    <div class="imageBox">
+        {% for images in image %}
+        <img src="{% get_media_prefix %}{{ images }}" width="100%">
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+<div class="audiApplyBack">
+    <div class="audiApplyPopup">
+        <div class="aTitle">오디션 지원</div>
+        <div class="closeSPopup"></div>
+
+        <div class="profileList">
+            {% for data in data1 %}
+            <div class="myProfile" data-num="{{ data.num }}">
+                <div class="btnBox">
+                    <input type="radio" class="profileCheck" name="profile" value="{{ data.num }}" id="check_{{ forloop.counter0 }}">
+                    <label class="checkProfile" for="check_{{ forloop.counter0 }}"></label>
+                </div>
+
+                <div class="userImage" style='background-image: url("{% get_media_prefix %}{{ data.profileimage }}");'></div>
+                <div class="userInfoBox">
+                    <div class="userName">{{ userInfo.name }} ({{ userInfo.birth|userAge }})
+                        {% if data.public == "on" %}
+                            <span></span>
+                        {% endif %}
+                    </div>
+                    <div class="pUInfo">
+                        키 {{ data.height }}cm | 몸무게 {{ data.weight }}kg<br>
+                        {% if userInfo.gender == "man" %} 군필 | {% endif %}
+                        {% if userInfo.entertain|default:"" == "" %}
+                        소속사 없음<br>
+                        {% else %}
+                        소속사 있음<br>
+                        {% endif %}
+                        {{ userInfo.school }} {{ userInfo.major }}<br>
+                        {% if data.talent != None %}
+                        특기 {{ data.talent|replace_2:"|, " }}
+                        {% endif %}
+                   </div>
+
+                    {% with data.num|getPersent as persent %}
+                    <div class="progress">
+                        <div class="proComplete">프로필 완성도 <span>{{ persent }}</span>%</div>
+                        <div class="proProgressBox">
+                            <div class="progressBar" style="width: {{ persent }}%"></div>
+                        </div>
+                    </div>
+                    {% endwith %}
+
+                    <div class="viewBox mobileNone">
+                        <div class="countBox">
+                            <span class="viewCount"></span>
+                            <p>{{ data.viewcount }}</p>
+                        </div>
+                        <div class="countBox">
+                            <span class="pickCount"></span>
+                            <p>{{ data.pickcount }}</p>
+                        </div>
+                        <div class="countBox">
+                            <span class="comViewCount"></span>
+                            <p>{{ data.cviewcount }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="aBtnBox">
+            <div class="sendProfile">선택한 프로필로 지원하기</div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    var isDelete = "{{ audition.isdelete }}";
+    var num = "{{ audition.num }}";
+    var writeUID = "{{ audition.userid }}";
+</script>
+
+{% endblock %}

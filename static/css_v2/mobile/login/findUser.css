@@ -1,0 +1,123 @@
+.container_2{
+    font-size: 0px;
+}
+
+.mainTitle{
+    font-size: 14px;
+    font-weight: bold;
+    color: #1f1f1f;
+    margin-bottom: 6px;
+}
+
+.inBox{
+    width: calc( 100% - 20px );
+    padding: 20px 10px 30px;
+    box-sizing: border-box;
+    background-color: #fff;
+    margin-bottom: 50px;
+    border-radius: 5px;
+}
+
+input{
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #f8f8f8;
+    box-sizing: border-box;
+    outline: none;
+    border: 0px;
+    margin-bottom: 10px;
+    padding: 0px 12px;
+    resize: none;
+
+    font-size: 12px;
+    color: #1f1f1f;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.inBox input::placeholder{
+    color: #959595;
+}
+.inBox input:focus{
+    outline: none;
+    border: 1px solid #1f1f1f;
+    background-color: #fff;
+}
+
+.inBox .overBtnBox{
+    position: relative;
+}
+
+.inBox .overBtnBox .overBtn{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 80px;
+    height: 30px;
+    box-sizing: border-box;
+    line-height: 30px;
+    border-radius: 5px;
+
+    text-align: center;
+    color: #ff8aae;
+    border: 1px solid #ff8aae;
+    font-size: 10px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.inBox .overBtnBox .overBtn.disabled{
+    background-color: #d7d7d7;
+    color: #959595;
+    border: 0px;
+    cursor: default;
+}
+
+.inBox .button{
+    margin-top: 30px;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 12px;
+    color: #fff;
+    background-color: #ff8aae;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.fInfo{
+    width: calc( 100% - 20px);
+    font-size: 10px;
+    line-height: 1.2em;
+    color: #595959;
+    text-align: center;
+    cursor: default;
+    margin-bottom: 138px;
+}
+
+
+.resetPWBox, .userInfo{
+    display: none;
+}
+
+.resetPWBox{
+    margin-top: 35px;
+}
+
+.userInfo .info{
+    margin-top: 50px;
+    font-size: 12px;
+    color: #959595;
+    text-align: center;
+}
+
+.uID{
+    margin-top: 20px;
+    margin-bottom: 85px;
+    font-size: 12px;
+    color: #1f1f1f;
+    font-weight: bold;
+    text-align: center;
+}
