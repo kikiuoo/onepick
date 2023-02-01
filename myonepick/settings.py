@@ -38,6 +38,10 @@ SESSION_SAVE_EVERY_REQUEST = True
 
 # Application definition
 
+import pymysql
+
+pymysql.install_as_MySQLdb()
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
