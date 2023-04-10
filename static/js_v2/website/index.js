@@ -35,13 +35,14 @@ $(document).ready(function (){
        var num = $(this).attr("data-num");
 
        if( userID == ""){
-           if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
+         if( confirm("로그인 후 이용가능합니다..!\n로그인 하시겠습니까?") == true){
                window.location.href = "login/local/?reUrl=/audi/audiDetail/actor/" + num + "/"
                return;
            } else {
                 return;
            }
-       }
+      }
+     
        window.location.href = "/audi/audiDetail/actor/" + num + "/" //  ../audi/audiDetail/actor(기본값)/글번호/
     });
 
@@ -220,6 +221,9 @@ $(document).ready(function (){
         var url = $(this).attr("data-url");
         var num = $(this).attr("data-num");
 
+        console.log("url : " , url)
+        console.log("num : " , num)
+
         if( userID == ""){
            if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
                window.location.href = "/login/local/"
@@ -231,7 +235,11 @@ $(document).ready(function (){
 
         updateCount(num);
 
-        window.open(url);
+//       window.open(url,"_self");
+          window.location.href = url
+//    window.location.href = "/audi/audiDetail/all/" + num + "/"
+ //  ../audi/audiDetail/actor(기본값)/글번호/
+
     });
 
 

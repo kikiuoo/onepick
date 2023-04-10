@@ -4,7 +4,8 @@
     font-size: 24px;
     font-weight: bold;
     color: #1f1f1f;
-    margin-bottom: 17px;
+    margin:0 auto 17px auto ;
+width: 1220px;
 }
 
 .mainTitle span{
@@ -273,8 +274,8 @@
 
 /* Picks of Onepick */
 .picksBox{
-    width: 100%;
-    margin-bottom: 50px;
+    width: 1220px;
+    margin:0 auto 50px auto;
     font-size: 0px;
 }
 
@@ -437,8 +438,8 @@
 
 /* 기업이 많이 본 프로필 */
 .comViewBox{
-    width: 100%;
-    margin-bottom: 50px;
+    width: 1220px;
+    margin:0 auto 50px auto;
     font-size: 0px;
     padding-top: 5px;
 }
@@ -615,6 +616,12 @@
 }
 
 /* 커뮤니티  */
+
+.leftRightBox{
+width : 1220px;
+margin : 0 auto;
+}
+
 .leftBox, .rightBox{
     display: inline-block;
     width: 590px;
@@ -745,18 +752,19 @@
 /* 미니 프로필 */
 .miniBox{
     font-size: 0px;
-    width: 100%;
-    margin-bottom: 50px;
+    width: 1220px;
+    margin:0 auto 50px auto;
     font-size: 0px;
     padding-top: 5px;
 }
 
+/*3.6수정 유튜브삭제하여프로필 배경 높이 자동으로조절 */
 .miniBox .miniProfile{
     position: relative;
     display : inline-block;
     font-size: 0px;
     width: 188px;
-    height: 370px;
+    height: 260px;
     border-radius: 10px 10px 0px 0px;
     background-color: #fff;
     margin-right : 14px;

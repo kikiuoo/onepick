@@ -24,8 +24,12 @@ $(document).ready(function(){
     $(document).on("click", ".audition, .audiListBox", function(){
        var num = $(this).attr("data-num");
 
+//3.5 수정 여기 수정하면 로그인 안해도 들어와짐
+        console.log("userID : ", userID)
+        console.log("userType : ", userType)
+
        if( userID == ""){
-           if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
+           if( confirm("로그인 후 이용이 가능합니다.\n로그인 하시겠습니까?") == true){
                window.location.href = baseUrl + "login/local/?reUrl=/audi/audiDetail/"+cateType+'/' +num +"/"
                return;
            } else {

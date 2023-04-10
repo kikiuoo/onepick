@@ -1,4 +1,11 @@
 /* Index 제목 */
+
+.wrap99_mo{
+margin-left : 20px;
+
+}
+
+
 .mainTitle{
     position : relative;
     font-size: 14px;
@@ -738,18 +745,19 @@
     overflow-x: scroll;
 }
 
+
 .miniListBox{
     width: 960px;
 }
 
 
-
+/*높이 자동으로 수정 3.6 수정*/
 .miniBox .miniProfile{
     position: relative;
     display : inline-block;
     font-size: 0px;
     width: 150px;
-    height: 302px;
+    height: 210px;
     border-radius: 10px 10px 0px 0px;
     background-color: #fff;
     margin-right : 10px;

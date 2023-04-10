@@ -2,7 +2,7 @@
 {% block context %} <!-- base.html 본문 내용 부분 시작 -->
 
 
-<!-- 수정했어요.222 -->
+<!-- 수정했어요.222333 -->
 <!-- Index CSS 파일 및 JS 파일 include -->
 {% load static %}
 {% load my_filter %} <!-- /picktalk/templatetags/myfilter.py -->
@@ -25,14 +25,14 @@
     </div>
 
     <div class="auditionBox">
-        <div class="bannerBox">
+<!--        <div class="bannerBox">
             <div class="banner">
                 {% for banner in mainbanner %}
                 <div class="mainBanner" style="background-image: url('/media/{{ banner.image }}')" data-num="{{ banner.num }}" data-url="{{ banner.url }}"></div>
                 {% endfor %}
             </div>
         </div>
-
+-->
         <div class="audiListBox">
             <div class="audiList">
                {% for audition in auditions %}
@@ -102,16 +102,16 @@
         </div>
         {% endfor %}
     </div>
-    -->
+    
     <div class="mobilBanner">
         <div class="swiper mySwiper mainBanner">
             <div class="swiper-wrapper">
                 <div class="swiper-slide subBanner" data-url = 'http://pf.kakao.com/_RczSxb/chat'></div>
-                <div class="swiper-slide subBanner sub2" data-url = 'https://pickstudio.net'></div>
+          <!--      <div class="swiper-slide subBanner sub2" data-url = 'https://pickstudio.net'></div> -->
             </div>
         </div>
     </div>
-
+<div class="wrap99_mo">
     <div class="mainTitle">
         Picks of ONEPICK
         <span data-url="/profile/list/?order=picks">더보기</span>
@@ -244,7 +244,6 @@
                         <img src="static/image/web_v2/noYoutube02.png" width="290" height="170">
                     </div>
                 {% endif %}
-
                 <div class="viewBox">
                     <div class="countBox">
                         <span class="viewCount"></span>
@@ -267,17 +266,83 @@
         </div>
     </div>
 
-    <div class="leftBox">
+<div class="leftRightBox">
+    <div class="leftBox" style="overflow : hidden;">
         <div class="mainTitle">
             캐스팅 후기
             <!--<span data-url="audi/main/all/1/">더보기</span>-->
         </div>
 
         <div class="mobileBox">
-            <div class="swiper castReview">
+            <div class="sw:iper castReview">
                 <div class="swiper-wrapper">
+   <div class="castReviewBox swiper-slide " data-num="143">
+                        <div class="image"  style='background-image: url("https://myonepick.com/media/photos/notice/6ed8970ea94becb22693baec43bb64f9.png");'></div>
+                        <div class="info">
+                            <div class="name">장희주 (여)</div>
+                            <div class="content">
+                                <strong>캐스팅 진행 과정</strong><br>
+                                원픽에 프로필 및 영상을 등록하고 업데이트해놓은 상황에서 캐디님으로부터 영화에 필요한 상인배우 섭외가 들어왔습니다. 상업영화는 이미지단역이라도 커리어에 매우 중요한 부분이므로 기대를 많이하고 있었고 감독님이 픽해주셔서 감사했습니다. <br><br>
+                                <strong>촬영장 현장 후기</strong> <br>
+                                영화 막바지에  투입되었기에 다들 잘 마무리하고 싶어하는 느낌이 들었고 장소가 시장 배경이다보니 곧 철거될 시장을 셋팅장으로 사용했는데 뭔가 촬영이 아니었으면 보지 못했을 삶의 흔적이 있는 사라질 시장의 모습을 눈으로 담을수 있었던 것이 참좋았습니다. 영화의 장면속에 이 사라질 시장이 담기게된것도 큰 의미일듯하고 환경은 거의 야외다보니 매우 춥고 먼지도 많습니다. 그치만 정말 맛있고 따뜻한 식사로 대접해주셔서 참좋았습니다.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="castReviewBox swiper-slide " data-num="142">
+                        <div class="image"  style='background-image: url("https://myonepick.com/media/photos/notice/c37e7b6427fa354533584b9e7186d921.png");'></div>
+                        <div class="info">
+                            <div class="name">이명희 (여)</div>
+                            <div class="content">
+                                <strong>캐스팅 진행 과정</strong><br>
+                                원픽 오디션 공고를 보고  지원했습니다. 이하은 캐디님께 픽스 연락을 받았고 시장상인역 으로 2회차 촬영 하였습니다. <br><br>
+                                <strong>촬영장 현장 후기</strong> <br>
+                                도착해서  감독님께서 인사를 하신뒤 화기애애한 분위기속 촬영이 시작 되었어요 2월 중순이고 좀 쌀쌀했던 현장에서 배우님들 스텝진들 모두 추위를 나누고 대기 시간엔 담소도 함께 나누며 즐겁게 촬영하였습니다.2회차 촬영이 끝난 직후 하은 캐디님이 전화하셔서 애쓰셨다며  따뜻한 인사도 해주시고 쫑파티에서의  도움되는 조언도 참 감사했습니다.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="castReviewBox swiper-slide " data-num="141">
+                        <div class="image"  style='background-image: url("https://myonepick.com/media/photos/notice/d4aaa48eb74ea0717bc1da65bf6e300f.jpg");'></div>
+                        <div class="info">
+                            <div class="name">김명진 (여)</div>
+                            <div class="content">
+                                <strong>캐스팅 진행 과정</strong><br>
+                                원픽 하은 캐스팅 디렉터님께 전화로 연락이 왔습니다!필요한 영상과 자료 등을 보내드린 후 얼마 되지 않아 캐스팅 확정 연락을 받았습니다. <br><br>
+                                <strong>촬영장 현장 후기</strong> <br>
+                                촬영시기가 겨울이고 의상도 얇아서 많이 추웠는데 스탭분들과 같이 촬영한 배우분들께서 정말 잘 챙겨주셨습니다.그래서 춥지만 즐겁고 행복한 마음으로 촬영할 수 있었습니다!
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="castReviewBox swiper-slide " data-num="140">
+                        <div class="image"  style='background-image: url("https://myonepick.com/media/photos/notice/0126f7a247fd12a4854b28345bfabffc.jpg");'></div>
+                        <div class="info">
+                            <div class="name">김명선 (여)</div>
+                            <div class="content">
+                                <strong>캐스팅 진행 과정</strong><br>
+                                이하은 팀장님께 오디션  연락을 받고 오디션을 보러갔어요. 오디션 당일 팀장님이 함께 오셔서 응원도 해주시고 긴장도 풀어주셔서 오디션 잘 볼수 있었어요. <br><br>
+                                <strong>촬영장 현장 후기</strong> <br>
+                                비행기내부씬이어서 비행기세트장에서 촬영했는데 좁은 공간이어서 그런지 더 화기애애한 분위기에서 진행됐고 좀 코믹스럽고 잼있는 씬이어서 즐겁게 촬영했어요. 오디션 볼때 계셨던 인물조감독님이 알아보시고 챙겨주셔서 감사했습니다~
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="castReviewBox swiper-slide " data-num="139">
+                        <div class="image"  style='background-image: url("https://myonepick.com/media/photos/notice/7b58c48fa0069131cbe66cc9c606f157.jpg");'></div>
+                        <div class="info">
+                            <div class="name">임준형 (남)</div>
+                            <div class="content">
+                                <strong>캐스팅 진행 과정</strong><br>
+                                항상 작품 연락 주시면 좋은 현장과 결과물을 주셨던 캐디님이 크리스마스 선물같이 크리스마스에 연락을 주셨습니다. 그래서 고민도 안하고 바로 진행했습니다. <br><br>
+                                <strong>촬영장 현장 후기</strong> <br>
+                                촬영장이 제주라 비행기 타고 이동했고 현장은 엄청 편했습니다. 캐디님도 와주셨고 선배님들도 친절하셔서 나중에 쫑파티때도 챙겨주셔서 너무 행복했던 작품이었습니다.
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="castReviewBox swiper-slide " data-num="116">
-                        <div class="image"  style='background-image: url("/media/photos/profile/additional/0b7ec47bd979c63f8d8dfb0b8a24301e.jpeg");'></div>
+                        <div class="image"  style='background-image: url("https://myonepick.com/media/photos/notice/ab31b0baedce5df86f114587e023651e.jpeg");'></div>
                         <div class="info">
                             <div class="name">남가예 (여)</div>
                             <div class="content">
@@ -367,6 +432,7 @@
             {% endfor %}
         </div>
     </div>
+</div>
 
     <div class="mainTitle">
         인기 프로필
@@ -400,7 +466,8 @@
                     {% endif %}
                 </div>
 
-               {% if profile.6 != "" %}
+
+              {% if profile.6 != "" %}
                 <div class="youtube">
                     <iframe width="188" height="116" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
@@ -409,7 +476,8 @@
                         <img src="static/image/web_v2/noYoutube03.png" width="188" height="116">
                     </div>
                 {% endif %}
-            </div>
+     
+       </div>
             {% endfor %}
         </div>
     </div>
@@ -447,6 +515,7 @@
                     {% endif %}
                 </div>
 
+<!--
                 {% if profile.6 != "" %}
                 <div class="youtube">
                     <iframe width="188" height="116" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -456,7 +525,8 @@
                         <img src="static/image/web_v2/noYoutube03.png" width="188" height="116">
                     </div>
                 {% endif %}
-            </div>
+-->    
+        </div>
             {% endfor %}
         </div>
     </div>
@@ -494,7 +564,7 @@
                     {% endif %}
                 </div>
 
-
+<!--
                 {% if profile.6 != "" %}
                 <div class="youtube">
                     <iframe width="188" height="116" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -504,6 +574,7 @@
                         <img src="static/image/web_v2/noYoutube03.png" width="188" height="116">
                     </div>
                 {% endif %}
+-->
             </div>
             {% endfor %}
         </div>
@@ -542,7 +613,7 @@
                     {% endif %}
                 </div>
 
-
+<!--
                 {% if profile.6 != "" %}
                 <div class="youtube">
                     <iframe width="188" height="116" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -552,7 +623,8 @@
                         <img src="static/image/web_v2/noYoutube03.png" width="188" height="116">
                     </div>
                 {% endif %}
-            </div>
+-->    
+        </div>
             {% endfor %}
         </div>
     </div>
@@ -589,7 +661,7 @@
                     {% endif %}
                 </div>
 
-
+<!--
                 {% if profile.6 != "" %}
                 <div class="youtube">
                     <iframe width="188" height="116" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -599,7 +671,8 @@
                         <img src="static/image/web_v2/noYoutube03.png" width="188" height="116">
                     </div>
                 {% endif %}
-            </div>
+-->   
+         </div>
             {% endfor %}
         </div>
     </div>
@@ -636,7 +709,7 @@
                     {% endif %}
                 </div>
 
-
+<!--
                 {% if profile.6 != "" %}
                 <div class="youtube">
                     <iframe width="188" height="116" src="{{ profile.6|parsingYoutube_view }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -646,10 +719,13 @@
                         <img src="static/image/web_v2/noYoutube03.png" width="188" height="116">
                     </div>
                 {% endif %}
-            </div>
+-->    
+        </div>
             {% endfor %}
         </div>
     </div>
+
+</div>
 
     <div class="popupBox">
         {% for popup in popupList %}
@@ -689,11 +765,7 @@
           delay: 3000,
           disableOnInteraction: false,
         },
-<<<<<<< HEAD
         loop: true,
-=======
-        loop: false,
->>>>>>> 95670011591e1cc5a7478ad3e954c61d883c758a
         pagination: {
           el: ".swiper-pagination",
           clickable: true,
@@ -716,18 +788,15 @@
     }
     {% endfor %}
 
-
     var ht = null;
     (function(id, scriptSrc, callback) {
         var d = document,
             tagName = 'script',
             $script = d.createElement(tagName),
             $element = d.getElementsByTagName(tagName)[0];
-
         $script.id = id;
         $script.async = true;
         $script.src = scriptSrc;
-
         if (callback) { $script.addEventListener('load', function (e) { callback(null, e); }, false); }
         $element.parentNode.insertBefore($script, $element);
     })('happytalkSDK', 'https://design.happytalkio.com/sdk/happytalk.chat.v2.min.js', function() {
@@ -739,6 +808,18 @@
       });
     });
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script src="https://cdn.flarelane.com/WebSDK.js" charset="UTF-8"></script>
 <script>

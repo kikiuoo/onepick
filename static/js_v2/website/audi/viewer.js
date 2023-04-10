@@ -1,13 +1,18 @@
 $(document).ready(function(){
+        console.log("userID : ", userID)
+        console.log("userType : ", userType)
+//3.5 수정 
 
      if( userID == ""){
-       if( confirm("로그인 후 이용가능합니다.\n로그인 하시겠습니까?") == true){
-           window.location.href = baseUrl + "login/local/?reUrl=/audi/audiDetail/actor/" + num +"/"
+      // if( confirm("로그인 후에  이용가능합니다!.\n로그인 하시겠습니까?") == true){
+             if( confirm("로그인 후에  이용가능합니다.\n만약 로그인 하셨던 적이 있으시다면, 재 로그인 후\n \n상단의 메뉴 > 오디션 > 마감임박순 클릭 > 오디션 지원\n \n위와 같은 경로로 오디션 지원하시기 바랍니다.") == true){
+           
+window.location.href = baseUrl + "login/local/?reUrl=/audi/audiDetail/actor/" + num +"/"
            return;
        } else {
            window.location.href = baseUrl ;
             return;
-       }
+      }
     }
 
 
