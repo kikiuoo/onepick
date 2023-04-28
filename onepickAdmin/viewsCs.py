@@ -248,7 +248,7 @@ def checkYoutube(request) :
     query = "SELECT ui.userID, NAME, email, gender, pr.youtube, birth, userType  " \
             "FROM profile_info AS pr LEFT JOIN user_info AS ui " \
             "     ON pr.userID = ui.userID  " \
-            "WHERE lastLogin >= '2022-01-01' " \
+            "WHERE lastLogin >= '2021-01-01' " \
             "GROUP BY userID ORDER BY ui.userID"
 
     result = cursor.execute(query)

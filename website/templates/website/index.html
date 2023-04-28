@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<head>
+    <meta name="naver-site-verification" content="45aa3debdc99a30ecdab95613feb66a4eae6f99d" />
+</head>
+
+<body>
 {% extends 'website/base.html' %}
 {% block context %} <!-- base.html 본문 내용 부분 시작 -->
 
@@ -196,7 +202,6 @@
         {% endfor %}
     </div>
 
-
     <div class="mainTitle">
         기업이 많이 본 프로필
         <span data-url="/profile/list/?order=cView">더보기</span>
@@ -270,13 +275,13 @@
     <div class="leftBox" style="overflow : hidden;">
         <div class="mainTitle">
             캐스팅 후기
-            <!--<span data-url="audi/main/all/1/">더보기</span>-->
+            <!-- <span data-url="audi/main/all/1/">더보기</span> -->
         </div>
 
         <div class="mobileBox">
-            <div class="sw:iper castReview">
+            <div class="swiper castReview">
                 <div class="swiper-wrapper">
-   <div class="castReviewBox swiper-slide " data-num="143">
+                <div class="castReviewBox swiper-slide " data-num="143">
                         <div class="image"  style='background-image: url("https://myonepick.com/media/photos/notice/6ed8970ea94becb22693baec43bb64f9.png");'></div>
                         <div class="info">
                             <div class="name">장희주 (여)</div>
@@ -313,7 +318,7 @@
                                 촬영시기가 겨울이고 의상도 얇아서 많이 추웠는데 스탭분들과 같이 촬영한 배우분들께서 정말 잘 챙겨주셨습니다.그래서 춥지만 즐겁고 행복한 마음으로 촬영할 수 있었습니다!
                             </div>
                         </div>
-                    </div>
+                    </div> 
 
                     <div class="castReviewBox swiper-slide " data-num="140">
                         <div class="image"  style='background-image: url("https://myonepick.com/media/photos/notice/0126f7a247fd12a4854b28345bfabffc.jpg");'></div>
@@ -752,6 +757,7 @@
 
 </div>
 
+
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
 
@@ -808,23 +814,11 @@
       });
     });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script src="https://cdn.flarelane.com/WebSDK.js" charset="UTF-8"></script>
 <script>
     //FlareLane.initialize({ projectId: "1fd48a3e-8028-4108-b55d-56d10ee513ab" });
 </script>
 
 {% endblock %}
-
+</body>
+</html>
