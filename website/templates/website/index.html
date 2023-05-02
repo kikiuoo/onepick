@@ -273,14 +273,14 @@
 
 <div class="leftRightBox">
     <div class="leftBox" style="overflow : hidden;">
-        <div class="mainTitle">
+        <div class="leftBoxTitle">
             캐스팅 후기
-            <!-- <span data-url="audi/main/all/1/">더보기</span> -->
         </div>
 
         <div class="mobileBox">
             <div class="swiper castReview">
                 <div class="swiper-wrapper">
+
                 <div class="castReviewBox swiper-slide " data-num="143">
                         <div class="image"  style='background-image: url("https://myonepick.com/media/photos/notice/6ed8970ea94becb22693baec43bb64f9.png");'></div>
                         <div class="info">
@@ -417,11 +417,13 @@
     </div>
 
     <div class="rightBox">
-        <div class="mainTitle">
+        <div class="rightBoxTitle">
             커뮤니티
-            <span data-url="/lounge/">더보기</span>
-        </div>
+            <!-- <span data-url="/lounge/">더보기</span> -->
+            <a href="/lounge/">더보기</a>
 
+            
+        </div>
         <div class="loungeBox">
             {% for commu in community %}
             <div class="loungeList" data-num="{{ commu.0 }}" data-type="{{ commu.3 }}">
@@ -432,7 +434,7 @@
                     {% endif %}
                 </div>
                 <div class="title">{{ commu.1 }}</div>
-                <div class="regDate">{{ commu.2|date:"Y-m-d" }}</div>
+                <!-- <div class="regDate">{{ commu.2|date:"Y-m-d" }}</div> -->
             </div>
             {% endfor %}
         </div>

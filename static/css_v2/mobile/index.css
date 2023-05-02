@@ -15,6 +15,7 @@ margin-left : 20px;
 }
 
 .mainTitle span{
+    /* width: 100%; */
     position : absolute;
     right : 20px;
     bottom: 1px;
@@ -23,6 +24,35 @@ margin-left : 20px;
     cursor: pointer;
     font-weight: normal;
 }
+
+    
+    .leftBoxTitle{
+        position : relative;
+        font-size: 14px;
+        font-weight: bold;
+        color: #1f1f1f;
+        margin-bottom: 6px;
+        }
+    .rightBoxTitle{
+
+        position : relative;
+        font-size: 14px;
+        font-weight: bold;
+        color: #1f1f1f;
+        margin-bottom: 6px;
+        }
+    .rightBoxTitle a{
+        position : absolute;
+        right : 20px;
+        bottom: 1px;
+        font-size: 10px;
+        color: #959595;
+        cursor: pointer;
+        font-weight: normal;
+        text-decoration-line: none;
+    }
+    
+
 
 /* 오디션 */
 .bannerBox{
@@ -686,7 +716,7 @@ margin-left : 20px;
     border-radius: 10px;
     overflow: hidden;
     font-size: 0px;
-    padding: 0px 20px;
+    padding: 0px 5px;
     box-sizing: border-box;
     margin-bottom: 30px;
 }
@@ -705,7 +735,6 @@ margin-left : 20px;
 
 .rightBox .loungeBox .loungeList .cate{
     display: inline-block;
-    width: 67px;
     height: 16px;
     font-size: 12px;
     color: #ff8aae;

@@ -618,9 +618,26 @@ width: 1220px;
 /* 커뮤니티  */
 
 .leftRightBox{
-width : 1220px;
-margin : 0 auto;
+/* width : 1220px;
+margin : 0 auto; */
+
+position : relative;
+font-size: 24px;
+color: #1f1f1f;
+margin:0px auto 17px auto ;
+width: 1220px;
 }
+
+.leftBoxTitle{
+    font-size: 24px;
+    font-weight: bold;
+    color: #1f1f1f;
+    }
+.rightBoxTitle{
+    font-size: 24px;
+    font-weight: bold;
+    color: #1f1f1f;
+    }
 
 .leftBox, .rightBox{
     display: inline-block;
@@ -630,6 +647,31 @@ margin : 0 auto;
     vertical-align: top;
     margin-bottom: 50px;
 }
+
+.leftBoxTitle a{
+    position : absolute;
+    right : 10px;
+    height : 36px;
+    line-height : 36px;
+    font-size: 16px;
+    color: #959595;
+    cursor: pointer;
+    font-weight: normal;
+    text-decoration-line: none;
+}
+
+.rightBoxTitle a{
+    position : absolute;
+    right : 10px;
+    height : 36px;
+    line-height : 36px;
+    font-size: 16px;
+    color: #959595;
+    cursor: pointer;
+    font-weight: normal;
+    text-decoration-line: none;
+}
+
 
 .rightBox{margin-right: 0px}
 
@@ -739,9 +781,10 @@ margin : 0 auto;
     overflow: hidden;
 }
 
+/* 230428 잠시 주석 */
 .rightBox .loungeBox .loungeList .regDate{
     display: inline-block;
-    width: 79px;
+    /* width: 79px; */
     height: 60px;
     line-height: 60px;
     font-size: 15px;
